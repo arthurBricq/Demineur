@@ -119,11 +119,11 @@ class InfiniteGameViewController: UIViewController {
         hasToFinishTheGame = true
         
         if sectionIndex%3 == 0 {
-            currentSection = Section(simpleSquareGameWith: (11,9))
+            currentSection = Section(simpleSquareGameWith: (12,9))
         } else if sectionIndex%3 == 1 {
-            currentSection = Section(simpleHexGameWith: (11,9))
+            currentSection = Section(simpleHexGameWith: (12,9))
         } else if sectionIndex%3 == 2 {
-            currentSection = Section(simpleTriangularGameWith: (6,7))
+            currentSection = Section(simpleTriangularGameWith: (8,7))
         }
         
         // Actualisation des couleurs des parties courantes
@@ -152,33 +152,9 @@ class InfiniteGameViewController: UIViewController {
             }
         } else {
             
-            // sinon on positionne la première partie de la nouvelle section à droite de celle active
-            if currentSection.gameType == .square {
-                addANewSquareGame(game: currentSection.game1!, isFirst: true)
-            } else if currentSection.gameType == .hexagonal {
-                addANewHexGame(game: currentSection.game1!, isFirst: true)
-            } else if currentSection.gameType == .triangular {
-                addANewTriangularGame(game: currentSection.game1!, isFirst: true)
-            }
-            
             // on supprime la partie courrante
             containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
-            
-            // modifie l'anchor point des view et le repositionne en conséquence pour donner une meilleure impression lors de l'animation
-            let view1 = containerView.subviews[containerView.subviews.count-1]
-            view1.layer.anchorPoint.x = 1
-            view1.center.x = view1.center.x + view1.bounds.width/2
-            
-            let view2 = containerView.subviews[containerView.subviews.count-2]
-            view2.layer.anchorPoint.x = 0
-            view2.center.x = view2.center.x - view2.bounds.width/2
-            
-            // on cache la deuxième vue, qui n'apparait qu'une fois l'animation commencée
-            view2.isHidden = true
-            
-            // on lance le timer qui gère l'animation
-            animationTimer.start(timeInterval: 0.01, id: "Animation")
-            animationTimer.delegate = self
+            animateNewSection()
         }
         
         // met à jour les affichages, etc. et lance la partie
@@ -580,57 +556,28 @@ extension InfiniteGameViewController: CountingTimerProtocol
 {
     func timerFires(id: String) {
         
-        if id == "Animation" {
+        
+        let pourcentage: CGFloat = gameTimer.counter / CGFloat(returnCurrentGame().totalTime) // ratio of time used.
+        
+        clockView.pourcentage = pourcentage // et actualisation via un didSet
+        
+        if pourcentage >= 1 {
             
-            let animationDuration: CGFloat = 1
-            
-            let percent : CGFloat = animationTimer.counter/animationDuration
-            setViews(atPercent: percent, view1: containerView.subviews[containerView.subviews.count-1], view2: containerView.subviews[containerView.subviews.count-2])
-            
-            if percent >= 1 {
-                
-                animationTimer.stop()
-                containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
-                
-                // centre correctement la vue à fin
-                let newGameView = containerView.subviews[containerView.subviews.count-1]
-                newGameView.layer.transform = CATransform3DIdentity
-                newGameView.center.x = newGameView.center.x - newGameView.bounds.width
-                
-                // ajoute la deuxième vue en dessous
-                if currentSection.gameType == .hexagonal {
-                    addANewHexGame(game: currentSection.game2!)
-                } else if currentSection.gameType == .square {
-                    addANewSquareGame(game: currentSection.game2!)
-                } else if currentSection.gameType == .triangular {
-                    addANewTriangularGame(game: currentSection.game2!)
-                }
-                
+            if containerView.subviews[containerView.subviews.count-1] is ViewOfGameSquare {
+                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameSquare
+                currentGameView.returnAllTheCases()
+            } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGame_Hex {
+                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame_Hex
+                currentGameView.returnAllTheCases()
+            } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGameTriangular {
+                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
+                currentGameView.returnAllTheCases()
             }
             
-        } else {
-            
-            let pourcentage: CGFloat = gameTimer.counter / CGFloat(returnCurrentGame().totalTime) // ratio of time used.
-            
-            clockView.pourcentage = pourcentage // et actualisation via un didSet
-            
-            if pourcentage >= 1 {
-                
-                if containerView.subviews[containerView.subviews.count-1] is ViewOfGameSquare {
-                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameSquare
-                    currentGameView.returnAllTheCases()
-                } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGame_Hex {
-                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame_Hex
-                    currentGameView.returnAllTheCases()
-                } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGameTriangular {
-                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
-                    currentGameView.returnAllTheCases()
-                }
-                
-                gameTimer.stop()
-                gameOver(win: false)
-            }
+            gameTimer.stop()
+            gameOver(win: false)
         }
+        
     }
     
     
@@ -640,37 +587,25 @@ extension InfiniteGameViewController: CountingTimerProtocol
 // Gere les animations
 extension InfiniteGameViewController {
     
-    func setViews(atPercent: CGFloat, view1: UIView, view2: UIView) {
+    func animateNewSection() {
         
-        func view1Transform(percent: CGFloat, translateBy: CGFloat) -> CATransform3D {
-            var identity = CATransform3DIdentity
-            identity.m34 = -1/1000
-            
-            let angle = percent * .pi * -0.5
-            
-            let rotationTransform = CATransform3DRotate(identity, angle, 0, 1, 0)
-            let translationTransform = CATransform3DMakeTranslation(percent*translateBy, 0, 0)
-            
-            return CATransform3DConcat(rotationTransform, translationTransform)
+        let view = containerView.subviews.last!
+        UIView.animate(withDuration: 1, animations: {
+            view.alpha = 0
+        }) { (_) in
+            view.removeFromSuperview()
+            if self.currentSection.gameType == .hexagonal {
+                self.addANewHexGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
+                self.addANewHexGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
+            } else if self.currentSection.gameType == .square {
+                self.addANewSquareGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
+                self.addANewSquareGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
+            } else if self.currentSection.gameType == .triangular {
+                self.addANewTriangularGame(game: self.currentSection.game1!)
+                self.addANewTriangularGame(game: self.currentSection.game2!)
+            }
         }
         
-        func view2Transform(percent: CGFloat, translateBy: CGFloat) -> CATransform3D {
-            var identity = CATransform3DIdentity
-            identity.m34 = -1/1000
-            
-            let angle = (1-percent) * .pi * 0.5
-            
-            let rotationTransform = CATransform3DRotate(identity, angle, 0, 1, 0)
-            let translationTransform = CATransform3DMakeTranslation(percent*translateBy, 0, 0)
-            
-            return CATransform3DConcat(rotationTransform, translationTransform)
-        }
-        
-        view1.layer.transform = view1Transform(percent: atPercent, translateBy: -view1.bounds.width)
-        view1.alpha = max(0.4, (1-atPercent))
-        view2.layer.transform = view2Transform(percent: atPercent, translateBy: -view1.bounds.width)
-        view2.alpha = max(0.4, atPercent)
-        view2.isHidden = false
     }
     
 }

@@ -49,14 +49,10 @@ class Section {
     convenience init(simpleSquareGameWith dimensions: (n: Int,m: Int) ) {
         
         let firstGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        /*let secondGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 4, numberOfFlag: 4, isTimerAllowed: true, totalTime: 60, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: false)
-         let thirdGame = OneGame(gameTypeWithOption1WithoutNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 60, option1Time: 5.0)
-         let fourthGame = OneGame(gameTypeWithOption2WithoutNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 60, option2Frequency: 0.3)
-         let fifthGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 5, totalTime: 30)*/
-        let secondGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let thirdGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let fourthGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let fifthGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let secondGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 4, numberOfFlag: 4, isTimerAllowed: true, totalTime: 60, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let thirdGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 6, numberOfFlag: 8, isTimerAllowed: true, totalTime: 60, option1: true, option2: false, option1Time: 6, option2Frequency: 0, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let fourthGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 14, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 0, option2Frequency: 0.2, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let fifthGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 10, isTimerAllowed: true, totalTime: 60, option1: false, option2: true, option1Time: 0, option2Frequency: 0.3, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: false)
         
         self.init(n: dimensions.n, m: dimensions.m, gameType: .square, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
     }
@@ -64,14 +60,10 @@ class Section {
     convenience init(simpleHexGameWith dimensions: (n: Int,m: Int) ) {
         
         let firstGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        /*let secondGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 4, totalTime: 60)
-         let thirdGame = OneGame(gameTypeWithOption1WithoutNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 60, option1Time: 15.0)
-         let fourthGame = OneGame(gameTypeWithOption2WithoutNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 60, option2Frequency: 0.3)
-         let fifthGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 30)*/
-        let secondGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let thirdGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let fourthGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let fifthGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let secondGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 4, numberOfFlag: 4, isTimerAllowed: true, totalTime: 60, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let thirdGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 6, numberOfFlag: 8, isTimerAllowed: true, totalTime: 60, option1: true, option2: false, option1Time: 6, option2Frequency: 0, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let fourthGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 14, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 0, option2Frequency: 0.2, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let fifthGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 10, isTimerAllowed: true, totalTime: 60, option1: false, option2: true, option1Time: 0, option2Frequency: 0.3, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: false)
         
         self.init(n: dimensions.n, m: dimensions.m, gameType: .hexagonal, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
     }
@@ -81,17 +73,12 @@ class Section {
         if (dimensions.n%2 != 0) || (dimensions.m%2 != 1) { fatalError("n doit être pair et m impair pour une partie triangulaire") }
         
         let firstGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        /*let secondGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 4, totalTime: 60)
-         let thirdGame = OneGame(gameTypeWithOption1WithoutNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 60, option1Time: 5.0)
-         let fourthGame = OneGame(gameTypeWithOption2WithoutNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 6, totalTime: 60, option2Frequency: 0.35)
-         let fifthGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 10, totalTime: 30)
-         self.init(n: dimensions.n, m: dimensions.m, gameType: .triangular, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)*/
-        let secondGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let thirdGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let fourthGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
-        let fifthGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 3, numberOfFlag: 4, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: true, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let secondGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 4, numberOfFlag: 4, isTimerAllowed: true, totalTime: 60, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let thirdGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 6, numberOfFlag: 8, isTimerAllowed: true, totalTime: 60, option1: true, option2: false, option1Time: 6, option2Frequency: 0, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let fourthGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 14, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 0, option2Frequency: 0.2, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
+        let fifthGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 10, isTimerAllowed: true, totalTime: 60, option1: false, option2: true, option1Time: 0, option2Frequency: 0.3, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: false)
         
-        self.init(n: dimensions.n, m: dimensions.m, gameType: .triangular, game1: fifthGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
+        self.init(n: dimensions.n, m: dimensions.m, gameType: .triangular, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
     }
     
 }

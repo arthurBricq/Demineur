@@ -16,7 +16,7 @@ class Vibrate: NSObject {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
         } else {
-            AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
+            AudioServicesPlaySystemSound(1520)
         }
     }
     
@@ -29,7 +29,7 @@ class Vibrate: NSObject {
             case .light:
                 AudioServicesPlaySystemSound(1519)
             case .medium:
-                AudioServicesPlayAlertSound(1520)
+                AudioServicesPlaySystemSound(1520)
             case .heavy:
                 AudioServicesPlayAlertSound(kSystemSoundID_Vibrate)
             }
