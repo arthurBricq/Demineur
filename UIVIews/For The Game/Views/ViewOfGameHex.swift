@@ -1,0 +1,364 @@
+//
+//  ViewOfGame_Hex.swift
+//  HexagoneViewMineIt
+//
+//  Created by Arthur BRICQ on 31/03/2018.
+//  Copyright © 2018 Arthur BRICQ. All rights reserved.
+//
+
+import UIKit
+
+class ViewOfGame_Hex: UIView {
+    
+    @IBInspectable var n: Int = 4
+    @IBInspectable var m: Int = 4
+    var z: Int = 4
+    @IBInspectable var a: CGFloat = 30
+    @IBInspectable var emptyColor: UIColor = .black
+    @IBInspectable var openColor: UIColor = .black
+    @IBInspectable var strokeColor: UIColor = .black
+    var textColor = UIColor.black
+    @IBInspectable var lineWidth: CGFloat = 1.5
+    var delegate: GameViewCanCallVC?
+    var gameState = [[Int]].init()
+    var option1: Bool = false
+    var option1Time: CGFloat = 1.0
+    var option2: Bool = false // certains numéros sont remplacés par des "?"
+    var option2frequency: CGFloat = 0.5 // probabilité 0 et 1
+    var option3Frequency: CGFloat = 0
+    var option3Timer = CountingTimer()
+    var numberOfFlags: Int = 5
+    
+    override func draw(_ rect: CGRect) {
+        // hypothesis : 1) w = k * h    2) what matters is the height since h = 2*a
+        
+        // pour toutes les cases :
+        let h = 2*a // la hauteur
+        let w = k*h // la largeur
+        let size = CGSize(width: w, height: h)
+        
+        // point itérateur pour positionner tous les boutons
+        var iteratorPoint: CGPoint = .zero
+        
+        // ***** Dessin des cases ***** //
+        
+        for i in 0..<n {
+            for j in 0..<gameState[i].count {
+                
+                let hexButton = HexCase()
+                hexButton.i = i // coordonné de la ligne
+                hexButton.j = j // coordonée de la colonne
+                hexButton.name = "line: \(i), column: \(j)"
+                hexButton.lineWidth = lineWidth
+                hexButton.emptyColor = emptyColor
+                hexButton.strokeColor = strokeColor
+                hexButton.openColor = openColor
+                hexButton.textColor = textColor
+                hexButton.gameState = gameState
+                hexButton.numberOfColumns = m
+                hexButton.number = gameState[i][j] // transmission du tableau des données.
+                hexButton.superViewDelegate = self // permet au boutton d'appeler cette vue.
+                hexButton.option1 = option1 // permet l'activation des timers.
+                hexButton.option1Time = option1Time
+                hexButton.option1Timer.delegate = hexButton
+                hexButton.option2 = option2
+                hexButton.option2frequency = option2frequency
+                
+                if gameState[i][j] == -2 {
+                    hexButton.caseState = .none
+                } else {
+                    hexButton.caseState = .empty
+                }
+                
+                if i%2 == 0 {
+                    iteratorPoint.x = CGFloat(j) * sqrt(3) * a
+                    iteratorPoint.y = CGFloat(i) * (3*a/2)
+                } else {
+                    iteratorPoint.x = w/2 + CGFloat(j) * sqrt(3) * a
+                    iteratorPoint.y = CGFloat(i) * (3*a/2) // le y ne change pas par rapport au premier point
+                }
+                
+                hexButton.frame = CGRect(origin: iteratorPoint, size: size)
+                self.addSubview(hexButton)
+                
+            }
+        }
+        
+        
+    }
+    
+}
+
+extension ViewOfGame_Hex: ButtonCanCallSuperView {
+    
+    /**
+     Cette fonction permet d'ouvrir toutes les cases les unes après les autres.
+     */
+    func buttonHaveBeenTapped(i: Int, j: Int, marking: Bool)
+    {
+        if isACaseNone(i: i, j: j) { return }
+        
+        func ouvertureRecursive(i: Int, j: Int) {
+            
+            let minIJ = 0 ; let maxI = gameState.count ;
+            if i >= minIJ && j >= minIJ && i < maxI
+            { // pas une case en dehors du domaine.
+                let maxJ = gameState[i].count ;
+                if j < maxJ // Début de la logique ici ...
+                {
+                    
+                    if isTheCaseBlocked(i: i, j: j) { return }
+                    
+                    if gameState[i][j] == -1 { // ******* fin du jeu ****** //
+                        
+                        returnAllTheCases()
+                        delegate!.gameOver(win: false)
+                        callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
+                        return
+                        
+                    } else if gameState[i][j] == -2 {
+                        return
+                    } else if !isTheCaseMarked(i: i, j: j) && !isACaseOpen(i: i, j: j) { // pas une bombe, pas une none
+                        returnACase(i: i, j: j)
+                        if gameState[i][j] != 0 { return }
+                        for a in (i-1)...(i+1) {
+                            for b in (j-1)...(j+1) {
+                                // il y a deux cas : ou bien i est paire ou bien i est impaire
+                                if i%2 == 0 { // il y m elements dans la ligne.
+                                    if a != i && b == (j+1) { continue }
+                                } else {
+                                    if b == (j-1) && a != i { continue }
+                                }
+                                
+                                ouvertureRecursive(i: a, j: b)
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        if marking { // il faut marquer ou unmarquer la case
+            
+            if isACaseOpen(i: i, j: j) { return }
+            
+            if !isTheCaseMarked(i: i, j: j) {
+                if numberOfFlags > 0 {
+                    markACase(i: i, j: j)
+                    numberOfFlags = numberOfFlags - 1
+                }
+            } else {
+                unmarkACase(i: i, j: j)
+            }
+            
+            delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
+            
+        } else { // appuyer sur la carte
+            if !isTheCaseMarked(i: i, j: j) {
+                ouvertureRecursive(i: i, j: j)
+            }
+        }
+        
+        if isTheGameFinished() {
+            // ******** Partie Gagnée ********* //
+            print("finished")
+            delegate!.gameOver(win: true)
+            returnAllTheCases(win: true)
+        }
+        
+        
+    }
+}
+
+extension ViewOfGame_Hex {
+    
+    func isTheCaseMarked(i: Int,j : Int)->Bool {
+        var toReturn: Bool = false
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            if button.caseState == .marked {
+                toReturn = true
+            }
+        }
+        return toReturn
+    }
+    
+    func isTheCaseBlocked(i: Int,j : Int)->Bool {
+        var toReturn: Bool = false
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            if button.caseState == .blocked {
+                toReturn = true
+            }
+        }
+        return toReturn
+    }
+    
+    func isACaseOpen(i: Int,j : Int)->Bool {
+        var toReturn: Bool = false
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            if button.caseState == .open {
+                toReturn = true
+            }
+        }
+        return toReturn
+    }
+    
+    func isACaseNone(i: Int,j : Int)->Bool {
+        var toReturn: Bool = false
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            if button.caseState == .none {
+                toReturn = true
+            }
+        }
+        return toReturn
+    }
+    
+    func isCaseABomb(i: Int, j: Int) -> Bool {
+        return gameState[i][j] == -1
+    }
+    
+    func markACase(i: Int,j: Int) {
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            button.caseState = .marked
+        }
+    }
+    
+    func unmarkACase(i: Int,j: Int) {
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            button.caseState = .empty
+        }
+    }
+    
+    func blockACase(i: Int,j: Int) {
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            if button.caseState == .empty {
+                button.caseState = .blocked
+                button.isUserInteractionEnabled = false
+            }
+        }
+    }
+    
+    func unblockACase(i: Int,j: Int) {
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            button.caseState = .empty
+            button.isUserInteractionEnabled = true
+        }
+    }
+    
+    func returnACase(i: Int, j: Int) {
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let k = i*m + j - delta
+        if self.subviews[k] is HexCase {
+            let button = self.subviews[k] as! HexCase
+            button.caseState = .open
+        }
+    }
+    
+    func isTheGameFinished() -> Bool {
+        var toReturn = true
+        
+        for i in 0..<gameState.count {
+            for j in 0..<gameState[i].count {
+                // We check if all bombs are marked
+                if gameState[i][j] == -1 {
+                    if !isTheCaseMarked(i: i, j: j) {
+                        toReturn = false
+                    }
+                }
+                
+            }
+        }
+        
+        // Si la partie est finie, il faut aussi bloquer les animations en cours sur les cases: par exemple arreter le timer de l'option 1
+        
+        if toReturn { // la partie est donc finie !
+            for button in self.subviews {
+                if button is HexCase {
+                    let button = button as! HexCase
+                    button.option1Timer.stop()
+                }
+            }
+        }
+        
+        return toReturn
+    }
+    
+    func returnAllTheCases(win: Bool = false) {
+        for i in 0..<gameState.count {
+            for j in 0..<gameState[i].count {
+                if isCaseABomb(i: i, j: j) {
+                    callEndAnimation(onButtonAt: i, j: j, win: win)
+                } else if isTheCaseMarked(i: i, j: j) {
+                    callEndAnimation(onButtonAt: i, j: j, win: false)
+                }
+            }
+        }
+    }
+    
+    func callEndAnimation(onButtonAt i: Int, j: Int, win: Bool, bombTapped: Bool = false) {
+        let delta: Int = (i%2==0) ? i/2 : (i-1)/2
+        let buttonTappedId = i*m + j - delta
+        if self.subviews[buttonTappedId] is HexCase {
+            let buttonTapped = self.subviews[buttonTappedId] as! HexCase
+            buttonTapped.animateGameOver(win: win, bombTapped: bombTapped)
+        }
+    }
+    
+    func updateAllNumbers() {
+        for button in self.subviews {
+            if button is HexCase {
+                let button = button as! HexCase
+                button.gameState = gameState
+            }
+        }
+    }
+    
+}
+
+extension ViewOfGame_Hex: CountingTimerProtocol {
+    func timerFires(id: String) {
+        if id == "Option3" {
+            
+            for subview in subviews {
+                if subview is HexCase {
+                    let hex = subview as! HexCase
+                    if hex.caseState == .blocked && random(100) < Int(option3Frequency*100) {
+                        hex.caseState = .empty
+                        hex.isUserInteractionEnabled = true
+                    }
+                }
+            }
+            
+            if random(100) < Int(option3Frequency*100) {
+                let randN = random(n)
+                let randM = n%2 == 0 ? random(m) : random(m-1)
+                blockACase(i: randN, j: randM)
+            }
+            
+        }
+    }
+}

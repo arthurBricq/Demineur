@@ -12,6 +12,37 @@
 		4EA7FD5C20F893E700740480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5A20F893E700740480 /* Main.storyboard */; };
 		4EA7FD5E20F893E800740480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5D20F893E800740480 /* Assets.xcassets */; };
 		4EA7FD6120F893E800740480 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5F20F893E800740480 /* LaunchScreen.storyboard */; };
+		4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD6B20F894E200740480 /* MenuViewController.swift */; };
+		4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD6D20F894F600740480 /* PauseViewController.swift */; };
+		4EA7FD7020F8951300740480 /* InfiniteGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD6F20F8951300740480 /* InfiniteGameViewController.swift */; };
+		4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */; };
+		4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */; };
+		4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7620F8957A00740480 /* RoundButtonWithNumber.swift */; };
+		4EA7FD7A20F8959C00740480 /* EndTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7920F8959C00740480 /* EndTableViewCell.swift */; };
+		4EA7FD7C20F895B000740480 /* StartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */; };
+		4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */; };
+		4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */; };
+		4EA7FD8420F8960700740480 /* HexCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8320F8960700740480 /* HexCase.swift */; };
+		4EA7FD8620F8961C00740480 /* RayureDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8520F8961C00740480 /* RayureDrawing.swift */; };
+		4EA7FD8820F8962B00740480 /* SquareCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8720F8962B00740480 /* SquareCase.swift */; };
+		4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8920F8963E00740480 /* TriangularCase.swift */; };
+		4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8C20F8966000740480 /* ViewOfGameHex.swift */; };
+		4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8E20F8967200740480 /* ViewOfGameSquare.swift */; };
+		4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9020F8968600740480 /* ViewOfGameTriangular.swift */; };
+		4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9320F896B500740480 /* BombViewDisplay.swift */; };
+		4EA7FD9620F896C200740480 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9520F896C200740480 /* ClockView.swift */; };
+		4EA7FD9820F896D200740480 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9720F896D200740480 /* FlagView.swift */; };
+		4EA7FD9A20F896EB00740480 /* FlagViewDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9920F896EB00740480 /* FlagViewDisplay.swift */; };
+		4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9B20F896FE00740480 /* Letter.swift */; };
+		4EA7FD9E20F8971000740480 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9D20F8971000740480 /* LineView.swift */; };
+		4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9F20F8971F00740480 /* PauseButton.swift */; };
+		4EA7FDA220F8974E00740480 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA120F8974E00740480 /* Functions.swift */; };
+		4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA320F8976B00740480 /* Protocols.swift */; };
+		4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA520F8977E00740480 /* StarterFunctions.swift */; };
+		4EA7FDA820F8978C00740480 /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA720F8978C00740480 /* Variables.swift */; };
+		4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA920F8979B00740480 /* Timer.swift */; };
+		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
+		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +53,37 @@
 		4EA7FD5D20F893E800740480 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EA7FD6020F893E800740480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4EA7FD6220F893E800740480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EA7FD6B20F894E200740480 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		4EA7FD6D20F894F600740480 /* PauseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
+		4EA7FD6F20F8951300740480 /* InfiniteGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteGameViewController.swift; sourceTree = "<group>"; };
+		4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPresentationViewController.swift; sourceTree = "<group>"; };
+		4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGameViewController.swift; sourceTree = "<group>"; };
+		4EA7FD7620F8957A00740480 /* RoundButtonWithNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonWithNumber.swift; sourceTree = "<group>"; };
+		4EA7FD7920F8959C00740480 /* EndTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTableViewCell.swift; sourceTree = "<group>"; };
+		4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTableViewCell.swift; sourceTree = "<group>"; };
+		4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type1TableViewCell.swift; sourceTree = "<group>"; };
+		4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type2TableViewCell.swift; sourceTree = "<group>"; };
+		4EA7FD8320F8960700740480 /* HexCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexCase.swift; sourceTree = "<group>"; };
+		4EA7FD8520F8961C00740480 /* RayureDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayureDrawing.swift; sourceTree = "<group>"; };
+		4EA7FD8720F8962B00740480 /* SquareCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareCase.swift; sourceTree = "<group>"; };
+		4EA7FD8920F8963E00740480 /* TriangularCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangularCase.swift; sourceTree = "<group>"; };
+		4EA7FD8C20F8966000740480 /* ViewOfGameHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGameHex.swift; sourceTree = "<group>"; };
+		4EA7FD8E20F8967200740480 /* ViewOfGameSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGameSquare.swift; sourceTree = "<group>"; };
+		4EA7FD9020F8968600740480 /* ViewOfGameTriangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGameTriangular.swift; sourceTree = "<group>"; };
+		4EA7FD9320F896B500740480 /* BombViewDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombViewDisplay.swift; sourceTree = "<group>"; };
+		4EA7FD9520F896C200740480 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
+		4EA7FD9720F896D200740480 /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
+		4EA7FD9920F896EB00740480 /* FlagViewDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagViewDisplay.swift; sourceTree = "<group>"; };
+		4EA7FD9B20F896FE00740480 /* Letter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Letter.swift; sourceTree = "<group>"; };
+		4EA7FD9D20F8971000740480 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		4EA7FD9F20F8971F00740480 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
+		4EA7FDA120F8974E00740480 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		4EA7FDA320F8976B00740480 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		4EA7FDA520F8977E00740480 /* StarterFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarterFunctions.swift; sourceTree = "<group>"; };
+		4EA7FDA720F8978C00740480 /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
+		4EA7FDA920F8979B00740480 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
+		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +100,9 @@
 		4EA7FD4A20F893E700740480 = {
 			isa = PBXGroup;
 			children = (
+				4EA7FD6820F894A700740480 /* Logic */,
+				4EA7FD6920F894B300740480 /* UIVIews */,
+				4EA7FD6A20F894BE00740480 /* VC */,
 				4EA7FD5520F893E700740480 /* Demineur */,
 				4EA7FD5420F893E700740480 /* Products */,
 			);
@@ -55,13 +120,113 @@
 			isa = PBXGroup;
 			children = (
 				4EA7FD5620F893E700740480 /* AppDelegate.swift */,
-				4EA7FD5820F893E700740480 /* ViewController.swift */,
 				4EA7FD5A20F893E700740480 /* Main.storyboard */,
 				4EA7FD5D20F893E800740480 /* Assets.xcassets */,
 				4EA7FD5F20F893E800740480 /* LaunchScreen.storyboard */,
 				4EA7FD6220F893E800740480 /* Info.plist */,
 			);
 			path = Demineur;
+			sourceTree = "<group>";
+		};
+		4EA7FD6820F894A700740480 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FDA120F8974E00740480 /* Functions.swift */,
+				4EA7FDA320F8976B00740480 /* Protocols.swift */,
+				4EA7FDA520F8977E00740480 /* StarterFunctions.swift */,
+				4EA7FDA720F8978C00740480 /* Variables.swift */,
+				4EA7FDA920F8979B00740480 /* Timer.swift */,
+				4EA7FDAB20F897A700740480 /* Vibrate.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		4EA7FD6920F894B300740480 /* UIVIews */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD9220F8969D00740480 /* Graphism */,
+				4EA7FD8120F895EC00740480 /* For The Game */,
+				4EA7FD7820F8958700740480 /* Cells */,
+				4EA7FD7520F8956200740480 /* Buttons */,
+			);
+			path = UIVIews;
+			sourceTree = "<group>";
+		};
+		4EA7FD6A20F894BE00740480 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD5820F893E700740480 /* ViewController.swift */,
+				4EA7FD6B20F894E200740480 /* MenuViewController.swift */,
+				4EA7FD6F20F8951300740480 /* InfiniteGameViewController.swift */,
+				4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */,
+				4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */,
+				4EA7FD6D20F894F600740480 /* PauseViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		4EA7FD7520F8956200740480 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD7620F8957A00740480 /* RoundButtonWithNumber.swift */,
+				4EA7FD9F20F8971F00740480 /* PauseButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		4EA7FD7820F8958700740480 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD7920F8959C00740480 /* EndTableViewCell.swift */,
+				4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */,
+				4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */,
+				4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		4EA7FD8120F895EC00740480 /* For The Game */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD8B20F8964A00740480 /* Views */,
+				4EA7FD8220F895FC00740480 /* Buttons */,
+			);
+			path = "For The Game";
+			sourceTree = "<group>";
+		};
+		4EA7FD8220F895FC00740480 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD8320F8960700740480 /* HexCase.swift */,
+				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
+				4EA7FD8720F8962B00740480 /* SquareCase.swift */,
+				4EA7FD8920F8963E00740480 /* TriangularCase.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		4EA7FD8B20F8964A00740480 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD8C20F8966000740480 /* ViewOfGameHex.swift */,
+				4EA7FD8E20F8967200740480 /* ViewOfGameSquare.swift */,
+				4EA7FD9020F8968600740480 /* ViewOfGameTriangular.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4EA7FD9220F8969D00740480 /* Graphism */ = {
+			isa = PBXGroup;
+			children = (
+				4EA7FD9320F896B500740480 /* BombViewDisplay.swift */,
+				4EA7FDAD20F8987700740480 /* BombView.swift */,
+				4EA7FD9520F896C200740480 /* ClockView.swift */,
+				4EA7FD9720F896D200740480 /* FlagView.swift */,
+				4EA7FD9920F896EB00740480 /* FlagViewDisplay.swift */,
+				4EA7FD9B20F896FE00740480 /* Letter.swift */,
+				4EA7FD9D20F8971000740480 /* LineView.swift */,
+			);
+			path = Graphism;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +300,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */,
+				4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */,
+				4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */,
+				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
+				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
+				4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */,
+				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
+				4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */,
+				4EA7FD9820F896D200740480 /* FlagView.swift in Sources */,
+				4EA7FDA820F8978C00740480 /* Variables.swift in Sources */,
+				4EA7FD8420F8960700740480 /* HexCase.swift in Sources */,
+				4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */,
+				4EA7FDAE20F8987700740480 /* BombView.swift in Sources */,
+				4EA7FD8820F8962B00740480 /* SquareCase.swift in Sources */,
+				4EA7FDA220F8974E00740480 /* Functions.swift in Sources */,
 				4EA7FD5920F893E700740480 /* ViewController.swift in Sources */,
+				4EA7FD7020F8951300740480 /* InfiniteGameViewController.swift in Sources */,
+				4EA7FD8620F8961C00740480 /* RayureDrawing.swift in Sources */,
+				4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */,
+				4EA7FD9E20F8971000740480 /* LineView.swift in Sources */,
+				4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */,
+				4EA7FD9A20F896EB00740480 /* FlagViewDisplay.swift in Sources */,
+				4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */,
+				4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */,
+				4EA7FD7C20F895B000740480 /* StartTableViewCell.swift in Sources */,
+				4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */,
+				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
+				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
+				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
+				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
+				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
+				4EA7FD7A20F8959C00740480 /* EndTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
