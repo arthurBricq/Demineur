@@ -662,7 +662,6 @@
                                 </state>
                                 <connections>
                                     <action selector="buttonReturn:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="Vrc-Wr-M4N"/>
-                                    <action selector="returnToPresentation:" destination="Z45-JZ-Gj9" eventType="touchUpInside" id="oma-3g-icK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaC-C1-B8N">
@@ -672,9 +671,7 @@
                                     <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="buttonReturn:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="nXA-c9-WfU"/>
                                     <action selector="newsectionbutton:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="x7f-vP-thx"/>
-                                    <action selector="returnToPresentation:" destination="Z45-JZ-Gj9" eventType="touchUpInside" id="m1k-Yu-lUd"/>
                                 </connections>
                             </button>
                         </subviews>
