@@ -15,12 +15,12 @@
         <!--Menu View Controller-->
         <scene sceneID="X9n-su-cgw">
             <objects>
-                <viewController id="Qnh-OT-7uj" customClass="MenuViewController" customModule="De_mineur" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qnh-OT-7uj" customClass="MenuViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LOY-a7-UR5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEZ-Z8-DzJ" customClass="LineView" customModule="De_mineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEZ-Z8-DzJ" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="30" y="0.0" width="5" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -32,7 +32,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppR-ja-diU" userLabel="LetterM" customClass="Letter" customModule="De_mineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppR-ja-diU" userLabel="LetterM" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="43" y="170" width="70" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -48,10 +48,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3Y-5a-e01" userLabel="LetterE" customClass="Letter" customModule="De_mineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3Y-5a-e01" userLabel="LetterE" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="111" y="170" width="70" height="70"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnJ-iP-sIj" customClass="LineView" customModule="De_mineur" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnJ-iP-sIj" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="8" y="0.0" width="5" height="400"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -92,7 +92,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnw-KT-xLA" userLabel="LetterN" customClass="Letter" customModule="De_mineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnw-KT-xLA" userLabel="LetterN" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="196" y="170" width="70" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -115,7 +115,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLw-gQ-wd1" userLabel="LetterU" customClass="Letter" customModule="De_mineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLw-gQ-wd1" userLabel="LetterU" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="280" y="170" width="70" height="70"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -154,6 +154,9 @@
                                 <state key="normal" title="MODE INFINIE">
                                     <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="ylO-j7-Tgn" kind="show" identifier="ToInfiniteGame" id="Mrt-qU-bVf"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBg-Hy-KC7">
                                 <rect key="frame" x="134" y="390" width="116" height="40"/>
@@ -229,7 +232,7 @@
         <!--History Presentation View Controller-->
         <scene sceneID="o19-DM-Ufg">
             <objects>
-                <viewController id="b43-F8-wXT" customClass="HistoryPresentationViewController" customModule="De_mineur" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="b43-F8-wXT" customClass="HistoryPresentationViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nu1-60-sAm" colorLabel="IBBuiltInLabel-Yellow">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,14 +259,14 @@
                                 <rect key="frame" x="53" y="75" width="300" height="592"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StartCell" rowHeight="62" id="yaL-3H-Z3c" customClass="StartTableViewCell" customModule="De_mineur" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StartCell" rowHeight="62" id="yaL-3H-Z3c" customClass="StartTableViewCell" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="300" height="62"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yaL-3H-Z3c" id="4bZ-Lp-7KJ">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="62"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLJ-2J-djg" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLJ-2J-djg" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="25" y="11" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="ix5-mJ-zXD"/>
@@ -273,7 +276,7 @@
                                                         <color key="titleColor" red="0.76470588240000004" green="0.47058823529999999" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGt-9d-l1G" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGt-9d-l1G" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="130" y="11" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="yWc-a5-GSh"/>
@@ -283,7 +286,7 @@
                                                         <color key="titleColor" red="0.76470588240000004" green="0.47058823529999999" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPc-Zz-en9" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPc-Zz-en9" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="235" y="11" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="6nm-tx-ucP"/>
@@ -309,14 +312,14 @@
                                             <outlet property="button3" destination="QPc-Zz-en9" id="lKh-lI-fpn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Type1Cell" rowHeight="64" id="EY9-PA-7kj" customClass="Type1TableViewCell" customModule="De_mineur" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Type1Cell" rowHeight="64" id="EY9-PA-7kj" customClass="Type1TableViewCell" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="90" width="300" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EY9-PA-7kj" id="7q6-Lf-hCa">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfA-XL-hq6" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfA-XL-hq6" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="25" y="12" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="Ahn-XV-Z3l"/>
@@ -326,7 +329,7 @@
                                                         <color key="titleColor" red="0.76470588240000004" green="0.47058823529999999" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-mQ-pcX" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tel-mQ-pcX" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="235" y="12" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="AyL-T9-IHB"/>
@@ -336,7 +339,7 @@
                                                         <color key="titleColor" red="0.76470588240000004" green="0.47058823529999999" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dX8-cO-IJe" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dX8-cO-IJe" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="130" y="12" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="FOP-Mw-Pdm"/>
@@ -362,14 +365,14 @@
                                             <outlet property="button3" destination="yfA-XL-hq6" id="ovm-81-i6s"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Type2Cell" rowHeight="60" id="l3j-fO-yfq" customClass="Type2TableViewCell" customModule="De_mineur" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Type2Cell" rowHeight="60" id="l3j-fO-yfq" customClass="Type2TableViewCell" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="154" width="300" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="l3j-fO-yfq" id="c1O-8H-U9Y">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iF2-N5-z1d" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iF2-N5-z1d" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="129.5" y="10" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="8AQ-pR-iGt"/>
@@ -379,7 +382,7 @@
                                                         <color key="titleColor" red="0.76470588240000004" green="0.47058823529999999" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLx-Iv-ad4" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLx-Iv-ad4" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="235" y="10" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Avb-nG-FZH"/>
@@ -389,7 +392,7 @@
                                                         <color key="titleColor" red="0.76470588240000004" green="0.47058823529999999" blue="0.0078431372550000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whe-kM-kCm" customClass="RoundButtonWithNumber" customModule="De_mineur" customModuleProvider="target">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Whe-kM-kCm" customClass="RoundButtonWithNumber" customModule="Demineur" customModuleProvider="target">
                                                     <rect key="frame" x="25" y="10" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="0ni-7S-vGa"/>
@@ -466,7 +469,7 @@
         <!--History Game View Controller-->
         <scene sceneID="BZO-L1-DnG">
             <objects>
-                <viewController id="Z45-JZ-Gj9" customClass="HistoryGameViewController" customModule="De_mineur" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Z45-JZ-Gj9" customClass="HistoryGameViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J12-eb-xw0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -474,7 +477,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qms-ah-Ttz">
                                 <rect key="frame" x="94" y="35" width="187.5" height="60"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88F-XN-XuS" customClass="FlagViewDisplay" customModule="De_mineur" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88F-XN-XuS" customClass="FlagViewDisplay" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="105" y="15" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -484,7 +487,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MC6-la-uvq" customClass="BombViewDisplay" customModule="De_mineur" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MC6-la-uvq" customClass="BombViewDisplay" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="20" y="15" width="30" height="30"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -514,7 +517,7 @@
                                     <constraint firstItem="88F-XN-XuS" firstAttribute="width" secondItem="MC6-la-uvq" secondAttribute="width" id="qB2-fR-NYa"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wo3-9b-qe6" customClass="PauseButton" customModule="De_mineur" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wo3-9b-qe6" customClass="PauseButton" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="325" y="50" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="8wn-Aj-vcm"/>
@@ -534,7 +537,7 @@
                                     <action selector="returnToPresentation:" destination="Z45-JZ-Gj9" eventType="touchUpInside" id="ul7-yE-vnT"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAm-3X-EtB" customClass="ClockView" customModule="De_mineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pAm-3X-EtB" customClass="ClockView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="20" y="45" width="40.5" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -576,10 +579,141 @@
             </objects>
             <point key="canvasLocation" x="-682" y="2203"/>
         </scene>
+        <!--Infinite Game View Controller-->
+        <scene sceneID="3Sd-F4-wGR">
+            <objects>
+                <viewController id="ylO-j7-Tgn" customClass="InfiniteGameViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GQh-gW-Zxv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dbs-gg-rV1">
+                                <rect key="frame" x="94" y="35" width="187.5" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OKj-Lg-RYV" customClass="FlagViewDisplay" customModule="Demineur" customModuleProvider="target">
+                                        <rect key="frame" x="105" y="15" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bomb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mUc-IF-dWj">
+                                        <rect key="frame" x="54" y="20" width="45" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eKV-0q-LeX" customClass="BombViewDisplay" customModule="Demineur" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="15" width="30" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="4vB-yu-EMY"/>
+                                            <constraint firstAttribute="width" constant="30" id="9YP-bC-zft"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkH-Vs-bVq">
+                                        <rect key="frame" x="135" y="20" width="32.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="eKV-0q-LeX" firstAttribute="centerY" secondItem="Dbs-gg-rV1" secondAttribute="centerY" id="7Pr-uA-Mgs"/>
+                                    <constraint firstItem="qkH-Vs-bVq" firstAttribute="centerY" secondItem="mUc-IF-dWj" secondAttribute="centerY" id="8Zr-ks-vU2"/>
+                                    <constraint firstItem="eKV-0q-LeX" firstAttribute="leading" secondItem="Dbs-gg-rV1" secondAttribute="leading" constant="20" id="BZk-Hw-Jxy"/>
+                                    <constraint firstItem="qkH-Vs-bVq" firstAttribute="leading" secondItem="OKj-Lg-RYV" secondAttribute="trailing" id="DS5-1x-2op"/>
+                                    <constraint firstItem="OKj-Lg-RYV" firstAttribute="width" secondItem="eKV-0q-LeX" secondAttribute="width" id="LPO-f6-jAF"/>
+                                    <constraint firstItem="OKj-Lg-RYV" firstAttribute="height" secondItem="eKV-0q-LeX" secondAttribute="height" id="Rfn-wE-9v7"/>
+                                    <constraint firstAttribute="trailing" secondItem="qkH-Vs-bVq" secondAttribute="trailing" constant="20" id="bQY-Dj-30s"/>
+                                    <constraint firstAttribute="height" secondItem="eKV-0q-LeX" secondAttribute="height" multiplier="2" id="e5L-l3-DNH"/>
+                                    <constraint firstItem="OKj-Lg-RYV" firstAttribute="centerY" secondItem="mUc-IF-dWj" secondAttribute="centerY" id="jK3-eI-Ur2"/>
+                                    <constraint firstItem="mUc-IF-dWj" firstAttribute="centerY" secondItem="eKV-0q-LeX" secondAttribute="centerY" id="ojn-Vi-N49"/>
+                                    <constraint firstItem="mUc-IF-dWj" firstAttribute="leading" secondItem="eKV-0q-LeX" secondAttribute="trailing" constant="4" id="yPk-O5-JPQ"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QR3-pF-xd2" customClass="PauseButton" customModule="Demineur" customModuleProvider="target">
+                                <rect key="frame" x="325" y="50" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QR3-pF-xd2" secondAttribute="height" multiplier="1:1" id="Qhd-Dn-HbN"/>
+                                    <constraint firstAttribute="width" constant="30" id="zS0-UB-Wid"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="pauseButtonTapped:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="Zdf-In-oEA"/>
+                                    <action selector="pauseButtonTapped:" destination="Z45-JZ-Gj9" eventType="touchUpInside" id="sdb-we-d73"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DbP-03-m8a" customClass="ClockView" customModule="Demineur" customModuleProvider="target">
+                                <rect key="frame" x="20" y="45" width="40.5" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DbP-03-m8a" secondAttribute="height" multiplier="1:1" id="9Ri-1Z-JHW"/>
+                                    <constraint firstAttribute="width" constant="40" id="FeQ-Mt-0mA"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="pourcentage">
+                                        <real key="value" value="0.29999999999999999"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iae-ki-3Mm">
+                                <rect key="frame" x="152.5" y="622" width="70" height="36"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
+                                <state key="normal" title="RETOUR">
+                                    <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonReturn:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="Vrc-Wr-M4N"/>
+                                    <action selector="returnToPresentation:" destination="Z45-JZ-Gj9" eventType="touchUpInside" id="oma-3g-icK"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaC-C1-B8N">
+                                <rect key="frame" x="234" y="622" width="131" height="36"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
+                                <state key="normal" title="Section suivante">
+                                    <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonReturn:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="nXA-c9-WfU"/>
+                                    <action selector="newsectionbutton:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="x7f-vP-thx"/>
+                                    <action selector="returnToPresentation:" destination="Z45-JZ-Gj9" eventType="touchUpInside" id="m1k-Yu-lUd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pcB-3R-DrW" firstAttribute="bottom" secondItem="iae-ki-3Mm" secondAttribute="bottom" constant="9" id="1AR-3l-5U8"/>
+                            <constraint firstItem="Dbs-gg-rV1" firstAttribute="centerY" secondItem="QR3-pF-xd2" secondAttribute="centerY" id="1Es-os-46q"/>
+                            <constraint firstItem="DbP-03-m8a" firstAttribute="width" secondItem="DbP-03-m8a" secondAttribute="height" multiplier="1:1" id="2BT-3l-qLu"/>
+                            <constraint firstItem="jaC-C1-B8N" firstAttribute="centerY" secondItem="iae-ki-3Mm" secondAttribute="centerY" id="3kE-hn-Clp"/>
+                            <constraint firstItem="iae-ki-3Mm" firstAttribute="centerX" secondItem="pcB-3R-DrW" secondAttribute="centerX" id="4zK-hD-EKi"/>
+                            <constraint firstItem="DbP-03-m8a" firstAttribute="centerY" secondItem="Dbs-gg-rV1" secondAttribute="centerY" id="70E-CU-FIe"/>
+                            <constraint firstItem="pcB-3R-DrW" firstAttribute="trailing" secondItem="QR3-pF-xd2" secondAttribute="trailing" constant="20" id="G1h-c8-sJh"/>
+                            <constraint firstItem="QR3-pF-xd2" firstAttribute="width" secondItem="QR3-pF-xd2" secondAttribute="height" multiplier="1:1" id="Mla-fc-P6R"/>
+                            <constraint firstItem="DbP-03-m8a" firstAttribute="width" secondItem="DbP-03-m8a" secondAttribute="height" multiplier="1:1" id="VEj-MC-MyV"/>
+                            <constraint firstItem="DbP-03-m8a" firstAttribute="leading" secondItem="pcB-3R-DrW" secondAttribute="leading" constant="20" id="cEg-Nd-Try"/>
+                            <constraint firstItem="pcB-3R-DrW" firstAttribute="trailing" secondItem="jaC-C1-B8N" secondAttribute="trailing" constant="10" id="qSb-SV-YKA"/>
+                            <constraint firstItem="Dbs-gg-rV1" firstAttribute="width" secondItem="GQh-gW-Zxv" secondAttribute="width" multiplier="0.5" id="sN8-jS-8wv"/>
+                            <constraint firstItem="Dbs-gg-rV1" firstAttribute="centerX" secondItem="pcB-3R-DrW" secondAttribute="centerX" id="ySK-Yu-BgJ"/>
+                            <constraint firstItem="Dbs-gg-rV1" firstAttribute="top" secondItem="pcB-3R-DrW" secondAttribute="top" constant="15" id="zjX-XZ-KJV"/>
+                            <constraint firstItem="QR3-pF-xd2" firstAttribute="width" secondItem="QR3-pF-xd2" secondAttribute="height" multiplier="1:1" id="zuN-YV-BQQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pcB-3R-DrW"/>
+                    </view>
+                    <connections>
+                        <outlet property="bombCounterLabel" destination="mUc-IF-dWj" id="gBJ-ha-ESa"/>
+                        <outlet property="bombView" destination="eKV-0q-LeX" id="ALM-lv-zgk"/>
+                        <outlet property="clockView" destination="DbP-03-m8a" id="vGd-Em-BsN"/>
+                        <outlet property="flagCounterLabel" destination="qkH-Vs-bVq" id="nUt-g5-xaX"/>
+                        <outlet property="flagView" destination="OKj-Lg-RYV" id="LyY-v8-D10"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bfc-ZA-NMF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1591" y="2950"/>
+        </scene>
         <!--Pause-->
         <scene sceneID="boE-NA-NeY">
             <objects>
-                <viewController storyboardIdentifier="Pause" title="Pause" modalPresentationStyle="overCurrentContext" id="QLO-ne-eVG" customClass="PauseViewController" customModule="DemineIt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Pause" title="Pause" modalPresentationStyle="overCurrentContext" id="QLO-ne-eVG" customClass="PauseViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jcO-ic-bZ4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -17,7 +17,6 @@ class InfiniteGameViewController: UIViewController {
     
     //// MARK : outlets
     
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var clockView: ClockView!
     @IBOutlet weak var bombCounterLabel: UILabel!
     @IBOutlet weak var bombView: BombViewDisplay!
@@ -118,7 +117,6 @@ class InfiniteGameViewController: UIViewController {
         isTheGameStarted.value = false
         gameIndex = 1
         hasToFinishTheGame = true
-        titleLabel.text = "Round \(gameIndex)" ; titleLabel.textColor = .black
         
         if sectionIndex%3 == 0 {
             currentSection = Section(simpleSquareGameWith: (11,9))
@@ -250,7 +248,6 @@ class InfiniteGameViewController: UIViewController {
         launchOption3TimerIfNeeded()
         updateUserInteractionProperty()
         hasToFinishTheGame = true
-        titleLabel.text = "Round \(gameIndex)" ; titleLabel.textColor = .black
         gameTimer.start(timeInterval: 1.0, id: "")
     }
     
@@ -560,7 +557,6 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             
             isTheGameStarted.value = false
             print("fin de la partie courante")
-            titleLabel.text = "Level Finished !" ; titleLabel.textColor = UIColor.green ;
             currentGameIsFinished()
             
             
@@ -571,7 +567,6 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             print("Game-Over")
             gameTimer.stop()
             containerView.isUserInteractionEnabled = false ;
-            titleLabel.text = "GAME OVER !" ; titleLabel.textColor = UIColor.red ;
         }
     }
     
@@ -634,7 +629,6 @@ extension InfiniteGameViewController: CountingTimerProtocol
                 
                 gameTimer.stop()
                 gameOver(win: false)
-                titleLabel.text = "Time is over !"
             }
         }
     }
