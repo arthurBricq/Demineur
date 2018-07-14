@@ -592,23 +592,60 @@ extension InfiniteGameViewController {
     
     func animateNewSection() {
         
-        let view = containerView.subviews.last!
-        UIView.animate(withDuration: 1, animations: {
-            view.alpha = 0
-        }) { (_) in
-            view.removeFromSuperview()
-            if self.currentSection.gameType == .hexagonal {
-                self.addANewHexGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
-                self.addANewHexGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
-            } else if self.currentSection.gameType == .square {
-                self.addANewSquareGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
-                self.addANewSquareGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
-            } else if self.currentSection.gameType == .triangular {
-                self.addANewTriangularGame(game: self.currentSection.game1!)
-                self.addANewTriangularGame(game: self.currentSection.game2!)
+        let message = MessageEndOfSection()
+        message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
+        message.textColor = colorForRGB(r: 255, g: 255, b: 255)
+        message.fontSizeNumber = 60
+        message.fontSizeLevel = 14
+        message.backgroundColor = UIColor.clear
+        message.sectionIndex = sectionIndex+1
+        let size: CGSize = CGSize(width: 200, height: 200)
+        let origin: CGPoint = CGPoint(x: (self.view.bounds.width-size.width)/2, y: (self.view.bounds.height-size.height)/2)
+        message.frame = CGRect(origin: origin, size: size)
+        self.view.addSubview(message)
+        
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+        scaleAnimation.fromValue = 0.3
+        scaleAnimation.toValue = 1
+        
+        let fadeAnimation = CABasicAnimation(keyPath: "opacity")
+        fadeAnimation.fromValue = 0
+        fadeAnimation.toValue = 1
+        
+        let groupAnimation = CAAnimationGroup()
+        groupAnimation.animations = [scaleAnimation, fadeAnimation]
+        groupAnimation.fillMode = kCAFillModeBackwards
+        groupAnimation.duration = 0.33
+        groupAnimation.delegate = self
+        message.layer.add(groupAnimation, forKey: "AppearMessageAnimation")
+        
+    }
+}
+extension InfiniteGameViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        
+        guard let id = anim.value(forKey: "name") as? String else {
+            return
+        }
+        
+        if id == "AppearMessageAnimation" {
+            let view = containerView.subviews.last!
+            UIView.animate(withDuration: 1, animations: {
+                view.alpha = 0
+            }) { (_) in
+                view.removeFromSuperview()
+                if self.currentSection.gameType == .hexagonal {
+                    self.addANewHexGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
+                    self.addANewHexGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
+                } else if self.currentSection.gameType == .square {
+                    self.addANewSquareGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
+                    self.addANewSquareGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
+                } else if self.currentSection.gameType == .triangular {
+                    self.addANewTriangularGame(game: self.currentSection.game1!)
+                    self.addANewTriangularGame(game: self.currentSection.game2!)
+                }
             }
         }
         
     }
-    
 }

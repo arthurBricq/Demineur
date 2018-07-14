@@ -45,6 +45,7 @@
 		4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA920F8979B00740480 /* Timer.swift */; };
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
+		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		4EA7FDA920F8979B00740480 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
+		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				4EA7FD9920F896EB00740480 /* FlagViewDisplay.swift */,
 				4EA7FD9B20F896FE00740480 /* Letter.swift */,
 				4EA7FD9D20F8971000740480 /* LineView.swift */,
+				9C47795B20FA55930094A358 /* MessageEndOfSection.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */,
 				4EA7FD9E20F8971000740480 /* LineView.swift in Sources */,
 				4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */,
+				9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */,
 				4EA7FD9A20F896EB00740480 /* FlagViewDisplay.swift in Sources */,
 				4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */,
 				4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */,
@@ -485,7 +489,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A669ZDMYDX;
+				DEVELOPMENT_TEAM = 39B3D4SKXY;
 				INFOPLIST_FILE = Demineur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -503,7 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = A669ZDMYDX;
+				DEVELOPMENT_TEAM = 39B3D4SKXY;
 				INFOPLIST_FILE = Demineur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
