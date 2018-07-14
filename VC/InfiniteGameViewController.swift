@@ -22,6 +22,7 @@ class InfiniteGameViewController: UIViewController {
     @IBOutlet weak var bombView: BombViewDisplay!
     @IBOutlet weak var flagCounterLabel: UILabel!
     @IBOutlet weak var flagView: FlagViewDisplay!
+    @IBOutlet weak var pauseButton: PauseButton!
     // Cette variable s'occupe de contenir les parties du jeu.
     //@IBOutlet weak var containerView: UIView!
     var containerView = UIView()
@@ -73,6 +74,7 @@ class InfiniteGameViewController: UIViewController {
         pauseVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         pauseVC.pausedGameViewController = self
         self.present(pauseVC, animated: true, completion: nil)
+        
     }
     
     
@@ -82,18 +84,19 @@ class InfiniteGameViewController: UIViewController {
     {
         super.viewDidLoad()
         
-        let containerWidth = self.view.frame.width*0.93
-        let containerHeight = self.view.frame.height*0.9
+        let containerWidth = self.view.frame.width*0.95
+        let containerHeight = self.view.frame.height * (isItABigScreen() ? 0.7 : 0.8 )
         let ox = view.frame.width/2 - containerWidth/2
-        let oy = 0.09*view.frame.height
+        let oy = (isItABigScreen() ? 0.16 : 0.10) * view.frame.height
         print("positionnement du container view: \(oy)")
         containerView.frame = CGRect(x: ox, y: oy, width: containerWidth, height: containerHeight)
         self.view.addSubview(containerView)
         
         containerView.backgroundColor = UIColor.clear
         containerView.layer.borderColor = UIColor.black.cgColor
-        containerView.layer.borderWidth = 0.0
+        containerView.layer.borderWidth = 1.0
         
+        pauseButton.layer.zPosition = 100
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +126,7 @@ class InfiniteGameViewController: UIViewController {
         } else if sectionIndex%3 == 1 {
             currentSection = Section(simpleHexGameWith: (12,9))
         } else if sectionIndex%3 == 2 {
-            currentSection = Section(simpleTriangularGameWith: (8,7))
+            currentSection = Section(simpleTriangularGameWith: (8,11))
         }
         
         // Actualisation des couleurs des parties courantes

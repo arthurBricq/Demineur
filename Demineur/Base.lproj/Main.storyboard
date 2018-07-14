@@ -701,6 +701,7 @@
                         <outlet property="clockView" destination="DbP-03-m8a" id="vGd-Em-BsN"/>
                         <outlet property="flagCounterLabel" destination="qkH-Vs-bVq" id="nUt-g5-xaX"/>
                         <outlet property="flagView" destination="OKj-Lg-RYV" id="LyY-v8-D10"/>
+                        <outlet property="pauseButton" destination="QR3-pF-xd2" id="8vT-l2-UpD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfc-ZA-NMF" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -86,6 +86,7 @@ func modelIdentifier() -> String {
     return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
 }
 
+/// Cette fonction retourne vraie si le ratio de l'écran est celui de l'iphone X (2.11)
 func isItABigScreen() -> Bool {
     if modelIdentifier() == "iPhone10,3" || modelIdentifier() == "iPhone10,6" { return true }
     else { return false }

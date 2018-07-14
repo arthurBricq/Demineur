@@ -23,7 +23,7 @@ class HistoryPresentationViewController: UIViewController  {
     /// VARIABLES
     var totalNumberOfRowsInSection: Int = 5 // nombre de lignes à a
     var currentGame: Int = 11
-    var color1 = UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
+    var color1 = colorForRGB(r: 66, g: 66, b: 66) //UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var color2 = UIColor.orange
     var selectedGameIndex: Int = 1
     
@@ -95,6 +95,7 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
             let cell = tableView.dequeueReusableCell(withIdentifier: "StartCell", for: indexPath) as! StartTableViewCell
             cell.currentGame = currentGame
             cell.VC = self
+            cell.strokeColor = color1
             cell.updateTheAlphas()
             return cell
             
