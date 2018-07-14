@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31820F91858000A9BCB /* DataModel.swift */; };
+		4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */; };
 		4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5620F893E700740480 /* AppDelegate.swift */; };
 		4EA7FD5920F893E700740480 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5820F893E700740480 /* ViewController.swift */; };
 		4EA7FD5C20F893E700740480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5A20F893E700740480 /* Main.storyboard */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E8FC31820F91858000A9BCB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demineur.xcdatamodel; sourceTree = "<group>"; };
 		4EA7FD5320F893E700740480 /* Demineur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demineur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA7FD5620F893E700740480 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EA7FD5820F893E700740480 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +128,7 @@
 				4EA7FD5D20F893E800740480 /* Assets.xcassets */,
 				4EA7FD5F20F893E800740480 /* LaunchScreen.storyboard */,
 				4EA7FD6220F893E800740480 /* Info.plist */,
+				4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */,
 			);
 			path = Demineur;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				4EA7FDA120F8974E00740480 /* Functions.swift */,
+				4E8FC31820F91858000A9BCB /* DataModel.swift */,
 				4EA7FDA320F8976B00740480 /* Protocols.swift */,
 				4EA7FDA520F8977E00740480 /* StarterFunctions.swift */,
 				4EA7FDA720F8978C00740480 /* Variables.swift */,
@@ -309,6 +315,7 @@
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */,
 				4EA7FD9820F896D200740480 /* FlagView.swift in Sources */,
+				4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */,
 				4EA7FDA820F8978C00740480 /* Variables.swift in Sources */,
 				4EA7FD8420F8960700740480 /* HexCase.swift in Sources */,
 				4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */,
@@ -331,6 +338,7 @@
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
+				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4EA7FD7A20F8959C00740480 /* EndTableViewCell.swift in Sources */,
 			);
@@ -530,6 +538,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */,
+			);
+			currentVersion = 4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */;
+			path = Demineur.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4EA7FD4B20F893E700740480 /* Project object */;
 }
