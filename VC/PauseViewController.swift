@@ -29,7 +29,7 @@ class PauseViewController: UIViewController {
         
         // test()
         
-        instantiateBoutiqueScrollView()
+    
         
     }
     
@@ -51,8 +51,8 @@ class PauseViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "pageSegue", let controller = segue.destination as? UIPageViewController {
-            controller.delegate = self
-            controller.dataSource = self
+//            controller.delegate = self
+//            controller.dataSource = self
         }
         
     }
@@ -140,7 +140,15 @@ class PauseViewController: UIViewController {
     
 }
 
-extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    
-}
+//extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+//        //
+//    }
+//
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+//        //
+//    }
+//
+//
+//}
 
