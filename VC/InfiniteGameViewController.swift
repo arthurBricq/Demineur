@@ -92,9 +92,10 @@ class InfiniteGameViewController: UIViewController {
         containerView.frame = CGRect(x: ox, y: oy, width: containerWidth, height: containerHeight)
         self.view.addSubview(containerView)
         
+        /// Pour la position de la containerView
         containerView.backgroundColor = UIColor.clear
         containerView.layer.borderColor = UIColor.black.cgColor
-        containerView.layer.borderWidth = 1.0
+        containerView.layer.borderWidth = 0.0
         
         pauseButton.layer.zPosition = 100
     }

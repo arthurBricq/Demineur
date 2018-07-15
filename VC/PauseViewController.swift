@@ -12,9 +12,86 @@ class PauseViewController: UIViewController {
     
     var pausedGameViewController: UIViewController?
     
+    /// OUTLETS
+    
+    @IBOutlet weak var pauseView: UIView!
+    @IBOutlet weak var boutiqueView: UIView!
+    @IBOutlet weak var boutiqueLabel: UILabel!
+    
+    /// FUNCTIONS
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let radius: CGFloat = 10.0
+        pauseView.layer.cornerRadius = radius
+        boutiqueView.layer.cornerRadius = radius-2
+        
+        // test()
+        
+        instantiateBoutiqueScrollView()
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        var darkBlur = UIBlurEffect()
+        if #available(iOS 10.0, *) { //iOS 10.0 and above
+            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light)//prominent,regular,extraLight, light, dark
+        } else { //iOS 8.0 and above
+            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+        }
+        let blurView = UIVisualEffectView(effect: darkBlur)
+        blurView.frame = self.view.frame //your view that have any objects
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.insertSubview(blurView, at: 0)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "pageSegue", let controller = segue.destination as? UIPageViewController {
+            controller.delegate = self
+            controller.dataSource = self
+        }
+        
+    }
+    
+    /**
+    This function should add a view inside a UISCROLLVIEW
+    */
+//    func test() {
+//        let view = UIView(frame: CGRect(x: 0, y: 30, width: 500, height: 20))
+//        view.backgroundColor = UIColor.red
+//        scrollView.addSubview(view)
+//    }
+    
+    /**
+    Cette fonction permet d'ajouter tous les boutons dans le scroll view de la boutique rapide dans le menu pause.
+    */
+//    func instantiateBoutiqueScrollView() {
+//        let h = scrollView.frame.height
+//        let b1 = UIButton(frame: CGRect(x: 0, y: 0, width: h, height: h))
+//        b1.setTitle("m1", for: .normal)
+//        b1.layer.borderWidth = 1.0
+//        b1.layer.borderColor = UIColor.white.cgColor
+//
+//        let b2 = UIButton(frame: CGRect(x: h+20, y: 0, width: h, height: h))
+//        b2.setTitle("m2", for: .normal)
+//        b2.layer.borderWidth = 1.0
+//        b2.layer.borderColor = UIColor.white.cgColor
+//
+//        let b3 = UIButton(frame: CGRect(x: 2*(h+20), y: 0, width: h, height: h))
+//        b3.setTitle("m3", for: .normal)
+//        b3.layer.borderWidth = 1.0
+//        b3.layer.borderColor = UIColor.white.cgColor
+//
+//        scrollView.addSubview(b1)
+//        scrollView.addSubview(b2)
+//        scrollView.addSubview(b3)
+//    }
+    
+    /// ACTIONS
     
     @IBAction func returnButtonTapped(_ sender: Any) {
         
@@ -50,20 +127,6 @@ class PauseViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        var darkBlur = UIBlurEffect()
-        if #available(iOS 10.0, *) { //iOS 10.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light)//prominent,regular,extraLight, light, dark
-        } else { //iOS 8.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
-        }
-        let blurView = UIVisualEffectView(effect: darkBlur)
-        blurView.frame = self.view.frame //your view that have any objects
-        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.insertSubview(blurView, at: 0)
-    }
     
     /*
      // MARK: - Navigation
@@ -76,3 +139,8 @@ class PauseViewController: UIViewController {
      */
     
 }
+
+extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    
+}
+
