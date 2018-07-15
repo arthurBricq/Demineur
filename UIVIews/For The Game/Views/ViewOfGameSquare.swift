@@ -154,6 +154,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
                 if isCaseABomb(i: i, j: j) {
                     
+                    print("test")
                     delegate?.gameOver(win: false)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     returnAllTheCases()
