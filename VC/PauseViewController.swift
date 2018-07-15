@@ -110,13 +110,20 @@ class PauseViewController: UIViewController {
 
 extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
+        return nil
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        //
+        return nil
     }
 
+   func returnTheViewController(forIndex index: Int) -> UIViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
+    
+        vc.articleIndex = index
+    
+        return vc
+    }
 
 }
 
@@ -136,7 +143,8 @@ extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControlle
 //        let view = UIView(frame: CGRect(x: 0, y: 30, width: 500, height: 20))
 //        view.backgroundColor = UIColor.red
 //        scrollView.addSubview(view)
-//    }
+// }
+
 
 /**
  Cette fonction permet d'ajouter tous les boutons dans le scroll view de la boutique rapide dans le menu pause.
