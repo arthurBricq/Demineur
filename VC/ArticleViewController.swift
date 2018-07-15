@@ -20,7 +20,7 @@ class ArticleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let button = Article1(frame: <#T##CGRect#>)
+        //let button = Article1(frame: <#T##CGRect#>)
         
         
     }

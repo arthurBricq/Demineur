@@ -103,6 +103,7 @@ class InfiniteGameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        clockView.alpha = 0
         isTheGameStarted.delegate = self // permet le positionnement des bombes pos-début.
         
         startNewSection()
@@ -189,7 +190,7 @@ class InfiniteGameViewController: UIViewController {
         }
         
         // met à jour les affichages, etc. et lance la partie
-        updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag)
+        updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag, onNewGame: true)
         
     }
     
@@ -268,7 +269,7 @@ class InfiniteGameViewController: UIViewController {
         }
         
         gameIndex += 1
-        updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag)
+        updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag, onNewGame: true)
         launchOption3TimerIfNeeded()
         updateUserInteractionProperty()
         hasToFinishTheGame = true
@@ -439,33 +440,132 @@ class InfiniteGameViewController: UIViewController {
         containerView.subviews.last?.isUserInteractionEnabled = true
     }
     
-    func updateLabels(numberOfFlags: Int) {
-        let currentGame = returnCurrentGame()
-        bombCounterLabel.text = currentGame.z.description
-        flagCounterLabel.text = numberOfFlags.description
+    func updateLabels(numberOfFlags: Int, onNewGame: Bool = false) {
+        
+        if returnCurrentGame().areNumbersShowed && !onNewGame {
+            bombCounterLabel.text = returnCurrentGame().z.description
+            flagCounterLabel.text = numberOfFlags.description
+        }
         
         if !returnCurrentGame().isTimerAllowed {
-            print("NO CLOCK")
-            clockView.isHidden = true
+            if onNewGame {
+                if clockView.alpha != 0 {
+                    let anim = Animator().fadeOut(duration: 0.5)
+                    anim.fillMode = kCAFillModeBackwards
+                    clockView.layer.add(anim, forKey: nil)
+                    clockView.alpha = 0
+                }
+            }
         } else {
-            print("CLOCK ON")
-            clockView.isHidden = false
-            gameTimer.delegate = self
-            gameTimer.timeInterval = 1.0
+            
+            if onNewGame {
+                if clockView.alpha != 0 {
+                    // Faire l'animation du retour de l'horloge
+                } else {
+                    let anim = Animator().fadeIn(duration: 0.5)
+                    anim.fillMode = kCAFillModeBackwards
+                    clockView.layer.add(anim, forKey: nil)
+                    clockView.alpha = 1
+                }
+                
+                gameTimer.delegate = self
+                gameTimer.timeInterval = 1.0
+            }
         }
         
         if !returnCurrentGame().areNumbersShowed {
-            print("NO DISPLAY")
-            flagView.isHidden = true
-            flagCounterLabel.isHidden = true
-            bombView.isHidden = true
-            bombCounterLabel.isHidden = true
+            
+            if onNewGame {
+                let anim = Animator().fadeOut(duration: 0.5)
+                anim.fillMode = kCAFillModeBackwards
+                
+                if flagView.alpha != 0 {
+                    flagView.layer.add(anim, forKey: nil)
+                    flagView.alpha = 0
+                }
+                
+                if flagCounterLabel.alpha != 0 {
+                    flagCounterLabel.layer.add(anim, forKey: nil)
+                    flagCounterLabel.alpha = 0
+                }
+                
+                if bombView.alpha != 0 {
+                    bombView.layer.add(anim, forKey: nil)
+                    bombView.alpha = 0
+                }
+                
+                if bombCounterLabel.alpha != 0 {
+                    bombCounterLabel.layer.add(anim, forKey: nil)
+                    bombCounterLabel.alpha = 0
+                }
+            }
+            
         } else {
-            print("DISPLAY ON")
-            flagView.isHidden = false
-            flagCounterLabel.isHidden = false
-            bombView.isHidden = false
-            bombCounterLabel.isHidden = false
+            
+            if onNewGame {
+                let anim = Animator().fadeIn(duration: 0.5)
+                anim.fillMode = kCAFillModeBackwards
+                
+                if flagView.alpha != 1 {
+                    
+                    bombCounterLabel.text = returnCurrentGame().z.description
+                    flagCounterLabel.text = numberOfFlags.description
+                    
+                    flagView.layer.add(anim, forKey: nil)
+                    flagView.alpha = 1
+                } else {
+                    let fadeOut = Animator().fadeOut(duration: 0.25)
+                    fadeOut.fillMode = kCAFillModeBoth
+                    fadeOut.delegate = self
+                    fadeOut.setValue("FadeDisplay", forKey: "name")
+                    fadeOut.setValue(flagView, forKey: "layer")
+                    fadeOut.setValue(returnCurrentGame().z.description, forKey: "bomb")
+                    fadeOut.setValue(numberOfFlags.description, forKey: "flag")
+                    flagView.layer.add(fadeOut, forKey: nil)
+                }
+                
+                if flagCounterLabel.alpha != 1 {
+                    flagCounterLabel.layer.add(anim, forKey: nil)
+                    flagCounterLabel.alpha = 1
+                } else {
+                    let fadeOut = Animator().fadeOut(duration: 0.25)
+                    fadeOut.fillMode = kCAFillModeBoth
+                    fadeOut.delegate = self
+                    fadeOut.setValue("FadeDisplay", forKey: "name")
+                    fadeOut.setValue(flagCounterLabel, forKey: "layer")
+                    fadeOut.setValue(returnCurrentGame().z.description, forKey: "bomb")
+                    fadeOut.setValue(numberOfFlags.description, forKey: "flag")
+                    flagCounterLabel.layer.add(fadeOut, forKey: nil)
+                }
+                
+                if bombView.alpha != 1 {
+                    bombView.layer.add(anim, forKey: nil)
+                    bombView.alpha = 1
+                } else {
+                    let fadeOut = Animator().fadeOut(duration: 0.25)
+                    fadeOut.fillMode = kCAFillModeBoth
+                    fadeOut.delegate = self
+                    fadeOut.setValue("FadeDisplay", forKey: "name")
+                    fadeOut.setValue(bombView, forKey: "layer")
+                    fadeOut.setValue(returnCurrentGame().z.description, forKey: "bomb")
+                    fadeOut.setValue(numberOfFlags.description, forKey: "flag")
+                    bombView.layer.add(fadeOut, forKey: nil)
+                }
+                
+                if bombCounterLabel.alpha != 1 {
+                    bombCounterLabel.layer.add(anim, forKey: nil)
+                    bombCounterLabel.alpha = 1
+                } else {
+                    let fadeOut = Animator().fadeOut(duration: 0.25)
+                    fadeOut.fillMode = kCAFillModeBoth
+                    fadeOut.delegate = self
+                    fadeOut.setValue("FadeDisplay", forKey: "name")
+                    fadeOut.setValue(bombCounterLabel, forKey: "layer")
+                    fadeOut.setValue(returnCurrentGame().z.description, forKey: "bomb")
+                    fadeOut.setValue(numberOfFlags.description, forKey: "flag")
+                    bombCounterLabel.layer.add(fadeOut, forKey: nil)
+                }
+            }
         }
     }
     
@@ -669,6 +769,7 @@ extension InfiniteGameViewController {
     }
     
     func animateNewLevel() {
+        
         let message = MessageEndOfSection()
         message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
         message.textColor = colorForRGB(r: 255, g: 255, b: 255)
@@ -745,6 +846,21 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             if returnCurrentGame().isTimerAllowed {
                 gameTimer.start(timeInterval: 1.0, id: "")
             }
+            
+        } else if id == "FadeDisplay" {
+            
+            let view = anim.value(forKey: "layer") as? UIView
+            bombCounterLabel.text = anim.value(forKey: "bomb") as? String
+            flagCounterLabel.text = anim.value(forKey: "flag") as? String
+            anim.setValue(nil, forKey: "bomb")
+            anim.setValue(nil, forKey: "flag")
+            anim.setValue(nil, forKey: "name")
+            anim.setValue(nil, forKey: "layer")
+            
+            let fadeIn = Animator().fadeIn(duration: 0.25)
+            fadeIn.fillMode = kCAFillModeBackwards
+            view?.layer.add(fadeIn, forKey: nil)
+            view?.alpha = 1
             
         }
         
