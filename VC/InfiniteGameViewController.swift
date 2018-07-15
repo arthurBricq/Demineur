@@ -26,6 +26,7 @@ class InfiniteGameViewController: UIViewController {
     // Cette variable s'occupe de contenir les parties du jeu.
     //@IBOutlet weak var containerView: UIView!
     var containerView = UIView()
+    var blockingView: UIView? = UIView()
     
     //// MARK : variables
     
@@ -142,6 +143,7 @@ class InfiniteGameViewController: UIViewController {
         
         // si c'est la première section, on ne fait pas d'animations et on lance la partie immédiatemment
         if sectionIndex == 0 {
+            
             if currentSection.gameType == .hexagonal {
                 addANewHexGame(game: currentSection.game1!) // element 1 (sur le dessus)
                 addANewHexGame(game: currentSection.game2!) // element 0 (en dessous du premier)
@@ -152,23 +154,60 @@ class InfiniteGameViewController: UIViewController {
                 addANewTriangularGame(game: currentSection.game1!)
                 addANewTriangularGame(game: currentSection.game2!)
             }
+            
+            blockingView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlockingView(_:)))
+            blockingView?.addGestureRecognizer(tapGesture)
+            
+            let message = MessageEndOfSection()
+            message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
+            message.textColor = colorForRGB(r: 255, g: 255, b: 255)
+            message.fontSizeNumber = 60
+            message.fontSizeLevel = 14
+            message.backgroundColor = UIColor.clear
+            message.sectionIndex = 1
+            let size: CGSize = CGSize(width: 200, height: 200)
+            let origin: CGPoint = CGPoint(x: (self.view.bounds.width-size.width)/2, y: (self.view.bounds.height-size.height)/2)
+            message.frame = CGRect(origin: origin, size: size)
+            self.view.addSubview(message)
+            
+            blockingView?.addSubview(message)
+            
+            view.addSubview(blockingView!)
+            
         } else {
             // on supprime la partie courrante
             containerView.isUserInteractionEnabled = true
             containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
             animateNewSection()
+            
+            launchOption3TimerIfNeeded()
+            containerView.isUserInteractionEnabled = true
+            if returnCurrentGame().isTimerAllowed {
+                gameTimer.start(timeInterval: 1.0, id: "")
+            }
         }
         
         // met à jour les affichages, etc. et lance la partie
         updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag)
-        launchOption3TimerIfNeeded()
-        containerView.isUserInteractionEnabled = true
         
-        if returnCurrentGame().isTimerAllowed {
-            gameTimer.start(timeInterval: 1.0, id: "")
-        }
     }
     
+    @objc func tapBlockingView(_ sender: UITapGestureRecognizer) {
+        
+        let message = blockingView?.subviews.last
+        let exitAnimation = CABasicAnimation(keyPath: "position.x")
+        exitAnimation.duration = 0.5
+        exitAnimation.toValue = -(message?.bounds.width)!
+        exitAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.73, 0.71, 0.92, 0.76)
+        exitAnimation.fillMode = kCAFillModeForwards
+        exitAnimation.isRemovedOnCompletion = false
+        exitAnimation.beginTime = CACurrentMediaTime()+0.2
+        exitAnimation.delegate = self
+        exitAnimation.setValue("FirstMessageAnimation", forKey: "name")
+        message!.layer.add(exitAnimation, forKey: nil)
+        
+    }
     
     /**
      Cette fonction est appelée quand une nouvelle partie actuelle doit commencer ;
@@ -679,17 +718,17 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             anim.setValue(nil, forKey: "name")
             anim.setValue(nil, forKey: "message")
             
-            let morphAnimation = CABasicAnimation(keyPath: "position.x")
-            morphAnimation.duration = 0.5
-            morphAnimation.toValue = -(message?.bounds.width)!
-            morphAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.73, 0.71, 0.92, 0.76)
-            morphAnimation.fillMode = kCAFillModeForwards
-            morphAnimation.isRemovedOnCompletion = false
-            morphAnimation.beginTime = CACurrentMediaTime()+0.2
-            morphAnimation.delegate = self
-            morphAnimation.setValue("DisappearMessageAnimation", forKey: "name")
-            morphAnimation.setValue(message, forKey: "message")
-            message!.layer.add(morphAnimation, forKey: nil)
+            let exitAnimation = CABasicAnimation(keyPath: "position.x")
+            exitAnimation.duration = 0.5
+            exitAnimation.toValue = -(message?.bounds.width)!
+            exitAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.73, 0.71, 0.92, 0.76)
+            exitAnimation.fillMode = kCAFillModeForwards
+            exitAnimation.isRemovedOnCompletion = false
+            exitAnimation.beginTime = CACurrentMediaTime()+0.2
+            exitAnimation.delegate = self
+            exitAnimation.setValue("DisappearMessageAnimation", forKey: "name")
+            exitAnimation.setValue(message, forKey: "message")
+            message!.layer.add(exitAnimation, forKey: nil)
             
         } else if id == "DisappearMessageAnimation" {
             
@@ -697,6 +736,15 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             anim.setValue(nil, forKey: "name")
             anim.setValue(nil, forKey: "message")
             message?.removeFromSuperview()
+            
+        } else if id == "FirstMessageAnimation" {
+            
+            blockingView?.removeFromSuperview()
+            launchOption3TimerIfNeeded()
+            containerView.isUserInteractionEnabled = true
+            if returnCurrentGame().isTimerAllowed {
+                gameTimer.start(timeInterval: 1.0, id: "")
+            }
             
         }
         
