@@ -94,9 +94,8 @@ class InfiniteGameViewController: UIViewController {
         
         containerView.backgroundColor = UIColor.clear
         containerView.layer.borderColor = UIColor.black.cgColor
-        containerView.layer.borderWidth = 1.0
+        containerView.layer.borderWidth = 0
         
-        pauseButton.layer.zPosition = 100
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +117,6 @@ class InfiniteGameViewController: UIViewController {
         gameTimer.stop()
         clockView.pourcentage = 0.0
         isTheGameStarted.value = false
-        gameIndex = 1
         hasToFinishTheGame = true
         
         if sectionIndex%3 == 0 {
@@ -154,8 +152,8 @@ class InfiniteGameViewController: UIViewController {
                 addANewTriangularGame(game: currentSection.game2!)
             }
         } else {
-            
             // on supprime la partie courrante
+            containerView.isUserInteractionEnabled = true
             containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
             animateNewSection()
         }
@@ -163,9 +161,11 @@ class InfiniteGameViewController: UIViewController {
         // met à jour les affichages, etc. et lance la partie
         updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag)
         launchOption3TimerIfNeeded()
-        containerView.isUserInteractionEnabled = true ;
-        gameTimer.start(timeInterval: 1.0, id: "")
+        containerView.isUserInteractionEnabled = true
         
+        if returnCurrentGame().isTimerAllowed {
+            gameTimer.start(timeInterval: 1.0, id: "")
+        }
     }
     
     
@@ -190,6 +190,11 @@ class InfiniteGameViewController: UIViewController {
     func currentGameIsFinished() {
         /// DISPARITION OF CURRENT VIEW
         gameTimer.stop()
+        print("AAA")
+        
+        if gameIndex != 5 {
+            animateNewLevel()
+        }
         
         //// ANIMATION TO MAKE DISAPEAR THE VIEW GOES HERE.
         UIView.animate(withDuration: 2.0, animations: {
@@ -390,7 +395,7 @@ class InfiniteGameViewController: UIViewController {
      L'utilisateur ne peut donc taper uniquement sur la première case.
      */
     func updateUserInteractionProperty() {
-        containerView.subviews.first?.isUserInteractionEnabled = false
+        //containerView.subviews.first?.isUserInteractionEnabled = false
         containerView.subviews.last?.isUserInteractionEnabled = true
     }
     
@@ -400,19 +405,23 @@ class InfiniteGameViewController: UIViewController {
         flagCounterLabel.text = numberOfFlags.description
         
         if !returnCurrentGame().isTimerAllowed {
+            print("NO CLOCK")
             clockView.isHidden = true
         } else {
+            print("CLOCK ON")
             clockView.isHidden = false
             gameTimer.delegate = self
             gameTimer.timeInterval = 1.0
         }
         
         if !returnCurrentGame().areNumbersShowed {
+            print("NO DISPLAY")
             flagView.isHidden = true
             flagCounterLabel.isHidden = true
             bombView.isHidden = true
             bombCounterLabel.isHidden = true
         } else {
+            print("DISPLAY ON")
             flagView.isHidden = false
             flagCounterLabel.isHidden = false
             bombView.isHidden = false
@@ -545,7 +554,7 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             
             print("Game-Over")
             gameTimer.stop()
-            containerView.isUserInteractionEnabled = false ;
+            containerView.isUserInteractionEnabled = false
         }
     }
     
@@ -559,28 +568,29 @@ extension InfiniteGameViewController: CountingTimerProtocol
 {
     func timerFires(id: String) {
         
-        
-        let pourcentage: CGFloat = gameTimer.counter / CGFloat(returnCurrentGame().totalTime) // ratio of time used.
-        
-        clockView.pourcentage = pourcentage // et actualisation via un didSet
-        
-        if pourcentage >= 1 {
+        if returnCurrentGame().isTimerAllowed {
+            let pourcentage: CGFloat = gameTimer.counter / CGFloat(returnCurrentGame().totalTime) // ratio of time used.
             
-            if containerView.subviews[containerView.subviews.count-1] is ViewOfGameSquare {
-                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameSquare
-                currentGameView.returnAllTheCases()
-            } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGame_Hex {
-                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame_Hex
-                currentGameView.returnAllTheCases()
-            } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGameTriangular {
-                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
-                currentGameView.returnAllTheCases()
+            clockView.pourcentage = pourcentage // et actualisation via un didSet
+            
+            if pourcentage >= 1 {
+                
+                if containerView.subviews[containerView.subviews.count-1] is ViewOfGameSquare {
+                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameSquare
+                    currentGameView.returnAllTheCases()
+                } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGame_Hex {
+                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame_Hex
+                    currentGameView.returnAllTheCases()
+                } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGameTriangular {
+                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
+                    currentGameView.returnAllTheCases()
+                }
+                
+                gameTimer.stop()
+                print("test1")
+                gameOver(win: false)
             }
-            
-            gameTimer.stop()
-            gameOver(win: false)
         }
-        
     }
     
     
@@ -592,13 +602,40 @@ extension InfiniteGameViewController {
     
     func animateNewSection() {
         
+        let view = containerView.subviews.last!
+        
+        UIView.animate(withDuration: 0.72, animations: {
+            view.alpha = 0
+        }) { (_) in
+            
+            view.removeFromSuperview()
+            
+            self.gameIndex = 0
+            print("Section = \(self.sectionIndex)     Game = \(self.gameIndex)")
+            self.animateNewLevel()
+            
+            if self.currentSection.gameType == .hexagonal {
+                self.addANewHexGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
+                self.addANewHexGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
+            } else if self.currentSection.gameType == .square {
+                self.addANewSquareGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
+                self.addANewSquareGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
+            } else if self.currentSection.gameType == .triangular {
+                self.addANewTriangularGame(game: self.currentSection.game1!)
+                self.addANewTriangularGame(game: self.currentSection.game2!)
+            }
+        }
+        
+    }
+    
+    func animateNewLevel() {
         let message = MessageEndOfSection()
         message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
         message.textColor = colorForRGB(r: 255, g: 255, b: 255)
         message.fontSizeNumber = 60
         message.fontSizeLevel = 14
         message.backgroundColor = UIColor.clear
-        message.sectionIndex = sectionIndex+1
+        message.sectionIndex = 5*sectionIndex + gameIndex + 1
         let size: CGSize = CGSize(width: 200, height: 200)
         let origin: CGPoint = CGPoint(x: (self.view.bounds.width-size.width)/2, y: (self.view.bounds.height-size.height)/2)
         message.frame = CGRect(origin: origin, size: size)
@@ -615,36 +652,51 @@ extension InfiniteGameViewController {
         let groupAnimation = CAAnimationGroup()
         groupAnimation.animations = [scaleAnimation, fadeAnimation]
         groupAnimation.fillMode = kCAFillModeBackwards
-        groupAnimation.duration = 0.33
+        groupAnimation.duration = 0.3
         groupAnimation.delegate = self
-        message.layer.add(groupAnimation, forKey: "AppearMessageAnimation")
-        
+        groupAnimation.setValue("AppearMessageAnimation", forKey: "name")
+        groupAnimation.setValue(message, forKey: "message")
+        message.layer.add(groupAnimation, forKey: nil)
     }
+    
 }
 extension InfiniteGameViewController: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        
         
         guard let id = anim.value(forKey: "name") as? String else {
             return
         }
         
         if id == "AppearMessageAnimation" {
-            let view = containerView.subviews.last!
-            UIView.animate(withDuration: 1, animations: {
-                view.alpha = 0
-            }) { (_) in
-                view.removeFromSuperview()
-                if self.currentSection.gameType == .hexagonal {
-                    self.addANewHexGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
-                    self.addANewHexGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
-                } else if self.currentSection.gameType == .square {
-                    self.addANewSquareGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
-                    self.addANewSquareGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
-                } else if self.currentSection.gameType == .triangular {
-                    self.addANewTriangularGame(game: self.currentSection.game1!)
-                    self.addANewTriangularGame(game: self.currentSection.game2!)
-                }
+            
+            if gameIndex == 0 {
+                gameIndex = 1
             }
+            
+            let message = anim.value(forKey: "message") as? MessageEndOfSection
+            anim.setValue(nil, forKey: "name")
+            anim.setValue(nil, forKey: "message")
+            
+            let morphAnimation = CABasicAnimation(keyPath: "position.x")
+            morphAnimation.duration = 0.5
+            morphAnimation.toValue = -(message?.bounds.width)!
+            morphAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.73, 0.71, 0.92, 0.76)
+            morphAnimation.fillMode = kCAFillModeForwards
+            morphAnimation.isRemovedOnCompletion = false
+            morphAnimation.beginTime = CACurrentMediaTime()+0.2
+            morphAnimation.delegate = self
+            morphAnimation.setValue("DisappearMessageAnimation", forKey: "name")
+            morphAnimation.setValue(message, forKey: "message")
+            message!.layer.add(morphAnimation, forKey: nil)
+            
+        } else if id == "DisappearMessageAnimation" {
+            
+            let message = anim.value(forKey: "message") as? MessageEndOfSection
+            anim.setValue(nil, forKey: "name")
+            anim.setValue(nil, forKey: "message")
+            message?.removeFromSuperview()
+            
         }
         
     }
