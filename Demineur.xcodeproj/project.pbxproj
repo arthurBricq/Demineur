@@ -48,6 +48,7 @@
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
+		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
+		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 				4EA7FDA720F8978C00740480 /* Variables.swift */,
 				4EA7FDA920F8979B00740480 /* Timer.swift */,
 				4EA7FDAB20F897A700740480 /* Vibrate.swift */,
+				9C745D2E20FB7B5800741ED2 /* Animator.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
+				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
