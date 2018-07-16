@@ -786,15 +786,20 @@
                                                     <segue destination="Ugg-9H-NaZ" kind="embed" identifier="pageSegue" id="1hc-OX-8aS"/>
                                                 </connections>
                                             </containerView>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-bP-kpu">
+                                                <rect key="frame" x="91" y="101" width="55" height="37"/>
+                                            </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="17L-qv-xq2" firstAttribute="leading" secondItem="VBJ-Lw-Q7a" secondAttribute="leading" constant="8" id="B4u-O0-sdp"/>
                                             <constraint firstAttribute="trailing" secondItem="17L-qv-xq2" secondAttribute="trailing" constant="8" id="D71-IR-mMW"/>
+                                            <constraint firstAttribute="bottom" secondItem="qsc-bP-kpu" secondAttribute="bottom" constant="4" id="Rd3-nm-AfV"/>
                                             <constraint firstItem="Tp1-p3-i6G" firstAttribute="leading" secondItem="VBJ-Lw-Q7a" secondAttribute="leading" constant="5" id="lCe-AN-PEH"/>
                                             <constraint firstAttribute="bottom" secondItem="17L-qv-xq2" secondAttribute="bottom" constant="8" id="m7e-Fv-Wup"/>
                                             <constraint firstItem="17L-qv-xq2" firstAttribute="top" secondItem="Tp1-p3-i6G" secondAttribute="bottom" constant="8" id="mJD-8W-b3b"/>
                                             <constraint firstItem="Tp1-p3-i6G" firstAttribute="top" secondItem="VBJ-Lw-Q7a" secondAttribute="top" constant="5" id="sh4-Dp-dCb"/>
+                                            <constraint firstItem="qsc-bP-kpu" firstAttribute="centerX" secondItem="VBJ-Lw-Q7a" secondAttribute="centerX" id="y6e-Gg-K2N"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -820,7 +825,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAUSE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jif-Jc-UUL">
-                                <rect key="frame" x="48" y="132.5" width="20" height="154"/>
+                                <rect key="frame" x="15" y="132.5" width="20" height="154"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="HN6-cO-iz3"/>
                                 </constraints>
@@ -832,11 +837,11 @@
                         <color key="backgroundColor" red="0.74901960779999999" green="0.74901960779999999" blue="0.74901960779999999" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5Gz-Ys-46b" firstAttribute="width" secondItem="jcO-ic-bZ4" secondAttribute="width" multiplier="0.7" id="B1p-Av-cFL"/>
-                            <constraint firstItem="5Gz-Ys-46b" firstAttribute="leading" secondItem="jif-Jc-UUL" secondAttribute="trailing" constant="8.5" id="DjB-Oj-tuA"/>
                             <constraint firstItem="DQt-OZ-xnr" firstAttribute="centerX" secondItem="jcO-ic-bZ4" secondAttribute="centerX" id="Frd-fN-2Xw"/>
                             <constraint firstItem="Op7-vJ-fzi" firstAttribute="bottom" secondItem="DQt-OZ-xnr" secondAttribute="bottom" constant="10" id="Ted-EE-LH5"/>
                             <constraint firstItem="jif-Jc-UUL" firstAttribute="top" secondItem="5Gz-Ys-46b" secondAttribute="top" id="U2U-Yi-koO"/>
                             <constraint firstItem="5Gz-Ys-46b" firstAttribute="centerX" secondItem="Op7-vJ-fzi" secondAttribute="centerX" constant="20" id="XEv-Ja-6bV"/>
+                            <constraint firstItem="jif-Jc-UUL" firstAttribute="leading" secondItem="Op7-vJ-fzi" secondAttribute="leading" constant="15" id="s8P-PK-s12"/>
                             <constraint firstItem="5Gz-Ys-46b" firstAttribute="centerY" secondItem="Op7-vJ-fzi" secondAttribute="centerY" constant="-30" id="vU4-JR-w45"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Op7-vJ-fzi"/>
@@ -844,6 +849,7 @@
                     <connections>
                         <outlet property="boutiqueLabel" destination="Tp1-p3-i6G" id="DSu-rh-SXf"/>
                         <outlet property="boutiqueView" destination="VBJ-Lw-Q7a" id="0cW-ag-Z8G"/>
+                        <outlet property="pageControl" destination="qsc-bP-kpu" id="SZr-y9-Iim"/>
                         <outlet property="pauseView" destination="5Gz-Ys-46b" id="sfC-9p-NB3"/>
                     </connections>
                 </viewController>
@@ -854,7 +860,7 @@
         <!--Page View Controller-->
         <scene sceneID="gyl-ru-aYc">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Ugg-9H-NaZ" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Ugg-9H-NaZ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ups-vC-nEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1157" y="2505"/>
@@ -862,7 +868,7 @@
         <!--articleViewController-->
         <scene sceneID="812-xO-Qiz">
             <objects>
-                <viewController title="articleViewController" id="2Py-aN-CFQ" customClass="ArticleViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="articleViewController" title="articleViewController" id="2Py-aN-CFQ" customClass="ArticleViewController" customModule="Demineur" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vdw-6z-e70">
                         <rect key="frame" x="0.0" y="0.0" width="220" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

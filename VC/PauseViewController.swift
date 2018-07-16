@@ -11,26 +11,38 @@ import UIKit
 class PauseViewController: UIViewController {
     
     var pausedGameViewController: UIViewController?
+
+    lazy var orderedViewControllers: [UIViewController] = {
+        return [self.viewController(forIndex: 0),
+                self.viewController(forIndex: 1),
+                self.viewController(forIndex: 2),
+                self.viewController(forIndex: 3)]
+    }()
+    
+    
     
     /// OUTLETS
     
+    @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var pauseView: UIView!
     @IBOutlet weak var boutiqueView: UIView!
     @IBOutlet weak var boutiqueLabel: UILabel!
     
     /// FUNCTIONS
     
+    func viewController(forIndex index: Int) -> UIViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
+        vc.articleIndex = index
+        return vc
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let radius: CGFloat = 10.0
         pauseView.layer.cornerRadius = radius
         boutiqueView.layer.cornerRadius = radius-2
-        
-        // test()
-        
-    
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,17 +58,19 @@ class PauseViewController: UIViewController {
         blurView.frame = self.view.frame //your view that have any objects
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
-    }
+        
+        pageControl.isUserInteractionEnabled = false
+        }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "pageSegue", let controller = segue.destination as? UIPageViewController {
             controller.delegate = self
             controller.dataSource = self
+            controller.setViewControllers([self.viewController(forIndex: 0)], direction: .forward, animated: false, completion: nil)
         }
         
     }
-    
     
     
     /// ACTIONS
@@ -94,37 +108,61 @@ class PauseViewController: UIViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+  
 }
 
 extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return nil
+        
+        guard let vc = viewController as? ArticleViewController else {
+            return nil
+        }
+        
+        let index = vc.articleIndex // c'est l'index du vc d'avant
+        
+        
+        guard orderedViewControllers.count > index else {
+            return nil
+        }
+        
+        guard index-1 > -1 else {
+            return nil
+        }
+        
+        return orderedViewControllers[index-1]
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return nil
+        
+        guard let vc = viewController as? ArticleViewController else {
+            return nil
+        }
+        
+        let index = vc.articleIndex
+        
+        guard orderedViewControllers.count > index+1 else {
+            return nil
+        }
+        
+        guard index < orderedViewControllers.count else {
+            return nil
+        }
+        
+        return orderedViewControllers[index+1]
     }
-
-   func returnTheViewController(forIndex index: Int) -> UIViewController {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
     
-        vc.articleIndex = index
-    
-        return vc
+  
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
+    {
+        guard let vc = pageViewController.viewControllers![0] as? ArticleViewController else {
+            return
+        }
+        let index = vc.articleIndex
+        
+        pageControl.currentPage = index
     }
-
+    
 }
 
 
