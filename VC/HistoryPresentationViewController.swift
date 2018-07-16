@@ -10,6 +10,7 @@ import UIKit
 
 class HistoryPresentationViewController: UIViewController  {
     
+    override var prefersStatusBarHidden: Bool { return true }
     
     /// OUTLETS hh
     @IBOutlet weak var levelsTableView: UITableView!
@@ -33,6 +34,8 @@ class HistoryPresentationViewController: UIViewController  {
         super.viewDidLoad()
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
+        
+        
     }
     
     /**

@@ -10,6 +10,8 @@ import UIKit
 
 class ArticleViewController: UIViewController {
 
+    override var prefersStatusBarHidden: Bool { return true }
+    
     var articleIndex: Int = 1
     
     override func viewDidLoad() {

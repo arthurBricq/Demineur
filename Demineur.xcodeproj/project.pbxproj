@@ -48,6 +48,7 @@
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
+		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
+		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 		4EA7FD4A20F893E700740480 = {
 			isa = PBXGroup;
 			children = (
+				9C6E629B20FC96AA003B98C9 /* CustomTransitions */,
 				4EA7FD6820F894A700740480 /* Logic */,
 				4EA7FD6920F894B300740480 /* UIVIews */,
 				4EA7FD6A20F894BE00740480 /* VC */,
@@ -247,6 +250,14 @@
 			path = Graphism;
 			sourceTree = "<group>";
 		};
+		9C6E629B20FC96AA003B98C9 /* CustomTransitions */ = {
+			isa = PBXGroup;
+			children = (
+				9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */,
+			);
+			path = CustomTransitions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,6 +331,7 @@
 			files = (
 				4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */,
 				4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */,
+				9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */,
 				4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */,
 				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,

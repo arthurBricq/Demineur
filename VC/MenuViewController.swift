@@ -27,5 +27,34 @@ class MenuViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is HistoryPresentationViewController {
+            segue.destination.transitioningDelegate = self
+        }
+        
+    }
+    
+}
+
+extension MenuViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        let transition = TransitionToHistoryMenuViewController()
+        transition.animationDuration = 2
+        transition.presenting = true
+        return transition
+    
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        let transition = TransitionToHistoryMenuViewController()
+        transition.animationDuration = 2
+        transition.presenting = false
+        return transition
+        
+    }
     
 }

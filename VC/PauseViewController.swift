@@ -10,6 +10,8 @@ import UIKit
 
 class PauseViewController: UIViewController {
     
+    override var prefersStatusBarHidden: Bool { return true }
+    
     var pausedGameViewController: UIViewController?
 
     lazy var orderedViewControllers: [UIViewController] = {

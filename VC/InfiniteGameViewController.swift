@@ -15,8 +15,9 @@ import UIKit
 
 class InfiniteGameViewController: UIViewController {
     
-    //// MARK : outlets
+    override var prefersStatusBarHidden: Bool { return true }
     
+    //// MARK : outlets
     @IBOutlet weak var clockView: ClockView!
     @IBOutlet weak var bombCounterLabel: UILabel!
     @IBOutlet weak var bombView: BombViewDisplay!
