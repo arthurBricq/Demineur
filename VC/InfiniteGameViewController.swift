@@ -231,8 +231,7 @@ class InfiniteGameViewController: UIViewController {
     func currentGameIsFinished() {
         /// DISPARITION OF CURRENT VIEW
         gameTimer.stop()
-        print("AAA")
-        
+
         if gameIndex != 5 {
             animateNewLevel()
         }
@@ -448,19 +447,27 @@ class InfiniteGameViewController: UIViewController {
         }
         
         if !returnCurrentGame().isTimerAllowed {
-            if onNewGame {
-                if clockView.alpha != 0 {
-                    let anim = Animator().fadeOut(duration: 0.5)
-                    anim.fillMode = kCAFillModeBackwards
-                    clockView.layer.add(anim, forKey: nil)
-                    clockView.alpha = 0
-                }
+            
+            if clockView.alpha != 0 {
+                let anim = Animator().fadeOut(duration: 0.5)
+                anim.fillMode = kCAFillModeBackwards
+                clockView.layer.add(anim, forKey: nil)
+                clockView.alpha = 0
             }
+            
         } else {
             
             if onNewGame {
                 if clockView.alpha != 0 {
                     // Faire l'animation du retour de l'horloge
+                    
+                    let fadeOut = Animator().fadeOut(duration: 0.25)
+                    fadeOut.fillMode = kCAFillModeBoth
+                    fadeOut.delegate = self
+                    fadeOut.setValue("FadeClock", forKey: "name")
+                    fadeOut.setValue(clockView, forKey: "layer")
+                    clockView.layer.add(fadeOut, forKey: nil)
+                    
                 } else {
                     let anim = Animator().fadeIn(duration: 0.5)
                     anim.fillMode = kCAFillModeBackwards
@@ -727,7 +734,6 @@ extension InfiniteGameViewController: CountingTimerProtocol
                 }
                 
                 gameTimer.stop()
-                print("test1")
                 gameOver(win: false)
             }
         }
@@ -751,7 +757,6 @@ extension InfiniteGameViewController {
             view.removeFromSuperview()
             
             self.gameIndex = 0
-            print("Section = \(self.sectionIndex)     Game = \(self.gameIndex)")
             self.animateNewLevel()
             
             if self.currentSection.gameType == .hexagonal {
@@ -861,6 +866,19 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             fadeIn.fillMode = kCAFillModeBackwards
             view?.layer.add(fadeIn, forKey: nil)
             view?.alpha = 1
+            
+        } else if id == "FadeClock" {
+            
+            let view = anim.value(forKey: "layer") as? UIView
+            anim.setValue(nil, forKey: "name")
+            anim.setValue(nil, forKey: "layer")
+            
+            let fadeIn = Animator().fadeIn(duration: 0.25)
+            fadeIn.fillMode = kCAFillModeBackwards
+            view?.layer.add(fadeIn, forKey: nil)
+            view?.alpha = 1
+            
+            clockView.pourcentage = 0
             
         }
         
