@@ -89,8 +89,8 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             }
             
             
-            let decalementFromView = -fromView.bounds.width + fromVC.mainLineLeadingConstraint.constant
-            let endOfFirstLineOnX = 0.9*fromView.frame.width-fromVC.mainLineLeadingConstraint.constant-0.5
+            let decalementFromView = -fromView.bounds.width
+            let endOfFirstLineOnX = 0.9*(fromView.frame.width-fromVC.mainLineLeadingConstraint.constant)
             
             
             firstLine.frame = CGRect(x: x, y: y, width: 0, height: 1)
@@ -142,7 +142,7 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                             return
                         }
                         
-                        let point = tableView.convert(CGPoint(x: 0, y: finalPointToView.y), from: toView)//CGPoint(x: -finalPointToView.x, y: 50 - thirdLine.lineWidth/2 )
+                        let point = tableView.convert(CGPoint(x: 0, y: finalPointToView.y), from: toView)
                         thirdLine.frame = CGRect(x: point.x, y: point.y, width: finalPointToView.x, height: 1)
                         
                         tableView.addSubview(thirdLine)
