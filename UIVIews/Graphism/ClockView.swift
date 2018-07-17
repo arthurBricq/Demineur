@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+// @IBDesignable
 class ClockView: UIView {
     
     @IBInspectable var pourcentage: CGFloat = 0.1 {// is the ratio of the time already used to be shown.

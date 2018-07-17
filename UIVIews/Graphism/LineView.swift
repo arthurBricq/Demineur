@@ -11,7 +11,7 @@ import UIKit
 /*
  Cette classe trace une ligne verticale
  **/
-@IBDesignable
+// @IBDesignable
 class LineView: UIView {
     
     @IBInspectable var lineWidth: CGFloat = 2

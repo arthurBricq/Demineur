@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+// @IBDesignable
 class RoundButtonWithNumber: UIButton {
     
     var strokeColor: UIColor = .brown
@@ -41,7 +41,7 @@ class RoundButtonWithNumber: UIButton {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
+        super.touchesEnded(touches, with: event)
         
         UIView.animate(withDuration: 0.5) {
             self.alpha = 1.0

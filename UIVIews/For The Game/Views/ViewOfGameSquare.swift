@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+// @IBDesignable
 class ViewOfGameSquare: UIView {
     
     @IBInspectable var n: Int = 4 // number of rows

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+// @IBDesignable
 class BombView: UIView {
     
     @IBInspectable var percent: CGFloat = 1.0

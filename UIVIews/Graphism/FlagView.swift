@@ -8,6 +8,7 @@
 
 import UIKit
 
+// @IBDesignable
 class FlagView: UIView {
     
     var color: UIColor = UIColor.orange

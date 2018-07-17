@@ -9,7 +9,7 @@
 import UIKit
 
 
-@IBDesignable
+ // @IBDesignable
 class Letter: UIView {
     
     @IBInspectable var letter: String = "M" // lettre en majuscule !

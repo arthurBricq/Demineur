@@ -11,7 +11,9 @@ import UIKit
 class PauseViewController: UIViewController {
     
     var pausedGameViewController: UIViewController?
-
+    
+    
+    
     lazy var orderedViewControllers: [UIViewController] = {
         return [self.viewController(forIndex: 0),
                 self.viewController(forIndex: 1),
@@ -27,6 +29,8 @@ class PauseViewController: UIViewController {
     @IBOutlet weak var pauseView: UIView!
     @IBOutlet weak var boutiqueView: UIView!
     @IBOutlet weak var boutiqueLabel: UILabel!
+    @IBOutlet weak var checkView: UIView!
+    @IBOutlet weak var moneyLabel: UILabel!
     
     /// FUNCTIONS
     
@@ -35,8 +39,6 @@ class PauseViewController: UIViewController {
         vc.articleIndex = index
         return vc
     }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +62,9 @@ class PauseViewController: UIViewController {
         view.insertSubview(blurView, at: 0)
         
         pageControl.isUserInteractionEnabled = false
+        updateMoneyDisplay()
+        
+        
         }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,10 +77,16 @@ class PauseViewController: UIViewController {
         
     }
     
+    func updateMoneyDisplay() {
+        moneyLabel.text = String(money.currentAmountOfMoney)
+    }
+    
     
     /// ACTIONS
     
     @IBAction func returnButtonTapped(_ sender: Any) {
+        
+        print("a")
         
         if pausedGameViewController is InfiniteGameViewController {
             let gameViewController = pausedGameViewController as! InfiniteGameViewController

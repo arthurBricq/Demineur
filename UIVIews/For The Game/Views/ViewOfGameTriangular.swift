@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+// @IBDesignable
 class ViewOfGameTriangular: UIView {
     
     @IBInspectable var n: Int = 4 // Doit être multiple de 2

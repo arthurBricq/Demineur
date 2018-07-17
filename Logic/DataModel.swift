@@ -11,6 +11,8 @@ import UIKit
 import CoreData
 
 let money = MoneyManager()
+let options = OptionsManager()
+
 
 class MoneyManager {
     
@@ -108,5 +110,11 @@ class MoneyManager {
         }
     }
     
+    
+}
+
+class OptionsManager {
+    
+    var areVibrationsOn: Bool = true
     
 }
