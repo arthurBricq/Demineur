@@ -19,9 +19,6 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 5*40 + 4*15
         
-        print("Presentation de l'état actuelle des donnes")
-        print("argent courant: \(money.currentAmountOfMoney)")
-        
 
     }
     

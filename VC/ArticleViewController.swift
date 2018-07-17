@@ -41,7 +41,6 @@ class ArticleViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("une vue arrive avec index: \(articleIndex)")
         updateView()
     }
     

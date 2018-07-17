@@ -85,9 +85,7 @@ class PauseViewController: UIViewController {
     /// ACTIONS
     
     @IBAction func returnButtonTapped(_ sender: Any) {
-        
-        print("a")
-        
+                
         if pausedGameViewController is InfiniteGameViewController {
             let gameViewController = pausedGameViewController as! InfiniteGameViewController
             gameViewController.gameTimer.play()

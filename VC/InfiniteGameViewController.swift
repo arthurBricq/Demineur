@@ -89,7 +89,6 @@ class InfiniteGameViewController: UIViewController {
         let containerHeight = self.view.frame.height * (isItABigScreen() ? 0.7 : 0.8 )
         let ox = view.frame.width/2 - containerWidth/2
         let oy = (isItABigScreen() ? 0.16 : 0.10) * view.frame.height
-        print("positionnement du container view: \(oy)")
         containerView.frame = CGRect(x: ox, y: oy, width: containerWidth, height: containerHeight)
         self.view.addSubview(containerView)
         
@@ -691,15 +690,12 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             Vibrate().vibrate(style: .heavy)
             
             isTheGameStarted.value = false
-            print("fin de la partie courante")
             currentGameIsFinished()
             
             
         } else {
             
             Vibrate().vibrate(style: .heavy)
-            
-            print("Game-Over")
             gameTimer.stop()
             containerView.isUserInteractionEnabled = false
         }

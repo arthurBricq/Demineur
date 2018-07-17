@@ -299,7 +299,6 @@ extension HistoryGameViewController {
         positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
         displayIntMatrix(matrix: gameState)
         createNumbersToDisplayTriangle(in: &gameState)
-        print("")
         displayIntMatrix(matrix: gameState)
         viewOfGameTriangular!.gameState = gameState
         viewOfGameTriangular!.updateAllNumbers()
@@ -369,11 +368,10 @@ extension HistoryGameViewController: CountingTimerProtocol {
                     }
                 }
                 
+                
             }
         }
-        
     }
-    
 }
 
 extension HistoryGameViewController: variableCanCallGameVC {

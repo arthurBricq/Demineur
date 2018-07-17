@@ -144,8 +144,10 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
 
 extension HistoryPresentationViewController: RoundButtonsCanCallVC {
     
+    /**
+    Cette fonction est appelée quand il faut initier un niveau.
+    */
     func buttonTapped(withIndex: Int) {
-        print("le boutton a été tapé \(withIndex)")
         selectedGameIndex = withIndex
         self.performSegue(withIdentifier: "StartingGame", sender: nil)
     }
