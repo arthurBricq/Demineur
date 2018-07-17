@@ -15,6 +15,7 @@ class HistoryPresentationViewController: UIViewController  {
     /// OUTLETS hh
     @IBOutlet weak var levelsTableView: UITableView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     
     /// ACTIONS

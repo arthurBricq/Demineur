@@ -134,27 +134,18 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                 secondLine.removeFromSuperview()
                 thirdLine.removeFromSuperview()
                 
+                let tableView = toVC.tableView!
+                let point = tableView.convert(CGPoint(x: 0, y: finalPointToView.y), from: toView)
+                thirdLine.frame = CGRect(x: point.x, y: point.y, width: finalPointToView.x, height: 1)
                 
-                for subview in toView.subviews {
-                    if subview.tag == 1 {
-                        
-                        guard let tableView = subview as? UITableView else {
-                            return
-                        }
-                        
-                        let point = tableView.convert(CGPoint(x: 0, y: finalPointToView.y), from: toView)
-                        thirdLine.frame = CGRect(x: point.x, y: point.y, width: finalPointToView.x, height: 1)
-                        
-                        tableView.addSubview(thirdLine)
-                        
-                    }
-                }
+                tableView.addSubview(thirdLine)
                 
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }
             
             
         } else {
+            
             let fromVC = transitionContext.viewController(forKey: .from) as! HistoryPresentationViewController
             let toVC = transitionContext.viewController(forKey: .to) as! MenuViewController
             
@@ -164,9 +155,27 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
             toVC.view.frame = CGRect(x: -fromView.bounds.width, y: 0, width: fromView.bounds.width, height: fromView.bounds.height)
             
-            UIView.animate(withDuration: animationDuration, animations: {
-                fromView.center.x = fromView.bounds.width*1.5
-                toView.center.x = toView.bounds.width/2
+            var line = LineView()
+            
+            let tableView = fromVC.tableView!
+            
+            for subview in tableView.subviews {
+                guard let view = subview as? LineView else { continue }
+                line = view
+            }
+            
+            
+            UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: [], animations: {
+                
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.3, animations: {
+                    line.alpha = 0
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.15, relativeDuration: 0.85, animations: {
+                    fromView.center.x = fromView.bounds.width*1.5
+                    toView.center.x = toView.bounds.width/2
+                })
+                
             }) { (_) in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }

@@ -470,6 +470,7 @@
                     </view>
                     <connections>
                         <outlet property="levelsTableView" destination="pmY-Qq-MxP" id="rJO-uk-4Hx"/>
+                        <outlet property="tableView" destination="pmY-Qq-MxP" id="HNd-Xo-GEU"/>
                         <outlet property="topView" destination="cOD-WW-QIs" id="oMP-Xq-qDE"/>
                         <segue destination="Z45-JZ-Gj9" kind="show" identifier="StartingGame" id="UaR-EJ-0cX"/>
                     </connections>
