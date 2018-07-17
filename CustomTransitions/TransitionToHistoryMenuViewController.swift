@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedTransitioning, CAAnimationDelegate {
+class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var animationDuration: TimeInterval = 1
     var presenting = true
@@ -29,12 +29,131 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
             toVC.view.frame = CGRect(x: fromView.bounds.width, y: 0, width: fromView.bounds.width, height: fromView.bounds.height)
             
-            UIView.animate(withDuration: animationDuration, animations: {
-                fromView.center.x = -fromView.bounds.width/2
-                toView.center.x = toView.bounds.width/2
+            let firstLine = LineView()
+            firstLine.isVertical = false
+            firstLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
+            firstLine.lineWidth = 1
+            firstLine.tag = -1
+            
+            let secondLine = LineView()
+            secondLine.isVertical = true
+            secondLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
+            secondLine.lineWidth = 1
+            secondLine.tag = -1
+            
+            let thirdLine = LineView()
+            thirdLine.isVertical = false
+            thirdLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
+            thirdLine.lineWidth = 1
+            thirdLine.tag = -1
+            
+            
+            // On cherche le x et le y de départ
+            var x: CGFloat = 0
+            var allY: [CGFloat] = [0, 0]
+            for subview in fromView.subviews {
+                
+                if subview is Letter && subview.tag == 1 {
+                    guard let line = subview.subviews.first as? LineView else { return }
+                    x = (fromView.convert(line.frame.origin, from: subview)).x + line.frame.width/2
+                }
+                
+                if subview is UIButton && subview.tag == 1 {
+                    allY[0] = subview.frame.maxY
+                }
+                if subview is UIButton && subview.tag == 2 {
+                    allY[1] = subview.frame.minY
+                }
+                
+            }
+            let y = (allY[0] + allY[1])/2
+            
+            
+            // on cherche le x et le y d'arrivée
+            var finalPointFromView = CGPoint(x: 0, y: 0)
+            var finalPointToView = CGPoint(x: 0, y: 0)
+            
+            for subview in toView.subviews {
+                if subview.tag == 1 {
+                    
+                    guard let tableView = subview as? UITableView else {
+                        return
+                    }
+                    
+                    let width = firstLine.lineWidth
+                    let point = tableView.frame.origin
+                    finalPointToView = CGPoint(x: point.x + 5, y: point.y + 100/2 - 20 - width/2)
+                    finalPointFromView = CGPoint(x: point.x + 5 + fromView.frame.width, y: point.y + 100/2 - 20 - width/2)
+                    
+                }
+            }
+            
+            
+            let decalementFromView = -fromView.bounds.width + fromVC.mainLineLeadingConstraint.constant
+            let endOfFirstLineOnX = 0.9*fromView.frame.width-fromVC.mainLineLeadingConstraint.constant-0.5
+            
+            
+            firstLine.frame = CGRect(x: x, y: y, width: 0, height: 1)
+            secondLine.frame = CGRect(x: endOfFirstLineOnX, y: y, width: 1, height: 0)
+            thirdLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: 0, height: 1)
+            fromView.addSubview(firstLine)
+            fromView.addSubview(secondLine)
+            fromView.addSubview(thirdLine)
+            
+            
+            UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: [], animations: {
+                
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25, animations: {
+                    firstLine.frame = CGRect(x: x, y: y, width: 0.9*(fromView.frame.width - x), height: 1)
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.4, animations: {
+                    firstLine.frame = CGRect(x: x+decalementFromView, y: y, width: 0.9*(fromView.frame.width - x - decalementFromView), height: 1)
+                    
+                    for subview in fromView.subviews {
+                        if subview.tag != -1 {
+                            subview.center.x = subview.center.x + decalementFromView
+                        }
+                    }
+                    
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.2, animations: {
+                    secondLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: 1, height: y-finalPointToView.y)
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1, animations: {
+                    thirdLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: finalPointFromView.x - endOfFirstLineOnX, height: 1)
+                    fromView.center.x = -fromView.bounds.width/2
+                    toView.center.x = toView.bounds.width/2
+                })
+                
             }) { (_) in
+                
+                firstLine.removeFromSuperview()
+                secondLine.removeFromSuperview()
+                thirdLine.removeFromSuperview()
+                
+                
+                for subview in toView.subviews {
+                    if subview.tag == 1 {
+                        
+                        guard let tableView = subview as? UITableView else {
+                            return
+                        }
+                        
+                        let point = tableView.convert(CGPoint(x: 0, y: finalPointToView.y), from: toView)//CGPoint(x: -finalPointToView.x, y: 50 - thirdLine.lineWidth/2 )
+                        thirdLine.frame = CGRect(x: point.x, y: point.y, width: finalPointToView.x, height: 1)
+                        
+                        tableView.addSubview(thirdLine)
+                        
+                    }
+                }
+                
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }
+            
+            
         } else {
             let fromVC = transitionContext.viewController(forKey: .from) as! HistoryPresentationViewController
             let toVC = transitionContext.viewController(forKey: .to) as! MenuViewController
@@ -53,6 +172,5 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             }
         }
     }
-    
     
 }

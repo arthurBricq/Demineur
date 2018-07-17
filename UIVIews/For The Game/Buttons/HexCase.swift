@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class HexCase: UIButton
 { // La vue doit être un carré
     

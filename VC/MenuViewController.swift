@@ -12,7 +12,8 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var lineE: LineView!
     @IBOutlet weak var lineHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var mainLine: LineView!
+    @IBOutlet weak var mainLineLeadingConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,6 @@ class MenuViewController: UIViewController {
         
         print("Presentation de l'état actuelle des donnes")
         print("argent courant: \(money.currentAmountOfMoney)")
-        
 
     }
     
@@ -41,20 +41,26 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        let transition = TransitionToHistoryMenuViewController()
-        transition.animationDuration = 2
-        transition.presenting = true
-        return transition
-    
+        if presented is HistoryPresentationViewController {
+            let transition = TransitionToHistoryMenuViewController()
+            transition.animationDuration = 2
+            transition.presenting = true
+            return transition
+        }
+        
+        return nil
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        let transition = TransitionToHistoryMenuViewController()
-        transition.animationDuration = 2
-        transition.presenting = false
-        return transition
+        if dismissed is HistoryPresentationViewController {
+            let transition = TransitionToHistoryMenuViewController()
+            transition.animationDuration = 2
+            transition.presenting = false
+            return transition
+        }
         
+        return nil
     }
     
 }

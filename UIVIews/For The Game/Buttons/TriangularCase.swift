@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-
-@IBDesignable
+//@IBDesignable
 class TriangularCase: UIButton {
     
     @IBInspectable var strokeColor: UIColor = .black

@@ -34,8 +34,6 @@ class HistoryPresentationViewController: UIViewController  {
         super.viewDidLoad()
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
-        
-        
     }
     
     /**
@@ -100,6 +98,7 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
             cell.VC = self
             cell.strokeColor = color1
             cell.updateTheAlphas()
+            print("Cell height = \(cell.frame.height)")
             return cell
             
         } else if indexPath.row % 2 == 1  {

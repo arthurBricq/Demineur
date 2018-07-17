@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class FlagViewDisplay: UIView {
     
     @IBInspectable var  couleurBaton: UIColor = UIColor(red: 0.350, green: 0.274, blue: 0.000, alpha: 1.000)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class SquareCase: UIButton {
     // This button is the one displaying the cases of the game.
     // Those buttons have many different states
