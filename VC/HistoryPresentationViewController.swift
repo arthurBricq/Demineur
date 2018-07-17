@@ -10,9 +10,12 @@ import UIKit
 
 class HistoryPresentationViewController: UIViewController  {
     
+    override var prefersStatusBarHidden: Bool { return true }
     
     /// OUTLETS hh
     @IBOutlet weak var levelsTableView: UITableView!
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     
     /// ACTIONS
@@ -97,6 +100,7 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
             cell.VC = self
             cell.strokeColor = color1
             cell.updateTheAlphas()
+            print("Cell height = \(cell.frame.height)")
             return cell
             
         } else if indexPath.row % 2 == 1  {

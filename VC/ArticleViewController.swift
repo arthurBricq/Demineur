@@ -18,6 +18,8 @@ import UIKit
 
 class ArticleViewController: UIViewController {
 
+    override var prefersStatusBarHidden: Bool { return true }
+    
     var articleIndex: Int = 1
     
     var boutiquePopulation: [(description: String,prix: String)] = [

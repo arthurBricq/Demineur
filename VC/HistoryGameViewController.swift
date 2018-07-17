@@ -10,6 +10,8 @@ import UIKit
 
 class HistoryGameViewController: UIViewController {
     
+    override var prefersStatusBarHidden: Bool { return true }
+    
     @IBOutlet weak var clockView: ClockView!
     @IBOutlet weak var flagsLabel: UILabel!
     @IBOutlet weak var flagView: FlagViewDisplay!
