@@ -13,7 +13,6 @@ import CoreData
 let money = MoneyManager()
 let options = OptionsManager()
 
-
 class MoneyManager {
     
     var currentAmountOfMoney: Int = 0 { // il s'agit de la variable qui contient l'argent du jeu. C'est celle-ci qu'il faut modifier lorsque l'on gagne de l'argent. On peut la modifier en utilisant des fonctions déjà construites ()
