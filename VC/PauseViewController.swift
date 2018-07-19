@@ -46,6 +46,8 @@ class PauseViewController: UIViewController {
         pauseView.layer.borderWidth = 0.75
         pauseView.layer.borderColor = UIColor.gray.cgColor
         boutiqueView.layer.cornerRadius = radius-2
+        boutiqueView.layer.borderWidth = 0.75
+        boutiqueView.layer.borderColor = UIColor.gray.cgColor
         
     }
     

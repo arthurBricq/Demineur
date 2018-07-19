@@ -960,28 +960,28 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqa-NM-I6J">
-                                <rect key="frame" x="91" y="16" width="161" height="21"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
+                                <rect key="frame" x="91" y="6.5" width="163" height="20"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dep-Id-uFb" customClass="AchatBoutiqueBouton" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="91" y="63.5" width="90" height="30"/>
+                                <rect key="frame" x="91" y="53.5" width="120" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="29W-W5-i98"/>
-                                    <constraint firstAttribute="height" constant="30" id="9rp-3I-4If"/>
+                                    <constraint firstAttribute="width" constant="120" id="29W-W5-i98"/>
+                                    <constraint firstAttribute="height" constant="40" id="9rp-3I-4If"/>
                                 </constraints>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vn4-BS-Vol" firstAttribute="trailing" secondItem="uqa-NM-I6J" secondAttribute="trailing" constant="2" id="2Z0-HH-nnC"/>
+                            <constraint firstItem="vn4-BS-Vol" firstAttribute="trailing" secondItem="uqa-NM-I6J" secondAttribute="trailing" id="2Z0-HH-nnC"/>
                             <constraint firstItem="Bog-JE-qyW" firstAttribute="leading" secondItem="vn4-BS-Vol" secondAttribute="leading" constant="6" id="BFg-6G-Rqt"/>
                             <constraint firstItem="uqa-NM-I6J" firstAttribute="leading" secondItem="Bog-JE-qyW" secondAttribute="trailing" constant="8" id="CD8-OC-c9G"/>
                             <constraint firstItem="Bog-JE-qyW" firstAttribute="height" secondItem="Vdw-6z-e70" secondAttribute="height" multiplier="0.7" id="FKv-6p-4wH"/>
                             <constraint firstItem="dep-Id-uFb" firstAttribute="bottom" secondItem="Bog-JE-qyW" secondAttribute="bottom" id="LmU-f9-RDY"/>
                             <constraint firstItem="Bog-JE-qyW" firstAttribute="centerY" secondItem="vn4-BS-Vol" secondAttribute="centerY" id="Wqt-VR-X7G"/>
-                            <constraint firstItem="Bog-JE-qyW" firstAttribute="top" secondItem="uqa-NM-I6J" secondAttribute="top" id="dI1-Es-xkn"/>
+                            <constraint firstItem="Bog-JE-qyW" firstAttribute="top" secondItem="uqa-NM-I6J" secondAttribute="top" constant="10" id="dI1-Es-xkn"/>
                             <constraint firstItem="dep-Id-uFb" firstAttribute="leading" secondItem="uqa-NM-I6J" secondAttribute="leading" id="dPb-E0-fD1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vn4-BS-Vol"/>
