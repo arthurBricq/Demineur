@@ -12,7 +12,8 @@ class BonusView: UIView {
 
     var index: Int = 1
     var tempsAngleParameter: CGFloat = 45
-
+    var delegate: BonusButtonsCanCallVC?
+    
     override func draw(_ rect: CGRect) {
         if index == 0 {
             BonusDraw.drawBonusTemps(frame: rect, resizing: .aspectFill, angle: tempsAngleParameter )
@@ -27,6 +28,16 @@ class BonusView: UIView {
         }
     }
  
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1.0
+        }
+        
+        print("a")
+        
+    }
 
 }
 

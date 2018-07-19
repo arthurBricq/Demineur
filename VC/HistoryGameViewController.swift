@@ -17,7 +17,9 @@ class HistoryGameViewController: UIViewController {
     @IBOutlet weak var flagView: FlagViewDisplay!
     @IBOutlet weak var bombsLabel: UILabel!
     @IBOutlet weak var bombView: BombViewDisplay!
+   
     
+    var bonusChoiceView: BonusChoiceView?
     var game: OneGame = OneGame(gameTypeWithNoneCases: .square, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
     var gameState = [[Int]].init()
     var gameTimer = CountingTimer()
@@ -62,9 +64,39 @@ class HistoryGameViewController: UIViewController {
         }
         
         
+        
+        
+        
         isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu.
         
         startANewGame()
+        
+        // instauration de la bar des bonus
+        addTheBonusChoiceView()
+    
+    }
+    
+    
+    func addTheBonusChoiceView() {
+        
+        print("aaa")
+        
+        let screenW = self.view.frame.width
+        let screenH = self.view.frame.height
+        let dec_h: CGFloat = 20 // decalage horizontal
+        let dec_v: CGFloat = 8 // decalage vertical
+        let w = screenW - dec_h
+        let h = w/6
+        let size = CGSize(width: w, height: h)
+        let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
+        if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
+        
+        bonusChoiceView = BonusChoiceView()
+        bonusChoiceView!.backgroundColor = UIColor.clear
+        bonusChoiceView!.progress = 0
+        bonusChoiceView!.frame = CGRect(origin: origin, size: size)
+        bonusChoiceView!.instantiateScrollView()
+        self.view.addSubview(bonusChoiceView!)
     }
     
     func startANewGame() {

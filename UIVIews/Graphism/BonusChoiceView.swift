@@ -11,16 +11,72 @@ import UIKit
 class BonusChoiceColor {
     var backgroundColorRuban: UIColor = UIColor(red: 0.522, green: 0.522, blue: 0.522, alpha: 1.000)
     var starColor: UIColor = UIColor(red: 0.800, green: 0.574, blue: 0.354, alpha: 1.000)
-    var backgroundContainer: UIColor = UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1.000)
+    var backgroundContainer: UIColor = UIColor.white //= UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1.000)
 }
-var bonusChoiceColor = BonusChoiceColor()
 
+var bonusChoiceColor = BonusChoiceColor() // il s'agit des couleurs de la vue
 
 class BonusChoiceView: UIView {
+    // Largeur = 6 Hauteur //
     
-    @objc public dynamic var progress: CGFloat = 0 {
+    var vcDelegate: BonusButtonsCanCallVC?
+    
+    var scrollView: UIScrollView?
+    
+    func instantiateScrollView() {
+        let tmp = UIScrollView()
+        let fx = self.bounds.width / 600 // ratios de dilatation de l'espace
+        let fy = self.bounds.height / 100
+        tmp.frame = CGRect(x: (42)*fx, y: 7.5*fy, width: (450)*fx, height: 85*fy)
+        tmp.backgroundColor = UIColor.clear
+        tmp.isScrollEnabled = true
+        tmp.alpha = 0
+        scrollView = tmp
+    }
+    
+    func populateScrollView() {
+        let fy = self.bounds.height / 100
+        let y0: CGFloat = 2
+        let c = 85*fy - 2*y0 // cotes du carre
+        let esp: CGFloat = 30 // espacement entre les boutons
+        
+        scrollView!.contentSize = CGSize(width: 5*(c+esp) - esp/2 + 30 , height: 85*fy )
+
+        
+        for i in (scrollView?.subviews)! {
+            i.removeFromSuperview()
+        }
+        
+        
+        for i in 0..<5 {
+            
+            let v = BonusView() // v comme view
+            v.frame = CGRect(x: 10 + CGFloat(i)*(c+esp), y: y0, width: c, height: c)
+            v.index = i
+            v.delegate = vcDelegate
+            v.backgroundColor = UIColor.clear
+            
+            let r = UILabel() // r comme rond
+            let d = c/2 // diametre du rond avec le nombre de bonus
+            r.backgroundColor = UIColor.clear
+            r.textColor = bonusChoiceColor.backgroundColorRuban
+            r.font = UIFont(name: "PingFangSC-Semibold", size: 20)
+            r.frame = CGRect(x: c+4, y: c-d/2-10, width: d, height: d)
+            r.text = String(bonus.giveTheNumberOfBonus(forIndex: i))
+            
+            v.addSubview(r)
+            scrollView!.addSubview(v)
+            
+        }
+        
+    }
+    
+    @objc public dynamic var progress: CGFloat = 1 {
         didSet {
             progressLayer.progress = progress
+            if progress == 0 || progress == 1 {
+                progressLayer.setNeedsDisplay()
+            }
         }
     }
     
@@ -34,7 +90,6 @@ class BonusChoiceView: UIView {
     
     override public func action(for layer: CALayer, forKey event: String) -> CAAction? {
         if event == #keyPath(BonusChoiceLayer.progress), let action = action(for: layer, forKey: #keyPath(backgroundColor)) as? CAAnimation {
-            
             let animation = CABasicAnimation()
             animation.keyPath = #keyPath(BonusChoiceLayer.progress)
             animation.fromValue = progressLayer.progress
@@ -50,9 +105,61 @@ class BonusChoiceView: UIView {
             animation.timingFunction = action.timingFunction
             animation.delegate = action.delegate
             self.layer.add(animation, forKey: #keyPath(BonusChoiceLayer.progress))
-            
         }
         return super.action(for: layer, forKey: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        let point = touches.first?.location(in: self)
+        
+        if (point!.x > 5/6*bounds.width && point!.x < bounds.width) || (point!.x > 0 && point!.x < bounds.width/6) {
+            if progress == 1 {
+                
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.scrollView?.alpha = 0
+                }) { (_) in
+                    self.scrollView?.removeFromSuperview()
+                    UIView.animate(withDuration: 1.0, animations: {
+                        self.progress = 0
+                    })
+                }
+            } else {
+                
+                UIView.animate(withDuration: 1.0, animations: {
+                    self.progress = 1
+                }, completion: { (_) in
+                    self.addSubview(self.scrollView!)
+                    self.scrollView!.alpha = 0
+                    
+                    UIView.animate(withDuration: 0.25, animations: {
+                        self.scrollView?.alpha = 1
+                    }, completion: { (_) in
+                        self.populateScrollView()
+                    })
+                })
+                
+            }
+        }
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if progress == 0 {
+            if point.x > 0 && point.x < bounds.width/6 {
+                if point.y > 0 && point.y < bounds.height {
+                    return true
+                }
+            }
+        } else if progress == 1 {
+            if point.x > 1/6*bounds.width && point.x < bounds.width {
+                if point.y > 0 && point.y < bounds.height {
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
     
 }
@@ -70,11 +177,8 @@ class BonusChoiceLayer: CALayer {
     
     override func draw(in ctx: CGContext) {
         super.draw(in: ctx)
-        
         UIGraphicsPushContext(ctx)
-        
-        BonusChoiceProgress.drawBonusChoice(frame: frame, resizing: .aspectFill, progress: progress)
-        
+        BonusChoiceProgress.drawBonusChoice(frame: bounds, resizing: .aspectFill, progress: progress)
         UIGraphicsPopContext()
     }
     

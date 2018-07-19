@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         bonus.getCurrentValue() // on récupère les bonus achetés.
        
         
+        bonus.displayCurrentBonus()
+        
         return true
     }
 

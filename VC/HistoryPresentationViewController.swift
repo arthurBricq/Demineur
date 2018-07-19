@@ -23,6 +23,10 @@ class HistoryPresentationViewController: UIViewController  {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func unwindToHistoryPresentation(segue: UIStoryboardSegue) {
+        // retour aux niveaux
+    }
+    
     /// VARIABLES
     var totalNumberOfRowsInSection: Int = 5 // nombre de lignes à a
     var currentGame: Int = 11

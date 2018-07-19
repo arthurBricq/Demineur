@@ -194,26 +194,6 @@ class IsTheGameStarted {
 
 var isTheGameStarted = IsTheGameStarted(value: false)
 
-
-// ***** PROTOCOLS ***** //
-protocol ButtonCanCallSuperView {
-    func buttonHaveBeenTapped(i: Int, j: Int, marking: Bool)
-}
-protocol GameViewCanCallVC {
-    func gameOver(win: Bool)
-    func updateFlagsDisplay(numberOfFlags: Int)
-}
-protocol CountingTimerProtocol {
-    func timerFires(id: String)
-}
-protocol LimitedTimerProtocol {
-    func timeLimitReached(id: String)
-}
-protocol variableCanCallGameVC {
-    func createTheGame(withFirstTouched: (x: Int, y: Int))
-}
-
-
 let k: CGFloat = 0.86603 // variable such that w = k*h.
 let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 
@@ -221,7 +201,18 @@ let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 
 
 
-//// BONUS
+//// BONUS //// 
+
+/// ORDRE DES BONUS :
+// Temps
+// Drapeau
+// Bombe
+// Vie
+// Verification
+
+/// VARIABLE DE SAUVEGARDE : 'bonus'
+
+
 
 struct BonusDescription {
     let name: String

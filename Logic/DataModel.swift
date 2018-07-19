@@ -217,12 +217,11 @@ class BonusManager {
         
         // 5 - Retourner les valeurs courantes
         
-        let n = allBonus.count
-        guard let bonus1 = allBonus[n-1].value(forKey: "temps") as? Int else { return toReturn } // ...
-        guard let bonus2 = allBonus[n-1].value(forKey: "drapeau") as? Int else { return toReturn } // ...
-        guard let bonus3 = allBonus[n-1].value(forKey: "bombe") as? Int else { return toReturn } // ...
-        guard let bonus4 = allBonus[n-1].value(forKey: "vie") as? Int else { return toReturn } // avant derniere ...
-        guard let bonus5 = allBonus[n-1].value(forKey: "verification") as? Int else { return toReturn } // dernière valeure sauvegardée
+        guard let bonus1 = allBonus.last?.value(forKey: "temps") as? Int else { return toReturn } // ...
+        guard let bonus2 = allBonus.last?.value(forKey: "drapeau") as? Int else { return toReturn } // ...
+        guard let bonus3 = allBonus.last?.value(forKey: "bombe") as? Int else { return toReturn } // ...
+        guard let bonus4 = allBonus.last?.value(forKey: "vie") as? Int else { return toReturn } // avant derniere ...
+        guard let bonus5 = allBonus.last?.value(forKey: "verification") as? Int else { return toReturn } // dernière valeure sauvegardée
         
         toReturn = (bonus1,bonus2,bonus3,bonus4,bonus5)
 
@@ -300,5 +299,27 @@ class BonusManager {
         print("verif.: \(self.verification)")
     }
     
+    
+    /// Cette fonction retourne le nombre de bonus que le joueur possede à partir de l'indice du bonus (utile dans la boutique).
+    func giveTheNumberOfBonus(forIndex index: Int) -> Int {
+        var tmp: Int = 1
+        
+        switch index {
+        case 0:
+            tmp = temps
+        case 1:
+            tmp = drapeau
+        case 2:
+            tmp = bombe
+        case 3:
+            tmp = vie
+        case 4:
+            tmp = verification
+        default:
+            break
+        }
+        
+        return tmp
+    }
     
 }

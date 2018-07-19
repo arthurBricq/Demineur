@@ -31,6 +31,7 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var achatButton: AchatBoutiqueBouton!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var containerView: UIView! // c'est la vue à gauche
+    @IBOutlet weak var indicateurNombreLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,17 +45,28 @@ class ArticleViewController: UIViewController {
     }
     
     func updateView() {
-        let bonus = allBonus[articleIndex]
-        descriptionLabel.text = bonus.descriptions[bonus.niveau]
-        achatButton.prix = String(bonus.prixAchat)
+        // label et prix de la case 
+        let currentBonus = allBonus[articleIndex]
+        descriptionLabel.text = currentBonus.descriptions[currentBonus.niveau]
+        achatButton.prix = String(currentBonus.prixAchat)
         containerView.backgroundColor = UIColor.clear
+        
+        let tmp = bonus.giveTheNumberOfBonus(forIndex: articleIndex)
+        if tmp == 0 || tmp == 1 {
+            indicateurNombreLabel.text = "\(tmp) restant"
+        } else {
+            indicateurNombreLabel.text = "\(tmp) restants"
+        }
+        
+        
+        // ajout de la vue avec le dessin
         let size = containerView.frame.size
         let bonusView = BonusView()
         bonusView.backgroundColor = UIColor.clear
         bonusView.index = articleIndex
         bonusView.frame = CGRect(origin: CGPoint.zero, size: size)
         if articleIndex == 0 {
-            switch bonus.niveau {
+            switch currentBonus.niveau {
             case 0:
                 bonusView.tempsAngleParameter = 0
             case 1:
@@ -68,6 +80,9 @@ class ArticleViewController: UIViewController {
             }
         }
         containerView.addSubview(bonusView)
+        
+        
+        
     }
     
 

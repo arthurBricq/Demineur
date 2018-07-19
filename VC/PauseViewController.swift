@@ -133,7 +133,10 @@ class PauseViewController: UIViewController {
             gameViewController.restartTheGame()
             gameViewController.startNewSection()
         } else if pausedGameViewController is HistoryGameViewController {
-            
+            let gameViewController = pausedGameViewController as! HistoryGameViewController
+            gameViewController.gameTimer.play()
+            gameViewController.removePrecendentViewOfGame()
+            gameViewController.startANewGame()
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -141,7 +144,12 @@ class PauseViewController: UIViewController {
     
     @IBAction func menuButtonTapped(_ sender: Any) {
         // retour au menu
-        self.performSegue(withIdentifier: "BackToMenu", sender: nil)
+        if pausedGameViewController is InfiniteGameViewController {
+            self.performSegue(withIdentifier: "BackToMenu", sender: nil)
+        } else if pausedGameViewController is HistoryGameViewController {
+            self.performSegue(withIdentifier: "BackToPresentation", sender: nil)
+        }
+        
     }
     
     @IBAction func vibrationButtonTapped(_ sender: Any) {
@@ -204,42 +212,3 @@ extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControlle
     }
     
 }
-
-
-
-
-
-/**
- This function should add a view inside a UISCROLLVIEW
- */
-//    func test() {
-//        let view = UIView(frame: CGRect(x: 0, y: 30, width: 500, height: 20))
-//        view.backgroundColor = UIColor.red
-//        scrollView.addSubview(view)
-// }
-
-
-/**
- Cette fonction permet d'ajouter tous les boutons dans le scroll view de la boutique rapide dans le menu pause.
- */
-//    func instantiateBoutiqueScrollView() {
-//        let h = scrollView.frame.height
-//        let b1 = UIButton(frame: CGRect(x: 0, y: 0, width: h, height: h))
-//        b1.setTitle("m1", for: .normal)
-//        b1.layer.borderWidth = 1.0
-//        b1.layer.borderColor = UIColor.white.cgColor
-//
-//        let b2 = UIButton(frame: CGRect(x: h+20, y: 0, width: h, height: h))
-//        b2.setTitle("m2", for: .normal)
-//        b2.layer.borderWidth = 1.0
-//        b2.layer.borderColor = UIColor.white.cgColor
-//
-//        let b3 = UIButton(frame: CGRect(x: 2*(h+20), y: 0, width: h, height: h))
-//        b3.setTitle("m3", for: .normal)
-//        b3.layer.borderWidth = 1.0
-//        b3.layer.borderColor = UIColor.white.cgColor
-//
-//        scrollView.addSubview(b1)
-//        scrollView.addSubview(b2)
-//        scrollView.addSubview(b3)
-//    }
