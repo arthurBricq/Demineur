@@ -14,16 +14,13 @@ class PauseViewController: UIViewController {
     
     var pausedGameViewController: UIViewController?
     
-    
-    
     lazy var orderedViewControllers: [UIViewController] = {
         return [self.viewController(forIndex: 0),
                 self.viewController(forIndex: 1),
                 self.viewController(forIndex: 2),
-                self.viewController(forIndex: 3)]
+                self.viewController(forIndex: 3),
+                self.viewController(forIndex: 4)]
     }()
-    
-    
     
     /// OUTLETS
     
@@ -46,7 +43,10 @@ class PauseViewController: UIViewController {
         super.viewDidLoad()
         let radius: CGFloat = 10.0
         pauseView.layer.cornerRadius = radius
+        pauseView.layer.borderWidth = 0.75
+        pauseView.layer.borderColor = UIColor.gray.cgColor
         boutiqueView.layer.cornerRadius = radius-2
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +119,34 @@ class PauseViewController: UIViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-  
+    
+    
+    @IBAction func restartButtonTapped(_ sender: Any) {
+        if pausedGameViewController is InfiniteGameViewController {
+            let gameViewController = pausedGameViewController as! InfiniteGameViewController
+            gameViewController.gameTimer.stop()
+            gameViewController.containerView.subviews.last?.removeFromSuperview()
+            gameViewController.containerView.subviews.last?.removeFromSuperview()
+            gameViewController.sectionIndex = 0
+            gameViewController.restartTheGame()
+            gameViewController.startNewSection()
+        } else if pausedGameViewController is HistoryGameViewController {
+            
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func menuButtonTapped(_ sender: Any) {
+        // retour au menu
+        self.performSegue(withIdentifier: "BackToMenu", sender: nil)
+    }
+    
+    @IBAction func vibrationButtonTapped(_ sender: Any) {
+        options.areVibrationsOn = !options.areVibrationsOn // changer les vibrations
+    }
+    
+    
 }
 
 extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
@@ -175,11 +202,6 @@ extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControlle
     }
     
 }
-
-
-
-
-
 
 
 

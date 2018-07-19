@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         money.getCurrentValue() // on récupère l'argent au début du jeu
+        options.getCurrentValue() // on récupère les options
+        bonus.getCurrentValue() // on récupère les bonus achetés.
+       
         
         return true
     }

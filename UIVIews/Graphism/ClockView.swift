@@ -28,8 +28,8 @@ class ClockView: UIView {
 public class ClockTimer : NSObject {
     
     //// Drawing Methods
-    
     @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 104, height: 104), resizing: ResizingBehavior = .aspectFit, angle: CGFloat = -270, roundEpaisseur: CGFloat = 2.0) {
+        
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         

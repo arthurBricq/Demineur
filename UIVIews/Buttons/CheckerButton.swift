@@ -46,7 +46,7 @@ class CheckerButton: UIButton {
             self.alpha = 1.0
         }
         
-        options.areVibrationsOn = !options.areVibrationsOn // changer les vibrations
+        
         self.setNeedsDisplay()
         
     }

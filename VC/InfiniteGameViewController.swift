@@ -111,6 +111,13 @@ class InfiniteGameViewController: UIViewController {
     
     
     /**
+     Cette fonction permet de remettre à zero la partie infinie, en iniciant la section à la première section
+    */
+    func restartTheGame() {
+        currentSection = Section(simpleSquareGameWith: (12,9))
+    }
+    
+    /**
      Cette fonction doit-être appelée quand on commence une nouvelle section (i.e.) dans le ViewWillAppear très probablement.
      Appelé au TOUT DEBUT
      */
@@ -682,6 +689,7 @@ extension InfiniteGameViewController: variableCanCallGameVC {
 extension InfiniteGameViewController: GameViewCanCallVC {
     func gameOver(win: Bool) {
         if win {
+            
             if hasToFinishTheGame {
                 hasToFinishTheGame = false
             } else {

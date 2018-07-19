@@ -216,3 +216,40 @@ protocol variableCanCallGameVC {
 
 let k: CGFloat = 0.86603 // variable such that w = k*h.
 let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
+
+
+
+
+
+//// BONUS
+
+struct BonusDescription {
+    let name: String
+    var niveau: Int = 0 // il faut faire +1
+    let descriptions: [String]
+    let prixAchat: Int
+    let prixAmelioration: [Int]
+}
+
+var allBonus: [BonusDescription] = [
+    
+    BonusDescription(name: "Temps", niveau: 0, descriptions: ["Récupérez 15 secondes", "Récupérez 30 secondes", "Récupérez 45 secondes", "Récupérez 1 minute"], prixAchat: 750, prixAmelioration: [8000, 16000, 30000, 40000] ),
+
+    BonusDescription(name: "Drapeau", niveau: 0, descriptions: ["Gagnez un drapeau.", "Gagnez 2 drapeaux", "Gagnez 3 drapeaux"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
+    
+    BonusDescription(name: "Bombe", niveau: 0, descriptions: ["Trouver une bombe avec une chance de 50%.","Trouver une bombe !","Trouver 2 bombes avec une chance de 50%"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
+    
+    BonusDescription(name: "Vie", niveau: 0, descriptions: ["Obtenez une seconde chance", "Vous surviverez à deux bombes", "Trois échecs ne vous abatteront pas !"], prixAchat: 2500, prixAmelioration: [20000, 50000] ),
+    
+    BonusDescription(name: "Verification", niveau: 0 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] )
+    
+]
+
+
+
+
+
+
+
+
+

@@ -746,6 +746,9 @@
                                                 <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="menuButtonTapped:" destination="QLO-ne-eVG" eventType="touchUpInside" id="FY9-0y-NNI"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cr0-pN-a8N" customClass="MenuPauseIconsButtons" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="125.5" y="350.5" width="50" height="50"/>
@@ -761,6 +764,9 @@
                                                 <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="restartButtonTapped:" destination="QLO-ne-eVG" eventType="touchUpInside" id="VK2-SR-dGU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKf-p7-mMg" customClass="MenuPauseIconsButtons" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="240.5" y="350.5" width="50" height="50"/>
@@ -817,8 +823,8 @@
                                                     <segue destination="Ugg-9H-NaZ" kind="embed" identifier="pageSegue" id="1hc-OX-8aS"/>
                                                 </connections>
                                             </containerView>
-                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="4" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-bP-kpu">
-                                                <rect key="frame" x="108" y="138" width="55" height="37"/>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="qsc-bP-kpu">
+                                                <rect key="frame" x="100" y="138" width="71" height="37"/>
                                             </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -850,6 +856,9 @@
                                                 <real key="value" value="7"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="vibrationButtonTapped:" destination="QLO-ne-eVG" eventType="touchUpInside" id="WjT-Jy-Gvk"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -919,9 +928,11 @@
                         <outlet property="moneyLabel" destination="wgr-kB-lTh" id="E5E-Jo-mGe"/>
                         <outlet property="pageControl" destination="qsc-bP-kpu" id="SZr-y9-Iim"/>
                         <outlet property="pauseView" destination="5Gz-Ys-46b" id="sfC-9p-NB3"/>
+                        <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToMenu" unwindAction="unwindToMenuWithSegue:" id="rXL-MZ-8nX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oY5-xV-psk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="apS-Vh-1Q6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="317.60000000000002" y="2504.7976011994006"/>
         </scene>
@@ -978,6 +989,7 @@
                     <size key="freeformSize" width="254" height="110"/>
                     <connections>
                         <outlet property="achatButton" destination="dep-Id-uFb" id="yyk-RN-X4u"/>
+                        <outlet property="containerView" destination="Bog-JE-qyW" id="PMx-2T-Dgt"/>
                         <outlet property="descriptionLabel" destination="uqa-NM-I6J" id="fft-oq-NPK"/>
                     </connections>
                 </viewController>

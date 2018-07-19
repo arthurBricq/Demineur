@@ -12,6 +12,7 @@ class StartTableViewCell: UITableViewCell {
     
     var currentGame: Int = 4
     var strokeColor: UIColor = UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
+    var lineWidth: CGFloat = 1
     
     // Pour la logique des bouttons
     var VC: RoundButtonsCanCallVC?
@@ -70,6 +71,7 @@ class StartTableViewCell: UITableViewCell {
             // dessin du cercle autour de 3 :
             let c3 = CGPoint(x: w - 25 - r, y: h/2)
             let circle = UIBezierPath(arcCenter: c3, radius: r + dec, startAngle: 0, endAngle: 2*3.15, clockwise: true)
+            circle.lineWidth = lineWidth
             circle.stroke()
             
             // dessin de la ligne
@@ -77,6 +79,7 @@ class StartTableViewCell: UITableViewCell {
             let p2 = CGPoint(x:w - 25 - r, y: h)
             let path = UIBezierPath()
             path.move(to: p1) ; path.addLine(to: p2)
+            path.lineWidth = lineWidth
             path.stroke()
             
             fallthrough
@@ -86,11 +89,13 @@ class StartTableViewCell: UITableViewCell {
             let p2 = CGPoint(x: w - 25 - 2*r - dec, y: h/2)
             let path = UIBezierPath()
             path.move(to: p1) ; path.addLine(to: p2)
+            path.lineWidth = lineWidth
             path.stroke()
             
             // dessin du cercle
             let c2 = CGPoint(x: w/2, y: h/2) // centre du cercle 2
             let circle = UIBezierPath(arcCenter: c2, radius: r + dec, startAngle: 0, endAngle: 2*3.15, clockwise: true)
+            circle.lineWidth = lineWidth
             circle.stroke()
             
             fallthrough
@@ -100,11 +105,13 @@ class StartTableViewCell: UITableViewCell {
             let p2 = CGPoint(x: 25 + 2*r + d - dec, y: h/2)
             let path = UIBezierPath()
             path.move(to: p1) ; path.addLine(to: p2)
+            path.lineWidth = lineWidth
             path.stroke()
             
             // dessin du cercle
             let c1 = CGPoint(x: 25+r, y: h/2)
             let circle = UIBezierPath(arcCenter: c1, radius: r + dec, startAngle: 0, endAngle: 2*3.15, clockwise: true)
+            circle.lineWidth = lineWidth
             circle.stroke()
             
             fallthrough
@@ -113,6 +120,7 @@ class StartTableViewCell: UITableViewCell {
             let p2 = CGPoint(x: 25-dec, y: h/2)
             let path = UIBezierPath()
             path.move(to: p1) ; path.addLine(to: p2)
+            path.lineWidth = lineWidth
             path.stroke()
             
             //

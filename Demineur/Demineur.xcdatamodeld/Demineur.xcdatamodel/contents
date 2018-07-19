@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bonus" representedClassName="Bonus" syncable="YES" codeGenerationType="class">
+        <attribute name="bombe" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="drapeau" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="temps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="verification" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="vie" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Money" representedClassName="Money" syncable="YES" codeGenerationType="class">
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="Options" representedClassName="Options" syncable="YES" codeGenerationType="class">
+        <attribute name="vibration" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Money" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="Money" positionX="-126" positionY="-144" width="128" height="58"/>
+        <element name="Options" positionX="70" positionY="-153" width="128" height="60"/>
+        <element name="Bonus" positionX="250" positionY="-90" width="128" height="118"/>
     </elements>
 </model>

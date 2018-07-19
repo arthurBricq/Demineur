@@ -34,18 +34,21 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             firstLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
             firstLine.lineWidth = 1
             firstLine.tag = -1
+            firstLine.backgroundColor = UIColor.clear
             
             let secondLine = LineView()
             secondLine.isVertical = true
             secondLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
             secondLine.lineWidth = 1
             secondLine.tag = -1
+            secondLine.backgroundColor = UIColor.clear
             
             let thirdLine = LineView()
             thirdLine.isVertical = false
             thirdLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
             thirdLine.lineWidth = 1
             thirdLine.tag = -1
+            thirdLine.backgroundColor = UIColor.clear
             
             
             // On cherche le x et le y de départ
@@ -82,11 +85,11 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                     
                     let lineWidth = firstLine.lineWidth
                     let cellHeight: CGFloat = 100
-                    let safeAreaHeight: CGFloat = isItABigScreen() ? -24 : 20
+                    let correctiveConstant: CGFloat = isItABigScreen() ? -24 : 20
                     let point = tableView.frame.origin
                     print(tableView.frame.origin)
-                    finalPointToView = CGPoint(x: point.x + 5, y: point.y + cellHeight/2 - safeAreaHeight - lineWidth/2)
-                    finalPointFromView = CGPoint(x: point.x + 5 + fromView.frame.width, y: point.y + cellHeight/2 - safeAreaHeight - lineWidth/2)
+                    finalPointToView = CGPoint(x: point.x + 2, y: point.y + cellHeight/2 - correctiveConstant - lineWidth/2)
+                    finalPointFromView = CGPoint(x: point.x + 2 + fromView.frame.width, y: point.y + cellHeight/2 - correctiveConstant - lineWidth/2)
                     
                 }
             }
@@ -98,7 +101,7 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             
             firstLine.frame = CGRect(x: x, y: y, width: 0, height: 1)
             secondLine.frame = CGRect(x: endOfFirstLineOnX, y: y, width: 1, height: 0)
-            thirdLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: 0, height: 1)
+            thirdLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: 0, height: 2)
             fromView.addSubview(firstLine)
             fromView.addSubview(secondLine)
             fromView.addSubview(thirdLine)
@@ -106,11 +109,11 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
             
             UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: [], animations: {
                 
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
                     firstLine.frame = CGRect(x: x, y: y, width: 0.9*(fromView.frame.width - x), height: 1)
                 })
                 
-                UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.4, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.4, animations: {
                     firstLine.frame = CGRect(x: x+decalementFromView, y: y, width: 0.9*(fromView.frame.width - x - decalementFromView), height: 1)
                     
                     for subview in fromView.subviews {
@@ -121,11 +124,11 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                     
                 })
                 
-                UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.2, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.2, animations: {
                     secondLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: 1, height: y-finalPointToView.y)
                 })
                 
-                UIView.addKeyframe(withRelativeStartTime: 0.9, relativeDuration: 0.1, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2, animations: {
                     thirdLine.frame = CGRect(x: endOfFirstLineOnX, y: finalPointToView.y, width: finalPointFromView.x - endOfFirstLineOnX, height: 1)
                     fromView.center.x = -fromView.bounds.width/2
                     toView.center.x = toView.bounds.width/2
@@ -139,9 +142,15 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                 
                 let tableView = toVC.tableView!
                 let point = tableView.convert(CGPoint(x: 0, y: finalPointToView.y), from: toView)
-                thirdLine.frame = CGRect(x: point.x, y: point.y, width: finalPointToView.x, height: 1)
                 
-                tableView.addSubview(thirdLine)
+                let line = LineView()
+                line.frame = CGRect(x: point.x, y: point.y-1, width: finalPointToView.x, height: 3)
+                line.lineWidth = 1
+                line.isVertical = false
+                line.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
+                line.backgroundColor = UIColor.clear
+                
+                tableView.addSubview(line)                
                 
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }
@@ -180,6 +189,7 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                 })
                 
             }) { (_) in
+                line.removeFromSuperview()
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }
         }

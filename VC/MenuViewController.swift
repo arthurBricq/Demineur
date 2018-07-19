@@ -33,6 +33,11 @@ class MenuViewController: UIViewController {
         
     }
     
+    @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
+        // retour au menu
+        
+    }
+    
 }
 
 extension MenuViewController: UIViewControllerTransitioningDelegate {
@@ -41,7 +46,7 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         
         if presented is HistoryPresentationViewController {
             let transition = TransitionToHistoryMenuViewController()
-            transition.animationDuration = 2
+            transition.animationDuration = 1.5
             transition.presenting = true
             return transition
         }
@@ -53,7 +58,7 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         
         if dismissed is HistoryPresentationViewController {
             let transition = TransitionToHistoryMenuViewController()
-            transition.animationDuration = 2
+            transition.animationDuration = 1.5
             transition.presenting = false
             return transition
         }
