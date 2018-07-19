@@ -20,7 +20,6 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 5*40 + 4*15
         
-
     }
     
     override var prefersStatusBarHidden: Bool { return true }
