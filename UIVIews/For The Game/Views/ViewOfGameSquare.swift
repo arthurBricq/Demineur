@@ -24,7 +24,13 @@ class ViewOfGameSquare: UIView {
     var option2frequency: CGFloat = 0.5 // probabilité 0 et 1
     var option3Frequency: CGFloat = 0
     var option3Timer = CountingTimer()
-    var numberOfFlags: Int = 5
+    var numberOfFlags: Int = 5 {
+        didSet {
+            delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
+        }
+    }
+    
+    
     
     var openColor = UIColor.white // color for open-case's background
     var emptyColor = UIColor.white // color for empty-case's background
@@ -148,7 +154,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                 unmarkACaseAt(i: i, j: j)
             }
             
-            delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
+            //delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
             
         } else { // Quick tapping --> have to open the case
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.

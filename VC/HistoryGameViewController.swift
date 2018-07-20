@@ -21,6 +21,7 @@ class HistoryGameViewController: UIViewController {
     
     var bonusChoiceView: BonusChoiceView?
     var game: OneGame = OneGame(gameTypeWithNoneCases: .square, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
+    
     var gameState = [[Int]].init()
     var gameTimer = CountingTimer()
     
@@ -66,9 +67,6 @@ class HistoryGameViewController: UIViewController {
         }
         
         
-        
-        
-        
         isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu.
         
         startANewGame()
@@ -86,7 +84,7 @@ class HistoryGameViewController: UIViewController {
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
         let dec_h: CGFloat = 20 // decalage horizontal
-        let dec_v: CGFloat = 8 // decalage vertical
+        let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
         let w = screenW - dec_h
         let h = w/6
         let size = CGSize(width: w, height: h)
@@ -98,6 +96,7 @@ class HistoryGameViewController: UIViewController {
         bonusChoiceView!.progress = 0
         bonusChoiceView!.frame = CGRect(origin: origin, size: size)
         bonusChoiceView!.instantiateScrollView()
+        bonusChoiceView!.vcDelegate = self
         self.view.addSubview(bonusChoiceView!)
     }
     
@@ -114,6 +113,7 @@ class HistoryGameViewController: UIViewController {
         let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
         
         removePrecendentViewOfGame()
+        
         let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
         let color2: UIColor = colorForRGB(r: 101, g: 115, b: 126)
         game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
@@ -423,12 +423,80 @@ extension HistoryGameViewController: variableCanCallGameVC {
 }
 
 
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destinationViewController.
- // Pass the selected object to the new view controller.
- }
- */
+extension HistoryGameViewController: BonusButtonsCanCallVC {
+    func tempsTapped() { // il faut ajouter du temps
+        
+        if bonus.temps > 0 {
+            bonus.addTemps(amount: -1)
+        } else {
+            return
+        }
+        
+        let timeLevel: Int = levelOfBonus.giveTheLevelOfBonus(forIndex: 0)
+        let values: [CGFloat] = [15,30,45,60] // temps à rajouter
+        gameTimer.counter -= values[timeLevel]
+    }
+    
+    func drapeauTapped() { // il faut ajouter des drapeaux
+        
+        if bonus.drapeau > 0 {
+            bonus.addDrapeau(amount: -1)
+        } else {
+            return
+        }
+        
+        let drapeauLevel = levelOfBonus.giveTheLevelOfBonus(forIndex: 1)
+        let values: [Int] = [1,2,3] // drapeaux à ajouter
+        // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
+        if game.gameType == .hexagonal {
+            viewOfGameHex?.numberOfFlags += values[drapeauLevel]
+        } else if game.gameType == .square {
+            viewOfGameSquare?.numberOfFlags += values[drapeauLevel]
+        } else if game.gameType == .triangular {
+            viewOfGameTriangular?.numberOfFlags += values[drapeauLevel]
+        }
+        
+    }
+    
+    func bombeTapped() { // il faut marquer des bombes
+        if bonus.bombe > 0 {
+            bonus.addBomb(amount: -1)
+        } else {
+            return
+        }
+        
+        
+        
+        
+    }
+    
+    func vieTapped() { // il faut rajouter une vie
+        if bonus.vie > 0 {
+            bonus.addVie(amount: -1)
+        } else {
+            return
+        }
+        
+        
+    }
+    
+    func verificationTapped() { // il faut verifier les drapeaux posée
+        if bonus.verification > 0 {
+            bonus.addVerification(amount: -1)
+        } else {
+            return
+        }
+        
+        
+        
+    }
+    
+    
+}
+
+
+
+
+
+
+

@@ -27,7 +27,11 @@ class ViewOfGameTriangular: UIView {
     var option2frequency: CGFloat = 0.5 // probabilité 0 et 1
     var option3Frequency: CGFloat = 0
     var option3Timer = CountingTimer()
-    var numberOfFlags: Int = 5
+    var numberOfFlags: Int = 5 {
+        didSet {
+            delegateVC?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         // les dimensions de la vue doivent être les bonnes, grâce à la fonction de dimensionnement.
@@ -141,8 +145,6 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
             } else {
                 unmarkACaseAt(i: i, j: j)
             }
-            
-            delegateVC?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
             
         } else { // Quick tapping --> have to open the case
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.

@@ -13,7 +13,13 @@ import UIKit
 class CountingTimer: NSObject {
     
     var timer = Timer()
-    var counter: CGFloat = 0
+    var counter: CGFloat = 0 {
+        didSet {
+            if counter < 0 {
+                counter = 0
+            }
+        }
+    }
     var timeInterval: TimeInterval = 1
     var delegate: CountingTimerProtocol?
     var id: String = ""

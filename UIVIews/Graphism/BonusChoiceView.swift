@@ -35,6 +35,7 @@ class BonusChoiceView: UIView {
     }
     
     func populateScrollView() {
+        
         let fy = self.bounds.height / 100
         let y0: CGFloat = 2
         let c = 85*fy - 2*y0 // cotes du carre
@@ -42,7 +43,6 @@ class BonusChoiceView: UIView {
         
         scrollView!.contentSize = CGSize(width: 5*(c+esp) - esp/2 + 30 , height: 85*fy )
 
-        
         for i in (scrollView?.subviews)! {
             i.removeFromSuperview()
         }
@@ -152,7 +152,7 @@ class BonusChoiceView: UIView {
                 }
             }
         } else if progress == 1 {
-            if point.x > 1/6*bounds.width && point.x < bounds.width {
+            if point.x > 0 && point.x < bounds.width {
                 if point.y > 0 && point.y < bounds.height {
                     return true
                 }

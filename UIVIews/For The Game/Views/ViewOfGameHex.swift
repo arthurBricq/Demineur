@@ -27,7 +27,11 @@ class ViewOfGame_Hex: UIView {
     var option2frequency: CGFloat = 0.5 // probabilité 0 et 1
     var option3Frequency: CGFloat = 0
     var option3Timer = CountingTimer()
-    var numberOfFlags: Int = 5
+    var numberOfFlags: Int = 5 {
+        didSet {
+            delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         // hypothesis : 1) w = k * h    2) what matters is the height since h = 2*a
@@ -151,9 +155,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
             } else {
                 unmarkACase(i: i, j: j)
             }
-            
-            delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
-            
+                        
         } else { // appuyer sur la carte
             if !isTheCaseMarked(i: i, j: j) {
                 ouvertureRecursive(i: i, j: j)

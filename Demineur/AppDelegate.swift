@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         money.getCurrentValue() // on récupère l'argent au début du jeu
         options.getCurrentValue() // on récupère les options
         bonus.getCurrentValue() // on récupère les bonus achetés.
-       
-        
-        bonus.displayCurrentBonus()
+        levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
+//        levelOfBonus.initializeLevels()
+        levelOfBonus.displayCurrentBonusLevel()
         
         return true
     }

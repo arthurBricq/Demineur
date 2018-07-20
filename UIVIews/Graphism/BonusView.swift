@@ -27,17 +27,43 @@ class BonusView: UIView {
             BonusDraw.drawBonusVerification(frame: rect, resizing: .aspectFill, width: 2)
         }
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.alpha = 0.4
+    }
  
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.4) {
             self.alpha = 1.0
         }
         
-        print("a")
+        if index == 0 {
+            delegate!.tempsTapped()
+        } else if index == 1 {
+            delegate!.drapeauTapped()
+        } else if index == 2 {
+            delegate!.bombeTapped()
+        } else if index == 3 {
+            delegate!.vieTapped()
+        } else {
+            delegate!.verificationTapped()
+        }
+        
+        
+        
         
     }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1.0
+        }
+    }
+    
 
 }
 

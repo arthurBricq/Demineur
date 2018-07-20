@@ -11,9 +11,10 @@ import CoreData
 let money = MoneyManager()
 let options = OptionsManager()
 let bonus = BonusManager()
+let levelOfBonus = LevelBonusManager()
 
 
-
+/// Pour sauvegarder l'argent de la partie.
 class MoneyManager {
     
     var currentAmountOfMoney: Int = 0 { // il s'agit de la variable qui contient l'argent du jeu. C'est celle-ci qu'il faut modifier lorsque l'on gagne de l'argent. On peut la modifier en utilisant des fonctions déjà construites ()
@@ -65,7 +66,7 @@ class MoneyManager {
         }
         
         // 5 : retourner la valeur courante
-        print("nombre d'element en memoire argent: \(allArgent.count)")
+
         guard let currentMoney = allArgent.last?.value(forKey: "quantity") as? Int else {
             return toReturn
         }
@@ -98,6 +99,7 @@ class MoneyManager {
     
 }
 
+/// Pour sauvegarder les options du jeu
 class OptionsManager {
     
     var areVibrationsOn: Bool = true {
@@ -231,11 +233,6 @@ class BonusManager {
     }
     
     func save() {
-        
-        print(temps,drapeau,bombe,vie,verification)
-
-        print("save")
-        
         // 1 :
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -323,3 +320,161 @@ class BonusManager {
     }
     
 }
+
+/// Pour sauvegarder le niveau des bonus, il faut utiliser les fonctions de cette classe afin d'ajouter ou de soustraire des bonus pour le joueur.
+class LevelBonusManager {
+    
+    var temps: Int = 1
+    var drapeau: Int = 1
+    var bombe: Int = 1
+    var vie: Int = 1
+    var verification: Int = 1
+    
+    /**
+     Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
+     */
+    @discardableResult func getCurrentValue() -> (Int,Int,Int,Int,Int)
+    {
+        var toReturn: (Int,Int,Int,Int,Int) = (0,0,0,0,0)
+        
+        // 1
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return toReturn }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : creéer la requete
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "LevelBonus") // tous les objets qui ont une entité Bonus
+        
+        // 3 : récuperer toutes les valeurs déjà sauvegardées, sous formes d'objets
+        var allBonus: [NSManagedObject] = []
+        
+        do {
+            allBonus = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        // 4 : il faut supprimer toutes les anciennes sauvegardes.
+        fetchRequest.includesPropertyValues = false
+        do {
+            let items = try managedContext.fetch(fetchRequest)
+            for item in items {
+                managedContext.delete(item)
+            }
+        } catch let error as NSError {
+            print("il y a une erreure pour supprimer les sauvegardes \(error), \(error.userInfo)")
+        }
+        
+        // 5 - Retourner les valeurs courantes qui sont dans la dernière entitée sauvegardée
+        print("nombre d'element: \(allBonus.count)")
+        guard let bonus1 = allBonus.last?.value(forKey: "temps") as? Int else { return toReturn } // ...
+        guard let bonus2 = allBonus.last?.value(forKey: "drapeau") as? Int else { return toReturn } // ...
+        guard let bonus3 = allBonus.last?.value(forKey: "bombe") as? Int else { return toReturn } // ...
+        guard let bonus4 = allBonus.last?.value(forKey: "vie") as? Int else { return toReturn } // avant derniere ...
+        guard let bonus5 = allBonus.last?.value(forKey: "verification") as? Int else { return toReturn } // dernière valeure sauvegardée
+        
+        toReturn = (bonus1,bonus2,bonus3,bonus4,bonus5)
+        
+        updateBonusQuantity(temps: bonus1, drapeau: bonus2, bombe: bonus3, vie: bonus4, verification: bonus5)
+        
+        return toReturn
+    }
+    
+    func save() {
+        
+        // 1 :
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : create the instance to be saved
+        let entity = NSEntityDescription.entity(forEntityName: "LevelBonus", in: managedContext)!
+        
+        let option = NSManagedObject(entity: entity, insertInto: managedContext)
+        option.setValue(self.temps, forKeyPath: "temps")
+        option.setValue(self.drapeau, forKeyPath: "drapeau")
+        option.setValue(self.bombe, forKeyPath: "bombe")
+        option.setValue(self.vie, forKeyPath: "vie")
+        option.setValue(self.verification, forKeyPath: "verification")
+        
+        
+        // 3 : save the instance that have been created
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    func addTemps(amount: Int) {
+        updateBonusQuantity(temps: temps+amount, drapeau: drapeau, bombe: bombe, vie: vie, verification: verification)
+    }
+    
+    func addDrapeau(amount: Int) {
+        updateBonusQuantity(temps: temps, drapeau: drapeau+amount, bombe: bombe, vie: vie, verification: verification)
+    }
+    
+    func addBomb(amount: Int) {
+        updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe+amount, vie: vie, verification: verification)
+    }
+    
+    func addVie(amount: Int) {
+        updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe, vie: vie+amount, verification: verification)
+    }
+    
+    func addVerification(amount: Int) {
+        updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe, vie: vie, verification: verification+amount)
+    }
+    
+    func updateBonusQuantity(temps: Int, drapeau: Int, bombe: Int, vie: Int, verification: Int) {
+        self.temps = temps
+        self.drapeau = drapeau
+        self.bombe = bombe
+        self.vie = vie
+        self.verification = verification
+        
+        self.save()
+    }
+    
+    func displayCurrentBonusLevel() {
+        print("Bonus du joueur")
+        print("temps: \(self.temps)")
+        print("drapeau: \(self.drapeau)")
+        print("bombe: \(self.bombe)")
+        print("vie: \(self.vie)")
+        print("verif.: \(self.verification)")
+    }
+    
+    func initializeLevels() {
+        self.temps = 0
+        self.drapeau = 0
+        self.bombe = 0
+        self.vie = 0
+        self.verification = 0
+        
+        self.save()
+    }
+    
+    /// Cette fonction retourne le nombre de bonus que le joueur possede à partir de l'indice du bonus (utile dans la boutique).
+    func giveTheLevelOfBonus(forIndex index: Int) -> Int {
+        var tmp: Int = 1
+        
+        switch index {
+        case 0:
+            tmp = temps
+        case 1:
+            tmp = drapeau
+        case 2:
+            tmp = bombe
+        case 3:
+            tmp = vie
+        case 4:
+            tmp = verification
+        default:
+            break
+        }
+        
+        return tmp
+    }
+    
+}
+

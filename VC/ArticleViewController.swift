@@ -45,6 +45,7 @@ class ArticleViewController: UIViewController {
     }
     
     func updateView() {
+        
         // label et prix de la case 
         let currentBonus = allBonus[articleIndex]
         descriptionLabel.text = currentBonus.descriptions[currentBonus.niveau]
