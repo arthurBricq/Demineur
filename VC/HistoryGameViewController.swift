@@ -41,6 +41,8 @@ class HistoryGameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        transitioningDelegate = nil
+        
         // instauration du timer
         if !game.isTimerAllowed {
             clockView.isHidden = true

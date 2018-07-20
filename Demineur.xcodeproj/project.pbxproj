@@ -12,6 +12,7 @@
 		4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F2120FE07A300EB5978 /* PieceView.swift */; };
 		4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7725C420FD088C00B24FBE /* HautParleur.swift */; };
 		4E88CAC220FF38B100DAD9DB /* BonusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC120FF38B100DAD9DB /* BonusView.swift */; };
+		4E88CAC42101338F00DAD9DB /* TransitionToGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */; };
 		4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31820F91858000A9BCB /* DataModel.swift */; };
 		4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */; };
 		4EA2893B20FD005C0069692F /* MenuPauseIconsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2893A20FD005C0069692F /* MenuPauseIconsButtons.swift */; };
@@ -63,6 +64,7 @@
 		4E3A4F2120FE07A300EB5978 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
 		4E7725C420FD088C00B24FBE /* HautParleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HautParleur.swift; sourceTree = "<group>"; };
 		4E88CAC120FF38B100DAD9DB /* BonusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusView.swift; sourceTree = "<group>"; };
+		4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToGameView.swift; sourceTree = "<group>"; };
 		4E8FC31820F91858000A9BCB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demineur.xcdatamodel; sourceTree = "<group>"; };
 		4EA2893A20FD005C0069692F /* MenuPauseIconsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPauseIconsButtons.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */,
+				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
 			);
 			path = CustomTransitions;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E88CAC42101338F00DAD9DB /* TransitionToGameView.swift in Sources */,
 				4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */,
 				4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */,
 				9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */,

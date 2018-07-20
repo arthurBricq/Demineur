@@ -75,6 +75,8 @@ class HistoryPresentationViewController: UIViewController  {
         case is HistoryGameViewController:
             let dest = segue.destination as! HistoryGameViewController
             dest.game = oneGameForGivenIndex(index: selectedGameIndex)
+            dest.transitioningDelegate = self
+            
         default:
             break
         }
@@ -160,4 +162,30 @@ extension HistoryPresentationViewController: RoundButtonsCanCallVC {
         self.performSegue(withIdentifier: "StartingGame", sender: nil)
     }
     
+}
+
+
+// Animations of transition
+extension HistoryPresentationViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if presented is HistoryGameViewController {
+            let transition = TransitionToGameView()
+            transition.animationDuration = 1.5
+            return transition
+        }
+        
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if dismissed is HistoryGameViewController {
+            let transition = TransitionToGameView()
+            transition.animationDuration = 1.5
+            return transition
+        }
+        
+        return nil
+    }
 }
