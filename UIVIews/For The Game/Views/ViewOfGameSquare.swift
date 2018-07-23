@@ -146,15 +146,11 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         if marking { // hold tapping --> have to mark or unmark the card
             
             if !isTheCaseMarked(i: i, j: j) {
-                if numberOfFlags > 0 {
-                    markACaseAt(i: i, j: j)
-                    numberOfFlags = numberOfFlags - 1
-                }
+                markACaseAt(i: i, j: j)
             } else {
                 unmarkACaseAt(i: i, j: j)
             }
             
-            //delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
             
         } else { // Quick tapping --> have to open the case
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
@@ -202,7 +198,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         let k: Int = i*m + j // indice
         if self.subviews[k] is SquareCase {
             let tmp = self.subviews[k] as! SquareCase
-            if tmp.caseState == .marked {
+            if tmp.caseState == .marked || tmp.caseState == .markedByComputer {
                 return true
             } else {
                 return false
@@ -273,14 +269,24 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         
     }
     
-    func markACaseAt(i: Int, j: Int) {
+    func markACaseAt(i: Int, j: Int, byComputer: Bool = false) {
+        
+        if numberOfFlags > 0 {
+            numberOfFlags = numberOfFlags - 1
+        } else {
+            return
+        }
         
         print("marquage de la case \(i),\(j)")
         
         let k: Int = i*m + j // indice
         if self.subviews[k] is SquareCase {
             let tmp = self.subviews[k] as! SquareCase
-            tmp.caseState = .marked
+            if byComputer {
+                tmp.caseState = .markedByComputer
+            } else {
+                tmp.caseState = .marked
+            }
         }
         
     }
@@ -343,6 +349,51 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
             let buttonTapped = self.subviews[buttonTappedId] as! SquareCase
             buttonTapped.animateGameOver(win: win, bombTapped: bombTapped)
         }
+    }
+    
+    
+    /**
+ Cette fonction est appelé pour le bonus 'bombe' afin de retourner une bombe aléatoire
+    */
+    func markARandomBomb() {
+        
+        // une chance sur deux de partir du haut
+        let cas = random(2) + 1
+        let n = gameState.count
+        for i in 0..<n {
+            let m = gameState[i].count
+            for j in 0..<m {
+                switch cas {
+                case 1:
+                    if isCaseABomb(i: i, j: j) {
+                        if !isTheCaseMarked(i: i, j: j) {
+                            markACaseAt(i: i, j: j, byComputer: true)
+                            if isTheGameFinished() { // end of game
+                                delegate!.gameOver(win: true)
+                                returnAllTheCases(win: true)
+                            }
+                            return
+                        }
+                    }
+                case 2:
+                    if isCaseABomb(i: n-i-1, j: m-j-1) {
+                        if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
+                            markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
+                            if isTheGameFinished() { // end of game
+                                delegate!.gameOver(win: true)
+                                returnAllTheCases(win: true)
+                            }
+                            return
+                        }
+                    }
+                default:
+                    break
+                }
+            }
+        }
+        
+        
+        
     }
     
 }

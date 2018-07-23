@@ -138,10 +138,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         if marking { // hold tapping --> have to mark or unmark the card
             
             if !isTheCaseMarked(i: i, j: j) {
-                if numberOfFlags > 0 {
-                    markACaseAt(i: i, j: j)
-                    numberOfFlags = numberOfFlags - 1
-                }
+                markACaseAt(i: i, j: j)
             } else {
                 unmarkACaseAt(i: i, j: j)
             }
@@ -189,7 +186,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         let k: Int = i*m + j // indice
         if self.subviews[k] is TriangularCase {
             let tmp = self.subviews[k] as! TriangularCase
-            if tmp.caseState == .marked {
+            if tmp.caseState == .marked || tmp.caseState == .markedByComputer {
                 return true
             } else {
                 return false
@@ -255,12 +252,24 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         }
     }
     
-    func markACaseAt(i: Int, j: Int) {
+    func markACaseAt(i: Int, j: Int, byComputer: Bool = false) {
+        
+        if numberOfFlags > 0 {
+            numberOfFlags = numberOfFlags - 1
+        } else {
+            return
+        }
+        
         print("marquage de la case \(i),\(j)")
         let k: Int = i*m + j // indice
         if self.subviews[k] is TriangularCase {
             let tmp = self.subviews[k] as! TriangularCase
-            tmp.caseState = .marked
+            
+            if byComputer {
+                tmp.caseState = .markedByComputer
+            } else {
+                tmp.caseState = .marked
+            }
         }
         
     }
@@ -303,6 +312,45 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
                 button.gameState = gameState
             }
         }
+    }
+    
+    func markARandomBomb() {
+        // une chance sur deux de partir du haut
+        let cas = random(2) + 1
+        
+        let n = gameState.count
+        for i in 0..<n {
+            let m = gameState[i].count
+            
+            for j in 0..<m {
+                
+                switch cas {
+                case 1:
+                    if isCaseABomb(i: i, j: j) {
+                        if !isTheCaseMarked(i: i, j: j) {
+                            
+                            /////// ATTENTION A CHANGER //////
+                            markACaseAt(i: i, j: j, byComputer: true)
+                            return
+                            
+                        }
+                    }
+                case 2:
+                    if isCaseABomb(i: n-i-1, j: m-j-1) {
+                        if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
+                            
+                            /////// ATTENTION A CHANGER ///////
+                            markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
+                            return
+                            
+                        }
+                    }
+                default:
+                    break
+                }
+            }
+        }
+        
     }
     
     func returnAllTheCases(win: Bool = false) {

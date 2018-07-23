@@ -36,12 +36,45 @@ class TriangularCase: UIButton {
     
     var caseState: CaseState = CaseState.empty {
         didSet {
+            
             setNeedsDisplay()
+            
             if option1 {
                 if caseState == .open {
                     option1Timer.start(limit: TimeInterval(option1Time), id: "ReturnCase")
                 }
             }
+            
+            if caseState == .marked {
+                let buttonType = triangularButtonIsOfType(i: i, j: j)
+                let verticalDisplacement: CGFloat = (buttonType == 1) ? -bounds.width/7.5 : bounds.width/7.5 // décaler les vues.
+                let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2 + verticalDisplacement), r: 0.16*bounds.width, color: UIColor.orange)
+                addSubview(flag)
+                Vibrate().vibrate(style: .medium)
+                marked = true
+            }
+            
+            if caseState == .markedByComputer {
+                let buttonType = triangularButtonIsOfType(i: i, j: j)
+                let verticalDisplacement: CGFloat = (buttonType == 1) ? -bounds.width/7.5 : bounds.width/7.5 // décaler les vues.
+                let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2 + verticalDisplacement), r: 0.16*bounds.width, color: colorForRGB(r: 60, g: 160, b: 100))
+                addSubview(flag)
+                Vibrate().vibrate(style: .medium)
+                marked = true
+            }
+            
+            if caseState == .empty {
+                
+                for subview in subviews {
+                    if subview is FlagView {
+                        let flag = subview as! FlagView
+                        flag.removeFromSuperview()
+                        Vibrate().vibrate(style: .light)
+                        marked = false
+                    }
+                }
+            }
+            
         }
     }
     
@@ -91,7 +124,7 @@ class TriangularCase: UIButton {
         let verticalDisplacement: CGFloat = (buttonType == 1) ? -a/7.5 : +a/7.5 // décaler les vues.
         switch caseState {
             
-        case .empty, .marked: // Lorsque la case n'est pas encore retourée.
+        case .empty, .marked, .markedByComputer: // Lorsque la case n'est pas encore retourée.
             // Remplir le background
             emptyColor.setFill()
             contourPath.fill()
@@ -329,24 +362,7 @@ extension TriangularCase: LimitedTimerProtocol {
             
             superViewDelegate?.buttonHaveBeenTapped(i: i, j: j, marking: true)
             
-            if caseState == .marked {
-                let buttonType = triangularButtonIsOfType(i: i, j: j)
-                let verticalDisplacement: CGFloat = (buttonType == 1) ? -bounds.width/7.5 : bounds.width/7.5 // décaler les vues.
-                let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2 + verticalDisplacement), r: 0.16*bounds.width, color: UIColor.orange)
-                addSubview(flag)
-                Vibrate().vibrate(style: .medium)
-                marked = true
-            } else if caseState == .empty {
-                
-                for subview in subviews {
-                    if subview is FlagView {
-                        let flag = subview as! FlagView
-                        flag.removeFromSuperview()
-                        Vibrate().vibrate(style: .light)
-                        marked = false
-                    }
-                }
-            }
+            
             
             markingTimer.stop()
             isUserInteractionEnabled = false

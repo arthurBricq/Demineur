@@ -148,10 +148,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
             if isACaseOpen(i: i, j: j) { return }
             
             if !isTheCaseMarked(i: i, j: j) {
-                if numberOfFlags > 0 {
-                    markACase(i: i, j: j)
-                    numberOfFlags = numberOfFlags - 1
-                }
+                markACase(i: i, j: j)
             } else {
                 unmarkACase(i: i, j: j)
             }
@@ -181,7 +178,7 @@ extension ViewOfGame_Hex {
         let k = i*m + j - delta
         if self.subviews[k] is HexCase {
             let button = self.subviews[k] as! HexCase
-            if button.caseState == .marked {
+            if button.caseState == .marked || button.caseState == .markedByComputer {
                 toReturn = true
             }
         }
@@ -231,12 +228,24 @@ extension ViewOfGame_Hex {
         return gameState[i][j] == -1
     }
     
-    func markACase(i: Int,j: Int) {
+    func markACase(i: Int,j: Int, byComputer: Bool = false) {
+        
+        if numberOfFlags > 0 {
+            numberOfFlags = numberOfFlags - 1
+        } else {
+            return
+        }
+        
         let delta: Int = (i%2==0) ? i/2 : (i-1)/2
         let k = i*m + j - delta
         if self.subviews[k] is HexCase {
             let button = self.subviews[k] as! HexCase
-            button.caseState = .marked
+            
+            if byComputer {
+                button.caseState = .markedByComputer
+            } else {
+                button.caseState = .marked
+            }
         }
     }
     
@@ -338,6 +347,47 @@ extension ViewOfGame_Hex {
             }
         }
     }
+    
+    
+    func markARandomBomb() {
+        // une chance sur deux de partir du haut
+        let cas = random(2) + 1
+        
+        let n = gameState.count
+        for i in 0..<n {
+            let m = gameState[i].count
+            
+            for j in 0..<m {
+                
+                switch cas {
+                case 1:
+                    if isCaseABomb(i: i, j: j) {
+                        if !isTheCaseMarked(i: i, j: j) {
+                            
+                            /////// ATTENTION A CHANGER //////
+                            markACase(i: i, j: j, byComputer: true)
+                            return
+                            
+                        }
+                    }
+                case 2:
+                    if isCaseABomb(i: n-i-1, j: m-j-1) {
+                        if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
+                            
+                            /////// ATTENTION A CHANGER ///////
+                            markACase(i: n-i-1, j: m-j-1, byComputer: true)
+                            return
+                            
+                        }
+                    }
+                default:
+                    break
+                }
+            }
+        }
+        
+    }
+    
     
 }
 

@@ -428,6 +428,7 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
         
         if bonus.temps > 0 {
             bonus.addTemps(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
@@ -441,6 +442,7 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
         
         if bonus.drapeau > 0 {
             bonus.addDrapeau(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
@@ -458,13 +460,44 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
         
     }
     
+    
+    
+    //// A FAIRE ////
     func bombeTapped() { // il faut marquer des bombes
+        
+        print("e")
+        
         if bonus.bombe > 0 {
             bonus.addBomb(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
         
+        
+        
+        
+        switch levelOfBonus.bombe {
+        case 0:
+            // 50 % de chance
+            let tmp = random(100)
+            if tmp < 50 {
+                // return
+            }
+            // marquer une bombe non marquée
+            
+            if game.gameType == .hexagonal {
+                viewOfGameHex?.markARandomBomb()
+            } else if game.gameType == .square {
+                viewOfGameSquare?.markARandomBomb()
+            } else if game.gameType == .triangular {
+                viewOfGameTriangular?.markARandomBomb()
+            }
+            
+            
+        default:
+            break
+        }
         
         
         
@@ -473,16 +506,19 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
     func vieTapped() { // il faut rajouter une vie
         if bonus.vie > 0 {
             bonus.addVie(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
-        
-        
     }
     
+    
+    
+    //// A FAIRE ////
     func verificationTapped() { // il faut verifier les drapeaux posée
         if bonus.verification > 0 {
             bonus.addVerification(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }

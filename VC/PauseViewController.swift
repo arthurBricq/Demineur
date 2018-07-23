@@ -30,12 +30,15 @@ class PauseViewController: UIViewController {
     @IBOutlet weak var boutiqueLabel: UILabel!
     @IBOutlet weak var checkView: UIView!
     @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var lifeLabel: UILabel!
+    
     
     /// FUNCTIONS
     
     func viewController(forIndex index: Int) -> UIViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
         vc.articleIndex = index
+        vc.pauseVC = self
         return vc
     }
     
@@ -56,7 +59,7 @@ class PauseViewController: UIViewController {
         
         var darkBlur = UIBlurEffect()
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light)//prominent,regular,extraLight, light, dark
+            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
             darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
         }
@@ -66,23 +69,36 @@ class PauseViewController: UIViewController {
         view.insertSubview(blurView, at: 0)
         
         pageControl.isUserInteractionEnabled = false
+        pageControl.currentPage = options.indexOfArticle
+        
         updateMoneyDisplay()
+        updateLivesDisplay()
         
         
         }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "pageSegue", let controller = segue.destination as? UIPageViewController {
             controller.delegate = self
             controller.dataSource = self
-            controller.setViewControllers([self.viewController(forIndex: 0)], direction: .forward, animated: false, completion: nil)
+            controller.setViewControllers([self.viewController(forIndex: options.indexOfArticle)], direction: .forward, animated: false, completion: nil)
         }
         
     }
     
     func updateMoneyDisplay() {
         moneyLabel.text = String(money.currentAmountOfMoney)
+    }
+    
+    func updateLivesDisplay() {
+        lifeLabel.text = String(bonus.vie)
     }
     
     
@@ -106,6 +122,12 @@ class PauseViewController: UIViewController {
                 triangularView.option3Timer.play()
             }
             
+            
+            
+            
+            ////// A FAIRE POUR LE MODE INFINI APRES !!!!!!!!!! /////////
+
+            
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()
@@ -117,6 +139,11 @@ class PauseViewController: UIViewController {
             } else if gameViewController.game.gameType == .triangular {
                 gameViewController.viewOfGameTriangular?.option3Timer.play()
             }
+            
+            
+            gameViewController.bonusChoiceView?.updateTheNumberLabels()
+            
+            
             
         }
         dismiss(animated: true, completion: nil)
@@ -208,7 +235,9 @@ extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControlle
         }
         let index = vc.articleIndex
         
+        options.indexOfArticle = index
         pageControl.currentPage = index
+        
     }
     
 }

@@ -40,11 +40,38 @@ class SquareCase: UIButton {
     // Pour l'affichage d'un numero
     var caseState = CaseState.empty {
         didSet {
+            
             if option1 {
                 if caseState == .open {
                     option1Timer.start(limit: TimeInterval(option1Time), id: "ReturnCase")
                 }
             }
+            
+            if caseState == .marked {
+                let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: UIColor.orange)
+                addSubview(flag)
+                Vibrate().vibrate(style: .medium)
+                marked = true
+            }
+            
+            if caseState == .markedByComputer {
+                let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: colorForRGB(r: 60, g: 160, b: 100))
+                addSubview(flag)
+                Vibrate().vibrate(style: .medium)
+                marked = true
+            }
+            
+            if caseState == .empty {
+                for subview in subviews {
+                    if subview is FlagView {
+                        let flag = subview as! FlagView
+                        flag.removeFromSuperview()
+                        Vibrate().vibrate(style: .light)
+                        marked = false
+                    }
+                }
+            }
+            
             setNeedsDisplay()
         }
     }
@@ -107,7 +134,7 @@ class SquareCase: UIButton {
         // *********** DESSIN DE LA CASE *************** //
         switch caseState {
             
-        case .empty, .marked:
+        case .empty, .marked, .markedByComputer:
             emptyColor.setFill()
             let path = UIBezierPath(rect: rect)
             path.fill()
@@ -234,6 +261,7 @@ class SquareCase: UIButton {
         if caseState == .open { return }
         
         markingTimer.delegate = self
+        
         markingTimer.start(limit: 0.3, id: "Marking")
         
     }
@@ -264,6 +292,9 @@ class SquareCase: UIButton {
         } else {
             isUserInteractionEnabled = true
         }
+        
+        
+        
     }
     
     /// Quand la partie se termine, gère les animations de la case.
@@ -355,21 +386,6 @@ extension SquareCase: LimitedTimerProtocol {
             
             superViewDelegate?.buttonHaveBeenTapped(i: i, j: j, marking: true)
             
-            if caseState == .marked {
-                let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: UIColor.orange)
-                addSubview(flag)
-                Vibrate().vibrate(style: .medium)
-                marked = true
-            } else if caseState == .empty {
-                for subview in subviews {
-                    if subview is FlagView {
-                        let flag = subview as! FlagView
-                        flag.removeFromSuperview()
-                        Vibrate().vibrate(style: .light)
-                        marked = false
-                    }
-                }
-            }
             
             markingTimer.stop()
             isUserInteractionEnabled = false

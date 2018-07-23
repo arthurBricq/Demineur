@@ -22,9 +22,9 @@ class BonusView: UIView {
         } else if index == 2 {
             BonusDraw.drawBonusBombe(frame: rect, resizing: .aspectFill)
         }  else if index == 3 {
-            BonusDraw.drawBonusVie(frame: rect, resizing: .aspectFill)
-        }  else if index == 4 {
             BonusDraw.drawBonusVerification(frame: rect, resizing: .aspectFill, width: 2)
+        }  else if index == 4 {
+            BonusDraw.drawBonusVie(frame: rect, resizing: .aspectFill)
         }
     }
     
@@ -47,9 +47,9 @@ class BonusView: UIView {
         } else if index == 2 {
             delegate!.bombeTapped()
         } else if index == 3 {
-            delegate!.vieTapped()
-        } else {
             delegate!.verificationTapped()
+        } else {
+            delegate!.vieTapped()
         }
         
         

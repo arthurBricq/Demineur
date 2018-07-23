@@ -108,11 +108,18 @@ class OptionsManager {
         }
     }
     
+    var indexOfArticle: Int = 0 {
+        didSet {
+            save()
+        }
+    }
+    
+    
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
      */
-    @discardableResult func getCurrentValue() -> Bool {
-        var toReturn: Bool = true
+    @discardableResult func getCurrentValue() -> (Bool,Int) {
+        var toReturn: (Bool,Int) = (true,0)
         
         // 1
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return toReturn }
@@ -142,12 +149,15 @@ class OptionsManager {
         }
         
         // 5 : retourner la valeur courante
-        guard let vibration = options.last?.value(forKey: "vibration") as? Bool else {
-            return toReturn
-        }
+        guard let option1 = options.last?.value(forKey: "vibration") as? Bool else { return toReturn }
+        guard let option2 = options.last?.value(forKey: "indexOfArticle") as? Int else { return toReturn }
+
+    
+        toReturn = (option1,option2)
+        self.areVibrationsOn = option1
+        self.indexOfArticle = option2
         
-        toReturn = vibration
-        self.areVibrationsOn = toReturn
+        
         return toReturn
     }
     
@@ -161,7 +171,10 @@ class OptionsManager {
         // 2 : create the instance to be saved
         let entity = NSEntityDescription.entity(forEntityName: "Options", in: managedContext)!
         let options = NSManagedObject(entity: entity, insertInto: managedContext)
+        
         options.setValue(self.areVibrationsOn, forKeyPath: "vibration")
+        options.setValue(self.indexOfArticle, forKey: "indexOfArticle")
+        
         
         // 3 : save the instance that have been created
         do {
@@ -170,18 +183,25 @@ class OptionsManager {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
+    
+    func displayOptions() {
+        print("      Parametres du jeu")
+        print("vibrations: \(areVibrationsOn)")
+        print("index de l'article: \(indexOfArticle)")
+    }
 }
 
 
 /// Pour sauvegarder les bonus, il faut utiliser les fonctions de cette classe afin d'ajouter ou de soustraire des bonus pour le joueur.
+/// ATTENTION IL FAUT MODIFIER LES VALEURS DES BONUS AVEC LES FONCTIONS ADD ///
 class BonusManager {
     
     var temps: Int = 1
     var drapeau: Int = 1
     var bombe: Int = 1
-    var vie: Int = 1
     var verification: Int = 1
-    
+    var vie: Int = 1
+
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
      */
@@ -214,7 +234,7 @@ class BonusManager {
                 managedContext.delete(item)
             }
         } catch let error as NSError {
-            print("il y a une erreure pour supprimer les sauvegardes \(error), \(error.userInfo)")
+            print("il y a une erreur pour supprimer les sauvegardes : \(error), \(error.userInfo)")
         }
         
         // 5 - Retourner les valeurs courantes
@@ -222,12 +242,12 @@ class BonusManager {
         guard let bonus1 = allBonus.last?.value(forKey: "temps") as? Int else { return toReturn } // ...
         guard let bonus2 = allBonus.last?.value(forKey: "drapeau") as? Int else { return toReturn } // ...
         guard let bonus3 = allBonus.last?.value(forKey: "bombe") as? Int else { return toReturn } // ...
-        guard let bonus4 = allBonus.last?.value(forKey: "vie") as? Int else { return toReturn } // avant derniere ...
-        guard let bonus5 = allBonus.last?.value(forKey: "verification") as? Int else { return toReturn } // dernière valeure sauvegardée
+        guard let bonus4 = allBonus.last?.value(forKey: "verification") as? Int else { return toReturn } // avant derniere ...
+        guard let bonus5 = allBonus.last?.value(forKey: "vie") as? Int else { return toReturn } // dernière valeure sauvegardée
         
         toReturn = (bonus1,bonus2,bonus3,bonus4,bonus5)
 
-        updateBonusQuantity(temps: bonus1, drapeau: bonus2, bombe: bonus3, vie: bonus4, verification: bonus5)
+        updateBonusQuantity(temps: bonus1, drapeau: bonus2, bombe: bonus3, vie: bonus5, verification: bonus4)
         
         return toReturn
     }
@@ -241,6 +261,7 @@ class BonusManager {
         let entity = NSEntityDescription.entity(forEntityName: "Bonus", in: managedContext)!
         
         let option = NSManagedObject(entity: entity, insertInto: managedContext)
+        
         option.setValue(self.temps, forKeyPath: "temps")
         option.setValue(self.drapeau, forKeyPath: "drapeau")
         option.setValue(self.bombe, forKeyPath: "bombe")
@@ -277,6 +298,7 @@ class BonusManager {
         updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe, vie: vie, verification: verification+amount)
     }
     
+    /// ATTENTION L'ORDRE N'EST PAS LE MEME ///
     func updateBonusQuantity(temps: Int, drapeau: Int, bombe: Int, vie: Int, verification: Int) {
         self.temps = temps
         self.drapeau = drapeau
@@ -292,8 +314,8 @@ class BonusManager {
         print("temps: \(self.temps)")
         print("drapeau: \(self.drapeau)")
         print("bombe: \(self.bombe)")
-        print("vie: \(self.vie)")
         print("verif.: \(self.verification)")
+        print("vie: \(self.vie)")
     }
     
     
@@ -309,9 +331,9 @@ class BonusManager {
         case 2:
             tmp = bombe
         case 3:
-            tmp = vie
-        case 4:
             tmp = verification
+        case 4:
+            tmp = vie
         default:
             break
         }
@@ -466,9 +488,9 @@ class LevelBonusManager {
         case 2:
             tmp = bombe
         case 3:
-            tmp = vie
-        case 4:
             tmp = verification
+        case 4:
+            tmp = vie
         default:
             break
         }

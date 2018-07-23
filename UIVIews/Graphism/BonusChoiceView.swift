@@ -39,16 +39,16 @@ class BonusChoiceView: UIView {
         let fy = self.bounds.height / 100
         let y0: CGFloat = 2
         let c = 85*fy - 2*y0 // cotes du carre
-        let esp: CGFloat = 30 // espacement entre les boutons
+        let esp: CGFloat = 40 // espacement entre les boutons
         
-        scrollView!.contentSize = CGSize(width: 5*(c+esp) - esp/2 + 30 , height: 85*fy )
+        scrollView!.contentSize = CGSize(width: 4*(c+esp) - esp/2 + 30 , height: 85*fy )
 
         for i in (scrollView?.subviews)! {
             i.removeFromSuperview()
         }
         
         
-        for i in 0..<5 {
+        for i in 0..<4 {
             
             let v = BonusView() // v comme view
             v.frame = CGRect(x: 10 + CGFloat(i)*(c+esp), y: y0, width: c, height: c)
@@ -61,14 +61,43 @@ class BonusChoiceView: UIView {
             r.backgroundColor = UIColor.clear
             r.textColor = bonusChoiceColor.backgroundColorRuban
             r.font = UIFont(name: "PingFangSC-Semibold", size: 20)
-            r.frame = CGRect(x: c+4, y: c-d/2-10, width: d, height: d)
+            r.layer.zPosition = 10
+            r.frame = CGRect(x: c+4, y: c-d/2-10, width: d+10, height: d)
             r.text = String(bonus.giveTheNumberOfBonus(forIndex: i))
+            r.tag = i
             
             v.addSubview(r)
             scrollView!.addSubview(v)
             
         }
+    
+        updateTheNumberLabels()
         
+    }
+    
+    
+    /**
+     Cette fonction permet de changer le nombre de bonus à l'ecran, elle fonctionne grâce à la propriété 'tag' qui est ajouté aux label par la fonction 'populateScrollView()'
+    */
+    func updateTheNumberLabels() {
+        for tmp in scrollView!.subviews {
+            if tmp is BonusView {
+                let view = tmp as! BonusView
+                guard let label = view.subviews[0] as? UILabel else { return } // il n'y a qu'un seul subview, il s'agit du label
+                
+                let number = bonus.giveTheNumberOfBonus(forIndex: label.tag)
+                
+                if number == 0 {
+                    view.alpha = 0.5
+                    view.isUserInteractionEnabled = false
+                } else {
+                    view.alpha = 1.0
+                    view.isUserInteractionEnabled = true
+                }
+                
+                label.text = String(number)
+            }
+        }
     }
     
     @objc public dynamic var progress: CGFloat = 1 {

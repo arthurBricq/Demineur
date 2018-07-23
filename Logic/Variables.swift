@@ -16,13 +16,13 @@ enum GameType {
 }
 
 enum CaseState {
-    case empty
-    case open
-    case marked
-    case none
-    case blocked
+    case empty // quand il ne s'est rien passé
+    case open // quand le joueur a ouvert la case
+    case marked // quand le joueur a pose un drapeau
+    case markedByComputer // quand l'ordinateur a pose un drapeau
+    case none // quand il n'y a pas de cases
+    case blocked // quand la case est temporairemetn bloque
 }
-
 
 class Section {
     var n: Int = 8
@@ -222,6 +222,9 @@ struct BonusDescription {
     let prixAmelioration: [Int]
 }
 
+
+
+
 var allBonus: [BonusDescription] = [
     
     BonusDescription(name: "Temps", niveau: 0, descriptions: ["Récupérez 15 secondes", "Récupérez 30 secondes", "Récupérez 45 secondes", "Récupérez 1 minute"], prixAchat: 750, prixAmelioration: [8000, 16000, 30000, 40000] ),
@@ -230,9 +233,9 @@ var allBonus: [BonusDescription] = [
     
     BonusDescription(name: "Bombe", niveau: 0, descriptions: ["Trouver une bombe avec une chance de 50%.","Trouver une bombe !","Trouver 2 bombes avec une chance de 50%"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
     
-    BonusDescription(name: "Vie", niveau: 0, descriptions: ["Obtenez une seconde chance", "Vous surviverez à deux bombes", "Trois échecs ne vous abatteront pas !"], prixAchat: 2500, prixAmelioration: [20000, 50000] ),
+    BonusDescription(name: "Verification", niveau: 0 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
     
-    BonusDescription(name: "Verification", niveau: 0 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] )
+    BonusDescription(name: "Vie", niveau: 0, descriptions: ["Obtenez une seconde chance", "Vous surviverez à deux bombes", "Trois échecs ne vous abatteront pas !"], prixAchat: 2500, prixAmelioration: [20000, 50000] )
     
 ]
 

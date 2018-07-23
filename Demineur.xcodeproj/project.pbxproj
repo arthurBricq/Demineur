@@ -10,6 +10,7 @@
 		4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */; };
 		4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */; };
 		4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F2120FE07A300EB5978 /* PieceView.swift */; };
+		4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E18CD2104F5C100B0AB30 /* HeartView.swift */; };
 		4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7725C420FD088C00B24FBE /* HautParleur.swift */; };
 		4E88CAC220FF38B100DAD9DB /* BonusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC120FF38B100DAD9DB /* BonusView.swift */; };
 		4E88CAC42101338F00DAD9DB /* TransitionToGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */; };
@@ -62,6 +63,7 @@
 		4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerButton.swift; sourceTree = "<group>"; };
 		4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchatBoutiqueBouton.swift; sourceTree = "<group>"; };
 		4E3A4F2120FE07A300EB5978 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
+		4E4E18CD2104F5C100B0AB30 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		4E7725C420FD088C00B24FBE /* HautParleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HautParleur.swift; sourceTree = "<group>"; };
 		4E88CAC120FF38B100DAD9DB /* BonusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusView.swift; sourceTree = "<group>"; };
 		4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToGameView.swift; sourceTree = "<group>"; };
@@ -231,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				4EA7FD8320F8960700740480 /* HexCase.swift */,
-				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
 				4EA7FD8720F8962B00740480 /* SquareCase.swift */,
 				4EA7FD8920F8963E00740480 /* TriangularCase.swift */,
 			);
@@ -263,6 +264,8 @@
 				4E88CAC120FF38B100DAD9DB /* BonusView.swift */,
 				4E3A4F2120FE07A300EB5978 /* PieceView.swift */,
 				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
+				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
+				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				4EA7FD8620F8961C00740480 /* RayureDrawing.swift in Sources */,
 				4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */,
 				4EA7FD9E20F8971000740480 /* LineView.swift in Sources */,
+				4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */,
 				4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */,
 				9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */,
 				4EA7FD9A20F896EB00740480 /* FlagViewDisplay.swift in Sources */,

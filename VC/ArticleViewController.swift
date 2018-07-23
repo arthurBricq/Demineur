@@ -20,18 +20,52 @@ class ArticleViewController: UIViewController {
     
     var articleIndex: Int = 1
     
-    var boutiquePopulation: [(description: String,prix: String)] = [
-        ("10 secondes en plus pour la partie.","1000"),
-        ("1 drapeaux en plus pour la partie.","1000"),
-        ("Vérifiez vos drapeaux déjà posé.","2000"),
-        ("Gagnez une vie supplémentaire.","2000")
-    ]
-    
     /// OUTLETS
+    
     @IBOutlet weak var achatButton: AchatBoutiqueBouton!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var containerView: UIView! // c'est la vue à gauche
     @IBOutlet weak var indicateurNombreLabel: UILabel!
+    
+    var pauseVC: PauseViewController? 
+    
+    /// ACTIONS
+    
+    @IBAction func achatButtonTapped(_ sender: Any) {
+        
+        let prix = allBonus[articleIndex].prixAchat
+        
+        if money.currentAmountOfMoney > prix {
+            money.takeAwayMoney(amount: prix)
+            
+            switch articleIndex {
+            case 0:
+                bonus.addTemps(amount: 1)
+            case 1:
+                bonus.addDrapeau(amount: 1)
+            case 2:
+                bonus.addBomb(amount: 1)
+            case 3:
+                bonus.addVerification(amount: 1)
+            case 4:
+                bonus.addVie(amount: 1)
+            default:
+                break
+            }
+            
+        }
+        
+        pauseVC?.updateLivesDisplay()
+        pauseVC?.updateMoneyDisplay()
+        updateNumberOfElementDisplay()
+        
+    }
+    
+    
+    
+    
+    
+    /// FONCTIONS
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,26 +78,31 @@ class ArticleViewController: UIViewController {
         updateView()
     }
     
-    func updateView() {
-        
-        // label et prix de la case 
-        let currentBonus = allBonus[articleIndex]
-        descriptionLabel.text = currentBonus.descriptions[currentBonus.niveau]
-        achatButton.prix = String(currentBonus.prixAchat)
-        containerView.backgroundColor = UIColor.clear
-        
+    
+    func updateNumberOfElementDisplay() {
         let tmp = bonus.giveTheNumberOfBonus(forIndex: articleIndex)
         if tmp == 0 || tmp == 1 {
             indicateurNombreLabel.text = "\(tmp) restant"
         } else {
             indicateurNombreLabel.text = "\(tmp) restants"
         }
+    }
+    
+    func updateView() {
         
+        // label et prix de la case
+        let currentBonus = allBonus[articleIndex]
+        descriptionLabel.text = currentBonus.descriptions[currentBonus.niveau]
+        achatButton.prix = String(currentBonus.prixAchat)
+        containerView.backgroundColor = UIColor.clear
+        
+        updateNumberOfElementDisplay()
         
         // ajout de la vue avec le dessin
         let size = containerView.frame.size
         let bonusView = BonusView()
         bonusView.backgroundColor = UIColor.clear
+        bonusView.isUserInteractionEnabled = false
         bonusView.index = articleIndex
         bonusView.frame = CGRect(origin: CGPoint.zero, size: size)
         if articleIndex == 0 {

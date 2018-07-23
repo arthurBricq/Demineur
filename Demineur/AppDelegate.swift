@@ -23,8 +23,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         options.getCurrentValue() // on récupère les options
         bonus.getCurrentValue() // on récupère les bonus achetés.
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
-//        levelOfBonus.initializeLevels()
-        levelOfBonus.displayCurrentBonusLevel()
+
+        // bonus.addTemps(amount: 10)
+        // bonus.addDrapeau(amount: 10)
+        // bonus.addBomb(amount: 10)
+        // bonus.addVerification(amount: 10)
+        // levelOfBonus.initializeLevels()
+        
+        bonus.displayCurrentBonus()
+        
+        //money.addMoney(amount: 100000)
+        
+        options.displayOptions()
+        
         
         return true
     }
@@ -76,6 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
+                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
