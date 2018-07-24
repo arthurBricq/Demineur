@@ -24,16 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         bonus.getCurrentValue() // on récupère les bonus achetés.
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
 
-        // bonus.addTemps(amount: 10)
-        // bonus.addDrapeau(amount: 10)
-        // bonus.addBomb(amount: 10)
-        // bonus.addVerification(amount: 10)
-        // levelOfBonus.initializeLevels()
-        
-        bonus.displayCurrentBonus()
-        
-        //money.addMoney(amount: 100000)
-        
+//        bonus.addTemps(amount: 10)
+//        bonus.addDrapeau(amount: 10)
+//        bonus.addBomb(amount: 10)
+//        bonus.addVerification(amount: 10)
+//        levelOfBonus.initializeLevels()
+//
+//        bonus.displayCurrentBonus()
+//
+//        money.addMoney(amount: 300000)
+//
         options.displayOptions()
         
         

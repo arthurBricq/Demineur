@@ -65,7 +65,7 @@ class HistoryPresentationViewController: UIViewController  {
         } else if index == 9 {
             return OneGame(triangularButterfly4x7GameTime: 60, z: 4)
         } else {
-            return OneGame(squareYingYang15x15GameTime: 60, z: 10)
+            return OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 20, totalTime: 90)
         }
         
     }
