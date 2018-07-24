@@ -17,6 +17,8 @@
 		4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31820F91858000A9BCB /* DataModel.swift */; };
 		4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */; };
 		4EA2893B20FD005C0069692F /* MenuPauseIconsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2893A20FD005C0069692F /* MenuPauseIconsButtons.swift */; };
+		4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2FAD6210624090039846E /* WinLooseViewController.swift */; };
+		4EA2FAD9210624190039846E /* LooseByBombViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2FAD8210624190039846E /* LooseByBombViewController.swift */; };
 		4EA76A9920FB6E9C00E940C8 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */; };
 		4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5620F893E700740480 /* AppDelegate.swift */; };
 		4EA7FD5C20F893E700740480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA7FD5A20F893E700740480 /* Main.storyboard */; };
@@ -70,6 +72,8 @@
 		4E8FC31820F91858000A9BCB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demineur.xcdatamodel; sourceTree = "<group>"; };
 		4EA2893A20FD005C0069692F /* MenuPauseIconsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPauseIconsButtons.swift; sourceTree = "<group>"; };
+		4EA2FAD6210624090039846E /* WinLooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinLooseViewController.swift; sourceTree = "<group>"; };
+		4EA2FAD8210624190039846E /* LooseByBombViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LooseByBombViewController.swift; sourceTree = "<group>"; };
 		4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		4EA7FD5320F893E700740480 /* Demineur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demineur.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA7FD5620F893E700740480 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +129,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4EA2FAD5210623E70039846E /* WinLoose */ = {
+			isa = PBXGroup;
+			children = (
+				4EA2FAD6210624090039846E /* WinLooseViewController.swift */,
+				4EA2FAD8210624190039846E /* LooseByBombViewController.swift */,
+			);
+			path = WinLoose;
+			sourceTree = "<group>";
+		};
 		4EA7FD4A20F893E700740480 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +206,7 @@
 				4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */,
 				4EA7FD6D20F894F600740480 /* PauseViewController.swift */,
 				4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */,
+				4EA2FAD5210623E70039846E /* WinLoose */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -388,11 +402,13 @@
 				4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */,
 				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
+				4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */,
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
+				4EA2FAD9210624190039846E /* LooseByBombViewController.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,
 				4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */,

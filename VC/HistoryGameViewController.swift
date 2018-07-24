@@ -124,6 +124,7 @@ class HistoryGameViewController: UIViewController {
             
             let gameView = ViewOfGameSquare()
             let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
+            print("largeur de la vue: \(width)")
             let viewSize = CGSize(width: width, height: height)
             let origin = CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
             gameView.frame = CGRect(origin: origin, size: viewSize)
@@ -287,6 +288,8 @@ class HistoryGameViewController: UIViewController {
         self.present(pauseVC, animated: true, completion: nil)
     }
     
+    
+    
     func updateFlags(numberOfFlags: Int) {
         flagsLabel.text = numberOfFlags.description
         bombsLabel.text = game.z.description
@@ -344,9 +347,11 @@ extension HistoryGameViewController {
 // Quand la partie est terminée
 extension HistoryGameViewController: GameViewCanCallVC {
     
-    func gameOver(win: Bool) {
+    func gameOver(win: Bool, didTapABomb: Bool) {
         gameTimer.stop()
         // finish the game
+        
+        
         if game.gameType == .hexagonal {
             viewOfGameHex!.isUserInteractionEnabled = false
             viewOfGameHex!.option3Timer.stop()
@@ -363,6 +368,18 @@ extension HistoryGameViewController: GameViewCanCallVC {
         } else {
             Vibrate().vibrate(style: .heavy)
         }
+      
+        if didTapABomb {
+
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            vc.win = win
+            self.present(vc, animated: true, completion: nil)
+        }
+        
         
     }
     
@@ -386,7 +403,7 @@ extension HistoryGameViewController: CountingTimerProtocol {
             
             if pourcentage == 1 {
                 gameTimer.stop()
-                gameOver(win: false)
+                gameOver(win: false, didTapABomb: false)
                 openTheBombs()
                 
                 

@@ -40,6 +40,8 @@ class PauseViewController: UIViewController {
         vc.articleIndex = index
         vc.pauseVC = self
         return vc
+        
+        
     }
     
     override func viewDidLoad() {
@@ -122,11 +124,7 @@ class PauseViewController: UIViewController {
                 triangularView.option3Timer.play()
             }
             
-            
-            
-            
-            ////// A FAIRE POUR LE MODE INFINI APRES !!!!!!!!!! /////////
-
+            gameViewController.bonusChoiceView?.updateTheNumberLabels()
             
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController

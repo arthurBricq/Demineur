@@ -47,7 +47,7 @@ class HistoryPresentationViewController: UIViewController  {
      */
     func oneGameForGivenIndex(index: Int) -> OneGame {
         if index == 1 {
-            return OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 14, totalTime: 60)
+            return OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 4, totalTime: 60)
         } else if index == 2 {
             return OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 16, m: 10, z: 10, totalTime: 60)
         } else if index == 3 {

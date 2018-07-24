@@ -148,7 +148,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
                 if isCaseABomb(i: i, j: j) {
                     
                     returnAllTheCases()
-                    delegateVC?.gameOver(win: false) // End of game
+                    delegateVC?.gameOver(win: false, didTapABomb: true) // End of game
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     
                 } else {
@@ -158,7 +158,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         }
         
         if isTheGameFinished() { // end of game
-            delegateVC!.gameOver(win: true)
+            delegateVC!.gameOver(win: true, didTapABomb: false)
             returnAllTheCases(win: true)
         }
         
@@ -329,8 +329,13 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
                     if isCaseABomb(i: i, j: j) {
                         if !isTheCaseMarked(i: i, j: j) {
                             
-                            /////// ATTENTION A CHANGER //////
                             markACaseAt(i: i, j: j, byComputer: true)
+                            
+                            if isTheGameFinished() { // end of game
+                                delegateVC!.gameOver(win: true, didTapABomb: false)
+                                returnAllTheCases(win: true)
+                            }
+                            
                             return
                             
                         }
@@ -339,8 +344,13 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
                     if isCaseABomb(i: n-i-1, j: m-j-1) {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             
-                            /////// ATTENTION A CHANGER ///////
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
+                            
+                            if isTheGameFinished() { // end of game
+                                delegateVC!.gameOver(win: true, didTapABomb: false)
+                                returnAllTheCases(win: true)
+                            }
+                            
                             return
                             
                         }

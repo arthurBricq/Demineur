@@ -157,7 +157,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                 if isCaseABomb(i: i, j: j) {
                     
                     print("test")
-                    delegate?.gameOver(win: false)
+                    delegate?.gameOver(win: false, didTapABomb: true)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     returnAllTheCases()
                     
@@ -169,7 +169,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         
         if isTheGameFinished() { // end of game
             
-            delegate!.gameOver(win: true)
+            delegate!.gameOver(win: true, didTapABomb: false)
             returnAllTheCases(win: true)
             
         }
@@ -367,11 +367,16 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                 case 1:
                     if isCaseABomb(i: i, j: j) {
                         if !isTheCaseMarked(i: i, j: j) {
+                            
                             markACaseAt(i: i, j: j, byComputer: true)
+                            
+                            // si on gagne la partie à l'aide du bonus ...
+                            
                             if isTheGameFinished() { // end of game
-                                delegate!.gameOver(win: true)
+                                delegate!.gameOver(win: true, didTapABomb: false)
                                 returnAllTheCases(win: true)
                             }
+                            
                             return
                         }
                     }
@@ -380,7 +385,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
                             if isTheGameFinished() { // end of game
-                                delegate!.gameOver(win: true)
+                                delegate!.gameOver(win: true, didTapABomb: false)
                                 returnAllTheCases(win: true)
                             }
                             return

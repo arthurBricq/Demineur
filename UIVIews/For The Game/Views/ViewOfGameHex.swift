@@ -116,7 +116,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
                     if gameState[i][j] == -1 { // ******* fin du jeu ****** //
                         
                         returnAllTheCases()
-                        delegate!.gameOver(win: false)
+                        delegate!.gameOver(win: false, didTapABomb: true)
                         callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                         return
                         
@@ -162,7 +162,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
         if isTheGameFinished() {
             // ******** Partie Gagnée ********* //
             print("finished")
-            delegate!.gameOver(win: true)
+            delegate!.gameOver(win: true, didTapABomb: false)
             returnAllTheCases(win: true)
         }
         
@@ -355,35 +355,52 @@ extension ViewOfGame_Hex {
         
         let n = gameState.count
         for i in 0..<n {
-            let m = gameState[i].count
             
-            for j in 0..<m {
+            switch cas {
+            case 1:
                 
-                switch cas {
-                case 1:
+                let m = gameState[i].count
+                
+                for j in 0..<m {
                     if isCaseABomb(i: i, j: j) {
                         if !isTheCaseMarked(i: i, j: j) {
                             
-                            /////// ATTENTION A CHANGER //////
                             markACase(i: i, j: j, byComputer: true)
+                            
+                            if isTheGameFinished() { // end of game
+                                delegate!.gameOver(win: true, didTapABomb: false)
+                                returnAllTheCases(win: true)
+                            }
+                            
+                            
                             return
                             
                         }
                     }
-                case 2:
+                }
+            case 2:
+                let m = gameState[n-i-1].count
+                
+                for j in 0..<m {
                     if isCaseABomb(i: n-i-1, j: m-j-1) {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             
-                            /////// ATTENTION A CHANGER ///////
                             markACase(i: n-i-1, j: m-j-1, byComputer: true)
+                            
+                            if isTheGameFinished() { // end of game
+                                delegate!.gameOver(win: true, didTapABomb: false)
+                                returnAllTheCases(win: true)
+                            }
+                            
                             return
                             
                         }
                     }
-                default:
-                    break
                 }
+            default:
+                break
             }
+            
         }
         
     }

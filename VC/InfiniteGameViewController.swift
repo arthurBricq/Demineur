@@ -43,6 +43,7 @@ class InfiniteGameViewController: UIViewController {
     
     var hasToFinishTheGame: Bool = true // This variable is used in order to call only once the function 'currentGameIsFinished'. Indeed, it is called many times for a very strange reason.
     
+    var bonusChoiceView: BonusChoiceView?
     
     //// MARK : actions of buttons
     @IBAction func buttonReturn(_ sender: Any) {
@@ -107,6 +108,10 @@ class InfiniteGameViewController: UIViewController {
         isTheGameStarted.delegate = self // permet le positionnement des bombes pos-début.
         
         startNewSection()
+        
+        // instauration de la bar des bonus
+        addTheBonusChoiceView()
+        
     }
     
     
@@ -687,7 +692,7 @@ extension InfiniteGameViewController: variableCanCallGameVC {
 
 /// Gerer la fin de la partie (lancée par le gameView)
 extension InfiniteGameViewController: GameViewCanCallVC {
-    func gameOver(win: Bool) {
+    func gameOver(win: Bool, didTapABomb: Bool) {
         if win {
             
             if hasToFinishTheGame {
@@ -739,7 +744,7 @@ extension InfiniteGameViewController: CountingTimerProtocol
                 }
                 
                 gameTimer.stop()
-                gameOver(win: false)
+                gameOver(win: false, didTapABomb: false)
             }
         }
     }
@@ -889,3 +894,145 @@ extension InfiniteGameViewController: CAAnimationDelegate {
         
     }
 }
+
+
+extension InfiniteGameViewController: BonusButtonsCanCallVC {
+    
+    func addTheBonusChoiceView() {
+        
+        print("aaa")
+        
+        let screenW = self.view.frame.width
+        let screenH = self.view.frame.height
+        let dec_h: CGFloat = 20 // decalage horizontal
+        let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
+        let w = screenW - dec_h
+        let h = w/6
+        let size = CGSize(width: w, height: h)
+        let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
+        if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
+        
+        bonusChoiceView = BonusChoiceView()
+        bonusChoiceView!.backgroundColor = UIColor.clear
+        bonusChoiceView!.progress = 0
+        bonusChoiceView!.frame = CGRect(origin: origin, size: size)
+        bonusChoiceView!.instantiateScrollView()
+        bonusChoiceView!.vcDelegate = self
+        self.view.addSubview(bonusChoiceView!)
+    }
+    
+    func tempsTapped() { // il faut ajouter du temps
+        
+        if bonus.temps > 0 {
+            bonus.addTemps(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
+        } else {
+            return
+        }
+        
+        let timeLevel: Int = levelOfBonus.giveTheLevelOfBonus(forIndex: 0)
+        let values: [CGFloat] = [15,30,45,60] // temps à rajouter
+        gameTimer.counter -= values[timeLevel]
+    }
+    
+    func drapeauTapped() { // il faut ajouter des drapeaux
+        
+        if bonus.drapeau > 0 {
+            bonus.addDrapeau(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
+        } else {
+            return
+        }
+        
+        let drapeauLevel = levelOfBonus.giveTheLevelOfBonus(forIndex: 1)
+        let values: [Int] = [1,2,3] // drapeaux à ajouter
+        // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
+        if currentSection.gameType == .hexagonal {
+            let viewOfGameHex = containerView.subviews.last as! ViewOfGame_Hex
+            viewOfGameHex.numberOfFlags += values[drapeauLevel]
+        } else if currentSection.gameType == .square {
+            let viewOfGameSquare = containerView.subviews.last as! ViewOfGameSquare
+            viewOfGameSquare.numberOfFlags += values[drapeauLevel]
+        } else if currentSection.gameType == .triangular {
+            let viewOfGameTriangular = containerView.subviews.last as! ViewOfGameTriangular
+            viewOfGameTriangular.numberOfFlags += values[drapeauLevel]
+        }
+        
+    }
+    
+    
+    
+    //// A FAIRE ////
+    func bombeTapped() { // il faut marquer des bombes
+        
+        print("e")
+        
+        if bonus.bombe > 0 {
+            bonus.addBomb(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
+        } else {
+            return
+        }
+        
+        
+        
+        
+        switch levelOfBonus.bombe {
+        case 0:
+            // 50 % de chance
+            let tmp = random(100)
+            if tmp < 50 {
+                // return
+            }
+            // marquer une bombe non marquée
+            
+            if currentSection.gameType == .hexagonal {
+                let viewOfGameHex = containerView.subviews.last as! ViewOfGame_Hex
+                viewOfGameHex.markARandomBomb()
+            } else if currentSection.gameType == .square {
+                let viewOfGameSquare = containerView.subviews.last as! ViewOfGameSquare
+                viewOfGameSquare.markARandomBomb()
+            } else if currentSection.gameType == .triangular {
+                let viewOfGameTriangular = containerView.subviews.last as! ViewOfGameTriangular
+                viewOfGameTriangular.markARandomBomb()
+            }
+            
+        default:
+            break
+        }
+        
+        
+        
+    }
+    
+    func vieTapped() { // il faut rajouter une vie
+        if bonus.vie > 0 {
+            bonus.addVie(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
+        } else {
+            return
+        }
+    }
+    
+    
+    
+    //// A FAIRE ////
+    func verificationTapped() { // il faut verifier les drapeaux posée
+        if bonus.verification > 0 {
+            bonus.addVerification(amount: -1)
+            bonusChoiceView!.updateTheNumberLabels()
+        } else {
+            return
+        }
+        
+        
+        
+    }
+    
+    
+}
+
+
+
+
+
