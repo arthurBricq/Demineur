@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Ce VC est appelé en fin de partie, quand l'utilisateur termine un niveau ou bien quand l'utilisateur meurt à cause du temps fini ou à cause du nombre de bombes.
 class WinLooseViewController: UIViewController {
 
     /// OUTLETS
@@ -58,7 +59,7 @@ class WinLooseViewController: UIViewController {
     }
     
     
-    /// pour actualiser la vue lorsque la partie est gagnée
+    /// pour actualiser la vue lorsque la partie est gagnée (uniquement en mode histoire)
     func updateWinDisplay() {
         titleLabel.text = "GAGNE"
         // titleLabel.textColor = colorForRGB(r: 79, g: 143, b: 0)
@@ -68,7 +69,7 @@ class WinLooseViewController: UIViewController {
     
     }
 
-    /// pour actualiser la vue lorsque la partie est perdue
+    /// pour actualiser la vue lorsque la partie est perdue (peut etre en mode histoire ou en mode infinie)
     func updateLooseDisplay() {
         titleLabel.text = "PERDU"
         // titleLabel.textColor = colorForRGB(r: 148, g: 17, b: 0)
@@ -78,6 +79,7 @@ class WinLooseViewController: UIViewController {
     
     }
     
+    /// Pour retourner au menu
     @IBAction func menuButtonTapped(_ sender: Any) {
         if precedentViewController is InfiniteGameViewController {
             self.performSegue(withIdentifier: "BackToMenu", sender: nil)
@@ -86,6 +88,7 @@ class WinLooseViewController: UIViewController {
         }
     }
     
+    /// Recommencer le niveau courrant
     @IBAction func rejouerButtonTapped(_ sender: Any) {
         if precedentViewController is InfiniteGameViewController {
             let gameViewController = precedentViewController as! InfiniteGameViewController
@@ -104,6 +107,8 @@ class WinLooseViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
+    /// Passer au niveau suivant, uniquement en mode histoire
     @IBAction func nextLevelButtonTapped(_ sender: Any) {
         menuButtonTapped(sender)
         

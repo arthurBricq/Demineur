@@ -28,8 +28,12 @@ class HistoryPresentationViewController: UIViewController  {
     }
     
     /// VARIABLES
-    var totalNumberOfRowsInSection: Int = 5 // nombre de lignes à a
-    var currentGame: Int = 11
+    var totalNumberOfRowsInSection: Int {
+        return Int(floor(Double(historyLevels.count/3)))
+    }
+    
+    var currentGame: Int = 10
+    
     var color1 = colorForRGB(r: 66, g: 66, b: 66) //UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var color2 = UIColor.orange
     var selectedGameIndex: Int = 1
@@ -40,10 +44,29 @@ class HistoryPresentationViewController: UIViewController  {
         super.viewDidLoad()
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
+        print("")
     }
     
+    
+    let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 4, totalTime: 60),
+                                    OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 16, m: 10, z: 10, totalTime: 60),
+                                    OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 10, totalTime: 60),
+                                    OneGame(gameTypeWithOption1WithoutNoneCases: .hexagonal, n: 15, m: 10, z: 10, totalTime: 60, option1Time: 10),
+                                    OneGame(gameTypeWithOption2WithoutNoneCases: .square, n: 15, m: 10, z: 10, totalTime: 60, option2Frequency: 0.2),
+                                    OneGame(gameTypeWithOption3WithoutNoneCases: .square, n: 12, m: 11, z: 16, totalTime: 90, option3Time: 5, option3Frequency: 0.7),
+                                    OneGame(hexagonalPyramid7x7GameTime: 60, z: 5),
+                                    OneGame(squareHeart12x13GameTime: 60, z: 8),
+                                    OneGame(triangularButterfly4x7GameTime: 60, z: 4),
+                                    OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 20, totalTime: 90),
+                                    OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 13, m: 10, z: 20, totalTime: 60),
+                                    OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 16, m: 10, z: 10, totalTime: 60),
+                                    OneGame(gameTypeWithOption1WithoutNoneCases: .hexagonal, n: 15, m: 10, z: 20, totalTime: 60, option1Time: 10),
+                                    OneGame(gameTypeWithOption2WithoutNoneCases: .square, n: 15, m: 10, z: 20, totalTime: 60, option2Frequency: 0.2),
+                                    OneGame(gameTypeWithOption3WithoutNoneCases: .square, n: 12, m: 11, z: 25, totalTime: 90, option3Time: 5, option3Frequency: 0.7)
+    ]
+    
     /**
-     Cette fonction doit retourner les niveaux
+     Cette fonction doit retourner les niveaux des jeux en mode histoire
      */
     func oneGameForGivenIndex(index: Int) -> OneGame {
         if index == 1 {
@@ -72,9 +95,17 @@ class HistoryPresentationViewController: UIViewController  {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
+            
         case is HistoryGameViewController:
             let dest = segue.destination as! HistoryGameViewController
-            dest.game = oneGameForGivenIndex(index: selectedGameIndex)
+            
+            if selectedGameIndex <= historyLevels.count {
+                dest.game = historyLevels[selectedGameIndex-1]
+            } else {
+                print("trop de niveaux")
+                dest.game = historyLevels[0]
+            }
+            
             dest.transitioningDelegate = self
             
         default:
@@ -98,7 +129,6 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StartCell", for: indexPath) as! StartTableViewCell
