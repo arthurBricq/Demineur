@@ -369,14 +369,17 @@ extension HistoryGameViewController: GameViewCanCallVC {
             Vibrate().vibrate(style: .heavy)
         }
       
+        
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
         vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         vc.precedentViewController = self
         vc.win = win
+        vc.transitioningDelegate = self
         vc.didTapABomb = didTapABomb
-        
+
         self.present(vc, animated: true, completion: nil)
         
     }
@@ -548,6 +551,21 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
 
 
 
-
+extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if presented is WinLooseViewController {
+            let transition = TransitionToWinLose()
+            transition.animationDuration = 1
+            return transition
+        }
+        
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
+}
 
 
