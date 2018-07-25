@@ -574,12 +574,10 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
             transition.animationDuration = 1.5
             return transition
         }
-        
         return nil
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
         return nil
     }
 }
