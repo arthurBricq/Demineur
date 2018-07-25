@@ -571,7 +571,7 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
         
         if presented is WinLooseViewController {
             let transition = TransitionToWinLose()
-            transition.animationDuration = 1
+            transition.animationDuration = 1.5
             return transition
         }
         

@@ -13,7 +13,15 @@ class WinLooseViewController: UIViewController {
 
     /// OUTLETS
     // @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var lineView: LineView!
+    @IBOutlet weak var letterE: Letter!
+    @IBOutlet weak var letterN: Letter!
+    @IBOutlet weak var letterD: Letter!
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var menuIconButton: MenuPauseIconsButtons!
+    @IBOutlet weak var replayButton: UIButton!
+    @IBOutlet weak var replayIconButton: MenuPauseIconsButtons!
     @IBOutlet weak var lastButton: UIButton!
     
     

@@ -1004,7 +1004,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3h-hb-QK7" userLabel="LetterU" customClass="Letter" customModule="Demineur" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3h-hb-QK7" userLabel="LetterD" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="208" y="120" width="70" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -1136,6 +1136,14 @@
                     <connections>
                         <outlet property="label" destination="E8g-w0-fgF" id="XnI-44-6Co"/>
                         <outlet property="lastButton" destination="FVi-bx-1lu" id="hSI-De-rcQ"/>
+                        <outlet property="letterD" destination="Z3h-hb-QK7" id="x0P-SB-eF6"/>
+                        <outlet property="letterE" destination="fmY-6E-jZp" id="Gi9-dE-GxX"/>
+                        <outlet property="letterN" destination="nEX-KR-m1g" id="WJQ-Uv-Vra"/>
+                        <outlet property="lineView" destination="kth-W3-POc" id="nB5-6d-DLN"/>
+                        <outlet property="menuButton" destination="j6Y-5k-SsV" id="uO2-9q-NTb"/>
+                        <outlet property="menuIconButton" destination="jjV-Um-fU6" id="cc4-8G-VwZ"/>
+                        <outlet property="replayButton" destination="5Pe-4b-bG5" id="2cF-y5-Nv9"/>
+                        <outlet property="replayIconButton" destination="C13-he-Eko" id="nVK-x5-8e5"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToPresentation" unwindAction="unwindToMenuWithSegue:" id="1pp-TJ-cdv"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="GoToNextLevel" unwindAction="unwindToHistoryGameViewControllerWithSegue:" id="qJC-CT-7Hx"/>
                     </connections>
