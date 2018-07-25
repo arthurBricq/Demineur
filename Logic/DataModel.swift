@@ -12,6 +12,7 @@ let money = MoneyManager()
 let options = OptionsManager()
 let bonus = BonusManager()
 let levelOfBonus = LevelBonusManager()
+let gameData = GameDataManager()
 
 
 /// Pour sauvegarder l'argent de la partie.
@@ -98,6 +99,83 @@ class MoneyManager {
     
     
 }
+
+
+/// Pour sauvegarder l'argent de la partie.
+class GameDataManager {
+    
+    var currentLevel: Int = 0 { // il s'agit de la variable qui contient l'argent du jeu. C'est celle-ci qu'il faut modifier lorsque l'on gagne de l'argent. On peut la modifier en utilisant des fonctions déjà construites ()
+        didSet {
+            save()
+        }
+    }
+    
+    
+    @discardableResult func getCurrentValue() -> Int {
+        var toReturn: Int = 0
+        
+        // 1
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return 0 }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : creéer la requete
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "GameData") // on récupère tous les objets qui ont une entité Money
+        
+        // 3 : récuperer toutes les valeurs déjà sauvegardées, sous formes d'objets
+        var allObjects: [NSManagedObject] = []
+        do {
+            allObjects = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            allObjects = []
+        }
+        
+        // 4 : il faut supprimer toutes les anciennes sauvegardes.
+        fetchRequest.includesPropertyValues = false
+        do {
+            let items = try managedContext.fetch(fetchRequest)
+            for item in items {
+                managedContext.delete(item)
+            }
+        } catch let error as NSError {
+            print("il y a une erreure pour supprimer les sauvegardes \(error), \(error.userInfo)")
+        }
+        
+        // 5 : retourner la valeur courante
+        
+        guard let level = allObjects.last?.value(forKey: "level") as? Int else {
+            return toReturn
+        }
+        
+        toReturn = level
+        self.currentLevel = level
+        
+        return toReturn
+    }
+    
+    /**
+     Cette fonction est appellée à chaque modification de la variable 'currentAmountOfMoney' dans le didSet de la variable.
+     */
+    func save() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 1 : creer une instance à sauvegarder.
+        let entity = NSEntityDescription.entity(forEntityName: "GameData", in: managedContext)!
+        let money = NSManagedObject(entity: entity, insertInto: managedContext)
+        money.setValue(self.currentLevel, forKeyPath: "level")
+        
+        // 2 : sauvegarder le nouveau contexte.
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+}
+
+
 
 /// Pour sauvegarder les options du jeu
 class OptionsManager {

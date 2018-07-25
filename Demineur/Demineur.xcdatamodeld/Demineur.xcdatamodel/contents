@@ -7,6 +7,9 @@
         <attribute name="verification" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vie" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="GameData" representedClassName="GameData" syncable="YES" codeGenerationType="class">
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="LevelBonus" representedClassName="LevelBonus" syncable="YES" codeGenerationType="class">
         <attribute name="bombe" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="drapeau" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -26,5 +29,6 @@
         <element name="LevelBonus" positionX="72" positionY="-72" width="128" height="120"/>
         <element name="Money" positionX="-126" positionY="-144" width="128" height="58"/>
         <element name="Options" positionX="70" positionY="-153" width="128" height="75"/>
+        <element name="GameData" positionX="63" positionY="-72" width="128" height="60"/>
     </elements>
 </model>

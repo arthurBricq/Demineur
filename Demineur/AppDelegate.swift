@@ -23,7 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         options.getCurrentValue() // on récupère les options
         bonus.getCurrentValue() // on récupère les bonus achetés.
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
-
+        gameData.getCurrentValue() // on récupère le mode histoire
+        
+        // gameData.currentLevel = 10
+        
+        
 //        bonus.addTemps(amount: 10)
 //        bonus.addDrapeau(amount: 10)
 //        bonus.addBomb(amount: 10)
@@ -33,7 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        bonus.displayCurrentBonus()
 //
 //        money.addMoney(amount: 300000)
-//
+        
+        print("niveau courant: \(gameData.currentLevel)")
         options.displayOptions()
         
         

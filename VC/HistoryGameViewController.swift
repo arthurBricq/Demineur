@@ -21,6 +21,7 @@ class HistoryGameViewController: UIViewController {
     
     var bonusChoiceView: BonusChoiceView?
     var game: OneGame = OneGame(gameTypeWithNoneCases: .square, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
+    var gameIndex: Int = 1 // Avoir connaissance de l'indice du niveau
     
     var gameState = [[Int]].init()
     var gameTimer = CountingTimer()
@@ -545,7 +546,12 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
     
 }
 
-
+/// Pour passer au niveau suivant lorsqu'on termine un niveau, il faut un unwindSegue
+extension HistoryGameViewController {
+    @IBAction func unwindToHistoryGameViewController(segue: UIStoryboardSegue) {
+        //
+    }
+}
 
 
 

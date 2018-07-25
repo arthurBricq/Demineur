@@ -930,7 +930,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oY5-xV-psk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="apS-Vh-1Q6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="317.60000000000002" y="2504.7976011994006"/>
+            <point key="canvasLocation" x="318" y="2203"/>
         </scene>
         <!--Win Loose View Controller-->
         <scene sceneID="5xn-Jv-iti">
@@ -1155,12 +1155,13 @@
                         <outlet property="label" destination="E8g-w0-fgF" id="XnI-44-6Co"/>
                         <outlet property="lastButton" destination="FVi-bx-1lu" id="hSI-De-rcQ"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToPresentation" unwindAction="unwindToMenuWithSegue:" id="1pp-TJ-cdv"/>
+                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="GoToNextLevel" unwindAction="unwindToHistoryGameViewControllerWithSegue:" id="qJC-CT-7Hx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMt-rR-zEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="dj3-ad-PN6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="317.60000000000002" y="3287.4062968515746"/>
+            <point key="canvasLocation" x="318" y="3027"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="gyl-ru-aYc">

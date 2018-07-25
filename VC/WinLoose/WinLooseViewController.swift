@@ -22,7 +22,7 @@ class WinLooseViewController: UIViewController {
     var win: Bool = false
     var didTapABomb: Bool = false
     var precedentViewController: UIViewController?
-    
+    var precedentGameIndex: Int = 1
     
     
     
@@ -125,6 +125,7 @@ class WinLooseViewController: UIViewController {
     /// Passer au niveau suivant, uniquement en mode histoire
     @objc func nextLevel() {
         print("passer au niveau suivant")
+        self.performSegue(withIdentifier: "GoToNextLevel", sender: nil)
     }
     
     /// Pour continuer avec une vie en moins
@@ -132,14 +133,23 @@ class WinLooseViewController: UIViewController {
         print("continuer la partie")
     }
     
-    /*
-    // MARK: - Navigation
+    
+    // NAVIGATIONS
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        switch segue.destination {
+        case is HistoryGameViewController:
+            let dest = segue.destination as! HistoryGameViewController
+            if segue.identifier! == "GoToNextLevel" {
+                dest.game = historyLevels[precedentGameIndex+1]
+            }
+        default:
+            break
+        }
+        
+        
     }
-    */
+    
 
 }
