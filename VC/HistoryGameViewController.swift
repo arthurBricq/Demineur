@@ -369,18 +369,15 @@ extension HistoryGameViewController: GameViewCanCallVC {
             Vibrate().vibrate(style: .heavy)
         }
       
-        if didTapABomb {
-            
-        } else {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            vc.precedentViewController = self
-            vc.win = win
-            self.present(vc, animated: true, completion: nil)
-        }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        vc.precedentViewController = self
+        vc.win = win
+        vc.didTapABomb = didTapABomb
         
+        self.present(vc, animated: true, completion: nil)
         
     }
     

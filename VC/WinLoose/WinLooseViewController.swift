@@ -12,7 +12,7 @@ import UIKit
 class WinLooseViewController: UIViewController {
 
     /// OUTLETS
-    @IBOutlet weak var titleLabel: UILabel!
+    // @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var lastButton: UIButton!
     
@@ -20,6 +20,7 @@ class WinLooseViewController: UIViewController {
     /// VARIABLES
 
     var win: Bool = false
+    var didTapABomb: Bool = false
     var precedentViewController: UIViewController?
     
     
@@ -61,23 +62,36 @@ class WinLooseViewController: UIViewController {
     
     /// pour actualiser la vue lorsque la partie est gagnée (uniquement en mode histoire)
     func updateWinDisplay() {
-        titleLabel.text = "GAGNE"
+        // titleLabel.text = "GAGNE"
         // titleLabel.textColor = colorForRGB(r: 79, g: 143, b: 0)
         label.text = "Bien joué ! Vous avez trouvé toutes les bombes à temps."
         lastButton.isUserInteractionEnabled = true
         lastButton.isHidden = false
+        lastButton.addTarget(self, action: #selector(nextLevel), for: .touchUpInside)
     
     }
 
     /// pour actualiser la vue lorsque la partie est perdue (peut etre en mode histoire ou en mode infinie)
     func updateLooseDisplay() {
-        titleLabel.text = "PERDU"
+        // titleLabel.text = "PERDU"
         // titleLabel.textColor = colorForRGB(r: 148, g: 17, b: 0)
-        label.text = "Dommage ! Le temps est écoulé."
-        lastButton.isUserInteractionEnabled = false
-        lastButton.isHidden = true
-    
+        
+        if didTapABomb {
+            label.text = "Dommage ! Vous avez touchez une bombe. "
+            lastButton.isUserInteractionEnabled = true
+            lastButton.isHidden = false
+            lastButton.setTitle("NOUVELLE CHANCE", for: .normal)
+            lastButton.addTarget(self, action: #selector(newChance), for: .touchUpInside)
+        } else {
+            label.text = "Dommage ! Le temps est écoulé."
+            lastButton.isUserInteractionEnabled = false
+            lastButton.isHidden = true
+        }
+        
     }
+    
+    
+    /// ACTIONS
     
     /// Pour retourner au menu
     @IBAction func menuButtonTapped(_ sender: Any) {
@@ -109,16 +123,14 @@ class WinLooseViewController: UIViewController {
     
     
     /// Passer au niveau suivant, uniquement en mode histoire
-    @IBAction func nextLevelButtonTapped(_ sender: Any) {
-        menuButtonTapped(sender)
-        
-        
-        
-        
-        
+    @objc func nextLevel() {
+        print("passer au niveau suivant")
     }
     
-    
+    /// Pour continuer avec une vie en moins
+    @objc func newChance() {
+        print("continuer la partie")
+    }
     
     /*
     // MARK: - Navigation
