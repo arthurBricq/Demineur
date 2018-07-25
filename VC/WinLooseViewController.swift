@@ -22,7 +22,7 @@ class WinLooseViewController: UIViewController {
     var win: Bool = false
     var didTapABomb: Bool = false
     var precedentViewController: UIViewController?
-    var precedentGameIndex: Int = 1
+    var precedentGameIndex: Int = 1 // uniquement important pour le mode histoire
     
     
     
@@ -125,7 +125,18 @@ class WinLooseViewController: UIViewController {
     /// Passer au niveau suivant, uniquement en mode histoire
     @objc func nextLevel() {
         print("passer au niveau suivant")
-        self.performSegue(withIdentifier: "GoToNextLevel", sender: nil)
+        let gameViewController = precedentViewController as! HistoryGameViewController
+        gameViewController.game = historyLevels[precedentGameIndex+1]
+        
+        if precedentGameIndex == gameData.currentLevel {
+            gameData.currentLevel += 1 // On débloque le niveau suivant 
+        }
+        
+        gameViewController.gameIndex = precedentGameIndex + 1
+        gameViewController.gameTimer.play()
+        gameViewController.removePrecendentViewOfGame()
+        gameViewController.startANewGame()
+        self.dismiss(animated: true, completion: nil)
     }
     
     /// Pour continuer avec une vie en moins
@@ -138,15 +149,7 @@ class WinLooseViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        switch segue.destination {
-        case is HistoryGameViewController:
-            let dest = segue.destination as! HistoryGameViewController
-            if segue.identifier! == "GoToNextLevel" {
-                dest.game = historyLevels[precedentGameIndex+1]
-            }
-        default:
-            break
-        }
+       
         
         
     }

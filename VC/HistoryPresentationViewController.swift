@@ -32,8 +32,13 @@ class HistoryPresentationViewController: UIViewController  {
         return Int(floor(Double(historyLevels.count/3)))
     }
     
+    // retourne l'indice
     var currentGame: Int { return gameData.currentLevel }
     
+    // retourne le nombre de niveau du chapitre en question.
+    var numberOfLevelInSection: Int {
+        return historyLevels.count
+    }
     var color1 = colorForRGB(r: 66, g: 66, b: 66) //UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var color2 = UIColor.orange
     var selectedGameIndex: Int = 1
@@ -84,7 +89,8 @@ class HistoryPresentationViewController: UIViewController  {
         case is HistoryGameViewController:
             let dest = segue.destination as! HistoryGameViewController
             
-            if selectedGameIndex < historyLevels.count {
+            // On connait l'indice choisit de la partie et on connait la partie courrant du jeu,
+            if selectedGameIndex <= gameData.currentLevel {
                 dest.game = historyLevels[selectedGameIndex]
                 dest.gameIndex = selectedGameIndex
             } else {

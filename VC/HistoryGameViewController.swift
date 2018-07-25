@@ -75,6 +75,9 @@ class HistoryGameViewController: UIViewController {
         // instauration de la bar des bonus
         addTheBonusChoiceView()
     
+        
+        
+        
     }
     
     
@@ -108,6 +111,10 @@ class HistoryGameViewController: UIViewController {
         isTheGameStarted.value = false
         updateFlags(numberOfFlags: game.numberOfFlag)
         
+        
+        print("Niveau Courant : \(gameIndex)")
+        
+        
         // Tailles maximales occupées par la vue :
         let maxHeight = self.view.bounds.height * 0.65
         let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.85
@@ -116,8 +123,8 @@ class HistoryGameViewController: UIViewController {
         removePrecendentViewOfGame()
         
         let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
-        let color2: UIColor = colorForRGB(r: 101, g: 115, b: 126)
         game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
+        
         gameTimer.start(timeInterval: 1.0, id: "Clock")
         
         if game.gameType == .square {
@@ -236,20 +243,22 @@ class HistoryGameViewController: UIViewController {
         }
     }
     
-    func removePrecendentViewOfGame() {
-        if game.gameType == .square {
-            if viewOfGameSquare != nil {
-                viewOfGameSquare?.removeFromSuperview()
-            }
-        } else if game.gameType == .hexagonal {
-            if viewOfGameHex != nil {
-                viewOfGameHex?.removeFromSuperview()
-            }
-        } else if game.gameType == .triangular {
-            if viewOfGameTriangular != nil {
-                viewOfGameTriangular?.removeFromSuperview()
-            }
+    /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
+    func removePrecendentViewOfGame()
+    {
+        
+        if viewOfGameSquare != nil {
+            viewOfGameSquare?.removeFromSuperview()
         }
+        
+        if viewOfGameHex != nil {
+            viewOfGameHex?.removeFromSuperview()
+        }
+        
+        if viewOfGameTriangular != nil {
+            viewOfGameTriangular?.removeFromSuperview()
+        }
+        
     }
     
     func openTheBombs() {
@@ -380,7 +389,7 @@ extension HistoryGameViewController: GameViewCanCallVC {
         vc.win = win
         vc.transitioningDelegate = self
         vc.didTapABomb = didTapABomb
-
+        vc.precedentGameIndex = gameIndex
         self.present(vc, animated: true, completion: nil)
         
     }
