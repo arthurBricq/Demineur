@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
         gameData.getCurrentValue() // on récupère le mode histoire
         
-        // gameData.currentLevel = 10
+        gameData.currentLevel = 10
         
         
 //        bonus.addTemps(amount: 10)
