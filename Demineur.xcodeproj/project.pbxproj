@@ -55,6 +55,7 @@
 		4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA920F8979B00740480 /* Timer.swift */; };
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
+		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
@@ -112,6 +113,7 @@
 		4EA7FDA920F8979B00740480 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
+		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */,
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
+				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
 			);
 			path = CustomTransitions;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				4EA7FDAE20F8987700740480 /* BombView.swift in Sources */,
 				4EA7FD8820F8962B00740480 /* SquareCase.swift in Sources */,
 				4EA7FDA220F8974E00740480 /* Functions.swift in Sources */,
+				9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */,
 				4EA7FD7020F8951300740480 /* InfiniteGameViewController.swift in Sources */,
 				4EA7FD8620F8961C00740480 /* RayureDrawing.swift in Sources */,
 				4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */,

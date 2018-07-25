@@ -16,6 +16,11 @@ func linearFunction(a: CGFloat, b: CGFloat, x: CGFloat) -> CGFloat {
     return (a*x + b)
 }
 
+/// This function execute the code in completion after seconds
+func delay(seconds: Double, completion: @escaping ()-> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: completion)
+}
+
 /**
  This method is helpful for the implementation of the haxagonal table. Indeed : all lines doesn't contain the same number. What we do is the following : for m elements in the first line, the second line has m-1, then m elements, then m-1 and so goes on.
  The function returns true if there is m elements in the line.
