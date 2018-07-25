@@ -579,6 +579,7 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
         return nil
     }
 }

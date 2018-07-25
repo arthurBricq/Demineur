@@ -33,7 +33,6 @@ class TransitionToGameView: NSObject, UIViewControllerAnimatedTransitioning {
             fromView.alpha = 1
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        
     }
 
 }

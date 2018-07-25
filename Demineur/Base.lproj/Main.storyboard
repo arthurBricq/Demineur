@@ -1144,7 +1144,7 @@
                         <outlet property="menuIconButton" destination="jjV-Um-fU6" id="cc4-8G-VwZ"/>
                         <outlet property="replayButton" destination="5Pe-4b-bG5" id="2cF-y5-Nv9"/>
                         <outlet property="replayIconButton" destination="C13-he-Eko" id="nVK-x5-8e5"/>
-                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToPresentation" unwindAction="unwindToMenuWithSegue:" id="1pp-TJ-cdv"/>
+                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="1pp-TJ-cdv"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="GoToNextLevel" unwindAction="unwindToHistoryGameViewControllerWithSegue:" id="qJC-CT-7Hx"/>
                     </connections>
                 </viewController>
