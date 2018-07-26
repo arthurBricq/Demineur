@@ -132,7 +132,6 @@ class WinLooseViewController: UIViewController {
     
     /// Passer au niveau suivant, uniquement en mode histoire
     @objc func nextLevel() {
-        print("passer au niveau suivant")
         let gameViewController = precedentViewController as! HistoryGameViewController
         gameViewController.game = historyLevels[precedentGameIndex+1]
         
@@ -149,7 +148,6 @@ class WinLooseViewController: UIViewController {
     
     /// Pour continuer avec une vie en moins
     @objc func newChance() {
-        print("continuer la partie")
     }
     
     

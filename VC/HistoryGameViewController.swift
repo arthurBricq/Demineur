@@ -67,7 +67,7 @@ class HistoryGameViewController: UIViewController {
             bombView.isHidden = false
         }
         
-        
+
         isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu.
         
         startANewGame()
@@ -83,7 +83,6 @@ class HistoryGameViewController: UIViewController {
     
     func addTheBonusChoiceView() {
         
-        print("aaa")
         
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
@@ -112,7 +111,6 @@ class HistoryGameViewController: UIViewController {
         updateFlags(numberOfFlags: game.numberOfFlag)
         
         
-        print("Niveau Courant : \(gameIndex)")
         
         
         // Tailles maximales occupées par la vue :
@@ -132,7 +130,6 @@ class HistoryGameViewController: UIViewController {
             
             let gameView = ViewOfGameSquare()
             let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
-            print("largeur de la vue: \(width)")
             let viewSize = CGSize(width: width, height: height)
             let origin = CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
             gameView.frame = CGRect(origin: origin, size: viewSize)
@@ -319,7 +316,6 @@ extension HistoryGameViewController {
     func updateSquareGame(withFirstTouched touch: (x: Int, y: Int)) {
         positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
         createNumbersToDisplaySquare(in: &gameState)
-        displayIntMatrix(matrix: gameState)
         viewOfGameSquare!.gameState = gameState
         viewOfGameSquare!.updateAllNumbers()
     }
@@ -333,7 +329,6 @@ extension HistoryGameViewController {
     func updateHexGameState(withFirstTouched touch: (x: Int, y: Int)) {
         positionBombsHex(gameState: &gameState, z: game.z, withFirstTouched: (touch.x, touch.y))
         createNumbersToDisplayHex(gameState: &gameState)
-        displayIntMatrix(matrix: gameState)
         viewOfGameHex!.gameState = gameState // on actualise la nouvelle carte du jeu
         viewOfGameHex!.updateAllNumbers()
     }
@@ -346,9 +341,7 @@ extension HistoryGameViewController {
     
     func updateTriangularGameStepTwo(withFirstTouched touch: (x: Int, y: Int)) {
         positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
-        displayIntMatrix(matrix: gameState)
         createNumbersToDisplayTriangle(in: &gameState)
-        displayIntMatrix(matrix: gameState)
         viewOfGameTriangular!.gameState = gameState
         viewOfGameTriangular!.updateAllNumbers()
     }
@@ -493,7 +486,6 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
     //// A FAIRE ////
     func bombeTapped() { // il faut marquer des bombes
         
-        print("e")
         
         if bonus.bombe > 0 {
             bonus.addBomb(amount: -1)

@@ -161,7 +161,6 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
         
         if isTheGameFinished() {
             // ******** Partie Gagnée ********* //
-            print("finished")
             delegate!.gameOver(win: true, didTapABomb: false)
             returnAllTheCases(win: true)
         }

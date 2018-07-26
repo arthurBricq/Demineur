@@ -260,7 +260,6 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
             return
         }
         
-        print("marquage de la case \(i),\(j)")
         let k: Int = i*m + j // indice
         if self.subviews[k] is TriangularCase {
             let tmp = self.subviews[k] as! TriangularCase
@@ -275,7 +274,6 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
     }
     
     func unmarkACaseAt(i: Int, j: Int) {
-        print("unmarking")
         let k: Int = i*m + j // indice
         if self.subviews[k] is TriangularCase {
             let tmp = self.subviews[k] as! TriangularCase

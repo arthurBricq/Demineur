@@ -14,6 +14,11 @@ class Type1TableViewCell: UITableViewCell {
     var strokeColor: UIColor = UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var secondStrokeColor: UIColor = UIColor.orange
     
+    // Retourne le dernier des niveaux
+    private var lastLevel: Int {
+        return historyLevels.count
+    }
+    
     // Pour la logique des bouttons
     var VC: RoundButtonsCanCallVC?
     
@@ -32,15 +37,21 @@ class Type1TableViewCell: UITableViewCell {
         button1.isEnabled = true
         button1.number = firstGameOfRow
         button1.delegate = VC
+        button1.alpha = 1
         
         button2.isEnabled = true
         button2.number = firstGameOfRow+1
         button2.delegate = VC
+        button2.alpha = 1
         
         button3.isEnabled = true
         button3.number = firstGameOfRow+2
         button3.delegate = VC
+        button3.alpha = 1
         
+        print("firstGame : \(firstGameOfRow)      x = \(currentGame-firstGameOfRow)")
+        
+        // bloquer les niveaux qui ne sont pas accessibles
         switch currentGame-firstGameOfRow {
         case let x where x < 0:
             button1.alpha = 0.5 ; button1.isEnabled = false ;
@@ -56,6 +67,24 @@ class Type1TableViewCell: UITableViewCell {
         default:
             break
         }
+        
+        // enlever les niveaux qui n'existe pas
+        switch lastLevel-firstGameOfRow{
+        case let x where x < 0:
+            button1.alpha = 0.0 ; button1.isEnabled = false ;
+            fallthrough
+        case 0:
+            button2.alpha = 0.0 ; button2.isEnabled = false ;
+            fallthrough
+        case 1:
+            button3.alpha = 0.0 ; button3.isEnabled = false ;
+            fallthrough
+        case 2:
+            break
+        default:
+            break
+        }
+        
     }
     
     
@@ -69,8 +98,10 @@ class Type1TableViewCell: UITableViewCell {
         
         strokeColor.setStroke()
         
+        updateTheAlphas()
+        
         switch currentGame-firstGameOfRow {
-        case 3...Int.max:
+        case let x where x >= 3 : // il faut tout dessiner
             
             // dessin du cercle
             let c1 = CGPoint(x: 25 + r, y: h/2)
@@ -126,6 +157,7 @@ class Type1TableViewCell: UITableViewCell {
             
             
             fallthrough
+            
         default:
             break
         }

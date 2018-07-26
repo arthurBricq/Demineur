@@ -15,6 +15,11 @@ class Type2TableViewCell: UITableViewCell {
     var secondStrokeColor: UIColor = UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var firstGameOfRow: Int = 4
     
+    // Retourne le dernier des niveaux
+    private var lastLevel: Int {
+        return historyLevels.count
+    }
+    
     // Pour la logique des bouttons
     var VC: RoundButtonsCanCallVC?
     
@@ -28,29 +33,58 @@ class Type2TableViewCell: UITableViewCell {
         button1.isEnabled = true
         button1.number = firstGameOfRow
         button1.delegate = VC
+        button1.alpha = 1
         
         button2.isEnabled = true
         button2.number = firstGameOfRow+1
         button2.delegate = VC
+        button2.alpha = 1
         
         button3.isEnabled = true
         button3.number = firstGameOfRow+2
         button3.delegate = VC
+        button3.alpha = 1
         
+        // bloquer les niveaux qui ne sont pas accessibles
         switch currentGame-firstGameOfRow {
-        case let x where x < 0:
+        case let x where x < 0: // aucun des trois boutons accessible ...
             button1.alpha = 0.5 ; button1.isEnabled = false ;
             fallthrough
-        case 0:
+        case 0: // ... uniquement le premier accessible ...
             button2.alpha = 0.5 ; button2.isEnabled = false ;
             fallthrough
-        case 1:
+        case 1: // ... et ainsi de suite
             button3.alpha = 0.5 ; button3.isEnabled = false ;
         case 2:
             break
         default:
             break
         }
+        
+        // enlever les niveaux qui n'existe pas
+//        if currentGame > lastLevel {
+//            button1.alpha = 0.0 ; button1.isEnabled = false ;
+//            button2.alpha = 0.0 ; button2.isEnabled = false ;
+//            button3.alpha = 0.0 ; button3.isEnabled = false ;
+//        }
+        
+        
+        switch lastLevel-firstGameOfRow {
+        case let x where x < 0: // il faut tout enlever
+            button1.alpha = 0.0 ; button1.isEnabled = false ;
+            fallthrough
+        case 0:
+            button2.alpha = 0.0 ; button2.isEnabled = false ;
+            fallthrough
+        case 1:
+            button3.alpha = 0.0 ; button3.isEnabled = false ;
+            fallthrough
+        case 2:
+            break
+        default:
+            break
+        }
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -61,8 +95,12 @@ class Type2TableViewCell: UITableViewCell {
         
         strokeColor.setStroke()
         
+        updateTheAlphas()
+        
         switch currentGame-firstGameOfRow {
-        case 3...Int.max:
+        case let x where x >= 3:
+            
+            
             // dessin du cercle autour de 3 :
             let c3 = CGPoint(x: w - 25 - r, y: h/2)
             let circle = UIBezierPath(arcCenter: c3, radius: r + dec, startAngle: 0, endAngle: 2*3.15, clockwise: true)

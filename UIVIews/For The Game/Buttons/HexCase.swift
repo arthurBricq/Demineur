@@ -291,7 +291,6 @@ class HexCase: UIButton
         if caseState == .none { return }
         
         if isTheGameStarted.value == false { // si c'est la première fois qu'on tappe.
-            print("B")
             isTheGameStarted.value = true
             //superViewDelegate!.buttonHaveBeenTapped(i: i, j: j, marking: false)
         }
@@ -308,7 +307,6 @@ class HexCase: UIButton
     }
     
     func animateGameOver(win: Bool, bombTapped: Bool = false) {
-        print("i = \(i)   j = \(j)    win = \(win)")
         if win {
             
             for subview in subviews {
@@ -326,7 +324,6 @@ class HexCase: UIButton
                         subview.layer.add(scaleAnimation, forKey: nil)
                         
                     } else {
-                        print("a")
                         let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
                         scaleAnimation.values = [1.0, 1.3, 0]
                         scaleAnimation.keyTimes = [0, 0.2, 1]

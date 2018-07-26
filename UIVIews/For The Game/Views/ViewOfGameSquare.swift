@@ -156,7 +156,6 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
                 if isCaseABomb(i: i, j: j) {
                     
-                    print("test")
                     delegate?.gameOver(win: false, didTapABomb: true)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     returnAllTheCases()
@@ -261,9 +260,6 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         let k: Int = i*m + j // indice
         if self.subviews[k] is SquareCase {
             let tmp = self.subviews[k] as! SquareCase
-            if tmp.caseState == .marked {
-                print("we are changing a marked case")
-            }
             tmp.caseState = .open
         }
         
@@ -277,7 +273,6 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
             return
         }
         
-        print("marquage de la case \(i),\(j)")
         
         let k: Int = i*m + j // indice
         if self.subviews[k] is SquareCase {

@@ -209,7 +209,8 @@ let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 16, m: 10, z: 10, totalTime: 60),
                                 OneGame(gameTypeWithOption1WithoutNoneCases: .hexagonal, n: 15, m: 10, z: 20, totalTime: 60, option1Time: 10),
                                 OneGame(gameTypeWithOption2WithoutNoneCases: .square, n: 15, m: 10, z: 20, totalTime: 60, option2Frequency: 0.2),
-                                OneGame(gameTypeWithOption3WithoutNoneCases: .square, n: 12, m: 11, z: 25, totalTime: 90, option3Time: 5, option3Frequency: 0.7)
+                                OneGame(gameTypeWithOption3WithoutNoneCases: .square, n: 12, m: 11, z: 25, totalTime: 90, option3Time: 5, option3Frequency: 0.7),
+                                 OneGame(gameTypeWithOption3WithoutNoneCases: .square, n: 12, m: 11, z: 25, totalTime: 90, option3Time: 5, option3Frequency: 0.7)
 ]
 
 

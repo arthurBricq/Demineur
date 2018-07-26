@@ -642,7 +642,6 @@ extension InfiniteGameViewController {
         positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: z, withFirstTouched: touch)
         createNumbersToDisplaySquare(in: &currentViewOfGame.gameState)
         currentViewOfGame.updateAllNumbers()
-        displayIntMatrix(matrix: gameState)
         
     }
     
@@ -654,7 +653,6 @@ extension InfiniteGameViewController {
         positionBombsHex(gameState: &currentViewOfGame.gameState, z: z, withFirstTouched: touch)
         createNumbersToDisplayHex(gameState: &currentViewOfGame.gameState)
         currentViewOfGame.updateAllNumbers()
-        displayIntMatrix(matrix: currentViewOfGame.gameState)
     }
     
     
@@ -665,7 +663,6 @@ extension InfiniteGameViewController {
         positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: z, withFirstTouched: touch)
         createNumbersToDisplayTriangle(in: &currentViewOfGame.gameState)
         currentViewOfGame.updateAllNumbers()
-        displayIntMatrix(matrix: currentViewOfGame.gameState)
         
     }
     
@@ -900,8 +897,6 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
     
     func addTheBonusChoiceView() {
         
-        print("aaa")
-        
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
         let dec_h: CGFloat = 20 // decalage horizontal
@@ -965,7 +960,6 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
     //// A FAIRE ////
     func bombeTapped() { // il faut marquer des bombes
         
-        print("e")
         
         if bonus.bombe > 0 {
             bonus.addBomb(amount: -1)

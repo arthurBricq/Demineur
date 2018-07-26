@@ -87,7 +87,6 @@ class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedT
                     let cellHeight: CGFloat = 100
                     let correctiveConstant: CGFloat = isItABigScreen() ? -24 : 20
                     let point = tableView.frame.origin
-                    print(tableView.frame.origin)
                     finalPointToView = CGPoint(x: point.x + 2, y: point.y + cellHeight/2 - correctiveConstant - lineWidth/2)
                     finalPointFromView = CGPoint(x: point.x + 2 + fromView.frame.width, y: point.y + cellHeight/2 - correctiveConstant - lineWidth/2)
                     

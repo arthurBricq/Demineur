@@ -14,6 +14,9 @@ class StartTableViewCell: UITableViewCell {
     var strokeColor: UIColor = UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var lineWidth: CGFloat = 1
     
+    
+    
+    
     // Pour la logique des bouttons
     var VC: RoundButtonsCanCallVC?
     
@@ -35,14 +38,17 @@ class StartTableViewCell: UITableViewCell {
         button1.isEnabled = true
         button1.number = 1
         button1.delegate = VC
+        button1.alpha = 1
         
         button2.isEnabled = true
         button2.number = 2
         button2.delegate = VC
+        button2.alpha = 1
         
         button3.isEnabled = true
         button3.number = 3
         button3.delegate = VC
+        button3.alpha = 1
         
         // presentation
         switch currentGame {
@@ -59,12 +65,13 @@ class StartTableViewCell: UITableViewCell {
     }
     
     override func draw(_ rect: CGRect) {
-        print("drawing")
         let h = rect.height ; let w = rect.width ;
         let r:CGFloat = 20
         let d = w/2 - 25 - 3*r
         let dec: CGFloat = 3
         strokeColor.setStroke()
+        
+        updateTheAlphas()
         
         switch currentGame {
         case 4...Int.max:

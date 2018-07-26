@@ -25,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
         gameData.getCurrentValue() // on récupère le mode histoire
         
-        gameData.currentLevel = 10
-        
-        
 //        bonus.addTemps(amount: 10)
 //        bonus.addDrapeau(amount: 10)
 //        bonus.addBomb(amount: 10)
@@ -38,7 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        money.addMoney(amount: 300000)
         
-        print("niveau courant: \(gameData.currentLevel)")
+        
+        gameData.currentLevel = 10
+        
         options.displayOptions()
         
         

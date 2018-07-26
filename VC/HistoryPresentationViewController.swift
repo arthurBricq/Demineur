@@ -8,6 +8,14 @@
 
 import UIKit
 
+/* ATTENTION : il y a deux choses à ne pas confondre
+1) currentGame
+2) currentGameIndex
+
+ 
+ Liaison : l'indice a une unité de moins que le niveau courant, qui lui est exprimé de façon purement logique en partant de 1.
+ 
+*/
 class HistoryPresentationViewController: UIViewController  {
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -29,11 +37,11 @@ class HistoryPresentationViewController: UIViewController  {
     
     /// VARIABLES
     var totalNumberOfRowsInSection: Int {
-        return Int(floor(Double(historyLevels.count/3)))
+        return Int(floor(Double(historyLevels.count/3))+1)
     }
     
     // retourne l'indice
-    var currentGame: Int { return gameData.currentLevel }
+    var currentGameIndex: Int { return gameData.currentLevel }
     
     // retourne le nombre de niveau du chapitre en question.
     var numberOfLevelInSection: Int {
@@ -49,10 +57,11 @@ class HistoryPresentationViewController: UIViewController  {
         super.viewDidLoad()
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
-        print("")
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
     
     /**
@@ -94,7 +103,6 @@ class HistoryPresentationViewController: UIViewController  {
                 dest.game = historyLevels[selectedGameIndex]
                 dest.gameIndex = selectedGameIndex
             } else {
-                print("trop de niveaux")
                 dest.game = historyLevels[0]
             }
             
@@ -103,9 +111,21 @@ class HistoryPresentationViewController: UIViewController  {
         default:
             break
         }
-        
-        
-        
+    }
+    
+    /// Cette fonction doit modifier le alpha des cellules correctement et cachées les cellules en trop,
+    func updateTheCells() {
+        print("updating the alphas")
+        for i in 1..<totalNumberOfRowsInSection {
+            let tmp = tableView.cellForRow(at: IndexPath(row: i, section: 0))
+            if tmp is Type1TableViewCell {
+                let cell = tmp as! Type1TableViewCell
+                cell.updateTheAlphas()
+            } else {
+                let cell = tmp as! Type2TableViewCell
+                cell.updateTheAlphas()
+            }
+        }
     }
     
 }
@@ -124,45 +144,48 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StartCell", for: indexPath) as! StartTableViewCell
-            cell.currentGame = currentGame
+            cell.currentGame = currentGameIndex+1
             cell.VC = self
             cell.strokeColor = color1
-            cell.updateTheAlphas()
-            print("Cell height = \(cell.frame.height)")
+            cell.tag = 1
+            cell.setNeedsDisplay()
             return cell
             
         } else if indexPath.row % 2 == 1  {
+            print("type 1 démarre avec : \(3*indexPath.row + 1) et currentGame: \(currentGameIndex+1)" )
             let cell = tableView.dequeueReusableCell(withIdentifier: "Type1Cell", for: indexPath) as! Type1TableViewCell
             cell.firstGameOfRow = 3*indexPath.row + 1
-            cell.currentGame = currentGame
+            cell.tag = currentGameIndex+1
+            cell.currentGame = currentGameIndex+1
             cell.VC = self
-            cell.updateTheAlphas()
             let firstGameOfRow = 3*indexPath.row + 1
             cell.button1.setTitle(String(firstGameOfRow), for: .normal)
             cell.button2.setTitle(String(firstGameOfRow+1), for: .normal)
             cell.button3.setTitle(String(firstGameOfRow+2), for: .normal)
             cell.strokeColor = color1
             cell.secondStrokeColor = color1
+            cell.setNeedsDisplay()
             return cell
             
         } else {
+            print("type 2 démarre avec : \(3*indexPath.row + 1) et currentGame: \(currentGameIndex+1)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "Type2Cell", for: indexPath) as! Type2TableViewCell
             cell.firstGameOfRow = 3*indexPath.row + 1
-            cell.currentGame = currentGame
+            cell.tag = currentGameIndex+1
+            cell.currentGame = currentGameIndex+1
             cell.VC = self
-            cell.updateTheAlphas()
             let firstGameOfRow = 3*indexPath.row + 1
             cell.button1.setTitle(String(firstGameOfRow), for: .normal)
             cell.button2.setTitle(String(firstGameOfRow+1), for: .normal)
             cell.button3.setTitle(String(firstGameOfRow+2), for: .normal)
             cell.strokeColor = color1
             cell.secondStrokeColor = color1
+            cell.setNeedsDisplay()
             return cell
             
         }
         
-        
-        
+       
         
     }
     
