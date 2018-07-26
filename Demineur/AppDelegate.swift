@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        money.addMoney(amount: 300000)
         
         
-        gameData.currentLevel = 10
+        gameData.currentLevel = 0
         
         options.displayOptions()
         

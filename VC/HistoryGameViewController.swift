@@ -44,45 +44,17 @@ class HistoryGameViewController: UIViewController {
         super.viewWillAppear(animated)
         
         transitioningDelegate = nil
-        
-        // instauration du timer
-        if !game.isTimerAllowed {
-            clockView.isHidden = true
-        } else {
-            clockView.isHidden = false
-            gameTimer.delegate = self
-            gameTimer.timeInterval = 1.0
-        }
-        
-        // instauration des drapeaux et des bombes
-        if !game.areNumbersShowed {
-            flagsLabel.isHidden = true
-            flagView.isHidden = true
-            bombsLabel.isHidden = true
-            bombView.isHidden = true
-        } else {
-            flagsLabel.isHidden = false
-            flagView.isHidden = false
-            bombsLabel.isHidden = false
-            bombView.isHidden = false
-        }
-        
 
         isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu.
         
         startANewGame()
         
-        // instauration de la bar des bonus
-        addTheBonusChoiceView()
     
-        
-        
         
     }
     
     
     func addTheBonusChoiceView() {
-        
         
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
@@ -101,17 +73,43 @@ class HistoryGameViewController: UIViewController {
         bonusChoiceView!.instantiateScrollView()
         bonusChoiceView!.vcDelegate = self
         self.view.addSubview(bonusChoiceView!)
+        
     }
     
     func startANewGame() {
+        
+        // instauration du timer sur l'écran
+        if !game.isTimerAllowed {
+            clockView.isHidden = true
+            gameTimer.stop()
+            gameTimer.delegate = nil
+        } else {
+            clockView.isHidden = false
+            gameTimer.delegate = self
+            gameTimer.timeInterval = 1.0
+        }
+        
+        // instauration des drapeaux et des bombes sur l'écran
+        if !game.areNumbersShowed {
+            flagsLabel.isHidden = true
+            flagView.isHidden = true
+            bombsLabel.isHidden = true
+            bombView.isHidden = true
+        } else {
+            flagsLabel.isHidden = false
+            flagView.isHidden = false
+            bombsLabel.isHidden = false
+            bombView.isHidden = false
+        }
+        
+        // instauration de la bar des bonus
+        addTheBonusChoiceView()
+        
         // Quelques détails relatif aux timer
         gameTimer.stop()
         clockView.pourcentage = 0.0
         isTheGameStarted.value = false
         updateFlags(numberOfFlags: game.numberOfFlag)
-        
-        
-        
         
         // Tailles maximales occupées par la vue :
         let maxHeight = self.view.bounds.height * 0.65
@@ -123,8 +121,7 @@ class HistoryGameViewController: UIViewController {
         let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
         game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
         
-        gameTimer.start(timeInterval: 1.0, id: "Clock")
-        
+        // Ajouter les vues du jeu
         if game.gameType == .square {
             createANewSquareGameStepOne()
             
@@ -432,7 +429,9 @@ extension HistoryGameViewController: CountingTimerProtocol {
 }
 
 extension HistoryGameViewController: variableCanCallGameVC {
-    func createTheGame(withFirstTouched touch: (x: Int, y: Int)) { // cette fonction est appelée lorsque l'utilisateur tape sur la première case : cela apelle cette fonction immédiatement avec le touches began, puis la partie commence comme il le faut grâce au touchesEnded.
+    
+    /// cette fonction est appelée lorsque l'utilisateur tape sur la première case : cela apelle cette fonction immédiatement avec le touches began, puis la partie commence comme il le faut grâce au touchesEnded.
+    func createTheGame(withFirstTouched touch: (x: Int, y: Int)) {
         if game.gameType == .hexagonal {
             updateHexGameState(withFirstTouched: (touch.x,touch.y))
         } else if game.gameType == .square {
@@ -440,10 +439,16 @@ extension HistoryGameViewController: variableCanCallGameVC {
         } else if game.gameType == .triangular {
             updateTriangularGameStepTwo(withFirstTouched: (touch.x,touch.y))
         }
+        
+        bonusChoiceView?.activateBonusButtons()
+        gameTimer.start(timeInterval: 1.0, id: "Clock")
+
+        
     }
 }
 
 
+/// Actions des boutons bonus via une délégation.
 extension HistoryGameViewController: BonusButtonsCanCallVC {
     func tempsTapped() { // il faut ajouter du temps
         

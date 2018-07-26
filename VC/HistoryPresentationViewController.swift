@@ -34,7 +34,11 @@ class HistoryPresentationViewController: UIViewController  {
     @IBAction func unwindToHistoryPresentation(segue: UIStoryboardSegue) {
         // retour aux niveaux
     }
+    
+    /// fonction appelée lorsque le unwind est fait
     override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
+       tableView.reloadData()
+        
         return UIStoryboardSegue(identifier: identifier, source: fromViewController, destination: toViewController) {
             let fromView = fromViewController.view!
             let toView = toViewController.view!

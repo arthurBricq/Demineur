@@ -11,6 +11,9 @@ import UIKit
 /// Ce VC est appelé en fin de partie, quand l'utilisateur termine un niveau ou bien quand l'utilisateur meurt à cause du temps fini ou à cause du nombre de bombes.
 class WinLooseViewController: UIViewController {
 
+    override var prefersStatusBarHidden: Bool { return true }
+    
+    
     /// OUTLETS
     // @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lineView: LineView!

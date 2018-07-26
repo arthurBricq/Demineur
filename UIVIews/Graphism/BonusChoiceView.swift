@@ -31,6 +31,10 @@ class BonusChoiceView: UIView {
         tmp.backgroundColor = UIColor.clear
         tmp.isScrollEnabled = true
         tmp.alpha = 0
+        tmp.showsVerticalScrollIndicator = false
+        tmp.showsHorizontalScrollIndicator = true
+        tmp.indicatorStyle = .default
+        
         scrollView = tmp
     }
     
@@ -66,15 +70,38 @@ class BonusChoiceView: UIView {
             r.text = String(bonus.giveTheNumberOfBonus(forIndex: i))
             r.tag = i
             
+            
+            
             v.addSubview(r)
             scrollView!.addSubview(v)
             
         }
-    
-        updateTheNumberLabels()
+        
+        desactivateBonusButtons()
+        scrollView!.flashScrollIndicators()
+        
         
     }
     
+    /// Cette fonction permet de réactiver tous les bonus après le début de la partie.
+    func activateBonusButtons() {
+        updateTheNumberLabels()
+    }
+    
+    /// Cette fonction doit-être appelée au début d'une partie pour pas que les bonus soit accessibles au début. Elle permet aussi de mettre les bons numéros à l'écran.
+    private func desactivateBonusButtons() {
+        for tmp in scrollView!.subviews {
+            if tmp is BonusView {
+                let view = tmp as! BonusView
+                guard let label = view.subviews[0] as? UILabel else { return } // il n'y a qu'un seul subview, il s'agit du label
+                
+                let number = bonus.giveTheNumberOfBonus(forIndex: label.tag)
+                view.alpha = 0.5
+                view.isUserInteractionEnabled = false
+                label.text = String(number)
+            }
+        }
+    }
     
     /**
      Cette fonction permet de changer le nombre de bonus à l'ecran, elle fonctionne grâce à la propriété 'tag' qui est ajouté aux label par la fonction 'populateScrollView()'
@@ -207,7 +234,8 @@ class BonusChoiceLayer: CALayer {
     override func draw(in ctx: CGContext) {
         super.draw(in: ctx)
         UIGraphicsPushContext(ctx)
-        BonusChoiceProgress.drawBonusChoice(frame: bounds, resizing: .aspectFill, progress: progress)
+        let frame = CGRect(x: 2, y: 2, width: bounds.width - 4, height: bounds.height - 4)
+        BonusChoiceProgress.drawBonusChoice(frame: frame, resizing: .aspectFill, progress: progress)
         UIGraphicsPopContext()
     }
     
@@ -241,8 +269,9 @@ public class BonusChoiceProgress : NSObject {
         
         //// Ruban Drawing
         let rubanPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: widthOfRuban, height: 100), cornerRadius: 50)
-        backgroundColorRuban.setFill()
-        rubanPath.fill()
+        backgroundColorRuban.setStroke()
+        rubanPath.lineWidth = 2
+        rubanPath.stroke()
         
         
         //// Container Drawing
