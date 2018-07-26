@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E02A1362109DF580040BA88 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E02A1342109DF580040BA88 /* Tutorial.storyboard */; };
+		4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */; };
 		4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */; };
 		4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */; };
 		4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F2120FE07A300EB5978 /* PieceView.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E02A1352109DF580040BA88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Demineur/Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
+		4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTutorialViewController.swift; sourceTree = "<group>"; };
 		4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerButton.swift; sourceTree = "<group>"; };
 		4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchatBoutiqueBouton.swift; sourceTree = "<group>"; };
 		4E3A4F2120FE07A300EB5978 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
@@ -129,6 +133,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E02A1372109E1480040BA88 /* VC_Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */,
+			);
+			path = VC_Tutorial;
+			sourceTree = "<group>";
+		};
 		4EA7FD4A20F893E700740480 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +148,7 @@
 				4EA7FD6820F894A700740480 /* Logic */,
 				4EA7FD6920F894B300740480 /* UIVIews */,
 				4EA7FD6A20F894BE00740480 /* VC */,
+				4E02A1372109E1480040BA88 /* VC_Tutorial */,
 				4EA7FD5520F893E700740480 /* Demineur */,
 				4EA7FD5420F893E700740480 /* Products */,
 			);
@@ -154,6 +167,7 @@
 			children = (
 				4EA7FD5620F893E700740480 /* AppDelegate.swift */,
 				4EA7FD5A20F893E700740480 /* Main.storyboard */,
+				4E02A1342109DF580040BA88 /* Tutorial.storyboard */,
 				4EA7FD5D20F893E800740480 /* Assets.xcassets */,
 				4EA7FD5F20F893E800740480 /* LaunchScreen.storyboard */,
 				4EA7FD6220F893E800740480 /* Info.plist */,
@@ -345,6 +359,7 @@
 			files = (
 				4EA7FD6120F893E800740480 /* LaunchScreen.storyboard in Resources */,
 				4EA7FD5E20F893E800740480 /* Assets.xcassets in Resources */,
+				4E02A1362109DF580040BA88 /* Tutorial.storyboard in Resources */,
 				4EA7FD5C20F893E700740480 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +407,7 @@
 				4EA76A9920FB6E9C00E940C8 /* ArticleViewController.swift in Sources */,
 				4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */,
 				4EA7FD7C20F895B000740480 /* StartTableViewCell.swift in Sources */,
+				4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */,
 				4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */,
 				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
@@ -411,6 +427,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4E02A1342109DF580040BA88 /* Tutorial.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E02A1352109DF580040BA88 /* Base */,
+			);
+			name = Tutorial.storyboard;
+			sourceTree = "<group>";
+		};
 		4EA7FD5A20F893E700740480 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

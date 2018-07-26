@@ -189,7 +189,7 @@
                                     <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="9wV-rI-KqM" kind="show" id="wB5-Mt-rtR"/>
+                                    <segue destination="V8I-2H-bB8" kind="show" id="wB5-Mt-rtR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -234,6 +234,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hhP-yo-bFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2508" y="2202.5487256371816"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QnZ-Vn-5RO">
+            <objects>
+                <viewController id="V8I-2H-bB8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pp7-RX-b4k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="YWm-e1-5fC"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cng-ag-ZKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2508" y="3027"/>
         </scene>
         <!--History Presentation View Controller-->
         <scene sceneID="o19-DM-Ufg">
@@ -1228,14 +1243,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rX-ui-Tw0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1068.8" y="2436.88155922039"/>
-        </scene>
-        <!--Tutorial-->
-        <scene sceneID="l3W-VX-qWs">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Tutorial" id="9wV-rI-KqM" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hKQ-0g-PYa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2550" y="3026"/>
         </scene>
     </scenes>
 </document>
