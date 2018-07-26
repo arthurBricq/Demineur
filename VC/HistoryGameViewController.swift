@@ -566,7 +566,6 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
             transition.animationDuration = 1.5
             return transition
         }
-        
         return nil
     }
     

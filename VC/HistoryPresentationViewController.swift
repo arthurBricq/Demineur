@@ -34,6 +34,24 @@ class HistoryPresentationViewController: UIViewController  {
     @IBAction func unwindToHistoryPresentation(segue: UIStoryboardSegue) {
         // retour aux niveaux
     }
+    override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
+        return UIStoryboardSegue(identifier: identifier, source: fromViewController, destination: toViewController) {
+            let fromView = fromViewController.view!
+            let toView = toViewController.view!
+            if let containerView = fromView.superview {
+                toView.frame = fromView.frame
+                toView.alpha = 0
+                containerView.addSubview(toView)
+                
+                UIView.animate(withDuration: 1, animations: {
+                    toView.alpha = 1
+                }, completion: { (_) in
+                    toView.removeFromSuperview()
+                    self.dismiss(animated: false, completion: nil)
+                })
+            }
+        }
+    }
     
     /// VARIABLES
     var totalNumberOfRowsInSection: Int {

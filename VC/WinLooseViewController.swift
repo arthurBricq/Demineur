@@ -46,6 +46,7 @@ class WinLooseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        transitioningDelegate = nil
         
         var darkBlur = UIBlurEffect()
         if #available(iOS 10.0, *) { //iOS 10.0 and above
