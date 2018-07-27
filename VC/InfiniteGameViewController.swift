@@ -119,7 +119,12 @@ class InfiniteGameViewController: UIViewController {
      Cette fonction permet de remettre à zero la partie infinie, en iniciant la section à la première section
     */
     func restartTheGame() {
-        currentSection = Section(simpleSquareGameWith: (12,9))
+        gameIndex = 1
+        sectionIndex = 0
+        gameTimer.stop()
+        containerView.subviews.last?.removeFromSuperview()
+        containerView.subviews.last?.removeFromSuperview()
+        startNewSection()
     }
     
     /**
