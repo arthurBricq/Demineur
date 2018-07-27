@@ -151,12 +151,7 @@ class PauseViewController: UIViewController {
     @IBAction func restartButtonTapped(_ sender: Any) {
         if pausedGameViewController is InfiniteGameViewController {
             let gameViewController = pausedGameViewController as! InfiniteGameViewController
-            gameViewController.gameTimer.stop()
-            gameViewController.containerView.subviews.last?.removeFromSuperview()
-            gameViewController.containerView.subviews.last?.removeFromSuperview()
-            gameViewController.sectionIndex = 0
             gameViewController.restartTheGame()
-            gameViewController.startNewSection()
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()

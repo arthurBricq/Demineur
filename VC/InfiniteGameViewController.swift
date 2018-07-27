@@ -119,7 +119,12 @@ class InfiniteGameViewController: UIViewController {
      Cette fonction permet de remettre à zero la partie infinie, en iniciant la section à la première section
     */
     func restartTheGame() {
-        currentSection = Section(simpleSquareGameWith: (12,9))
+        gameIndex = 1
+        sectionIndex = 0
+        gameTimer.stop()
+        containerView.subviews.last?.removeFromSuperview()
+        containerView.subviews.last?.removeFromSuperview()
+        startNewSection()
     }
     
     /**
@@ -203,7 +208,7 @@ class InfiniteGameViewController: UIViewController {
         
         // met à jour les affichages, etc. et lance la partie
         updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag, onNewGame: true)
-        
+        containerView.subviews.first?.isUserInteractionEnabled = false
     }
     
     @objc func tapBlockingView(_ sender: UITapGestureRecognizer) {
@@ -447,7 +452,7 @@ class InfiniteGameViewController: UIViewController {
      L'utilisateur ne peut donc taper uniquement sur la première case.
      */
     func updateUserInteractionProperty() {
-        //containerView.subviews.first?.isUserInteractionEnabled = false
+        containerView.subviews.first?.isUserInteractionEnabled = false
         containerView.subviews.last?.isUserInteractionEnabled = true
     }
     

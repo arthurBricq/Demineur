@@ -445,7 +445,6 @@ extension HistoryGameViewController: variableCanCallGameVC {
         
         bonusChoiceView?.activateBonusButtons()
         gameTimer.start(timeInterval: 1.0, id: "Clock")
-
         
     }
 }
@@ -494,17 +493,13 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
     //// A FAIRE ////
     func bombeTapped() { // il faut marquer des bombes
         
-        
         if bonus.bombe > 0 {
             bonus.addBomb(amount: -1)
             bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
-        
-        
-        
-        
+                
         switch levelOfBonus.bombe {
         case 0:
             // 50 % de chance
@@ -521,7 +516,6 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
             } else if game.gameType == .triangular {
                 viewOfGameTriangular?.markARandomBomb()
             }
-            
             
         default:
             break

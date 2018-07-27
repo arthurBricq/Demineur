@@ -20,8 +20,8 @@ class BonusChoiceView: UIView {
     // Largeur = 6 Hauteur //
     
     var vcDelegate: BonusButtonsCanCallVC?
-    
     var scrollView: UIScrollView?
+    private var isActivated: Bool = false
     
     func instantiateScrollView() {
         let tmp = UIScrollView()
@@ -77,7 +77,13 @@ class BonusChoiceView: UIView {
             
         }
         
-        desactivateBonusButtons()
+        
+        if isActivated {
+            updateTheNumberLabels()
+        } else {
+            desactivateBonusButtons()
+        }
+        
         scrollView!.flashScrollIndicators()
         
         
@@ -86,6 +92,7 @@ class BonusChoiceView: UIView {
     /// Cette fonction permet de réactiver tous les bonus après le début de la partie.
     func activateBonusButtons() {
         updateTheNumberLabels()
+        isActivated = true
     }
     
     /// Cette fonction doit-être appelée au début d'une partie pour pas que les bonus soit accessibles au début. Elle permet aussi de mettre les bons numéros à l'écran.
