@@ -368,19 +368,22 @@ extension HistoryGameViewController: GameViewCanCallVC {
         } else {
             Vibrate().vibrate(style: .heavy)
         }
-      
         
+        if didTapABomb {
+            addTheMessage()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            vc.precedentViewController = self
+            vc.win = win
+            vc.transitioningDelegate = self
+            vc.didTapABomb = didTapABomb
+            vc.precedentGameIndex = gameIndex
+            self.present(vc, animated: true, completion: nil)
+        }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        vc.precedentViewController = self
-        vc.win = win
-        vc.transitioningDelegate = self
-        vc.didTapABomb = didTapABomb
-        vc.precedentGameIndex = gameIndex
-        self.present(vc, animated: true, completion: nil)
         
     }
     
@@ -579,4 +582,77 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
+/// PARTIE POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
+extension HistoryGameViewController {
+    
+    /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
+    func addTheMessage() {
+        if bonus.vie > 0 {
+            // faire apparaitre le message qui demande une nouvelle chance
+            messageOne()
+        } else {
+            if money.currentAmountOfMoney > 0 {
+                // faire apparaitre la demande d'achat de vie pour une nouvelle chance
+                messageTwo()
+            } else {
+                // faire apparaitre la demande d'achat d'argent pour pouvoir acheter des vies
+                messageThree()
+            }
+        }
+    }
+    
+    /// Faire apparaitre le message qui demande une nouvelle chance
+    func messageOne() {
+        let message = UIView()
+        
+        // Details sur le layer
+        message.backgroundColor = UIColor.white
+        message.layer.borderColor = UIColor.gray.cgColor
+        message.layer.cornerRadius = 5
+        message.layer.borderWidth = 2.0
+        
+        // Positionnnement de la vue
+        let decH: CGFloat = 10
+        let width = widthForThePopover()
+        let height: CGFloat = 200
+        let x = self.view.frame.width/2 - width/2 - decH
+        let y = self.view.frame.height/2 - height/2 - 50
+        message.frame = CGRect(x: x, y: y, width: width+2*decH, height: height)
+        
+        // Population de la vue
+        
+        
+        
+        
+        self.view.addSubview(message)
+    }
+    
+    /// Faire apparaitre la demande d'achat de vie pour une nouvelle chance
+    func messageTwo() {
+        
+    }
+    
+    /// Faire apparaitre la demande d'achat d'argent pour pouvoir acheter des vies
+    func messageThree() {
+        
+    }
+    
+    /// Retourne la largeur que doit avoir le popover pour etre exactement à la taille des parties
+    func widthForThePopover() -> CGFloat {
+        
+        var toReturn: CGFloat = 100
+        
+        if game.gameType == .square {
+            toReturn = viewOfGameSquare!.frame.width
+        } else if game.gameType == .hexagonal {
+            toReturn = viewOfGameHex!.frame.width
+        } else if game.gameType == .triangular {
+            toReturn = viewOfGameTriangular!.frame.width
+        }
+        
+        return toReturn
+        
+    }
+    
+}
 
