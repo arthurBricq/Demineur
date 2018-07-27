@@ -944,7 +944,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kth-W3-POc" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="40" y="10" width="5" height="667"/>
+                                <rect key="frame" x="40" y="0.0" width="5" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="5" id="8p7-Dj-PMW"/>
@@ -1121,7 +1121,7 @@
                             <constraint firstItem="j6Y-5k-SsV" firstAttribute="leading" secondItem="kth-W3-POc" secondAttribute="trailing" constant="30" id="PxT-hP-3Sc"/>
                             <constraint firstItem="C13-he-Eko" firstAttribute="leading" secondItem="5Pe-4b-bG5" secondAttribute="trailing" constant="20" id="Pyd-Eu-hKb"/>
                             <constraint firstItem="jjV-Um-fU6" firstAttribute="centerY" secondItem="j6Y-5k-SsV" secondAttribute="centerY" id="SKP-Mh-h01"/>
-                            <constraint firstItem="kth-W3-POc" firstAttribute="centerY" secondItem="jy0-Hc-0yq" secondAttribute="centerY" id="WlN-Vb-cdN"/>
+                            <constraint firstItem="kth-W3-POc" firstAttribute="centerY" secondItem="2ry-IH-xZc" secondAttribute="centerY" id="Sxl-ej-UKw"/>
                             <constraint firstItem="kth-W3-POc" firstAttribute="leading" secondItem="jy0-Hc-0yq" secondAttribute="leading" constant="40" id="dFP-E4-dVv"/>
                             <constraint firstItem="nEX-KR-m1g" firstAttribute="width" secondItem="nEX-KR-m1g" secondAttribute="height" multiplier="1:1" id="eAc-KB-qhz"/>
                             <constraint firstItem="Z3h-hb-QK7" firstAttribute="centerY" secondItem="nEX-KR-m1g" secondAttribute="centerY" id="fQJ-1W-Gvh"/>
