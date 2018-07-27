@@ -203,7 +203,7 @@ class InfiniteGameViewController: UIViewController {
         
         // met à jour les affichages, etc. et lance la partie
         updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag, onNewGame: true)
-        
+        containerView.subviews.first?.isUserInteractionEnabled = false
     }
     
     @objc func tapBlockingView(_ sender: UITapGestureRecognizer) {
@@ -447,7 +447,7 @@ class InfiniteGameViewController: UIViewController {
      L'utilisateur ne peut donc taper uniquement sur la première case.
      */
     func updateUserInteractionProperty() {
-        //containerView.subviews.first?.isUserInteractionEnabled = false
+        containerView.subviews.first?.isUserInteractionEnabled = false
         containerView.subviews.last?.isUserInteractionEnabled = true
     }
     
