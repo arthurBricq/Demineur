@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         money.getCurrentValue() // on récupère l'argent au début du jeu
-        options.getCurrentValue() // on récupère les options
+        options.getCurrentValue() // on récupère les options de l'application
         bonus.getCurrentValue() // on récupère les bonus achetés.
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
         gameData.getCurrentValue() // on récupère le mode histoire
@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        money.addMoney(amount: 300000)
         
         
-        gameData.currentLevel = 0
+        gameData.currentLevel = 20
         
         options.displayOptions()
         

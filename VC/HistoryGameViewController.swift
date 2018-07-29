@@ -38,6 +38,9 @@ class HistoryGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -126,6 +129,8 @@ class HistoryGameViewController: UIViewController {
             createANewSquareGameStepOne()
             
             let gameView = ViewOfGameSquare()
+            gameView.layer.borderWidth = 2.0
+            gameView.layer.borderColor = UIColor.red.cgColor
             let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
             let viewSize = CGSize(width: width, height: height)
             let origin = CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
@@ -162,9 +167,11 @@ class HistoryGameViewController: UIViewController {
             createANewHexGameStepOne() // première étape de la création
             
             let gameView = ViewOfGame_Hex()
+            gameView.layer.borderWidth = 2.0
+            gameView.layer.borderColor = UIColor.red.cgColor
             let center = self.view.center
             let (w,h) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = CGPoint(x: center.x - w/2, y: center.y - h/2 + 50)
+            let origin = CGPoint(x: center.x - w/2, y: center.y - h/2)
             gameView.frame = CGRect(origin: origin, size: CGSize.init(width: w, height: h))
             gameView.a = w / (sqrt(3) * CGFloat(game.m))
             gameView.m = game.m
@@ -202,6 +209,10 @@ class HistoryGameViewController: UIViewController {
             createNewTriangularGameStepOne()
             
             let gameView = ViewOfGameTriangular()
+            
+            gameView.layer.borderWidth = 2.0
+            gameView.layer.borderColor = UIColor.red.cgColor
+            
             let center = self.view.center
             let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
             let origin = CGPoint(x: center.x - w/2, y: center.y - h/2 + 20)
