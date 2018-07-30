@@ -38,9 +38,6 @@ class HistoryGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +49,25 @@ class HistoryGameViewController: UIViewController {
         
         startANewGame()
         
-    
+        /// Affichage de la taille disponible à l'ecran
+        /**
+        let p1 = clockView.frame.origin
+        let h1 = clockView.frame.height
+        let h11 = p1.y + h1
+        let p2 = bonusChoiceView?.frame.origin
+        let H = self.view.frame.height
+        let h22 = H - p2!.y
+        let usableHeigth = H - h11 - h22
+        print("ANALYSE DE TAILLE")
+        print("taille utilisable: \(usableHeigth)")
+        print("h11:\(h11) & h22:\(h22) & H:\(H)")
+        **/
+     
+        
+        
+        
+        
+        
         
     }
     
@@ -116,8 +131,11 @@ class HistoryGameViewController: UIViewController {
         
         // Tailles maximales occupées par la vue :
         let maxHeight = self.view.bounds.height * 0.65
-        let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.85
+        let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.92
         let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
+        
+        // print("pourcentage utile de la largeur: \(maxWidth/self.view.frame.width)")
+        // print("taille utile pour la largueur: \(maxWidth)")
         
         removePrecendentViewOfGame()
         
@@ -215,7 +233,7 @@ class HistoryGameViewController: UIViewController {
             
             let center = self.view.center
             let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = CGPoint(x: center.x - w/2, y: center.y - h/2 + 20)
+            let origin = CGPoint(x: center.x - w/2, y: center.y - h/2)
             
             gameView.frame = CGRect(origin: origin, size: CGSize.init(width: w, height: h))
             gameView.m = game.m

@@ -15,6 +15,13 @@ import UIKit
  */
 func dimensionTriangularTable(n: Int, m: Int, maxW: CGFloat, maxH: CGFloat) -> (w: CGFloat, h: CGFloat) {
     
+    
+    
+    
+    
+    
+    
+    
     /// Case 1 : le favoris
     let w1 = maxW
     // à partir de w, on doit trouver a, h
@@ -22,6 +29,9 @@ func dimensionTriangularTable(n: Int, m: Int, maxW: CGFloat, maxH: CGFloat) -> (
     // Normalement, on doit avoir que m%2 == 1, mais je fais dans les deux pour si on doit faire des visuelles différents de personnalisation.
     let h1 = sqrt(3) * a1/2 * CGFloat(n)
     
+    return (w1,h1)
+    
+    /*
     /// Case 2 : lorsqu'on doit choisir la hauteur et pas la largeur.
     let h2 = maxH
     let a2 = 2*h2 / (sqrt(3)*CGFloat(n))
@@ -33,7 +43,7 @@ func dimensionTriangularTable(n: Int, m: Int, maxW: CGFloat, maxH: CGFloat) -> (
         return (w2,h2)
     } else {
         return (0,0)
-    }
+    }*/
 }
 
 func createNumbersToDisplayTriangle(in gameState: inout [[Int]]) {

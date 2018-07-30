@@ -28,6 +28,8 @@ class Section {
     var n: Int = 8
     var m: Int = 8
     var gameType = GameType.square
+    var z0: Int = 10
+    
     
     var game1: OneGame?
     var game2: OneGame?
@@ -35,15 +37,20 @@ class Section {
     var game4: OneGame?
     var game5: OneGame?
     
-    init(n: Int, m: Int, gameType: GameType, game1: OneGame, game2: OneGame, game3: OneGame, game4: OneGame, game5: OneGame) {
+    init(n: Int, m: Int, z0: Int, gameType: GameType, game1: OneGame, game2: OneGame, game3: OneGame, game4: OneGame, game5: OneGame) {
         self.n = n
         self.m = m
+        self.z0 = z0
         self.gameType = gameType
         self.game1 = game1
         self.game2 = game2
         self.game3 = game3
         self.game4 = game4
         self.game5 = game5
+    }
+    
+    convenience init() {
+        self.init(simpleSquareGameWith: (10,10))
     }
     
     convenience init(simpleSquareGameWith dimensions: (n: Int,m: Int) ) {
@@ -54,7 +61,7 @@ class Section {
         let fourthGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 5, numberOfFlag: 14, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 0, option2Frequency: 0.2, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
         let fifthGame = OneGame(gameTypeWithNoneCases: .square, n: dimensions.n, m: dimensions.m, z: 5, numberOfFlag: 10, isTimerAllowed: true, totalTime: 60, option1: false, option2: true, option1Time: 0, option2Frequency: 0.1, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: false)
         
-        self.init(n: dimensions.n, m: dimensions.m, gameType: .square, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
+        self.init(n: dimensions.n, m: dimensions.m, z0: 1,  gameType: .square, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
     }
     
     convenience init(simpleHexGameWith dimensions: (n: Int,m: Int) ) {
@@ -65,7 +72,7 @@ class Section {
         let fourthGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 14, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 0, option2Frequency: 0.2, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
         let fifthGame = OneGame(gameTypeWithNoneCases: .hexagonal, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 10, isTimerAllowed: true, totalTime: 60, option1: false, option2: true, option1Time: 0, option2Frequency: 0.3, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: false)
         
-        self.init(n: dimensions.n, m: dimensions.m, gameType: .hexagonal, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
+        self.init(n: dimensions.n, m: dimensions.m, z0: 3, gameType: .hexagonal, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
     }
     
     convenience init(simpleTriangularGameWith dimensions: (n: Int, m: Int)) {
@@ -78,12 +85,10 @@ class Section {
         let fourthGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 14, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 0, option2Frequency: 0.2, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: true)
         let fifthGame = OneGame(gameTypeWithNoneCases: .triangular, n: dimensions.n, m: dimensions.m, z: 10, numberOfFlag: 10, isTimerAllowed: true, totalTime: 60, option1: false, option2: true, option1Time: 0, option2Frequency: 0.3, option3: false, option3Frequency: 0.5, option3Time: 2, noneCases: [], areNumbersShowed: false)
         
-        self.init(n: dimensions.n, m: dimensions.m, gameType: .triangular, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
+        self.init(n: dimensions.n, m: dimensions.m, z0: 3, gameType: .triangular, game1: firstGame, game2: secondGame, game3: thirdGame, game4: fourthGame, game5: fifthGame)
     }
     
 }
-
-
 
 struct ColorSetForOneGame {
     var openColor = UIColor.white // color for open-case's background
@@ -91,6 +96,7 @@ struct ColorSetForOneGame {
     var strokeColor = UIColor.white
     var textColor = UIColor.black
 }
+
 
 class OneGame  {
     
@@ -180,13 +186,13 @@ class OneGame  {
     
 }
 
-let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 15, m: 10, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 17, m: 12, z: 4, totalTime: 60),
+let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 6, m: 7, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 6, m: 9, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 9, z: 4, totalTime: 60),
                                 
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases:.hexagonal , n: 13, m: 10, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 15, m: 10, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 17, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 11, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 13, z: 4, totalTime: 60),
                                 
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 13, z: 4, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 15, z: 4, totalTime: 60),
@@ -206,24 +212,21 @@ let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 13, m: 10, z: 4, totalTime: 60),
                                 
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 4, totalTime: 60),
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 15, m: 10, z: 4, totalTime: 60),
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 17, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 15, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 17, m: 10, z: 4, totalTime: 60),
                                  
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases:.hexagonal , n: 13, m: 10, z: 4, totalTime: 60),
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 15, m: 10, z: 4, totalTime: 60),
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 17, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases:.hexagonal , n: 13, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 15, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 17, m: 10, z: 4, totalTime: 60),
                                  
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 13, m: 10, z: 4, totalTime: 60),
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 15, m: 10, z: 4, totalTime: 60),
-                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 17, m: 10, z: 4, totalTime: 60)
-                                
-                                
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 13, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 15, m: 10, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 17, m: 10, z: 4, totalTime: 60)
                                 
     
     
     
-    
-    /*OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 4, totalTime: 60),
+    /* OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 13, m: 10, z: 4, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 16, m: 10, z: 10, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 10, totalTime: 60),
                                 OneGame(gameTypeWithOption1WithoutNoneCases: .hexagonal, n: 15, m: 10, z: 10, totalTime: 60, option1Time: 10),
