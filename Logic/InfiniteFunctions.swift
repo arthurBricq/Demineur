@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 
+/// Cette classe permet de changer les cartes des modes infinies au fur et à mesure que la partie avance.
 class InfiniteIterators {
-    var squareGameDimensionsIterator: Int = 0 // iterateur des cartes carrées
-    var hexGameDimensionsIterator: Int = 0 // iterateur des cartes hexa
-    var triangularGameDimensionsIterator: Int = 0 // iterateur des cartes triangulaires
+    var squareGameDimensionsIterator: Int = -1 // iterateur des cartes carrées
+    var hexGameDimensionsIterator: Int = -1 // iterateur des cartes hexa
+    var triangularGameDimensionsIterator: Int = -1 // iterateur des cartes triangulaires
 
     init(squareGameDimensionsIterator: Int,hexGameDimensionsIterator: Int,triangularGameDimensionsIterator: Int) {
         self.squareGameDimensionsIterator = squareGameDimensionsIterator
@@ -21,7 +22,7 @@ class InfiniteIterators {
     }
     
     convenience init() {
-        self.init(squareGameDimensionsIterator: 0, hexGameDimensionsIterator: 0, triangularGameDimensionsIterator: 0)
+        self.init(squareGameDimensionsIterator: -1, hexGameDimensionsIterator: -1, triangularGameDimensionsIterator: -1)
     }
 }
 
@@ -57,7 +58,7 @@ class InfiniteGameManager {
     /// Cette fonction retourne la prochaine section, pour une section donnée. Pour la première section, il faut rentrer -1 en paramètre d'entré. Le deuxième paramètre est le remplissemet : z / (n*m)
     func nextSection(forLastRemplissement lastRemplissement: CGFloat) -> Section {
         
-        let section = Section()
+        let section = Section.init()
         
         //// 1. Trouver le type de case
         // 20% de chance pour triangle
@@ -66,13 +67,10 @@ class InfiniteGameManager {
         let tmp1 = random(5)
         switch tmp1 {
         case 0,1:
-            print("cas carré")
             section.gameType = .square
         case 2,3:
-            print("cas hax")
             section.gameType = .hexagonal
         case 4:
-            print("cas triangulaire")
             section.gameType = .triangular
         default:
             fatalError("Probleme dans la génération de tmp aléatoire ! ")
@@ -81,30 +79,35 @@ class InfiniteGameManager {
         
         
         //// 2. Trouver la partie à jouer (n,m)
-        // 2 chances sur 3 d'avancer
-        // sinon on recule
-        let tmp2 = random(3)
+        // 3 chances sur 4 d'avancer
+        // sinon on recule (ou ne rien faire ?)
+        let tmp2 = random(4)
         var increment2: Int = 0
         switch tmp2 {
-        case 0,1:
-            increment2 = 1
-        case 2:
-            increment2 = -1
+        case 0,1,2:
+            increment2 = 1 // on avance
+        case 3:
+            increment2 = 0 // on ne fais rien
         default:
             fatalError("Probleme dans la généraation de tmp aléatoire")
         }
         
         var map: (n:Int,m:Int) = (0,0)
-        
         switch section.gameType {
         case .square:
             iterators.squareGameDimensionsIterator += increment2
+            if iterators.squareGameDimensionsIterator <= -1 { iterators.squareGameDimensionsIterator = 0 }
+            if iterators.squareGameDimensionsIterator == ListeDesMondes.carreMap.count { iterators.squareGameDimensionsIterator = ListeDesMondes.carreMap.count - 1 }
             map = ListeDesMondes.carreMap[iterators.squareGameDimensionsIterator]
         case .hexagonal:
             iterators.hexGameDimensionsIterator += increment2
+            if iterators.hexGameDimensionsIterator <= -1 { iterators.hexGameDimensionsIterator = 0 }
+            if iterators.hexGameDimensionsIterator == ListeDesMondes.hexMap.count { iterators.hexGameDimensionsIterator = ListeDesMondes.hexMap.count - 1 }
             map = ListeDesMondes.hexMap[iterators.hexGameDimensionsIterator]
         case .triangular:
             iterators.triangularGameDimensionsIterator += increment2
+            if iterators.triangularGameDimensionsIterator <= -1 { iterators.triangularGameDimensionsIterator = 0 }
+            if iterators.triangularGameDimensionsIterator == ListeDesMondes.triangularMap.count { iterators.triangularGameDimensionsIterator = ListeDesMondes.triangularMap.count - 1 }
             map = ListeDesMondes.triangularMap[iterators.triangularGameDimensionsIterator]
         }
         
@@ -121,26 +124,46 @@ class InfiniteGameManager {
         switch tmp3 {
         case 0,1:
             if lastRemplissement < remplissementMaximale {
-                increment3 = 0.1
+                increment3 = 0.05
             } else {
                 increment3 = 0
             }
         case 2:
-            increment3 = -0.1
+            increment3 = -0.05
         default:
-            fatalError("Probleme dans la généraation de tmp aléatoire")
+            fatalError("Probleme dans la génération de tmp aléatoire")
         }
         
-        let newRemplissement = lastRemplissement + increment3 // = z / (n*m)
+        var newRemplissement = lastRemplissement + increment3 // = z / (n*m)
+        if newRemplissement < 0 { newRemplissement = 0.1 } // ne pas avoir zero ou moins
         let zTmp = newRemplissement * CGFloat(section.n) * CGFloat(section.m)
         let z = floor(zTmp)
         section.z0 = Int(z)
         
-        // On a trouve les 4 propriétés principales d'une section s
-        print(" *** Nouvelle section *** ")
+        // On a trouve les 4 propriétés principales d'une section
+        print(" \n*** Nouvelle section *** ")
         print("Type de case: \(section.gameType)")
+        switch section.gameType {
+        case .square:
+            print("itérateur: \(iterators.squareGameDimensionsIterator)")
+        case .hexagonal:
+            print("itérateur: \(iterators.hexGameDimensionsIterator)")
+        case .triangular:
+            print("itérateur: \(iterators.triangularGameDimensionsIterator)")
+        }
         print("Dimensions: \(section.n),\(section.m)")
-        print("Nombre de bombes: \(section.z0)")
+        print("Nombre de bombes: \(section.z0) et \(zTmp)")
+        print("Last remplissement: \(lastRemplissement)")
+        print("Nouveau remplissement: \(newRemplissement)")
+        
+        
+        //// 4. Il faut maintenant trouver les 5 parties de la section qui vient.
+        // Pour cela, on fait un tirage au sort entre différentes parties. 
+        section.updateGamesOfThisSection()
+        
+        
+        
+        
         
         return section
     }
