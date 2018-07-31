@@ -377,7 +377,7 @@ extension HistoryGameViewController {
 extension HistoryGameViewController: GameViewCanCallVC {
     
     func gameOver(win: Bool, didTapABomb: Bool) {
-        gameTimer.stop()
+        gameTimer.pause()
         // finish the game
         
         
@@ -401,7 +401,12 @@ extension HistoryGameViewController: GameViewCanCallVC {
         if didTapABomb {
             addTheMessage()
         } else {
-            openTheBombs()
+            gameTimer.stop()
+            
+            if !win {
+                openTheBombs()
+            }
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
             vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -644,7 +649,7 @@ extension HistoryGameViewController {
         // Details sur le layer
         message.backgroundColor = UIColor.white
         message.layer.borderColor = UIColor.gray.cgColor
-        //message.layer.cornerRadius = 5
+        message.layer.cornerRadius = 5
         message.layer.borderWidth = 2.0
         
         let topSpace: CGFloat = 8
@@ -694,18 +699,69 @@ extension HistoryGameViewController {
             
             bonus.addVie(amount: -1)
             
+            var viewToRemove: BombView?
+            var viewOfGame: UIView?
+            
+            switch self.game.gameType {
+            case .square:
+                viewOfGame = self.viewOfGameSquare
+            case .hexagonal:
+                viewOfGame = self.viewOfGameHex
+            case .triangular:
+                viewOfGame = self.viewOfGameTriangular
+            }
+            
+            for subview in viewOfGame!.subviews {
+                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                    for subview2 in subview.subviews {
+                        if subview2 is BombView {
+                            viewToRemove = subview2 as? BombView
+                        }
+                    }
+                }
+            }
+            
             UIView.animate(withDuration: 0.1, animations: {
                 heartLabel.alpha = 0
             }, completion: { (_) in
                 heartLabel.text = String(bonus.vie)
                 
-                UIView.animateKeyframes(withDuration: 3, delay: 0, options: [], animations: {
+                UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     
-                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.15, animations: {
                         heartLabel.alpha = 1
                     })
                     
+                    UIView.addKeyframe(withRelativeStartTime: 0.15, relativeDuration: 0.55, animations: {
+                        blurView.alpha = 0
+                    })
+                    
+                    UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3, animations: {
+                        viewToRemove?.alpha = 0
+                    })
+                    
                 }, completion: { (_) in
+                    
+                    blurView.removeFromSuperview()
+                    viewToRemove?.removeFromSuperview()
+                    self.gameTimer.play()
+                    
+                    if self.game.gameType == .hexagonal {
+                        self.viewOfGameHex!.isUserInteractionEnabled = true
+                        if self.game.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        }
+                    } else if self.game.gameType == .square {
+                        self.viewOfGameSquare!.isUserInteractionEnabled = true
+                        if self.game.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        }
+                    } else if self.game.gameType == .triangular {
+                        self.viewOfGameTriangular!.isUserInteractionEnabled = true
+                        if self.game.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        }
+                    }
                     
                 })
                 
@@ -723,6 +779,7 @@ extension HistoryGameViewController {
                 blurView.alpha = 0
             }, completion: { (_) in
                 blurView.removeFromSuperview()
+                self.gameTimer.stop()
                 self.openTheBombs()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
