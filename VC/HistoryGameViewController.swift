@@ -401,6 +401,7 @@ extension HistoryGameViewController: GameViewCanCallVC {
         if didTapABomb {
             addTheMessage()
         } else {
+            openTheBombs()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
             vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -636,18 +637,37 @@ extension HistoryGameViewController {
         
         // Positionnnement de la vue
         let decH: CGFloat = 10
-        let width = widthForThePopover()
+        let width = widthForThePopover() - decH
         let height: CGFloat = 200
-        let x = self.view.frame.width/2 - width/2 - decH
+        let x = self.view.frame.width/2 - width/2
         let y = self.view.frame.height/2 - height/2 - 50
-        message.frame = CGRect(x: x, y: y, width: width+2*decH, height: height)
+        message.frame = CGRect(x: x, y: y, width: width, height: height)
+        message.alpha = 0
         
         // Population de la vue
+        let label = UILabel()
+        label.font = UIFont(name: "PingFangSC-Regular", size: 30)
+        label.numberOfLines = 0
+        let labelW = width - 20
+        label.text = "Souhaitez-vous utiliser une vie ?"
+        label.textAlignment = .center
+        label.frame = CGRect(x: (message.bounds.width-labelW)/2, y: 10, width: labelW, height: label.font.lineHeight)
+        message.addSubview(label)
         
+        let heart = HeartView()
+        let heartCote: CGFloat = width/10
+        heart.frame = CGRect(x: width/2 - heartCote/2, y: label.frame.maxY + 15, width: heartCote, height: heartCote)
+        heart.backgroundColor = UIColor.clear
+        message.addSubview(heart)
         
+        let yes = YesNoButton()
+        yes.isYes = true
         
         
         self.view.addSubview(message)
+        UIView.animate(withDuration: 0.4, delay: 0.6, options: [], animations: {
+            message.alpha = 1
+        }, completion: nil)
     }
     
     /// Faire apparaitre la demande d'achat de vie pour une nouvelle chance

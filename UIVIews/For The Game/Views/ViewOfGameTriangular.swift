@@ -147,7 +147,6 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
                 if isCaseABomb(i: i, j: j) {
                     
-                    returnAllTheCases()
                     delegateVC?.gameOver(win: false, didTapABomb: true) // End of game
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     

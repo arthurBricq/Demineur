@@ -158,7 +158,6 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                     
                     delegate?.gameOver(win: false, didTapABomb: true)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
-                    returnAllTheCases()
                     
                 } else {
                     ouvertureRecursive(line: i, column: j) // To open
