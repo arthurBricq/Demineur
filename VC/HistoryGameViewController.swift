@@ -627,46 +627,129 @@ extension HistoryGameViewController {
     
     /// Faire apparaitre le message qui demande une nouvelle chance
     func messageOne() {
+        
+        var blurEffect: UIBlurEffect
+        if #available(iOS 10.0, *) { //iOS 10.0 and above
+            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+        } else { //iOS 8.0 and above
+            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+        }
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = self.view.frame //your view that have any objects
+        blurView.alpha = 0
+        blurView.tag = -2
+        
         let message = UIView()
         
         // Details sur le layer
         message.backgroundColor = UIColor.white
         message.layer.borderColor = UIColor.gray.cgColor
-        message.layer.cornerRadius = 5
+        //message.layer.cornerRadius = 5
         message.layer.borderWidth = 2.0
         
-        // Positionnnement de la vue
+        let topSpace: CGFloat = 8
         let decH: CGFloat = 10
+        let verticalSeparator: CGFloat = 15
         let width = widthForThePopover() - decH
-        let height: CGFloat = 200
-        let x = self.view.frame.width/2 - width/2
-        let y = self.view.frame.height/2 - height/2 - 50
-        message.frame = CGRect(x: x, y: y, width: width, height: height)
-        message.alpha = 0
+        let heartCote: CGFloat = width/10
+        
+        // Ajout du nombre de coeurs
+        let secondHeart = HeartView()
+        secondHeart.backgroundColor = UIColor.clear
+        secondHeart.frame = CGRect(x: width - heartCote, y:  -heartCote - 5, width: heartCote, height: heartCote)
+        message.addSubview(secondHeart)
+        
+        let heartLabel = UILabel()
+        heartLabel.numberOfLines = 1
+        heartLabel.textAlignment = .right
+        heartLabel.text = String(bonus.vie)
+        heartLabel.font = UIFont(name: "PingFangSC-Regular", size: 30)
+        heartLabel.frame = CGRect(x: 0, y: -heartLabel.font.lineHeight - 5, width: width - heartCote - 10, height: heartLabel.font.lineHeight)
+        message.addSubview(heartLabel)
         
         // Population de la vue
         let label = UILabel()
-        label.font = UIFont(name: "PingFangSC-Regular", size: 30)
+        label.font = UIFont(name: "PingFangSC-Regular", size: 25)
         label.numberOfLines = 0
-        let labelW = width - 20
         label.text = "Souhaitez-vous utiliser une vie ?"
+        let labelW = width - 15
+        let labelH = label.text?.heightWithConstrainedWidth(width: labelW, font: label.font)
         label.textAlignment = .center
-        label.frame = CGRect(x: (message.bounds.width-labelW)/2, y: 10, width: labelW, height: label.font.lineHeight)
+        label.lineBreakMode = .byWordWrapping
+        label.frame = CGRect(x: (width-labelW)/2, y: topSpace, width: labelW, height: labelH!)
         message.addSubview(label)
         
         let heart = HeartView()
-        let heartCote: CGFloat = width/10
-        heart.frame = CGRect(x: width/2 - heartCote/2, y: label.frame.maxY + 15, width: heartCote, height: heartCote)
+        heart.frame = CGRect(x: width/2 - heartCote/2, y: label.frame.maxY + verticalSeparator, width: heartCote, height: heartCote)
         heart.backgroundColor = UIColor.clear
         message.addSubview(heart)
         
+        let buttonsWidth: CGFloat = width/3
+        let buttonsHeight: CGFloat = buttonsWidth/2
+        let separator: CGFloat = buttonsWidth/2
+        
         let yes = YesNoButton()
         yes.isYes = true
+        yes.tappedFunc = {
+            
+            bonus.addVie(amount: -1)
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                heartLabel.alpha = 0
+            }, completion: { (_) in
+                heartLabel.text = String(bonus.vie)
+                
+                UIView.animateKeyframes(withDuration: 3, delay: 0, options: [], animations: {
+                    
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1, animations: {
+                        heartLabel.alpha = 1
+                    })
+                    
+                }, completion: { (_) in
+                    
+                })
+                
+            })
+            
+        }
+        yes.frame = CGRect(x: width/2 - buttonsWidth - separator/2, y: heart.frame.maxY + verticalSeparator, width: buttonsWidth, height: buttonsHeight)
+        message.addSubview(yes)
         
+        let no = YesNoButton()
+        no.isYes = false
+        no.tappedFunc = {
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                blurView.alpha = 0
+            }, completion: { (_) in
+                blurView.removeFromSuperview()
+                self.openTheBombs()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                vc.precedentViewController = self
+                vc.win = false
+                vc.transitioningDelegate = self
+                vc.didTapABomb = true
+                vc.precedentGameIndex = self.gameIndex
+                self.present(vc, animated: true, completion: nil)
+            })
+            
+        }
+        no.frame = CGRect(x: yes.frame.maxX+separator, y: heart.frame.maxY + verticalSeparator, width: buttonsWidth, height: buttonsHeight)
+        message.addSubview(no)
         
-        self.view.addSubview(message)
-        UIView.animate(withDuration: 0.4, delay: 0.6, options: [], animations: {
-            message.alpha = 1
+        // Positionnnement de la vue
+        let height: CGFloat = 2*topSpace + label.bounds.height + heart.frame.height + yes.frame.height + 2*verticalSeparator
+        let x = self.view.frame.width/2 - width/2
+        let y = self.view.frame.height/2 - height/2 - 50
+        message.frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        blurView.contentView.addSubview(message)
+        self.view.addSubview(blurView)
+        UIView.animate(withDuration: 0.5, delay: 0.6, options: [], animations: {
+            blurView.alpha = 1
         }, completion: nil)
     }
     

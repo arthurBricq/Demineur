@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        bonus.addDrapeau(amount: 10)
 //        bonus.addBomb(amount: 10)
 //        bonus.addVerification(amount: 10)
+//        bonus.addVie(amount: 50)
         levelOfBonus.initializeLevels()
 //
 //        bonus.displayCurrentBonus()

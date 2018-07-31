@@ -12,9 +12,16 @@ import UIKit
 class YesNoButton: UIButton {
 
     var isYes: Bool = true
+    var tappedFunc: (()->Void)?
     
     override func draw(_ rect: CGRect) {
         OuiNonButton.drawCanvas1(frame: rect, resizing: .aspectFill, isOui: isYes)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        
+        tappedFunc?()
     }
 
 }
