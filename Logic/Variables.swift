@@ -30,7 +30,6 @@ class Section {
     var gameType = GameType.square
     var z0: Int = 10
     
-    
     var game1: OneGame?
     var game2: OneGame?
     var game3: OneGame?
