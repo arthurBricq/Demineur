@@ -291,6 +291,8 @@ class InfiniteGameViewController: UIViewController {
         gameIndex += 1
         updateLabels(numberOfFlags: returnCurrentGame().numberOfFlag, onNewGame: true)
         launchOption3TimerIfNeeded()
+        bonusChoiceView!.isTimerOn = returnCurrentGame().isTimerAllowed
+        bonusChoiceView!.activateBonusButtons()
         updateUserInteractionProperty()
         hasToFinishTheGame = true
         gameTimer.start(timeInterval: 1.0, id: "")
@@ -697,6 +699,8 @@ extension InfiniteGameViewController: variableCanCallGameVC {
             updateTriangularGameState(withFirstTouched: touch)
         }
         
+        bonusChoiceView!.activateBonusButtons()
+        
         
     }
 }
@@ -929,6 +933,7 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
         bonusChoiceView!.frame = CGRect(origin: origin, size: size)
         bonusChoiceView!.instantiateScrollView()
         bonusChoiceView!.vcDelegate = self
+        bonusChoiceView!.isTimerOn = returnCurrentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
     }
     

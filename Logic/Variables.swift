@@ -29,6 +29,8 @@ class Section {
     var m: Int = 8
     var gameType = GameType.square
     var z0: Int = 10
+    var incrementBomb: Int = 1
+    var additionalsFlags: [Int] = [2,2,2,2,2]
     
     var game1: OneGame?
     var game2: OneGame?

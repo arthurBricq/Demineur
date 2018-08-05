@@ -22,6 +22,7 @@ class BonusChoiceView: UIView {
     var vcDelegate: BonusButtonsCanCallVC?
     var scrollView: UIScrollView?
     private var isActivated: Bool = false
+    var isTimerOn: Bool = true
     
     func instantiateScrollView() {
         let tmp = UIScrollView()
@@ -121,13 +122,15 @@ class BonusChoiceView: UIView {
                 
                 let number = bonus.giveTheNumberOfBonus(forIndex: label.tag)
                 
-                if number == 0 {
+                if number == 0 || (!isTimerOn && view.index == 0) { // permet d'annuler le bouttons temps ou d'annuler les cases qui n'ont plus de bonus.
                     view.alpha = 0.5
                     view.isUserInteractionEnabled = false
                 } else {
                     view.alpha = 1.0
                     view.isUserInteractionEnabled = true
                 }
+
+                
                 
                 label.text = String(number)
             }

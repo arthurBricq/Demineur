@@ -472,13 +472,14 @@ extension HistoryGameViewController: variableCanCallGameVC {
             updateTriangularGameStepTwo(withFirstTouched: (touch.x,touch.y))
         }
         
-        bonusChoiceView?.activateBonusButtons()
+        bonusChoiceView!.activateBonusButtons()
         gameTimer.start(timeInterval: 1.0, id: "Clock")
         
     }
 }
 
 
+/// BONUS
 /// Actions des boutons bonus via une délégation.
 extension HistoryGameViewController: BonusButtonsCanCallVC {
     func tempsTapped() { // il faut ajouter du temps

@@ -55,7 +55,11 @@ class InfiniteGameManager {
     
     var iterators = InfiniteIterators()
     
-    /// Cette fonction retourne la prochaine section, pour une section donnée. Pour la première section, il faut rentrer -1 en paramètre d'entré. Le deuxième paramètre est le remplissemet : z / (n*m)
+    init() {
+        self.iterators = InfiniteIterators()
+    }
+    
+    /// Cette fonction retourne la prochaine section, pour une section donnée. Le deuxième paramètre est le remplissemet : z / (n*m)
     func nextSection(forLastRemplissement lastRemplissement: CGFloat, forSectionIndex index: Int = 1) -> Section {
         
         let section = Section.init()
