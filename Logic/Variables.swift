@@ -36,6 +36,44 @@ class Section {
     var game4: OneGame?
     var game5: OneGame?
     
+    /// Cette fonction doit-être appelée après que toutes les propriétés principales d'une section ont été mise à jour afin de modifier les jeux créer par les fonctions init.
+    /// Pas de input
+    func updateGamesOfThisSection() {
+        game1!.n = n
+        game1!.m = m
+        game1!.z = z0 + (1-1)*incrementBomb
+        game1!.gameType = gameType
+        game1!.numberOfFlag = game1!.z+additionalsFlags[0]
+        
+        game2!.n = n
+        game2!.m = m
+        game2!.z = z0 + (2-1)*incrementBomb
+        game2!.gameType = gameType
+        game2!.numberOfFlag = game2!.z+additionalsFlags[1]
+        
+        game3!.n = n
+        game3!.m = m
+        game3!.z = z0 + (3-1)*incrementBomb
+        game3!.gameType = gameType
+        game3!.numberOfFlag = game3!.z+additionalsFlags[2]
+
+        game4!.n = n
+        game4!.m = m
+        game4!.z = z0 + (4-1)*incrementBomb
+        game4!.gameType = gameType
+        game4!.numberOfFlag = game4!.z+additionalsFlags[3]
+        
+        game5!.n = n
+        game5!.m = m
+        game5!.z = z0 + (5-1)*incrementBomb
+        game5!.gameType = gameType
+        game5!.numberOfFlag = game5!.z+additionalsFlags[4]
+        
+    }
+    
+    
+    
+    
     init(n: Int, m: Int, z0: Int, gameType: GameType, game1: OneGame, game2: OneGame, game3: OneGame, game4: OneGame, game5: OneGame) {
         self.n = n
         self.m = m
@@ -100,7 +138,7 @@ struct ColorSetForOneGame {
 class OneGame  {
     
     var gameType: GameType = .square
-    var n: Int = 4
+    var n: Int = 4 
     var m: Int = 4
     var z: Int = 4
     var numberOfFlag: Int = 4
@@ -123,6 +161,15 @@ class OneGame  {
     var areNumbersShowed: Bool = true
     
     
+    
+    func describeThisGame() {
+        print("Type de partie: \(gameType)")
+        print("Présence du timer: \(isTimerAllowed)")
+        print("Option 1: \(option1)")
+        print("Option 2: \(option1)")
+        print("Option 3: \(option1)")
+        print("Affichage des indications: \(areNumbersShowed)")
+    }
     
     
     // No need to init, since all value have defaut values.
@@ -148,7 +195,10 @@ class OneGame  {
         self.option3Frequency = option3Frequency
         self.numberOfFlag = numberOfFlag
         self.isTimerAllowed = isTimerAllowed
-        
+    }
+    
+    convenience init() {
+        self.init(gameTypeWithNoneCases: .square, n: 10, m: 8, z: 10, numberOfFlag: 12, isTimerAllowed: true , totalTime: 90, option1: false, option2: false , option1Time: 0, option2Frequency: 0, option3: false , option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
     }
     
     convenience init(gameTypeWithNoOptionsWithoutNoneCases gameType: GameType,n: Int,m: Int,z: Int, totalTime: CGFloat) {

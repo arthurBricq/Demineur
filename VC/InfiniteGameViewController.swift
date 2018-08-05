@@ -17,7 +17,8 @@ class InfiniteGameViewController: UIViewController {
     
     override var prefersStatusBarHidden: Bool { return true }
     
-    //// MARK : outlets
+    //// OUTLETS
+    
     @IBOutlet weak var clockView: ClockView!
     @IBOutlet weak var bombCounterLabel: UILabel!
     @IBOutlet weak var bombView: BombViewDisplay!
@@ -29,23 +30,25 @@ class InfiniteGameViewController: UIViewController {
     var containerView = UIView()
     var blockingView: UIView? = UIView()
     
-    //// MARK : variables
+    
+    //// VARIABLES
     
     var sectionIndex: Int = 0
     var gameIndex: Int = 1
     var emptyGameState = [[Int]].init()
     var gameState = [[Int]].init() // Pour la partie en cours ...
-    
     var currentSection = Section(simpleHexGameWith: (11,9)) // création de la section courante
     
     var gameTimer = CountingTimer()
     var animationTimer = CountingTimer()
     
     var hasToFinishTheGame: Bool = true // This variable is used in order to call only once the function 'currentGameIsFinished'. Indeed, it is called many times for a very strange reason.
-    
     var bonusChoiceView: BonusChoiceView?
+    var gameManager = InfiniteGameManager() // permet de s'occuper de la logique du mode infinie.
     
-    //// MARK : actions of buttons
+    
+    //// ACTIONS
+    
     @IBAction func buttonReturn(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -81,7 +84,7 @@ class InfiniteGameViewController: UIViewController {
     }
     
     
-    //// MARK : all functions
+    //// FUNCTIONS
     
     override func viewDidLoad()
     {
@@ -96,7 +99,7 @@ class InfiniteGameViewController: UIViewController {
         
         /// Pour la position de la containerView
         containerView.backgroundColor = UIColor.clear
-        containerView.layer.borderColor = UIColor.black.cgColor
+        containerView.layer.borderColor = UIColor.red.cgColor
         containerView.layer.borderWidth = 0.0
         
     }
@@ -139,12 +142,12 @@ class InfiniteGameViewController: UIViewController {
         isTheGameStarted.value = false
         hasToFinishTheGame = true
         
-        if sectionIndex%3 == 0 {
-            currentSection = Section(simpleSquareGameWith: (12,9))
-        } else if sectionIndex%3 == 1 {
-            currentSection = Section(simpleHexGameWith: (12,9))
-        } else if sectionIndex%3 == 2 {
-            currentSection = Section(simpleTriangularGameWith: (8,11))
+        // On change de section
+        if sectionIndex == 0 {
+            currentSection = gameManager.nextSection(forLastRemplissement: 0.05)
+        } else {
+            let remplissement = CGFloat(currentSection.z0)/(CGFloat(currentSection.n)*CGFloat(currentSection.m))
+            currentSection = gameManager.nextSection(forLastRemplissement: remplissement)
         }
         
         // Actualisation des couleurs des parties courantes
@@ -197,6 +200,7 @@ class InfiniteGameViewController: UIViewController {
             // on supprime la partie courrante
             containerView.isUserInteractionEnabled = true
             containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
+            
             animateNewSection()
             
             launchOption3TimerIfNeeded()
@@ -300,10 +304,12 @@ class InfiniteGameViewController: UIViewController {
         /// Dimensionnement
         let maxWidth = self.containerView.frame.width
         let maxHeight = self.containerView.frame.height
+        
         let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
         /// Positionnnement
         
-        let origin = CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: containerView.frame.height/2 - height/2)
+        let origin = CGPoint(x: self.containerView.frame.width/2 - width/2, y: self.containerView.frame.height/2 - height/2)
+        // let origin = CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: containerView.frame.height/2 - height/2)
         let viewSize = CGSize(width: width, height: height)
         let gameToAdd = ViewOfGameSquare()
         gameToAdd.frame = CGRect(origin: origin, size: viewSize)
@@ -349,7 +355,8 @@ class InfiniteGameViewController: UIViewController {
         let (width, height) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
         // Positionnement
         let viewSize = CGSize(width: width, height: height)
-        let origin = (height > containerView.frame.height) ? CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: (containerView.frame.height/2 - height/2)*0.5) : CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: containerView.frame.height/2 - height/2)
+        let origin = CGPoint(x: self.containerView.frame.width/2 - width/2, y: self.containerView.frame.height/2 - height/2)
+        // let origin = (height > containerView.frame.height) ? CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: (containerView.frame.height/2 - height/2)*0.5) : CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: containerView.frame.height/2 - height/2)
         let gameToAdd = ViewOfGame_Hex()
         gameToAdd.frame = CGRect(origin: origin, size: viewSize)
         gameToAdd.layer.zPosition = 0
@@ -389,9 +396,12 @@ class InfiniteGameViewController: UIViewController {
         let maxWidth = self.containerView.bounds.width
         let maxHeight = self.containerView.bounds.height
         let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-        let origin = CGPoint(x: containerView.bounds.width/2 + (isFirst ? w/2 : -w/2), y: (containerView.bounds.height - h)/2)
+        let origin = CGPoint(x: self.containerView.frame.width/2 - w/2, y: self.containerView.frame.height/2 - h/2)
+
+//        let origin = CGPoint(x: containerView.bounds.width/2 + (isFirst ? w/2 : -w/2), y: (containerView.bounds.height - h)/2)
         
         let gameToAdd = ViewOfGameTriangular()
+
         gameToAdd.frame = CGRect(origin: origin, size: CGSize.init(width: w, height: h))
         gameToAdd.m = game.m
         gameToAdd.n = game.n
@@ -725,6 +735,7 @@ extension InfiniteGameViewController: GameViewCanCallVC {
 /// Gerer l'affichage de l'horloge
 extension InfiniteGameViewController: CountingTimerProtocol
 {
+    // Cette fonction est appelée par le timer toutes les secondes pour actualiser le temps de l'horloge. Si la chronomètre est terminée, la fonction arrete de le jeu.
     func timerFires(id: String) {
         
         if returnCurrentGame().isTimerAllowed {
