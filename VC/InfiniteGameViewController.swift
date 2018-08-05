@@ -44,7 +44,7 @@ class InfiniteGameViewController: UIViewController {
     
     var hasToFinishTheGame: Bool = true // This variable is used in order to call only once the function 'currentGameIsFinished'. Indeed, it is called many times for a very strange reason.
     var bonusChoiceView: BonusChoiceView?
-    var gameManager = InfiniteGameManager()
+    var gameManager = InfiniteGameManager() // permet de s'occuper de la logique du mode infinie.
     
     
     //// ACTIONS
@@ -100,7 +100,7 @@ class InfiniteGameViewController: UIViewController {
         /// Pour la position de la containerView
         containerView.backgroundColor = UIColor.clear
         containerView.layer.borderColor = UIColor.red.cgColor
-        containerView.layer.borderWidth = 1.0
+        containerView.layer.borderWidth = 0.0
         
     }
     
@@ -144,7 +144,7 @@ class InfiniteGameViewController: UIViewController {
         
         // On change de section
         if sectionIndex == 0 {
-            currentSection = gameManager.nextSection(forLastRemplissement: 0.1)
+            currentSection = gameManager.nextSection(forLastRemplissement: 0.05)
         } else {
             let remplissement = CGFloat(currentSection.z0)/(CGFloat(currentSection.n)*CGFloat(currentSection.m))
             currentSection = gameManager.nextSection(forLastRemplissement: remplissement)
