@@ -237,13 +237,13 @@ class OneGame  {
     
 }
 
-let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 6, m: 7, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 6, m: 9, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 9, z: 4, totalTime: 60),
+let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 7, z: 10, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 12, m: 9, z: 15, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 14, m: 10, z: 10, totalTime: 60),
                                 
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 11, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 13, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 8, m: 11, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 11, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 13, z: 4, totalTime: 60),
                                 
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 13, z: 4, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 15, z: 4, totalTime: 60),

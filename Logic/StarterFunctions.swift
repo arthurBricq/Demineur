@@ -16,12 +16,6 @@ import UIKit
 func dimensionTriangularTable(n: Int, m: Int, maxW: CGFloat, maxH: CGFloat) -> (w: CGFloat, h: CGFloat) {
     
     
-    
-    
-    
-    
-    
-    
     /// Case 1 : le favoris
     let w1 = maxW
     // à partir de w, on doit trouver a, h
@@ -172,13 +166,24 @@ func positionBombsHex(gameState: inout [[Int]], z: Int, withFirstTouched touch: 
     while remainingBombsToPlace > 0
     {
         
-        let newPosX = random(n)
-        let newPosY = random(gameState[newPosX].count)
+        let x = random(n)
+        let y = random(gameState[x].count)
         
-        if newPosX == touch.x && newPosY == touch.y { continue }
+        // conditions pour lesquelles il ne faut pas que cette position de bombe n'est pas bonne
+        let cond1 = (x == touch.x && y == touch.y)
+        let cond2 = (x-1 == touch.x && y == touch.y)
+        let cond3 = (x-1 == touch.x && y-1 == touch.y)
+        let cond4 = (x == touch.x && y-1 == touch.y)
+        let cond5 = (x+1 == touch.x && y-1 == touch.y)
+        let cond6 = (x+1 == touch.x && y == touch.y)
+        let cond7 = (x+1 == touch.x && y+1 == touch.y)
+        let cond8 = (x == touch.x && y+1 == touch.y)
+        let cond9 = (x-1 == touch.x && y+1 == touch.y)
         
-        if gameState[newPosX][newPosY] != -2 && gameState[newPosX][newPosY] != -1 {
-            gameState[newPosX][newPosY] = -1 // on rajoute une bombe.
+        if cond1 || cond2 || cond3 || cond4 || cond5 || cond6 || cond7 || cond8 || cond9  { continue }
+        
+        if gameState[x][y] != -2 && gameState[x][y] != -1 {
+            gameState[x][y] = -1 // on rajoute une bombe.
             remainingBombsToPlace -= 1
         }
         
@@ -291,7 +296,18 @@ func positionBombsSquare(in gameState: inout [[Int]], numberOfBombs z: Int, with
             y = random(gameState[0].count)
         } while (gameState[x][y] != 0)
         
-        if x == touch.x && y == touch.y {
+        // conditions pour lesquelles il ne faut pas que cette position de bombe n'est pas bonne
+        let cond1 = (x == touch.x && y == touch.y)
+        let cond2 = (x-1 == touch.x && y == touch.y)
+        let cond3 = (x-1 == touch.x && y-1 == touch.y)
+        let cond4 = (x == touch.x && y-1 == touch.y)
+        let cond5 = (x+1 == touch.x && y-1 == touch.y)
+        let cond6 = (x+1 == touch.x && y == touch.y)
+        let cond7 = (x+1 == touch.x && y+1 == touch.y)
+        let cond8 = (x == touch.x && y+1 == touch.y)
+        let cond9 = (x-1 == touch.x && y+1 == touch.y)
+
+        if cond1 || cond2 || cond3 || cond4 || cond5 || cond6 || cond7 || cond8 || cond9  {
             continue
         } else {
             gameState[x][y] = -1

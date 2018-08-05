@@ -66,9 +66,7 @@ class HistoryPresentationViewController: UIViewController  {
     var currentGameIndex: Int { return gameData.currentLevel }
     
     // retourne le nombre de niveau du chapitre en question.
-    var numberOfLevelInSection: Int {
-        return historyLevels.count
-    }
+    var numberOfLevelInSection: Int { return historyLevels.count }
     var color1 = colorForRGB(r: 66, g: 66, b: 66) //UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var color2 = UIColor.orange
     var selectedGameIndex: Int = 1
