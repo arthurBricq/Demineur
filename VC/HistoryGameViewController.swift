@@ -620,12 +620,22 @@ extension HistoryGameViewController {
             // faire apparaitre le message qui demande une nouvelle chance
             messageOne()
         } else {
-            if money.currentAmountOfMoney > 0 {
-                // faire apparaitre la demande d'achat de vie pour une nouvelle chance
+            
+            if money.getCurrentValue() > 0 {
                 messageTwo()
             } else {
-                // faire apparaitre la demande d'achat d'argent pour pouvoir acheter des vies
-                messageThree()
+                self.gameTimer.stop()
+                self.openTheBombs()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                vc.precedentViewController = self
+                vc.win = false
+                vc.transitioningDelegate = self
+                vc.didTapABomb = true
+                vc.precedentGameIndex = self.gameIndex
+                self.present(vc, animated: true, completion: nil)
             }
         }
     }
@@ -669,7 +679,8 @@ extension HistoryGameViewController {
         heartLabel.textAlignment = .right
         heartLabel.text = String(bonus.vie)
         heartLabel.font = UIFont(name: "PingFangSC-Regular", size: 30)
-        heartLabel.frame = CGRect(x: 0, y: -heartLabel.font.lineHeight - 5, width: width - heartCote - 10, height: heartLabel.font.lineHeight)
+        let diffHeight: CGFloat = heartLabel.font.lineHeight - heartCote
+        heartLabel.frame = CGRect(x: 0, y: secondHeart.frame.minY - diffHeight/2, width: width - heartCote - 10, height: heartLabel.font.lineHeight)
         message.addSubview(heartLabel)
         
         // Population de la vue
@@ -812,12 +823,177 @@ extension HistoryGameViewController {
     
     /// Faire apparaitre la demande d'achat de vie pour une nouvelle chance
     func messageTwo() {
+        var blurEffect: UIBlurEffect
+        if #available(iOS 10.0, *) { //iOS 10.0 and above
+            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+        } else { //iOS 8.0 and above
+            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+        }
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = self.view.frame //your view that have any objects
+        blurView.alpha = 0
+        blurView.tag = -2
         
-    }
-    
-    /// Faire apparaitre la demande d'achat d'argent pour pouvoir acheter des vies
-    func messageThree() {
+        let message = UIView()
         
+        // Details sur le layer
+        message.backgroundColor = UIColor.white
+        message.layer.borderColor = UIColor.gray.cgColor
+        message.layer.cornerRadius = 5
+        message.layer.borderWidth = 2.0
+        
+        let topSpace: CGFloat = 8
+        let decH: CGFloat = 10
+        let verticalSeparator: CGFloat = 15
+        let width = widthForThePopover() - decH
+        let coinCote: CGFloat = width/10
+        
+        // Ajout du nombre de pieces
+        let coinView = PieceView()
+        coinView.backgroundColor = UIColor.clear
+        coinView.frame = CGRect(x: width - coinCote, y: -coinCote - 5, width: coinCote, height: coinCote)
+        message.addSubview(coinView)
+        
+        let coinLabel = UILabel()
+        coinLabel.numberOfLines = 1
+        coinLabel.textAlignment = .right
+        coinLabel.text = String(money.currentAmountOfMoney)
+        coinLabel.font = UIFont(name: "PingFangSC-Regular", size: 26)
+        let diffHeight: CGFloat = coinLabel.font.lineHeight - coinCote
+        coinLabel.frame = CGRect(x: 0, y: coinView.frame.minY - diffHeight/2, width: width - coinCote, height: coinLabel.font.lineHeight)
+        message.addSubview(coinLabel)
+        
+        // Population de la vue
+        let label = UILabel()
+        label.font = UIFont(name: "PingFangSC-Regular", size: 25)
+        label.numberOfLines = 0
+        label.text = "Souhaitez-vous acheter une vie ?"
+        let labelW = width - 15
+        let labelH = label.text?.heightWithConstrainedWidth(width: labelW, font: label.font)
+        label.textAlignment = .center
+        label.lineBreakMode = .byWordWrapping
+        label.frame = CGRect(x: (width-labelW)/2, y: topSpace, width: labelW, height: labelH!)
+        message.addSubview(label)
+        
+        let buttonToBuyWidth: CGFloat = width/3
+        let buttonsHeight: CGFloat = buttonToBuyWidth/3
+        let buttonNoWidth: CGFloat = buttonsHeight*2
+        let separator: CGFloat = buttonToBuyWidth/2
+        
+        let buttonToBuy = AchatBoutiqueBouton()
+        buttonToBuy.prix = String(allBonus[4].prixAchat)
+        buttonToBuy.frame = CGRect(x: width/2 - buttonToBuyWidth/2 - buttonNoWidth/2 - separator/2, y: label.frame.maxY + verticalSeparator, width: buttonToBuyWidth, height: buttonsHeight)
+        buttonToBuy.tappedFuncIfEnoughMoney = {
+            money.addMoney(amount: -allBonus[4].prixAchat)
+            
+            var viewToRemove: BombView?
+            var viewOfGame: UIView?
+            
+            switch self.game.gameType {
+            case .square:
+                viewOfGame = self.viewOfGameSquare
+            case .hexagonal:
+                viewOfGame = self.viewOfGameHex
+            case .triangular:
+                viewOfGame = self.viewOfGameTriangular
+            }
+            
+            for subview in viewOfGame!.subviews {
+                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                    for subview2 in subview.subviews {
+                        if subview2 is BombView {
+                            viewToRemove = subview2 as? BombView
+                        }
+                    }
+                }
+            }
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                coinLabel.alpha = 0
+            }, completion: { (_) in
+                coinLabel.text = String(money.getCurrentValue())
+                
+                UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
+                    
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.15, animations: {
+                        coinLabel.alpha = 1
+                    })
+                    
+                    UIView.addKeyframe(withRelativeStartTime: 0.15, relativeDuration: 0.55, animations: {
+                        blurView.alpha = 0
+                    })
+                    
+                    UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3, animations: {
+                        viewToRemove?.alpha = 0
+                    })
+                    
+                }, completion: { (_) in
+                    
+                    blurView.removeFromSuperview()
+                    viewToRemove?.removeFromSuperview()
+                    self.gameTimer.play()
+                    
+                    if self.game.gameType == .hexagonal {
+                        self.viewOfGameHex!.isUserInteractionEnabled = true
+                        if self.game.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        }
+                    } else if self.game.gameType == .square {
+                        self.viewOfGameSquare!.isUserInteractionEnabled = true
+                        if self.game.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        }
+                    } else if self.game.gameType == .triangular {
+                        self.viewOfGameTriangular!.isUserInteractionEnabled = true
+                        if self.game.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        }
+                    }
+                    
+                })
+                
+            })
+            
+        }
+        message.addSubview(buttonToBuy)
+        
+        let no = YesNoButton()
+        no.isYes = false
+        no.tappedFunc = {
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                blurView.alpha = 0
+            }, completion: { (_) in
+                blurView.removeFromSuperview()
+                self.gameTimer.stop()
+                self.openTheBombs()
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                vc.precedentViewController = self
+                vc.win = false
+                vc.transitioningDelegate = self
+                vc.didTapABomb = true
+                vc.precedentGameIndex = self.gameIndex
+                self.present(vc, animated: true, completion: nil)
+            })
+            
+        }
+        no.frame = CGRect(x: buttonToBuy.frame.maxX+separator, y: label.frame.maxY + verticalSeparator, width: buttonNoWidth, height: buttonsHeight)
+        message.addSubview(no)
+        
+        // Positionnnement de la vue
+        let height: CGFloat = 2*topSpace + label.bounds.height /*+ heart.frame.height*/ + no.frame.height + 2*verticalSeparator
+        let x = self.view.frame.width/2 - width/2
+        let y = self.view.frame.height/2 - height/2 - 50
+        message.frame = CGRect(x: x, y: y, width: width, height: height)
+        
+        blurView.contentView.addSubview(message)
+        self.view.addSubview(blurView)
+        UIView.animate(withDuration: 0.5, delay: 0.6, options: [], animations: {
+            blurView.alpha = 1
+        }, completion: nil)
     }
     
     /// Retourne la largeur que doit avoir le popover pour etre exactement à la taille des parties
