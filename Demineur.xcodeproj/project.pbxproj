@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E02A1362109DF580040BA88 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E02A1342109DF580040BA88 /* Tutorial.storyboard */; };
 		4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */; };
+		4E36C10F211DD78900F810B7 /* InfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */; };
 		4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */; };
 		4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */; };
 		4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F2120FE07A300EB5978 /* PieceView.swift */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		4E02A1352109DF580040BA88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Demineur/Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
 		4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTutorialViewController.swift; sourceTree = "<group>"; };
+		4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinitePresentationViewController.swift; sourceTree = "<group>"; };
 		4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerButton.swift; sourceTree = "<group>"; };
 		4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchatBoutiqueBouton.swift; sourceTree = "<group>"; };
 		4E3A4F2120FE07A300EB5978 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */,
 				4EA2FAD6210624090039846E /* WinLooseViewController.swift */,
 				4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */,
+				4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */,
 				9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */,
 				4E51200A210B2B2F00736375 /* YesNoButton.swift in Sources */,
+				4E36C10F211DD78900F810B7 /* InfinitePresentationViewController.swift in Sources */,
 				4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */,
 				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,

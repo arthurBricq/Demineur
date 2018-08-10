@@ -40,7 +40,8 @@ class WinLooseViewController: UIViewController {
     /// FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        menuIconButton.isUserInteractionEnabled = true
+        replayIconButton.isUserInteractionEnabled = true
         
     }
     
@@ -61,6 +62,9 @@ class WinLooseViewController: UIViewController {
         blurView.frame = self.view.frame //your view that have any objects
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
+        
+        
+        
         
         if win {
             updateWinDisplay()
@@ -91,9 +95,7 @@ class WinLooseViewController: UIViewController {
         if didTapABomb {
             label.text = "Dommage ! Vous avez touchez une bombe. "
             lastButton.isUserInteractionEnabled = true
-            lastButton.isHidden = false
-            lastButton.setTitle("NOUVELLE CHANCE", for: .normal)
-            lastButton.addTarget(self, action: #selector(newChance), for: .touchUpInside)
+            lastButton.isHidden = true
         } else {
             label.text = "Dommage ! Le temps est écoulé."
             lastButton.isUserInteractionEnabled = false
@@ -118,12 +120,7 @@ class WinLooseViewController: UIViewController {
     @IBAction func rejouerButtonTapped(_ sender: Any) {
         if precedentViewController is InfiniteGameViewController {
             let gameViewController = precedentViewController as! InfiniteGameViewController
-            gameViewController.gameTimer.stop()
-            gameViewController.containerView.subviews.last?.removeFromSuperview()
-            gameViewController.containerView.subviews.last?.removeFromSuperview()
-            gameViewController.sectionIndex = 0
             gameViewController.restartTheGame()
-            gameViewController.startNewSection()
         } else if precedentViewController is HistoryGameViewController {
             let gameViewController = precedentViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()
@@ -149,10 +146,7 @@ class WinLooseViewController: UIViewController {
         gameViewController.startANewGame()
         self.dismiss(animated: true, completion: nil)
     }
-    
-    /// Pour continuer avec une vie en moins
-    @objc func newChance() {
-    }
+  
     
     
     // NAVIGATIONS

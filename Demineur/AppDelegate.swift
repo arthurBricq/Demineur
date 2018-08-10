@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         gameData.getCurrentValue() // on récupère le mode histoire
         
         
-        initiateANewDevice()
+        initiateANewDevice(argent: 10000, lives: 0, level: 20)
         
         options.displayOptions()
         

@@ -15,19 +15,19 @@ let levelOfBonus = LevelBonusManager()
 let gameData = GameDataManager()
 
 /// Cette fonction est appelée si on souhaite ré-initialiser toutes les propriétés d'une partie correctement
-func initiateANewDevice() {
+func initiateANewDevice(argent: Int, lives: Int, level: Int) {
     // 1. Niveau du joueur
-    gameData.currentLevel = 20
+    gameData.currentLevel = level
     // 2. Niveaux des bonus
     levelOfBonus.initializeLevels(atLevel: 0) // indice zéro pour les premiers bonus
     // 3. Argent du joueur
-    money.currentAmountOfMoney = 10000
+    money.currentAmountOfMoney = argent
     // 4. Ajouter quelques bonus au joueur
     bonus.temps = 10
     bonus.drapeau = 10
     bonus.bombe = 10
     bonus.verification = 10
-    bonus.vie = 10
+    bonus.vie = lives
 }
 
 

@@ -147,8 +147,8 @@ class HistoryGameViewController: UIViewController {
             createANewSquareGameStepOne()
             
             let gameView = ViewOfGameSquare()
-            gameView.layer.borderWidth = 2.0
-            gameView.layer.borderColor = UIColor.red.cgColor
+            //gameView.layer.borderWidth = 2.0
+            //gameView.layer.borderColor = game.colors.strokeColor.cgColor
             let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
             let viewSize = CGSize(width: width, height: height)
             let origin = CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
@@ -185,8 +185,8 @@ class HistoryGameViewController: UIViewController {
             createANewHexGameStepOne() // première étape de la création
             
             let gameView = ViewOfGame_Hex()
-            gameView.layer.borderWidth = 2.0
-            gameView.layer.borderColor = UIColor.red.cgColor
+            //gameView.layer.borderWidth = 2.0
+            //gameView.layer.borderColor = UIColor.red.cgColor
             let center = self.view.center
             let (w,h) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
             let origin = CGPoint(x: center.x - w/2, y: center.y - h/2)
@@ -228,8 +228,8 @@ class HistoryGameViewController: UIViewController {
             
             let gameView = ViewOfGameTriangular()
             
-            gameView.layer.borderWidth = 2.0
-            gameView.layer.borderColor = UIColor.red.cgColor
+            //gameView.layer.borderWidth = 2.0
+            //gameView.layer.borderColor = UIColor.red.cgColor
             
             let center = self.view.center
             let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
@@ -595,7 +595,7 @@ extension HistoryGameViewController {
     }
 }
 
-
+// Gere les transitions vers les autres VC
 extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -818,7 +818,7 @@ extension HistoryGameViewController {
         blurView.contentView.addSubview(message)
         self.view.addSubview(blurView)
         UIView.animate(withDuration: 0.5, delay: 0.6, options: [], animations: {
-            blurView.alpha = 1
+            blurView.alpha = 0.8
         }, completion: nil)
     }
     
@@ -993,7 +993,7 @@ extension HistoryGameViewController {
         blurView.contentView.addSubview(message)
         self.view.addSubview(blurView)
         UIView.animate(withDuration: 0.5, delay: 0.6, options: [], animations: {
-            blurView.alpha = 1
+            blurView.alpha = 0.8
         }, completion: nil)
     }
     
