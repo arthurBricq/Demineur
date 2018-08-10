@@ -677,7 +677,7 @@ extension InfiniteGameViewController {
     func updateTriangularGameState(withFirstTouched touch: (x:Int, y: Int)) {
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
         let z = currentViewOfGame.z
-        positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: z, withFirstTouched: touch)
+        positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: z, withFirstTouched: touch, isTriangular: true)
         createNumbersToDisplayTriangle(in: &currentViewOfGame.gameState)
         currentViewOfGame.updateAllNumbers()
         

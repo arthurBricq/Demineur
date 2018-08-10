@@ -26,6 +26,7 @@ class InfiniteIterators {
     }
 }
 
+/// Il s'agit juste des niveaux les uns après les autres qui sont utilisés par le jeu.
 struct ListeDesMondes {
     static let carreMap: [(n: Int, m: Int)] = [ (9,7),
                                                 (10,8),
@@ -50,7 +51,7 @@ struct ListeDesMondes {
     
 }
 
-
+/// Un élément de cette classe permet d'organiser le jeu infinie. Il est constitué des iterateurs pour les parties, et d'une fonction qui permet de trouver toutes les parties d'une section suivante.
 class InfiniteGameManager {
     
     var iterators = InfiniteIterators()
@@ -292,16 +293,16 @@ class InfiniteGameManager {
          Les points représentent les pondérations des probabilités.
          
          Parties possibles:
-         - Partie basique : aucune option, aucun timer ••• 4 points
-         - Partie chrono : aucune option, avec timer ••• 2 points
-         - Partie option1 : juste l'option 1, sans timer ••• 2 points
-         - Partie option2 : juste l'option 2, sans timer ••• 2 points
-         - Partie option3 : juste l'option 3, sans timer ••• 2 points
-         - Partie option1 chrono : juste l'option 1, avec timer ••• 1 point
-         - Partie option2 chrono :  juste l'option 2, avec timer ••• 1 point
-         - Partie option3 chrono : juste l'option 3, avec timer ••• 1 point
-         - Partie azheilmer : option 1 + option 2 sans timer ••• 1 point
-         - Partie hardcore : option 1 + option 2 + option 3 ••• 1 point
+         - Partie basique : aucune option, aucun timer •••
+         - Partie chrono : aucune option, avec timer •••
+         - Partie option1 : juste l'option 1, sans timer •••
+         - Partie option2 : juste l'option 2, sans timer •••
+         - Partie option3 : juste l'option 3, sans timer •••
+         - Partie option1 chrono : juste l'option 1, avec timer •••
+         - Partie option2 chrono :  juste l'option 2, avec timer •••
+         - Partie option3 chrono : juste l'option 3, avec timer •••
+         - Partie azheilmer : option 1 + option 2 sans timer •••
+         - Partie hardcore : option 1 + option 2 + option 3 •••
          
          somme des points = 17 points
          
@@ -323,39 +324,41 @@ class InfiniteGameManager {
         
         let tmp2 = random(x1+x2+x3+x4+x5+x6+x7+x8+x9+x10)
         
+        let option1Time: CGFloat = 15
+        
         var stringToDisplay: String = ""
         
         switch tmp2 {
         case 0..<x1: // partie basique.
             stringToDisplay = "partie basique"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: option1Time, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1..<x1+x2: // partie basique chrono.
             stringToDisplay = "partie basique chrono"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 60, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 60, option1: false, option2: false, option1Time: option1Time, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1+x2..<x1+x2+x3: // partie option 1 avec 10 secondes d'interval.
             stringToDisplay = "partie option 1 avec 10 secondes d'interval"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: true, option2: false, option1Time: 10, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: true, option2: false, option1Time: option1Time, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3..<x1+x2+x3+x4: // partie option 2 avec 0.2 de fréquence de points d'interrogations.
             stringToDisplay = "partie option 2 avec 0.2 de fréquence de points d'interrogations"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: false, option2: true, option1Time: 10, option2Frequency: 0.2, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: false, option2: true, option1Time: option1Time, option2Frequency: 0.2, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3+x4..<x1+x2+x3+x4+x5: // partie option 3 avec 0.2 de fréquence et un interval de 5 secondes
             stringToDisplay = "partie option 3 avec 0.2 de fréquence et un interval de 5 secondes"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 10, option2Frequency: 0.2, option3: true, option3Frequency: 0.2, option3Time: 5, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: option1Time, option2Frequency: 0.2, option3: true, option3Frequency: 0.2, option3Time: 5, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3+x4+x5..<x1+x2+x3+x4+x5+x6: // partie option 1 avec 10 secondes d'interval & avec timer
             stringToDisplay = "partie option 1 avec 10 secondes d'interval & avec timer"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 90, option1: true, option2: false, option1Time: 10, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 90, option1: true, option2: false, option1Time: option1Time, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3+x4+x5+x6..<x1+x2+x3+x4+x5+x6+x7: // partie option 2 avec 0.2 de fréquence de points d'interrogations & avec timer
             stringToDisplay = "partie option 2 avec 0.2 de fréquence de points d'interrogations & avec timer"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: 10, option2Frequency: 0.2, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 90, option1: false, option2: true, option1Time: option1Time, option2Frequency: 0.2, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3+x4+x5+x6+x7..<x1+x2+x3+x4+x5+x6+x7+x8: // partie option 3 avec 0.2 de fréquence et un interval de 5 secondes & avec timer
             stringToDisplay = "partie option 3 avec 0.2 de fréquence et un interval de 5 secondes & avec timer"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 90, option1: false, option2: false, option1Time: 10, option2Frequency: 0.2, option3: true, option3Frequency: 0.2, option3Time: 5, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: true, totalTime: 90, option1: false, option2: false, option1Time: option1Time, option2Frequency: 0.2, option3: true, option3Frequency: 0.2, option3Time: 5, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3+x4+x5+x6+x7+x8..<x1+x2+x3+x4+x5+x6+x7+x8+x9: // Partie azheilmer
             stringToDisplay = "Partie azheilmer"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: true, option2: true, option1Time: 10, option2Frequency: 0.2, option3: false, option3Frequency: 0.0, option3Time: 0, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: true, option2: true, option1Time: option1Time, option2Frequency: 0.2, option3: false, option3Frequency: 0.0, option3Time: 0, noneCases: [], areNumbersShowed: true)
         case x1+x2+x3+x4+x5+x6+x7+x8+x9..<x1+x2+x3+x4+x5+x6+x7+x8+x9+x10: // Partie hardcore
             stringToDisplay = "Partie hardcore"
-            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: true, option2: true, option1Time: 10, option2Frequency: 0.2, option3: true, option3Frequency: 0.2, option3Time: 5, noneCases: [], areNumbersShowed: true)
+            game = OneGame(gameTypeWithNoneCases: .square, n: 18, m: 18, z: 18, numberOfFlag: 18, isTimerAllowed: false, totalTime: 0, option1: true, option2: true, option1Time: option1Time, option2Frequency: 0.2, option3: true, option3Frequency: 0.2, option3Time: 5, noneCases: [], areNumbersShowed: true)
         default:
             fatalError("Problème dans la génération aléatoire ")
         }

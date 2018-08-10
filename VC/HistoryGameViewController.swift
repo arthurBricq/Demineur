@@ -366,7 +366,7 @@ extension HistoryGameViewController {
     }
     
     func updateTriangularGameStepTwo(withFirstTouched touch: (x: Int, y: Int)) {
-        positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
+        positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y), isTriangular: true)
         createNumbersToDisplayTriangle(in: &gameState)
         viewOfGameTriangular!.gameState = gameState
         viewOfGameTriangular!.updateAllNumbers()

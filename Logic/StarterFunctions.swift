@@ -285,33 +285,73 @@ func positionNoneCaseSquare(noneCases: [(Int, Int)], in gameState: inout [[Int]]
 }
 
 /// Square : Choisit des positions pour les bombes aléatoires.
-func positionBombsSquare(in gameState: inout [[Int]], numberOfBombs z: Int, withFirstTouched touch: (x: Int, y: Int)) {
+func positionBombsSquare(in gameState: inout [[Int]], numberOfBombs z: Int, withFirstTouched touch: (x: Int, y: Int), isTriangular: Bool = false) {
     var x: Int
     var y: Int
     var nbOfBombsRemaining: Int = z
-    
+        
     while nbOfBombsRemaining > 0 {
+        
+        // On trouve une bombe
         repeat {
             x = random(gameState.count)
             y = random(gameState[0].count)
         } while (gameState[x][y] != 0)
         
-        // conditions pour lesquelles il ne faut pas que cette position de bombe n'est pas bonne
-        let cond1 = (x == touch.x && y == touch.y)
-        let cond2 = (x-1 == touch.x && y == touch.y)
-        let cond3 = (x-1 == touch.x && y-1 == touch.y)
-        let cond4 = (x == touch.x && y-1 == touch.y)
-        let cond5 = (x+1 == touch.x && y-1 == touch.y)
-        let cond6 = (x+1 == touch.x && y == touch.y)
-        let cond7 = (x+1 == touch.x && y+1 == touch.y)
-        let cond8 = (x == touch.x && y+1 == touch.y)
-        let cond9 = (x-1 == touch.x && y+1 == touch.y)
-
-        if cond1 || cond2 || cond3 || cond4 || cond5 || cond6 || cond7 || cond8 || cond9  {
-            continue
+        
+        // On vérifie qu'elle n'est pas en contact du tout avec la case qui a été touché
+        if isTriangular {
+            
+            var cond1: Bool = false // devient vrai s'il faut passer la boucle
+            
+            let i = touch.x ; let j = touch.y
+            let minI = i - 1 ; let maxI = i + 1
+            let minJ = j - 2 ; let maxJ = j + 2
+            
+            for a in minI...maxI {
+                for b in minJ...maxJ {
+                    if a >= 0 && a < gameState.count && b >= 0 && b < gameState[0].count
+                    {
+                        switch triangularButtonIsOfType(i: i, j: j) {
+                        case 1:
+                            if a == i+1 && (b == j-2 || b == j+2) { continue }
+                            // on balaie les cases autour de la première case tapée
+                            if a == x && b == y { cond1 = true }
+                        case 2:
+                            if a == i-1 && (b == j-2 || b == j+2) { continue }
+                            if a == x && b == y { cond1 = true }
+                        default:
+                            break
+                        }
+                    }
+                }
+            }
+            
+            if cond1 {
+                continue
+            } else {
+                gameState[x][y] = -1
+                nbOfBombsRemaining -= 1
+            }
+            
         } else {
-            gameState[x][y] = -1
-            nbOfBombsRemaining -= 1
+            // conditions pour lesquelles il ne faut pas que cette position de bombe n'est pas bonne
+            let cond1 = (x == touch.x && y == touch.y)
+            let cond2 = (x-1 == touch.x && y == touch.y)
+            let cond3 = (x-1 == touch.x && y-1 == touch.y)
+            let cond4 = (x == touch.x && y-1 == touch.y)
+            let cond5 = (x+1 == touch.x && y-1 == touch.y)
+            let cond6 = (x+1 == touch.x && y == touch.y)
+            let cond7 = (x+1 == touch.x && y+1 == touch.y)
+            let cond8 = (x == touch.x && y+1 == touch.y)
+            let cond9 = (x-1 == touch.x && y+1 == touch.y)
+            
+            if cond1 || cond2 || cond3 || cond4 || cond5 || cond6 || cond7 || cond8 || cond9  {
+                continue
+            } else {
+                gameState[x][y] = -1
+                nbOfBombsRemaining -= 1
+            }
         }
     }
 }

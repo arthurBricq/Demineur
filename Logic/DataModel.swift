@@ -14,6 +14,25 @@ let bonus = BonusManager()
 let levelOfBonus = LevelBonusManager()
 let gameData = GameDataManager()
 
+/// Cette fonction est appelée si on souhaite ré-initialiser toutes les propriétés d'une partie correctement
+func initiateANewDevice() {
+    // 1. Niveau du joueur
+    gameData.currentLevel = 20
+    // 2. Niveaux des bonus
+    levelOfBonus.initializeLevels(atLevel: 0) // indice zéro pour les premiers bonus
+    // 3. Argent du joueur
+    money.currentAmountOfMoney = 10000
+    // 4. Ajouter quelques bonus au joueur
+    bonus.temps = 10
+    bonus.drapeau = 10
+    bonus.bombe = 10
+    bonus.verification = 10
+    bonus.vie = 10
+}
+
+
+
+
 
 /// Pour sauvegarder l'argent de la partie.
 class MoneyManager {
@@ -101,10 +120,9 @@ class MoneyManager {
 }
 
 
-/// Pour sauvegarder l'argent de la partie.
 class GameDataManager {
     
-    var currentLevel: Int = 0 { // il s'agit de la variable qui contient l'argent du jeu. C'est celle-ci qu'il faut modifier lorsque l'on gagne de l'argent. On peut la modifier en utilisant des fonctions déjà construites ()
+    var currentLevel: Int = 0 {
         didSet {
             save()
         }
@@ -176,7 +194,6 @@ class GameDataManager {
 }
 
 
-
 /// Pour sauvegarder les options du jeu
 class OptionsManager {
     
@@ -191,7 +208,6 @@ class OptionsManager {
             save()
         }
     }
-    
     
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
@@ -271,14 +287,13 @@ class OptionsManager {
 
 
 /// Pour sauvegarder les bonus, il faut utiliser les fonctions de cette classe afin d'ajouter ou de soustraire des bonus pour le joueur.
-/// ATTENTION IL FAUT MODIFIER LES VALEURS DES BONUS AVEC LES FONCTIONS ADD ///
 class BonusManager {
     
-    var temps: Int = 1
-    var drapeau: Int = 1
-    var bombe: Int = 1
-    var verification: Int = 1
-    var vie: Int = 1
+    var temps: Int = 1 { didSet { save() }}
+    var drapeau: Int = 1 { didSet { save() }}
+    var bombe: Int = 1 { didSet { save() }}
+    var verification: Int = 1 { didSet { save() }}
+    var vie: Int = 1 { didSet { save() }}
 
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
@@ -424,11 +439,11 @@ class BonusManager {
 /// Pour sauvegarder le niveau des bonus, il faut utiliser les fonctions de cette classe afin d'ajouter ou de soustraire des bonus pour le joueur.
 class LevelBonusManager {
     
-    var temps: Int = 1
-    var drapeau: Int = 1
-    var bombe: Int = 1
-    var vie: Int = 1
-    var verification: Int = 1
+    var temps: Int = 1 { didSet { save() } }
+    var drapeau: Int = 1 { didSet { save() } }
+    var bombe: Int = 1 { didSet { save() } }
+    var vie: Int = 1 { didSet { save() } }
+    var verification: Int = 1 { didSet { save() } }
     
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
@@ -544,13 +559,12 @@ class LevelBonusManager {
         print("verif.: \(self.verification)")
     }
     
-    func initializeLevels() {
-        self.temps = 0
-        self.drapeau = 0
-        self.bombe = 0
-        self.vie = 0
-        self.verification = 0
-        
+    func initializeLevels(atLevel level: Int ) {
+        self.temps = level
+        self.drapeau = level
+        self.bombe = level
+        self.vie = level
+        self.verification = level
         self.save()
     }
     

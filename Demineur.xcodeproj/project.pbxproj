@@ -57,6 +57,8 @@
 		4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA920F8979B00740480 /* Timer.swift */; };
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
+		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
+		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
@@ -118,6 +120,8 @@
 		4EA7FDA920F8979B00740480 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
+		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				4EA7FD6D20F894F600740480 /* PauseViewController.swift */,
 				4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */,
 				4EA2FAD6210624090039846E /* WinLooseViewController.swift */,
+				4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 				4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */,
 				4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */,
 				4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */,
+				4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -396,6 +402,8 @@
 				4EA7FDA820F8978C00740480 /* Variables.swift in Sources */,
 				4EA7FD8420F8960700740480 /* HexCase.swift in Sources */,
 				4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */,
+				4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */,
+				4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */,
 				4EA7FDAE20F8987700740480 /* BombView.swift in Sources */,
 				4EA7FD8820F8962B00740480 /* SquareCase.swift in Sources */,
 				4EA7FDA220F8974E00740480 /* Functions.swift in Sources */,
@@ -581,7 +589,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 39B3D4SKXY;
+				DEVELOPMENT_TEAM = A669ZDMYDX;
 				INFOPLIST_FILE = Demineur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -599,7 +607,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 39B3D4SKXY;
+				DEVELOPMENT_TEAM = A669ZDMYDX;
 				INFOPLIST_FILE = Demineur/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
