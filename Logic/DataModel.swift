@@ -384,7 +384,11 @@ class BonusManager {
     }
     
     func addVie(amount: Int) {
-        updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe, vie: vie+amount, verification: verification)
+        if vie + amount < 0 {
+            updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe, vie: 0, verification: verification)
+        } else {
+            updateBonusQuantity(temps: temps, drapeau: drapeau, bombe: bombe, vie: vie+amount, verification: verification)
+        }
     }
     
     func addVerification(amount: Int) {

@@ -115,7 +115,6 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
                     
                     if gameState[i][j] == -1 { // ******* fin du jeu ****** //
                         
-                        returnAllTheCases()
                         delegate!.gameOver(win: false, didTapABomb: true)
                         callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                         return

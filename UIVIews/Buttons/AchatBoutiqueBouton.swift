@@ -15,6 +15,8 @@ class AchatBoutiqueBouton: UIButton {
     @IBInspectable var prix: String = "1000"
     @IBInspectable var textsize: CGFloat = 60
     
+    var tappedFuncIfEnoughMoney: (()->Void)?
+    
     override func draw(_ rect: CGRect) {
         BoutonAchat.drawCanvas1(frame: rect, resizing: .aspectFill, textColor: textColor, prix: prix, textsize: textsize)
     }
@@ -29,9 +31,15 @@ class AchatBoutiqueBouton: UIButton {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1.0
-        }
+        }, completion: { (_) in
+            
+            if money.getCurrentValue() >= Int(self.prix)! {
+                self.tappedFuncIfEnoughMoney?()
+            }
+            
+        })
         
     }
     
