@@ -37,8 +37,6 @@ class AchatBoutiqueBouton: UIButton {
             
             if money.getCurrentValue() >= Int(self.prix)! {
                 self.tappedFuncIfEnoughMoney?()
-            } else {
-                // pop up d'achat de pieces
             }
             
         })
