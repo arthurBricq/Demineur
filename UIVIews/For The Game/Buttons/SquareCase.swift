@@ -392,7 +392,6 @@ extension SquareCase: LimitedTimerProtocol {
             
             superViewDelegate?.buttonHaveBeenTapped(i: i, j: j, marking: true)
             
-            
             markingTimer.stop()
             isUserInteractionEnabled = false
             
