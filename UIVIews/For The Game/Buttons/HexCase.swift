@@ -370,7 +370,13 @@ class HexCase: UIButton
                 
                 // si la case était une bombe
                 if gameState[i][j] == -1 {
-                    let cross = BombView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), percentOfCase: 0.4, lineWidth: 4, color: UIColor.red)
+                    var color: UIColor?
+                    if marked {
+                        color = colorForRGB(r: 100, g: 200, b: 150)
+                    } else {
+                        color = UIColor.red
+                    }
+                    let cross = BombView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), percentOfCase: 0.4, lineWidth: 4, color: color!)
                     self.addSubview(cross)
                     
                     let alphaAnimation = CABasicAnimation(keyPath: "opacity")
