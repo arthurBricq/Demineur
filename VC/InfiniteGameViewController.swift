@@ -500,6 +500,8 @@ class InfiniteGameViewController: UIViewController {
         if returnCurrentGame().isTimerAllowed {
             
             gameTimer.start(timeInterval: 1.0, id: "Clock")
+            gameTimer.delegate = self
+            
             UIView.animate(withDuration: 0.25) {
                 self.clockView.alpha = 1
             }
@@ -674,9 +676,7 @@ extension InfiniteGameViewController: CountingTimerProtocol
 {
     // Cette fonction est appelée par le timer toutes les secondes pour actualiser le temps de l'horloge. Si la chronomètre est terminée, la fonction arrete de le jeu.
     func timerFires(id: String) {
-        
-        print(id)
-        
+                
         if returnCurrentGame().isTimerAllowed {
             let pourcentage: CGFloat = gameTimer.counter / CGFloat(returnCurrentGame().totalTime) // ratio of time used.
             
