@@ -10,26 +10,30 @@ import UIKit
 
 class InfinitePresentationViewController: UIViewController {
 
+    override var prefersStatusBarHidden: Bool { return true }
+    
+    @IBOutlet weak var headerView: HeaderInfinite!
+    @IBOutlet weak var iLine: LineView!
+    @IBOutlet weak var iLineLeading: NSLayoutConstraint!
+    @IBOutlet weak var iLineTop: NSLayoutConstraint!
+    @IBOutlet weak var bestScoreLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        // Positionnement et propriété de la ligne
+        iLine.backgroundColor = UIColor.clear
+        iLine.strokeColor = headerView.color2
+        iLine.lineWidth = 2
+        iLineLeading.constant = (4.5*headerView.frame.width/163) - iLine.frame.width/2 + iLine.lineWidth/2
+        iLineTop.constant += 13.5*headerView.frame.height/57
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func playButton(_ sender: Any) {
     }
-    */
-
+    
+    @IBAction func scoreButton(_ sender: Any) {
+    }
+    
 }

@@ -61,6 +61,8 @@
 		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
+		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
+		9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
@@ -125,6 +127,8 @@
 		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
+		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
+		9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInfinite.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				4EA7FD6B20F894E200740480 /* MenuViewController.swift */,
+				4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */,
 				4EA7FD6F20F8951300740480 /* InfiniteGameViewController.swift */,
 				4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */,
 				4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */,
@@ -224,7 +229,6 @@
 				4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */,
 				4EA2FAD6210624090039846E /* WinLooseViewController.swift */,
 				4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */,
-				4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -300,6 +304,7 @@
 				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
 				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
+				9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 				9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */,
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
 				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
+				9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */,
 			);
 			path = CustomTransitions;
 			sourceTree = "<group>";
@@ -430,11 +436,13 @@
 				4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */,
 				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
+				9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */,
 				4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */,
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
+				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,

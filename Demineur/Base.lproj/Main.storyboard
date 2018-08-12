@@ -156,7 +156,7 @@
                                     <color key="titleColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ylO-j7-Tgn" kind="show" identifier="ToInfiniteGame" id="Mrt-qU-bVf"/>
+                                    <segue destination="aHY-U2-Vt6" kind="show" id="vqh-fm-UJh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBg-Hy-KC7">
@@ -1513,11 +1513,114 @@
                     <view key="view" contentMode="scaleToFill" id="lBc-z1-Fzu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xN-u6-O4e" customClass="HeaderInfinite" customModule="Demineur" customModuleProvider="target">
+                                <rect key="frame" x="40" y="170" width="300" height="105"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQo-WQ-wOG" customClass="LineView" customModule="Demineur" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="10" height="333.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="10" id="0IO-Rm-85k"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isVertical" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="9xN-u6-O4e" secondAttribute="height" multiplier="163:57" id="DTF-J5-Eih"/>
+                                    <constraint firstItem="EQo-WQ-wOG" firstAttribute="leading" secondItem="9xN-u6-O4e" secondAttribute="leading" id="Xdv-dZ-SJY"/>
+                                    <constraint firstItem="EQo-WQ-wOG" firstAttribute="top" secondItem="9xN-u6-O4e" secondAttribute="top" id="oMG-nF-dXN"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K11-oL-8zG">
+                                <rect key="frame" x="70" y="305" width="73" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xCW-si-IY7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
+                                <state key="normal" title="JOUER">
+                                    <color key="titleColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="playButton:" destination="aHY-U2-Vt6" eventType="touchUpInside" id="14f-GX-SKD"/>
+                                    <segue destination="ylO-j7-Tgn" kind="show" id="kn7-IV-hDF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6G-M4-K4d">
+                                <rect key="frame" x="70" y="375" width="90" height="40"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
+                                <state key="normal" title="SCORES">
+                                    <color key="titleColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="scoreButton:" destination="aHY-U2-Vt6" eventType="touchUpInside" id="0qm-vL-fl4"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEILLEUR SCORE :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qt-lE-6Ru">
+                                <rect key="frame" x="70" y="445" width="206" height="40"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
+                                <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6v-6d-ilT">
+                                <rect key="frame" x="284" y="445" width="14" height="40"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
+                                <color key="textColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ixc-4M-RNR">
+                                <rect key="frame" x="15" y="15" width="56" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="uaB-g7-AuZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Light" family="PingFang SC" pointSize="22"/>
+                                <state key="normal" title="Menu">
+                                    <color key="titleColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="MenuButtonTapped:" destination="b43-F8-wXT" eventType="touchUpInside" id="8I8-g6-zpl"/>
+                                    <segue destination="f1x-H4-S8R" kind="unwind" unwindAction="unwindToMenuWithSegue:" id="EZ5-1c-vWA"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="G6v-6d-ilT" firstAttribute="centerY" secondItem="4Qt-lE-6Ru" secondAttribute="centerY" id="5Bl-i8-jOu"/>
+                            <constraint firstItem="9xN-u6-O4e" firstAttribute="leading" secondItem="AWv-hb-zw1" secondAttribute="leading" constant="40" id="6d9-I0-nvd"/>
+                            <constraint firstItem="G6v-6d-ilT" firstAttribute="height" secondItem="4Qt-lE-6Ru" secondAttribute="height" id="Ebi-O9-y80"/>
+                            <constraint firstItem="4Qt-lE-6Ru" firstAttribute="height" secondItem="d6G-M4-K4d" secondAttribute="height" id="FBU-bi-0Mn"/>
+                            <constraint firstItem="EQo-WQ-wOG" firstAttribute="height" secondItem="lBc-z1-Fzu" secondAttribute="height" multiplier="0.5" id="G9Y-Wc-Xgs"/>
+                            <constraint firstItem="d6G-M4-K4d" firstAttribute="top" secondItem="K11-oL-8zG" secondAttribute="bottom" constant="30" id="QYa-gM-e0T"/>
+                            <constraint firstItem="4Qt-lE-6Ru" firstAttribute="top" secondItem="d6G-M4-K4d" secondAttribute="bottom" constant="30" id="YcO-d4-kiA"/>
+                            <constraint firstItem="4Qt-lE-6Ru" firstAttribute="leading" secondItem="d6G-M4-K4d" secondAttribute="leading" id="dDR-Sm-tcQ"/>
+                            <constraint firstItem="K11-oL-8zG" firstAttribute="top" secondItem="9xN-u6-O4e" secondAttribute="bottom" constant="30" id="eNw-3I-4fg"/>
+                            <constraint firstItem="d6G-M4-K4d" firstAttribute="leading" secondItem="K11-oL-8zG" secondAttribute="leading" id="gWn-pq-BNR"/>
+                            <constraint firstItem="9xN-u6-O4e" firstAttribute="width" secondItem="lBc-z1-Fzu" secondAttribute="width" multiplier="0.8" id="ia4-h2-kQ7"/>
+                            <constraint firstItem="Ixc-4M-RNR" firstAttribute="top" secondItem="lBc-z1-Fzu" secondAttribute="top" constant="15" id="mJ7-aD-rD7"/>
+                            <constraint firstItem="Ixc-4M-RNR" firstAttribute="leading" secondItem="AWv-hb-zw1" secondAttribute="leading" constant="15" id="qgU-Fw-xRi"/>
+                            <constraint firstItem="K11-oL-8zG" firstAttribute="leading" secondItem="9xN-u6-O4e" secondAttribute="leading" constant="30" id="rE2-OP-ohm"/>
+                            <constraint firstItem="9xN-u6-O4e" firstAttribute="top" secondItem="AWv-hb-zw1" secondAttribute="top" constant="150" id="sGA-iS-gyk"/>
+                            <constraint firstItem="d6G-M4-K4d" firstAttribute="height" secondItem="K11-oL-8zG" secondAttribute="height" id="xSz-Kd-NFs"/>
+                            <constraint firstItem="G6v-6d-ilT" firstAttribute="leading" secondItem="4Qt-lE-6Ru" secondAttribute="trailing" constant="8" id="xvj-PS-ZCh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="AWv-hb-zw1"/>
                     </view>
+                    <connections>
+                        <outlet property="bestScoreLabel" destination="G6v-6d-ilT" id="1U8-E7-xXm"/>
+                        <outlet property="headerView" destination="9xN-u6-O4e" id="edN-H2-ClI"/>
+                        <outlet property="iLine" destination="EQo-WQ-wOG" id="lBs-Xe-GWG"/>
+                        <outlet property="iLineLeading" destination="Xdv-dZ-SJY" id="Wvg-3C-ZYy"/>
+                        <outlet property="iLineTop" destination="oMG-nF-dXN" id="N5q-zR-gAK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tE0-uP-WIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="f1x-H4-S8R" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1591" y="3026"/>
         </scene>

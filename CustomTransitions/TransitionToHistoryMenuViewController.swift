@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransitionToHistoryMenuViewController: NSObject, UIViewControllerAnimatedTransitioning {
+class TransitionToHistoryPresentationViewController: NSObject, UIViewControllerAnimatedTransitioning {
     
     var animationDuration: TimeInterval = 1
     var presenting = true

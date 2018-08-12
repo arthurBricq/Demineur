@@ -436,31 +436,33 @@ extension HistoryGameViewController: CountingTimerProtocol {
         
         if id == "Clock" {
             
-            let pourcentage: CGFloat = gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
-            
-            clockView.pourcentage = pourcentage // et actualisation via un didSet
-            
-            if pourcentage == 1 {
-                gameTimer.stop()
-                gameOver(win: false, didTapABomb: false)
-                openTheBombs()
+            if game.isTimerAllowed {
+                let pourcentage: CGFloat = gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
                 
+                clockView.pourcentage = pourcentage // et actualisation via un didSet
                 
-                // show all the bombs
-                for subview in view.subviews {
-                    if subview is ViewOfGameSquare {
-                        let gameView = subview as! ViewOfGameSquare
-                        gameView.returnAllTheCases()
-                    } else if subview is ViewOfGame_Hex {
-                        let gameView = subview as! ViewOfGame_Hex
-                        gameView.returnAllTheCases()
-                    } else if subview is ViewOfGameTriangular {
-                        let gameView = subview as! ViewOfGameTriangular
-                        gameView.returnAllTheCases()
+                if pourcentage == 1 {
+                    gameTimer.stop()
+                    gameOver(win: false, didTapABomb: false)
+                    openTheBombs()
+                    
+                    
+                    // show all the bombs
+                    for subview in view.subviews {
+                        if subview is ViewOfGameSquare {
+                            let gameView = subview as! ViewOfGameSquare
+                            gameView.returnAllTheCases()
+                        } else if subview is ViewOfGame_Hex {
+                            let gameView = subview as! ViewOfGame_Hex
+                            gameView.returnAllTheCases()
+                        } else if subview is ViewOfGameTriangular {
+                            let gameView = subview as! ViewOfGameTriangular
+                            gameView.returnAllTheCases()
+                        }
                     }
+                    
+                    
                 }
-                
-                
             }
         }
     }
