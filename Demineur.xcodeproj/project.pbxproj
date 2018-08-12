@@ -61,6 +61,7 @@
 		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
+		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
@@ -125,6 +126,7 @@
 		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
+		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */,
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
 				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
+				9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */,
 			);
 			path = CustomTransitions;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
+				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,

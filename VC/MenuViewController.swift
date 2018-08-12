@@ -28,6 +28,8 @@ class MenuViewController: UIViewController {
         
         if segue.destination is HistoryPresentationViewController {
             segue.destination.transitioningDelegate = self
+        } else if segue.destination is BoutiqueViewController {
+            segue.destination.transitioningDelegate = self
         }
         
     }
@@ -47,6 +49,11 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
             transition.animationDuration = 1.5
             transition.presenting = true
             return transition
+        } else if presented is BoutiqueViewController {
+            let transition = TransitionToBoutique()
+            transition.animationDuration = 1.5
+            transition.presenting = true
+            return transition
         }
         
         return nil
@@ -56,6 +63,11 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         
         if dismissed is HistoryPresentationViewController {
             let transition = TransitionToHistoryMenuViewController()
+            transition.animationDuration = 1.5
+            transition.presenting = false
+            return transition
+        } else if dismissed is BoutiqueViewController {
+            let transition = TransitionToBoutique()
             transition.animationDuration = 1.5
             transition.presenting = false
             return transition
