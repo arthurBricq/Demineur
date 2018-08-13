@@ -63,6 +63,7 @@
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
 		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
 		9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */; };
+		9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
@@ -129,6 +130,7 @@
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
 		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
 		9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInfinite.swift; sourceTree = "<group>"; };
+		9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfinitePresentationViewController.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			isa = PBXGroup;
 			children = (
 				9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */,
+				9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */,
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
 				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
 				9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */,
@@ -398,6 +401,7 @@
 				9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */,
 				4E51200A210B2B2F00736375 /* YesNoButton.swift in Sources */,
 				4E36C10F211DD78900F810B7 /* InfinitePresentationViewController.swift in Sources */,
+				9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */,
 				4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */,
 				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
