@@ -370,7 +370,7 @@ let allBonus: [BonusDescription] = [
     
     BonusDescription(name: "Bombe", niveau: 0, descriptions: ["Trouver une bombe avec une chance de 50%.","Trouver une bombe !","Trouver 2 bombes avec une chance de 50%"],descriptionsAmeliorations: ["Trouvez-là avec 100% de chance !", "+ 1 bombe à 50% de chances"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
     
-    BonusDescription(name: "Verification", niveau: 0 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"],descriptionsAmeliorations: ["Tous les drapeaux posés."], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
+    BonusDescription(name: "Verification", niveau: 0 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"],descriptionsAmeliorations: ["Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
     
     BonusDescription(name: "Vie", niveau: 0, descriptions: ["Obtenez une seconde chance", "Vous surviverez à 2 bombes", "3 échecs ne vous abatteront pas !"],descriptionsAmeliorations: ["Survivez à 2 bombes !", "Survivez à 3 bombes"], prixAchat: 2500, prixAmelioration: [20000, 50000] )
     

@@ -14,6 +14,9 @@ let bonus = BonusManager()
 let levelOfBonus = LevelBonusManager()
 let gameData = GameDataManager()
 
+
+
+
 /// Cette fonction est appelée si on souhaite ré-initialiser toutes les propriétés d'une partie correctement
 func initiateANewDevice(argent: Int, lives: Int, level: Int) {
     // 1. Niveau du joueur
@@ -29,9 +32,6 @@ func initiateANewDevice(argent: Int, lives: Int, level: Int) {
     bonus.verification = 10
     bonus.vie = lives
 }
-
-
-
 
 
 /// Pour sauvegarder l'argent de la partie.
