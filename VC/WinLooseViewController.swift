@@ -110,9 +110,9 @@ class WinLooseViewController: UIViewController {
     /// Pour retourner au menu
     @IBAction func menuButtonTapped(_ sender: Any) {
         if precedentViewController is InfiniteGameViewController {
-            self.performSegue(withIdentifier: "BackToMenu", sender: nil)
+            self.performSegue(withIdentifier: "BackToInfinitePresentation", sender: nil)
         } else if precedentViewController is HistoryGameViewController {
-            self.performSegue(withIdentifier: "BackToPresentation", sender: nil)
+            self.performSegue(withIdentifier: "BackToHistoryPresentation", sender: nil)
         }
     }
     
