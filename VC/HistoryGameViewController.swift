@@ -574,11 +574,23 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
     
     
     
-    //// A FAIRE ////
     func verificationTapped() { // il faut verifier les drapeaux posée
         if bonus.verification > 0 {
             bonus.addVerification(amount: -1)
             bonusChoiceView!.updateTheNumberLabels()
+            
+            switch game.gameType {
+            case .square:
+                viewOfGameSquare?.verificationBonusFunc()
+                
+            case .hexagonal:
+                viewOfGameHex?.verificationBonusFunc()
+                
+            case .triangular:
+                viewOfGameTriangular?.verificationBonusFunc()
+                
+            }
+            
         } else {
             return
         }

@@ -165,9 +165,9 @@ class PauseViewController: UIViewController {
     @IBAction func menuButtonTapped(_ sender: Any) {
         // retour au menu
         if pausedGameViewController is InfiniteGameViewController {
-            self.performSegue(withIdentifier: "BackToMenu", sender: nil)
+            self.performSegue(withIdentifier: "BackToInfinitePresentation", sender: nil)
         } else if pausedGameViewController is HistoryGameViewController {
-            self.performSegue(withIdentifier: "BackToPresentation", sender: nil)
+            self.performSegue(withIdentifier: "BackToHistoryPresentation", sender: nil)
         }
         
     }

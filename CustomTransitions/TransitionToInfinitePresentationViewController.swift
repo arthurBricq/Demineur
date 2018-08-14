@@ -113,7 +113,7 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 
                 UIView.addKeyframe(withRelativeStartTime: x1+x2+x3, relativeDuration: x4, animations: {
                     firstLine.frame = CGRect(x: firstX, y: finalPoint.y - lineFrameWidth/2, width: finalPoint.x-firstX+1, height: lineFrameWidth)
-                    secondLine.frame = CGRect(x: finalPoint.x - lineFrameWidth/2, y: finalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-40)
+                    secondLine.frame = CGRect(x: finalPoint.x - lineFrameWidth/2, y: finalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-30)
                 })
                 
                 UIView.addKeyframe(withRelativeStartTime: x1+x2+x3+x4, relativeDuration: x5, animations: {
@@ -139,7 +139,7 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 secondLine.removeFromSuperview()
                 
                 firstLine.frame = CGRect(x: 0, y: convertedFinalPoint.y - lineFrameWidth/2, width: convertedFinalPoint.x+1, height: lineFrameWidth)
-                secondLine.frame = CGRect(x: convertedFinalPoint.x - lineFrameWidth/2, y: convertedFinalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-40)
+                secondLine.frame = CGRect(x: convertedFinalPoint.x - lineFrameWidth/2, y: convertedFinalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-30)
                 
                 toView.addSubview(firstLine)
                 toView.addSubview(secondLine)

@@ -930,7 +930,8 @@
                         <outlet property="pageControl" destination="qsc-bP-kpu" id="SZr-y9-Iim"/>
                         <outlet property="pauseView" destination="5Gz-Ys-46b" id="sfC-9p-NB3"/>
                         <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToMenu" unwindAction="unwindToMenuWithSegue:" id="rXL-MZ-8nX"/>
-                        <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="wMs-TG-NvC"/>
+                        <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToHistoryPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="wMs-TG-NvC"/>
+                        <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToInfinitePresentation" unwindAction="unwindToInfinitePresentationWithSegue:" id="W62-Rs-sV4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oY5-xV-psk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1152,8 +1153,9 @@
                         <outlet property="menuIconButton" destination="jjV-Um-fU6" id="cc4-8G-VwZ"/>
                         <outlet property="replayButton" destination="5Pe-4b-bG5" id="2cF-y5-Nv9"/>
                         <outlet property="replayIconButton" destination="C13-he-Eko" id="nVK-x5-8e5"/>
-                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="1pp-TJ-cdv"/>
+                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToHistoryPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="1pp-TJ-cdv"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="GoToNextLevel" unwindAction="unwindToHistoryGameViewControllerWithSegue:" id="qJC-CT-7Hx"/>
+                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToInfinitePresentation" unwindAction="unwindToInfinitePresentationWithSegue:" id="tNA-gg-7AB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMt-rR-zEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
