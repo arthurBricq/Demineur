@@ -123,6 +123,7 @@ class InfiniteGameViewController: UIViewController {
     */
     func restartTheGame() {
         gameIndex = 1
+        gameManager.iterators = InfiniteIterators() // remettre les iterateurs à 0
         sectionIndex = 0
         gameTimer.stop()
         containerView.subviews.last?.removeFromSuperview()
@@ -144,10 +145,10 @@ class InfiniteGameViewController: UIViewController {
         
         // On change de section
         if sectionIndex == 0 {
-            currentSection = gameManager.nextSection(forLastRemplissement: 0.05)
+            currentSection = gameManager.nextSection(forLastRemplissement: 0.05, forSectionIndex: sectionIndex)
         } else {
             let remplissement = CGFloat(currentSection.z0)/(CGFloat(currentSection.n)*CGFloat(currentSection.m))
-            currentSection = gameManager.nextSection(forLastRemplissement: remplissement)
+            currentSection = gameManager.nextSection(forLastRemplissement: remplissement, forSectionIndex: sectionIndex)
         }
         
         // Actualisation des couleurs des parties courantes

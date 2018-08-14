@@ -64,6 +64,8 @@ class InfiniteGameManager {
     func nextSection(forLastRemplissement lastRemplissement: CGFloat, forSectionIndex index: Int = 1) -> Section {
         
         let section = Section.init()
+        let level1: Int = 3
+        let level2: Int = 5
         
         //// 1. Trouver le type de case
         // 20% de chance pour triangle
@@ -143,6 +145,7 @@ class InfiniteGameManager {
         if newRemplissement < 0 { newRemplissement = 0.1 } // ne pas avoir zero ou moins
         let zTmp = newRemplissement * CGFloat(section.n) * CGFloat(section.m)
         var z = floor(zTmp)
+        if section.gameType == .triangular { z -= (index <= level2) ? 4 : 2 }
         if z < 3 { z = 3 } // numéro minimal de bombes
         section.z0 = Int(z)
         
@@ -157,6 +160,7 @@ class InfiniteGameManager {
         case .triangular:
             print("itérateur: \(iterators.triangularGameDimensionsIterator)")
         }
+        
         print("Dimensions: \(section.n),\(section.m)")
         print("Nombre de bombes: \(section.z0) et \(zTmp)")
         print("Last remplissement: \(lastRemplissement)")
@@ -187,8 +191,6 @@ class InfiniteGameManager {
         let mediumPonderation = (4,3,2,2,2,3,3,3,1,1)
         let hardPonderation = (1,2,3,3,3,4,4,4,2,2)
 
-        let level1: Int = 3
-        let level2: Int = 5
         
         // Reglages des options et du temps de jeu.
         print("Parties à jouer")
@@ -219,6 +221,7 @@ class InfiniteGameManager {
             section.game5 = createOneGame(forDensity: hardPonderation)
         }
         
+        if section.gameType == .triangular { section.incrementBomb = section.incrementBomb/2}
         
         
         //// 5. Trouver le nombre de drapeaux suplémentaire des parties

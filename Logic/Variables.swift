@@ -41,33 +41,36 @@ class Section {
     /// Cette fonction doit-être appelée après que toutes les propriétés principales d'une section ont été mise à jour afin de modifier les jeux créer par les fonctions init.
     /// Pas de input
     func updateGamesOfThisSection() {
+        
+        
+        
         game1!.n = n
         game1!.m = m
-        game1!.z = z0 + (1-1)*incrementBomb
+        game1!.z = z0 + Int((1-1)*floor(Double(incrementBomb)))
         game1!.gameType = gameType
         game1!.numberOfFlag = game1!.z+additionalsFlags[0]
         
         game2!.n = n
         game2!.m = m
-        game2!.z = z0 + (2-1)*incrementBomb
+        game2!.z = z0 + Int((2-1)*floor(Double(incrementBomb)))
         game2!.gameType = gameType
         game2!.numberOfFlag = game2!.z+additionalsFlags[1]
         
         game3!.n = n
         game3!.m = m
-        game3!.z = z0 + (3-1)*incrementBomb
+        game3!.z = z0 + Int((3-1)*floor(Double(incrementBomb)))
         game3!.gameType = gameType
         game3!.numberOfFlag = game3!.z+additionalsFlags[2]
 
         game4!.n = n
         game4!.m = m
-        game4!.z = z0 + (4-1)*incrementBomb
+        game4!.z = z0 + Int((4-1)*floor(Double(incrementBomb)))
         game4!.gameType = gameType
         game4!.numberOfFlag = game4!.z+additionalsFlags[3]
         
         game5!.n = n
         game5!.m = m
-        game5!.z = z0 + (5-1)*incrementBomb
+        game5!.z = z0 + Int((5-1)*floor(Double(incrementBomb)))
         game5!.gameType = gameType
         game5!.numberOfFlag = game5!.z+additionalsFlags[4]
         
