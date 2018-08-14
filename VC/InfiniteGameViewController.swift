@@ -551,8 +551,7 @@ class InfiniteGameViewController: UIViewController {
     
 }
 
-// *********** Creation d'une nouvelle partie **************** //
-// Ces fonctions sont appelée lorsqu'on a besoin de créer une nouvelle partie.
+// MARK: - Création d'une nouvelle partie
 extension InfiniteGameViewController {
     
     ///// SQUARE
@@ -591,7 +590,7 @@ extension InfiniteGameViewController {
 }
 
 
-/// Gérer la création de la partie après le premier touché.
+// MARK: - Gere la création de la partie après le premier touché.
 extension InfiniteGameViewController: variableCanCallGameVC {
     /// Cette fonction est appelée une fois que l'utilisateur tappe pour la première fois sur l'écran. Elle permet
     func createTheGame(withFirstTouched touch: (x: Int, y: Int))
@@ -610,7 +609,7 @@ extension InfiniteGameViewController: variableCanCallGameVC {
 }
 
 
-/// Gerer la fin de la partie (lancée par le gameView)
+// MARK: - Gere la fin de la partie (lancée par le gameView)
 extension InfiniteGameViewController: GameViewCanCallVC {
     func gameOver(win: Bool, didTapABomb: Bool) {
         if win {
@@ -669,7 +668,7 @@ extension InfiniteGameViewController: GameViewCanCallVC {
     }
 }
 
-/// Gerer l'affichage de l'horloge
+// MARK: - Gere l'affichage de l'horloge
 extension InfiniteGameViewController: CountingTimerProtocol
 {
     // Cette fonction est appelée par le timer toutes les secondes pour actualiser le temps de l'horloge. Si la chronomètre est terminée, la fonction arrete de le jeu.
@@ -703,7 +702,7 @@ extension InfiniteGameViewController: CountingTimerProtocol
 }
 
 
-// Gere les animations
+// MARK: - Gere les animations
 extension InfiniteGameViewController {
     
     func animateNewSection() {
@@ -814,7 +813,7 @@ extension InfiniteGameViewController: CAAnimationDelegate {
     }
 }
 
-
+// MARK: - Les actions des bonus
 extension InfiniteGameViewController: BonusButtonsCanCallVC {
     
     func addTheBonusChoiceView() {
@@ -880,7 +879,6 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
     
     
     
-    //// A FAIRE ////
     func bombeTapped() { // il faut marquer des bombes
         
         
@@ -931,23 +929,37 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
     
     
     
-    //// A FAIRE ////
     func verificationTapped() { // il faut verifier les drapeaux posée
         if bonus.verification > 0 {
+            
             bonus.addVerification(amount: -1)
             bonusChoiceView!.updateTheNumberLabels()
+            
+            let viewOfGame = containerView.subviews.last!
+            
+            switch returnCurrentGame().gameType {
+            case .square:
+                let viewOfGameSquare = viewOfGame as! ViewOfGameSquare
+                viewOfGameSquare.verificationBonusFunc()
+                
+            case .hexagonal:
+                let viewOfGameHex = viewOfGame as! ViewOfGame_Hex
+                
+            case .triangular:
+                let viewOfGameTriangular = viewOfGame as! ViewOfGameTriangular
+                
+            }
+            
         } else {
             return
         }
-        
-        
         
     }
     
     
 }
 
-// Gere les transitions vers les autres VC
+// MARK: - Gere les transitions vers les autres VC
 extension InfiniteGameViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -964,7 +976,7 @@ extension InfiniteGameViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
-/// PARTIE POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
+// MARK: - Message à la fin de partie si le joueur tape sur une bombe.
 extension InfiniteGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
