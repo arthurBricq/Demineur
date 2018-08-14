@@ -11,7 +11,7 @@ import UIKit
 class HeaderInfinite: UIView {
 
     var color1: UIColor = UIColor(red: 0.678, green: 0.359, blue: 0.020, alpha: 1.000)
-    var color2: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
+    var color2: UIColor = colorForRGB(r: 66, g: 66, b: 66)
     
     override func draw(_ rect: CGRect) {
         InfiniHeader.drawCanvas1(frame: rect, resizing: .aspectFill, color: color1, color2: color2)
