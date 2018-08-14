@@ -944,9 +944,11 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
                 
             case .hexagonal:
                 let viewOfGameHex = viewOfGame as! ViewOfGame_Hex
+                viewOfGameHex.verificationBonusFunc()
                 
             case .triangular:
                 let viewOfGameTriangular = viewOfGame as! ViewOfGameTriangular
+                viewOfGameTriangular.verificationBonusFunc()
                 
             }
             

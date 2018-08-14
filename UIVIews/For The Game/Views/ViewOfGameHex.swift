@@ -403,6 +403,47 @@ extension ViewOfGame_Hex {
         
     }
     
+    func verificationBonusFunc() {
+        for subview in subviews {
+            
+            guard let hexCase = subview as? HexCase else { continue }
+            
+            if hexCase.caseState == .marked || hexCase.caseState == .markedByComputer {
+                
+                for subview2 in hexCase.subviews {
+                    guard let flag = subview2 as? FlagView else { continue }
+                    if flag.tag != 1 {
+                        UIView.animate(withDuration: 0.2, animations: {
+                            flag.frame = CGRect(x: -5, y: -5, width: flag.frame.width + 10, height: flag.frame.height + 10)
+                        }) { (_) in
+                            if levelOfBonus.verification == 0 && random(2) == 1 {
+                                UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                    flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                }, completion: nil)
+                                
+                            } else if self.isCaseABomb(i: hexCase.i, j: hexCase.j) {
+                                UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                    flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                }, completion: { (_) in
+                                    flag.removeFromSuperview()
+                                    flag.color = colorForRGB(r: 60, g: 160, b: 100)
+                                    flag.tag = 1
+                                    hexCase.addSubview(flag)
+                                    flag.setNeedsDisplay()
+                                })
+                            } else {
+                                UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                    flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                }, completion: nil)
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+    }
     
 }
 
