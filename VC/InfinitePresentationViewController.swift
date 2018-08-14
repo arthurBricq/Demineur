@@ -13,9 +13,6 @@ class InfinitePresentationViewController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     
     @IBOutlet weak var headerView: HeaderInfinite!
-    @IBOutlet weak var iLine: LineView!
-    @IBOutlet weak var iLineLeading: NSLayoutConstraint!
-    @IBOutlet weak var iLineTop: NSLayoutConstraint!
     @IBOutlet weak var bestScoreLabel: UILabel!
     
     override func viewDidLoad() {
@@ -23,11 +20,15 @@ class InfinitePresentationViewController: UIViewController {
 
         
         // Positionnement et propriété de la ligne
-        iLine.backgroundColor = UIColor.clear
+        /*iLine.backgroundColor = UIColor.clear
         iLine.strokeColor = headerView.color2
         iLine.lineWidth = 2
         iLineLeading.constant = (4.5*headerView.frame.width/163) - iLine.frame.width/2 + iLine.lineWidth/2
         iLineTop.constant += 13.5*headerView.frame.height/57
+        
+        leftLine.backgroundColor = UIColor.clear
+        leftLine.strokeColor = headerView.color2
+        leftLine.lineWidth = 2*/
     }
     
     @IBAction func playButton(_ sender: Any) {

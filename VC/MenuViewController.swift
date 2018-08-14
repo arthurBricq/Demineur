@@ -26,9 +26,7 @@ class MenuViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is HistoryPresentationViewController {
-            segue.destination.transitioningDelegate = self
-        } else if segue.destination is BoutiqueViewController {
+        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController {
             segue.destination.transitioningDelegate = self
         }
         
@@ -49,6 +47,11 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
             transition.animationDuration = 1.5
             transition.presenting = true
             return transition
+        } else if presented is InfinitePresentationViewController {
+            let transition = TransitionToInfinitePresentationViewController()
+            transition.animationDuration = 1.5
+            transition.presenting = true
+            return transition
         } else if presented is BoutiqueViewController {
             let transition = TransitionToBoutique()
             transition.animationDuration = 1.5
@@ -63,6 +66,11 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         
         if dismissed is HistoryPresentationViewController {
             let transition = TransitionToHistoryPresentationViewController()
+            transition.animationDuration = 1.5
+            transition.presenting = false
+            return transition
+        } else if dismissed is InfinitePresentationViewController {
+            let transition = TransitionToInfinitePresentationViewController()
             transition.animationDuration = 1.5
             transition.presenting = false
             return transition

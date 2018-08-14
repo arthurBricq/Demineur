@@ -1516,30 +1516,13 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xN-u6-O4e" customClass="HeaderInfinite" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="40" y="170" width="300" height="105"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EQo-WQ-wOG" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="10" height="333.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="10" id="0IO-Rm-85k"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
-                                                <real key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isVertical" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
-                                </subviews>
                                 <color key="backgroundColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9xN-u6-O4e" secondAttribute="height" multiplier="163:57" id="DTF-J5-Eih"/>
-                                    <constraint firstItem="EQo-WQ-wOG" firstAttribute="leading" secondItem="9xN-u6-O4e" secondAttribute="leading" id="Xdv-dZ-SJY"/>
-                                    <constraint firstItem="EQo-WQ-wOG" firstAttribute="top" secondItem="9xN-u6-O4e" secondAttribute="top" id="oMG-nF-dXN"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K11-oL-8zG">
-                                <rect key="frame" x="70" y="305" width="73" height="40"/>
+                                <rect key="frame" x="70" y="295" width="73" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="xCW-si-IY7"/>
                                 </constraints>
@@ -1553,7 +1536,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6G-M4-K4d">
-                                <rect key="frame" x="70" y="375" width="90" height="40"/>
+                                <rect key="frame" x="70" y="350" width="90" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
                                 <state key="normal" title="SCORES">
                                     <color key="titleColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1563,13 +1546,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEILLEUR SCORE :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qt-lE-6Ru">
-                                <rect key="frame" x="70" y="445" width="206" height="40"/>
+                                <rect key="frame" x="70" y="405" width="206" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
                                 <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6v-6d-ilT">
-                                <rect key="frame" x="284" y="445" width="14" height="40"/>
+                                <rect key="frame" x="284" y="405" width="14" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
                                 <color key="textColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1595,11 +1578,10 @@
                             <constraint firstItem="9xN-u6-O4e" firstAttribute="leading" secondItem="AWv-hb-zw1" secondAttribute="leading" constant="40" id="6d9-I0-nvd"/>
                             <constraint firstItem="G6v-6d-ilT" firstAttribute="height" secondItem="4Qt-lE-6Ru" secondAttribute="height" id="Ebi-O9-y80"/>
                             <constraint firstItem="4Qt-lE-6Ru" firstAttribute="height" secondItem="d6G-M4-K4d" secondAttribute="height" id="FBU-bi-0Mn"/>
-                            <constraint firstItem="EQo-WQ-wOG" firstAttribute="height" secondItem="lBc-z1-Fzu" secondAttribute="height" multiplier="0.5" id="G9Y-Wc-Xgs"/>
-                            <constraint firstItem="d6G-M4-K4d" firstAttribute="top" secondItem="K11-oL-8zG" secondAttribute="bottom" constant="30" id="QYa-gM-e0T"/>
-                            <constraint firstItem="4Qt-lE-6Ru" firstAttribute="top" secondItem="d6G-M4-K4d" secondAttribute="bottom" constant="30" id="YcO-d4-kiA"/>
+                            <constraint firstItem="d6G-M4-K4d" firstAttribute="top" secondItem="K11-oL-8zG" secondAttribute="bottom" constant="15" id="QYa-gM-e0T"/>
+                            <constraint firstItem="4Qt-lE-6Ru" firstAttribute="top" secondItem="d6G-M4-K4d" secondAttribute="bottom" constant="15" id="YcO-d4-kiA"/>
                             <constraint firstItem="4Qt-lE-6Ru" firstAttribute="leading" secondItem="d6G-M4-K4d" secondAttribute="leading" id="dDR-Sm-tcQ"/>
-                            <constraint firstItem="K11-oL-8zG" firstAttribute="top" secondItem="9xN-u6-O4e" secondAttribute="bottom" constant="30" id="eNw-3I-4fg"/>
+                            <constraint firstItem="K11-oL-8zG" firstAttribute="top" secondItem="9xN-u6-O4e" secondAttribute="bottom" constant="20" id="eNw-3I-4fg"/>
                             <constraint firstItem="d6G-M4-K4d" firstAttribute="leading" secondItem="K11-oL-8zG" secondAttribute="leading" id="gWn-pq-BNR"/>
                             <constraint firstItem="9xN-u6-O4e" firstAttribute="width" secondItem="lBc-z1-Fzu" secondAttribute="width" multiplier="0.8" id="ia4-h2-kQ7"/>
                             <constraint firstItem="Ixc-4M-RNR" firstAttribute="top" secondItem="lBc-z1-Fzu" secondAttribute="top" constant="15" id="mJ7-aD-rD7"/>
@@ -1614,9 +1596,6 @@
                     <connections>
                         <outlet property="bestScoreLabel" destination="G6v-6d-ilT" id="1U8-E7-xXm"/>
                         <outlet property="headerView" destination="9xN-u6-O4e" id="edN-H2-ClI"/>
-                        <outlet property="iLine" destination="EQo-WQ-wOG" id="lBs-Xe-GWG"/>
-                        <outlet property="iLineLeading" destination="Xdv-dZ-SJY" id="Wvg-3C-ZYy"/>
-                        <outlet property="iLineTop" destination="oMG-nF-dXN" id="N5q-zR-gAK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tE0-uP-WIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
