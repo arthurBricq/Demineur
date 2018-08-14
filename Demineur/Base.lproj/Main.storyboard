@@ -1515,14 +1515,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xN-u6-O4e" customClass="HeaderInfinite" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="40" y="170" width="300" height="105"/>
+                                <rect key="frame" x="40" y="150" width="300" height="105"/>
                                 <color key="backgroundColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9xN-u6-O4e" secondAttribute="height" multiplier="163:57" id="DTF-J5-Eih"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K11-oL-8zG">
-                                <rect key="frame" x="70" y="295" width="73" height="40"/>
+                                <rect key="frame" x="70" y="275" width="73" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="xCW-si-IY7"/>
                                 </constraints>
@@ -1536,7 +1536,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6G-M4-K4d">
-                                <rect key="frame" x="70" y="350" width="90" height="40"/>
+                                <rect key="frame" x="70" y="330" width="90" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
                                 <state key="normal" title="SCORES">
                                     <color key="titleColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1546,13 +1546,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEILLEUR SCORE :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qt-lE-6Ru">
-                                <rect key="frame" x="70" y="405" width="206" height="40"/>
+                                <rect key="frame" x="70" y="385" width="206" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
                                 <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6v-6d-ilT">
-                                <rect key="frame" x="284" y="405" width="14" height="40"/>
+                                <rect key="frame" x="284" y="385" width="14" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
                                 <color key="textColor" red="0.47450980390000003" green="0.47450980390000003" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1587,7 +1587,7 @@
                             <constraint firstItem="Ixc-4M-RNR" firstAttribute="top" secondItem="lBc-z1-Fzu" secondAttribute="top" constant="15" id="mJ7-aD-rD7"/>
                             <constraint firstItem="Ixc-4M-RNR" firstAttribute="leading" secondItem="AWv-hb-zw1" secondAttribute="leading" constant="15" id="qgU-Fw-xRi"/>
                             <constraint firstItem="K11-oL-8zG" firstAttribute="leading" secondItem="9xN-u6-O4e" secondAttribute="leading" constant="30" id="rE2-OP-ohm"/>
-                            <constraint firstItem="9xN-u6-O4e" firstAttribute="top" secondItem="AWv-hb-zw1" secondAttribute="top" constant="150" id="sGA-iS-gyk"/>
+                            <constraint firstItem="9xN-u6-O4e" firstAttribute="top" secondItem="AWv-hb-zw1" secondAttribute="top" constant="130" id="sGA-iS-gyk"/>
                             <constraint firstItem="d6G-M4-K4d" firstAttribute="height" secondItem="K11-oL-8zG" secondAttribute="height" id="xSz-Kd-NFs"/>
                             <constraint firstItem="G6v-6d-ilT" firstAttribute="leading" secondItem="4Qt-lE-6Ru" secondAttribute="trailing" constant="8" id="xvj-PS-ZCh"/>
                         </constraints>
