@@ -99,45 +99,53 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bonusBoutiqueCell", for: indexPath) as! BonusBoutiqueTableViewCell
-        /// ATTENTION : les cellules sont responsables elles-mêmes des actions lorsque l'on les tappes.
-    
-        let currentBonus = allBonus[indexPath.row]
-        let level = levelOfBonus.giveTheLevelOfBonus(forIndex: indexPath.row)
-        let number = bonus.giveTheNumberOfBonus(forIndex: indexPath.row)
-        
-        cell.label1.text = currentBonus.descriptions[level]
-        cell.bonusView.index = indexPath.row
-        cell.achatButton.prix = String(currentBonus.prixAchat)
-        cell.levelLabel.text = String(level+1)
-        cell.numberLabel.text = String(number)
-        cell.itemLabel.text = number == 0 ? "item" : "items"
-        cell.index = indexPath.row
-        
-        if currentBonus.niveau == currentBonus.descriptions.count { // dernier niveau atteint
-            cell.label2.text = ""
-            cell.AmeliorerButton.alpha = 0.5
-            cell.AmeliorerButton.prix = ""
-            cell.AmeliorerButton.isUserInteractionEnabled = false
-        } else {
-            cell.label2.text = currentBonus.descriptionsAmeliorations[currentBonus.niveau]
-            cell.AmeliorerButton.prix = String(currentBonus.prixAmelioration[currentBonus.niveau])
-            cell.AmeliorerButton.alpha = 1.0
-            cell.AmeliorerButton.isUserInteractionEnabled = true
+        switch selectedButtonIndex {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "bonusBoutiqueCell", for: indexPath) as! BonusBoutiqueTableViewCell
+            /// ATTENTION : les cellules sont responsables elles-mêmes des actions lorsque l'on les tappes.
+            
+            let currentBonus = allBonus[indexPath.row]
+            let level = levelOfBonus.giveTheLevelOfBonus(forIndex: indexPath.row)
+            let number = bonus.giveTheNumberOfBonus(forIndex: indexPath.row)
+            
+            cell.label1.text = currentBonus.descriptions[level]
+            cell.bonusView.index = indexPath.row
+            cell.achatButton.prix = String(currentBonus.prixAchat)
+            cell.levelLabel.text = String(level+1)
+            cell.numberLabel.text = String(number)
+            cell.itemLabel.text = number == 0 ? "item" : "items"
+            cell.index = indexPath.row
+            
+            if currentBonus.niveau == currentBonus.descriptions.count { // dernier niveau atteint
+                cell.label2.text = ""
+                cell.AmeliorerButton.alpha = 0.5
+                cell.AmeliorerButton.prix = ""
+                cell.AmeliorerButton.isUserInteractionEnabled = false
+            } else {
+                cell.label2.text = currentBonus.descriptionsAmeliorations[currentBonus.niveau]
+                cell.AmeliorerButton.prix = String(currentBonus.prixAmelioration[currentBonus.niveau])
+                cell.AmeliorerButton.alpha = 1.0
+                cell.AmeliorerButton.isUserInteractionEnabled = true
+            }
+            
+            if money.currentAmountOfMoney < currentBonus.prixAchat { // Pas assez d'argent pour acheter.
+                cell.achatButton.alpha = 0.5
+                cell.achatButton.isUserInteractionEnabled = false
+                cell.AmeliorerButton.alpha = 0.5
+                cell.AmeliorerButton.isUserInteractionEnabled = false
+            } else if money.currentAmountOfMoney < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
+                cell.AmeliorerButton.alpha = 0.5
+                cell.AmeliorerButton.isUserInteractionEnabled = false
+            }
+            
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "blabla", for: indexPath)
+            return cell
         }
         
-        if money.currentAmountOfMoney < currentBonus.prixAchat { // Pas assez d'argent pour acheter.
-            cell.achatButton.alpha = 0.5
-            cell.achatButton.isUserInteractionEnabled = false
-            cell.AmeliorerButton.alpha = 0.5
-            cell.AmeliorerButton.isUserInteractionEnabled = false
-        } else if money.currentAmountOfMoney < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
-            cell.AmeliorerButton.alpha = 0.5
-            cell.AmeliorerButton.isUserInteractionEnabled = false
-        }
         
         
-        return cell
     }
     
    

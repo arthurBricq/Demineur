@@ -360,7 +360,7 @@ struct BonusDescription {
 }
 
 
-
+// MARK: - Modèle de données pour les tablesView de la boutique
 
 let allBonus: [BonusDescription] = [
     
