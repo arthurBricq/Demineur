@@ -70,7 +70,6 @@
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
-		9C7E778C21242E02003D6D0E /* MoneyPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E778B21242E02003D6D0E /* MoneyPackages.swift */; };
 		9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */; };
 /* End PBXBuildFile section */
 
@@ -194,8 +193,8 @@
 				4EA7FD5620F893E700740480 /* AppDelegate.swift */,
 				4EA7FD5A20F893E700740480 /* Main.storyboard */,
 				4E02A1342109DF580040BA88 /* Tutorial.storyboard */,
-				4EA7FD5D20F893E800740480 /* Assets.xcassets */,
 				4EA7FD5F20F893E800740480 /* LaunchScreen.storyboard */,
+				4EA7FD5D20F893E800740480 /* Assets.xcassets */,
 				4EA7FD6220F893E800740480 /* Info.plist */,
 				4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */,
 			);
