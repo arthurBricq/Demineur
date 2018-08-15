@@ -49,7 +49,7 @@ class InfinitePresentationViewController: UIViewController {
     
     @IBAction func scoreButton(_ sender: Any) {
         
-        
+        self.performSegue(withIdentifier: "InfinitePresentationToScores", sender: nil)
         
     }
     
