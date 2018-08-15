@@ -1453,6 +1453,14 @@
                                             <outlet property="numberLabel" destination="TAI-tb-XF3" id="f5U-pn-cld"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="128" id="8Zn-Tu-OjK">
+                                        <rect key="frame" x="0.0" y="180" width="324" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Zn-Tu-OjK" id="RLn-fQ-P7b">
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="127.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n2E-at-Xie" customClass="PieceView" customModule="Demineur" customModuleProvider="target">
@@ -1534,7 +1542,6 @@
                                 </state>
                                 <connections>
                                     <action selector="playButton:" destination="aHY-U2-Vt6" eventType="touchUpInside" id="14f-GX-SKD"/>
-                                    <segue destination="ylO-j7-Tgn" kind="show" id="kn7-IV-hDF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6G-M4-K4d">
@@ -1550,7 +1557,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEILLEUR SCORE :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Qt-lE-6Ru">
                                 <rect key="frame" x="70" y="385" width="206" height="40"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="22"/>
-                                <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.47450980392156861" green="0.47450980392156861" blue="0.47450980392156861" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6v-6d-ilT">
@@ -1573,23 +1580,65 @@
                                     <segue destination="f1x-H4-S8R" kind="unwind" unwindAction="unwindToMenuWithSegue:" id="EZ5-1c-vWA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="56b-tW-YXe" customClass="MenuPauseIconsButtons" customModule="Demineur" customModuleProvider="target">
+                                <rect key="frame" x="158" y="270" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MM1-kf-tlP"/>
+                                    <constraint firstAttribute="width" constant="50" id="fxF-mS-7M5"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="playButton:" destination="aHY-U2-Vt6" eventType="touchUpInside" id="dJk-ou-d9c"/>
+                                    <action selector="returnButtonTapped:" destination="QLO-ne-eVG" eventType="touchUpInside" id="Q7Z-f3-Vya"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ddu-UN-JZd" customClass="ScoreStarView" customModule="Demineur" customModuleProvider="target">
+                                <rect key="frame" x="175" y="325" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="dsI-5V-h9q"/>
+                                    <constraint firstAttribute="height" constant="50" id="zEH-Rm-MyV"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="type">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="returnButtonTapped:" destination="QLO-ne-eVG" eventType="touchUpInside" id="LBQ-WH-5Eo"/>
+                                    <action selector="scoreButton:" destination="aHY-U2-Vt6" eventType="touchUpInside" id="Lrm-SF-JvO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="G6v-6d-ilT" firstAttribute="centerY" secondItem="4Qt-lE-6Ru" secondAttribute="centerY" id="5Bl-i8-jOu"/>
                             <constraint firstItem="9xN-u6-O4e" firstAttribute="leading" secondItem="AWv-hb-zw1" secondAttribute="leading" constant="40" id="6d9-I0-nvd"/>
+                            <constraint firstItem="Ddu-UN-JZd" firstAttribute="centerY" secondItem="d6G-M4-K4d" secondAttribute="centerY" id="72a-QL-3z4"/>
                             <constraint firstItem="G6v-6d-ilT" firstAttribute="height" secondItem="4Qt-lE-6Ru" secondAttribute="height" id="Ebi-O9-y80"/>
                             <constraint firstItem="4Qt-lE-6Ru" firstAttribute="height" secondItem="d6G-M4-K4d" secondAttribute="height" id="FBU-bi-0Mn"/>
+                            <constraint firstItem="56b-tW-YXe" firstAttribute="leading" secondItem="K11-oL-8zG" secondAttribute="trailing" constant="15" id="MIR-CC-H4G"/>
                             <constraint firstItem="d6G-M4-K4d" firstAttribute="top" secondItem="K11-oL-8zG" secondAttribute="bottom" constant="15" id="QYa-gM-e0T"/>
                             <constraint firstItem="4Qt-lE-6Ru" firstAttribute="top" secondItem="d6G-M4-K4d" secondAttribute="bottom" constant="15" id="YcO-d4-kiA"/>
                             <constraint firstItem="4Qt-lE-6Ru" firstAttribute="leading" secondItem="d6G-M4-K4d" secondAttribute="leading" id="dDR-Sm-tcQ"/>
                             <constraint firstItem="K11-oL-8zG" firstAttribute="top" secondItem="9xN-u6-O4e" secondAttribute="bottom" constant="20" id="eNw-3I-4fg"/>
+                            <constraint firstItem="Ddu-UN-JZd" firstAttribute="leading" secondItem="d6G-M4-K4d" secondAttribute="trailing" constant="15" id="ekg-pC-I8j"/>
                             <constraint firstItem="d6G-M4-K4d" firstAttribute="leading" secondItem="K11-oL-8zG" secondAttribute="leading" id="gWn-pq-BNR"/>
                             <constraint firstItem="9xN-u6-O4e" firstAttribute="width" secondItem="lBc-z1-Fzu" secondAttribute="width" multiplier="0.8" id="ia4-h2-kQ7"/>
                             <constraint firstItem="Ixc-4M-RNR" firstAttribute="top" secondItem="lBc-z1-Fzu" secondAttribute="top" constant="15" id="mJ7-aD-rD7"/>
                             <constraint firstItem="Ixc-4M-RNR" firstAttribute="leading" secondItem="AWv-hb-zw1" secondAttribute="leading" constant="15" id="qgU-Fw-xRi"/>
                             <constraint firstItem="K11-oL-8zG" firstAttribute="leading" secondItem="9xN-u6-O4e" secondAttribute="leading" constant="30" id="rE2-OP-ohm"/>
                             <constraint firstItem="9xN-u6-O4e" firstAttribute="top" secondItem="AWv-hb-zw1" secondAttribute="top" constant="130" id="sGA-iS-gyk"/>
+                            <constraint firstItem="56b-tW-YXe" firstAttribute="centerY" secondItem="K11-oL-8zG" secondAttribute="centerY" id="sy9-It-sOH"/>
                             <constraint firstItem="d6G-M4-K4d" firstAttribute="height" secondItem="K11-oL-8zG" secondAttribute="height" id="xSz-Kd-NFs"/>
                             <constraint firstItem="G6v-6d-ilT" firstAttribute="leading" secondItem="4Qt-lE-6Ru" secondAttribute="trailing" constant="8" id="xvj-PS-ZCh"/>
                         </constraints>
@@ -1598,6 +1647,7 @@
                     <connections>
                         <outlet property="bestScoreLabel" destination="G6v-6d-ilT" id="1U8-E7-xXm"/>
                         <outlet property="headerView" destination="9xN-u6-O4e" id="edN-H2-ClI"/>
+                        <segue destination="ylO-j7-Tgn" kind="show" identifier="InfinitePresentationToInfiniteGame" id="qUd-d2-3pd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tE0-uP-WIU" userLabel="First Responder" sceneMemberID="firstResponder"/>

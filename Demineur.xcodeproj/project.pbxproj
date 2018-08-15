@@ -60,6 +60,7 @@
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
 		4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F121242982003F9BFE /* ScoreModel.swift */; };
 		4EAAE0F621242B11003F9BFE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAAE0F521242B11003F9BFE /* CloudKit.framework */; };
+		4EAAE0F8212434E9003F9BFE /* ScoreStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */; };
 		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
@@ -131,6 +132,7 @@
 		4EAAE0F121242982003F9BFE /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
 		4EAAE0F321242B0C003F9BFE /* Demineur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demineur.entitlements; sourceTree = "<group>"; };
 		4EAAE0F521242B11003F9BFE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStarView.swift; sourceTree = "<group>"; };
 		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				4E7725C420FD088C00B24FBE /* HautParleur.swift */,
 				4E3A4F2120FE07A300EB5978 /* PieceView.swift */,
 				4E88CAC120FF38B100DAD9DB /* BonusView.swift */,
+				4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */,
 				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
 				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
@@ -469,12 +472,14 @@
 				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
 				9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */,
+				4EAAE0F8212434E9003F9BFE /* ScoreStarView.swift in Sources */,
 				4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */,
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
+				9C7E778C21242E02003D6D0E /* MoneyPackages.swift in Sources */,
 				4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,

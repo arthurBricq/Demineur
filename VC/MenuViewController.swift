@@ -29,6 +29,7 @@ class MenuViewController: UIViewController {
             let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ok", style: .default))
             print("Voici l'erreur: \(error.localizedDescription)")
+            
             self.present(alert, animated: true, completion: nil)
         }
         

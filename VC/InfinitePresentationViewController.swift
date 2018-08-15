@@ -44,6 +44,7 @@ class InfinitePresentationViewController: UIViewController {
     }
     
     @IBAction func playButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)
     }
     
     @IBAction func scoreButton(_ sender: Any) {
