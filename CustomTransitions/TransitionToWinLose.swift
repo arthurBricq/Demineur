@@ -43,6 +43,7 @@ class TransitionToWinLose: NSObject, UIViewControllerAnimatedTransitioning {
         toVC.replayButton.alpha = 0
         toVC.replayIconButton.alpha = 0
         toVC.lastButton.alpha = 0
+        toVC.nextLevelIcon.alpha = 0
         
         let correctiveConstant: CGFloat = isItABigScreen() ? -24 : 20
         
@@ -66,6 +67,7 @@ class TransitionToWinLose: NSObject, UIViewControllerAnimatedTransitioning {
                 toVC.replayButton.alpha = 1
                 toVC.replayIconButton.alpha = 1
                 toVC.lastButton.alpha = 1
+                toVC.nextLevelIcon.alpha = 1 
             })
 
         }) { (_) in

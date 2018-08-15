@@ -9,26 +9,23 @@
 import UIKit
 
 class NextLevelButton: UIButton {
-
+    
+    @IBInspectable var color: UIColor = UIColor.cyan
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
-        // Drawing code
+        NextLevelDraw.drawCanvas1(frame: rect, resizing: .aspectFill, color: color)
     }
  
 
 }
 
-
-
-import UIKit
-
 public class NextLevelDraw : NSObject {
     
     //// Drawing Methods
     
-    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit) {
+    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit, color: UIColor) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -37,10 +34,6 @@ public class NextLevelDraw : NSObject {
         let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 240, height: 240), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
         context.scaleBy(x: resizedFrame.width / 240, y: resizedFrame.height / 240)
-        
-        
-        //// Color Declarations
-        let color = UIColor(red: 0.327, green: 0.327, blue: 0.327, alpha: 1.000)
         
         //// Group
         //// Group 2

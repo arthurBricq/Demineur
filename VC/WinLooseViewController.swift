@@ -26,6 +26,7 @@ class WinLooseViewController: UIViewController {
     @IBOutlet weak var replayButton: UIButton!
     @IBOutlet weak var replayIconButton: MenuPauseIconsButtons!
     @IBOutlet weak var lastButton: UIButton!
+    @IBOutlet weak var nextLevelIcon: NextLevelButton!
     
     
     /// VARIABLES
@@ -84,7 +85,9 @@ class WinLooseViewController: UIViewController {
         lastButton.isUserInteractionEnabled = true
         lastButton.isHidden = false
         lastButton.addTarget(self, action: #selector(nextLevel), for: .touchUpInside)
-    
+        nextLevelIcon.isHidden = false
+        nextLevelIcon.addTarget(self, action: #selector(nextLevel), for: .touchUpInside)
+        
     }
 
     /// pour actualiser la vue lorsque la partie est perdue (peut etre en mode histoire ou en mode infinie)
@@ -92,14 +95,17 @@ class WinLooseViewController: UIViewController {
         // titleLabel.text = "PERDU"
         // titleLabel.textColor = colorForRGB(r: 148, g: 17, b: 0)
         
+        lastButton.isUserInteractionEnabled = false
+        lastButton.isHidden = true
+        nextLevelIcon.isHidden = true
+        nextLevelIcon.isUserInteractionEnabled = false 
+        
         if didTapABomb {
-            label.text = "Dommage ! Vous avez touchez une bombe. "
-            lastButton.isUserInteractionEnabled = true
-            lastButton.isHidden = true
+            label.text = "Dommage ! Vous avez touché une bombe. "
+            
         } else {
             label.text = "Dommage ! Le temps est écoulé."
-            lastButton.isUserInteractionEnabled = false
-            lastButton.isHidden = true
+            
         }
         
     }
