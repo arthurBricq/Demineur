@@ -68,6 +68,7 @@
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
+		9C7E778C21242E02003D6D0E /* MoneyPackages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7E778B21242E02003D6D0E /* MoneyPackages.swift */; };
 		9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */; };
 /* End PBXBuildFile section */
 
@@ -135,6 +136,7 @@
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		9C7E778B21242E02003D6D0E /* MoneyPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyPackages.swift; sourceTree = "<group>"; };
 		9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,6 +309,7 @@
 				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
 				9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */,
+				9C7E778B21242E02003D6D0E /* MoneyPackages.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
+				9C7E778C21242E02003D6D0E /* MoneyPackages.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,
