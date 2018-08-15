@@ -1,30 +1,34 @@
 //
-//  ScoreStarView.swift
+//  NextLevelButton.swift
 //  Demineur
 //
 //  Created by Arthur BRICQ on 15/08/2018.
 //  Copyright © 2018 Arthur BRICQ. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class NextLevelButton: UIButton {
+
+    
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+ 
+
+}
+
+
 
 import UIKit
 
-class ScoreStarView: UIButton {
-    
-    var color: UIColor = UIColor.lightGray
-    
-    override func draw(_ rect: CGRect) {
-        StarDrawing.drawCanvas1(frame: rect, resizing: .aspectFill, color: color)
-    }
-    
-}
-
-public class StarDrawing : NSObject {
+public class NextLevelDraw : NSObject {
     
     //// Drawing Methods
     
-    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit, color: UIColor) {
+    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -35,21 +39,69 @@ public class StarDrawing : NSObject {
         context.scaleBy(x: resizedFrame.width / 240, y: resizedFrame.height / 240)
         
         
-        //// Star Drawing
-        let starPath = UIBezierPath()
-        starPath.move(to: CGPoint(x: 121, y: 54))
-        starPath.addLine(to: CGPoint(x: 146.92, y: 88.99))
-        starPath.addLine(to: CGPoint(x: 190.9, y: 100.99))
-        starPath.addLine(to: CGPoint(x: 162.94, y: 134.61))
-        starPath.addLine(to: CGPoint(x: 164.2, y: 177.01))
-        starPath.addLine(to: CGPoint(x: 121, y: 162.8))
-        starPath.addLine(to: CGPoint(x: 77.8, y: 177.01))
-        starPath.addLine(to: CGPoint(x: 79.06, y: 134.61))
-        starPath.addLine(to: CGPoint(x: 51.1, y: 100.99))
-        starPath.addLine(to: CGPoint(x: 95.08, y: 88.99))
-        starPath.close()
-        color.setFill()
-        starPath.fill()
+        //// Color Declarations
+        let color = UIColor(red: 0.327, green: 0.327, blue: 0.327, alpha: 1.000)
+        
+        //// Group
+        //// Group 2
+        //// Bezier 3 Drawing
+        let bezier3Path = UIBezierPath()
+        bezier3Path.move(to: CGPoint(x: 141, y: 45))
+        bezier3Path.addLine(to: CGPoint(x: 203, y: 122))
+        color.setStroke()
+        bezier3Path.lineWidth = 20
+        bezier3Path.lineCapStyle = .round
+        bezier3Path.stroke()
+        
+        
+        
+        
+        //// Bezier Drawing
+        context.saveGState()
+        context.translateBy(x: 203, y: 122)
+        context.scaleBy(x: -1, y: 1)
+        
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 0, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 62, y: 77))
+        color.setStroke()
+        bezierPath.lineWidth = 20
+        bezierPath.lineCapStyle = .round
+        bezierPath.stroke()
+        
+        context.restoreGState()
+        
+        
+        
+        
+        //// Group 3
+        //// Group 4
+        //// Bezier 2 Drawing
+        let bezier2Path = UIBezierPath()
+        bezier2Path.move(to: CGPoint(x: 48, y: 45))
+        bezier2Path.addLine(to: CGPoint(x: 110, y: 122))
+        color.setStroke()
+        bezier2Path.lineWidth = 20
+        bezier2Path.lineCapStyle = .round
+        bezier2Path.stroke()
+        
+        
+        
+        
+        //// Bezier 4 Drawing
+        context.saveGState()
+        context.translateBy(x: 110, y: 122)
+        context.scaleBy(x: -1, y: 1)
+        
+        let bezier4Path = UIBezierPath()
+        bezier4Path.move(to: CGPoint(x: 0, y: 0))
+        bezier4Path.addLine(to: CGPoint(x: 62, y: 77))
+        color.setStroke()
+        bezier4Path.lineWidth = 20
+        bezier4Path.lineCapStyle = .round
+        bezier4Path.stroke()
+        
+        context.restoreGState()
         
         context.restoreGState()
         
@@ -58,7 +110,7 @@ public class StarDrawing : NSObject {
     
     
     
-    @objc(StarDrawingResizingBehavior)
+    @objc(NextLevelDrawResizingBehavior)
     public enum ResizingBehavior: Int {
         case aspectFit /// The content is proportionally resized to fit into the target rectangle.
         case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
@@ -97,3 +149,4 @@ public class StarDrawing : NSObject {
         }
     }
 }
+
