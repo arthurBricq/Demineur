@@ -14,7 +14,7 @@ let bonus = BonusManager()
 let levelOfBonus = LevelBonusManager()
 let gameData = GameDataManager()
 
-
+let scoresModel = ScoresModel()
 
 
 /// Cette fonction est appelée si on souhaite ré-initialiser toutes les propriétés d'une partie correctement

@@ -58,6 +58,8 @@
 		4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDA920F8979B00740480 /* Timer.swift */; };
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
+		4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F121242982003F9BFE /* ScoreModel.swift */; };
+		4EAAE0F621242B11003F9BFE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAAE0F521242B11003F9BFE /* CloudKit.framework */; };
 		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
@@ -125,6 +127,9 @@
 		4EA7FDA920F8979B00740480 /* Timer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		4EA7FDAB20F897A700740480 /* Vibrate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrate.swift; sourceTree = "<group>"; };
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
+		4EAAE0F121242982003F9BFE /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
+		4EAAE0F321242B0C003F9BFE /* Demineur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demineur.entitlements; sourceTree = "<group>"; };
+		4EAAE0F521242B11003F9BFE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
@@ -143,6 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EAAE0F621242B11003F9BFE /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +173,7 @@
 				4E02A1372109E1480040BA88 /* VC_Tutorial */,
 				4EA7FD5520F893E700740480 /* Demineur */,
 				4EA7FD5420F893E700740480 /* Products */,
+				4EAAE0F421242B11003F9BFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,6 +188,7 @@
 		4EA7FD5520F893E700740480 /* Demineur */ = {
 			isa = PBXGroup;
 			children = (
+				4EAAE0F321242B0C003F9BFE /* Demineur.entitlements */,
 				4EA7FD5620F893E700740480 /* AppDelegate.swift */,
 				4EA7FD5A20F893E700740480 /* Main.storyboard */,
 				4E02A1342109DF580040BA88 /* Tutorial.storyboard */,
@@ -197,6 +205,7 @@
 			children = (
 				4EA7FDA120F8974E00740480 /* Functions.swift */,
 				4E8FC31820F91858000A9BCB /* DataModel.swift */,
+				4EAAE0F121242982003F9BFE /* ScoreModel.swift */,
 				4EA7FDA320F8976B00740480 /* Protocols.swift */,
 				4EA7FDA520F8977E00740480 /* StarterFunctions.swift */,
 				4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */,
@@ -311,6 +320,14 @@
 			path = Graphism;
 			sourceTree = "<group>";
 		};
+		4EAAE0F421242B11003F9BFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4EAAE0F521242B11003F9BFE /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9C6E629B20FC96AA003B98C9 /* CustomTransitions */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +372,14 @@
 				TargetAttributes = {
 					4EA7FD5220F893E700740480 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -447,6 +472,7 @@
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
+				4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,
@@ -604,6 +630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Demineur/Demineur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A669ZDMYDX;
 				INFOPLIST_FILE = Demineur/Info.plist;
@@ -611,7 +638,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Demineur;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BricqBros.Demineur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -622,6 +649,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Demineur/Demineur.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A669ZDMYDX;
 				INFOPLIST_FILE = Demineur/Info.plist;
@@ -629,7 +657,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Demineur;
+				PRODUCT_BUNDLE_IDENTIFIER = com.BricqBros.Demineur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

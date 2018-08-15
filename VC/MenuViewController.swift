@@ -19,6 +19,18 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 5*40 + 4*15
+
+        // CloudKit
+        scoresModel.refresh()
+        print("Gestion des scores")
+        print("Nombre de Bonus: \(scoresModel.allScores.count)\n")
+        // On ajoute la gestion des erreurs
+        scoresModel.onError = { error in
+            let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            print("Voici l'erreur: \(error.localizedDescription)")
+            self.present(alert, animated: true, completion: nil)
+        }
         
     }
     
