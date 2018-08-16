@@ -377,10 +377,16 @@ let allBonus: [BonusDescription] = [
 ]
 
 
+struct PackagesDescription {
+    let size: MoneyPackage.PackageSize
+    let description: String
+    let prix: Double
+    let amountOfCoins: Int
+}
 
-
-
-
-
-
+let allPacks: [PackagesDescription] = [
+    PackagesDescription(size: .small, description: "Achetez une petite quantité de pièces", prix: 0.99, amountOfCoins: 1),
+    PackagesDescription(size: .medium, description: "Achetez une bourse de pièces", prix: 2.99, amountOfCoins: 10),
+    PackagesDescription(size: .large, description: "Achetez un grand coffre de pièces", prix: 4.99, amountOfCoins: 100)
+]
 

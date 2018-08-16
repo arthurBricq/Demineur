@@ -19,25 +19,7 @@ class MoneyPackage: UIView {
     // La taille du pack, change son visuel et la quantité d'argent
     var size: PackageSize = .small
     
-    // Computed properties qui retourne la quantité d'argent du pack, il suffit de changer ses trois valeurs pour modifier tous les packs
-    var amountOfMoney: Int {
-        get {
-            switch self.size {
-            case .small:
-                return 10
-                
-            case .medium:
-                return 100
-                
-            case .large:
-                return 1000
-                
-            }
-        }
-    }
-    
     override func draw(_ rect: CGRect) {
-    
         
         switch size {
         case .small:

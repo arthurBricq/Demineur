@@ -11,7 +11,7 @@ import UIKit
 class PieceBoutiqueTableViewCell: UITableViewCell {
 
     // MARK: - Outlets
-    @IBOutlet weak var moneyPackView: UIView!
+    @IBOutlet weak var moneyPackView: MoneyPackage!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var prixButton: InAppPurchaseButton!
     
