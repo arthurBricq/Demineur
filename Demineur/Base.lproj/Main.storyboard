@@ -1501,9 +1501,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gR-5w-7i9" customClass="InAppPurchaseButton" customModule="Demineur" customModuleProvider="target">
-                                                    <rect key="frame" x="75" y="48" width="33" height="30"/>
+                                                    <rect key="frame" x="75" y="48" width="60" height="26.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="3gR-5w-7i9" secondAttribute="height" multiplier="9:4" id="4oP-Cb-DZL"/>
+                                                        <constraint firstAttribute="width" constant="60" id="ikh-5g-zyC"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="PRIX"/>
                                                     <connections>
                                                         <action selector="buyAction:" destination="8Zn-Tu-OjK" eventType="touchUpInside" id="9Nc-ky-4Jv"/>
                                                     </connections>

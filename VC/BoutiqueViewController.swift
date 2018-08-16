@@ -165,7 +165,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.moneyPackView.size = currentPack.size
             cell.moneyPackView.setNeedsDisplay()
             cell.descriptionLabel.text = currentPack.description
-            cell.prixButton.setTitle(currentPack.prix.description, for: .normal)
+            cell.prixButton.text = "\(currentPack.prix.description)€"
             
             return cell
             
