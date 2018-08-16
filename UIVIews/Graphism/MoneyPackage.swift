@@ -1,15 +1,15 @@
 //
-//  MoneyPackages.swift
+//  MoneyPackage.swift
 //  Demineur
 //
-//  Created by Marin on 15/08/2018.
+//  Created by Arthur BRICQ on 15/08/2018.
 //  Copyright © 2018 Arthur BRICQ. All rights reserved.
 //
 
 import UIKit
 
-class MoneyPackages: UIView {
-
+class MoneyPackage: UIView {
+    
     enum PackageSize: Int {
         case small = 0
         case medium = 1
@@ -17,7 +17,7 @@ class MoneyPackages: UIView {
     }
     
     // La taille du pack, change son visuel et la quantité d'argent
-    @IBInspectable var size: PackageSize = .small
+    var size: PackageSize = .small
     
     // Computed properties qui retourne la quantité d'argent du pack, il suffit de changer ses trois valeurs pour modifier tous les packs
     var amountOfMoney: Int {
@@ -37,21 +37,22 @@ class MoneyPackages: UIView {
     }
     
     override func draw(_ rect: CGRect) {
+    
         
         switch size {
         case .small:
-            MoneyPacks.drawSmallPack(targetFrame: rect, resizing: .aspectFill)
+            MoneyPacks.drawSmallPack(frame: rect, resizing: .aspectFill)
             
         case .medium:
-            MoneyPacks.drawMediumPack(targetFrame: rect, resizing: .aspectFill)
+            MoneyPacks.drawMediumPack(frame: rect, resizing: .aspectFill)
             
         case .large:
-            MoneyPacks.drawLargePack(targetFrame: rect, resizing: .aspectFill)
+            MoneyPacks.drawLargePack(frame: rect, resizing: .aspectFill)
             
         }
         
     }
-
+    
 }
 
 public class MoneyPacks : NSObject {

@@ -15,7 +15,7 @@ import UIKit
 class LineView: UIView {
     
     @IBInspectable var lineWidth: CGFloat = 1
-    @IBInspectable var strokeColor: UIColor = UIColor(red: 0.720, green: 0.469, blue: 0.000, alpha: 1.000)
+    @IBInspectable var strokeColor: UIColor = UIColor(red: 0.720, green: 0.469, blue: 0.000, alpha: 1.000)//184,120,0
     @IBInspectable var isVertical: Bool = true
     
     override func draw(_ rect: CGRect) {

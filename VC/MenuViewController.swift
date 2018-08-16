@@ -62,7 +62,7 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
             return transition
         } else if presented is InfinitePresentationViewController {
             let transition = TransitionToInfinitePresentationViewController()
-            transition.animationDuration = 1.5
+            transition.animationDuration = 2.0
             transition.presenting = true
             return transition
         } else if presented is BoutiqueViewController {

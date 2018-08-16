@@ -62,6 +62,8 @@
 		4EAAE0F621242B11003F9BFE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAAE0F521242B11003F9BFE /* CloudKit.framework */; };
 		4EAAE0F8212434E9003F9BFE /* ScoreStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */; };
 		4EAAE0FA21243810003F9BFE /* NextLevelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F921243810003F9BFE /* NextLevelButton.swift */; };
+		4EAAE0FC21244024003F9BFE /* MoneyPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */; };
+		4EAAE0FE212444DE003F9BFE /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0FD212444DE003F9BFE /* ScoreViewController.swift */; };
 		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
@@ -136,6 +138,8 @@
 		4EAAE0F521242B11003F9BFE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStarView.swift; sourceTree = "<group>"; };
 		4EAAE0F921243810003F9BFE /* NextLevelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLevelButton.swift; sourceTree = "<group>"; };
+		4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyPackage.swift; sourceTree = "<group>"; };
+		4EAAE0FD212444DE003F9BFE /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
@@ -146,7 +150,6 @@
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
-		9C7E778B21242E02003D6D0E /* MoneyPackages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyPackages.swift; sourceTree = "<group>"; };
 		9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseButton.swift; sourceTree = "<group>"; };
 		9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusChoiceView.swift; sourceTree = "<group>"; };
@@ -249,6 +252,7 @@
 				4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */,
 				4EA2FAD6210624090039846E /* WinLooseViewController.swift */,
 				4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */,
+				4EAAE0FD212444DE003F9BFE /* ScoreViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -329,7 +333,7 @@
 				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
 				9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */,
-				9C7E778B21242E02003D6D0E /* MoneyPackages.swift */,
+				4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -467,6 +471,7 @@
 				4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */,
 				9CA08A2F21243A50006BC68E /* PieceBoutiqueTableViewCell.swift in Sources */,
 				4EA7FD9E20F8971000740480 /* LineView.swift in Sources */,
+				4EAAE0FC21244024003F9BFE /* MoneyPackage.swift in Sources */,
 				4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */,
 				4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */,
 				9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */,
@@ -490,6 +495,7 @@
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
+				4EAAE0FE212444DE003F9BFE /* ScoreViewController.swift in Sources */,
 				4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */,
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
