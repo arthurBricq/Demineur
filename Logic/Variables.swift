@@ -335,9 +335,8 @@ let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 
 
 
+// MARK: - Modèle de données pour les tablesView de la boutique
 
-
-//// BONUS //// 
 
 /// ORDRE DES BONUS :
 // Temps
@@ -360,7 +359,6 @@ struct BonusDescription {
 }
 
 
-// MARK: - Modèle de données pour les tablesView de la boutique
 
 let allBonus: [BonusDescription] = [
     

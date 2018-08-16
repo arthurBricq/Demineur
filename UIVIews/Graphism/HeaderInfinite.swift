@@ -118,12 +118,6 @@ public class InfiniHeader : NSObject {
         bezier10Path.stroke()
         
         
-        //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 0.69, y: 0.59, width: 8, height: 8))
-        color2.setFill()
-        ovalPath.fill()
-        
-        
         //// Bezier Drawing
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 114.57, y: 9.9))

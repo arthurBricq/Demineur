@@ -14,7 +14,7 @@ class BoutiqueViewController: UIViewController {
     /// VARIABLES
     override var prefersStatusBarHidden: Bool { return true }
     var selectedButtonIndex: Int = 0 // 0 for bonus, 1 for pieces, 2 for colors
-    let identifiersOfCells: [String] = ["bonusBoutiqueCell","piecesBoutiqueCell","colorsBoutiqueCell"]
+    let identifiersOfCells: [String] = ["BonusBoutiqueCell","PieceBoutiqueCell","ColorsBoutiqueCell"]
     
     
     
@@ -34,21 +34,33 @@ class BoutiqueViewController: UIViewController {
         bonusButton.alpha = 1.0
         piecesButton.alpha = 0.6
         colorsButtons.alpha = 0.6
+        bonusButton.isUserInteractionEnabled = false
+        piecesButton.isUserInteractionEnabled = true
+        colorsButtons.isUserInteractionEnabled = true
         selectedButtonIndex = 0
+        tableView.reloadData()
     }
     
     @IBAction func piecesButtonTapped(_ sender: Any) {
         bonusButton.alpha = 0.6
         piecesButton.alpha = 1.0
         colorsButtons.alpha = 0.6
+        bonusButton.isUserInteractionEnabled = true
+        piecesButton.isUserInteractionEnabled = false
+        colorsButtons.isUserInteractionEnabled = true
         selectedButtonIndex = 1
+        tableView.reloadData()
     }
     
     @IBAction func colorsButtonTapped(_ sender: Any) {
         bonusButton.alpha = 0.6
         piecesButton.alpha = 0.6
         colorsButtons.alpha = 1.0
+        bonusButton.isUserInteractionEnabled = true
+        piecesButton.isUserInteractionEnabled = true
+        colorsButtons.isUserInteractionEnabled = false
         selectedButtonIndex = 2
+        tableView.reloadData()
     }
     
     @IBAction func menuButtonTapped(_ sender: Any) {
@@ -64,6 +76,10 @@ class BoutiqueViewController: UIViewController {
         bonusButton.alpha = 1.0
         piecesButton.alpha = 0.6
         colorsButtons.alpha = 0.6
+        bonusButton.isUserInteractionEnabled = false
+        piecesButton.isUserInteractionEnabled = true
+        colorsButtons.isUserInteractionEnabled = true
+        selectedButtonIndex = 0
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -91,6 +107,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
         switch selectedButtonIndex {
         case 0:
             return allBonus.count
+        case 1:
+            return allPacks.count
         default:
             return 1
         }
@@ -101,7 +119,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
     {
         switch selectedButtonIndex {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "bonusBoutiqueCell", for: indexPath) as! BonusBoutiqueTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BonusBoutiqueCell", for: indexPath) as! BonusBoutiqueTableViewCell
             /// ATTENTION : les cellules sont responsables elles-mêmes des actions lorsque l'on les tappes.
             
             let currentBonus = allBonus[indexPath.row]
@@ -139,8 +157,20 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             return cell
+        case 1:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PieceBoutiqueCell", for: indexPath) as! PieceBoutiqueTableViewCell
+            let currentPack = allPacks[indexPath.row]
+            
+            cell.moneyPackView.size = currentPack.size
+            cell.moneyPackView.setNeedsDisplay()
+            cell.descriptionLabel.text = currentPack.description
+            cell.prixButton.setTitle(currentPack.prix.description, for: .normal)
+            
+            return cell
+            
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "blabla", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
             return cell
         }
         
@@ -155,6 +185,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
         switch selectedButtonIndex {
         case 0:
             return 140
+        case 1:
+            return 100
         default:
             return 100
 
