@@ -17,6 +17,19 @@ class InAppPurchaseButton: UIButton {
         InAppPurchaseButtonDraw.drawInAppPurchaseDraw(frame: rect, resizing: .aspectFill, text: text)
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.alpha = 0.4
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1.0
+        }
+        
+    }
+    
 }
 
 public class InAppPurchaseButtonDraw : NSObject {
