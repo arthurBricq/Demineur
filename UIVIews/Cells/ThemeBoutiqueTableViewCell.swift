@@ -15,8 +15,13 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     @IBOutlet weak var lineView: LineView!
     @IBOutlet weak var titleView: UILabel!
     @IBOutlet weak var checkerButton: CheckerButton!
+    @IBOutlet weak var hidingView: UIView!
+    @IBOutlet weak var buyButton: AchatBoutiqueBouton!
     
     @IBAction func chosenButton(_ sender: Any) {
+    }
+    
+    @IBAction func buyAction(_ sender: Any) {
     }
     
 }

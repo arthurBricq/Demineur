@@ -187,6 +187,11 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.titleView.textColor = currentTheme.colors[2]
             cell.titleView.text = currentTheme.name
             
+            cell.buyButton.prix = currentTheme.price.description
+            cell.hidingView.isHidden = currentTheme.isUnlocked
+            cell.hidingView.layer.cornerRadius = 10
+            cell.hidingView.layer.borderWidth = 2
+            
             cell.checkerButton.isChecked = (selectedTheme == indexPath.row)
             
             return cell
@@ -209,7 +214,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             return 100
         case 2:
-            return 100
+            return 120
         default:
             return 100
         }

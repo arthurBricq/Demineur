@@ -33,8 +33,8 @@ public class LockDraw : NSObject {
         
         
         //// Color Declarations
-        let lockColor = UIColor(red: 0.498, green: 0.498, blue: 0.498, alpha: 1.000)
-        let holeColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let lockColor = UIColor(red: 0.698, green: 0.698, blue: 0.698, alpha: 1.000)
+        let holeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.000)
         
         //// Gray
         //// Rectangle Drawing
