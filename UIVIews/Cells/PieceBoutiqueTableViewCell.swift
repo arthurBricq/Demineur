@@ -16,6 +16,7 @@ class PieceBoutiqueTableViewCell: UITableViewCell {
     @IBOutlet weak var prixButton: InAppPurchaseButton!
     
     @IBAction func buyAction(_ sender: Any) {
+        print(moneyPackView.size)
     }
     
 
