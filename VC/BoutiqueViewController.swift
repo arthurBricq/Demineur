@@ -173,6 +173,21 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeBoutiqueCell", for: indexPath) as! ThemeBoutiqueTableViewCell
+            let currentTheme = allThemes[indexPath.row]
+            
+            cell.mainView.layer.cornerRadius = 10
+            cell.mainView.layer.borderWidth = 2
+            cell.mainView.layer.borderColor = colorForRGB(r: 20, g: 20, b: 20).cgColor
+            cell.mainView.backgroundColor = currentTheme.colors[0]
+            
+            cell.lineView.strokeColor = currentTheme.colors[1]
+            cell.lineView.backgroundColor = UIColor.clear
+            cell.lineView.setNeedsDisplay()
+            
+            cell.titleView.textColor = currentTheme.colors[2]
+            cell.titleView.text = currentTheme.name
+            
+            cell.checkerButton.isChecked = (selectedTheme == indexPath.row)
             
             return cell
             

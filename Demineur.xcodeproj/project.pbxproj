@@ -68,6 +68,7 @@
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
 		9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */; };
+		9C0084BE2126E64A00490F97 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BD2126E64A00490F97 /* LockView.swift */; };
 		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
 		9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */; };
 		9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */; };
@@ -145,6 +146,7 @@
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
 		9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
+		9C0084BD2126E64A00490F97 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
 		9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInfinite.swift; sourceTree = "<group>"; };
 		9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfinitePresentationViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
 				9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */,
 				4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */,
+				9C0084BD2126E64A00490F97 /* LockView.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				4E88CAC220FF38B100DAD9DB /* BonusView.swift in Sources */,
 				4EA7FDA820F8978C00740480 /* Variables.swift in Sources */,
 				4EA7FD8420F8960700740480 /* HexCase.swift in Sources */,
+				9C0084BE2126E64A00490F97 /* LockView.swift in Sources */,
 				4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */,
 				9CA08A3121243EB3006BC68E /* InAppPurchaseButton.swift in Sources */,
 				4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */,
