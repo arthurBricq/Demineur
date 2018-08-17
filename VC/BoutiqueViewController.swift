@@ -14,7 +14,7 @@ class BoutiqueViewController: UIViewController {
     /// VARIABLES
     override var prefersStatusBarHidden: Bool { return true }
     var selectedButtonIndex: Int = 0 // 0 for bonus, 1 for pieces, 2 for colors
-    let identifiersOfCells: [String] = ["BonusBoutiqueCell","PieceBoutiqueCell","ColorsBoutiqueCell"]
+    let identifiersOfCells: [String] = ["BonusBoutiqueCell","PieceBoutiqueCell","ThemeBoutiqueCell"]
     
     
     
@@ -109,6 +109,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             return allBonus.count
         case 1:
             return allPacks.count
+        case 2:
+            return allThemes.count
         default:
             return 1
         }
@@ -157,8 +159,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             return cell
-        case 1:
             
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PieceBoutiqueCell", for: indexPath) as! PieceBoutiqueTableViewCell
             let currentPack = allPacks[indexPath.row]
             
@@ -169,9 +171,13 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
             return cell
             
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeBoutiqueCell", for: indexPath) as! ThemeBoutiqueTableViewCell
+            
             return cell
+            
+        default:
+            return tableView.dequeueReusableCell(withIdentifier: "BonusBoutiqueCell", for: indexPath)
         }
         
         
@@ -187,9 +193,10 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             return 140
         case 1:
             return 100
+        case 2:
+            return 100
         default:
             return 100
-
         }
     }
 }

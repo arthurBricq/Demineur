@@ -1528,13 +1528,76 @@
                                             <outlet property="prixButton" destination="3gR-5w-7i9" id="42R-yE-KpT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="cPx-AN-KyR" customClass="ThemeBoutiqueTableViewCell" customModule="Demineur" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ThemeBoutiqueCell" rowHeight="100" id="cPx-AN-KyR" customClass="ThemeBoutiqueTableViewCell" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="280" width="324" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cPx-AN-KyR" id="8p6-41-nPs">
                                             <rect key="frame" x="0.0" y="0.0" width="324" height="99.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rI-Lv-pLI">
+                                                    <rect key="frame" x="24.5" y="8" width="275" height="84.5"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9N-RS-HeQ" customClass="LineView" customModule="Demineur" customModuleProvider="target">
+                                                            <rect key="frame" x="10" y="0.0" width="10" height="84.5"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="10" id="K8u-8K-x77"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isVertical" value="YES"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="m9N-RS-HeQ" firstAttribute="leading" secondItem="7rI-Lv-pLI" secondAttribute="leading" constant="10" id="Y5O-TX-EBd"/>
+                                                        <constraint firstItem="m9N-RS-HeQ" firstAttribute="centerY" secondItem="7rI-Lv-pLI" secondAttribute="centerY" id="g7e-eS-m23"/>
+                                                        <constraint firstItem="m9N-RS-HeQ" firstAttribute="height" secondItem="7rI-Lv-pLI" secondAttribute="height" id="pjm-HT-A07"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="539-U6-iid">
+                                                    <rect key="frame" x="55" y="29" width="61" height="42"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="30"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyO-g2-3Id" customClass="CheckerButton" customModule="Demineur" customModuleProvider="target">
+                                                    <rect key="frame" x="254" y="32.5" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="EyO-g2-3Id" secondAttribute="height" multiplier="1:1" id="l1e-k3-j78"/>
+                                                        <constraint firstAttribute="width" constant="35" id="sJI-NL-4gX"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="widthForCheck">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="chosenButton:" destination="cPx-AN-KyR" eventType="touchUpInside" id="IMI-9W-pMD"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="EyO-g2-3Id" secondAttribute="trailing" constant="20" id="7eK-iZ-r6b"/>
+                                                <constraint firstItem="7rI-Lv-pLI" firstAttribute="centerY" secondItem="8p6-41-nPs" secondAttribute="centerY" id="94p-Zr-TeS"/>
+                                                <constraint firstItem="7rI-Lv-pLI" firstAttribute="centerX" secondItem="8p6-41-nPs" secondAttribute="centerX" id="96c-wp-Haf"/>
+                                                <constraint firstItem="7rI-Lv-pLI" firstAttribute="width" secondItem="8p6-41-nPs" secondAttribute="width" multiplier="0.85" id="YSC-cb-eUi"/>
+                                                <constraint firstItem="EyO-g2-3Id" firstAttribute="centerY" secondItem="8p6-41-nPs" secondAttribute="centerY" id="d8M-5R-5UP"/>
+                                                <constraint firstItem="539-U6-iid" firstAttribute="centerY" secondItem="8p6-41-nPs" secondAttribute="centerY" id="l0p-Ke-7Lb"/>
+                                                <constraint firstItem="539-U6-iid" firstAttribute="leading" secondItem="8p6-41-nPs" secondAttribute="leadingMargin" constant="40" id="usT-zx-J2v"/>
+                                                <constraint firstItem="7rI-Lv-pLI" firstAttribute="height" secondItem="8p6-41-nPs" secondAttribute="height" multiplier="0.85" id="yrF-WB-qwE"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkerButton" destination="EyO-g2-3Id" id="yuU-Hf-Hsk"/>
+                                            <outlet property="lineView" destination="m9N-RS-HeQ" id="mEP-sN-MnC"/>
+                                            <outlet property="mainView" destination="7rI-Lv-pLI" id="K1n-zP-ngX"/>
+                                            <outlet property="titleView" destination="539-U6-iid" id="0iO-79-SjL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -399,3 +399,4 @@ let allThemes: [ColorTheme] = [
     ColorTheme(name: "Cartoon", price: 2500, colors: [colorForRGB(r: 204, g: 255, b: 153), colorForRGB(r: 0, g: 102, b: 255), colorForRGB(r: 204, g: 51, b: 153)], isUnlocked: false),
     ColorTheme(name: "Dark", price: 3000, colors: [colorForRGB(r: 55, g: 22, b: 55), colorForRGB(r: 51, g: 0, b: 0), colorForRGB(r: 179, g: 179, b: 179)], isUnlocked: false)
 ]
+var selectedTheme: Int = 0
