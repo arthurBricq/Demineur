@@ -344,11 +344,7 @@ let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 // Bombe
 // Verification
 // Vie
-
 /// VARIABLE DE SAUVEGARDE : 'bonus'
-
-
-
 struct BonusDescription {
     let name: String
     var niveau: Int = 0 // il faut faire +1 // INUTILE POUR LA LOGIQUE
@@ -357,9 +353,6 @@ struct BonusDescription {
     let prixAchat: Int
     let prixAmelioration: [Int]
 }
-
-
-
 let allBonus: [BonusDescription] = [
     
     BonusDescription(name: "Temps", niveau: 0, descriptions: ["Récupérez 15 secondes", "Récupérez 30 secondes", "Récupérez 45 secondes", "Récupérez 1 minute"],descriptionsAmeliorations: ["+ 15 secondes", "+ 15 secondes", "+ 15 secondees"], prixAchat: 750, prixAmelioration: [8000, 16000, 30000, 40000] ),
@@ -375,16 +368,34 @@ let allBonus: [BonusDescription] = [
 ]
 
 
+// Packs de pièces a achetés
 struct PackagesDescription {
     let size: MoneyPackage.PackageSize
     let description: String
     let prix: Double
     let amountOfCoins: Int
 }
-
 let allPacks: [PackagesDescription] = [
     PackagesDescription(size: .small, description: "Achetez X pièces", prix: 0.99, amountOfCoins: 1),
     PackagesDescription(size: .medium, description: "Achetez une bourse de X pièces", prix: 2.99, amountOfCoins: 10),
     PackagesDescription(size: .large, description: "Achetez un grand coffre de X pièces", prix: 4.99, amountOfCoins: 100)
 ]
 
+
+// Thèmes de couleurs pour le jeu
+/* Ordre des couleurs :
+        1) Fond d'écran
+        2) Lignes principales
+        3) Textes et lignes secondaires
+ */
+struct ColorTheme {
+    let name: String
+    let price: Int
+    let colors: [UIColor]
+    let isUnlocked: Bool
+}
+let allThemes: [ColorTheme] = [
+    ColorTheme(name: "Classic", price: 0, colors: [colorForRGB(r: 255, g: 255, b: 255), colorForRGB(r: 184, g: 120, b: 0), colorForRGB(r: 66, g: 66, b: 66)], isUnlocked: true),
+    ColorTheme(name: "Cartoon", price: 2500, colors: [colorForRGB(r: 204, g: 255, b: 153), colorForRGB(r: 0, g: 102, b: 255), colorForRGB(r: 204, g: 51, b: 153)], isUnlocked: false),
+    ColorTheme(name: "Dark", price: 3000, colors: [colorForRGB(r: 55, g: 22, b: 55), colorForRGB(r: 51, g: 0, b: 0), colorForRGB(r: 179, g: 179, b: 179)], isUnlocked: false)
+]
