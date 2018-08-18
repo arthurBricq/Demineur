@@ -92,7 +92,7 @@ class ArticleViewController: UIViewController {
         
         // label et prix de la case
         let currentBonus = allBonus[articleIndex]
-        descriptionLabel.text = currentBonus.descriptions[currentBonus.niveau]
+        descriptionLabel.text = currentBonus.descriptions[levelOfBonus.giveTheLevelOfBonus(forIndex: articleIndex)]
         achatButton.prix = String(currentBonus.prixAchat)
         containerView.backgroundColor = UIColor.clear
         
@@ -106,7 +106,7 @@ class ArticleViewController: UIViewController {
         bonusView.index = articleIndex
         bonusView.frame = CGRect(origin: CGPoint.zero, size: size)
         if articleIndex == 0 {
-            switch currentBonus.niveau {
+            switch levelOfBonus.giveTheLevelOfBonus(forIndex: articleIndex) {
             case 0:
                 bonusView.tempsAngleParameter = 0
             case 1:

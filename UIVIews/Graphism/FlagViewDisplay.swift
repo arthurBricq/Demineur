@@ -12,7 +12,7 @@ import UIKit
 class FlagViewDisplay: UIView {
     
     @IBInspectable var  couleurBaton: UIColor = UIColor(red: 0.350, green: 0.274, blue: 0.000, alpha: 1.000)
-    @IBInspectable var couleurDrapeau: UIColor = UIColor(red: 0.176, green: 0.523, blue: 0.035, alpha: 1.000)
+    @IBInspectable var couleurDrapeau: UIColor = UIColor.orange//UIColor(red: 0.176, green: 0.523, blue: 0.035, alpha: 1.000)
     
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

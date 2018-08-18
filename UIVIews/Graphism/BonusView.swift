@@ -291,7 +291,7 @@ public class BonusDraw : NSObject {
         
         //// Color Declarations
         let gradientColor = UIColor(red: 0.546, green: 0.541, blue: 0.541, alpha: 1.000)
-        let color3 = UIColor(red: 0.176, green: 0.523, blue: 0.035, alpha: 1.000)
+        let color3 = UIColor.orange//UIColor(red: 0.176, green: 0.523, blue: 0.035, alpha: 1.000)
         let color4 = UIColor(red: 0.350, green: 0.274, blue: 0.000, alpha: 1.000)
         let color5 = UIColor(red: 0.751, green: 0.751, blue: 0.751, alpha: 1.000)
         

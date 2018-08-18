@@ -133,30 +133,34 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.label1.text = currentBonus.descriptions[level]
             cell.bonusView.index = indexPath.row
+            cell.bonusView.tempsAngleParameter = -185
             cell.achatButton.prix = String(currentBonus.prixAchat)
             cell.levelLabel.text = String(level+1)
             cell.numberLabel.text = String(number)
             cell.itemLabel.text = number == 0 ? "item" : "items"
             cell.index = indexPath.row
             
-            if currentBonus.niveau == currentBonus.descriptions.count { // dernier niveau atteint
-                cell.label2.text = ""
-                cell.AmeliorerButton.alpha = 0.5
-                cell.AmeliorerButton.prix = ""
+            if level == currentBonus.niveauMax { // dernier niveau atteint
+                cell.label2.text = "NIVEAU MAXIMUM"
+                cell.AmeliorerButton.alpha = 0
                 cell.AmeliorerButton.isUserInteractionEnabled = false
             } else {
-                cell.label2.text = currentBonus.descriptionsAmeliorations[currentBonus.niveau]
-                cell.AmeliorerButton.prix = String(currentBonus.prixAmelioration[currentBonus.niveau])
-                cell.AmeliorerButton.alpha = 1.0
-                cell.AmeliorerButton.isUserInteractionEnabled = true
+                cell.label2.text = currentBonus.descriptionsAmeliorations[level]
+                cell.AmeliorerButton.prix = String(currentBonus.prixAmelioration[level])
+                
+                if money.currentAmountOfMoney < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
+                    cell.AmeliorerButton.alpha = 0.5
+                    cell.AmeliorerButton.isUserInteractionEnabled = false
+                } else {
+                    cell.AmeliorerButton.alpha = 1.0
+                    cell.AmeliorerButton.isUserInteractionEnabled = true
+                }
             }
+            cell.AmeliorerButton.setNeedsDisplay()
             
             if money.currentAmountOfMoney < currentBonus.prixAchat { // Pas assez d'argent pour acheter.
                 cell.achatButton.alpha = 0.5
                 cell.achatButton.isUserInteractionEnabled = false
-                cell.AmeliorerButton.alpha = 0.5
-                cell.AmeliorerButton.isUserInteractionEnabled = false
-            } else if money.currentAmountOfMoney < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
                 cell.AmeliorerButton.alpha = 0.5
                 cell.AmeliorerButton.isUserInteractionEnabled = false
             }
