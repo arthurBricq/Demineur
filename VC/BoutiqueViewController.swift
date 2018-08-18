@@ -175,6 +175,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeBoutiqueCell", for: indexPath) as! ThemeBoutiqueTableViewCell
             let currentTheme = allThemes[indexPath.row]
             
+            cell.index = indexPath.row
+            
             cell.mainView.layer.cornerRadius = 10
             cell.mainView.layer.borderWidth = 2
             cell.mainView.layer.borderColor = colorForRGB(r: 20, g: 20, b: 20).cgColor
@@ -188,9 +190,22 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.titleView.text = currentTheme.name
             
             cell.buyButton.prix = currentTheme.price.description
+            cell.buyButton.isHidden = currentTheme.isUnlocked
+            cell.buyButton.textsize = 55
+            if money.currentAmountOfMoney < currentTheme.price {
+                cell.buyButton.isUserInteractionEnabled = false
+                cell.buyButton.alpha = 0.5
+            } else {
+                cell.buyButton.isUserInteractionEnabled = true
+                cell.buyButton.alpha = 1
+            }
+            cell.buyButton.setNeedsDisplay()
+            
             cell.hidingView.isHidden = currentTheme.isUnlocked
             cell.hidingView.layer.cornerRadius = 10
             cell.hidingView.layer.borderWidth = 2
+            
+            cell.lockView.progress = 1
             
             cell.checkerButton.isChecked = (selectedTheme == indexPath.row)
             
@@ -214,7 +229,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             return 100
         case 2:
-            return 120
+            return 160
         default:
             return 100
         }

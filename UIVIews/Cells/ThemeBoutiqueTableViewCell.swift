@@ -10,6 +10,13 @@ import UIKit
 
 class ThemeBoutiqueTableViewCell: UITableViewCell {
 
+    var index: Int = 0
+    var currentTheme: ColorTheme {
+        get {
+            return allThemes[index]
+        }
+    }
+    
     // MARK: - Outlets
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var lineView: LineView!
@@ -17,11 +24,13 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     @IBOutlet weak var checkerButton: CheckerButton!
     @IBOutlet weak var hidingView: UIView!
     @IBOutlet weak var buyButton: AchatBoutiqueBouton!
+    @IBOutlet weak var lockView: LockView!
     
     @IBAction func chosenButton(_ sender: Any) {
     }
     
     @IBAction func buyAction(_ sender: Any) {
+        print("test")
     }
     
 }

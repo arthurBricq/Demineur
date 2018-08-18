@@ -10,18 +10,71 @@ import UIKit
 
 class LockView: UIView {
 
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        LockDraw.drawLockCanvas(frame: rect, resizing: .aspectFill)
+    @objc public dynamic var progress: CGFloat = 1 {
+        didSet {
+            progressLayer.progress = progress
+            if progress == 0 || progress == 1 {
+                progressLayer.setNeedsDisplay()
+            }
+        }
+    }
+    
+    fileprivate var progressLayer: LockLayer {
+        return layer as! LockLayer
+    }
+    
+    override public class var layerClass: AnyClass {
+        return LockLayer.self
+    }
+    
+    override public func action(for layer: CALayer, forKey event: String) -> CAAction? {
+        if event == #keyPath(LockLayer.progress), let action = action(for: layer, forKey: #keyPath(backgroundColor)) as? CAAnimation {
+            let animation = CABasicAnimation()
+            animation.keyPath = #keyPath(LockLayer.progress)
+            animation.fromValue = progressLayer.progress
+            animation.toValue = progress
+            animation.beginTime = action.beginTime
+            animation.duration = action.duration
+            animation.speed = action.speed
+            animation.timeOffset = action.timeOffset
+            animation.repeatCount = action.repeatCount
+            animation.repeatDuration = action.repeatDuration
+            animation.autoreverses = action.autoreverses
+            animation.fillMode = action.fillMode
+            animation.timingFunction = action.timingFunction
+            animation.delegate = action.delegate
+            self.layer.add(animation, forKey: #keyPath(LockLayer.progress))
+        }
+        return super.action(for: layer, forKey: event)
     }
 
+}
+
+class LockLayer: CALayer {
+    
+    @NSManaged var progress: CGFloat
+    
+    override class func needsDisplay(forKey key: String) -> Bool {
+        if key == #keyPath(progress) {
+            return true
+        }
+        return super.needsDisplay(forKey: key)
+    }
+    
+    override func draw(in ctx: CGContext) {
+        super.draw(in: ctx)
+        UIGraphicsPushContext(ctx)
+        LockDraw.drawLockCanvas(frame: bounds, resizing: .aspectFill, progress: progress)
+        UIGraphicsPopContext()
+    }
+    
 }
 
 public class LockDraw : NSObject {
     
     //// Drawing Methods
     
-    @objc dynamic public class func drawLockCanvas(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit) {
+    @objc dynamic public class func drawLockCanvas(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100), resizing: ResizingBehavior = .aspectFit, progress: CGFloat = 1) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -33,8 +86,11 @@ public class LockDraw : NSObject {
         
         
         //// Color Declarations
-        let lockColor = UIColor(red: 0.698, green: 0.698, blue: 0.698, alpha: 1.000)
-        let holeColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.000)
+        let lockColor = UIColor(red: 0.498, green: 0.498, blue: 0.498, alpha: 1.000)
+        let holeColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
+        
+        //// Variable Declarations
+        let heightForFirstRectangle: CGFloat = 6 + progress * 8
         
         //// Gray
         //// Rectangle Drawing
@@ -44,7 +100,7 @@ public class LockDraw : NSObject {
         
         
         //// Rectangle 2 Drawing
-        let rectangle2Path = UIBezierPath(rect: CGRect(x: 30, y: 27, width: 6, height: 20))
+        let rectangle2Path = UIBezierPath(rect: CGRect(x: 30, y: 27, width: 6, height: heightForFirstRectangle))
         lockColor.setFill()
         rectangle2Path.fill()
         
