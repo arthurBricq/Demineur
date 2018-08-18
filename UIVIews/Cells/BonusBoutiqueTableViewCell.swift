@@ -35,6 +35,22 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
         
         money.takeAwayMoney(amount: allBonus[index].prixAchat)
         
+        switch index {
+        case 0:
+            bonus.addTemps(amount: 1)
+        case 1:
+            bonus.addDrapeau(amount: 1)
+        case 2:
+            bonus.addBomb(amount: 1)
+        case 3:
+            bonus.addVerification(amount: 1)
+        case 4:
+            bonus.addVie(amount: 1)
+        default:
+            break
+        }
+        
+        delegate?.reloadDatas()
         
     }
     
