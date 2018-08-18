@@ -90,7 +90,7 @@ public class LockDraw : NSObject {
         let holeColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
         
         //// Variable Declarations
-        let heightForFirstRectangle: CGFloat = 6 + progress * 8
+        let heightForFirstRectangle: CGFloat = 4 + progress * 10
         
         //// Gray
         //// Rectangle Drawing

@@ -12,11 +12,6 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
 
     // MARK: - Variables
     var index: Int = 0
-    var currentTheme: ColorTheme {
-        get {
-            return allThemes[index]
-        }
-    }
     var delegate: CellCanCallTableViewController?
     
     // MARK: - Outlets
@@ -31,11 +26,28 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func chosenButton(_ sender: Any) {
+        
+        selectedTheme = index
+        delegate?.reloadDatas()
+        
     }
     
     @IBAction func buyAction(_ sender: Any) {
         
+        money.takeAwayMoney(amount: allThemes[index].price)
+        allThemes[index].isUnlocked = true
         
+        delay(seconds: 0.2) {
+            UIView.animate(withDuration: 0.5) {
+                self.lockView.progress = 0
+            }
+            UIView.animateKeyframes(withDuration: 1.5, delay: 0.4, options: [], animations: {
+                self.hidingView.alpha = 0
+                self.buyButton.alpha = 0
+            }) { (_) in
+                self.delegate?.reloadDatas()
+            }
+        }
         
     }
     

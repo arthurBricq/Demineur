@@ -33,7 +33,7 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
     // REMARQUE : on est certain que lorsque l'utilisateur tappe sur ces bouttons il a assez d'argent, car les boutons ne seraient pas disponibles sinon.
     @IBAction func achatButtonTapped(_ sender: Any) {
         
-        money.currentAmountOfMoney -= allBonus[index].prixAchat
+        money.takeAwayMoney(amount: allBonus[index].prixAchat)
         
         
     }

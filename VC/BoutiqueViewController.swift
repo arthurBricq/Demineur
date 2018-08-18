@@ -212,9 +212,11 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.hidingView.layer.cornerRadius = 10
             cell.hidingView.layer.borderWidth = 2
             
-            cell.lockView.progress = 1
+            cell.lockView.progress = currentTheme.isUnlocked ? 0 : 1
             
             cell.checkerButton.isChecked = (selectedTheme == indexPath.row)
+            cell.checkerButton.setNeedsDisplay()
+            
             
             return cell
             

@@ -1630,7 +1630,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="buyButton" destination="MFj-8g-vLJ" id="mSd-DJ-uQM"/>
+                                            <outlet property="buyButton" destination="MFj-8g-vLJ" id="Ugx-VV-W9c"/>
                                             <outlet property="checkerButton" destination="EyO-g2-3Id" id="yuU-Hf-Hsk"/>
                                             <outlet property="hidingView" destination="00d-WU-sTW" id="qyh-yG-YlU"/>
                                             <outlet property="lineView" destination="m9N-RS-HeQ" id="mEP-sN-MnC"/>
