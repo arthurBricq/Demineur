@@ -11,14 +11,14 @@ import UIKit
 /// Cette classe présente la boutique. Il y a trois bouttons qui permettent de changer le contenu de la boutique : bonus, les pièces, et les couleurs. Le contenu de la boutique se trouve dans une tableView en dessous de ces bouttons. 
 class BoutiqueViewController: UIViewController {
 
-    /// VARIABLES
+    // MARK: - VARIABLES
     override var prefersStatusBarHidden: Bool { return true }
     var selectedButtonIndex: Int = 0 // 0 for bonus, 1 for pieces, 2 for colors
     let identifiersOfCells: [String] = ["BonusBoutiqueCell","PieceBoutiqueCell","ThemeBoutiqueCell"]
     
     
     
-    /// OUTLETS
+    // MARK: - OUTLETS
     @IBOutlet weak var bonusButton: UIButton!
     @IBOutlet weak var piecesButton: UIButton!
     @IBOutlet weak var colorsButtons: UIButton!
@@ -29,7 +29,7 @@ class BoutiqueViewController: UIViewController {
     
     
     
-    /// ACTIONS
+    // MARK: - ACTIONS
     @IBAction func bonusButtonTapped(_ sender: Any) {
         bonusButton.alpha = 1.0
         piecesButton.alpha = 0.6
@@ -69,7 +69,7 @@ class BoutiqueViewController: UIViewController {
     
     
     
-    /// FUNCTIONS
+    // MARK: - Other functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +96,8 @@ class BoutiqueViewController: UIViewController {
     
 }
 
+
+// MARK: - Gère la TableView
 extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int
     {
@@ -124,6 +126,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "BonusBoutiqueCell", for: indexPath) as! BonusBoutiqueTableViewCell
             /// ATTENTION : les cellules sont responsables elles-mêmes des actions lorsque l'on les tappes.
             
+            cell.delegate = self
             let currentBonus = allBonus[indexPath.row]
             let level = levelOfBonus.giveTheLevelOfBonus(forIndex: indexPath.row)
             let number = bonus.giveTheNumberOfBonus(forIndex: indexPath.row)
@@ -162,6 +165,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PieceBoutiqueCell", for: indexPath) as! PieceBoutiqueTableViewCell
+            cell.delegate = self
+            
             let currentPack = allPacks[indexPath.row]
             
             cell.moneyPackView.size = currentPack.size
@@ -173,6 +178,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeBoutiqueCell", for: indexPath) as! ThemeBoutiqueTableViewCell
+            cell.delegate = self
+            
             let currentTheme = allThemes[indexPath.row]
             
             cell.index = indexPath.row
@@ -234,4 +241,17 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             return 100
         }
     }
+}
+
+
+// MARK: - Extension pour recharger les données de la page après un changement dans une cellule
+extension BoutiqueViewController: CellCanCallTableViewController {
+    
+    func reloadDatas() {
+        
+        updateDisplay()
+        tableView.reloadData()
+        
+    }
+    
 }

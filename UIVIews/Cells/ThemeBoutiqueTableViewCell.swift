@@ -10,12 +10,14 @@ import UIKit
 
 class ThemeBoutiqueTableViewCell: UITableViewCell {
 
+    // MARK: - Variables
     var index: Int = 0
     var currentTheme: ColorTheme {
         get {
             return allThemes[index]
         }
     }
+    var delegate: CellCanCallTableViewController?
     
     // MARK: - Outlets
     @IBOutlet weak var mainView: UIView!
@@ -26,11 +28,15 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     @IBOutlet weak var buyButton: AchatBoutiqueBouton!
     @IBOutlet weak var lockView: LockView!
     
+    
+    // MARK: - Actions
     @IBAction func chosenButton(_ sender: Any) {
     }
     
     @IBAction func buyAction(_ sender: Any) {
-        print("test")
+        
+        
+        
     }
     
 }

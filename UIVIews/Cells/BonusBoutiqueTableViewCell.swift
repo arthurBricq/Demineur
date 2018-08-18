@@ -10,10 +10,11 @@ import UIKit
 
 class BonusBoutiqueTableViewCell: UITableViewCell {
 
-    //// VARIABLES
+    // MARK: - VARIABLES
     var index: Int = 0 // indice du bonus représenté
+    var delegate: CellCanCallTableViewController?
 
-    //// OUTLETS
+    // MARK: - OUTLETS
 
     /// description du niveau actuel. 
     @IBOutlet weak var label1: UILabel!
@@ -27,7 +28,7 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
     @IBOutlet weak var AmeliorerButton: AchatBoutiqueBouton!
     
     
-    //// FUNCTIONS & ACTIONS
+    // MARK: - FUNCTIONS & ACTIONS
     
     // REMARQUE : on est certain que lorsque l'utilisateur tappe sur ces bouttons il a assez d'argent, car les boutons ne seraient pas disponibles sinon.
     @IBAction func achatButtonTapped(_ sender: Any) {
