@@ -899,6 +899,7 @@ extension HistoryGameViewController {
         buttonToBuy.prix = String(allBonus[4].prixAchat)
         buttonToBuy.frame = CGRect(x: width/2 - buttonToBuyWidth/2 - buttonNoWidth/2 - separator/2, y: label.frame.maxY + verticalSeparator, width: buttonToBuyWidth, height: buttonsHeight)
         buttonToBuy.tappedFuncIfEnoughMoney = {
+            coinView.playParticleAnimation()
             money.addMoney(amount: -allBonus[4].prixAchat)
             
             var viewToRemove: BombView?

@@ -56,18 +56,21 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
             break
         }
         
-        delegate?.reloadDatas()
+        delegate?.reloadDatas(moneyNeedAnimation: true)
         
     }
     
     @IBAction func ameliorerButtonTapped(_ sender: Any) {
         
+        money.takeAwayMoney(amount: allBonus[self.index].prixAmelioration[levelOfBonus.giveTheLevelOfBonus(forIndex: self.index)])
+        self.delegate?.reloadDatas(moneyNeedAnimation: true)
+        
         let arrow = SkillUpArrowView()
         arrow.backgroundColor = UIColor.clear
         let arrowWidth: CGFloat = 30
         let arrowHeight: CGFloat = 7/5*arrowWidth
-        arrow.frame = CGRect(x: bonusView.frame.maxX - arrowWidth/2, y: bonusView.frame.minY + arrowHeight/2, width: arrowWidth, height: 0)
-        contentView.addSubview(arrow)
+        arrow.frame = CGRect(x: bonusView.frame.maxX - arrowWidth/2, y: bonusView.frame.minY + arrowHeight/2 + CGFloat(index)*self.frame.height, width: arrowWidth, height: 0)
+        self.superview?.addSubview(arrow)
         
         switch index {
         case 0:
@@ -87,14 +90,13 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
         levelLabel.text = String(levelOfBonus.giveTheLevelOfBonus(forIndex: index))
 
         UIView.animate(withDuration: 0.4, delay: 0, options: [], animations: {
-            arrow.frame = CGRect(x: self.bonusView.frame.maxX - arrowWidth/2, y: self.bonusView.frame.minY - arrowHeight/2, width: arrowWidth, height: arrowHeight)
+            arrow.frame = CGRect(x: self.bonusView.frame.maxX - arrowWidth/2, y: self.bonusView.frame.minY - arrowHeight/2 + CGFloat(self.index)*self.frame.height, width: arrowWidth, height: arrowHeight)
         }) { (_) in
             
-            UIView.animate(withDuration: 0.4, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 arrow.alpha = 0
             }, completion: { (_) in
-                money.takeAwayMoney(amount: allBonus[self.index].prixAmelioration[levelOfBonus.giveTheLevelOfBonus(forIndex: self.index)])
-                self.delegate?.reloadDatas()
+                arrow.removeFromSuperview()
             })
         }
         

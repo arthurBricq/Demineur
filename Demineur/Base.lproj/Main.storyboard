@@ -930,6 +930,7 @@
                         <outlet property="moneyLabel" destination="wgr-kB-lTh" id="E5E-Jo-mGe"/>
                         <outlet property="pageControl" destination="qsc-bP-kpu" id="SZr-y9-Iim"/>
                         <outlet property="pauseView" destination="5Gz-Ys-46b" id="sfC-9p-NB3"/>
+                        <outlet property="pieceView" destination="wKh-nO-KAF" id="7Us-ol-DAE"/>
                         <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToMenu" unwindAction="unwindToMenuWithSegue:" id="rXL-MZ-8nX"/>
                         <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToHistoryPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="wMs-TG-NvC"/>
                         <segue destination="apS-Vh-1Q6" kind="unwind" identifier="BackToInfinitePresentation" unwindAction="unwindToInfinitePresentationWithSegue:" id="W62-Rs-sV4"/>
@@ -1686,6 +1687,7 @@
                         <outlet property="bonusButton" destination="Saj-9k-XXp" id="5lx-66-oCy"/>
                         <outlet property="colorsButtons" destination="LPd-ae-zvH" id="WMo-ce-Y8B"/>
                         <outlet property="moneyLabel" destination="Qqx-v4-iL5" id="IDA-Ey-gDm"/>
+                        <outlet property="pieceView" destination="n2E-at-Xie" id="y8W-N2-StJ"/>
                         <outlet property="piecesButton" destination="U1X-TP-pI4" id="42C-WE-7dr"/>
                         <outlet property="tableView" destination="VX9-pt-CFt" id="wKo-KP-Fu4"/>
                     </connections>

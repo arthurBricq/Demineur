@@ -28,7 +28,7 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     @IBAction func chosenButton(_ sender: Any) {
         
         selectedTheme = index
-        delegate?.reloadDatas()
+        delegate?.reloadDatas(moneyNeedAnimation: false)
         
     }
     
@@ -45,7 +45,7 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
                 self.hidingView.alpha = 0
                 self.buyButton.alpha = 0
             }) { (_) in
-                self.delegate?.reloadDatas()
+                self.delegate?.reloadDatas(moneyNeedAnimation: true)
             }
         }
         

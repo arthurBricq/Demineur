@@ -16,11 +16,11 @@ import UIKit
 
 class ArticleViewController: UIViewController {
 
+    // MARK: - VARIABLES
     override var prefersStatusBarHidden: Bool { return true }
-    
     var articleIndex: Int = 1
     
-    /// OUTLETS
+    // MARK: - OUTLETS
     
     @IBOutlet weak var achatButton: AchatBoutiqueBouton!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -29,7 +29,7 @@ class ArticleViewController: UIViewController {
     
     var pauseVC: PauseViewController? 
     
-    /// ACTIONS
+    // MARK: - ACTIONS
     
     @IBAction func achatButtonTapped(_ sender: Any) {
         
@@ -57,6 +57,7 @@ class ArticleViewController: UIViewController {
         
         pauseVC?.updateLivesDisplay()
         pauseVC?.updateMoneyDisplay()
+        pauseVC?.pieceView.playParticleAnimation()
         updateNumberOfElementDisplay()
         
     }
@@ -65,7 +66,7 @@ class ArticleViewController: UIViewController {
     
     
     
-    /// FONCTIONS
+    // MARK: - FONCTIONS
     
     override func viewDidLoad() {
         super.viewDidLoad()

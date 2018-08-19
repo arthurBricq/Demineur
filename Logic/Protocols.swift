@@ -39,5 +39,5 @@ protocol BonusButtonsCanCallVC {
     func verificationTapped()
 }
 protocol CellCanCallTableViewController {
-    func reloadDatas()
+    func reloadDatas(moneyNeedAnimation: Bool)
 }

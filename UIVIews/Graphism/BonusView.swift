@@ -105,7 +105,7 @@ public class BonusDraw : NSObject {
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2.26, y: 1.71, width: 136, height: 136), cornerRadius: 4)
         gradientColor.setStroke()
         rectanglePath.lineWidth = 3
-        rectanglePath.stroke()
+        //rectanglePath.stroke()
         
         
         //// Oval Drawing
@@ -188,7 +188,7 @@ public class BonusDraw : NSObject {
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 2.13, y: 1.7, width: 136, height: 136), cornerRadius: 4)
         gradientColor.setStroke()
         rectangle2Path.lineWidth = 3
-        rectangle2Path.stroke()
+        //rectangle2Path.stroke()
         
         
         //// Group 4
@@ -300,7 +300,7 @@ public class BonusDraw : NSObject {
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2.36, y: 1.67, width: 136, height: 136), cornerRadius: 4)
         gradientColor.setStroke()
         rectanglePath.lineWidth = 3
-        rectanglePath.stroke()
+        //rectanglePath.stroke()
         
         
         
@@ -377,7 +377,7 @@ public class BonusDraw : NSObject {
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 1.87, y: 1.64, width: 136, height: 136), cornerRadius: 4)
         gradientColor.setStroke()
         rectanglePath.lineWidth = 3
-        rectanglePath.stroke()
+        //rectanglePath.stroke()
         
         
         
@@ -488,7 +488,7 @@ public class BonusDraw : NSObject {
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 2.36, y: 1.67, width: 136, height: 136), cornerRadius: 4)
         gradientColor.setStroke()
         rectanglePath.lineWidth = 3
-        rectanglePath.stroke()
+        //rectanglePath.stroke()
         
         
         

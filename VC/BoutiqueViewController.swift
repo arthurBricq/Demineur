@@ -24,6 +24,7 @@ class BoutiqueViewController: UIViewController {
     @IBOutlet weak var colorsButtons: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moneyLabel: UILabel!
+    @IBOutlet weak var pieceView: PieceView!
     
     
     
@@ -253,10 +254,14 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Extension pour recharger les données de la page après un changement dans une cellule
 extension BoutiqueViewController: CellCanCallTableViewController {
     
-    func reloadDatas() {
+    func reloadDatas(moneyNeedAnimation: Bool) {
         
         updateDisplay()
         tableView.reloadData()
+        
+        if moneyNeedAnimation {
+            pieceView.playParticleAnimation()
+        }
         
     }
     
