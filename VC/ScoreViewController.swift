@@ -76,7 +76,7 @@ class ScoreViewController: UIViewController {
             // 2. On compare ce score avec tous les scores équivalent de tous les joueurs pour trouver le X% des plus forts, à l'aide d'un tableau de tous les scores équivalent triés
             let localEquivalentScore = 10 * localAverageLevel + localAverageNumberOfBombs
             var tmp: Int = 0
-            while localEquivalentScore > equivalentScores[tmp] {
+            while localEquivalentScore > equivalentScores[tmp] && tmp < equivalentScores.count-1 {
                 tmp += 1
             }
             let pourcentage1: CGFloat = (1 - CGFloat(tmp/equivalentScores.count))*(100)
@@ -86,7 +86,7 @@ class ScoreViewController: UIViewController {
             
             // Pour la durée des parties, on refais pareil
             tmp = 0 // reinitaliser
-            while localAverageLevel > averageLevels[tmp] {
+            while localAverageLevel > averageLevels[tmp] && tmp < averageLevels.count-1 {
                 tmp += 1
             }
             let pourcentage2: CGFloat = 100*(1 - CGFloat(tmp/averageLevels.count))
@@ -95,12 +95,12 @@ class ScoreViewController: UIViewController {
             
             
             // Pour le nombre de bombe
-            /*
+            
             tmp = 0
-            while localScores.totalNumberOfBombs > numberOfBombs[tmp] { tmp += 1}
+            while localScores.totalNumberOfBombs > numberOfBombs[tmp] && tmp < numberOfBombs.count-1 { tmp += 1}
             let pourcentage3: CGFloat = 100 * (1 - CGFloat(tmp/numberOfBombs.count))
             label7.text = "Vous avez désamorcé \(localScores.totalNumberOfBombs) bombes, soit plus que \(pourcentage3)% des joueurs."
-            */
+            
             
             
             
