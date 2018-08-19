@@ -10,10 +10,9 @@ import UIKit
 
 class PauseViewController: UIViewController {
     
+    // MARK: - Variables
     override var prefersStatusBarHidden: Bool { return true }
-    
     var pausedGameViewController: UIViewController?
-    
     lazy var orderedViewControllers: [UIViewController] = {
         return [self.viewController(forIndex: 0),
                 self.viewController(forIndex: 1),
@@ -22,7 +21,7 @@ class PauseViewController: UIViewController {
                 self.viewController(forIndex: 4)]
     }()
     
-    /// OUTLETS
+    // MARK: - OUTLETS
     
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var pauseView: UIView!
@@ -31,9 +30,10 @@ class PauseViewController: UIViewController {
     @IBOutlet weak var checkView: UIView!
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var lifeLabel: UILabel!
+    @IBOutlet weak var pieceView: PieceView!
     
     
-    /// FUNCTIONS
+    // MARK: - FUNCTIONS
     
     func viewController(forIndex index: Int) -> UIViewController {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
@@ -104,7 +104,7 @@ class PauseViewController: UIViewController {
     }
     
     
-    /// ACTIONS
+    // MARK: - ACTIONS
     
     @IBAction func returnButtonTapped(_ sender: Any) {
                 
@@ -179,6 +179,7 @@ class PauseViewController: UIViewController {
     
 }
 
+// MARK: - Gère le PageViewController
 extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

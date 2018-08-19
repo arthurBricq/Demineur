@@ -17,6 +17,8 @@ class CheckerButton: UIButton {
     @IBInspectable var widthForCheck: CGFloat = 4.0
     @IBInspectable var strokeWidth: CGFloat = 5.0
 
+    var isChecked = true
+    
     
     override func draw(_ rect: CGRect) {
         let contour = UIBezierPath(rect: rect)
@@ -24,7 +26,7 @@ class CheckerButton: UIButton {
         contour.lineWidth = strokeWidth
         contour.stroke()
      
-        if options.areVibrationsOn == true {
+        if isChecked {
             Checker.drawCanvas1(frame: rect, resizing: .aspectFill, width: widthForCheck)
         }
     }

@@ -15,10 +15,42 @@ class PieceView: UIView {
         Piece.drawCanvas1(frame: rect, resizing: .aspectFill)
     }
  
+    func playParticleAnimation() {
+        
+        print("Play animation")
+        
+        let emitter = CAEmitterLayer()
+        emitter.frame = CGRect(x: 0.35*bounds.width, y: bounds.height/2, width: 0.3*bounds.width, height: bounds.height/2)
+        emitter.emitterShape = kCAEmitterLayerLine
+        emitter.emitterPosition = CGPoint(x: emitter.frame.width/2, y: emitter.frame.height/2)
+        emitter.emitterSize = bounds.size
+        
+        // Cree les particules
+        let emitterCell = CAEmitterCell()
+        emitterCell.contents = UIImage(named: "CoinImage")?.cgImage
+        emitterCell.birthRate = 10
+        emitterCell.lifetime = 0.2
+        
+        emitterCell.scale = 0.13
+        emitterCell.scaleRange = 0.05
+        emitterCell.scaleSpeed = -0.4
+        
+        emitterCell.xAcceleration = 10
+        emitterCell.yAcceleration = 20
+        emitterCell.velocity = 10
+        emitterCell.velocityRange = 10
+        emitterCell.emissionLongitude = -.pi/2
+        emitterCell.emissionRange = .pi/2
+        
+        emitter.emitterCells = [emitterCell]
+        
+        self.layer.addSublayer(emitter)
+        delay(seconds: 0.3) {
+            emitter.removeFromSuperlayer()
+        }
+    }
 
 }
-
-
 
 public class Piece : NSObject {
     

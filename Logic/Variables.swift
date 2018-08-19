@@ -335,9 +335,8 @@ let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 
 
 
+// MARK: - Modèle de données pour les tablesView de la boutique
 
-
-//// BONUS //// 
 
 /// ORDRE DES BONUS :
 // Temps
@@ -345,42 +344,60 @@ let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 // Bombe
 // Verification
 // Vie
-
 /// VARIABLE DE SAUVEGARDE : 'bonus'
-
-
-
 struct BonusDescription {
     let name: String
     var niveau: Int = 0 // il faut faire +1 // INUTILE POUR LA LOGIQUE
+    var niveauMax: Int // egale au nombre de niveaux possible -1 (le 1er niveau étant d'indice 0)
     let descriptions: [String]
     let descriptionsAmeliorations: [String]
     let prixAchat: Int
     let prixAmelioration: [Int]
 }
-
-
-// MARK: - Modèle de données pour les tablesView de la boutique
-
 let allBonus: [BonusDescription] = [
     
-    BonusDescription(name: "Temps", niveau: 0, descriptions: ["Récupérez 15 secondes", "Récupérez 30 secondes", "Récupérez 45 secondes", "Récupérez 1 minute"],descriptionsAmeliorations: ["+ 15 secondes", "+ 15 secondes", "+ 15 secondees"], prixAchat: 750, prixAmelioration: [8000, 16000, 30000, 40000] ),
+    BonusDescription(name: "Temps", niveau: 0, niveauMax: 3, descriptions: ["Récupérez 15 secondes", "Récupérez 30 secondes", "Récupérez 45 secondes", "Récupérez 1 minute"],descriptionsAmeliorations: ["+ 15 secondes", "+ 15 secondes", "+ 15 secondees"], prixAchat: 750, prixAmelioration: [8000, 16000, 30000, 40000] ),
 
-    BonusDescription(name: "Drapeau", niveau: 0, descriptions: ["Gagnez un drapeau durant une partie", "Gagnez 2 drapeaux durant une partie", "Gagnez 3 drapeaux durant une partie"],descriptionsAmeliorations: ["+ 1 drapeau", "+ 1 drapeau"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
+    BonusDescription(name: "Drapeau", niveau: 0, niveauMax: 2, descriptions: ["Gagnez un drapeau durant une partie", "Gagnez 2 drapeaux durant une partie", "Gagnez 3 drapeaux durant une partie"],descriptionsAmeliorations: ["+ 1 drapeau gagné", "+ 1 drapeau gagné"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
     
-    BonusDescription(name: "Bombe", niveau: 0, descriptions: ["Trouver une bombe avec une chance de 50%.","Trouver une bombe !","Trouver 2 bombes avec une chance de 50%"],descriptionsAmeliorations: ["Trouvez-là avec 100% de chance !", "+ 1 bombe à 50% de chances"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
+    BonusDescription(name: "Bombe", niveau: 0, niveauMax: 2, descriptions: ["Trouver une bombe avec une chance de 50%.","Trouver une bombe !","Trouver 2 bombes avec une chance de 50%"],descriptionsAmeliorations: ["Trouvez-là avec 100% de chance !", "+ 1 bombe à 50% de chances"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
     
-    BonusDescription(name: "Verification", niveau: 0 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"],descriptionsAmeliorations: ["Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
+    BonusDescription(name: "Verification", niveau: 0, niveauMax: 1 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"],descriptionsAmeliorations: ["Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
     
-    BonusDescription(name: "Vie", niveau: 0, descriptions: ["Obtenez une seconde chance", "Vous surviverez à 2 bombes", "3 échecs ne vous abatteront pas !"],descriptionsAmeliorations: ["Survivez à 2 bombes !", "Survivez à 3 bombes"], prixAchat: 2500, prixAmelioration: [20000, 50000] )
+    BonusDescription(name: "Vie", niveau: 0, niveauMax: 2, descriptions: ["Obtenez une seconde chance", "Vous surviverez à 2 bombes", "3 échecs ne vous abatteront pas !"],descriptionsAmeliorations: ["Survivez à 2 bombes !", "Survivez à 3 bombes"], prixAchat: 2500, prixAmelioration: [20000, 50000] )
     
 ]
 
 
+// Packs de pièces a achetés
+struct PackagesDescription {
+    let size: MoneyPackage.PackageSize
+    let description: String
+    let prix: Double
+    let amountOfCoins: Int
+}
+let allPacks: [PackagesDescription] = [
+    PackagesDescription(size: .small, description: "Achetez X pièces", prix: 0.99, amountOfCoins: 1),
+    PackagesDescription(size: .medium, description: "Achetez une bourse de X pièces", prix: 2.99, amountOfCoins: 10),
+    PackagesDescription(size: .large, description: "Achetez un grand coffre de X pièces", prix: 4.99, amountOfCoins: 100)
+]
 
 
-
-
-
-
-
+// Thèmes de couleurs pour le jeu
+/* Ordre des couleurs :
+        1) Fond d'écran
+        2) Lignes principales
+        3) Textes et lignes secondaires
+ */
+struct ColorTheme {
+    let name: String
+    let price: Int
+    let colors: [UIColor]
+    var isUnlocked: Bool
+}
+var allThemes: [ColorTheme] = [
+    ColorTheme(name: "Classic", price: 0, colors: [colorForRGB(r: 255, g: 255, b: 255), colorForRGB(r: 184, g: 120, b: 0), colorForRGB(r: 66, g: 66, b: 66)], isUnlocked: true),
+    ColorTheme(name: "Cartoon", price: 2500, colors: [colorForRGB(r: 204, g: 255, b: 153), colorForRGB(r: 0, g: 102, b: 255), colorForRGB(r: 204, g: 51, b: 153)], isUnlocked: false),
+    ColorTheme(name: "Dark", price: 3000, colors: [colorForRGB(r: 55, g: 22, b: 55), colorForRGB(r: 153, g: 102, b: 0), colorForRGB(r: 179, g: 179, b: 179)], isUnlocked: false)
+]
+var selectedTheme: Int = 0

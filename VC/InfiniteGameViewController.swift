@@ -1343,6 +1343,7 @@ extension InfiniteGameViewController {
         buttonToBuy.frame = CGRect(x: width/2 - buttonToBuyWidth/2 - buttonNoWidth/2 - separator/2, y: label.frame.maxY + verticalSeparator, width: buttonToBuyWidth, height: buttonsHeight)
         buttonToBuy.tappedFuncIfEnoughMoney = {
             money.addMoney(amount: -allBonus[4].prixAchat)
+            coinView.playParticleAnimation()
             
             var viewToRemove: BombView?
             let viewOfGame: UIView? = self.containerView.subviews.last
@@ -1360,6 +1361,7 @@ extension InfiniteGameViewController {
             UIView.animate(withDuration: 0.1, animations: {
                 coinLabel.alpha = 0
             }, completion: { (_) in
+                
                 coinLabel.text = String(money.getCurrentValue())
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {

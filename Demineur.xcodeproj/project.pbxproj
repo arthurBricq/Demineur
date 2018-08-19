@@ -67,6 +67,9 @@
 		4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */; };
 		4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */; };
 		4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */; };
+		9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */; };
+		9C0084BE2126E64A00490F97 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BD2126E64A00490F97 /* LockView.swift */; };
+		9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */; };
 		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
 		9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */; };
 		9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */; };
@@ -143,6 +146,9 @@
 		4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoutiqueViewController.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteFunctions.swift; sourceTree = "<group>"; };
+		9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
+		9C0084BD2126E64A00490F97 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
+		9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillUpArrowView.swift; sourceTree = "<group>"; };
 		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
 		9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInfinite.swift; sourceTree = "<group>"; };
 		9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfinitePresentationViewController.swift; sourceTree = "<group>"; };
@@ -282,6 +288,7 @@
 				4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */,
 				4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */,
 				9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */,
+				9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -334,6 +341,8 @@
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
 				9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */,
 				4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */,
+				9C0084BD2126E64A00490F97 /* LockView.swift */,
+				9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */,
 			);
 			path = Graphism;
 			sourceTree = "<group>";
@@ -449,6 +458,7 @@
 				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
 				4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */,
+				9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */,
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */,
 				4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */,
@@ -458,6 +468,7 @@
 				4E88CAC220FF38B100DAD9DB /* BonusView.swift in Sources */,
 				4EA7FDA820F8978C00740480 /* Variables.swift in Sources */,
 				4EA7FD8420F8960700740480 /* HexCase.swift in Sources */,
+				9C0084BE2126E64A00490F97 /* LockView.swift in Sources */,
 				4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */,
 				9CA08A3121243EB3006BC68E /* InAppPurchaseButton.swift in Sources */,
 				4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */,
@@ -492,6 +503,7 @@
 				4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */,
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
+				9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */,
 				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,

@@ -248,7 +248,7 @@ class BonusChoiceLayer: CALayer {
         BonusChoiceProgress.drawBonusChoice(frame: frame, resizing: .aspectFill, progress: progress)
         UIGraphicsPopContext()
     }
-    
+     
 }
 
 public class BonusChoiceProgress : NSObject {
