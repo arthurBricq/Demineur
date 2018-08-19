@@ -42,6 +42,11 @@ class InfinitePresentationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
+    }
     
     @IBAction func playButton(_ sender: Any) {
         self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)

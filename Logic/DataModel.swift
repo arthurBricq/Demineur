@@ -8,13 +8,33 @@ import Foundation
 import UIKit
 import CoreData
 
+// MARK: - Remarque générale
+/*
+ Il y a deux type de classe de sauvegarde, les méthodes de sauvegarde sont différentes pour les deux types.
+ 1. Quand il faut juste se souvenir de la dernière valeure: alors la sauvegarde peut se faire directement en accedant à la propriété qui nous intéresse et en la modifiant.
+ 2. Quand il faut se souvenir d'un tableau de valeurs, alors il faut utiliser la fonction de la classe qui va ajouter un élément au tableau ET ajouter un élément à la base de données
+ Quand il s'agit de lire les données, alors il suffit d'accéder à la propriété qui nous interesse.
+ 
+ Pour la sauvegarde des scores, il y a deux choses différentes:
+ 1. Une base de donnée qui sauvegarde les scores de TOUS les joueurs
+ 2. Une sauvegarde local de tous les scores du joueur
+ 
+ */
+
+
+// MARK: - Variables globales pour les sauvegardes
 let money = MoneyManager()
 let options = OptionsManager()
 let bonus = BonusManager()
 let levelOfBonus = LevelBonusManager()
 let gameData = GameDataManager()
+let localScores = LocalScoresManager()
 
+// MARK: - Variable globale pour cloudKit
 let scoresModel = ScoresModel()
+
+
+
 
 
 /// Cette fonction est appelée si on souhaite ré-initialiser toutes les propriétés d'une partie correctement
@@ -33,6 +53,9 @@ func initiateANewDevice(argent: Int, lives: Int, level: Int) {
     bonus.vie = lives
 }
 
+
+
+// MARK: - Sauvegarde de l'argent
 
 /// Pour sauvegarder l'argent de la partie.
 class MoneyManager {
@@ -192,6 +215,121 @@ class GameDataManager {
     }
     
 }
+
+/// Pour sauvegarder les scores en mode infini sur le disque local de l'iphone.
+/// ATTENTION : Pour cette classe de sauvegarde, il faut utiliser les fonctions fournies afin de rajouter de nouveaux éléments au tableau.
+class LocalScoresManager {
+    
+    var allScores: [(level:Int,numberOfBombs:Int)] = [] {
+        didSet {
+            displayTheLocalScores()
+        }
+    }
+    
+    var bestLevel: Int  {
+        var toReturn: Int = 1
+        for score in allScores {
+            if score.level > toReturn {
+                toReturn = score.level
+            }
+        }
+        return toReturn
+    }
+    
+    var bestNumberOfBombs: Int  {
+        var toReturn: Int = 0
+        for score in allScores {
+            if score.numberOfBombs > toReturn {
+                toReturn = score.numberOfBombs
+            }
+        }
+        return toReturn
+    }
+    
+    var averageLevel: Int {
+        var sum: Int = 0
+        for score in allScores {
+            sum += score.level
+        }
+        return sum/allScores.count
+    }
+    
+    var averageNumberOfBombs: Int {
+        var sum: Int = 0
+        for score in allScores {
+            sum += score.numberOfBombs
+        }
+        return sum/allScores.count
+    }
+    
+    var totalNumberOfBombs: Int {
+        var toReturn: Int = 0
+        for score in allScores {
+            toReturn += score.numberOfBombs
+        }
+        return toReturn
+    }
+    
+    /// Cette fonction va actualiser le tableau
+    @discardableResult func getCurrentValue() -> [(level:Int,numberOfBombs:Int)] {
+        var toReturn: [(level:Int,numberOfBombs:Int)] = []
+        
+        // 1
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : creéer la requete
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "LocalScores") // on récupère tous les objets qui ont une entité Money
+        
+        // 3 : récuperer toutes les valeurs déjà sauvegardées, sous formes d'objets
+        var allObjects: [NSManagedObject] = []
+        do {
+            allObjects = try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            allObjects = []
+        }
+    
+        // 4 : retourner les valeurs sauvegardées
+
+        for object in allObjects {
+            let tmpLevel = object.value(forKey: "level") as? Int
+            let tmpBombs = object.value(forKey: "numberOfBombs") as? Int
+            toReturn.append((tmpLevel!, tmpBombs!))
+        }
+        
+        self.allScores = toReturn
+        return toReturn
+    }
+    
+    /**
+     Cette fonction est appellée quand on souhaite rajouter un élément au tableau allScore.
+     */
+    func addOneScoreToLocal(level: Int, numberOfBombs: Int) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 1 : creer une instance à sauvegarder.
+        let entity = NSEntityDescription.entity(forEntityName: "LocalScores", in: managedContext)!
+        let newScore = NSManagedObject(entity: entity, insertInto: managedContext)
+        newScore.setValue(level, forKeyPath: "level")
+        newScore.setValue(numberOfBombs, forKey: "numberOfBombs")
+        allScores.append((level: level, numberOfBombs: numberOfBombs))
+        
+        // 2 : sauvegarder le nouveau contexte.
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
+    func displayTheLocalScores() {
+        print("Nombre de scores enregistrées en local: \(self.allScores.count)")
+    }
+    
+}
+
 
 
 /// Pour sauvegarder les options du jeu
@@ -484,7 +622,6 @@ class LevelBonusManager {
         }
         
         // 5 - Retourner les valeurs courantes qui sont dans la dernière entitée sauvegardée
-        print("nombre d'element: \(allBonus.count)")
         guard let bonus1 = allBonus.last?.value(forKey: "temps") as? Int else { return toReturn } // ...
         guard let bonus2 = allBonus.last?.value(forKey: "drapeau") as? Int else { return toReturn } // ...
         guard let bonus3 = allBonus.last?.value(forKey: "bombe") as? Int else { return toReturn } // ...

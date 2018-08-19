@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17F77" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bonus" representedClassName="Bonus" syncable="YES" codeGenerationType="class">
         <attribute name="bombe" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="drapeau" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -17,6 +17,10 @@
         <attribute name="verification" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vie" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="LocalScores" representedClassName="LocalScores" syncable="YES" codeGenerationType="class">
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="numberOfBombs" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="Money" representedClassName="Money" syncable="YES" codeGenerationType="class">
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
@@ -26,9 +30,10 @@
     </entity>
     <elements>
         <element name="Bonus" positionX="250" positionY="-90" width="128" height="118"/>
+        <element name="GameData" positionX="63" positionY="-72" width="128" height="60"/>
         <element name="LevelBonus" positionX="72" positionY="-72" width="128" height="120"/>
         <element name="Money" positionX="-126" positionY="-144" width="128" height="58"/>
         <element name="Options" positionX="70" positionY="-153" width="128" height="75"/>
-        <element name="GameData" positionX="63" positionY="-72" width="128" height="60"/>
+        <element name="LocalScores" positionX="63" positionY="-72" width="128" height="75"/>
     </elements>
 </model>

@@ -23,13 +23,14 @@
 
 import Foundation
 import CloudKit
+import SystemConfiguration
 
 
 // MARK: - Structure à sauvegarder
 struct Score {
     
     fileprivate static let recordType = "Score"
-    fileprivate static let keys: (level: String, numberOfBombs: String) = ("level","numberOfBombs")
+    fileprivate static let keys: (level: String, numberOfBombs: String, userIdentifier: String) = ("level","numberOfBombs","userIdentifier")
     
     var record: CKRecord
     
@@ -60,12 +61,23 @@ struct Score {
         }
     }
     
+    var userIdentifier: String {
+        get {
+            return self.record.value(forKey: Score.keys.userIdentifier) as! String
+        }
+        set {
+            self.record.setValue(newValue, forKey: Score.keys.userIdentifier)
+        }
+    }
     
 }
 
 // MARK: - Classe de sauvegarde qui gère la structure "Score"
 class ScoresModel {
     private let database = CKContainer.default().publicCloudDatabase
+    
+    
+    // MARK: - variables et propriétés remarquables
     var allScores = [Score]() {
         didSet {
             self.notificationQueue.addOperation {
@@ -73,6 +85,28 @@ class ScoresModel {
             }
         }
     }
+    
+    var bestLevel: Int  {
+        var toReturn: Int = 1
+        for score in allScores {
+            if score.level > toReturn {
+                toReturn = score.level
+            }
+        }
+        return toReturn
+    }
+    
+    var bestNumberOfBombs: Int  {
+        var toReturn: Int = 0
+        for score in allScores {
+            if score.numberOfBombs > toReturn {
+                toReturn = score.numberOfBombs
+            }
+        }
+        return toReturn
+    }
+    
+    
     
     var onChange : (() -> Void)?
     var onError : ((Error) -> Void)?
@@ -90,10 +124,22 @@ class ScoresModel {
         }
     }
     
+    // MARK: - Fonctions pour la synchronisation
+    
     func addOneScore(level: Int, numberOfBombs: Int) {
         var newScore = Score()
         newScore.level = level
         newScore.numberOfBombs = numberOfBombs
+        
+        // Pour ajouter l'identifiant des apples
+        iCloudUserIDAsync { (recordID: CKRecordID?, error: NSError?) in
+            if let userID = recordID?.recordName {
+                newScore.userIdentifier = userID
+            } else {
+                print("Fetched iCloudID was nil")
+            }
+        }
+        
         database.save(newScore.record) { (_, error) in
             guard error == nil else {
                 self.handle(error: error!)
@@ -144,7 +190,7 @@ class ScoresModel {
         
         self.allScores = scores
         
-        debugPrint("Tracking local objects \(self.insertedObjects) \(self.deletedObjectIds)")
+        // debugPrint("Tracking local objects \(self.insertedObjects) \(self.deletedObjectIds)")
         
     }
     
@@ -158,6 +204,160 @@ class ScoresModel {
             self.records = records
             self.updateModel()
         }
+    }
+    
+    // MARK: - Fonctions pour le calcul des statistiques
+    // Il faut calculer 1. la longueur moyenne des parties 2. le nombre de bombes moyen et 3. le % des plus forts
+    
+    
+    /// Cette fonction retourne un tableau de tous les scores équivalents de tous les joueurs, triés par ordre croissant
+    /// Le score equivalent = 10*(Nombre Moyen de Niveau) + Nombre Moyen de Bombes
+    func findEquivalentScoresOfPlayers() -> [Int] {
+        var toReturn: [Int] = []
+        
+        // Version trié des scores
+        let array = allScores.sorted { (score1, score2) -> Bool in
+            return score1.userIdentifier < score2.userIdentifier
+        }
+        
+        var curentId: String = array.first!.userIdentifier
+        var arraysByPlayers: [[Score]] = [[Score]].init() // tableau de tableau, qui est trié par tous les comptes des joueurs.
+        var tmpArray: [Score] = []
+        
+        print("current id:\(curentId)")
+        // On progresse parmis tous les scores
+        for element in array
+        {
+            print("id:\(element.userIdentifier)")
+            
+            if element.userIdentifier == curentId { // même joueur qu'avant -> remplir le tableau TMP
+                print("a")
+                tmpArray.append(element)
+            } else { // il s'agit d'un nouveau joueur -> On change le current iD
+                print("b")
+                arraysByPlayers.append(tmpArray)
+                tmpArray.removeAll()
+                curentId = element.userIdentifier
+                tmpArray.append(element)
+            }
+        }
+        arraysByPlayers.append(tmpArray)
+        
+        for playerArray in arraysByPlayers {
+            
+            var sumOfLevel: Int = 0
+            var sumOfBombs: Int = 0
+            
+            for i in playerArray { // tous les scores du joueur ...
+                sumOfLevel += i.level
+                sumOfBombs += i.numberOfBombs
+            }
+            
+            // Nombres moyen pour le joueur X :
+            let tmpLevel = sumOfLevel/playerArray.count
+            let tmpBomb = sumOfBombs/playerArray.count
+            
+            let equivalentScore = 10*tmpLevel + tmpBomb
+            toReturn.append(equivalentScore)
+        }
+        
+        
+        return toReturn.sorted(by: { (a, b) -> Bool in
+            return a < b
+        })
+
+    }
+    /// Cette fonction retourne un tableau de tous les niveau moyens des joueurs, triés par ordre croissant
+    func findAverageLevelOfPlayers() -> [Int] {
+        var toReturn: [Int] = []
+        
+        let array = allScores.sorted { (score1, score2) -> Bool in
+            return score1.userIdentifier < score2.userIdentifier
+        }
+        
+        var curentId: String = allScores.first!.userIdentifier
+        var arraysByPlayers: [[Score]] = [[Score]].init() // tableau de tableau, qui est trié par tous les comptes des joueurs.
+        var tmpArray: [Score] = [Score].init()
+        
+        
+        for element in array {
+            if element.userIdentifier == curentId { // même joueur qu'avant -> remplir le tableau TMP
+                tmpArray.append(element)
+            } else { // il s'agit d'un nouveau joueur
+                arraysByPlayers.append(tmpArray)
+                tmpArray.removeAll()
+                curentId = element.userIdentifier
+                tmpArray.append(element)
+            }
+        }
+        
+        arraysByPlayers.append(tmpArray)
+        
+        
+        for playerArray in arraysByPlayers {
+            
+            var sumOfLevel: Int = 0
+            var sumOfBombs: Int = 0
+            
+            for i in playerArray { // tous les scores du joueur ...
+                sumOfLevel += i.level
+                sumOfBombs += i.numberOfBombs
+            }
+            
+            // Nombres moyen pour le joueur X :
+            let tmpLevel = sumOfLevel/playerArray.count
+            let tmpBomb = sumOfBombs/playerArray.count
+            
+            toReturn.append(tmpLevel)
+            
+        }
+        
+        return toReturn.sorted(by: { (a, b) -> Bool in
+            return a < b
+        })
+        
+    }
+    
+    /// Cette fonction retourne un tableau de tous les nombre de bombes moyens des joueurs, triés par ordre croissant
+    func findTotalNumberOfBombsOfPlayers() -> [Int] {
+        var toReturn: [Int] = []
+        
+        let array = allScores.sorted { (score1, score2) -> Bool in
+            return score1.userIdentifier < score2.userIdentifier
+        }
+        
+        var curentId: String = array.first!.userIdentifier
+        var arraysByPlayers: [[Score]] = [[Score]].init() // tableau de tableau, qui est trié par tous les comptes des joueurs.
+        var tmpArray: [Score] = []
+        
+        for element in array {
+            if element.userIdentifier == curentId { // même joueur qu'avant -> remplir le tableau TMP
+                tmpArray.append(element)
+            } else { // il s'agit d'un nouveau joueur
+                arraysByPlayers.append(tmpArray)
+                tmpArray.removeAll()
+                curentId = element.userIdentifier
+                tmpArray.append(element)
+            }
+        }
+
+        arraysByPlayers.append(tmpArray)
+
+        for playerArray in arraysByPlayers {
+            
+            var sumOfBombs: Int = 0
+            
+            for i in playerArray { // tous les scores du joueur ...
+                sumOfBombs += i.numberOfBombs
+            }
+        
+            toReturn.append(sumOfBombs)
+        }
+        
+        return toReturn.sorted(by: { (a, b) -> Bool in
+            return a < b
+        })
+        
     }
     
     
@@ -177,3 +377,64 @@ extension Array {
     }
 }
 
+// MARK: - Vérification de la présence d'internet
+public class Reachability {
+    class func isConnectedToNetwork() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                SCNetworkReachabilityCreateWithAddress(nil, $0)
+            }
+        }) else {
+            return false
+        }
+        
+        var flags: SCNetworkReachabilityFlags = []
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+            return false
+        }
+        if flags.isEmpty {
+            return false
+        }
+        
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        
+        return (isReachable && !needsConnection)
+    }
+}
+
+// MARK: - Reconnaissance de l'identifiant iCloud afin de reconnaitre les joueurs
+
+/// async gets iCloud record ID object of logged-in iCloud user
+func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecordID?, _ error: NSError?) -> ()) {
+    let container = CKContainer.default()
+    container.fetchUserRecordID() {
+        recordID, error in
+        if error != nil {
+            print(error!.localizedDescription)
+            complete(nil, error as NSError?)
+        } else {
+            print("fetched ID \(recordID?.recordName)")
+            complete(recordID, nil)
+        }
+    }
+}
+
+
+/*
+
+// call the function above in the following way:
+// (userID is the string you are interested in!)
+iCloudUserIDAsync { (recordID: CKRecordID?, error: NSError?) in
+    if let userID = recordID?.recordName {
+        print("received iCloudID \(userID)")
+    } else {
+        print("Fetched iCloudID was nil")
+    }
+}
+
+ */

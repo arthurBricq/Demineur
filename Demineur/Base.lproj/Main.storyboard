@@ -1758,79 +1758,103 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCORES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZo-Mh-d1z">
-                                <rect key="frame" x="53" y="90" width="199.5" height="70"/>
+                                <rect key="frame" x="53" y="70" width="199.5" height="70"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="50"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mes records" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nx-Rk-ffF">
-                                <rect key="frame" x="53" y="185" width="140.5" height="35"/>
+                                <rect key="frame" x="53" y="165" width="140.5" height="35"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="25"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHr-QP-WAT">
-                                <rect key="frame" x="53" y="230" width="298" height="21"/>
+                                <rect key="frame" x="53" y="210" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YeN-l7-yky">
-                                <rect key="frame" x="351" y="230" width="20" height="21"/>
+                                <rect key="frame" x="341" y="210" width="30" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="wVF-Mi-GQQ"/>
+                                    <constraint firstAttribute="width" constant="30" id="wVF-Mi-GQQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label2" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMG-7d-YJG">
-                                <rect key="frame" x="53" y="261" width="298" height="21"/>
+                                <rect key="frame" x="53" y="241" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m02-j3-Ykg">
-                                <rect key="frame" x="351" y="261" width="20" height="21"/>
+                                <rect key="frame" x="341" y="241" width="30" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="8uq-iQ-SfR"/>
+                                    <constraint firstAttribute="width" constant="30" id="8uq-iQ-SfR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Records de la communauté" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5O-7H-2gD">
-                                <rect key="frame" x="53" y="297" width="308" height="35"/>
+                                <rect key="frame" x="53" y="277" width="308" height="35"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="25"/>
+                                <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statistiques" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEt-DE-k4D">
+                                <rect key="frame" x="53" y="389" width="131.5" height="35"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="25"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label3" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gES-hF-wOD">
-                                <rect key="frame" x="53" y="342" width="298" height="21"/>
+                                <rect key="frame" x="53" y="322" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0o-JS-1QA">
-                                <rect key="frame" x="351" y="342" width="20" height="21"/>
+                                <rect key="frame" x="341" y="322" width="30" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="a7H-m4-b2u"/>
+                                    <constraint firstAttribute="width" constant="30" id="a7H-m4-b2u"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label4" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqK-Od-DKk">
-                                <rect key="frame" x="53" y="373" width="298" height="21"/>
+                                <rect key="frame" x="53" y="353" width="288" height="21"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sl9-4m-t7X">
-                                <rect key="frame" x="351" y="373" width="20" height="21"/>
+                                <rect key="frame" x="341" y="353" width="30" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="f7n-Vd-6Xx"/>
+                                    <constraint firstAttribute="width" constant="30" id="f7n-Vd-6Xx"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
+                                <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous faites partie de 5% les plus doués" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlp-x9-DBn">
+                                <rect key="frame" x="53" y="432" width="314" height="21"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
+                                <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vos parties sont 30% plus longue/courte que la moyenne." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nit-lb-GSN">
+                                <rect key="frame" x="53" y="461" width="314" height="42"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
+                                <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vous avez détruit 2000 bombes, soit 30% de plus/moins que la moyenne" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sl2-G6-OBQ">
+                                <rect key="frame" x="53" y="511" width="314" height="42"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                                 <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1839,33 +1863,44 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="gES-hF-wOD" firstAttribute="top" secondItem="s5O-7H-2gD" secondAttribute="bottom" constant="10" id="3P8-Mv-4lV"/>
+                            <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="Nit-lb-GSN" secondAttribute="trailing" constant="8" id="3Vl-BD-qFw"/>
                             <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="N0o-JS-1QA" secondAttribute="trailing" constant="4" id="4y4-Hv-W14"/>
+                            <constraint firstItem="dlp-x9-DBn" firstAttribute="leading" secondItem="bEt-DE-k4D" secondAttribute="leading" id="6dW-4f-dqu"/>
                             <constraint firstItem="cHr-QP-WAT" firstAttribute="top" secondItem="3nx-Rk-ffF" secondAttribute="bottom" constant="10" id="8Y4-6b-flR"/>
+                            <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="Sl2-G6-OBQ" secondAttribute="trailing" constant="8" id="Azu-Oq-cWV"/>
                             <constraint firstItem="cHr-QP-WAT" firstAttribute="top" secondItem="PZo-Mh-d1z" secondAttribute="bottom" constant="70" id="BIB-NN-omi"/>
                             <constraint firstItem="VOP-fp-OAw" firstAttribute="leading" secondItem="Bs1-8c-xao" secondAttribute="leading" constant="40" id="CFU-Ij-zoq"/>
+                            <constraint firstItem="Sl2-G6-OBQ" firstAttribute="leading" secondItem="Nit-lb-GSN" secondAttribute="leading" id="D3b-Bb-QBq"/>
                             <constraint firstItem="YeN-l7-yky" firstAttribute="centerY" secondItem="cHr-QP-WAT" secondAttribute="centerY" id="D3x-KN-XJC"/>
                             <constraint firstItem="s5O-7H-2gD" firstAttribute="leading" secondItem="3nx-Rk-ffF" secondAttribute="leading" id="FUJ-jr-R9P"/>
                             <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="YeN-l7-yky" secondAttribute="trailing" constant="4" id="HKw-v9-VaN"/>
                             <constraint firstItem="cMG-7d-YJG" firstAttribute="leading" secondItem="cHr-QP-WAT" secondAttribute="leading" id="LCs-t3-Knp"/>
                             <constraint firstItem="d7J-CX-GBt" firstAttribute="top" secondItem="yNV-jv-lvg" secondAttribute="top" constant="25" id="LLp-8R-VFN"/>
-                            <constraint firstItem="PZo-Mh-d1z" firstAttribute="top" secondItem="Bs1-8c-xao" secondAttribute="top" constant="70" id="MeP-f6-b5w"/>
+                            <constraint firstItem="PZo-Mh-d1z" firstAttribute="top" secondItem="Bs1-8c-xao" secondAttribute="top" constant="50" id="MeP-f6-b5w"/>
                             <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="m02-j3-Ykg" secondAttribute="trailing" constant="4" id="Nb3-wg-KmC"/>
                             <constraint firstItem="m02-j3-Ykg" firstAttribute="centerY" secondItem="cMG-7d-YJG" secondAttribute="centerY" id="NjQ-mM-TKz"/>
                             <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="Sl9-4m-t7X" secondAttribute="trailing" constant="4" id="Nmy-Rb-kP9"/>
                             <constraint firstItem="VOP-fp-OAw" firstAttribute="height" secondItem="yNV-jv-lvg" secondAttribute="height" multiplier="1.1" id="OkJ-iJ-egD"/>
+                            <constraint firstItem="Bs1-8c-xao" firstAttribute="trailing" secondItem="dlp-x9-DBn" secondAttribute="trailing" constant="8" id="P8C-uz-Z0F"/>
                             <constraint firstItem="s5O-7H-2gD" firstAttribute="top" secondItem="cMG-7d-YJG" secondAttribute="bottom" constant="15" id="TOK-kJ-ci9"/>
                             <constraint firstItem="d7J-CX-GBt" firstAttribute="leading" secondItem="VOP-fp-OAw" secondAttribute="trailing" constant="8" id="TWH-0D-06z"/>
                             <constraint firstItem="aqK-Od-DKk" firstAttribute="leading" secondItem="gES-hF-wOD" secondAttribute="leading" id="Ume-ie-Tho"/>
+                            <constraint firstItem="Nit-lb-GSN" firstAttribute="leading" secondItem="dlp-x9-DBn" secondAttribute="leading" id="WGg-06-B1d"/>
                             <constraint firstItem="cHr-QP-WAT" firstAttribute="leading" secondItem="VOP-fp-OAw" secondAttribute="trailing" constant="8" id="Wud-DA-J6Q"/>
                             <constraint firstItem="VOP-fp-OAw" firstAttribute="centerY" secondItem="Bs1-8c-xao" secondAttribute="centerY" id="XCU-uf-SSZ"/>
+                            <constraint firstItem="Sl2-G6-OBQ" firstAttribute="top" secondItem="Nit-lb-GSN" secondAttribute="bottom" constant="8" id="Xv5-Yd-mrC"/>
                             <constraint firstItem="m02-j3-Ykg" firstAttribute="leading" secondItem="cMG-7d-YJG" secondAttribute="trailing" id="YVR-r1-8dB"/>
                             <constraint firstItem="Sl9-4m-t7X" firstAttribute="centerY" secondItem="aqK-Od-DKk" secondAttribute="centerY" id="aOb-kq-mGk"/>
                             <constraint firstItem="YeN-l7-yky" firstAttribute="leading" secondItem="cHr-QP-WAT" secondAttribute="trailing" id="ahe-3F-qns"/>
+                            <constraint firstItem="bEt-DE-k4D" firstAttribute="top" secondItem="aqK-Od-DKk" secondAttribute="bottom" constant="15" id="bWG-8W-8pq"/>
+                            <constraint firstItem="bEt-DE-k4D" firstAttribute="leading" secondItem="s5O-7H-2gD" secondAttribute="leading" id="bw0-Z7-Atb"/>
                             <constraint firstItem="aqK-Od-DKk" firstAttribute="top" secondItem="gES-hF-wOD" secondAttribute="bottom" constant="10" id="cSh-LV-1w4"/>
                             <constraint firstItem="cMG-7d-YJG" firstAttribute="top" secondItem="cHr-QP-WAT" secondAttribute="bottom" constant="10" id="eEH-yL-pWA"/>
                             <constraint firstItem="PZo-Mh-d1z" firstAttribute="leading" secondItem="VOP-fp-OAw" secondAttribute="trailing" constant="8" id="ebO-Hm-Gvr"/>
                             <constraint firstItem="3nx-Rk-ffF" firstAttribute="leading" secondItem="PZo-Mh-d1z" secondAttribute="leading" id="is5-T7-8dI"/>
                             <constraint firstItem="N0o-JS-1QA" firstAttribute="leading" secondItem="gES-hF-wOD" secondAttribute="trailing" id="kDH-Ij-k1G"/>
+                            <constraint firstItem="Nit-lb-GSN" firstAttribute="top" secondItem="dlp-x9-DBn" secondAttribute="bottom" constant="8" id="m1v-9c-UB0"/>
+                            <constraint firstItem="dlp-x9-DBn" firstAttribute="top" secondItem="bEt-DE-k4D" secondAttribute="bottom" constant="8" id="nbT-cf-EYT"/>
                             <constraint firstItem="Sl9-4m-t7X" firstAttribute="leading" secondItem="aqK-Od-DKk" secondAttribute="trailing" id="ouO-k1-PhQ"/>
                             <constraint firstItem="gES-hF-wOD" firstAttribute="leading" secondItem="s5O-7H-2gD" secondAttribute="leading" id="tRD-RW-PGc"/>
                             <constraint firstItem="N0o-JS-1QA" firstAttribute="centerY" secondItem="gES-hF-wOD" secondAttribute="centerY" id="wTw-ec-03n"/>
@@ -1873,6 +1908,9 @@
                         <viewLayoutGuide key="safeArea" id="Bs1-8c-xao"/>
                     </view>
                     <connections>
+                        <outlet property="label5" destination="dlp-x9-DBn" id="2cB-d0-gtJ"/>
+                        <outlet property="label6" destination="Nit-lb-GSN" id="tez-M5-Vqk"/>
+                        <outlet property="label7" destination="Sl2-G6-OBQ" id="ZWr-Gm-pqW"/>
                         <outlet property="numbe2label" destination="m02-j3-Ykg" id="ZYt-Xl-lcg"/>
                         <outlet property="number1label" destination="YeN-l7-yky" id="EFT-O5-Vtv"/>
                         <outlet property="number3label" destination="N0o-JS-1QA" id="Fo6-tt-qj7"/>
@@ -1885,7 +1923,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFs-BN-nLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1591.2" y="3830.7346326836587"/>
+            <point key="canvasLocation" x="-1591" y="3752"/>
         </scene>
     </scenes>
 </document>

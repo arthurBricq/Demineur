@@ -32,6 +32,10 @@ class ViewOfGameTriangular: UIView {
             delegateVC?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
         }
     }
+    /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va rajouter +1 à la variable 'numberOfBombs' du VC si on marque un drapeau au bon endroit.
+    var onPosingFlag: ((Bool) -> Void)?
+    /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
+    var onUnposingFlag: ((Bool) -> Void)?
     
     override func draw(_ rect: CGRect) {
         // les dimensions de la vue doivent être les bonnes, grâce à la fonction de dimensionnement.
@@ -138,8 +142,10 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         if marking { // hold tapping --> have to mark or unmark the card
             
             if !isTheCaseMarked(i: i, j: j) {
+                self.onPosingFlag!(isCaseABomb(i: i, j: j))
                 markACaseAt(i: i, j: j)
             } else {
+                self.onUnposingFlag!(isCaseABomb(i: i, j: j))
                 unmarkACaseAt(i: i, j: j)
             }
             

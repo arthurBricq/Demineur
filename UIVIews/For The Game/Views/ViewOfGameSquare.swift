@@ -30,7 +30,10 @@ class ViewOfGameSquare: UIView {
         }
     }
     
-    
+    /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va rajouter +1 à la variable 'numberOfBombs' du VC si on marque un drapeau au bon endroit.
+    var onPosingFlag: ((Bool) -> Void)?
+    /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
+    var onUnposingFlag: ((Bool) -> Void)?
     
     var openColor = UIColor.white // color for open-case's background
     var emptyColor = UIColor.white // color for empty-case's background
@@ -145,9 +148,13 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         
         if marking { // hold tapping --> have to mark or unmark the card
             
-            if !isTheCaseMarked(i: i, j: j) {
+            if !isTheCaseMarked(i: i, j: j)
+            {
+                let test = isCaseABomb(i: i, j: j)
+                self.onPosingFlag!(test)
                 markACaseAt(i: i, j: j)
             } else {
+                self.onUnposingFlag!(isCaseABomb(i: i, j: j))
                 unmarkACaseAt(i: i, j: j)
             }
             
@@ -156,6 +163,8 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
                 if isCaseABomb(i: i, j: j) {
                     
+                    
+                    // Le joueur a tapé sur une bombe
                     delegate?.gameOver(win: false, didTapABomb: true)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     
@@ -166,6 +175,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         }
         
         if isTheGameFinished() { // end of game
+            
             
             delegate!.gameOver(win: true, didTapABomb: false)
             returnAllTheCases(win: true)

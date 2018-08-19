@@ -25,10 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         options.getCurrentValue() // on récupère les options de l'application
         bonus.getCurrentValue() // on récupère les bonus achetés.
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
-        gameData.getCurrentValue() // on récupère le mode histoire
+        gameData.getCurrentValue() // on récupère le mode histoire. 
+        localScores.getCurrentValue() // on récupère tous les scores du joueur.
         
         initiateANewDevice(argent: 10000, lives: 0, level: 20)
-        options.displayOptions()
+        
         return true
     }
 
