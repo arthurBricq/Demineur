@@ -150,7 +150,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.AmeliorerButton.prix = String(currentBonus.prixAmelioration[level])
                 
                 if money.currentAmountOfMoney < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
-                    cell.AmeliorerButton.alpha = 0.5
+                    UIView.animate(withDuration: 0.2, animations: { cell.AmeliorerButton.alpha = 0.5 })
                     cell.AmeliorerButton.isUserInteractionEnabled = false
                 } else {
                     cell.AmeliorerButton.alpha = 1.0
@@ -160,9 +160,9 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.AmeliorerButton.setNeedsDisplay()
             
             if money.currentAmountOfMoney < currentBonus.prixAchat { // Pas assez d'argent pour acheter.
-                cell.achatButton.alpha = 0.5
+                UIView.animate(withDuration: 0.2, animations: { cell.achatButton.alpha = 0.5 })
                 cell.achatButton.isUserInteractionEnabled = false
-                cell.AmeliorerButton.alpha = 0.5
+                UIView.animate(withDuration: 0.2, animations: { cell.AmeliorerButton.alpha = 0.5 })
                 cell.AmeliorerButton.isUserInteractionEnabled = false
             }
             

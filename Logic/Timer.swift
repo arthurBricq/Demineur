@@ -43,6 +43,7 @@ class CountingTimer: NSObject {
     /// Arrete le timer et retourne le temps final
     @discardableResult func stop() -> CGFloat {
         isRunning = false
+        isPaused = false
         let toRet = counter
         timer.invalidate()
         counter = 0
@@ -50,10 +51,12 @@ class CountingTimer: NSObject {
         return toRet
     }
     
-    /// Met le timer en pause
+    /// Met le timer en pause, s'il est en marche
     func pause() {
-        timer.invalidate()
-        isPaused = true
+        if isRunning {
+            timer.invalidate()
+            isPaused = true
+        }
     }
     
     /// Relance le timer s'il est en pause
@@ -74,19 +77,46 @@ class LimitedTimer: NSObject {
     var delegate: LimitedTimerProtocol?
     var id: String = ""
     
+    var isRunning: Bool = false
+    var isPaused: Bool = false
+    
+    private var timeLeftWhenPaused: TimeInterval = 0
+    
     @objc func timerAction() {
         delegate?.timeLimitReached(id: id)
     }
     
     /// Lance le timer, appelle son delegate à la fin de la limite
     func start(limit: TimeInterval, id: String) {
+        isRunning = true
         self.id = id
         self.timer = Timer.scheduledTimer(timeInterval: limit, target: self, selector: #selector(CountingTimer.timerAction), userInfo: nil, repeats: false)
     }
     
     /// Arrete le timer
     func stop() {
+        isRunning = false
+        isPaused = false
         id = ""
+        timeLeftWhenPaused = 0
         timer.invalidate()
+    }
+    
+    /// Met le timer en pause, s'il est en marche
+    func pause() {
+        if isRunning && !isPaused {
+            isPaused = true
+            timeLeftWhenPaused = timer.fireDate.timeIntervalSinceNow
+            timer.invalidate()
+        }
+    }
+    
+    /// Relance le timer s'il était en pause
+    func play() {
+        if isPaused {
+            isPaused = false
+            timer = Timer.scheduledTimer(timeInterval: timeLeftWhenPaused, target: self, selector: #selector(CountingTimer.timerAction), userInfo: nil, repeats: false)
+            timeLeftWhenPaused = 0
+        }
     }
 }

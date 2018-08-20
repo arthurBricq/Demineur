@@ -307,10 +307,13 @@ class HistoryGameViewController: UIViewController {
         
         if game.gameType == .square {
             viewOfGameSquare?.option3Timer.pause()
+            viewOfGameSquare?.pauseAllOption1Timers()
         } else if game.gameType == .hexagonal {
             viewOfGameHex?.option3Timer.pause()
+            viewOfGameHex?.pauseAllOption1Timers()
         } else if game.gameType == .triangular {
             viewOfGameTriangular?.option3Timer.pause()
+            viewOfGameTriangular?.pauseAllOption1Timers()
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -376,20 +379,22 @@ extension HistoryGameViewController {
 // Quand la partie est terminée
 extension HistoryGameViewController: GameViewCanCallVC {
     
-    func gameOver(win: Bool, didTapABomb: Bool) {
-        gameTimer.pause()
-        // finish the game
+    func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
+        gameTimer.pause()
         
         if game.gameType == .hexagonal {
             viewOfGameHex!.isUserInteractionEnabled = false
             viewOfGameHex!.option3Timer.stop()
+            viewOfGameHex?.pauseAllOption1Timers()
         } else if game.gameType == .square {
             viewOfGameSquare!.isUserInteractionEnabled = false
             viewOfGameSquare!.option3Timer.stop()
+            viewOfGameSquare?.pauseAllOption1Timers()
         } else if game.gameType == .triangular {
             viewOfGameTriangular!.isUserInteractionEnabled = false
             viewOfGameTriangular!.option3Timer.stop()
+            viewOfGameTriangular?.pauseAllOption1Timers()
         }
         
         if win {
@@ -398,8 +403,8 @@ extension HistoryGameViewController: GameViewCanCallVC {
             Vibrate().vibrate(style: .heavy)
         }
         
-        if didTapABomb {
-            addTheMessage()
+        if didTapABomb || didTimeEnd {
+            addTheMessage(didTapABomb: didTapABomb)
         } else {
             gameTimer.stop()
             
@@ -442,26 +447,8 @@ extension HistoryGameViewController: CountingTimerProtocol {
                 clockView.pourcentage = pourcentage // et actualisation via un didSet
                 
                 if pourcentage == 1 {
-                    gameTimer.stop()
-                    gameOver(win: false, didTapABomb: false)
-                    openTheBombs()
-                    
-                    
-                    // show all the bombs
-                    for subview in view.subviews {
-                        if subview is ViewOfGameSquare {
-                            let gameView = subview as! ViewOfGameSquare
-                            gameView.returnAllTheCases()
-                        } else if subview is ViewOfGame_Hex {
-                            let gameView = subview as! ViewOfGame_Hex
-                            gameView.returnAllTheCases()
-                        } else if subview is ViewOfGameTriangular {
-                            let gameView = subview as! ViewOfGameTriangular
-                            gameView.returnAllTheCases()
-                        }
-                    }
-                    
-                    
+                    gameTimer.pause()
+                    gameOver(win: false, didTapABomb: false, didTimeEnd: true)
                 }
             }
         }
@@ -630,14 +617,14 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
 extension HistoryGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
-    func addTheMessage() {
+    func addTheMessage(didTapABomb: Bool) {
         if bonus.vie > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
-            messageOne()
+            messageOne(didTapABomb: didTapABomb)
         } else {
             
             if money.getCurrentValue() > 0 {
-                messageTwo()
+                messageTwo(didTapABomb: didTapABomb)
             } else {
                 self.gameTimer.stop()
                 self.openTheBombs()
@@ -648,7 +635,7 @@ extension HistoryGameViewController {
                 vc.precedentViewController = self
                 vc.win = false
                 vc.transitioningDelegate = self
-                vc.didTapABomb = true
+                vc.didTapABomb = didTapABomb
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             }
@@ -656,7 +643,7 @@ extension HistoryGameViewController {
     }
     
     /// Faire apparaitre le message qui demande une nouvelle chance
-    func messageOne() {
+    func messageOne(didTapABomb: Bool) {
         
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
@@ -737,14 +724,19 @@ extension HistoryGameViewController {
                 viewOfGame = self.viewOfGameTriangular
             }
             
-            for subview in viewOfGame!.subviews {
-                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                    for subview2 in subview.subviews {
-                        if subview2 is BombView {
-                            viewToRemove = subview2 as? BombView
+            if didTapABomb {
+                for subview in viewOfGame!.subviews {
+                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                        for subview2 in subview.subviews {
+                            if subview2 is BombView {
+                                viewToRemove = subview2 as? BombView
+                            }
                         }
                     }
                 }
+            } else {
+                self.gameTimer.counter = 3*self.game.totalTime/4
+                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -777,16 +769,19 @@ extension HistoryGameViewController {
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameHex?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .square {
                         self.viewOfGameSquare!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameSquare?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .triangular {
                         self.viewOfGameTriangular!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameTriangular?.unPauseAllOption1Timers()
                     }
                     
                 })
@@ -814,7 +809,7 @@ extension HistoryGameViewController {
                 vc.precedentViewController = self
                 vc.win = false
                 vc.transitioningDelegate = self
-                vc.didTapABomb = true
+                vc.didTapABomb = didTapABomb
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             })
@@ -837,7 +832,7 @@ extension HistoryGameViewController {
     }
     
     /// Faire apparaitre la demande d'achat de vie pour une nouvelle chance
-    func messageTwo() {
+    func messageTwo(didTapABomb: Bool) {
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
             blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
@@ -914,14 +909,19 @@ extension HistoryGameViewController {
                 viewOfGame = self.viewOfGameTriangular
             }
             
-            for subview in viewOfGame!.subviews {
-                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                    for subview2 in subview.subviews {
-                        if subview2 is BombView {
-                            viewToRemove = subview2 as? BombView
+            if didTapABomb {
+                for subview in viewOfGame!.subviews {
+                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                        for subview2 in subview.subviews {
+                            if subview2 is BombView {
+                                viewToRemove = subview2 as? BombView
+                            }
                         }
                     }
                 }
+            } else {
+                self.gameTimer.counter = 3*self.game.totalTime/4
+                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -954,16 +954,19 @@ extension HistoryGameViewController {
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameHex?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .square {
                         self.viewOfGameSquare!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameSquare?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .triangular {
                         self.viewOfGameTriangular!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameTriangular?.unPauseAllOption1Timers()
                     }
                     
                 })
@@ -990,7 +993,7 @@ extension HistoryGameViewController {
                 vc.precedentViewController = self
                 vc.win = false
                 vc.transitioningDelegate = self
-                vc.didTapABomb = true
+                vc.didTapABomb = didTapABomb
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             })
