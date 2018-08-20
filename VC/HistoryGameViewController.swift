@@ -376,7 +376,7 @@ extension HistoryGameViewController {
 // Quand la partie est terminée
 extension HistoryGameViewController: GameViewCanCallVC {
     
-    func gameOver(win: Bool, didTapABomb: Bool) {
+    func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         gameTimer.pause()
         // finish the game
         
@@ -398,8 +398,8 @@ extension HistoryGameViewController: GameViewCanCallVC {
             Vibrate().vibrate(style: .heavy)
         }
         
-        if didTapABomb {
-            addTheMessage()
+        if didTapABomb || didTimeEnd {
+            addTheMessage(didTapABomb: didTapABomb)
         } else {
             gameTimer.stop()
             
@@ -442,26 +442,8 @@ extension HistoryGameViewController: CountingTimerProtocol {
                 clockView.pourcentage = pourcentage // et actualisation via un didSet
                 
                 if pourcentage == 1 {
-                    gameTimer.stop()
-                    gameOver(win: false, didTapABomb: false)
-                    openTheBombs()
-                    
-                    
-                    // show all the bombs
-                    for subview in view.subviews {
-                        if subview is ViewOfGameSquare {
-                            let gameView = subview as! ViewOfGameSquare
-                            gameView.returnAllTheCases()
-                        } else if subview is ViewOfGame_Hex {
-                            let gameView = subview as! ViewOfGame_Hex
-                            gameView.returnAllTheCases()
-                        } else if subview is ViewOfGameTriangular {
-                            let gameView = subview as! ViewOfGameTriangular
-                            gameView.returnAllTheCases()
-                        }
-                    }
-                    
-                    
+                    gameTimer.pause()
+                    gameOver(win: false, didTapABomb: false, didTimeEnd: true)
                 }
             }
         }
@@ -630,14 +612,14 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
 extension HistoryGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
-    func addTheMessage() {
+    func addTheMessage(didTapABomb: Bool) {
         if bonus.vie > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
-            messageOne()
+            messageOne(didTapABomb: didTapABomb)
         } else {
             
             if money.getCurrentValue() > 0 {
-                messageTwo()
+                messageTwo(didTapABomb: didTapABomb)
             } else {
                 self.gameTimer.stop()
                 self.openTheBombs()
@@ -648,7 +630,7 @@ extension HistoryGameViewController {
                 vc.precedentViewController = self
                 vc.win = false
                 vc.transitioningDelegate = self
-                vc.didTapABomb = true
+                vc.didTapABomb = didTapABomb
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             }
@@ -656,7 +638,7 @@ extension HistoryGameViewController {
     }
     
     /// Faire apparaitre le message qui demande une nouvelle chance
-    func messageOne() {
+    func messageOne(didTapABomb: Bool) {
         
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
@@ -737,14 +719,19 @@ extension HistoryGameViewController {
                 viewOfGame = self.viewOfGameTriangular
             }
             
-            for subview in viewOfGame!.subviews {
-                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                    for subview2 in subview.subviews {
-                        if subview2 is BombView {
-                            viewToRemove = subview2 as? BombView
+            if didTapABomb {
+                for subview in viewOfGame!.subviews {
+                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                        for subview2 in subview.subviews {
+                            if subview2 is BombView {
+                                viewToRemove = subview2 as? BombView
+                            }
                         }
                     }
                 }
+            } else {
+                self.gameTimer.counter = 3*self.game.totalTime/4
+                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -814,7 +801,7 @@ extension HistoryGameViewController {
                 vc.precedentViewController = self
                 vc.win = false
                 vc.transitioningDelegate = self
-                vc.didTapABomb = true
+                vc.didTapABomb = didTapABomb
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             })
@@ -837,7 +824,7 @@ extension HistoryGameViewController {
     }
     
     /// Faire apparaitre la demande d'achat de vie pour une nouvelle chance
-    func messageTwo() {
+    func messageTwo(didTapABomb: Bool) {
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
             blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
@@ -914,14 +901,19 @@ extension HistoryGameViewController {
                 viewOfGame = self.viewOfGameTriangular
             }
             
-            for subview in viewOfGame!.subviews {
-                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                    for subview2 in subview.subviews {
-                        if subview2 is BombView {
-                            viewToRemove = subview2 as? BombView
+            if didTapABomb {
+                for subview in viewOfGame!.subviews {
+                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                        for subview2 in subview.subviews {
+                            if subview2 is BombView {
+                                viewToRemove = subview2 as? BombView
+                            }
                         }
                     }
                 }
+            } else {
+                self.gameTimer.counter = 3*self.game.totalTime/4
+                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -990,7 +982,7 @@ extension HistoryGameViewController {
                 vc.precedentViewController = self
                 vc.win = false
                 vc.transitioningDelegate = self
-                vc.didTapABomb = true
+                vc.didTapABomb = didTapABomb
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             })

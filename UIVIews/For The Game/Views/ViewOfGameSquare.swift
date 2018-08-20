@@ -165,7 +165,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                     
                     
                     // Le joueur a tapé sur une bombe
-                    delegate?.gameOver(win: false, didTapABomb: true)
+                    delegate?.gameOver(win: false, didTapABomb: true, didTimeEnd: false)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     
                 } else {
@@ -177,7 +177,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         if isTheGameFinished() { // end of game
             
             
-            delegate!.gameOver(win: true, didTapABomb: false)
+            delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
             returnAllTheCases(win: true)
             
         }
@@ -377,7 +377,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                             // si on gagne la partie à l'aide du bonus ...
                             
                             if isTheGameFinished() { // end of game
-                                delegate!.gameOver(win: true, didTapABomb: false)
+                                delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
                             
@@ -389,7 +389,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
                             if isTheGameFinished() { // end of game
-                                delegate!.gameOver(win: true, didTapABomb: false)
+                                delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
                             return

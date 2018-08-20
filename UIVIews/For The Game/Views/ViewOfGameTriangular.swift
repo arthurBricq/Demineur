@@ -153,7 +153,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
                 if isCaseABomb(i: i, j: j) {
                     
-                    delegateVC?.gameOver(win: false, didTapABomb: true) // End of game
+                    delegateVC?.gameOver(win: false, didTapABomb: true, didTimeEnd: false) // End of game
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                     
                 } else {
@@ -163,7 +163,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         }
         
         if isTheGameFinished() { // end of game
-            delegateVC!.gameOver(win: true, didTapABomb: false)
+            delegateVC!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
             returnAllTheCases(win: true)
         }
         
@@ -335,7 +335,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
                             markACaseAt(i: i, j: j, byComputer: true)
                             
                             if isTheGameFinished() { // end of game
-                                delegateVC!.gameOver(win: true, didTapABomb: false)
+                                delegateVC!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
                             
@@ -350,7 +350,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
                             
                             if isTheGameFinished() { // end of game
-                                delegateVC!.gameOver(win: true, didTapABomb: false)
+                                delegateVC!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
                             

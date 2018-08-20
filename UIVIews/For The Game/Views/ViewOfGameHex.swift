@@ -121,7 +121,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
                     
                     if gameState[i][j] == -1 { // ******* fin du jeu ****** //
                         
-                        delegate!.gameOver(win: false, didTapABomb: true)
+                        delegate!.gameOver(win: false, didTapABomb: true, didTimeEnd: false)
                         callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                         return
                         
@@ -168,7 +168,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
         
         if isTheGameFinished() {
             // ******** Partie Gagnée ********* //
-            delegate!.gameOver(win: true, didTapABomb: false)
+            delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
             returnAllTheCases(win: true)
         }
         
@@ -374,7 +374,7 @@ extension ViewOfGame_Hex {
                             markACase(i: i, j: j, byComputer: true)
                             
                             if isTheGameFinished() { // end of game
-                                delegate!.gameOver(win: true, didTapABomb: false)
+                                delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
                             
@@ -394,7 +394,7 @@ extension ViewOfGame_Hex {
                             markACase(i: n-i-1, j: m-j-1, byComputer: true)
                             
                             if isTheGameFinished() { // end of game
-                                delegate!.gameOver(win: true, didTapABomb: false)
+                                delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
                             

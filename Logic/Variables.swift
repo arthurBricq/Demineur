@@ -240,7 +240,7 @@ class OneGame  {
     
 }
 
-let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 7, z: 10, totalTime: 60),
+let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 7, z: 10, totalTime: 20),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 12, m: 9, z: 15, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 14, m: 10, z: 10, totalTime: 60),
                                 

@@ -308,7 +308,7 @@ class InfiniteGameViewController: UIViewController {
     }
     
     /// Cette fonction termine totalement la partie et lance le prochain VC qui est un message de fin de partie.
-    func endOfInfiniteGame() {
+    func endOfInfiniteGame(didTapABomb: Bool) {
         self.gameTimer.stop()
         self.openTheBombs()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -318,7 +318,7 @@ class InfiniteGameViewController: UIViewController {
         vc.precedentViewController = self
         vc.win = false
         vc.transitioningDelegate = self
-        vc.didTapABomb = true
+        vc.didTapABomb = didTapABomb
         vc.precedentGameIndex = self.gameIndex
         // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
         // La variable 'level' est déjà upadter à chaque changement de niveau
@@ -690,10 +690,11 @@ extension InfiniteGameViewController: variableCanCallGameVC {
 
 // MARK: - Gere la fin de la partie (lancée par le gameView)
 extension InfiniteGameViewController: GameViewCanCallVC {
-    func gameOver(win: Bool, didTapABomb: Bool) {
+    func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
         if win {
             
+            gameTimer.stop()
             bonusChoiceView?.desactivateBonusButtons()
             
             UIView.animate(withDuration: 0.25, animations: {
@@ -718,28 +719,12 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             
         } else {
             
-            if didTapABomb {
-                addTheMessage()
+            if didTapABomb || didTimeEnd {
+                gameTimer.pause()
+                addTheMessage(didTapABomb: didTapABomb)
             } else {
-                self.endOfInfiniteGame()
-                
-                /*
-                openTheBombs()
                 gameTimer.stop()
-                containerView.isUserInteractionEnabled = false
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                vc.precedentViewController = self
-                vc.win = false
-                vc.transitioningDelegate = self
-                vc.didTapABomb = false
-                vc.precedentGameIndex = gameIndex
-                self.present(vc, animated: true, completion: nil)
-                */
-                
+                self.endOfInfiniteGame(didTapABomb: false)
             }
         }
         
@@ -770,19 +755,7 @@ extension InfiniteGameViewController: CountingTimerProtocol
                 
                 // Fin de la partie à cause de temps
                 
-                if containerView.subviews[containerView.subviews.count-1] is ViewOfGameSquare {
-                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameSquare
-                    currentGameView.returnAllTheCases()
-                } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGame_Hex {
-                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame_Hex
-                    currentGameView.returnAllTheCases()
-                } else if containerView.subviews[containerView.subviews.count-1] is ViewOfGameTriangular {
-                    let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
-                    currentGameView.returnAllTheCases()
-                }
-                
-                gameTimer.stop()
-                gameOver(win: false, didTapABomb: false) // on marque 0 pour le
+                gameOver(win: false, didTapABomb: false, didTimeEnd: true)
             }
         }
     }
@@ -1075,36 +1048,22 @@ extension InfiniteGameViewController: UIViewControllerTransitioningDelegate {
 extension InfiniteGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
-    func addTheMessage() {
+    func addTheMessage(didTapABomb: Bool) {
         if bonus.vie > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
-            messageOne()
+            messageOne(didTapABomb: didTapABomb)
         } else {
             
             if money.getCurrentValue() > 0 {
-                messageTwo()
+                messageTwo(didTapABomb: didTapABomb)
             } else {
-                endOfInfiniteGame()
-                /*
-                self.gameTimer.stop()
-                self.openTheBombs()
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                vc.precedentViewController = self
-                vc.win = false
-                vc.transitioningDelegate = self
-                vc.didTapABomb = true
-                vc.precedentGameIndex = self.gameIndex
-                self.present(vc, animated: true, completion: nil)
-                */
+                endOfInfiniteGame(didTapABomb: didTapABomb)
             }
         }
     }
     
     /// Faire apparaitre le message qui demande une nouvelle chance
-    func messageOne() {
+    func messageOne(didTapABomb: Bool) {
         
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
@@ -1176,14 +1135,19 @@ extension InfiniteGameViewController {
             var viewToRemove: BombView?
             let viewOfGame: UIView? = self.containerView.subviews.last
             
-            for subview in viewOfGame!.subviews {
-                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                    for subview2 in subview.subviews {
-                        if subview2 is BombView {
-                            viewToRemove = subview2 as? BombView
+            if didTapABomb {
+                for subview in viewOfGame!.subviews {
+                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                        for subview2 in subview.subviews {
+                            if subview2 is BombView {
+                                viewToRemove = subview2 as? BombView
+                            }
                         }
                     }
                 }
+            } else {
+                self.gameTimer.counter = 3*self.returnCurrentGame().totalTime/4
+                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -1202,7 +1166,9 @@ extension InfiniteGameViewController {
                     })
                     
                     UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3, animations: {
-                        viewToRemove?.alpha = 0
+                        if didTapABomb {
+                            viewToRemove?.alpha = 0
+                        }
                     })
                     
                 }, completion: { (_) in
@@ -1247,21 +1213,7 @@ extension InfiniteGameViewController {
                 blurView.alpha = 0
             }, completion: { (_) in
                 blurView.removeFromSuperview()
-                self.endOfInfiniteGame()
-                /*
-                self.gameTimer.stop()
-                self.openTheBombs()
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                vc.precedentViewController = self
-                vc.win = false
-                vc.transitioningDelegate = self
-                vc.didTapABomb = true
-                vc.precedentGameIndex = self.gameIndex
-                self.present(vc, animated: true, completion: nil)
-                */
+                self.endOfInfiniteGame(didTapABomb: didTapABomb)
             })
             
         }
@@ -1282,7 +1234,7 @@ extension InfiniteGameViewController {
     }
     
     /// Faire apparaitre la demande d'achat de vie pour une nouvelle chance
-    func messageTwo() {
+    func messageTwo(didTapABomb: Bool) {
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
             blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
@@ -1350,14 +1302,19 @@ extension InfiniteGameViewController {
             var viewToRemove: BombView?
             let viewOfGame: UIView? = self.containerView.subviews.last
             
-            for subview in viewOfGame!.subviews {
-                if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                    for subview2 in subview.subviews {
-                        if subview2 is BombView {
-                            viewToRemove = subview2 as? BombView
+            if didTapABomb {
+                for subview in viewOfGame!.subviews {
+                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
+                        for subview2 in subview.subviews {
+                            if subview2 is BombView {
+                                viewToRemove = subview2 as? BombView
+                            }
                         }
                     }
                 }
+            } else {
+                self.gameTimer.counter = 3*self.returnCurrentGame().totalTime/4
+                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -1421,21 +1378,7 @@ extension InfiniteGameViewController {
                 blurView.alpha = 0
             }, completion: { (_) in
                 blurView.removeFromSuperview()
-                self.endOfInfiniteGame()
-                /*
-                self.gameTimer.stop()
-                self.openTheBombs()
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                vc.precedentViewController = self
-                vc.win = false
-                vc.transitioningDelegate = self
-                vc.didTapABomb = true
-                vc.precedentGameIndex = self.gameIndex
-                self.present(vc, animated: true, completion: nil)
-                */
+                self.endOfInfiniteGame(didTapABomb: didTapABomb)
             })
             
         }
