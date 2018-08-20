@@ -97,7 +97,7 @@ class BonusChoiceView: UIView {
     }
     
     /// Cette fonction doit-être appelée au début d'une partie pour pas que les bonus soit accessibles au début. Elle permet aussi de mettre les bons numéros à l'écran.
-    private func desactivateBonusButtons() {
+    func desactivateBonusButtons() {
         for tmp in scrollView!.subviews {
             if tmp is BonusView {
                 let view = tmp as! BonusView

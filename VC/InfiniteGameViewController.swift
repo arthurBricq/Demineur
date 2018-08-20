@@ -303,7 +303,6 @@ class InfiniteGameViewController: UIViewController {
         updateDisplaysOnNewGame()
         launchOption3TimerIfNeeded()
         bonusChoiceView!.isTimerOn = returnCurrentGame().isTimerAllowed
-        bonusChoiceView!.activateBonusButtons()
         updateUserInteractionProperty()
         hasToFinishTheGame = true
     }
@@ -694,6 +693,8 @@ extension InfiniteGameViewController: GameViewCanCallVC {
     func gameOver(win: Bool, didTapABomb: Bool) {
         
         if win {
+            
+            bonusChoiceView?.desactivateBonusButtons()
             
             UIView.animate(withDuration: 0.25, animations: {
                 self.clockView.alpha = 0
