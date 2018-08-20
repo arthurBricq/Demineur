@@ -91,23 +91,31 @@ public class LockDraw : NSObject {
         
         //// Variable Declarations
         let heightForFirstRectangle: CGFloat = 4 + progress * 10
+        let rotation: CGFloat = -20 * (1 - progress)
+        
+        //// all
+        context.saveGState()
+        context.translateBy(x: 50, y: 49.25)
+        context.rotate(by: -rotation * CGFloat.pi/180)
+        
+        
         
         //// Gray
         //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 20, y: 40.5, width: 60, height: 45), cornerRadius: 10)
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: -30, y: -8.75, width: 60, height: 45), cornerRadius: 10)
         lockColor.setFill()
         rectanglePath.fill()
         
         
         //// Rectangle 2 Drawing
-        let rectangle2Path = UIBezierPath(rect: CGRect(x: 30, y: 27, width: 6, height: heightForFirstRectangle))
+        let rectangle2Path = UIBezierPath(rect: CGRect(x: -20, y: -22.25, width: 6, height: heightForFirstRectangle))
         lockColor.setFill()
         rectangle2Path.fill()
         
         
         //// Rectangle 3 Drawing
         context.saveGState()
-        context.translateBy(x: 70, y: 27)
+        context.translateBy(x: 20, y: -22.25)
         
         let rectangle3Path = UIBezierPath(rect: CGRect(x: -6, y: 0, width: 6, height: 20))
         lockColor.setFill()
@@ -117,7 +125,7 @@ public class LockDraw : NSObject {
         
         
         //// Oval Drawing
-        let ovalRect = CGRect(x: 33, y: 13, width: 34, height: 30)
+        let ovalRect = CGRect(x: -17, y: -36.25, width: 34, height: 30)
         let ovalPath = UIBezierPath()
         ovalPath.addArc(withCenter: CGPoint.zero, radius: ovalRect.width / 2, startAngle: -180 * CGFloat.pi/180, endAngle: 0 * CGFloat.pi/180, clockwise: true)
         
@@ -134,15 +142,21 @@ public class LockDraw : NSObject {
         
         //// Hole
         //// Oval 2 Drawing
-        let oval2Path = UIBezierPath(ovalIn: CGRect(x: 45, y: 54, width: 10, height: 10))
+        let oval2Path = UIBezierPath(ovalIn: CGRect(x: -5, y: 4.75, width: 10, height: 10))
         holeColor.setFill()
         oval2Path.fill()
         
         
         //// Rectangle 4 Drawing
-        let rectangle4Path = UIBezierPath(rect: CGRect(x: 48, y: 59, width: 4, height: 13))
+        let rectangle4Path = UIBezierPath(rect: CGRect(x: -2, y: 9.75, width: 4, height: 13))
         holeColor.setFill()
         rectangle4Path.fill()
+        
+        
+        
+        
+        
+        context.restoreGState()
         
         context.restoreGState()
         
