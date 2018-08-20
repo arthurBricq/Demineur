@@ -223,7 +223,6 @@ class InfiniteGameViewController: UIViewController {
         }
         
         // met à jour les affichages, etc. et lance la partie
-        updateDisplaysOnNewGame()
         containerView.subviews.first?.isUserInteractionEnabled = false
     }
     
@@ -578,7 +577,7 @@ class InfiniteGameViewController: UIViewController {
             })
         }
         
-        // si nécessaire cache ou affiche la clock
+        // si nécessaire affiche la clock
         if returnCurrentGame().isTimerAllowed {
             
             gameTimer.start(timeInterval: 1.0, id: "Clock")
@@ -817,6 +816,8 @@ extension InfiniteGameViewController {
                 self.addANewTriangularGame(game: self.currentSection.game1!)
                 self.addANewTriangularGame(game: self.currentSection.game2!)
             }
+            
+            self.updateDisplaysOnNewGame()
         }
         
     }
