@@ -13,7 +13,7 @@ class SquareCase: UIButton {
     // This button is the one displaying the cases of the game.
     // Those buttons have many different states
     
-    // Pour le dessin des angles
+    // MARK: -  VARIABLES
     @IBInspectable var cornersToDraw: [Int] = [1,2,3,4,5,6,7,8]
     @IBInspectable var ratio: CGFloat = 6
     @IBInspectable var lineWidth: CGFloat = 1.0
@@ -76,6 +76,7 @@ class SquareCase: UIButton {
         }
     }
     
+    // MARK: - FUNCTIONS
     override func draw(_ rect: CGRect) {
         let w = rect.width
         let h = rect.height
@@ -386,6 +387,7 @@ class SquareCase: UIButton {
     }
 }
 
+// MARK: - Gère les timers
 extension SquareCase: LimitedTimerProtocol {
     func timeLimitReached(id: String) {
         if id == "Marking" {
