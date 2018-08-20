@@ -116,12 +116,15 @@ class PauseViewController: UIViewController {
             if currentGameView is ViewOfGameSquare {
                 let squareView = currentGameView as! ViewOfGameSquare
                 squareView.option3Timer.play()
+                squareView.unPauseAllOption1Timers()
             } else if currentGameView is ViewOfGame_Hex {
                 let hexView = currentGameView as! ViewOfGame_Hex
                 hexView.option3Timer.play()
+                hexView.unPauseAllOption1Timers()
             } else if currentGameView is ViewOfGameTriangular {
                 let triangularView = currentGameView as! ViewOfGameTriangular
                 triangularView.option3Timer.play()
+                triangularView.unPauseAllOption1Timers()
             }
             
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
@@ -132,10 +135,13 @@ class PauseViewController: UIViewController {
             
             if gameViewController.game.gameType == .square {
                 gameViewController.viewOfGameSquare?.option3Timer.play()
+                gameViewController.viewOfGameSquare?.unPauseAllOption1Timers()
             } else if gameViewController.game.gameType == .hexagonal {
                 gameViewController.viewOfGameHex?.option3Timer.play()
+                gameViewController.viewOfGameHex?.unPauseAllOption1Timers()
             } else if gameViewController.game.gameType == .triangular {
                 gameViewController.viewOfGameTriangular?.option3Timer.play()
+                gameViewController.viewOfGameTriangular?.unPauseAllOption1Timers()
             }
             
             

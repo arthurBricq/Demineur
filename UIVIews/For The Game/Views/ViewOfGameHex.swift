@@ -10,6 +10,7 @@ import UIKit
 
 class ViewOfGame_Hex: UIView {
     
+    // MARK: - Variables sur le jeu en cours
     @IBInspectable var n: Int = 4
     @IBInspectable var m: Int = 4
     var z: Int = 4
@@ -33,6 +34,7 @@ class ViewOfGame_Hex: UIView {
         }
     }
     
+    // MARK: - Autres variables et la fonction draw(_:)
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va rajouter +1 à la variable 'numberOfBombs' du VC si on marque un drapeau au bon endroit.
     var onPosingFlag: ((Bool) -> Void)?
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
@@ -99,6 +101,7 @@ class ViewOfGame_Hex: UIView {
     
 }
 
+// MARK: - Fonction qui gère l'ouverture des cases
 extension ViewOfGame_Hex: ButtonCanCallSuperView {
     
     /**
@@ -176,6 +179,7 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
     }
 }
 
+// MARK: - Fonctions pour obtenir des infos sur la partie
 extension ViewOfGame_Hex {
     
     func isTheCaseMarked(i: Int,j : Int)->Bool {
@@ -233,7 +237,10 @@ extension ViewOfGame_Hex {
     func isCaseABomb(i: Int, j: Int) -> Bool {
         return gameState[i][j] == -1
     }
-    
+}
+
+// MARK: - Fonctions pour agir sur la partie
+extension ViewOfGame_Hex {
     func markACase(i: Int,j: Int, byComputer: Bool = false) {
         
         if numberOfFlags > 0 {
@@ -455,6 +462,7 @@ extension ViewOfGame_Hex {
     
 }
 
+// MARK: - Gère les timers
 extension ViewOfGame_Hex: CountingTimerProtocol {
     func timerFires(id: String) {
         if id == "Option3" {
@@ -475,6 +483,24 @@ extension ViewOfGame_Hex: CountingTimerProtocol {
                 blockACase(i: randN, j: randM)
             }
             
+        }
+    }
+    
+    func pauseAllOption1Timers() {
+        if option1 {
+            for subview in subviews {
+                guard let hex = subview as? HexCase else { continue }
+                hex.option1Timer.pause()
+            }
+        }
+    }
+    
+    func unPauseAllOption1Timers() {
+        if option1 {
+            for subview in subviews {
+                guard let hex = subview as? HexCase else { continue }
+                hex.option1Timer.play()
+            }
         }
     }
 }

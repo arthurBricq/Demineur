@@ -11,6 +11,7 @@ import UIKit
 // @IBDesignable
 class ViewOfGameSquare: UIView {
     
+    // MARK: - Variables
     @IBInspectable var n: Int = 4 // number of rows
     @IBInspectable var m: Int = 4 // number of columns
     var z: Int = 4
@@ -30,6 +31,7 @@ class ViewOfGameSquare: UIView {
         }
     }
     
+    // MARK: - Autres variables et la fonction draw(_:)
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va rajouter +1 à la variable 'numberOfBombs' du VC si on marque un drapeau au bon endroit.
     var onPosingFlag: ((Bool) -> Void)?
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
@@ -90,6 +92,7 @@ class ViewOfGameSquare: UIView {
     
 }
 
+// MARK: - Fonction qui gère l'ouverture des cases
 extension ViewOfGameSquare: ButtonCanCallSuperView {
     func buttonHaveBeenTapped(i: Int, j: Int, marking: Bool) { // this function has all the logic whenever a button is tapped.
         
@@ -183,7 +186,10 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         }
         
     }
-    
+}
+
+// MARK: - Fonctions pour obtenir des infos sur la partie en cours
+extension ViewOfGameSquare {
     func isTheGameFinished() -> Bool {
         var toReturn = true
         
@@ -263,7 +269,10 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
     func isCaseABomb(i: Int, j: Int) -> Bool {
         return gameState[i][j] == -1
     }
-    
+}
+
+// MARK: - Fonctions pour agir sur la partie
+extension ViewOfGameSquare {
     func returnACaseAt(i: Int, j: Int) {
         
         let k: Int = i*m + j // indice
@@ -449,6 +458,7 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
     
 }
 
+// MARK: - Gère les timers
 extension ViewOfGameSquare: CountingTimerProtocol {
     func timerFires(id: String) {
         if id == "Option3" {
@@ -469,6 +479,24 @@ extension ViewOfGameSquare: CountingTimerProtocol {
                 blockACaseAt(i: randN, j: randM)
             }
             
+        }
+    }
+    
+    func pauseAllOption1Timers() {
+        if option1 {
+            for subview in subviews {
+                guard let square = subview as? SquareCase else { continue }
+                square.option1Timer.pause()
+            }
+        }
+    }
+    
+    func unPauseAllOption1Timers() {
+        if option1 {
+            for subview in subviews {
+                guard let square = subview as? SquareCase else { continue }
+                square.option1Timer.play()
+            }
         }
     }
 }

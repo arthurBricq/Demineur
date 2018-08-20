@@ -12,6 +12,7 @@ import UIKit
 class HexCase: UIButton
 { // La vue doit être un carré
     
+    // MARK: - VARIABLES
     @IBInspectable var strokeColor: UIColor = .black // Pour les contours
     @IBInspectable var emptyColor: UIColor = .black // Pour le background des cases vides
     @IBInspectable var openColor: UIColor = .black // Pour le background des cases ouvertes
@@ -73,7 +74,7 @@ class HexCase: UIButton
         }
     }
     
-    
+    // MARK: - FUNCTIONS
     override func draw(_ rect: CGRect)
     {
         
@@ -392,6 +393,7 @@ class HexCase: UIButton
     }
 }
 
+// MARK: - Gère les timers
 extension HexCase: LimitedTimerProtocol {
     func timeLimitReached(id: String) {
         if id == "Marking" {

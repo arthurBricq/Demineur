@@ -78,12 +78,15 @@ class InfiniteGameViewController: UIViewController {
         if currentGameView is ViewOfGameSquare {
             let squareView = currentGameView as! ViewOfGameSquare
             squareView.option3Timer.pause()
+            squareView.pauseAllOption1Timers()
         } else if currentGameView is ViewOfGame_Hex {
             let hexView = currentGameView as! ViewOfGame_Hex
             hexView.option3Timer.pause()
+            hexView.pauseAllOption1Timers()
         } else if currentGameView is ViewOfGameTriangular {
             let triangularView = currentGameView as! ViewOfGameTriangular
             triangularView.option3Timer.pause()
+            triangularView.pauseAllOption1Timers()
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -720,6 +723,22 @@ extension InfiniteGameViewController: GameViewCanCallVC {
         } else {
             
             if didTapABomb || didTimeEnd {
+                
+                let currentGameView = containerView.subviews[containerView.subviews.count-1]
+                if currentGameView is ViewOfGameSquare {
+                    let squareView = currentGameView as! ViewOfGameSquare
+                    squareView.option3Timer.pause()
+                    squareView.pauseAllOption1Timers()
+                } else if currentGameView is ViewOfGame_Hex {
+                    let hexView = currentGameView as! ViewOfGame_Hex
+                    hexView.option3Timer.pause()
+                    hexView.pauseAllOption1Timers()
+                } else if currentGameView is ViewOfGameTriangular {
+                    let triangularView = currentGameView as! ViewOfGameTriangular
+                    triangularView.option3Timer.pause()
+                    triangularView.pauseAllOption1Timers()
+                }
+                
                 gameTimer.pause()
                 addTheMessage(didTapABomb: didTapABomb)
             } else {
@@ -1181,20 +1200,23 @@ extension InfiniteGameViewController {
                         let currentViewOfGame = self.containerView.subviews.last as! ViewOfGame_Hex
                         currentViewOfGame.isUserInteractionEnabled = true
                         if self.returnCurrentGame().option3 {
-                            currentViewOfGame.option3Timer.start(timeInterval: TimeInterval(self.returnCurrentGame().option3Time), id: "Option3")
+                            currentViewOfGame.option3Timer.play()
                         }
+                        currentViewOfGame.unPauseAllOption1Timers()
                     } else if self.returnCurrentGame().gameType == .square {
                         let currentViewOfGame = self.containerView.subviews.last as! ViewOfGameSquare
                         currentViewOfGame.isUserInteractionEnabled = true
                         if self.returnCurrentGame().option3 {
-                            currentViewOfGame.option3Timer.start(timeInterval: TimeInterval(self.returnCurrentGame().option3Time), id: "Option3")
+                            currentViewOfGame.option3Timer.play()
                         }
+                        currentViewOfGame.unPauseAllOption1Timers()
                     } else if self.returnCurrentGame().gameType == .triangular {
                         let currentViewOfGame = self.containerView.subviews.last as! ViewOfGameTriangular
                         currentViewOfGame.isUserInteractionEnabled = true
                         if self.returnCurrentGame().option3 {
-                            currentViewOfGame.option3Timer.start(timeInterval: TimeInterval(self.returnCurrentGame().option3Time), id: "Option3")
+                            currentViewOfGame.option3Timer.play()
                         }
+                        currentViewOfGame.unPauseAllOption1Timers()
                     }
                     
                 })
@@ -1347,20 +1369,23 @@ extension InfiniteGameViewController {
                         let viewOfGame = self.containerView.subviews.last as! ViewOfGame_Hex
                         viewOfGame.isUserInteractionEnabled = true
                         if self.returnCurrentGame().option3 {
-                            viewOfGame.option3Timer.start(timeInterval: TimeInterval(self.returnCurrentGame().option3Time), id: "Option3")
+                            viewOfGame.option3Timer.play()
                         }
+                        viewOfGame.unPauseAllOption1Timers()
                     } else if self.returnCurrentGame().gameType == .square {
                         let viewOfGame = self.containerView.subviews.last as! ViewOfGameSquare
                         viewOfGame.isUserInteractionEnabled = true
                         if self.returnCurrentGame().option3 {
-                            viewOfGame.option3Timer.start(timeInterval: TimeInterval(self.returnCurrentGame().option3Time), id: "Option3")
+                            viewOfGame.option3Timer.play()
                         }
+                        viewOfGame.unPauseAllOption1Timers()
                     } else if self.returnCurrentGame().gameType == .triangular {
                         let viewOfGame = self.containerView.subviews.last as! ViewOfGameTriangular
                         viewOfGame.isUserInteractionEnabled = true
                         if self.returnCurrentGame().option3 {
-                            viewOfGame.option3Timer.start(timeInterval: TimeInterval(self.returnCurrentGame().option3Time), id: "Option3")
+                            viewOfGame.option3Timer.play()
                         }
+                        viewOfGame.unPauseAllOption1Timers()
                     }
                     
                 })

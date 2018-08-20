@@ -13,6 +13,7 @@ import UIKit
 // @IBDesignable
 class TriangularCase: UIButton {
     
+    // MARK: - VARIABLES
     @IBInspectable var strokeColor: UIColor = .black
     @IBInspectable var emptyColor: UIColor = .black
     @IBInspectable var openColor: UIColor = .black
@@ -78,6 +79,8 @@ class TriangularCase: UIButton {
         }
     }
     
+    
+    // MARK: - FUNCTIONS
     override func draw(_ rect: CGRect) {
         // Contrainte sur les dimensions : w = a ; h = sin(alpha)w
         let a: CGFloat = rect.width ;
@@ -362,6 +365,7 @@ class TriangularCase: UIButton {
     
 }
 
+// MARK: - Gère les timers
 extension TriangularCase: LimitedTimerProtocol {
     func timeLimitReached(id: String) {
         if id == "Marking" {

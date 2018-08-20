@@ -11,6 +11,7 @@ import UIKit
 // @IBDesignable
 class ViewOfGameTriangular: UIView {
     
+    // MARK: - Variables sur le jeu en cours
     @IBInspectable var n: Int = 4 // Doit être multiple de 2
     @IBInspectable var m: Int = 4 // Ne doit pas être multiple de 2
     var z: Int = 4
@@ -32,6 +33,8 @@ class ViewOfGameTriangular: UIView {
             delegateVC?.updateFlagsDisplay(numberOfFlags: numberOfFlags)
         }
     }
+    
+    // MARK: - Autres variables et la fonction draw(_:)
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va rajouter +1 à la variable 'numberOfBombs' du VC si on marque un drapeau au bon endroit.
     var onPosingFlag: ((Bool) -> Void)?
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
@@ -79,6 +82,7 @@ class ViewOfGameTriangular: UIView {
     }
 }
 
+// MARK: - Fonction qui gère l'ouverture des cases
 extension ViewOfGameTriangular: ButtonCanCallSuperView {
     
     func buttonHaveBeenTapped(i: Int, j: Int, marking: Bool) {
@@ -168,6 +172,10 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         }
         
     }
+}
+
+// MARK: - Fonctions qui permettent d'obtenir des infos sur la partie
+extension ViewOfGameTriangular {
     
     func isTheGameFinished() -> Bool {
         var toReturn = true
@@ -248,6 +256,10 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
     func isCaseABomb(i: Int, j: Int) -> Bool {
         return gameState[i][j] == -1
     }
+}
+
+// MARK: - Fonctions qui permettent d'agir sur la partie
+extension ViewOfGameTriangular {
     
     func returnACaseAt(i: Int, j: Int) {
         let k: Int = i*m + j // indice
@@ -429,6 +441,7 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
     }
 }
 
+// MARK: - Gère les timers
 extension ViewOfGameTriangular: CountingTimerProtocol {
     func timerFires(id: String) {
         if id == "Option3" {
@@ -449,6 +462,24 @@ extension ViewOfGameTriangular: CountingTimerProtocol {
                 blockACaseAt(i: randN, j: randM)
             }
             
+        }
+    }
+    
+    func pauseAllOption1Timers() {
+        if option1 {
+            for subview in subviews {
+                guard let triangle = subview as? TriangularCase else { continue }
+                triangle.option1Timer.pause()
+            }
+        }
+    }
+    
+    func unPauseAllOption1Timers() {
+        if option1 {
+            for subview in subviews {
+                guard let triangle = subview as? TriangularCase else { continue }
+                triangle.option1Timer.play()
+            }
         }
     }
 }

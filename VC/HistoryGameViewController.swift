@@ -307,10 +307,13 @@ class HistoryGameViewController: UIViewController {
         
         if game.gameType == .square {
             viewOfGameSquare?.option3Timer.pause()
+            viewOfGameSquare?.pauseAllOption1Timers()
         } else if game.gameType == .hexagonal {
             viewOfGameHex?.option3Timer.pause()
+            viewOfGameHex?.pauseAllOption1Timers()
         } else if game.gameType == .triangular {
             viewOfGameTriangular?.option3Timer.pause()
+            viewOfGameTriangular?.pauseAllOption1Timers()
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -377,19 +380,21 @@ extension HistoryGameViewController {
 extension HistoryGameViewController: GameViewCanCallVC {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
-        gameTimer.pause()
-        // finish the game
         
+        gameTimer.pause()
         
         if game.gameType == .hexagonal {
             viewOfGameHex!.isUserInteractionEnabled = false
             viewOfGameHex!.option3Timer.stop()
+            viewOfGameHex?.pauseAllOption1Timers()
         } else if game.gameType == .square {
             viewOfGameSquare!.isUserInteractionEnabled = false
             viewOfGameSquare!.option3Timer.stop()
+            viewOfGameSquare?.pauseAllOption1Timers()
         } else if game.gameType == .triangular {
             viewOfGameTriangular!.isUserInteractionEnabled = false
             viewOfGameTriangular!.option3Timer.stop()
+            viewOfGameTriangular?.pauseAllOption1Timers()
         }
         
         if win {
@@ -764,16 +769,19 @@ extension HistoryGameViewController {
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameHex?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .square {
                         self.viewOfGameSquare!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameSquare?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .triangular {
                         self.viewOfGameTriangular!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameTriangular?.unPauseAllOption1Timers()
                     }
                     
                 })
@@ -946,16 +954,19 @@ extension HistoryGameViewController {
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameHex?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .square {
                         self.viewOfGameSquare!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameSquare?.unPauseAllOption1Timers()
                     } else if self.game.gameType == .triangular {
                         self.viewOfGameTriangular!.isUserInteractionEnabled = true
                         if self.game.option3 {
                             self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                         }
+                        self.viewOfGameTriangular?.unPauseAllOption1Timers()
                     }
                     
                 })
