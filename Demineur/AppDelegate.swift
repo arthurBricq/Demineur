@@ -22,12 +22,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         money.getCurrentValue() // on récupère l'argent au début du jeu
-        options.getCurrentValue() // on récupère les options de l'application
+        reglages.getCurrentValue() // on récupère les options de l'application
         bonus.getCurrentValue() // on récupère les bonus achetés.
         levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
         gameData.getCurrentValue() // on récupère le mode histoire. 
         localScores.getCurrentValue() // on récupère tous les scores du joueur.
+        themesManager.getCurrentValue() // on récupère les thèmes de couleurs ...
         
+        // themesManager.indexOfSelectedTheme = 0
+        // themesManager.addUnlockedTheme(index: 3)
+        // themesManager.initiateUnlockedThemes()
+        
+        
+        localScores.displayTheLocalScores()
+        themesManager.displayCurrentThemes()
+        
+        /// A faire lors du premier appel de l'application 
+        
+        //themesManager.initiateUnlockedThemes()
         initiateANewDevice(argent: 10000, lives: 0, level: 20)
         
         return true

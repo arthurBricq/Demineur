@@ -71,7 +71,7 @@ class PauseViewController: UIViewController {
         view.insertSubview(blurView, at: 0)
         
         pageControl.isUserInteractionEnabled = false
-        pageControl.currentPage = options.indexOfArticle
+        pageControl.currentPage = reglages.indexOfArticleInPauseVC
         
         updateMoneyDisplay()
         updateLivesDisplay()
@@ -90,7 +90,7 @@ class PauseViewController: UIViewController {
         if segue.identifier == "pageSegue", let controller = segue.destination as? UIPageViewController {
             controller.delegate = self
             controller.dataSource = self
-            controller.setViewControllers([self.viewController(forIndex: options.indexOfArticle)], direction: .forward, animated: false, completion: nil)
+            controller.setViewControllers([self.viewController(forIndex: reglages.indexOfArticleInPauseVC)], direction: .forward, animated: false, completion: nil)
         }
         
     }
@@ -173,7 +173,7 @@ class PauseViewController: UIViewController {
     }
     
     @IBAction func vibrationButtonTapped(_ sender: Any) {
-        options.areVibrationsOn = !options.areVibrationsOn // changer les vibrations
+        reglages.areVibrationsOn = !reglages.areVibrationsOn // changer les vibrations
     }
     
     
@@ -229,7 +229,7 @@ extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControlle
         }
         let index = vc.articleIndex
         
-        options.indexOfArticle = index
+        reglages.indexOfArticleInPauseVC = index
         pageControl.currentPage = index
         
     }

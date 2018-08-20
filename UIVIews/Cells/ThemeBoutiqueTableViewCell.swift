@@ -27,7 +27,8 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     // MARK: - Actions
     @IBAction func chosenButton(_ sender: Any) {
         
-        selectedTheme = index
+        themesManager.indexOfSelectedTheme = index // changer l'indice sauvegardé
+        
         delegate?.reloadDatas(moneyNeedAnimation: false)
         
     }
@@ -35,8 +36,9 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     @IBAction func buyAction(_ sender: Any) {
         
         money.takeAwayMoney(amount: allThemes[index].price)
-        allThemes[index].isUnlocked = true
         
+        themesManager.addUnlockedTheme(index: index)
+                
         delay(seconds: 0.2) {
             UIView.animate(withDuration: 0.5) {
                 self.lockView.progress = 0

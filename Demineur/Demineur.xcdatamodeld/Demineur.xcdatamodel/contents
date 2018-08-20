@@ -7,6 +7,9 @@
         <attribute name="verification" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vie" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="CurrentTheme" representedClassName="CurrentTheme" syncable="YES" codeGenerationType="class">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <entity name="GameData" representedClassName="GameData" syncable="YES" codeGenerationType="class">
         <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
@@ -24,16 +27,21 @@
     <entity name="Money" representedClassName="Money" syncable="YES" codeGenerationType="class">
         <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Options" representedClassName="Options" syncable="YES" codeGenerationType="class">
-        <attribute name="indexOfArticle" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    <entity name="Reglage" representedClassName="Reglage" syncable="YES" codeGenerationType="class">
+        <attribute name="indexOfArticleInPauseVC" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vibration" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="UnlockTheme" representedClassName="UnlockTheme" syncable="YES" codeGenerationType="class">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="Bonus" positionX="250" positionY="-90" width="128" height="118"/>
+        <element name="CurrentTheme" positionX="72" positionY="-63" width="128" height="60"/>
         <element name="GameData" positionX="63" positionY="-72" width="128" height="60"/>
         <element name="LevelBonus" positionX="72" positionY="-72" width="128" height="120"/>
-        <element name="Money" positionX="-126" positionY="-144" width="128" height="58"/>
-        <element name="Options" positionX="70" positionY="-153" width="128" height="75"/>
         <element name="LocalScores" positionX="63" positionY="-72" width="128" height="75"/>
+        <element name="Money" positionX="-126" positionY="-144" width="128" height="58"/>
+        <element name="Reglage" positionX="70" positionY="-153" width="128" height="75"/>
+        <element name="UnlockTheme" positionX="63" positionY="-72" width="128" height="60"/>
     </elements>
 </model>

@@ -15,6 +15,7 @@ class LockView: UIView {
             progressLayer.progress = progress
             if progress == 0 || progress == 1 {
                 progressLayer.setNeedsDisplay()
+                
             }
         }
     }

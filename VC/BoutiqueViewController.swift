@@ -202,7 +202,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.titleView.text = currentTheme.name
             
             cell.buyButton.prix = currentTheme.price.description
-            cell.buyButton.isHidden = currentTheme.isUnlocked
+            cell.buyButton.isHidden = themesManager.indexesOfUnlockedThemes.contains(indexPath.row)
+            
             cell.buyButton.textsize = 55
             if money.currentAmountOfMoney < currentTheme.price {
                 cell.buyButton.isUserInteractionEnabled = false
@@ -213,13 +214,14 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             }
             cell.buyButton.setNeedsDisplay()
             
-            cell.hidingView.isHidden = currentTheme.isUnlocked
+            cell.hidingView.isHidden = themesManager.indexesOfUnlockedThemes.contains(indexPath.row)
             cell.hidingView.layer.cornerRadius = 10
             cell.hidingView.layer.borderWidth = 2
             
-            cell.lockView.progress = currentTheme.isUnlocked ? 0 : 1
+            cell.lockView.progress = themesManager.indexesOfUnlockedThemes.contains(indexPath.row) ? 0 : 1
             
-            cell.checkerButton.isChecked = (selectedTheme == indexPath.row)
+            cell.checkerButton.isChecked = (themesManager.indexOfSelectedTheme == indexPath.row)
+            
             cell.checkerButton.setNeedsDisplay()
             
             

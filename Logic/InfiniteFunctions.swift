@@ -205,7 +205,7 @@ class InfiniteGameManager {
             section.game5 = createOneGame(forDensity: easyPonderation)
         case level1..<level2:
             print("  Pondération moyenne")
-            section.incrementBomb = 2
+            section.incrementBomb = section.gameType == .triangular ? 1 : 2
             section.game1 = createOneGame(forDensity: mediumPonderation)
             section.game2 = createOneGame(forDensity: mediumPonderation)
             section.game3 = createOneGame(forDensity: mediumPonderation)
@@ -213,7 +213,7 @@ class InfiniteGameManager {
             section.game5 = createOneGame(forDensity: mediumPonderation)
         default:
             print("  Pondération difficile")
-            section.incrementBomb = 3
+            section.incrementBomb = section.gameType == .triangular ? 1 : 3
             section.game1 = createOneGame(forDensity: hardPonderation)
             section.game2 = createOneGame(forDensity: hardPonderation)
             section.game3 = createOneGame(forDensity: hardPonderation)
@@ -221,7 +221,6 @@ class InfiniteGameManager {
             section.game5 = createOneGame(forDensity: hardPonderation)
         }
         
-        if section.gameType == .triangular { section.incrementBomb = section.incrementBomb/2}
         
         
         //// 5. Trouver le nombre de drapeaux suplémentaire des parties

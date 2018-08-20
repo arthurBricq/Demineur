@@ -24,11 +24,13 @@ import CoreData
 
 // MARK: - Variables globales pour les sauvegardes
 let money = MoneyManager()
-let options = OptionsManager()
+let reglages = ReglagesManager()
 let bonus = BonusManager()
 let levelOfBonus = LevelBonusManager()
 let gameData = GameDataManager()
 let localScores = LocalScoresManager()
+let themesManager = ThemesManager()
+
 
 // MARK: - Variable globale pour cloudKit
 let scoresModel = ScoresModel()
@@ -222,7 +224,7 @@ class LocalScoresManager {
     
     var allScores: [(level:Int,numberOfBombs:Int)] = [] {
         didSet {
-            displayTheLocalScores()
+            // displayTheLocalScores()
         }
     }
     
@@ -291,7 +293,6 @@ class LocalScoresManager {
         }
     
         // 4 : retourner les valeurs sauvegardées
-
         for object in allObjects {
             let tmpLevel = object.value(forKey: "level") as? Int
             let tmpBombs = object.value(forKey: "numberOfBombs") as? Int
@@ -314,7 +315,7 @@ class LocalScoresManager {
         let newScore = NSManagedObject(entity: entity, insertInto: managedContext)
         newScore.setValue(level, forKeyPath: "level")
         newScore.setValue(numberOfBombs, forKey: "numberOfBombs")
-        allScores.append((level: level, numberOfBombs: numberOfBombs))
+        allScores.append((level: level, numberOfBombs: numberOfBombs)) // On actualise le tableau en même temps qu'on rajoute un élément en mémoire
         
         // 2 : sauvegarder le nouveau contexte.
         do {
@@ -325,15 +326,16 @@ class LocalScoresManager {
     }
     
     func displayTheLocalScores() {
-        print("Nombre de scores enregistrées en local: \(self.allScores.count)")
+        print("GESTION DES SCORES EN LOCAL")
+        print("Nombre de scores enregistrées en local: \(self.allScores.count)\n")
     }
     
 }
 
 
 
-/// Pour sauvegarder les options du jeu
-class OptionsManager {
+/// Pour sauvegarder les options et les reglages du jeu/
+class ReglagesManager {
     
     var areVibrationsOn: Bool = true {
         didSet {
@@ -341,11 +343,18 @@ class OptionsManager {
         }
     }
     
-    var indexOfArticle: Int = 0 {
+    /// Article courrament présentée dans la boutique du menu pause
+    var indexOfArticleInPauseVC: Int = 0 { //
         didSet {
             save()
         }
     }
+    
+    /// Temps à attendre pour poser une bombe
+    var timeToMaintain: Double = 0.3 { didSet { save() } }
+    
+    
+    
     
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
@@ -358,7 +367,7 @@ class OptionsManager {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         // 2 : creéer la requete
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Options") // on récupère tous les objets qui ont une entité Money
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Reglage") // on récupère tous les objets qui ont une entité Money
         
         // 3 : récuperer toutes les valeurs déjà sauvegardées, sous formes d'objets
         var options: [NSManagedObject] = []
@@ -382,12 +391,12 @@ class OptionsManager {
         
         // 5 : retourner la valeur courante
         guard let option1 = options.last?.value(forKey: "vibration") as? Bool else { return toReturn }
-        guard let option2 = options.last?.value(forKey: "indexOfArticle") as? Int else { return toReturn }
+        guard let option2 = options.last?.value(forKey: "indexOfArticleInPauseVC") as? Int else { return toReturn }
 
     
         toReturn = (option1,option2)
         self.areVibrationsOn = option1
-        self.indexOfArticle = option2
+        self.indexOfArticleInPauseVC = option2
         
         
         return toReturn
@@ -401,11 +410,11 @@ class OptionsManager {
         let managedContext = appDelegate.persistentContainer.viewContext
 
         // 2 : create the instance to be saved
-        let entity = NSEntityDescription.entity(forEntityName: "Options", in: managedContext)!
+        let entity = NSEntityDescription.entity(forEntityName: "Reglage", in: managedContext)!
         let options = NSManagedObject(entity: entity, insertInto: managedContext)
         
         options.setValue(self.areVibrationsOn, forKeyPath: "vibration")
-        options.setValue(self.indexOfArticle, forKey: "indexOfArticle")
+        options.setValue(self.indexOfArticleInPauseVC, forKey: "indexOfArticleInPauseVC")
         
         
         // 3 : save the instance that have been created
@@ -419,12 +428,12 @@ class OptionsManager {
     func displayOptions() {
         print("      Parametres du jeu")
         print("vibrations: \(areVibrationsOn)")
-        print("index de l'article: \(indexOfArticle)")
+        print("index de l'article: \(indexOfArticleInPauseVC)")
     }
 }
 
 
-/// Pour sauvegarder les bonus, il faut utiliser les fonctions de cette classe afin d'ajouter ou de soustraire des bonus pour le joueur.
+/// Pour sauvegarder les bonus
 class BonusManager {
     
     var temps: Int = 1 { didSet { save() }}
@@ -578,7 +587,7 @@ class BonusManager {
     
 }
 
-/// Pour sauvegarder le niveau des bonus, il faut utiliser les fonctions de cette classe afin d'ajouter ou de soustraire des bonus pour le joueur.
+/// Pour sauvegarder le niveau des bonus.
 class LevelBonusManager {
     
     var temps: Int = 1 { didSet { save() } }
@@ -729,6 +738,151 @@ class LevelBonusManager {
         }
         
         return tmp
+    }
+    
+}
+
+/// Pour sauvegarder les informations nécessaire au fonctionnement des thèmes de couleur:
+// 1. Pour tous les thèmes déverouillez, il y a un tableau d'entier qui sauvegarde les indices des thèmes. Pour lui rajouter un élément, il faut utiliser la fonction .addUnlockedTheme()
+// 2. Pour la sauvegarde de l'indice du thème actuelle, il suffit de modifier directement la propriété indexOfSelectedTheme pour la sauvegarder. 
+class ThemesManager {
+    
+    var indexesOfUnlockedThemes: [Int] = [0]
+    var indexOfSelectedTheme: Int = 0 { didSet { self.saveCurrentIndex() }}
+    
+    /**
+     Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
+     */
+    func getCurrentValue()
+    {
+        var arrayToReturn: [Int] = [Int].init()
+        
+        // 1
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : creéer la requete
+        let firstFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UnlockTheme") // tous les objets qui ont une entité Bonus
+        let secondFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CurrentTheme") // tous les objets qui ont une entité Bonus
+
+        // 3 : récuperer toutes les valeurs déjà sauvegardées, sous formes d'objets
+        var allThemesUnlocked: [NSManagedObject] = []
+        var allCurrentIndex: [NSManagedObject] = []
+        
+        do {
+            allThemesUnlocked = try managedContext.fetch(firstFetchRequest)
+            allCurrentIndex = try managedContext.fetch(secondFetchRequest)
+            print("nombre de themes retournées : \(allThemesUnlocked.count)")
+            
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        // 4 : il faut supprimer toutes les anciennes sauvegardes.
+        firstFetchRequest.includesPropertyValues = false
+        secondFetchRequest.includesPropertyValues = false
+        do {
+            let items = try managedContext.fetch(secondFetchRequest)
+            for item in items {
+                managedContext.delete(item)
+            }
+        } catch let error as NSError {
+            print("il y a une erreure pour supprimer les sauvegardes \(error), \(error.userInfo)")
+        }
+        
+        // 5 - Retourner les valeurs courantes qui sont dans la dernière entitée sauvegardée
+        guard let index = allCurrentIndex.last?.value(forKey: "index") as? Int else { return } // ...
+        self.indexOfSelectedTheme = index
+        
+        for object in allThemesUnlocked {
+            let tmpIndex = object.value(forKey: "index") as? Int
+            arrayToReturn.append(tmpIndex!)
+        }
+        
+        self.indexesOfUnlockedThemes = arrayToReturn
+        
+        return
+    }
+    
+    func addUnlockedTheme(index: Int) {
+        
+        if indexesOfUnlockedThemes.contains(index) {
+            return
+        }
+        
+        // 1 :
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : create the instance to be saved
+        let entity = NSEntityDescription.entity(forEntityName: "UnlockTheme", in: managedContext)!
+        let newThemeUnlokecked = NSManagedObject(entity: entity, insertInto: managedContext)
+        newThemeUnlokecked.setValue(index, forKey: "index")
+        self.indexesOfUnlockedThemes.append(index)
+        
+        
+        // 3 : save the instance that have been created
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    /// Permet de retourner le tableau qui doit-être présenté la première fois que l'application est lancée
+    func initiateUnlockedThemes() {
+        
+        self.indexesOfUnlockedThemes = [Int].init()
+        
+        // 1
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : creéer la requete
+        let firstFetchRequest = NSFetchRequest<NSManagedObject>(entityName: "UnlockTheme") // tous les objets qui ont une entité Bonus
+      
+        // 3 : il faut supprimer toutes les anciennes sauvegardes.
+        firstFetchRequest.includesPropertyValues = false
+        do {
+            let items = try managedContext.fetch(firstFetchRequest)
+            for item in items {
+                managedContext.delete(item)
+            }
+        } catch let error as NSError {
+            print("il y a une erreure pour supprimer les sauvegardes \(error), \(error.userInfo)")
+        }
+        
+        
+        self.addUnlockedTheme(index: 0)
+
+    }
+    
+    func saveCurrentIndex() {
+        
+        // 1 :
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        // 2 : create the instance to be saved
+        let entity = NSEntityDescription.entity(forEntityName: "CurrentTheme", in: managedContext)!
+        let managedObject = NSManagedObject(entity: entity, insertInto: managedContext)
+        managedObject.setValue(self.indexOfSelectedTheme, forKey: "index") // rajouter la valeur déjà passée dans la variable
+        
+        
+        // 3 : save the instance that have been created
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+        
+    }
+    
+    func displayCurrentThemes() {
+        print("AFFICHAGE DES THEMES (couleurs)")
+        print("Theme utilisé actuellement: \(self.indexOfSelectedTheme)")
+        print("Tous les thèmes achetés: \(self.indexesOfUnlockedThemes) \n" )
     }
     
 }
