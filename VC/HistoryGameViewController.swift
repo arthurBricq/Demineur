@@ -381,6 +381,8 @@ extension HistoryGameViewController: GameViewCanCallVC {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
+        Vibrate().vibrate(style: .heavy)
+        
         gameTimer.pause()
         
         if game.gameType == .hexagonal {
@@ -395,12 +397,6 @@ extension HistoryGameViewController: GameViewCanCallVC {
             viewOfGameTriangular!.isUserInteractionEnabled = false
             viewOfGameTriangular!.option3Timer.stop()
             viewOfGameTriangular?.pauseAllOption1Timers()
-        }
-        
-        if win {
-            Vibrate().vibrate(style: .heavy)
-        } else {
-            Vibrate().vibrate(style: .heavy)
         }
         
         if didTapABomb || didTimeEnd {
@@ -603,12 +599,19 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
         if presented is WinLooseViewController {
             let transition = TransitionToWinLose()
             transition.animationDuration = 1.5
+            transition.presenting = true
             return transition
         }
         return nil
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if dismissed is WinLooseViewController {
+            let transition = TransitionToWinLose()
+            transition.animationDuration = 1.5
+            transition.presenting = false
+            return transition
+        }
         return nil
     }
 }
