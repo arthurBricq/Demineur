@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// A faire lors du premier appel de l'application 
         
         //themesManager.initiateUnlockedThemes()
-        initiateANewDevice(argent: 10000, lives: 0, level: 20)
+        initiateANewDevice(argent: 1000000, lives: 0, level: 20)
         
         return true
     }

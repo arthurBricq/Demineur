@@ -64,7 +64,7 @@ class BonusView: UIView {
         }
     }
     
-
+    
 }
 
 
@@ -188,7 +188,7 @@ public class BonusDraw : NSObject {
         let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 2.13, y: 1.7, width: 136, height: 136), cornerRadius: 4)
         gradientColor.setStroke()
         rectangle2Path.lineWidth = 3
-        //rectangle2Path.stroke()
+        rectangle2Path.stroke()
         
         
         //// Group 4

@@ -7,10 +7,6 @@
 //
 
 
-/*
- Le but de cette page est de fonctionner avec une section donnée.
- */
-
 import UIKit
 
 class InfiniteGameViewController: UIViewController {

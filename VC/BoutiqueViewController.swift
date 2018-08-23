@@ -135,6 +135,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.label1.text = currentBonus.descriptions[level]
             cell.bonusView.index = indexPath.row
             cell.bonusView.tempsAngleParameter = -185
+            cell.bonusView.setNeedsDisplay()
             cell.achatButton.prix = String(currentBonus.prixAchat)
             cell.levelLabel.text = String(level+1)
             cell.numberLabel.text = String(number)
@@ -256,15 +257,15 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
 // MARK: - Extension pour recharger les données de la page après un changement dans une cellule
 extension BoutiqueViewController: CellCanCallTableViewController {
     
-    func reloadDatas(moneyNeedAnimation: Bool) {
-        
+    func reloadMoney() {
+        updateDisplay()
+        pieceView.playParticleAnimation()
+    }
+    
+    
+    func reloadDatas() {
         updateDisplay()
         tableView.reloadData()
-        
-        if moneyNeedAnimation {
-            pieceView.playParticleAnimation()
-        }
-        
     }
     
 }

@@ -29,7 +29,7 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
         
         themesManager.indexOfSelectedTheme = index // changer l'indice sauvegardé
         
-        delegate?.reloadDatas(moneyNeedAnimation: false)
+        delegate?.reloadDatas()
         
     }
     
@@ -47,7 +47,8 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
                 self.hidingView.alpha = 0
                 self.buyButton.alpha = 0
             }) { (_) in
-                self.delegate?.reloadDatas(moneyNeedAnimation: true)
+                self.delegate?.reloadDatas()
+                self.delegate?.reloadMoney()
             }
         }
         
