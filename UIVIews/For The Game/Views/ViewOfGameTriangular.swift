@@ -146,10 +146,10 @@ extension ViewOfGameTriangular: ButtonCanCallSuperView {
         if marking { // hold tapping --> have to mark or unmark the card
             
             if !isTheCaseMarked(i: i, j: j) {
-                self.onPosingFlag!(isCaseABomb(i: i, j: j))
+                self.onPosingFlag?(isCaseABomb(i: i, j: j))
                 markACaseAt(i: i, j: j)
             } else {
-                self.onUnposingFlag!(isCaseABomb(i: i, j: j))
+                self.onUnposingFlag?(isCaseABomb(i: i, j: j))
                 unmarkACaseAt(i: i, j: j)
             }
             

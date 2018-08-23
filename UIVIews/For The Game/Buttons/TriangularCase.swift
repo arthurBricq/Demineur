@@ -252,6 +252,13 @@ class TriangularCase: UIButton {
         }
     }
     
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesCancelled(touches, with: event)
+        UIView.animate(withDuration: 0.1) {
+            self.alpha = 1.0
+        }
+    }
+    
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let x = point.x
         let y = point.y

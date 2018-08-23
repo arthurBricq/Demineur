@@ -162,7 +162,7 @@ class PauseViewController: UIViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()
             gameViewController.removePrecendentViewOfGame()
-            gameViewController.startANewGame()
+            gameViewController.startANewGame(animatedFromTheRight: false)
         }
         self.dismiss(animated: true, completion: nil)
     }
