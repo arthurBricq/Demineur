@@ -78,7 +78,7 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 }
             }
             
-            let finalPoint = fromView.convert(CGPoint(x: 4.5*(headerView?.frame.width)!/163, y: 13.5*(headerView?.frame.height)!/57 - correctiveConstant ), from: headerView)
+            let finalPoint = fromView.convert(CGPoint(x: 9*(headerView?.frame.width)!/163, y: 12*(headerView?.frame.height)!/57 - correctiveConstant ), from: headerView)
             
             
             firstLine.frame = CGRect(x: firstX, y: firstY, width: 0, height: lineFrameWidth)

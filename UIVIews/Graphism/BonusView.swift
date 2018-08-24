@@ -12,19 +12,67 @@ class BonusView: UIView {
 
     var index: Int = 1
     var tempsAngleParameter: CGFloat = 45
+    var writenNumber: Int {
+        get {
+            if index == 0 {
+                
+                switch levelOfBonus.giveTheLevelOfBonus(forIndex: 0) {
+                case 0:
+                    return 15
+                case 1:
+                    return 30
+                case 2:
+                    return 45
+                case 3:
+                    return 60
+                default:
+                    return 15
+                }
+                
+            } else if index == 1 {
+                
+                switch levelOfBonus.giveTheLevelOfBonus(forIndex: 1) {
+                case 0:
+                    return 1
+                case 1:
+                    return 2
+                case 2:
+                    return 3
+                default:
+                    return 1
+                }
+                
+            } else if index == 4 {
+                
+                switch levelOfBonus.giveTheLevelOfBonus(forIndex: 4) {
+                case 0:
+                    return 1
+                case 1:
+                    return 2
+                case 2:
+                    return 3
+                default:
+                    return 1
+                }
+                
+            } else {
+                return 1
+            }
+        }
+    }
     var delegate: BonusButtonsCanCallVC?
     
     override func draw(_ rect: CGRect) {
         if index == 0 {
-            BonusDraw.drawBonusTemps(frame: rect, resizing: .aspectFill, angle: tempsAngleParameter )
+            BonusDraw.drawBonusTemps(frame: rect, resizing: .aspectFill, angle: tempsAngleParameter, amountToAdd: writenNumber )
         } else if index == 1 {
-            BonusDraw.drawBonusDrapeau(frame: rect, resizing: .aspectFill)
+            BonusDraw.drawBonusDrapeau(frame: rect, resizing: .aspectFill, amountToAdd: writenNumber)
         } else if index == 2 {
             BonusDraw.drawBonusBombe(frame: rect, resizing: .aspectFill)
         }  else if index == 3 {
             BonusDraw.drawBonusVerification(frame: rect, resizing: .aspectFill, width: 2)
         }  else if index == 4 {
-            BonusDraw.drawBonusVie(frame: rect, resizing: .aspectFill)
+            BonusDraw.drawBonusVie(frame: rect, resizing: .aspectFill, amountToAdd: writenNumber)
         }
     }
     
@@ -166,7 +214,7 @@ public class BonusDraw : NSObject {
         
     }
     
-    @objc dynamic public class func drawBonusVie(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 140), resizing: ResizingBehavior = .aspectFit) {
+    @objc dynamic public class func drawBonusVie(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 140), resizing: ResizingBehavior = .aspectFit, amountToAdd: Int) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -252,18 +300,18 @@ public class BonusDraw : NSObject {
         
         //// Group 3
         //// Oval 2 Drawing
-        let oval2Path = UIBezierPath(ovalIn: CGRect(x: 9.93, y: 7.91, width: 40, height: 40))
+        let oval2Path = UIBezierPath(ovalIn: CGRect(x: 8.93, y: 6.91, width: 42, height: 42))
         color5.setFill()
         oval2Path.fill()
         
         
         //// Text Drawing
-        let textRect = CGRect(x: 13.62, y: 4.26, width: 30.57, height: 46)
-        let textTextContent = "+1"
+        let textRect = CGRect(x: 10.62, y: 4.26, width: 34.57, height: 46)
+        let textTextContent = "+\(amountToAdd)"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .left
+        textStyle.alignment = .center
         let textFontAttributes = [
-            .font: UIFont(name: "PingFangSC-Semibold", size: 30)!,
+            .font: UIFont(name: "PingFangSC-Semibold", size: 28)!,
             .foregroundColor: UIColor.white,
             .paragraphStyle: textStyle,
             ] as [NSAttributedStringKey: Any]
@@ -278,7 +326,7 @@ public class BonusDraw : NSObject {
         
     }
     
-    @objc dynamic public class func drawBonusDrapeau(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 140), resizing: ResizingBehavior = .aspectFit) {
+    @objc dynamic public class func drawBonusDrapeau(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 140), resizing: ResizingBehavior = .aspectFit, amountToAdd: Int) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -326,22 +374,20 @@ public class BonusDraw : NSObject {
         bezier2Path.stroke()
         
         
-        
-        
         //// Group 5
         //// Oval Drawing
-        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 9.93, y: 7.91, width: 40, height: 40))
+        let ovalPath = UIBezierPath(ovalIn: CGRect(x: 8.93, y: 6.91, width: 42, height: 42))
         color5.setFill()
         ovalPath.fill()
         
         
         //// Text Drawing
-        let textRect = CGRect(x: 13.62, y: 4.26, width: 30.57, height: 46)
-        let textTextContent = "+1"
+        let textRect = CGRect(x: 10.62, y: 4.26, width: 34.57, height: 46)
+        let textTextContent = "+\(amountToAdd)"
         let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .left
+        textStyle.alignment = .center
         let textFontAttributes = [
-            .font: UIFont(name: "PingFangSC-Semibold", size: 30)!,
+            .font: UIFont(name: "PingFangSC-Semibold", size: 28)!,
             .foregroundColor: UIColor.white,
             .paragraphStyle: textStyle,
             ] as [NSAttributedStringKey: Any]
@@ -356,7 +402,7 @@ public class BonusDraw : NSObject {
         
     }
     
-    @objc dynamic public class func drawBonusTemps(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 140), resizing: ResizingBehavior = .aspectFit, angle: CGFloat = 0) {
+    @objc dynamic public class func drawBonusTemps(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 140, height: 140), resizing: ResizingBehavior = .aspectFit, angle: CGFloat = 0, amountToAdd: Int) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -445,7 +491,7 @@ public class BonusDraw : NSObject {
         
         //// Text Drawing
         let textRect = CGRect(x: 14.93, y: 12.16, width: 69.39, height: 46)
-        let textTextContent = "15s"
+        let textTextContent = "\(amountToAdd)s"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         let textFontAttributes = [

@@ -10,10 +10,52 @@ import UIKit
 
 class InfinitePresentationViewController: UIViewController {
 
+    // MARK: - Outlets et variables
     override var prefersStatusBarHidden: Bool { return true }
-    
     @IBOutlet weak var headerView: HeaderInfinite!
     @IBOutlet weak var bestScoreLabel: UILabel!
+    
+    // MARK: - Fonctions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
+    }
+    
+    // MARK: - Actions et segues
+    @IBAction func playButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)
+    }
+    
+    @IBAction func scoreButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "InfinitePresentationToScores", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is InfiniteGameViewController {
+            segue.destination.transitioningDelegate = self
+        }
+        
+    }
+    
+}
+
+// MARK: - Gère les transitions
+extension InfinitePresentationViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if presented is InfiniteGameViewController {
+            let transition = TransitionToGameView()
+            transition.animationDuration = 1.5
+            return transition
+        }
+        
+        return nil
+    }
     
     @IBAction func unwindToInfinitePresentation(segue: UIStoryboardSegue) {
         // retour aux niveaux
@@ -38,24 +80,4 @@ class InfinitePresentationViewController: UIViewController {
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
-    }
-    
-    @IBAction func playButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)
-    }
-    
-    @IBAction func scoreButton(_ sender: Any) {
-        
-        self.performSegue(withIdentifier: "InfinitePresentationToScores", sender: nil)
-        
-    }
-    
 }
