@@ -156,10 +156,10 @@ extension ViewOfGame_Hex: ButtonCanCallSuperView {
             if isACaseOpen(i: i, j: j) { return }
             
             if !isTheCaseMarked(i: i, j: j) {
-                self.onPosingFlag!(isCaseABomb(i: i, j: j))
+                self.onPosingFlag?(isCaseABomb(i: i, j: j))
                 markACase(i: i, j: j)
             } else {
-                self.onUnposingFlag!(isCaseABomb(i: i, j: j))
+                self.onUnposingFlag?(isCaseABomb(i: i, j: j))
                 unmarkACase(i: i, j: j)
             }
                         

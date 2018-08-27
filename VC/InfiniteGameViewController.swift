@@ -7,10 +7,6 @@
 //
 
 
-/*
- Le but de cette page est de fonctionner avec une section donnée.
- */
-
 import UIKit
 
 class InfiniteGameViewController: UIViewController {
@@ -709,6 +705,8 @@ extension InfiniteGameViewController: variableCanCallGameVC {
 extension InfiniteGameViewController: GameViewCanCallVC {
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
+        Vibrate().vibrate(style: .heavy)
+        
         if win {
             
             gameTimer.stop()
@@ -727,8 +725,6 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             } else {
                 return
             }
-            
-            Vibrate().vibrate(style: .heavy)
             
             isTheGameStarted.value = false
             currentGameIsFinished()

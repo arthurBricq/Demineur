@@ -78,7 +78,7 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 }
             }
             
-            let finalPoint = fromView.convert(CGPoint(x: 4.5*(headerView?.frame.width)!/163, y: 13.5*(headerView?.frame.height)!/57 - correctiveConstant ), from: headerView)
+            let finalPoint = fromView.convert(CGPoint(x: 9*(headerView?.frame.width)!/163, y: 12*(headerView?.frame.height)!/57 - correctiveConstant ), from: headerView)
             
             
             firstLine.frame = CGRect(x: firstX, y: firstY, width: 0, height: lineFrameWidth)
@@ -139,7 +139,9 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 secondLine.removeFromSuperview()
                 
                 firstLine.frame = CGRect(x: 0, y: convertedFinalPoint.y - lineFrameWidth/2, width: convertedFinalPoint.x+1, height: lineFrameWidth)
+                firstLine.tag = 10
                 secondLine.frame = CGRect(x: convertedFinalPoint.x - lineFrameWidth/2, y: convertedFinalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-30)
+                secondLine.tag = 20
                 
                 toView.addSubview(firstLine)
                 toView.addSubview(secondLine)

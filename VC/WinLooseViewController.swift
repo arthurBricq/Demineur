@@ -51,8 +51,6 @@ class WinLooseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        transitioningDelegate = nil
-        
         var darkBlur = UIBlurEffect()
         if #available(iOS 10.0, *) { //iOS 10.0 and above
             darkBlur = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
@@ -65,7 +63,7 @@ class WinLooseViewController: UIViewController {
         view.insertSubview(blurView, at: 0)
         
         
-        
+        transitioningDelegate = nil
         
         if win {
             updateWinDisplay()
@@ -124,6 +122,7 @@ class WinLooseViewController: UIViewController {
     
     /// Recommencer le niveau courrant
     @IBAction func rejouerButtonTapped(_ sender: Any) {
+        
         if precedentViewController is InfiniteGameViewController {
             let gameViewController = precedentViewController as! InfiniteGameViewController
             gameViewController.restartTheGame()
@@ -131,7 +130,7 @@ class WinLooseViewController: UIViewController {
             let gameViewController = precedentViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()
             gameViewController.removePrecendentViewOfGame()
-            gameViewController.startANewGame()
+            gameViewController.startANewGame(animatedFromTheRight: false)
         }
         self.dismiss(animated: true, completion: nil)
     }
@@ -139,30 +138,19 @@ class WinLooseViewController: UIViewController {
     
     /// Passer au niveau suivant, uniquement en mode histoire
     @objc func nextLevel() {
+        
         let gameViewController = precedentViewController as! HistoryGameViewController
+        
         gameViewController.game = historyLevels[precedentGameIndex+1]
-        
         if precedentGameIndex == gameData.currentLevel {
-            gameData.currentLevel += 1 // On débloque le niveau suivant 
+            gameData.currentLevel += 1 // On débloque le niveau suivant
         }
-        
         gameViewController.gameIndex = precedentGameIndex + 1
-        gameViewController.gameTimer.play()
-        gameViewController.removePrecendentViewOfGame()
-        gameViewController.startANewGame()
-        self.dismiss(animated: true, completion: nil)
+        
+        gameViewController.animateNextLevel()
+        
+        dismiss(animated: true, completion: nil)
+        
     }
   
-    
-    
-    // NAVIGATIONS
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-       
-        
-        
-    }
-    
-
 }

@@ -67,13 +67,13 @@ class TransitionToWinLose: NSObject, UIViewControllerAnimatedTransitioning {
                 toVC.replayButton.alpha = 1
                 toVC.replayIconButton.alpha = 1
                 toVC.lastButton.alpha = 1
-                toVC.nextLevelIcon.alpha = 1 
+                toVC.nextLevelIcon.alpha = 1
             })
 
         }) { (_) in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
- 
+        
     }
     
 }

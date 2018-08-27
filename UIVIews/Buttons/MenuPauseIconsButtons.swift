@@ -158,28 +158,32 @@ public class MenuPauseDrawings : NSObject {
         
     }
     
-    @objc dynamic public class func drawCanvas3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 120, height: 120), resizing: ResizingBehavior = .aspectFit, color: UIColor) {
+    @objc dynamic public class func drawCanvas3(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit, color: UIColor) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
         //// Resize to Target Frame
         context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 120, height: 120), target: targetFrame)
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 240, height: 240), target: targetFrame)
         context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 120, y: resizedFrame.height / 120)
+        context.scaleBy(x: resizedFrame.width / 240, y: resizedFrame.height / 240)
         
         
-        //// Color Declarations
-        let color3 = color
+        //// Polygon Drawing
+        context.saveGState()
+        context.translateBy(x: 205, y: 35)
+        context.rotate(by: 90 * CGFloat.pi/180)
         
-        //// Bezier Drawing
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 32.22, y: 20.74))
-        bezierPath.addLine(to: CGPoint(x: 32.22, y: 97.25))
-        bezierPath.addLine(to: CGPoint(x: 93.09, y: 58.51))
-        bezierPath.addLine(to: CGPoint(x: 32.22, y: 20.74))
-        color3.setFill()
-        bezierPath.fill()
+        let polygonPath = UIBezierPath()
+        polygonPath.move(to: CGPoint(x: 77.5, y: -0))
+        polygonPath.addLine(to: CGPoint(x: 144.62, y: 116.25))
+        polygonPath.addLine(to: CGPoint(x: 10.38, y: 116.25))
+        polygonPath.close()
+        color.setFill()
+        polygonPath.fill()
+
+        
+        context.restoreGState()
         
         context.restoreGState()
         

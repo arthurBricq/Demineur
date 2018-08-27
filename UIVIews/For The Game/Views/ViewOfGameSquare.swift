@@ -154,10 +154,10 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
             if !isTheCaseMarked(i: i, j: j)
             {
                 let test = isCaseABomb(i: i, j: j)
-                self.onPosingFlag!(test)
+                self.onPosingFlag?(test)
                 markACaseAt(i: i, j: j)
             } else {
-                self.onUnposingFlag!(isCaseABomb(i: i, j: j))
+                self.onUnposingFlag?(isCaseABomb(i: i, j: j))
                 unmarkACaseAt(i: i, j: j)
             }
             

@@ -35,19 +35,9 @@ public class InfiniHeader : NSObject {
         context.scaleBy(x: resizedFrame.width / 163, y: resizedFrame.height / 57)
         
         
-        //// Bezier 9 Drawing
-        /*let bezier9Path = UIBezierPath()
-        bezier9Path.move(to: CGPoint(x: 4.5, y: 13.5))
-        bezier9Path.addLine(to: CGPoint(x: 4.5, y: 55.5))
-        bezier9Path.addLine(to: CGPoint(x: 162.5, y: 55.5))
-        color2.setStroke()
-        bezier9Path.lineWidth = 1
-        bezier9Path.stroke()*/
-        
-        
         //// Bezier 2 Drawing
         let bezier2Path = UIBezierPath()
-        bezier2Path.move(to: CGPoint(x: 19.15, y: 10.99))
+        bezier2Path.move(to: CGPoint(x: 19.15, y: 10.9))
         bezier2Path.addLine(to: CGPoint(x: 19.29, y: 49.04))
         color.setStroke()
         bezier2Path.lineWidth = 1

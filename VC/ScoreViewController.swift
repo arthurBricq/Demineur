@@ -11,7 +11,6 @@ import UIKit
 class ScoreViewController: UIViewController {
 
     // MARK: - Outlets
-    
     @IBOutlet weak var text1label: UILabel!
     @IBOutlet weak var number1label: UILabel!
     @IBOutlet weak var text2label: UILabel!
@@ -23,13 +22,14 @@ class ScoreViewController: UIViewController {
     @IBOutlet weak var label5: UILabel!
     @IBOutlet weak var label6: UILabel!
     @IBOutlet weak var label7: UILabel!
+    @IBOutlet weak var lineView: LineView!
     
     
     
     override var prefersStatusBarHidden: Bool { return true }
     
     
-    // MARK: - functions
+    // MARK: - FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
 
