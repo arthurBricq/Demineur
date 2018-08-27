@@ -75,6 +75,7 @@
 		9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
+		9C5A9CFD213165390013A91B /* TransitionToScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5A9CFC213165390013A91B /* TransitionToScore.swift */; };
 		9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
 		9CA08A2F21243A50006BC68E /* PieceBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */; };
@@ -154,6 +155,7 @@
 		9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfinitePresentationViewController.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
+		9C5A9CFC213165390013A91B /* TransitionToScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToScore.swift; sourceTree = "<group>"; };
 		9C6E629920FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToHistoryMenuViewController.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
 				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
 				9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */,
+				9C5A9CFC213165390013A91B /* TransitionToScore.swift */,
 			);
 			path = CustomTransitions;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
 				4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */,
 				9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */,
+				9C5A9CFD213165390013A91B /* TransitionToScore.swift in Sources */,
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */,
 				4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */,

@@ -24,7 +24,7 @@ public class StarDrawing : NSObject {
     
     //// Drawing Methods
     
-    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit, color: UIColor) {
+    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 240, height: 240), resizing: ResizingBehavior = .aspectFit, color: UIColor = UIColor(red: 0.865, green: 0.860, blue: 0.860, alpha: 1.000)) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -35,18 +35,19 @@ public class StarDrawing : NSObject {
         context.scaleBy(x: resizedFrame.width / 240, y: resizedFrame.height / 240)
         
         
+       
         //// Star Drawing
         let starPath = UIBezierPath()
-        starPath.move(to: CGPoint(x: 121, y: 54))
-        starPath.addLine(to: CGPoint(x: 146.92, y: 88.99))
-        starPath.addLine(to: CGPoint(x: 190.9, y: 100.99))
-        starPath.addLine(to: CGPoint(x: 162.94, y: 134.61))
-        starPath.addLine(to: CGPoint(x: 164.2, y: 177.01))
-        starPath.addLine(to: CGPoint(x: 121, y: 162.8))
-        starPath.addLine(to: CGPoint(x: 77.8, y: 177.01))
-        starPath.addLine(to: CGPoint(x: 79.06, y: 134.61))
-        starPath.addLine(to: CGPoint(x: 51.1, y: 100.99))
-        starPath.addLine(to: CGPoint(x: 95.08, y: 88.99))
+        starPath.move(to: CGPoint(x: 121, y: 45))
+        starPath.addLine(to: CGPoint(x: 142.46, y: 100.46))
+        starPath.addLine(to: CGPoint(x: 201.84, y: 103.73))
+        starPath.addLine(to: CGPoint(x: 155.73, y: 141.28))
+        starPath.addLine(to: CGPoint(x: 170.96, y: 198.77))
+        starPath.addLine(to: CGPoint(x: 121, y: 166.51))
+        starPath.addLine(to: CGPoint(x: 71.04, y: 198.77))
+        starPath.addLine(to: CGPoint(x: 86.27, y: 141.28))
+        starPath.addLine(to: CGPoint(x: 40.16, y: 103.73))
+        starPath.addLine(to: CGPoint(x: 99.54, y: 100.46))
         starPath.close()
         color.setFill()
         starPath.fill()
@@ -54,7 +55,7 @@ public class StarDrawing : NSObject {
         context.restoreGState()
         
     }
-    
+
     
     
     

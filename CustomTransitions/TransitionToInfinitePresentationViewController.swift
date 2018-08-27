@@ -139,7 +139,9 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 secondLine.removeFromSuperview()
                 
                 firstLine.frame = CGRect(x: 0, y: convertedFinalPoint.y - lineFrameWidth/2, width: convertedFinalPoint.x+1, height: lineFrameWidth)
+                firstLine.tag = 10
                 secondLine.frame = CGRect(x: convertedFinalPoint.x - lineFrameWidth/2, y: convertedFinalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-30)
+                secondLine.tag = 20
                 
                 toView.addSubview(firstLine)
                 toView.addSubview(secondLine)

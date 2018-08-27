@@ -25,7 +25,7 @@ class InfinitePresentationViewController: UIViewController {
         print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
     }
     
-    // MARK: - Actions et segues
+    // MARK: - Actions
     @IBAction func playButton(_ sender: Any) {
         self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)
     }
@@ -36,7 +36,7 @@ class InfinitePresentationViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is InfiniteGameViewController {
+        if segue.destination is InfiniteGameViewController || segue.destination is ScoreViewController {
             segue.destination.transitioningDelegate = self
         }
         
@@ -52,9 +52,27 @@ extension InfinitePresentationViewController: UIViewControllerTransitioningDeleg
             let transition = TransitionToGameView()
             transition.animationDuration = 1.5
             return transition
+        } else if presented is ScoreViewController {
+            let transition = TransitionToScore()
+            transition.animationDuration = 1.5
+            transition.presenting = true
+            return transition
         }
         
         return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if dismissed is ScoreViewController{
+            let transition = TransitionToScore()
+            transition.animationDuration = 1.5
+            transition.presenting = false
+            return transition
+        }
+        
+        return nil
+        
     }
     
     @IBAction func unwindToInfinitePresentation(segue: UIStoryboardSegue) {
