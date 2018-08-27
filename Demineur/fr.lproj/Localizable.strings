@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  Demineur
+
+  Created by Arthur BRICQ on 26/08/2018.
+  Copyright © 2018 Arthur BRICQ. All rights reserved.
+*/
+
+// MARK: - Page du menu
+"key1" = "MODE HISTOIRE";
+"key2" = "MODE INFINI";
+"key3" = "SUPER PARTIES";
+"key4" = "BOUTIQUE";
+"key5" = "REGLAGES";
+"key6" = "TUTORIEL";
+
+
+// MARK: - Page tutoriel
+"key7" = "SOMMAIRE";
