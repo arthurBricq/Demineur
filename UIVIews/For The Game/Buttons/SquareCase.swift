@@ -262,8 +262,8 @@ class SquareCase: UIButton {
         if caseState == .open { return }
         
         markingTimer.delegate = self
-        
-        markingTimer.start(limit: 0.3, id: "Marking")
+                
+        markingTimer.start(limit: TimeInterval(reglages.giveTimeToMantain()), id: "Marking")
         
     }
     
@@ -274,7 +274,6 @@ class SquareCase: UIButton {
         
         if caseState == .none { return }
         
-        
         UIView.animate(withDuration: 0.1) {
             self.alpha = 1.0
         }
@@ -284,6 +283,7 @@ class SquareCase: UIButton {
         }
         
         if caseState == .open { return }
+        
         // ********* Logique lorsqu'on appuit sur un boutton ********** //
         if isUserInteractionEnabled { // Cela veut dire que le timer ne s'est pas encore terminé.
             markingTimer.stop()
@@ -393,7 +393,6 @@ extension SquareCase: LimitedTimerProtocol {
         if id == "Marking" {
             
             superViewDelegate?.buttonHaveBeenTapped(i: i, j: j, marking: true)
-            
             markingTimer.stop()
             isUserInteractionEnabled = false
             

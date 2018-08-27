@@ -1,0 +1,243 @@
+
+/* Class = "UILabel"; text = "HISTOIRE"; ObjectID = "0IH-iq-MPs"; */
+"0IH-iq-MPs.text" = "HISTOIRE";
+
+/* Class = "UIViewController"; title = "articleViewController"; ObjectID = "2Py-aN-CFQ"; */
+"2Py-aN-CFQ.title" = "articleViewController";
+
+/* Class = "UILabel"; text = "REGLAGES"; ObjectID = "2uE-YH-lPj"; */
+"2uE-YH-lPj.text" = "REGLAGES";
+
+/* Class = "UILabel"; text = "Mes records"; ObjectID = "3nx-Rk-ffF"; */
+"3nx-Rk-ffF.text" = "Mes records";
+
+/* Class = "UILabel"; text = "MEILLEUR NIVEAU :"; ObjectID = "4Qt-lE-6Ru"; */
+"4Qt-lE-6Ru.text" = "MEILLEUR NIVEAU :";
+
+/* Class = "UILabel"; text = "Vibrations"; ObjectID = "4pH-bU-1aL"; */
+"4pH-bU-1aL.text" = "Vibrations";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "539-U6-iid"; */
+"539-U6-iid.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "REJOUER"; ObjectID = "5Pe-4b-bG5"; */
+"5Pe-4b-bG5.normalTitle" = "REJOUER";
+
+/* Class = "UILabel"; text = "Flag"; ObjectID = "AOB-xl-K7a"; */
+"AOB-xl-K7a.text" = "Flag";
+
+/* Class = "UILabel"; text = "Label2"; ObjectID = "Dgk-9E-rgL"; */
+"Dgk-9E-rgL.text" = "Label2";
+
+/* Class = "UILabel"; text = "blablabla"; ObjectID = "E8g-w0-fgF"; */
+"E8g-w0-fgF.text" = "blablabla";
+
+/* Class = "UIButton"; normalTitle = "PROCHAIN NIVEAU"; ObjectID = "FVi-bx-1lu"; */
+"FVi-bx-1lu.normalTitle" = "PROCHAIN NIVEAU";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "G6v-6d-ilT"; */
+"G6v-6d-ilT.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "TUTORIEL"; ObjectID = "GKo-ii-aGo"; */
+"GKo-ii-aGo.normalTitle" = "TUTORIEL";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "HLJ-2J-djg"; */
+"HLJ-2J-djg.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "Menu"; ObjectID = "Ixc-4M-RNR"; */
+"Ixc-4M-RNR.normalTitle" = "Menu";
+
+/* Class = "UILabel"; text = "niveau :"; ObjectID = "JJd-DC-I3W"; */
+"JJd-DC-I3W.text" = "niveau :";
+
+/* Class = "UILabel"; text = "Effets sonores"; ObjectID = "Jz0-z6-sVr"; */
+"Jz0-z6-sVr.text" = "Effets sonores";
+
+/* Class = "UIButton"; normalTitle = "JOUER"; ObjectID = "K11-oL-8zG"; */
+"K11-oL-8zG.normalTitle" = "JOUER";
+
+/* Class = "UILabel"; text = "Musique"; ObjectID = "KZL-zw-KSV"; */
+"KZL-zw-KSV.text" = "Musique";
+
+/* Class = "UIButton"; normalTitle = "Thèmes"; ObjectID = "LPd-ae-zvH"; */
+"LPd-ae-zvH.normalTitle" = "Thèmes";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Mjs-wy-f3Z"; */
+"Mjs-wy-f3Z.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "N0o-JS-1QA"; */
+"N0o-JS-1QA.text" = "30";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "NLx-Iv-ad4"; */
+"NLx-Iv-ad4.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "Vibrations"; ObjectID = "NM8-Bb-pB7"; */
+"NM8-Bb-pB7.text" = "Vibrations";
+
+/* Class = "UILabel"; text = "Vos parties sont 30% plus longue/courte que la moyenne."; ObjectID = "Nit-lb-GSN"; */
+"Nit-lb-GSN.text" = "Vos parties sont 30% plus longue/courte que la moyenne.";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "O23-gg-s1x"; */
+"O23-gg-s1x.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "items"; ObjectID = "PAa-gD-GOS"; */
+"PAa-gD-GOS.text" = "items";
+
+/* Class = "UILabel"; text = "SCORES"; ObjectID = "PZo-Mh-d1z"; */
+"PZo-Mh-d1z.text" = "SCORES";
+
+/* Class = "UILabel"; text = "X"; ObjectID = "Pf1-XW-owx"; */
+"Pf1-XW-owx.text" = "X";
+
+/* Class = "UILabel"; text = "Language"; ObjectID = "Pxb-k2-WjD"; */
+"Pxb-k2-WjD.text" = "Language";
+
+/* Class = "UIViewController"; title = "Pause"; ObjectID = "QLO-ne-eVG"; */
+"QLO-ne-eVG.title" = "Pause";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "QPc-Zz-en9"; */
+"QPc-Zz-en9.normalTitle" = "3";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "Qqx-v4-iL5"; */
+"Qqx-v4-iL5.text" = "30";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "R10-jV-am5"; */
+"R10-jV-am5.text" = "Description";
+
+/* Class = "UIButton"; normalTitle = "MODE INFINI"; ObjectID = "Rzn-g0-ZtH"; */
+"Rzn-g0-ZtH.normalTitle" = "MODE INFINI";
+
+/* Class = "UIButton"; normalTitle = "Bonus"; ObjectID = "Saj-9k-XXp"; */
+"Saj-9k-XXp.normalTitle" = "Bonus";
+
+/* Class = "UILabel"; text = "Vous avez détruit 2000 bombes, soit 30% de plus/moins que la moyenne"; ObjectID = "Sl2-G6-OBQ"; */
+"Sl2-G6-OBQ.text" = "Vous avez détruit 2000 bombes, soit 30% de plus/moins que la moyenne";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "Sl9-4m-t7X"; */
+"Sl9-4m-t7X.text" = "30";
+
+/* Class = "UILabel"; text = "X"; ObjectID = "TAI-tb-XF3"; */
+"TAI-tb-XF3.text" = "X";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "Tel-mQ-pcX"; */
+"Tel-mQ-pcX.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "Boutique "; ObjectID = "Tp1-p3-i6G"; */
+"Tp1-p3-i6G.text" = "Boutique ";
+
+/* Class = "UIButton"; normalTitle = "Pièces"; ObjectID = "U1X-TP-pI4"; */
+"U1X-TP-pI4.normalTitle" = "Pièces";
+
+/* Class = "UILabel"; text = "AMELIORER"; ObjectID = "UZa-S7-CS4"; */
+"UZa-S7-CS4.text" = "AMELIORER";
+
+/* Class = "UIButton"; normalTitle = "BOUTIQUE"; ObjectID = "VEb-lu-SHz"; */
+"VEb-lu-SHz.normalTitle" = "BOUTIQUE";
+
+/* Class = "UIButton"; normalTitle = "Menu"; ObjectID = "W1M-dS-tEo"; */
+"W1M-dS-tEo.normalTitle" = "Menu";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "Whe-kM-kCm"; */
+"Whe-kM-kCm.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "Menu"; ObjectID = "Xuv-Dc-WBd"; */
+"Xuv-Dc-WBd.normalTitle" = "Menu";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "YeN-l7-yky"; */
+"YeN-l7-yky.text" = "30";
+
+/* Class = "UILabel"; text = "Label4"; ObjectID = "aqK-Od-DKk"; */
+"aqK-Od-DKk.text" = "Label4";
+
+/* Class = "UILabel"; text = "Statistiques"; ObjectID = "bEt-DE-k4D"; */
+"bEt-DE-k4D.text" = "Statistiques";
+
+/* Class = "UIButton"; normalTitle = "REGLAGES"; ObjectID = "cBg-Hy-KC7"; */
+"cBg-Hy-KC7.normalTitle" = "REGLAGES";
+
+/* Class = "UILabel"; text = "Label1"; ObjectID = "cHr-QP-WAT"; */
+"cHr-QP-WAT.text" = "Label1";
+
+/* Class = "UILabel"; text = "Label2"; ObjectID = "cMG-7d-YJG"; */
+"cMG-7d-YJG.text" = "Label2";
+
+/* Class = "UIButton"; normalTitle = "SCORES"; ObjectID = "d6G-M4-K4d"; */
+"d6G-M4-K4d.normalTitle" = "SCORES";
+
+/* Class = "UIButton"; normalTitle = "Infini"; ObjectID = "d7J-CX-GBt"; */
+"d7J-CX-GBt.normalTitle" = "Infini";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "dX8-cO-IJe"; */
+"dX8-cO-IJe.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "HISTOIRE"; ObjectID = "dgC-lK-s4i"; */
+"dgC-lK-s4i.text" = "HISTOIRE";
+
+/* Class = "UILabel"; text = "Vous faites partie de 5% les plus doués"; ObjectID = "dlp-x9-DBn"; */
+"dlp-x9-DBn.text" = "Vous faites partie de 5% les plus doués";
+
+/* Class = "UILabel"; text = "Temps pour poser une bombe"; ObjectID = "eou-5Y-IdM"; */
+"eou-5Y-IdM.text" = "Temps pour poser une bombe";
+
+/* Class = "UILabel"; text = "Label3"; ObjectID = "gES-hF-wOD"; */
+"gES-hF-wOD.text" = "Label3";
+
+/* Class = "UILabel"; text = "BOUTIQUE"; ObjectID = "h4J-3l-2eT"; */
+"h4J-3l-2eT.text" = "BOUTIQUE";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "iF2-N5-z1d"; */
+"iF2-N5-z1d.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "MENU"; ObjectID = "j6Y-5k-SsV"; */
+"j6Y-5k-SsV.normalTitle" = "MENU";
+
+/* Class = "UIButton"; normalTitle = ">"; ObjectID = "jaC-C1-B8N"; */
+"jaC-C1-B8N.normalTitle" = ">";
+
+/* Class = "UILabel"; text = "PAUSE"; ObjectID = "jif-Jc-UUL"; */
+"jif-Jc-UUL.text" = "PAUSE";
+
+/* Class = "UILabel"; text = "Bomb"; ObjectID = "lCr-5J-siY"; */
+"lCr-5J-siY.text" = "Bomb";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "m02-j3-Ykg"; */
+"m02-j3-Ykg.text" = "30";
+
+/* Class = "UILabel"; text = "Label1"; ObjectID = "mC5-cC-f7K"; */
+"mC5-cC-f7K.text" = "Label1";
+
+/* Class = "UILabel"; text = "Bomb"; ObjectID = "mUc-IF-dWj"; */
+"mUc-IF-dWj.text" = "Bomb";
+
+/* Class = "UILabel"; text = "Flag"; ObjectID = "qkH-Vs-bVq"; */
+"qkH-Vs-bVq.text" = "Flag";
+
+/* Class = "UILabel"; text = "Records de la communauté"; ObjectID = "s5O-7H-2gD"; */
+"s5O-7H-2gD.text" = "Records de la communauté";
+
+/* Class = "UIButton"; normalTitle = "MODE HISTOIRE"; ObjectID = "sOV-d4-h4g"; */
+"sOV-d4-h4g.normalTitle" = "MODE HISTOIRE";
+
+/* Class = "UILabel"; text = "0 restant"; ObjectID = "uOq-kb-jxk"; */
+"uOq-kb-jxk.text" = "0 restant";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "uqa-NM-I6J"; */
+"uqa-NM-I6J.text" = "Description";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "vGt-9d-l1G"; */
+"vGt-9d-l1G.normalTitle" = "2";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "wgr-kB-lTh"; */
+"wgr-kB-lTh.text" = "30";
+
+/* Class = "UILabel"; text = "ACHETER"; ObjectID = "x4A-el-aNy"; */
+"x4A-el-aNy.text" = "ACHETER";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "yfA-XL-hq6"; */
+"yfA-XL-hq6.normalTitle" = "1";
+
+/* Class = "UIButton"; normalTitle = "Menu"; ObjectID = "yiE-Pm-Kgx"; */
+"yiE-Pm-Kgx.normalTitle" = "Menu";
+
+/* Class = "UILabel"; text = "30"; ObjectID = "zIF-Hx-QS1"; */
+"zIF-Hx-QS1.text" = "30";

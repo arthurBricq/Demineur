@@ -10,6 +10,11 @@
 		4E02A1362109DF580040BA88 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E02A1342109DF580040BA88 /* Tutorial.storyboard */; };
 		4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */; };
 		4E36C10F211DD78900F810B7 /* InfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */; };
+		4E3705E12130304B00972B51 /* ReglageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3705E02130304B00972B51 /* ReglageViewController.swift */; };
+		4E3705E721315A4700972B51 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3705E621315A4700972B51 /* Sound.swift */; };
+		4E3705E821315E9F00972B51 /* song1.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 4E3705E52131571600972B51 /* song1.m4a */; };
+		4E3705EA2131652D00972B51 /* NiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3705E92131652D00972B51 /* NiceButton.swift */; };
+		4E3705EC213168E100972B51 /* TransitionToReglage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3705EB213168E100972B51 /* TransitionToReglage.swift */; };
 		4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */; };
 		4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */; };
 		4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F2120FE07A300EB5978 /* PieceView.swift */; };
@@ -20,6 +25,9 @@
 		4E88CAC42101338F00DAD9DB /* TransitionToGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */; };
 		4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31820F91858000A9BCB /* DataModel.swift */; };
 		4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */; };
+		4E98BBC92132E2D30054C7E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E98BBCB2132E2D30054C7E7 /* Localizable.strings */; };
+		4E98BBCE21335AB30054C7E7 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98BBCD21335AB30054C7E7 /* TutorialViewController.swift */; };
+		4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98BBCF21340E920054C7E7 /* TransitionToTutoriel.swift */; };
 		4EA2893B20FD005C0069692F /* MenuPauseIconsButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2893A20FD005C0069692F /* MenuPauseIconsButtons.swift */; };
 		4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA2FAD6210624090039846E /* WinLooseViewController.swift */; };
 		4EA76A9920FB6E9C00E940C8 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */; };
@@ -86,6 +94,11 @@
 		4E02A1352109DF580040BA88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Demineur/Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
 		4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTutorialViewController.swift; sourceTree = "<group>"; };
 		4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfinitePresentationViewController.swift; sourceTree = "<group>"; };
+		4E3705E02130304B00972B51 /* ReglageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReglageViewController.swift; sourceTree = "<group>"; };
+		4E3705E52131571600972B51 /* song1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = song1.m4a; sourceTree = "<group>"; };
+		4E3705E621315A4700972B51 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		4E3705E92131652D00972B51 /* NiceButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceButton.swift; sourceTree = "<group>"; };
+		4E3705EB213168E100972B51 /* TransitionToReglage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToReglage.swift; sourceTree = "<group>"; };
 		4E3A4F1D20FD277100EB5978 /* CheckerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerButton.swift; sourceTree = "<group>"; };
 		4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchatBoutiqueBouton.swift; sourceTree = "<group>"; };
 		4E3A4F2120FE07A300EB5978 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
@@ -96,6 +109,13 @@
 		4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToGameView.swift; sourceTree = "<group>"; };
 		4E8FC31820F91858000A9BCB /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demineur.xcdatamodel; sourceTree = "<group>"; };
+		4E98BBC42132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		4E98BBC52132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Demineur/fr.lproj/Tutorial.strings; sourceTree = "<group>"; };
+		4E98BBC62132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		4E98BBCA2132E2D30054C7E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E98BBCC2132E2DD0054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4E98BBCD21335AB30054C7E7 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		4E98BBCF21340E920054C7E7 /* TransitionToTutoriel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToTutoriel.swift; sourceTree = "<group>"; };
 		4EA2893A20FD005C0069692F /* MenuPauseIconsButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPauseIconsButtons.swift; sourceTree = "<group>"; };
 		4EA2FAD6210624090039846E /* WinLooseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinLooseViewController.swift; sourceTree = "<group>"; };
 		4EA76A9820FB6E9C00E940C8 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
@@ -212,8 +232,10 @@
 				4E02A1342109DF580040BA88 /* Tutorial.storyboard */,
 				4EA7FD5F20F893E800740480 /* LaunchScreen.storyboard */,
 				4EA7FD5D20F893E800740480 /* Assets.xcassets */,
+				4E3705E52131571600972B51 /* song1.m4a */,
 				4EA7FD6220F893E800740480 /* Info.plist */,
 				4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */,
+				4E98BBCB2132E2D30054C7E7 /* Localizable.strings */,
 			);
 			path = Demineur;
 			sourceTree = "<group>";
@@ -223,6 +245,7 @@
 			children = (
 				4EA7FDA120F8974E00740480 /* Functions.swift */,
 				4E8FC31820F91858000A9BCB /* DataModel.swift */,
+				4E3705E621315A4700972B51 /* Sound.swift */,
 				4EAAE0F121242982003F9BFE /* ScoreModel.swift */,
 				4EA7FDA320F8976B00740480 /* Protocols.swift */,
 				4EA7FDA520F8977E00740480 /* StarterFunctions.swift */,
@@ -259,6 +282,8 @@
 				4EA2FAD6210624090039846E /* WinLooseViewController.swift */,
 				4EB7D4F9211B38C000BE3E42 /* BoutiqueViewController.swift */,
 				4EAAE0FD212444DE003F9BFE /* ScoreViewController.swift */,
+				4E3705E02130304B00972B51 /* ReglageViewController.swift */,
+				4E98BBCD21335AB30054C7E7 /* TutorialViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -275,6 +300,7 @@
 				4E3A4F1F20FDFC5500EB5978 /* AchatBoutiqueBouton.swift */,
 				9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */,
 				4E512009210B2B2F00736375 /* YesNoButton.swift */,
+				4E3705E92131652D00972B51 /* NiceButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -363,6 +389,8 @@
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
 				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
 				9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */,
+				4E3705EB213168E100972B51 /* TransitionToReglage.swift */,
+				4E98BBCF21340E920054C7E7 /* TransitionToTutoriel.swift */,
 			);
 			path = CustomTransitions;
 			sourceTree = "<group>";
@@ -417,6 +445,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 4EA7FD4A20F893E700740480;
 			productRefGroup = 4EA7FD5420F893E700740480 /* Products */;
@@ -433,6 +462,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E3705E821315E9F00972B51 /* song1.m4a in Resources */,
+				4E98BBC92132E2D30054C7E7 /* Localizable.strings in Resources */,
 				4EA7FD6120F893E800740480 /* LaunchScreen.storyboard in Resources */,
 				4EA7FD5E20F893E800740480 /* Assets.xcassets in Resources */,
 				4E02A1362109DF580040BA88 /* Tutorial.storyboard in Resources */,
@@ -456,8 +487,11 @@
 				9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */,
 				4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */,
 				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
+				4E3705EC213168E100972B51 /* TransitionToReglage.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
+				4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */,
 				4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */,
+				4E3705EA2131652D00972B51 /* NiceButton.swift in Sources */,
 				9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */,
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */,
@@ -482,9 +516,11 @@
 				4EA7FDAA20F8979B00740480 /* Timer.swift in Sources */,
 				9CA08A2F21243A50006BC68E /* PieceBoutiqueTableViewCell.swift in Sources */,
 				4EA7FD9E20F8971000740480 /* LineView.swift in Sources */,
+				4E3705E721315A4700972B51 /* Sound.swift in Sources */,
 				4EAAE0FC21244024003F9BFE /* MoneyPackage.swift in Sources */,
 				4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */,
 				4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */,
+				4E98BBCE21335AB30054C7E7 /* TutorialViewController.swift in Sources */,
 				9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */,
 				4EA7FD9A20F896EB00740480 /* FlagViewDisplay.swift in Sources */,
 				4EA2893B20FD005C0069692F /* MenuPauseIconsButtons.swift in Sources */,
@@ -512,6 +548,7 @@
 				4E8FC31920F91858000A9BCB /* DataModel.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,
+				4E3705E12130304B00972B51 /* ReglageViewController.swift in Sources */,
 				4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */,
 				4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */,
 				4EA7FD7A20F8959C00740480 /* EndTableViewCell.swift in Sources */,
@@ -525,14 +562,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				4E02A1352109DF580040BA88 /* Base */,
+				4E98BBC52132E2A00054C7E7 /* fr */,
 			);
 			name = Tutorial.storyboard;
+			sourceTree = "<group>";
+		};
+		4E98BBCB2132E2D30054C7E7 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4E98BBCA2132E2D30054C7E7 /* en */,
+				4E98BBCC2132E2DD0054C7E7 /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		4EA7FD5A20F893E700740480 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4EA7FD5B20F893E700740480 /* Base */,
+				4E98BBC42132E2A00054C7E7 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -541,6 +589,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4EA7FD6020F893E800740480 /* Base */,
+				4E98BBC62132E2A00054C7E7 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -552,6 +601,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -612,6 +662,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

@@ -337,33 +337,30 @@ class LocalScoresManager {
 /// Pour sauvegarder les options et les reglages du jeu/
 class ReglagesManager {
     
-    var areVibrationsOn: Bool = true {
-        didSet {
-            save()
-        }
-    }
+    var areVibrationsOn: Bool = true { didSet { save() } }
+    
+    var isMusicOn: Bool = true { didSet { save() } }
+    
+    var areEffectsOn: Bool = true { didSet { save() } }
+    
+    /// Temps à attendre pour poser une bombe : il faut regarder le ReglageViewController pour comprendre la signification de l'iterateur Int. Le modèle de donnée se trouve à la fin de cette classe.
+    var timeToMantainIterator: Int = 0 { didSet { save() } }
+    
+    /// Language de l'application : il faut regarder le ReglageViewController pour comprendre la signification de l'iterateur Int. Le modèle de donnée se trouve à la fin de cette classe.
+    var languageIterator: Int = 0 { didSet { save() }}
     
     /// Article courrament présentée dans la boutique du menu pause
-    var indexOfArticleInPauseVC: Int = 0 { //
-        didSet {
-            save()
-        }
-    }
-    
-    /// Temps à attendre pour poser une bombe
-    var timeToMaintain: Double = 0.3 { didSet { save() } }
-    
+    var indexOfArticleInPauseVC: Int = 0 { didSet { save() } }
     
     
     
     /**
      Cette fonction actualise la variable et supprime de la mémoire les anciennes valeurs stockées de cette variable.
      */
-    @discardableResult func getCurrentValue() -> (Bool,Int) {
-        var toReturn: (Bool,Int) = (true,0)
+    @discardableResult func getCurrentValue() {
         
         // 1
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return toReturn }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let managedContext = appDelegate.persistentContainer.viewContext
         
         // 2 : creéer la requete
@@ -390,16 +387,21 @@ class ReglagesManager {
         }
         
         // 5 : retourner la valeur courante
-        guard let option1 = options.last?.value(forKey: "vibration") as? Bool else { return toReturn }
-        guard let option2 = options.last?.value(forKey: "indexOfArticleInPauseVC") as? Int else { return toReturn }
-
+        guard let option1 = options.last?.value(forKey: "vibration") as? Bool else { return  }
+        guard let option2 = options.last?.value(forKey: "indexOfArticleInPauseVC") as? Int else { return }
+        guard let option3 = options.last?.value(forKey: "timeToMantainIterator") as? Int else { return }
+        guard let option4 = options.last?.value(forKey: "languageIterator") as? Int else { return }
+        guard let option5 = options.last?.value(forKey: "isMusicOn") as? Bool else { return }
+        guard let option6 = options.last?.value(forKey: "areEffectsOn") as? Bool else { return }
     
-        toReturn = (option1,option2)
         self.areVibrationsOn = option1
         self.indexOfArticleInPauseVC = option2
+        self.timeToMantainIterator = option3
+        self.languageIterator = option4
+        self.isMusicOn = option5
+        self.areEffectsOn = option6
         
-        
-        return toReturn
+        return
     }
     
     /**
@@ -415,7 +417,10 @@ class ReglagesManager {
         
         options.setValue(self.areVibrationsOn, forKeyPath: "vibration")
         options.setValue(self.indexOfArticleInPauseVC, forKey: "indexOfArticleInPauseVC")
-        
+        options.setValue(self.timeToMantainIterator, forKey: "timeToMantainIterator")
+        options.setValue(self.languageIterator, forKeyPath: "languageIterator")
+        options.setValue(self.isMusicOn, forKey: "isMusicOn")
+        options.setValue(self.areEffectsOn, forKey: "areEffectsOn")
         
         // 3 : save the instance that have been created
         do {
@@ -429,7 +434,35 @@ class ReglagesManager {
         print("      Parametres du jeu")
         print("vibrations: \(areVibrationsOn)")
         print("index de l'article: \(indexOfArticleInPauseVC)")
+        print("iterateur pour le temps de posage: \(timeToMantainIterator)")
+        print("iterateur pour la langue: \(languageIterator)")
+        print("musique activée: \(isMusicOn)")
+        print("effets spéciaux activé: \(areEffectsOn)\n")
     }
+    
+    // MARK: - Modèle de données pour les reglages
+    static let allTimesToMantain: [String] = ["Petit","Moyen","Long"]
+    static let allLanguages: [String] = ["fr","en"]
+    
+    func giveTimeToMantain() -> CGFloat {
+        if timeToMantainIterator == 0 {
+            return 0.2
+        } else if timeToMantainIterator == 1 {
+            return 0.35
+        } else {
+            return 0.55
+        }
+    }
+    
+    func giveCurrentLanguage() -> String {
+        return ReglagesManager.allLanguages[languageIterator]
+    }
+    
+    
+    
+    
+    
+    
 }
 
 

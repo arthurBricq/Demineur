@@ -221,7 +221,7 @@ class TriangularCase: UIButton {
         
         // **** logique du timer **** //
         markingTimer.delegate = self
-        markingTimer.start(limit: 0.4, id: "Marking")
+        markingTimer.start(limit: TimeInterval(reglages.giveTimeToMantain()), id: "Marking")
         
     }
     

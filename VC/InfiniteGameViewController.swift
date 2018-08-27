@@ -314,15 +314,10 @@ class InfiniteGameViewController: UIViewController {
     func endOfInfiniteGame(didTapABomb: Bool) {
         self.gameTimer.stop()
         self.openTheBombs()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        vc.precedentViewController = self
-        vc.win = false
-        vc.transitioningDelegate = self
-        vc.didTapABomb = didTapABomb
-        vc.precedentGameIndex = self.gameIndex
+        
+        
+        
+        //1.
         // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
         // La variable 'level' est déjà upadter à chaque changement de niveau
         // Pour la variable 'numberOfBombs', on utilise des closures dénomées 'onPosingFlag(isFlagCorrect: Bool)' qui vont être donnée aux gameView et qui update la variable 'numberOfBombs'.
@@ -332,6 +327,25 @@ class InfiniteGameViewController: UIViewController {
         }
         localScores.addOneScoreToLocal(level: self.level, numberOfBombs: self.numberOfBombs)
         
+        
+        // 2.
+        // Rajouter l'argent gagné par le joueur
+        // Argent gagné = niveau + nombre de bombes
+        money.addMoney(amount: self.level + self.numberOfBombs)
+        
+        
+        
+        
+        //3.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        vc.precedentViewController = self
+        vc.win = false
+        vc.transitioningDelegate = self
+        vc.didTapABomb = didTapABomb
+        vc.precedentGameIndex = self.gameIndex
         self.present(vc, animated: true, completion: nil)
     }
     

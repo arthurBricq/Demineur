@@ -46,6 +46,9 @@ class InfinitePresentationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
+        if scoresModel.allScores.count == 0 && Reachability.isConnectedToNetwork() {
+            scoresModel.refresh()
+        }
     }
     
     @IBAction func playButton(_ sender: Any) {

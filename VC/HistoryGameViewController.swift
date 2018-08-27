@@ -21,7 +21,12 @@ class HistoryGameViewController: UIViewController {
     
     var bonusChoiceView: BonusChoiceView?
     var game: OneGame = OneGame(gameTypeWithNoneCases: .square, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
+    
     var gameIndex: Int = 1 // Avoir connaissance de l'indice du niveau
+    
+    /// Nombre de bombes qui ont été trouvées par l'utilisateur
+    var numberOfBombs: Int = 0
+    
     
     var gameState = [[Int]].init()
     var gameTimer = CountingTimer()
@@ -123,11 +128,12 @@ class HistoryGameViewController: UIViewController {
         // instauration de la bar des bonus
         addTheBonusChoiceView()
         
-        // Quelques détails relatif aux timer
+        // Quelques détails relatif aux timer et aux comptage
         gameTimer.stop()
         clockView.pourcentage = 0.0
         isTheGameStarted.value = false
         updateFlags(numberOfFlags: game.numberOfFlag)
+        self.numberOfBombs = 0 
         
         // Tailles maximales occupées par la vue :
         let maxHeight = self.view.bounds.height * 0.65
@@ -171,6 +177,16 @@ class HistoryGameViewController: UIViewController {
             gameView.layer.masksToBounds = false
             gameView.numberOfFlags = game.numberOfFlag
             
+            gameView.onPosingFlag = { (test: Bool) -> Void in
+                
+                if test {
+                    // Incrémenter le nombre de bombes
+                    self.numberOfBombs += 1
+                }
+                
+            }
+            
+            
             if game.option3 {
                 gameView.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
                 gameView.option3Frequency = game.option3Frequency
@@ -210,6 +226,14 @@ class HistoryGameViewController: UIViewController {
             gameView.openColor = game.colors.openColor
             gameView.emptyColor = game.colors.emptyColor
             gameView.textColor = game.colors.textColor
+            gameView.onPosingFlag = { (test: Bool) -> Void in
+                
+                if test {
+                    // Incrémenter le nombre de bombes
+                    self.numberOfBombs += 1
+                }
+                
+            }
             
             gameView.numberOfFlags = game.numberOfFlag
             
@@ -253,6 +277,15 @@ class HistoryGameViewController: UIViewController {
             gameView.option2frequency = game.option2Frequency
             gameView.isUserInteractionEnabled = true
             gameView.numberOfFlags = game.numberOfFlag
+            gameView.onPosingFlag = { (test: Bool) -> Void in
+                
+                if test {
+                    // Incrémenter le nombre de bombes
+                    self.numberOfBombs += 1
+                }
+                
+            }
+            
             
             viewOfGameTriangular = gameView
             

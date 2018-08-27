@@ -12,6 +12,10 @@ import AudioToolbox.AudioServices
 class Vibrate: NSObject {
     
     func vibrate() {
+        if reglages.areVibrationsOn == false {
+            return
+        }
+        
         if hasImpactGenerator {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
@@ -20,7 +24,12 @@ class Vibrate: NSObject {
         }
     }
     
-    func vibrate(style: UIImpactFeedbackStyle) {
+    func vibrate(style: UIImpactFeedbackStyle)
+    {
+        if reglages.areVibrationsOn == false {
+            return
+        }
+        
         if hasImpactGenerator {
             let generator = UIImpactFeedbackGenerator(style: style)
             generator.impactOccurred()

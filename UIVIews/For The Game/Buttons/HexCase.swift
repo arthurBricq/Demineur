@@ -275,7 +275,7 @@ class HexCase: UIButton
         
         // **** logique du timer **** //
         markingTimer.delegate = self
-        markingTimer.start(limit: 0.3, id: "Marking")
+        markingTimer.start(limit: TimeInterval(reglages.giveTimeToMantain()), id: "Marking")
         
     }
     

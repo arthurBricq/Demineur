@@ -1,6 +1,5 @@
 
-
- //
+//
 //  AppDelegate.swift
 //  Demineur
 //
@@ -29,18 +28,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         localScores.getCurrentValue() // on récupère tous les scores du joueur.
         themesManager.getCurrentValue() // on récupère les thèmes de couleurs ...
         
-        // themesManager.indexOfSelectedTheme = 0
-        // themesManager.addUnlockedTheme(index: 3)
-        // themesManager.initiateUnlockedThemes()
+
         
-        
+        reglages.displayOptions()
         localScores.displayTheLocalScores()
         themesManager.displayCurrentThemes()
+        
+        // Lancer la musique
+        if reglages.isMusicOn {
+            playMusic()
+        }
+        
         
         /// A faire lors du premier appel de l'application 
         
         //themesManager.initiateUnlockedThemes()
         initiateANewDevice(argent: 10000, lives: 0, level: 20)
+        
+        
         
         return true
     }

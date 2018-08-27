@@ -10,15 +10,27 @@ import UIKit
 
 class MenuViewController: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var lineE: LineView!
     @IBOutlet weak var lineHeight: NSLayoutConstraint!
     @IBOutlet weak var mainLine: LineView!
     @IBOutlet weak var mainLineLeadingConstraint: NSLayoutConstraint!
     
-    override func viewDidLoad() {
+    
+    @IBOutlet weak var histoireButton: UIButton!
+    @IBOutlet weak var infiniteButton: UIButton!
+    @IBOutlet weak var superPartiesButton: UIButton!
+    @IBOutlet weak var boutiqueButton: UIButton!
+    @IBOutlet weak var tutorialButton: UIButton!
+    @IBOutlet weak var reglagesButton: UIButton!
+    
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        lineHeight.constant = 110 + 5*40 + 4*15
+        lineHeight.constant = 110 + 6*40 + 5*15
 
         // CloudKit
         if Reachability.isConnectedToNetwork() == true { // Internet est activé
@@ -34,13 +46,29 @@ class MenuViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Localisation
+        histoireButton.setTitle("key1".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+        infiniteButton.setTitle("key2".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+        superPartiesButton.setTitle("key3".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+        boutiqueButton.setTitle("key4".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+        reglagesButton.setTitle("key5".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+        tutorialButton.setTitle("key6".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+
+        
     }
     
     override var prefersStatusBarHidden: Bool { return true }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController {
+        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController
+        {
             segue.destination.transitioningDelegate = self
         }
         
@@ -71,6 +99,16 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
             transition.animationDuration = 1.5
             transition.presenting = true
             return transition
+        } else if presented is ReglageViewController {
+            let transition = TransitionToReglage()
+            transition.animationDuration = 1.5
+            transition.presenting = true
+            return transition
+        } else if presented is TutorialViewController {
+            let transition = TransitionToTutoriel()
+            transition.animationDuration = 1.5
+            transition.presenting = true
+            return transition
         }
         
         return nil
@@ -93,7 +131,18 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
             transition.animationDuration = 1.5
             transition.presenting = false
             return transition
+        } else if dismissed is ReglageViewController {
+            let transition = TransitionToReglage()
+            transition.animationDuration = 1.5
+            transition.presenting = false
+            return transition
+        } else if dismissed is TutorialViewController {
+            let transition = TransitionToTutoriel()
+            transition.animationDuration = 1.5
+            transition.presenting = false
+            return transition
         }
+        
         
         return nil
     }

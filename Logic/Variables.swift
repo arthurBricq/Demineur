@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+
+
+
+// MARK: - Definition des parties
+
+
 enum GameType {
     case square
     case hexagonal
@@ -239,6 +245,8 @@ class OneGame  {
     }
     
 }
+
+// MARK: - Mode Histoire
 
 let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 7, z: 10, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 12, m: 9, z: 15, totalTime: 60),
