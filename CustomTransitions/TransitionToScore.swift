@@ -1,11 +1,3 @@
-//
-//  TransitionToScore.swift
-//  Demineur
-//
-//  Created by Marin on 25/08/2018.
-//  Copyright © 2018 Arthur BRICQ. All rights reserved.
-//
-
 import UIKit
 
 class TransitionToScore: NSObject, UIViewControllerAnimatedTransitioning {
@@ -198,5 +190,5 @@ class TransitionToScore: NSObject, UIViewControllerAnimatedTransitioning {
         
     }
     
-
+    
 }

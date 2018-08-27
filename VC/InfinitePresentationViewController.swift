@@ -15,15 +15,7 @@ class InfinitePresentationViewController: UIViewController {
     @IBOutlet weak var headerView: HeaderInfinite!
     @IBOutlet weak var bestScoreLabel: UILabel!
     
-    // MARK: - Fonctions
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
-    }
+  
     
     // MARK: - Actions
     @IBAction func playButton(_ sender: Any) {
@@ -99,9 +91,6 @@ extension InfinitePresentationViewController: UIViewControllerTransitioningDeleg
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,14 +100,6 @@ extension InfinitePresentationViewController: UIViewControllerTransitioningDeleg
         }
     }
     
-    @IBAction func playButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)
-    }
     
-    @IBAction func scoreButton(_ sender: Any) {
-        
-        self.performSegue(withIdentifier: "InfinitePresentationToScores", sender: nil)
-        
-    }
     
 }
