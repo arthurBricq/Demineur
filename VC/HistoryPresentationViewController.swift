@@ -20,13 +20,13 @@ class HistoryPresentationViewController: UIViewController  {
     
     override var prefersStatusBarHidden: Bool { return true }
     
-    /// OUTLETS hh
+    // MARK: - OUTLETS
     @IBOutlet weak var levelsTableView: UITableView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
     
-    /// ACTIONS
+    // MARK: - ACTIONS
     @IBAction func MenuButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -132,22 +132,7 @@ class HistoryPresentationViewController: UIViewController  {
             break
         }
     }
-    
-    /// Cette fonction doit modifier le alpha des cellules correctement et cachées les cellules en trop,
-    func updateTheCells() {
-        print("updating the alphas")
-        for i in 1..<totalNumberOfRowsInSection {
-            let tmp = tableView.cellForRow(at: IndexPath(row: i, section: 0))
-            if tmp is Type1TableViewCell {
-                let cell = tmp as! Type1TableViewCell
-                cell.updateTheAlphas()
-            } else {
-                let cell = tmp as! Type2TableViewCell
-                cell.updateTheAlphas()
-            }
-        }
-    }
-    
+        
 }
 
 extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDelegate

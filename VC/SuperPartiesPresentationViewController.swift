@@ -54,7 +54,6 @@ extension SuperPartiesPresentationViewController: UITableViewDelegate, UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SuperPartieCell", for: indexPath) as! SuperPartiesTableViewCell
         
-        
         cell.squareButton.cornersToDraw = [1,2,3,4,5,6,7,8]
         cell.squareButton.openColor = .white
         cell.squareButton.strokeColor = .black
@@ -62,7 +61,7 @@ extension SuperPartiesPresentationViewController: UITableViewDelegate, UITableVi
         
         cell.hexButton.openColor = .white
         cell.hexButton.strokeColor = .black
-        
+    
         cell.triangularButton.openColor = .white
         cell.triangularButton.strokeColor = .black
         
@@ -71,46 +70,12 @@ extension SuperPartiesPresentationViewController: UITableViewDelegate, UITableVi
         
         cell.level = indexPath.row
         cell.currentLevelReached = currentLevelReached
-    
         
+        cell.updateTheAlphas()
+        cell.updateTheLines()
+        cell.setNeedsDisplay()
         
-        
-        
-        
-        
-        if indexPath.row == 0 && currentLevelReached.square == 0 { // premier niveau pas fini
-            cell.ligneDuHautSquare = false
-            cell.partieSupSquare = true
-            cell.pointDuMilieuSquare = true
-            cell.partieInfSquare = false
-            cell.ligneDuBasSquare = false
-        } else if indexPath.row == 0 { // premier niveau fini
-            cell.ligneDuHautSquare = false
-            cell.partieSupSquare = true
-            cell.pointDuMilieuSquare = false
-            cell.partieInfSquare = true
-            cell.ligneDuBasSquare = true
-        } else if indexPath.row > currentLevelReached.square { // pas encore débloqué
-            cell.ligneDuHautSquare = false
-            cell.partieSupSquare = false
-            cell.pointDuMilieuSquare = false
-            cell.partieInfSquare = false
-            cell.ligneDuBasSquare = false
-        } else if indexPath.row == currentLevelReached.square { // niveau le plus avancé
-            cell.ligneDuHautSquare = true
-            cell.partieSupSquare = true
-            cell.pointDuMilieuSquare = true
-            cell.partieInfSquare = false
-            cell.ligneDuBasSquare = false
-        } else if indexPath.row < currentLevelReached.square { // niveau déjà fini
-            cell.ligneDuHautSquare = true
-            cell.partieSupSquare = true
-            cell.pointDuMilieuSquare = false
-            cell.partieInfSquare = true
-            cell.ligneDuBasSquare = true
-        }
-        
-        ///////
+        /*
         
         if currentLevelReached.square < indexPath.row {
             cell.squareButton.alpha = 0.4
@@ -126,9 +91,9 @@ extension SuperPartiesPresentationViewController: UITableViewDelegate, UITableVi
             cell.triangularButton.alpha = 0.4
             cell.triangularButton.isEnabled = false
         }
+        */
         
         
-        cell.setNeedsDisplay()
         return cell
     }
     

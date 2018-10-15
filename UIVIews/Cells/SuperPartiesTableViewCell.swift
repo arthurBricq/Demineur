@@ -20,12 +20,12 @@ class SuperPartiesTableViewCell: UITableViewCell {
     var level: Int = 1 
     var currentLevelReached: (square: Int, hex: Int, triangle: Int) = (1,1,1)
 
-    
-    var ligneDuHautSquare: Bool = true
-    var partieSupSquare: Bool = true
-    var pointDuMilieuSquare: Bool = true
-    var partieInfSquare: Bool = true
-    var ligneDuBasSquare: Bool = true
+    // MARK: - Variables
+    private var ligneDuHautSquare: Bool = true
+    private var partieSupSquare: Bool = true
+    private var pointDuMilieuSquare: Bool = true
+    private var partieInfSquare: Bool = true
+    private var ligneDuBasSquare: Bool = true
     
     
     // MARK: - Actions
@@ -37,6 +37,75 @@ class SuperPartiesTableViewCell: UITableViewCell {
         // Initialization code
     }
 
+    /// EFFECT: will update the alphas of the 3 buttons of the cell. 
+    func updateTheAlphas() {
+        // Alphas of the squares
+        if level == currentLevelReached.square || level < currentLevelReached.square {
+            self.squareButton.alpha = 1.0
+            self.squareButton.isUserInteractionEnabled = true
+        } else {
+            self.squareButton.alpha = 0.5
+            self.squareButton.isUserInteractionEnabled = false
+        }
+        
+        // Alphas of the hexagones
+        if level == currentLevelReached.hex || level < currentLevelReached.hex {
+            self.hexButton.alpha = 1.0
+            self.hexButton.isUserInteractionEnabled = true
+        } else {
+            self.hexButton.alpha = 0.5
+            self.hexButton.isUserInteractionEnabled = false
+        }
+        
+        // Alphas of the triangles
+        if level == currentLevelReached.triangle || level < currentLevelReached.triangle {
+            self.triangularButton.alpha = 1.0
+            self.triangularButton.isUserInteractionEnabled = true
+        } else {
+            self.triangularButton.alpha = 0.5
+            self.triangularButton.isUserInteractionEnabled = false
+        }
+        
+        
+    }
+    
+    /// REQUIRES: the level & the current level reached must be indicated, and you need to call the draw function afterward
+    /// EFFECTS: will set the correct lines variable for the draw function
+    func updateTheLines() {
+        if level == 0 && currentLevelReached.square == 0 { // premier niveau pas fini
+            self.ligneDuHautSquare = false
+            self.partieSupSquare = true
+            self.pointDuMilieuSquare = true
+            self.partieInfSquare = false
+            self.ligneDuBasSquare = false
+        } else if level == 0 { // premier niveau fini
+            self.ligneDuHautSquare = false
+            self.partieSupSquare = true
+            self.pointDuMilieuSquare = false
+            self.partieInfSquare = true
+            self.ligneDuBasSquare = true
+        } else if level > currentLevelReached.square { // pas encore débloqué
+            self.ligneDuHautSquare = false
+            self.partieSupSquare = false
+            self.pointDuMilieuSquare = false
+            self.partieInfSquare = false
+            self.ligneDuBasSquare = false
+        } else if level == currentLevelReached.square { // niveau le plus avancé
+            self.ligneDuHautSquare = true
+            self.partieSupSquare = true
+            self.pointDuMilieuSquare = true
+            self.partieInfSquare = false
+            self.ligneDuBasSquare = false
+        } else if level < currentLevelReached.square { // niveau déjà fini
+            self.ligneDuHautSquare = true
+            self.partieSupSquare = true
+            self.pointDuMilieuSquare = false
+            self.partieInfSquare = true
+            self.ligneDuBasSquare = true
+        }
+    }
+    
+    
     override func draw(_ rect: CGRect) {
         
         // MARK: - Dessin des carrées
