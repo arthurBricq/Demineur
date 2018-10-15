@@ -20,7 +20,7 @@ class SuperPartiesPresentationViewController: UIViewController {
     // MARK: - Variables
     override var prefersStatusBarHidden: Bool { return true }
     var currentLevelReached: (square: Int, hex: Int, triangle: Int) = (1,0,0)
-    
+    var selectedGame: (level: Int,gameType: GameType)?
     
     // MARK: - Actions
     @IBAction func menuButtonTapped(_ sender: Any) {
@@ -44,6 +44,17 @@ class SuperPartiesPresentationViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.allowsSelection = false 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is SuperPartiesGameViewController {
+            let dest = segue.destination as! SuperPartiesGameViewController
+            // Give the correct game to the destination
+            let numberOfBombs: Int = (selectedGame!.level+1)*100
+            let ratio: CGFloat = 0.3 // % of bombs: ratio = z / (n*m) = z / (n^2)
+            let n: Int = Int(sqrt(Double(numberOfBombs)/Double(ratio)))
+            dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame!.gameType, n: n, m: n, z: numberOfBombs, totalTime: 1000)
+        }
     }
 }
 
@@ -71,36 +82,22 @@ extension SuperPartiesPresentationViewController: UITableViewDelegate, UITableVi
         cell.level = indexPath.row
         cell.currentLevelReached = currentLevelReached
         
+        cell.isUserInteractionEnabled = true
+        
         cell.updateTheAlphas()
         cell.updateTheLines()
         cell.setNeedsDisplay()
         
-        /*
-        
-        if currentLevelReached.square < indexPath.row {
-            cell.squareButton.alpha = 0.4
-            cell.squareButton.isEnabled = false
+        cell.closureToStartGame = { (levelTapped: Int,gameTypeTapped: GameType) -> Void in
+            self.selectedGame = (level: levelTapped, gameType: gameTypeTapped)
+            self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: nil)
         }
-        
-        if currentLevelReached.hex < indexPath.row {
-            cell.hexButton.alpha = 0.4
-            cell.hexButton.isEnabled = false
-        }
-        
-        if currentLevelReached.square < indexPath.row {
-            cell.triangularButton.alpha = 0.4
-            cell.triangularButton.isEnabled = false
-        }
-        */
-        
         
         return cell
     }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let maxLevel = max(currentLevelReached.square, currentLevelReached.hex, currentLevelReached.triangle)
-        return 10 //maxLevel+2
+        return maxLevel+2
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1

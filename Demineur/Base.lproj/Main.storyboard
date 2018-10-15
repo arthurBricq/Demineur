@@ -646,6 +646,7 @@
                         <outlet property="line3" destination="bFa-bz-TXH" id="vwM-4G-tgf"/>
                         <outlet property="line4" destination="JqB-Z4-0EX" id="Bcp-Ti-mJ3"/>
                         <outlet property="tableView" destination="bem-hC-lBR" id="Aq4-zA-5s7"/>
+                        <segue destination="w7e-nc-dz6" kind="show" identifier="StartSuperPartieSegue" id="uKw-XG-diE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCz-Nv-Tx1" userLabel="First Responder" sceneMemberID="firstResponder"/>

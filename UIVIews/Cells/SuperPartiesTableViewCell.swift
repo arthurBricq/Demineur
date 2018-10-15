@@ -19,8 +19,10 @@ class SuperPartiesTableViewCell: UITableViewCell {
     var lineColor: UIColor = UIColor.orange
     var level: Int = 1 
     var currentLevelReached: (square: Int, hex: Int, triangle: Int) = (1,1,1)
-
+    var closureToStartGame: ((Int,GameType)->Void)? // Parameters : level, gameType
+    
     // MARK: - Variables
+    
     private var ligneDuHautSquare: Bool = true
     private var partieSupSquare: Bool = true
     private var pointDuMilieuSquare: Bool = true
@@ -35,6 +37,15 @@ class SuperPartiesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        squareButton.closureToStartGame = { () -> Void in
+            self.closureToStartGame?(self.level,.square)
+        }
+        triangularButton.closureToStartGame = { () -> Void in
+            self.closureToStartGame?(self.level,.triangular)
+        }
+        hexButton.closureToStartGame = { () -> Void in
+            self.closureToStartGame?(self.level,.hexagonal)
+        }
     }
 
     /// EFFECT: will update the alphas of the 3 buttons of the cell. 
@@ -42,28 +53,28 @@ class SuperPartiesTableViewCell: UITableViewCell {
         // Alphas of the squares
         if level == currentLevelReached.square || level < currentLevelReached.square {
             self.squareButton.alpha = 1.0
-            self.squareButton.isUserInteractionEnabled = true
+            self.squareButton.isEnabled = true
         } else {
             self.squareButton.alpha = 0.5
-            self.squareButton.isUserInteractionEnabled = false
+            self.squareButton.isEnabled = false
         }
         
         // Alphas of the hexagones
         if level == currentLevelReached.hex || level < currentLevelReached.hex {
             self.hexButton.alpha = 1.0
-            self.hexButton.isUserInteractionEnabled = true
+            self.hexButton.isEnabled = true
         } else {
             self.hexButton.alpha = 0.5
-            self.hexButton.isUserInteractionEnabled = false
+            self.hexButton.isEnabled = false
         }
         
         // Alphas of the triangles
         if level == currentLevelReached.triangle || level < currentLevelReached.triangle {
             self.triangularButton.alpha = 1.0
-            self.triangularButton.isUserInteractionEnabled = true
+            self.triangularButton.isEnabled = true
         } else {
             self.triangularButton.alpha = 0.5
-            self.triangularButton.isUserInteractionEnabled = false
+            self.triangularButton.isEnabled = false
         }
         
         
@@ -170,5 +181,6 @@ class SuperPartiesTableViewCell: UITableViewCell {
        
         
     }
+    
 
 }

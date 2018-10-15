@@ -8,6 +8,10 @@
 
 import UIKit
 
+
+// TODO: - Activate the pause menu
+// TODO: - Handle the correct zoom behavors
+
 class SuperPartiesGameViewController: UIViewController {
     
     // MARK: - Outlets
@@ -31,7 +35,7 @@ class SuperPartiesGameViewController: UIViewController {
         
         // Instaurer les details techniques
         
-        game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 60, m: 40, z: 100, totalTime: 500)
+//        game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 60, m: 40, z: 100, totalTime: 500)
         transitioningDelegate = nil
         isTheGameStarted.delegate = self
         startANewGame(animatedFromTheRight: false)

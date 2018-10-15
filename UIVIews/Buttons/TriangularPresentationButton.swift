@@ -17,6 +17,7 @@ class TriangularPresentationButton: UIButton {
     @IBInspectable var textColor: UIColor = .black
     @IBInspectable var lineWidth: CGFloat = 1.0
     var number: Int = 0
+    var closureToStartGame: (()->Void)?
     
     // MARK: - FUNCTIONS
     override func draw(_ rect: CGRect) {
@@ -107,5 +108,17 @@ class TriangularPresentationButton: UIButton {
         return false
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.alpha = 0.5
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        UIView.animate(withDuration: 1.0) {
+            self.alpha = 1.0
+        }
+        self.closureToStartGame?()
+    }
 
 }
