@@ -6,6 +6,16 @@
   Copyright © 2018 Arthur BRICQ. All rights reserved.
 */
 
+// MARK: - Noms utilisés dans toutes l'application
+"bonus1name" = "Bonus de temps";
+"bonus2name" = "Bonus de drapeaux";
+"bonus3name" = "Bonus de bombe";
+"bonus4name" = "Bonus de vérification";
+"bonus5name" = "Bonus de vie";
+
+
+
+
 // MARK: - Page du menu
 "key1" = "MODE HISTOIRE";
 "key2" = "MODE INFINI";
@@ -15,5 +25,30 @@
 "key6" = "TUTORIEL";
 
 
+
+
 // MARK: - Page tutoriel
 "key7" = "SOMMAIRE";
+"key8" = "Le jeu" ;
+"key9" = "Les bonus" ;
+"key10" = "Les types de parties" ;
+"key11" = "Les modes de jeu" ;
+"key8bis" = "LE JEU";
+"key9bis" = "LES BONUS";
+"key10bis" = "LES TYPES DE PARTIES";
+"key11bis" = "LES MODES DE JEU";
+// Introduction au geu
+"key12" = "Le principe du jeu est simplissime: il y une grille de cases, où se cachent des bombes. Le but du jeu est de trouver toutes les bombes. Le joueur possède deux actions possibles: " ;
+"key13" = "Ouvrir une case, en tappant dessus." ;
+"key14" = "Marquer une case, en laissant appuyer dessus." ;
+// Comment gagner ?
+"key15" = "Comment gagner ?";
+"key16" = "Pour gagner, il faut marquer toutes les bombes ou bien ouvrir toutes les cases qui n'en sont pas ! Attention, vous disposez d'un nombre limiter de drapeaux (les marqueurs), il faut donc bien réflechir avant de poser vos drapeaux aux risque de les perdre." ;
+"key17" = "Les bombes laissent des indices : sur chaque case, il y a un numéro inscrit. Ce numéro est le nombre de bombes sur les cases voisinnes. C'est si simple que cela !" ;
+// Types de cases
+"key18" = "Cases et voisins";
+"key19" = "Voici les différentes cases présentes dans le jeu, ainsi que leur influence s'il y a une bombe." ;
+// Les bonus
+"key20" = "En jouant, vous gagnez des pièces. Avec cette argent, vous pouvez acheter des bonus dans la boutique ou dans le menu pause et les utiliser durant une partie. " ;
+"key21" = "Les bonus s'utilisent dans la bar des bonus." ;
+

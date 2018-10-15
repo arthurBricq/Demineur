@@ -43,6 +43,8 @@ class ViewOfGame_Hex: UIView {
     
     override func draw(_ rect: CGRect) {
         // hypothesis : 1) w = k * h    2) what matters is the height since h = 2*a
+        // k = sqrt(3)/2
+        // Conclustions: 1 w = k * h = 2 * a * k = sqrt(3) * a  and   2)   h = 2 * a
         
         // pour toutes les cases :
         let h = 2*a // la hauteur

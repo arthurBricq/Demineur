@@ -7,6 +7,18 @@
 */
 
 
+
+// MARK: - Noms utilisés dans toutes l'application
+"bonus1name" = "Bonus de temps";
+"bonus2name" = "Bonus de drapeaux";
+"bonus3name" = "Bonus de bombe";
+"bonus4name" = "Bonus de vérification";
+"bonus5name" = "Bonus de vie";
+
+
+
+
+
 // MARK: - Page du menu
 "key1" = "HISTORY MODE";
 "key2" = "INFINITE GAME";
@@ -17,5 +29,28 @@
 
 
 
+
 // MARK: - Page tutoriel
 "key7" = "Summary";
+"key8" = "The Game";
+"key9" = "Bonus" ;
+"key10" = "Types of rounds" ;
+"key11" = "Game modes" ;
+"key8bis" = "THE GAME";
+"key9bis" = "BONUS";
+"key10bis" = "TYPES OF ROUNDS";
+"key11bis" = "GAME MODES";
+// Première phrase
+"key12" = "The game principle is super easy: there is a grill, and some bombs are hiden inside it. The goal is to find all the bombs, just like in minesweeper." ;
+"key13" = "Ouvrir une case, en tappant dessus." ;
+"key14" = "Marquer une case, en laissant appuyer dessus." ;
+// Comment gagner ?
+"key15" = "How to win ?";
+"key16" = "Pour gagner, il faut marquer toutes les bombes ou bien ouvrir toutes les cases qui n'en sont pas ! " ;
+"key17" = "Les bombes laissent des indices : sur chaque case, il y a un numéro inscrit. Ce numéro est le nombre de bombes sur les cases voisinnes. C'est si simple que cela !" ;
+// Types de cases
+"key18" = "Cases and voisins";
+"key19" = "Voici les différentes cases présentes dans le jeu, ainsi que leur influence s'il y a une bombe." ;
+// Les bonus
+"key20" = "En jouant, vous gagnez des pièces. Avec cette argent, vous pouvez acheter des bonus dans la boutique ou dans le menu pause et les utiliser durant une partie. ";
+"key21" = "Les bonus s'utilisent dans la bar des bonus.";

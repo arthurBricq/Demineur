@@ -1,84 +1,71 @@
 //
-//  HistoryGameViewController.swift
-//  DemineIt
+//  SuperPartiesGameViewController.swift
+//  Demineur
 //
-//  Created by Arthur BRICQ on 12/07/2018.
+//  Created by Arthur BRICQ on 30/08/2018.
 //  Copyright © 2018 Arthur BRICQ. All rights reserved.
-//
+
 
 import UIKit
 
-class HistoryGameViewController: UIViewController {
+class SuperPartiesGameViewController: UIViewController {
     
-    // MARK: - OUTLETS
-    @IBOutlet weak var clockView: ClockView!
+    // MARK: - Outlets
     @IBOutlet weak var flagsLabel: UILabel!
     @IBOutlet weak var flagView: FlagViewDisplay!
     @IBOutlet weak var bombsLabel: UILabel!
     @IBOutlet weak var bombView: BombViewDisplay!
-   
-    // MARK: - VARIABLES
-    override var prefersStatusBarHidden: Bool { return true }
-    var bonusChoiceView: BonusChoiceView?
-    var game: OneGame = OneGame(gameTypeWithNoneCases: .square, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
-    var gameIndex: Int = 1 // Avoir connaissance de l'indice du niveau
-    /// Nombre de bombes qui ont été trouvées par l'utilisateur
-    var numberOfBombs: Int = 0
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    // MARK: - Variables
+    var game: OneGame? 
     var gameState = [[Int]].init()
-    var gameTimer = CountingTimer()
     var viewOfGameSquare: ViewOfGameSquare?
     var viewOfGameHex: ViewOfGame_Hex?
     var viewOfGameTriangular: ViewOfGameTriangular?
-    
-    // MARK: - FUNCTIONS
+    var numberOfBombs: Int = 0
+
+    // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
+        // Instaurer les details techniques
+        
+        game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 60, m: 40, z: 100, totalTime: 500)
         transitioningDelegate = nil
-        isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu.
+        isTheGameStarted.delegate = self
         startANewGame(animatedFromTheRight: false)
+        
+        // Scroll View settings (zoom scales are setUp inside the function "startANewGame")
+        scrollView.delegate = self
+        scrollView.layer.zPosition = -1 // permet de placer la vue du jeu derrières l'interface
+        scrollView.bounces = true // permet de faire rebondir sur les dépassements
+        scrollView.clipsToBounds = false // Permet de faire dépasser le jeu sur tout l'écran de l'iphone
+        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
+        
     }
     
-    func addTheBonusChoiceView() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        let screenW = self.view.frame.width
-        let screenH = self.view.frame.height
-        let dec_h: CGFloat = 20 // decalage horizontal
-        let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
-        let w = screenW - dec_h
-        let h = w/6
-        let size = CGSize(width: w, height: h)
-        let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
-        if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
+        // Terminer d'actualiser la scrollView
+        switch game!.gameType {
+        case .square:
+            scrollView.contentSize = viewOfGameSquare!.frame.size
+        case .hexagonal:
+            scrollView.contentSize = viewOfGameHex!.frame.size
+        case .triangular:
+            scrollView.contentSize = viewOfGameTriangular!.frame.size
+        }
         
-        bonusChoiceView = BonusChoiceView()
-        bonusChoiceView!.backgroundColor = UIColor.clear
-        bonusChoiceView!.progress = 0
-        bonusChoiceView!.frame = CGRect(origin: origin, size: size)
-        bonusChoiceView!.instantiateScrollView()
-        bonusChoiceView!.vcDelegate = self
-        self.view.addSubview(bonusChoiceView!)
-        
+        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
     }
+
     
     func startANewGame(animatedFromTheRight: Bool) {
         
-        // instauration du timer sur l'écran
-        if !game.isTimerAllowed {
-            clockView.isHidden = true
-            gameTimer.stop()
-            gameTimer.delegate = nil
-        } else {
-            clockView.isHidden = false
-            gameTimer.delegate = self
-            gameTimer.timeInterval = 1.0
-        }
-        
         // instauration des drapeaux et des bombes sur l'écran
-        if !game.areNumbersShowed {
+        if !game!.areNumbersShowed {
             flagsLabel.isHidden = true
             flagView.isHidden = true
             bombsLabel.isHidden = true
@@ -90,73 +77,65 @@ class HistoryGameViewController: UIViewController {
             bombView.isHidden = false
         }
         
-        // instauration de la bar des bonus
-        addTheBonusChoiceView()
         
         // Quelques détails relatif aux timer et aux comptage
-        gameTimer.stop()
-        clockView.pourcentage = 0.0
         isTheGameStarted.value = false
-        updateFlags(numberOfFlags: game.numberOfFlag)
-        self.numberOfBombs = 0 
-        
-        // Tailles maximales occupées par la vue :
-        let maxHeight = self.view.bounds.height * 0.65
-        let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.92
-        let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
+        updateFlags(numberOfFlags: game!.numberOfFlag)
+        self.numberOfBombs = 0
         
         removePrecendentViewOfGame()
         
         let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
-        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
+        game!.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
         
-        // Ajouter les vues du jeu
-        if game.gameType == .square {
+        
+        switch game!.gameType {
+        case .square:
+            
             createANewSquareGameStepOne()
             
+            /// Prenons 50 comme 1 côté d'un carré
+            let cote: Int = 50
             let gameView = ViewOfGameSquare()
-            //gameView.layer.borderWidth = 2.0
-            //gameView.layer.borderColor = game.colors.strokeColor.cgColor
-            let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
-            let viewSize = CGSize(width: width, height: height)
-            let origin = animatedFromTheRight ? CGPoint(x: self.view.center.x - width/2 + self.view.frame.width, y: self.view.center.y - height/2) : CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
-            gameView.frame = CGRect(origin: origin, size: viewSize)
-            gameView.backgroundColor = UIColor.clear
-            gameView.n = game.n
-            gameView.m = game.m
+            gameView.n = game!.n
+            gameView.m = game!.m
+            gameView.z = game!.z
             gameView.ratio = 2
+            gameView.frame = CGRect(x: 0, y: 0, width: cote*gameView.m, height: cote*gameView.n)
             gameView.gameState = gameState
-            gameView.delegate = self
-            gameView.option1 = game.option1
-            gameView.option1Time = game.option1Time
-            gameView.option2 = game.option2
-            gameView.option2frequency = game.option2Frequency
-            gameView.isUserInteractionEnabled = true
-            gameView.strokeColor = game.colors.strokeColor
-            gameView.openColor = game.colors.openColor
-            gameView.emptyColor = game.colors.emptyColor
-            gameView.textColor = game.colors.textColor
+            gameView.strokeColor = game!.colors.strokeColor
+            gameView.openColor = game!.colors.openColor
+            gameView.emptyColor = game!.colors.emptyColor
+            gameView.textColor = game!.colors.textColor
+            gameView.option1 = game!.option1
+            gameView.option1Time = game!.option1Time
+            gameView.option2 = game!.option2
+            gameView.option2frequency = game!.option2Frequency
             gameView.layer.masksToBounds = false
-            gameView.numberOfFlags = game.numberOfFlag
-            
+            gameView.numberOfFlags = game!.numberOfFlag
+            // Delegation
+            gameView.delegate = self
             gameView.onPosingFlag = { (test: Bool) -> Void in
-                
                 if test {
                     // Incrémenter le nombre de bombes
                     self.numberOfBombs += 1
                 }
-                
             }
             
             
-            if game.option3 {
-                gameView.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-                gameView.option3Frequency = game.option3Frequency
-                gameView.option3Timer.delegate = gameView
-            }
+            
             
             viewOfGameSquare = gameView
-            self.view.addSubview(viewOfGameSquare!)
+            scrollView.maximumZoomScale = 2.0
+            scrollView.minimumZoomScale = 2 * scrollView.frame.width / gameView.frame.width
+            
+            self.scrollView.addSubview(gameView)
+            
+            if game!.option3 {
+                gameView.option3Timer.start(timeInterval: TimeInterval(game!.option3Time), id: "Option3")
+                gameView.option3Frequency = game!.option3Frequency
+                gameView.option3Timer.delegate = gameView
+            }
             
             if animatedFromTheRight {
                 UIView.animate(withDuration: 0.7) {
@@ -164,20 +143,23 @@ class HistoryGameViewController: UIViewController {
                 }
             }
             
-        } else if game.gameType == .hexagonal {
+        case .hexagonal:
             
             createANewHexGameStepOne() // première étape de la création
             
             let gameView = ViewOfGame_Hex()
-            //gameView.layer.borderWidth = 2.0
-            //gameView.layer.borderColor = UIColor.red.cgColor
-            let center = self.view.center
-            let (w,h) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
-            gameView.frame = CGRect(origin: origin, size: CGSize.init(width: w, height: h))
-            gameView.a = w / (sqrt(3) * CGFloat(game.m))
-            gameView.m = game.m
-            gameView.n = game.n
+            let a: CGFloat = 30
+            let w: CGFloat = sqrt(3)*a // cote de 1 cube
+            
+            gameView.frame = CGRect(x: 0, y: 0, width: CGFloat(game!.m)*w , height: 3/2*a*CGFloat(game!.n))
+            scrollView.contentSize = gameView.frame.size
+            
+            print("taille de la scroll")
+            print(gameView.frame)
+            
+            gameView.a = a
+            gameView.m = game!.m
+            gameView.n = game!.n
             gameView.gameState = gameState
             gameView.backgroundColor = UIColor.clear
             gameView.emptyColor = UIColor.white
@@ -185,98 +167,104 @@ class HistoryGameViewController: UIViewController {
             gameView.strokeColor = UIColor.black
             gameView.lineWidth = 1.0
             gameView.delegate = self
-            gameView.option1 = game.option1
-            gameView.option1Time = game.option1Time
-            gameView.option2 = game.option2
-            gameView.option2frequency = game.option2Frequency
-            gameView.isUserInteractionEnabled = true
-            gameView.strokeColor = game.colors.strokeColor
-            gameView.openColor = game.colors.openColor
-            gameView.emptyColor = game.colors.emptyColor
-            gameView.textColor = game.colors.textColor
+            gameView.option1 = game!.option1
+            gameView.option1Time = game!.option1Time
+            gameView.option2 = game!.option2
+            gameView.option2frequency = game!.option2Frequency
+            gameView.strokeColor = game!.colors.strokeColor
+            gameView.openColor = game!.colors.openColor
+            gameView.emptyColor = game!.colors.emptyColor
+            gameView.textColor = game!.colors.textColor
             gameView.onPosingFlag = { (test: Bool) -> Void in
-                
                 if test {
                     // Incrémenter le nombre de bombes
                     self.numberOfBombs += 1
                 }
-                
             }
             
-            gameView.numberOfFlags = game.numberOfFlag
+            gameView.numberOfFlags = game!.numberOfFlag
             
-            if game.option3 {
-                gameView.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-                gameView.option3Frequency = game.option3Frequency
+            if game!.option3 {
+                gameView.option3Timer.start(timeInterval: TimeInterval(game!.option3Time), id: "Option3")
+                gameView.option3Frequency = game!.option3Frequency
                 gameView.option3Timer.delegate = gameView
             }
             
             viewOfGameHex = gameView
+            self.scrollView.addSubview(viewOfGameHex!)
+            scrollView.maximumZoomScale = 2.0
+            scrollView.minimumZoomScale = 2 * scrollView.frame.width / gameView.frame.width
             
-            self.view.addSubview(viewOfGameHex!)
             
             if animatedFromTheRight {
                 UIView.animate(withDuration: 0.7) {
                     self.viewOfGameHex?.center.x -= self.view.frame.width
                 }
             }
-            
-        } else if game.gameType == .triangular {
+        case .triangular:
             createNewTriangularGameStepOne()
             
             let gameView = ViewOfGameTriangular()
+            let cote: CGFloat = 40 // cote d'un triangle
+            let hauteur = cote * sqrt(3) / 2
             
-            //gameView.layer.borderWidth = 2.0
-            //gameView.layer.borderColor = UIColor.red.cgColor
             
-            let center = self.view.center
-            let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
+            gameView.frame = CGRect(origin: CGPoint.zero, size: CGSize.init(width: CGFloat(game!.m+1)*cote/2, height: hauteur * CGFloat(game!.n)))
             
-            gameView.frame = CGRect(origin: origin, size: CGSize.init(width: w, height: h))
-            gameView.m = game.m
-            gameView.n = game.n
+            gameView.m = game!.m
+            gameView.n = game!.n
             gameView.gameState = gameState
             gameView.backgroundColor = UIColor.clear
-            gameView.emptyColor = game.colors.emptyColor
-            gameView.openColor = game.colors.openColor
-            gameView.strokeColor = game.colors.strokeColor
-            gameView.textColor = game.colors.textColor
+            gameView.emptyColor = game!.colors.emptyColor
+            gameView.openColor = game!.colors.openColor
+            gameView.strokeColor = game!.colors.strokeColor
+            gameView.textColor = game!.colors.textColor
             
             gameView.lineWidth = 1.0
             gameView.delegateVC = self
-            gameView.option1 = game.option1
-            gameView.option1Time = game.option1Time
-            gameView.option2 = game.option2
-            gameView.option2frequency = game.option2Frequency
-            gameView.isUserInteractionEnabled = true
-            gameView.numberOfFlags = game.numberOfFlag
+            gameView.option1 = game!.option1
+            gameView.option1Time = game!.option1Time
+            gameView.option2 = game!.option2
+            gameView.option2frequency = game!.option2Frequency
+            gameView.numberOfFlags = game!.numberOfFlag
             gameView.onPosingFlag = { (test: Bool) -> Void in
-                
                 if test {
                     // Incrémenter le nombre de bombes
                     self.numberOfBombs += 1
                 }
-                
             }
             
-            
             viewOfGameTriangular = gameView
+            self.scrollView.addSubview(viewOfGameTriangular!)
+            scrollView.maximumZoomScale = 2.0
+            scrollView.minimumZoomScale = 2 * scrollView.frame.width / gameView.frame.width
             
-            if game.option3 {
-                gameView.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-                gameView.option3Frequency = game.option3Frequency
+            
+            if game!.option3 {
+                gameView.option3Timer.start(timeInterval: TimeInterval(game!.option3Time), id: "Option3")
+                gameView.option3Frequency = game!.option3Frequency
                 gameView.option3Timer.delegate = gameView
             }
             
-            self.view.addSubview(viewOfGameTriangular!)
+            
             
             if animatedFromTheRight {
                 UIView.animate(withDuration: 0.7) {
                     self.viewOfGameTriangular?.center.x -= self.view.frame.width
                 }
             }
+        
         }
+        
+        
+        
+        
+    }
+   
+    /// Permet d'actualiser l'ecran durant une partie. 
+    func updateFlags(numberOfFlags: Int) {
+        flagsLabel.text = numberOfFlags.description
+        bombsLabel.text = game!.z.description
     }
     
     /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
@@ -298,66 +286,39 @@ class HistoryGameViewController: UIViewController {
     }
     
     func openTheBombs() {
-        if game.gameType == .square {
+        if game!.gameType == .square {
             if viewOfGameSquare != nil {
                 viewOfGameSquare!.returnAllTheCases()
             }
-        } else if game.gameType == .hexagonal {
+        } else if game!.gameType == .hexagonal {
             if viewOfGameHex != nil {
                 viewOfGameHex!.returnAllTheCases()
             }
-        } else if game.gameType == .triangular {
+        } else if game!.gameType == .triangular {
             if viewOfGameTriangular != nil {
                 viewOfGameTriangular!.returnAllTheCases()
             }
         }
     }
     
-    
-    
-    @IBAction func pauseButtonTapped(_ sender: Any) {
-        gameTimer.pause()
-        
-        if game.gameType == .square {
-            viewOfGameSquare?.option3Timer.pause()
-            viewOfGameSquare?.pauseAllOption1Timers()
-        } else if game.gameType == .hexagonal {
-            viewOfGameHex?.option3Timer.pause()
-            viewOfGameHex?.pauseAllOption1Timers()
-        } else if game.gameType == .triangular {
-            viewOfGameTriangular?.option3Timer.pause()
-            viewOfGameTriangular?.pauseAllOption1Timers()
-        }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
-        pauseVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        pauseVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        pauseVC.pausedGameViewController = self
-        self.present(pauseVC, animated: true, completion: nil)
-    }
-    
-    
-    
-    func updateFlags(numberOfFlags: Int) {
-        flagsLabel.text = numberOfFlags.description
-        bombsLabel.text = game.z.description
-    }
-    
 }
 
+
+
 // MARK: - Creation d'une nouvelle partie
-extension HistoryGameViewController {
+// Ces fontions vont modifier le gameState, qui sera ensuite envoyé aux gameView.
+extension SuperPartiesGameViewController {
     
     ///// SQUARE
+    /// Cette fonction est appelée au tout début d'une partie, avant que le joueur ne tape sur l'ecran pour ouvrir la premiere case.
     func createANewSquareGameStepOne() {
-        gameState = createEmptySquareGameState(n: game.n, m: game.m)
-        positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
-        
+        gameState = createEmptySquareGameState(n: game!.n, m: game!.m)
+        positionNoneCaseSquare(noneCases: game!.noneCasesPosition, in: &gameState)
     }
     
+    /// Cette fonction est appelée après que le joueur est tapé sur le première case qu'il souhaite ouvrir.
     func updateSquareGame(withFirstTouched touch: (x: Int, y: Int)) {
-        positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
+        positionBombsSquare(in: &gameState, numberOfBombs: game!.z, withFirstTouched: (touch.x,touch.y))
         createNumbersToDisplaySquare(in: &gameState)
         viewOfGameSquare!.gameState = gameState
         viewOfGameSquare!.updateAllNumbers()
@@ -365,12 +326,12 @@ extension HistoryGameViewController {
     
     ///// HEX
     func createANewHexGameStepOne() {
-        gameState = createEmptyHexGameState(n: game.n, m: game.m)
-        positionNoneCaseHex(noneCases: game.noneCasesPosition, gameState: &gameState)
+        gameState = createEmptyHexGameState(n: game!.n, m: game!.m)
+        positionNoneCaseHex(noneCases: game!.noneCasesPosition, gameState: &gameState)
     }
     
     func updateHexGameState(withFirstTouched touch: (x: Int, y: Int)) {
-        positionBombsHex(gameState: &gameState, z: game.z, withFirstTouched: (touch.x, touch.y))
+        positionBombsHex(gameState: &gameState, z: game!.z, withFirstTouched: (touch.x, touch.y))
         createNumbersToDisplayHex(gameState: &gameState)
         viewOfGameHex!.gameState = gameState // on actualise la nouvelle carte du jeu
         viewOfGameHex!.updateAllNumbers()
@@ -378,55 +339,37 @@ extension HistoryGameViewController {
     
     ///// TRIANGLE
     func createNewTriangularGameStepOne() {
-        gameState = createEmptySquareGameState(n: game.n, m: game.m)
-        positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
+        gameState = createEmptySquareGameState(n: game!.n, m: game!.m)
+        positionNoneCaseSquare(noneCases: game!.noneCasesPosition, in: &gameState)
     }
     
     func updateTriangularGameStepTwo(withFirstTouched touch: (x: Int, y: Int)) {
-        positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y), isTriangular: true)
+        positionBombsSquare(in: &gameState, numberOfBombs: game!.z, withFirstTouched: (touch.x,touch.y), isTriangular: true)
         createNumbersToDisplayTriangle(in: &gameState)
         viewOfGameTriangular!.gameState = gameState
         viewOfGameTriangular!.updateAllNumbers()
     }
-}
-
-
-extension HistoryGameViewController: variableCanCallGameVC {
     
-    /// cette fonction est appelée lorsque l'utilisateur tape sur la première case : cela apelle cette fonction immédiatement avec le touches began, puis la partie commence comme il le faut grâce au touchesEnded.
-    func createTheGame(withFirstTouched touch: (x: Int, y: Int)) {
-        if game.gameType == .hexagonal {
-            updateHexGameState(withFirstTouched: (touch.x,touch.y))
-        } else if game.gameType == .square {
-            updateSquareGame(withFirstTouched: (touch.x,touch.y))
-        } else if game.gameType == .triangular {
-            updateTriangularGameStepTwo(withFirstTouched: (touch.x,touch.y))
-        }
-        
-        bonusChoiceView!.activateBonusButtons()
-        gameTimer.start(timeInterval: 1.0, id: "Clock")
-        
-    }
+    
 }
 
-// MARK: - Quand la partie est terminée
-extension HistoryGameViewController: GameViewCanCallVC {
+// MARK: - Délégation pour le gameView (fin de la partie)
+extension SuperPartiesGameViewController: GameViewCanCallVC {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
         Vibrate().vibrate(style: .heavy)
         
-        gameTimer.pause()
         
-        if game.gameType == .hexagonal {
+        if game!.gameType == .hexagonal {
             viewOfGameHex!.isUserInteractionEnabled = false
             viewOfGameHex!.option3Timer.stop()
             viewOfGameHex?.pauseAllOption1Timers()
-        } else if game.gameType == .square {
+        } else if game!.gameType == .square {
             viewOfGameSquare!.isUserInteractionEnabled = false
             viewOfGameSquare!.option3Timer.stop()
             viewOfGameSquare?.pauseAllOption1Timers()
-        } else if game.gameType == .triangular {
+        } else if game!.gameType == .triangular {
             viewOfGameTriangular!.isUserInteractionEnabled = false
             viewOfGameTriangular!.option3Timer.stop()
             viewOfGameTriangular?.pauseAllOption1Timers()
@@ -435,7 +378,6 @@ extension HistoryGameViewController: GameViewCanCallVC {
         if didTapABomb || didTimeEnd {
             addTheMessage(didTapABomb: didTapABomb)
         } else {
-            gameTimer.stop()
             
             if !win {
                 openTheBombs()
@@ -449,7 +391,6 @@ extension HistoryGameViewController: GameViewCanCallVC {
             vc.win = win
             vc.transitioningDelegate = self
             vc.didTapABomb = didTapABomb
-            vc.precedentGameIndex = gameIndex
             self.present(vc, animated: true, completion: nil)
         }
         
@@ -459,149 +400,47 @@ extension HistoryGameViewController: GameViewCanCallVC {
     func updateFlagsDisplay(numberOfFlags: Int) {
         updateFlags(numberOfFlags: numberOfFlags)
     }
-}
-
-// MARK: - Pour le chronomètre
-extension HistoryGameViewController: CountingTimerProtocol {
     
-    func timerFires(id: String) {
-        // In this case, the id does not matter at all.
-        // This method is called each second.
-        
-        if id == "Clock" {
-            
-            if game.isTimerAllowed {
-                let pourcentage: CGFloat = gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
-                
-                clockView.pourcentage = pourcentage // et actualisation via un didSet
-                
-                if pourcentage == 1 {
-                    gameTimer.pause()
-                    gameOver(win: false, didTapABomb: false, didTimeEnd: true)
-                }
-            }
-        }
-    }
+    
 }
 
 
-/// BONUS
-// MARK: - Actions des boutons bonus via une délégation.
-extension HistoryGameViewController: BonusButtonsCanCallVC {
-    func tempsTapped() { // il faut ajouter du temps
-        
-        if bonus.temps > 0 {
-            bonus.addTemps(amount: -1)
-            bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-        
-        let timeLevel: Int = levelOfBonus.giveTheLevelOfBonus(forIndex: 0)
-        let values: [CGFloat] = [15,30,45,60] // temps à rajouter
-        gameTimer.counter -= values[timeLevel]
-    }
+
+// MARK: - Délégation pour les variables (commencer une partie)
+extension SuperPartiesGameViewController: variableCanCallGameVC {
     
-    func drapeauTapped() { // il faut ajouter des drapeaux
-        
-        if bonus.drapeau > 0 {
-            bonus.addDrapeau(amount: -1)
-            bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-        
-        let drapeauLevel = levelOfBonus.giveTheLevelOfBonus(forIndex: 1)
-        let values: [Int] = [1,2,3] // drapeaux à ajouter
-        // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
-        if game.gameType == .hexagonal {
-            viewOfGameHex?.numberOfFlags += values[drapeauLevel]
-        } else if game.gameType == .square {
-            viewOfGameSquare?.numberOfFlags += values[drapeauLevel]
-        } else if game.gameType == .triangular {
-            viewOfGameTriangular?.numberOfFlags += values[drapeauLevel]
-        }
-        
-    }
-    
-    
-    
-    //// A FAIRE ////
-    func bombeTapped() { // il faut marquer des bombes
-        
-        if bonus.bombe > 0 {
-            bonus.addBomb(amount: -1)
-            bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-                
-        switch levelOfBonus.bombe {
-        case 0:
-            // 50 % de chance
-            let tmp = random(100)
-            if tmp < 50 {
-                // return
-            }
-            // marquer une bombe non marquée
-            
-            if game.gameType == .hexagonal {
-                viewOfGameHex?.markARandomBomb()
-            } else if game.gameType == .square {
-                viewOfGameSquare?.markARandomBomb()
-            } else if game.gameType == .triangular {
-                viewOfGameTriangular?.markARandomBomb()
-            }
-            
-        default:
-            break
+    /// cette fonction est appelée lorsque l'utilisateur tape sur la première case : cela apelle cette fonction immédiatement avec le touches began, puis la partie commence comme il le faut grâce au touchesEnded.
+    func createTheGame(withFirstTouched touch: (x: Int, y: Int)) {
+        if game!.gameType == .hexagonal {
+            updateHexGameState(withFirstTouched: (touch.x,touch.y))
+        } else if game!.gameType == .square {
+            updateSquareGame(withFirstTouched: (touch.x,touch.y))
+        } else if game!.gameType == .triangular {
+            updateTriangularGameStepTwo(withFirstTouched: (touch.x,touch.y))
         }
         
         
         
     }
-    
-    func vieTapped() { // il faut rajouter une vie
-        if bonus.vie > 0 {
-            bonus.addVie(amount: -1)
-            bonusChoiceView!.updateTheNumberLabels()
+}
+
+
+// MARK: - Scroll View
+extension SuperPartiesGameViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView?
+    {
+        if game!.gameType == .square {
+            return viewOfGameSquare
+        } else if game!.gameType == .triangular {
+            return viewOfGameTriangular
         } else {
-            return
+            return viewOfGameHex!
         }
     }
-    
-    
-    
-    func verificationTapped() { // il faut verifier les drapeaux posée
-        if bonus.verification > 0 {
-            bonus.addVerification(amount: -1)
-            bonusChoiceView!.updateTheNumberLabels()
-            
-            switch game.gameType {
-            case .square:
-                viewOfGameSquare?.verificationBonusFunc()
-                
-            case .hexagonal:
-                viewOfGameHex?.verificationBonusFunc()
-                
-            case .triangular:
-                viewOfGameTriangular?.verificationBonusFunc()
-                
-            }
-            
-        } else {
-            return
-        }
-        
-        
-        
-    }
-    
-    
 }
 
 // MARK: - Gere les transitions
-extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
+extension SuperPartiesGameViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -628,7 +467,7 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
             })
             
             UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.7, animations: {
-                switch self.game.gameType {
+                switch self.game!.gameType {
                 case .square:
                     self.viewOfGameSquare?.center.x -= self.view.frame.width
                 case .hexagonal:
@@ -656,7 +495,7 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
 }
 
 // MARK: - PARTIE POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
-extension HistoryGameViewController {
+extension SuperPartiesGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
     func addTheMessage(didTapABomb: Bool) {
@@ -668,7 +507,6 @@ extension HistoryGameViewController {
             if money.getCurrentValue() > 0 {
                 messageTwo(didTapABomb: didTapABomb)
             } else {
-                self.gameTimer.stop()
                 self.openTheBombs()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
@@ -678,7 +516,6 @@ extension HistoryGameViewController {
                 vc.win = false
                 vc.transitioningDelegate = self
                 vc.didTapABomb = didTapABomb
-                vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             }
         }
@@ -707,9 +544,8 @@ extension HistoryGameViewController {
         message.layer.borderWidth = 2.0
         
         let topSpace: CGFloat = 8
-        let decH: CGFloat = 10
         let verticalSeparator: CGFloat = 15
-        let width = widthForThePopover() - decH
+        let width = self.view.frame.width * 0.8
         let heartCote: CGFloat = width/10
         
         // Ajout du nombre de coeurs
@@ -757,7 +593,7 @@ extension HistoryGameViewController {
             var viewToRemove: BombView?
             var viewOfGame: UIView?
             
-            switch self.game.gameType {
+            switch self.game!.gameType {
             case .square:
                 viewOfGame = self.viewOfGameSquare
             case .hexagonal:
@@ -776,9 +612,6 @@ extension HistoryGameViewController {
                         }
                     }
                 }
-            } else {
-                self.gameTimer.counter = 3*self.game.totalTime/4
-                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -804,24 +637,23 @@ extension HistoryGameViewController {
                     
                     blurView.removeFromSuperview()
                     viewToRemove?.removeFromSuperview()
-                    self.gameTimer.play()
                     
-                    if self.game.gameType == .hexagonal {
+                    if self.game!.gameType == .hexagonal {
                         self.viewOfGameHex!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        if self.game!.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game!.option3Time), id: "Option3")
                         }
                         self.viewOfGameHex?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .square {
+                    } else if self.game!.gameType == .square {
                         self.viewOfGameSquare!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        if self.game!.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game!.option3Time), id: "Option3")
                         }
                         self.viewOfGameSquare?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .triangular {
+                    } else if self.game!.gameType == .triangular {
                         self.viewOfGameTriangular!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        if self.game!.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game!.option3Time), id: "Option3")
                         }
                         self.viewOfGameTriangular?.unPauseAllOption1Timers()
                     }
@@ -842,7 +674,6 @@ extension HistoryGameViewController {
                 blurView.alpha = 0
             }, completion: { (_) in
                 blurView.removeFromSuperview()
-                self.gameTimer.stop()
                 self.openTheBombs()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
@@ -852,7 +683,6 @@ extension HistoryGameViewController {
                 vc.win = false
                 vc.transitioningDelegate = self
                 vc.didTapABomb = didTapABomb
-                vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             })
             
@@ -897,7 +727,7 @@ extension HistoryGameViewController {
         let topSpace: CGFloat = 8
         let decH: CGFloat = 10
         let verticalSeparator: CGFloat = 15
-        let width = widthForThePopover() - decH
+        let width = self.view.frame.width * 0.8
         let coinCote: CGFloat = width/10
         
         // Ajout du nombre de pieces
@@ -942,7 +772,7 @@ extension HistoryGameViewController {
             var viewToRemove: BombView?
             var viewOfGame: UIView?
             
-            switch self.game.gameType {
+            switch self.game!.gameType {
             case .square:
                 viewOfGame = self.viewOfGameSquare
             case .hexagonal:
@@ -961,9 +791,6 @@ extension HistoryGameViewController {
                         }
                     }
                 }
-            } else {
-                self.gameTimer.counter = 3*self.game.totalTime/4
-                self.clockView.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -989,24 +816,23 @@ extension HistoryGameViewController {
                     
                     blurView.removeFromSuperview()
                     viewToRemove?.removeFromSuperview()
-                    self.gameTimer.play()
                     
-                    if self.game.gameType == .hexagonal {
+                    if self.game!.gameType == .hexagonal {
                         self.viewOfGameHex!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        if self.game!.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game!.option3Time), id: "Option3")
                         }
                         self.viewOfGameHex?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .square {
+                    } else if self.game!.gameType == .square {
                         self.viewOfGameSquare!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        if self.game!.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game!.option3Time), id: "Option3")
                         }
                         self.viewOfGameSquare?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .triangular {
+                    } else if self.game!.gameType == .triangular {
                         self.viewOfGameTriangular!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
+                        if self.game!.option3 {
+                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game!.option3Time), id: "Option3")
                         }
                         self.viewOfGameTriangular?.unPauseAllOption1Timers()
                     }
@@ -1026,8 +852,6 @@ extension HistoryGameViewController {
                 blurView.alpha = 0
             }, completion: { (_) in
                 blurView.removeFromSuperview()
-                self.gameTimer.stop()
-                self.openTheBombs()
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
                 vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -1036,7 +860,6 @@ extension HistoryGameViewController {
                 vc.win = false
                 vc.transitioningDelegate = self
                 vc.didTapABomb = didTapABomb
-                vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             })
             
@@ -1062,11 +885,11 @@ extension HistoryGameViewController {
         
         var toReturn: CGFloat = 100
         
-        if game.gameType == .square {
+        if game!.gameType == .square {
             toReturn = viewOfGameSquare!.frame.width
-        } else if game.gameType == .hexagonal {
+        } else if game!.gameType == .hexagonal {
             toReturn = viewOfGameHex!.frame.width
-        } else if game.gameType == .triangular {
+        } else if game!.gameType == .triangular {
             toReturn = viewOfGameTriangular!.frame.width
         }
         
@@ -1075,4 +898,3 @@ extension HistoryGameViewController {
     }
     
 }
-

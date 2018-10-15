@@ -28,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         localScores.getCurrentValue() // on récupère tous les scores du joueur.
         themesManager.getCurrentValue() // on récupère les thèmes de couleurs ...
         
-
-        
         reglages.displayOptions()
         localScores.displayTheLocalScores()
         themesManager.displayCurrentThemes()
@@ -43,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /// A faire lors du premier appel de l'application 
         
         //themesManager.initiateUnlockedThemes()
-        initiateANewDevice(argent: 1000000, lives: 0, level: 20)
+        initiateANewDevice(argent: 10000, lives: 0, level: 20)
         
         
         

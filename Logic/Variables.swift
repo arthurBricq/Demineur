@@ -324,7 +324,7 @@ let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .
 
 
 
-
+/// Cette classe permet d'initier les parties. Il y a une variable globale de communication, qui possède un appel de fonction via une delegation.
 class IsTheGameStarted {
     var value: Bool = false
     

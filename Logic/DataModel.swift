@@ -253,7 +253,12 @@ class LocalScoresManager {
         for score in allScores {
             sum += score.level
         }
-        return sum/allScores.count
+        if allScores.count != 0 {
+            return sum/allScores.count
+        } else {
+            return 1
+        }
+        
     }
     
     var averageNumberOfBombs: Int {
@@ -261,7 +266,11 @@ class LocalScoresManager {
         for score in allScores {
             sum += score.numberOfBombs
         }
-        return sum/allScores.count
+        if allScores.count != 0 {
+            return sum/allScores.count
+        } else {
+            return 1
+        }
     }
     
     var totalNumberOfBombs: Int {

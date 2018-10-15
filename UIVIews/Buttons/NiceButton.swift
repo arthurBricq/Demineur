@@ -12,7 +12,8 @@ import UIKit
 class NiceButton: UIButton {
     
     @IBInspectable var color: UIColor = colorForRGB(r: 94, g: 94, b: 94) { didSet { updateText() } }
-    
+    @IBInspectable var textColor: UIColor = colorForRGB(r: 66, g: 66, b: 66) { didSet { updateText() } }
+
     @IBInspectable var lineWidth: CGFloat = 1.0
     
     @IBInspectable var text: String = "" { didSet { updateText() } }
@@ -33,6 +34,7 @@ class NiceButton: UIButton {
     
     func updateText() {
         self.setTitle(text, for: .normal)
+        self.setTitleColor(textColor, for: .normal)
         self.titleLabel!.font = UIFont(name: "PingFangSC-Regular", size: 15)
         self.tintColor = color
     }

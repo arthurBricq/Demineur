@@ -25,6 +25,8 @@ protocol CountingTimerProtocol {
 protocol LimitedTimerProtocol {
     func timeLimitReached(id: String)
 }
+
+/// Permet à la variable 'isTheGameStarted' (variable globale) de créer une partie après qu'une case ait été tapée.
 protocol variableCanCallGameVC {
     func createTheGame(withFirstTouched: (x: Int, y: Int))
 }
