@@ -117,6 +117,8 @@ class WinLooseViewController: UIViewController {
             self.performSegue(withIdentifier: "BackToInfinitePresentation", sender: nil)
         } else if precedentViewController is HistoryGameViewController {
             self.performSegue(withIdentifier: "BackToHistoryPresentation", sender: nil)
+        } else if precedentViewController is SuperPartiesGameViewController {
+            self.performSegue(withIdentifier: "BackToSuperPartiesPresentation", sender: nil)
         }
     }
     

@@ -1440,6 +1440,7 @@
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToHistoryPresentation" unwindAction="unwindToHistoryPresentationWithSegue:" id="1pp-TJ-cdv"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="GoToNextLevel" unwindAction="unwindToHistoryGameViewControllerWithSegue:" id="qJC-CT-7Hx"/>
                         <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToInfinitePresentation" unwindAction="unwindToInfinitePresentationWithSegue:" id="tNA-gg-7AB"/>
+                        <segue destination="dj3-ad-PN6" kind="unwind" identifier="BackToSuperPartiesPresentation" unwindAction="unwindToSuperPartiesPresentationWithSegue:" id="Vmy-Ns-BR8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LMt-rR-zEa" userLabel="First Responder" sceneMemberID="firstResponder"/>
