@@ -146,15 +146,37 @@ class PauseViewController: UIViewController {
             
             
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
+        
+        } else if pausedGameViewController is SuperPartiesGameViewController {
+            let gameViewController = pausedGameViewController as! SuperPartiesGameViewController
             
             
+            if gameViewController.game!.gameType == .square {
+                gameViewController.viewOfGameSquare?.option3Timer.play()
+                gameViewController.viewOfGameSquare?.unPauseAllOption1Timers()
+            } else if gameViewController.game!.gameType == .hexagonal {
+                gameViewController.viewOfGameHex?.option3Timer.play()
+                gameViewController.viewOfGameHex?.unPauseAllOption1Timers()
+            } else if gameViewController.game!.gameType == .triangular {
+                gameViewController.viewOfGameTriangular?.option3Timer.play()
+                gameViewController.viewOfGameTriangular?.unPauseAllOption1Timers()
+            }
             
+            
+            // TODO: update the number of the bonus bar 
         }
+        
+        
+        
+        
+        
+        
         dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func restartButtonTapped(_ sender: Any) {
+        
         if pausedGameViewController is InfiniteGameViewController {
             let gameViewController = pausedGameViewController as! InfiniteGameViewController
             gameViewController.restartTheGame()
@@ -163,19 +185,25 @@ class PauseViewController: UIViewController {
             gameViewController.gameTimer.play()
             gameViewController.removePrecendentViewOfGame()
             gameViewController.startANewGame(animatedFromTheRight: false)
+        } else if pausedGameViewController is SuperPartiesGameViewController {
+            let gameViewController = pausedGameViewController as! SuperPartiesGameViewController
+            gameViewController.restartTheGame()
         }
         self.dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func menuButtonTapped(_ sender: Any) {
+        
         // retour au menu
         if pausedGameViewController is InfiniteGameViewController {
             self.performSegue(withIdentifier: "BackToInfinitePresentation", sender: nil)
         } else if pausedGameViewController is HistoryGameViewController {
             self.performSegue(withIdentifier: "BackToHistoryPresentation", sender: nil)
+        } else if pausedGameViewController is SuperPartiesGameViewController {
+            self.performSegue(withIdentifier: "BackToSuperPartiesPresentation", sender: nil)
         }
-        
+    
     }
     
     @IBAction func vibrationButtonTapped(_ sender: Any) {

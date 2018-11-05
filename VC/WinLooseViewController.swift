@@ -117,6 +117,8 @@ class WinLooseViewController: UIViewController {
             self.performSegue(withIdentifier: "BackToInfinitePresentation", sender: nil)
         } else if precedentViewController is HistoryGameViewController {
             self.performSegue(withIdentifier: "BackToHistoryPresentation", sender: nil)
+        } else if precedentViewController is SuperPartiesGameViewController {
+            self.performSegue(withIdentifier: "BackToSuperPartiesPresentation", sender: nil)
         }
     }
     
@@ -131,7 +133,11 @@ class WinLooseViewController: UIViewController {
             gameViewController.gameTimer.play()
             gameViewController.removePrecendentViewOfGame()
             gameViewController.startANewGame(animatedFromTheRight: false)
+        } else if precedentViewController is SuperPartiesGameViewController {
+            let gameViewController = precedentViewController as! SuperPartiesGameViewController
+            gameViewController.restartTheGame()
         }
+        
         self.dismiss(animated: true, completion: nil)
     }
     

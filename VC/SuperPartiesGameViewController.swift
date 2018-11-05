@@ -22,20 +22,46 @@ class SuperPartiesGameViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - Variables
-    var game: OneGame? 
+    override var prefersStatusBarHidden: Bool { return true }
+    var game: OneGame?
     var gameState = [[Int]].init()
     var viewOfGameSquare: ViewOfGameSquare?
     var viewOfGameHex: ViewOfGame_Hex?
     var viewOfGameTriangular: ViewOfGameTriangular?
     var numberOfBombs: Int = 0
 
+    // MARK: - Actions
+    
+    @IBAction func pauseButtonTapped(_ sender: Any) {
+        
+        
+        if game!.gameType == .square {
+            viewOfGameSquare?.option3Timer.pause()
+            viewOfGameSquare?.pauseAllOption1Timers()
+        } else if game!.gameType == .hexagonal {
+            viewOfGameHex?.option3Timer.pause()
+            viewOfGameHex?.pauseAllOption1Timers()
+        } else if game!.gameType == .triangular {
+            viewOfGameTriangular?.option3Timer.pause()
+            viewOfGameTriangular?.pauseAllOption1Timers()
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
+        pauseVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        pauseVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        pauseVC.pausedGameViewController = self
+        self.present(pauseVC, animated: true, completion: nil)
+        
+    }
+
+    
+    
     // MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Instaurer les details techniques
-        
-//        game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 60, m: 40, z: 100, totalTime: 500)
         transitioningDelegate = nil
         isTheGameStarted.delegate = self
         startANewGame(animatedFromTheRight: false)
@@ -81,7 +107,6 @@ class SuperPartiesGameViewController: UIViewController {
             bombView.isHidden = false
         }
         
-        
         // Quelques détails relatif aux timer et aux comptage
         isTheGameStarted.value = false
         updateFlags(numberOfFlags: game!.numberOfFlag)
@@ -91,7 +116,6 @@ class SuperPartiesGameViewController: UIViewController {
         
         let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
         game!.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
-        
         
         switch game!.gameType {
         case .square:
@@ -260,9 +284,12 @@ class SuperPartiesGameViewController: UIViewController {
         
         }
         
-        
-        
-        
+    }
+    
+    /// This function restarts the current game
+    func restartTheGame() {
+        removePrecendentViewOfGame()
+        startANewGame(animatedFromTheRight: false)
     }
    
     /// Permet d'actualiser l'ecran durant une partie. 
@@ -274,7 +301,6 @@ class SuperPartiesGameViewController: UIViewController {
     /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
     func removePrecendentViewOfGame()
     {
-        
         if viewOfGameSquare != nil {
             viewOfGameSquare?.removeFromSuperview()
         }
@@ -364,7 +390,6 @@ extension SuperPartiesGameViewController: GameViewCanCallVC {
         
         Vibrate().vibrate(style: .heavy)
         
-        
         if game!.gameType == .hexagonal {
             viewOfGameHex!.isUserInteractionEnabled = false
             viewOfGameHex!.option3Timer.stop()
@@ -382,6 +407,7 @@ extension SuperPartiesGameViewController: GameViewCanCallVC {
         if didTapABomb || didTimeEnd {
             addTheMessage(didTapABomb: didTapABomb)
         } else {
+            
             
             if !win {
                 openTheBombs()
@@ -423,7 +449,7 @@ extension SuperPartiesGameViewController: variableCanCallGameVC {
             updateTriangularGameStepTwo(withFirstTouched: (touch.x,touch.y))
         }
         
-        
+        // TODO : Activate the bonus bar
         
     }
 }
@@ -902,3 +928,5 @@ extension SuperPartiesGameViewController {
     }
     
 }
+
+// TODO: add extensions for the bonus bar

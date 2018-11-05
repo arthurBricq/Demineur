@@ -27,6 +27,33 @@ class SuperPartiesPresentationViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    /// Unwind segue to come back nicely
+    @IBAction func unwindToSuperpartiesPresentation(segue: UIStoryboardSegue) {
+        // retour aux niveaux
+    }
+    
+    /// fonction appelée lorsque le unwind est fait
+    override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
+        tableView.reloadData()
+        
+        return UIStoryboardSegue(identifier: identifier, source: fromViewController, destination: toViewController) {
+            let fromView = fromViewController.view!
+            let toView = toViewController.view!
+            if let containerView = fromView.superview {
+                toView.frame = fromView.frame
+                toView.alpha = 0
+                containerView.addSubview(toView)
+                
+                UIView.animate(withDuration: 1, animations: {
+                    toView.alpha = 1
+                }, completion: { (_) in
+                    toView.removeFromSuperview()
+                    self.dismiss(animated: false, completion: nil)
+                })
+            }
+        }
+    }
+    
     
     // MARK: - Functions
     override func viewDidLoad() {

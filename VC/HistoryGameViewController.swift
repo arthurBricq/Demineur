@@ -67,12 +67,13 @@ class HistoryGameViewController: UIViewController {
     func startANewGame(animatedFromTheRight: Bool) {
         
         // instauration du timer sur l'écran
+        gameTimer.stop()
         if !game.isTimerAllowed {
             clockView.isHidden = true
-            gameTimer.stop()
             gameTimer.delegate = nil
         } else {
             clockView.isHidden = false
+            clockView.pourcentage = 0.0
             gameTimer.delegate = self
             gameTimer.timeInterval = 1.0
         }
@@ -93,9 +94,7 @@ class HistoryGameViewController: UIViewController {
         // instauration de la bar des bonus
         addTheBonusChoiceView()
         
-        // Quelques détails relatif aux timer et aux comptage
-        gameTimer.stop()
-        clockView.pourcentage = 0.0
+        // Quelques détails
         isTheGameStarted.value = false
         updateFlags(numberOfFlags: game.numberOfFlag)
         self.numberOfBombs = 0 

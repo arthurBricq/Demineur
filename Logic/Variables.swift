@@ -14,7 +14,6 @@ import UIKit
 
 // MARK: - Definition des parties
 
-
 enum GameType {
     case square
     case hexagonal
@@ -248,9 +247,9 @@ class OneGame  {
 
 // MARK: - Mode Histoire
 
-let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 7, z: 10, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 12, m: 9, z: 15, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 14, m: 10, z: 10, totalTime: 60),
+let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 7, z: 10, totalTime: 90),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 12, m: 8, z: 15, totalTime: 90),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 13, z: 10, totalTime: 90),
                                 
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 8, m: 11, z: 4, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 11, z: 4, totalTime: 60),
@@ -384,6 +383,7 @@ struct PackagesDescription {
     let prix: Double
     let amountOfCoins: Int
 }
+
 let allPacks: [PackagesDescription] = [
     PackagesDescription(size: .small, description: "Achetez X pièces", prix: 0.99, amountOfCoins: 1),
     PackagesDescription(size: .medium, description: "Achetez une bourse de X pièces", prix: 2.99, amountOfCoins: 10),
