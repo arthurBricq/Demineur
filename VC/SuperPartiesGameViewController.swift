@@ -9,8 +9,21 @@
 import UIKit
 
 
-// TODO: - Activate the pause menu
-// TODO: - Handle the correct zoom behavors
+
+
+/*
+ 
+ Disposition of boxes:
+ - The widht is the limiting dimension of the of those games
+ - It means game has to be on a vertical scale, as the horizontal number of case is 'fixed'
+ - It also means that the value of m is predefined (see in the SuperPartiesPresentationViewController)
+ 
+ 
+ 
+ 
+ 
+ 
+ */
 
 class SuperPartiesGameViewController: UIViewController {
     
@@ -66,7 +79,8 @@ class SuperPartiesGameViewController: UIViewController {
         isTheGameStarted.delegate = self
         startANewGame(animatedFromTheRight: false)
         
-        // Scroll View settings (zoom scales are setUp inside the function "startANewGame")
+        // Scroll View settings
+        // (zoom scales are setUp inside the function "startANewGame")
         scrollView.delegate = self
         scrollView.layer.zPosition = -1 // permet de placer la vue du jeu derrières l'interface
         scrollView.bounces = true // permet de faire rebondir sur les dépassements
@@ -77,20 +91,8 @@ class SuperPartiesGameViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // Terminer d'actualiser la scrollView
-        switch game!.gameType {
-        case .square:
-            scrollView.contentSize = viewOfGameSquare!.frame.size
-        case .hexagonal:
-            scrollView.contentSize = viewOfGameHex!.frame.size
-        case .triangular:
-            scrollView.contentSize = viewOfGameTriangular!.frame.size
-        }
-        
-        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
+        updateScrollViewDisplay()
     }
-
     
     func startANewGame(animatedFromTheRight: Bool) {
         
@@ -150,12 +152,9 @@ class SuperPartiesGameViewController: UIViewController {
                 }
             }
             
-            
-            
-            
             viewOfGameSquare = gameView
-            scrollView.maximumZoomScale = 2.0
-            scrollView.minimumZoomScale = 2 * scrollView.frame.width / gameView.frame.width
+            
+            
             
             self.scrollView.addSubview(gameView)
             
@@ -220,9 +219,6 @@ class SuperPartiesGameViewController: UIViewController {
             
             viewOfGameHex = gameView
             self.scrollView.addSubview(viewOfGameHex!)
-            scrollView.maximumZoomScale = 2.0
-            scrollView.minimumZoomScale = 2 * scrollView.frame.width / gameView.frame.width
-            
             
             if animatedFromTheRight {
                 UIView.animate(withDuration: 0.7) {
@@ -261,20 +257,15 @@ class SuperPartiesGameViewController: UIViewController {
                     self.numberOfBombs += 1
                 }
             }
-            
             viewOfGameTriangular = gameView
-            self.scrollView.addSubview(viewOfGameTriangular!)
-            scrollView.maximumZoomScale = 2.0
-            scrollView.minimumZoomScale = 2 * scrollView.frame.width / gameView.frame.width
             
+            self.scrollView.addSubview(viewOfGameTriangular!)
             
             if game!.option3 {
                 gameView.option3Timer.start(timeInterval: TimeInterval(game!.option3Time), id: "Option3")
                 gameView.option3Frequency = game!.option3Frequency
                 gameView.option3Timer.delegate = gameView
             }
-            
-            
             
             if animatedFromTheRight {
                 UIView.animate(withDuration: 0.7) {
@@ -296,6 +287,32 @@ class SuperPartiesGameViewController: UIViewController {
     func updateFlags(numberOfFlags: Int) {
         flagsLabel.text = numberOfFlags.description
         bombsLabel.text = game!.z.description
+    }
+    
+    func updateScrollViewDisplay() {
+        
+        
+        // Terminer d'actualiser la scrollView
+        switch game!.gameType {
+        case .square:
+            scrollView.contentSize = viewOfGameSquare!.frame.size
+        case .hexagonal:
+            scrollView.contentSize = viewOfGameHex!.frame.size
+        case .triangular:
+            scrollView.contentSize = viewOfGameTriangular!.frame.size
+        }
+        // Set the zooming scale
+        /*
+         We have the critical value of n
+         We have the content size of the scroll view
+         We have the size of the scroll view
+        */
+        
+        let widthOfScrollView = scrollView.frame.width
+        let widhtOfGameView = scrollView.contentSize.width
+        
+        scrollView.maximumZoomScale = 2.0
+        scrollView.minimumZoomScale = widthOfScrollView/widhtOfGameView
     }
     
     /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
@@ -344,6 +361,7 @@ extension SuperPartiesGameViewController {
     func createANewSquareGameStepOne() {
         gameState = createEmptySquareGameState(n: game!.n, m: game!.m)
         positionNoneCaseSquare(noneCases: game!.noneCasesPosition, in: &gameState)
+        // Opening the first case of the game here
     }
     
     /// Cette fonction est appelée après que le joueur est tapé sur le première case qu'il souhaite ouvrir.
@@ -431,7 +449,6 @@ extension SuperPartiesGameViewController: GameViewCanCallVC {
         updateFlags(numberOfFlags: numberOfFlags)
     }
     
-    
 }
 
 
@@ -441,6 +458,7 @@ extension SuperPartiesGameViewController: variableCanCallGameVC {
     
     /// cette fonction est appelée lorsque l'utilisateur tape sur la première case : cela apelle cette fonction immédiatement avec le touches began, puis la partie commence comme il le faut grâce au touchesEnded.
     func createTheGame(withFirstTouched touch: (x: Int, y: Int)) {
+        
         if game!.gameType == .hexagonal {
             updateHexGameState(withFirstTouched: (touch.x,touch.y))
         } else if game!.gameType == .square {

@@ -93,6 +93,7 @@ class ViewOfGameSquare: UIView {
 }
 
 // MARK: - Fonction qui gère l'ouverture des cases
+
 extension ViewOfGameSquare: ButtonCanCallSuperView {
     func buttonHaveBeenTapped(i: Int, j: Int, marking: Bool) { // this function has all the logic whenever a button is tapped.
         
@@ -151,10 +152,12 @@ extension ViewOfGameSquare: ButtonCanCallSuperView {
         
         if marking { // hold tapping --> have to mark or unmark the card
             
+            // Then ... 
             if !isTheCaseMarked(i: i, j: j)
             {
                 let test = isCaseABomb(i: i, j: j)
                 self.onPosingFlag?(test)
+                
                 markACaseAt(i: i, j: j)
             } else {
                 self.onUnposingFlag?(isCaseABomb(i: i, j: j))

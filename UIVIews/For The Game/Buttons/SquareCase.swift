@@ -40,20 +40,17 @@ class SquareCase: UIButton {
     // Pour l'affichage d'un numero
     var caseState = CaseState.empty {
         didSet {
-            
             if option1 {
                 if caseState == .open {
                     option1Timer.start(limit: TimeInterval(option1Time), id: "ReturnCase")
                 }
             }
-            
             if caseState == .marked {
                 let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: UIColor.orange)
                 addSubview(flag)
                 Vibrate().vibrate(style: .medium)
                 marked = true
             }
-            
             if caseState == .markedByComputer {
                 let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: colorForRGB(r: 60, g: 160, b: 100))
                 addSubview(flag)
@@ -86,6 +83,7 @@ class SquareCase: UIButton {
         ///// 1 dessin des contours habituels /////
         // ******** drawing the corners of the case ************ //
         strokeColor.setStroke()
+        
         let n: CGFloat = ratio
         let borderPath = UIBezierPath()
         
@@ -94,26 +92,31 @@ class SquareCase: UIButton {
             borderPath.addLine(to: CGPoint(x: 0, y: r/n))
             borderPath.lineWidth = lineWidth
         }
+        
         if cornersToDraw.contains(2) {
             borderPath.move(to: CGPoint.zero)
             borderPath.addLine(to: CGPoint(x: r/n, y: 0))
             borderPath.lineWidth = lineWidth
         }
+        
         if cornersToDraw.contains(3) {
             borderPath.move(to: CGPoint(x: r, y: 0))
             borderPath.addLine(to: CGPoint(x: r - r/n, y: 0))
             borderPath.lineWidth = lineWidth
         }
+        
         if cornersToDraw.contains(4) {
             borderPath.move(to: CGPoint(x: r, y: 0))
             borderPath.addLine(to: CGPoint(x: r, y: r/n))
             borderPath.lineWidth = lineWidth
         }
+        
         if cornersToDraw.contains(5) {
             borderPath.move(to: CGPoint(x: r, y: r))
             borderPath.addLine(to: CGPoint(x: r - r/n, y: r))
             borderPath.lineWidth = lineWidth
         }
+        
         if cornersToDraw.contains(6) {
             borderPath.move(to: CGPoint(x: r, y: r))
             borderPath.addLine(to: CGPoint(x: r , y: r - r/n))
@@ -185,62 +188,6 @@ class SquareCase: UIButton {
         /// On ne peut pas dessiner sur les cases qui sont au dessus ou en dessous de soi.
         /// il y a deux cas à distinguer : la case est à un bord blogal.
         /// la case est contre une none case (dans ce cas, il faut que ce soit la methode draw de la none case qui soit appelée.)
-        func underlineUpperLine() {
-            let contour = UIBezierPath()
-            contour.move(to: CGPoint(x: 0, y: 0))
-            contour.addLine(to: CGPoint(x: r/n, y: 0))
-            contour.move(to: CGPoint(x: r, y: 0))
-            contour.addLine(to: CGPoint(x: r - r/n, y: 0))
-            contour.lineWidth = 1*lineWidth
-            contour.stroke()
-        }
-        
-        func underlineLowestLine() {
-            let contour = UIBezierPath()
-            contour.move(to: CGPoint(x: 0, y: r))
-            contour.addLine(to: CGPoint(x: r/n, y: r))
-            contour.move(to: CGPoint(x: r, y: r))
-            contour.addLine(to: CGPoint(x: r - r/n, y: r))
-            contour.lineWidth = 1*lineWidth
-            contour.stroke()
-        }
-        
-        func underlineRightmostLine() {
-            let contour = UIBezierPath()
-            contour.move(to: CGPoint(x: r, y: 0))
-            contour.addLine(to: CGPoint(x: r, y: r/n))
-            contour.move(to: CGPoint(x: r, y: r))
-            contour.addLine(to: CGPoint(x: r, y: r-r/n))
-            contour.lineWidth = 1*lineWidth
-            contour.stroke()
-        }
-        
-        func underlineLeftmostLine() {
-            let contour = UIBezierPath()
-            contour.move(to: CGPoint(x: 0, y: 0))
-            contour.addLine(to: CGPoint(x: 0, y: r/n))
-            contour.move(to: CGPoint(x: 0, y: r))
-            contour.addLine(to: CGPoint(x: 0, y: r-r/n))
-            contour.lineWidth = 1*lineWidth
-            contour.stroke()
-        }
-        
-        // bordure les plus extérieures //
-        let cond_up = (i-1 == -1)
-        let cond_down = (i+1 == gameState.count)
-        let cond_left = (j-1 == -1)
-        let cond_right = (j+1 == gameState[0].count)
-        if caseState != .none {
-            if cond_up { underlineUpperLine()  }
-            if cond_down { underlineLowestLine() }
-            if cond_left  { underlineLeftmostLine() }
-            if cond_right  { underlineRightmostLine() }
-        } else {
-            if i+1 != gameState.count && gameState[i+1][j] != -2 { underlineLowestLine() }
-            if i-1 != -1 && gameState[i-1][j] != -2 { underlineUpperLine() }
-            if j-1 != -1 && gameState[i][j-1] != -2 { underlineLeftmostLine() }
-            if j+1 != gameState[0].count && gameState[i][j+1] != -2 { underlineRightmostLine() }
-        }
         
         
     }
@@ -271,7 +218,6 @@ class SquareCase: UIButton {
     {
         super.touchesEnded(touches, with: event)
         
-        
         if caseState == .none { return }
         
         UIView.animate(withDuration: 0.1) {
@@ -300,6 +246,8 @@ class SquareCase: UIButton {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
+        // Stopping the timer
+        markingTimer.stop()
         UIView.animate(withDuration: 0.1) {
             self.alpha = 1.0
         }
@@ -398,11 +346,9 @@ class SquareCase: UIButton {
 extension SquareCase: LimitedTimerProtocol {
     func timeLimitReached(id: String) {
         if id == "Marking" {
-            
             superViewDelegate?.buttonHaveBeenTapped(i: i, j: j, marking: true)
             markingTimer.stop()
             isUserInteractionEnabled = false
-            
         } else if id == "ReturnCase" { /// OPTION 1 HAPPENS HERE.
             if self.caseState == .open {
                 self.caseState = .empty

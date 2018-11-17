@@ -32,6 +32,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         localScores.displayTheLocalScores()
         themesManager.displayCurrentThemes()
         
+        
+        
+        print("\nUser Default Manager")
+        let manager = UserDefaultsManager()
+        // print(manager.currentTheme)
+        // print(manager.unlockedThemes)
+        // manager.unlockedThemes.append(2)
+        
+
+        
+        
+        
+        
+        
         // Lancer la musique
         if reglages.isMusicOn {
             playMusic()

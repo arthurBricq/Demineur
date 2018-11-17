@@ -76,11 +76,16 @@ class SuperPartiesPresentationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is SuperPartiesGameViewController {
             let dest = segue.destination as! SuperPartiesGameViewController
-            // Give the correct game to the destination
-            let numberOfBombs: Int = (selectedGame!.level+1)*100
-            let ratio: CGFloat = 0.3 // % of bombs: ratio = z / (n*m) = z / (n^2)
-            let n: Int = Int(sqrt(Double(numberOfBombs)/Double(ratio)))
-            dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame!.gameType, n: n, m: n, z: numberOfBombs, totalTime: 1000)
+            // TODO : Give the correct game to the destination
+            /*
+             There is a maximum m fixed by default
+                square --> m = 30
+                hex --> m = ?
+                triangle --> m = ?
+             
+             Then, using a ratio which depends on the difficulty, we determine the value of n required to fit the game
+            */
+            dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame!.gameType, n: 100, m: 30, z: 300, totalTime: 1000)
         }
     }
 }

@@ -701,7 +701,7 @@ extension InfiniteGameViewController: variableCanCallGameVC {
 }
 
 
-// MARK: - Gere la fin de la partie (lancée par le gameView)
+// MARK: - Protocole pour les gameView 
 extension InfiniteGameViewController: GameViewCanCallVC {
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
@@ -767,6 +767,7 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             flagCounterLabel.text = numberOfFlags.description
         }
     }
+    
 }
 
 // MARK: - Gere l'affichage de l'horloge

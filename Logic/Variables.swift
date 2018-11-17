@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-
-
-
 // MARK: - Definition des parties
 
 enum GameType {
@@ -46,9 +43,6 @@ class Section {
     /// Cette fonction doit-être appelée après que toutes les propriétés principales d'une section ont été mise à jour afin de modifier les jeux créer par les fonctions init.
     /// Pas de input
     func updateGamesOfThisSection() {
-        
-        
-        
         game1!.n = n
         game1!.m = m
         game1!.z = z0 + Int((1-1)*floor(Double(incrementBomb)))

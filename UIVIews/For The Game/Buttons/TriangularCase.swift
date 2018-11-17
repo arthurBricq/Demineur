@@ -254,6 +254,7 @@ class TriangularCase: UIButton {
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
+        markingTimer.stop()
         UIView.animate(withDuration: 0.1) {
             self.alpha = 1.0
         }

@@ -136,6 +136,8 @@ class HistoryGameViewController: UIViewController {
             gameView.emptyColor = game.colors.emptyColor
             gameView.textColor = game.colors.textColor
             gameView.layer.masksToBounds = false
+            gameView.layer.borderColor = game.colors.strokeColor.cgColor
+            gameView.layer.borderWidth = 1.0
             gameView.numberOfFlags = game.numberOfFlag
             
             gameView.onPosingFlag = { (test: Bool) -> Void in
@@ -408,7 +410,7 @@ extension HistoryGameViewController: variableCanCallGameVC {
     }
 }
 
-// MARK: - Quand la partie est terminée
+// MARK: - Protocol pour les gameViews (permet de terminer la partie, entre autre)
 extension HistoryGameViewController: GameViewCanCallVC {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
@@ -458,6 +460,8 @@ extension HistoryGameViewController: GameViewCanCallVC {
     func updateFlagsDisplay(numberOfFlags: Int) {
         updateFlags(numberOfFlags: numberOfFlags)
     }
+    
+    
 }
 
 // MARK: - Pour le chronomètre

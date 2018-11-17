@@ -18,7 +18,9 @@ protocol ButtonCanCallSuperView {
 protocol GameViewCanCallVC {
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) 
     func updateFlagsDisplay(numberOfFlags: Int)
+    
 }
+
 protocol CountingTimerProtocol {
     func timerFires(id: String)
 }
