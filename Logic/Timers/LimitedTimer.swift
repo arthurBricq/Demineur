@@ -1,11 +1,12 @@
 //
-//  MyTimerHandlerObject.swift
-//  03-@selector - TIMER CALLBACK
+//  LimitedTimer.swift
+//  Demineur
+//
+//  Created by Arthur BRICQ on 17/11/2018.
+//  Copyright © 2018 Arthur BRICQ. All rights reserved.
 //
 
-import Foundation
 import UIKit
-
 
 
 /**

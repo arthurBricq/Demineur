@@ -4,7 +4,14 @@
         <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="numberOfBombs" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="SuperPartieGame" representedClassName=".SuperPartieGame" syncable="YES" codeGenerationType="category">
+        <attribute name="m" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="n" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="positionOfBombs" optional="YES" attributeType="Transformable" customClassName="[[Int]]" syncable="YES"/>
+        <attribute name="z" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="LocalScore" positionX="63" positionY="-72" width="128" height="73"/>
+        <element name="SuperPartieGame" positionX="-192.88671875" positionY="-60.89453125" width="128" height="103"/>
     </elements>
 </model>
