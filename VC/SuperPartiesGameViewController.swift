@@ -547,12 +547,11 @@ extension SuperPartiesGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
     func addTheMessage(didTapABomb: Bool) {
-        if bonus.vie > 0 {
+        if dataManager.vieQuantity > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
             messageOne(didTapABomb: didTapABomb)
         } else {
-            
-            if money.getCurrentValue() > 0 {
+            if dataManager.money > 0 {
                 messageTwo(didTapABomb: didTapABomb)
             } else {
                 self.openTheBombs()
@@ -605,7 +604,7 @@ extension SuperPartiesGameViewController {
         let heartLabel = UILabel()
         heartLabel.numberOfLines = 1
         heartLabel.textAlignment = .right
-        heartLabel.text = String(bonus.vie)
+        heartLabel.text = String(dataManager.vieQuantity)
         heartLabel.font = UIFont(name: "PingFangSC-Regular", size: 30)
         let diffHeight: CGFloat = heartLabel.font.lineHeight - heartCote
         heartLabel.frame = CGRect(x: 0, y: secondHeart.frame.minY - diffHeight/2, width: width - heartCote - 10, height: heartLabel.font.lineHeight)
@@ -636,7 +635,7 @@ extension SuperPartiesGameViewController {
         yes.isYes = true
         yes.tappedFunc = {
             
-            bonus.addVie(amount: -1)
+            dataManager.vieQuantity -= 1
             
             var viewToRemove: BombView?
             var viewOfGame: UIView?
@@ -665,7 +664,7 @@ extension SuperPartiesGameViewController {
             UIView.animate(withDuration: 0.1, animations: {
                 heartLabel.alpha = 0
             }, completion: { (_) in
-                heartLabel.text = String(bonus.vie)
+                heartLabel.text = String(dataManager.vieQuantity)
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     
@@ -787,7 +786,7 @@ extension SuperPartiesGameViewController {
         let coinLabel = UILabel()
         coinLabel.numberOfLines = 1
         coinLabel.textAlignment = .right
-        coinLabel.text = String(money.currentAmountOfMoney)
+        coinLabel.text = String(dataManager.money)
         coinLabel.font = UIFont(name: "PingFangSC-Regular", size: 26)
         let diffHeight: CGFloat = coinLabel.font.lineHeight - coinCote
         coinLabel.frame = CGRect(x: 0, y: coinView.frame.minY - diffHeight/2, width: width - coinCote, height: coinLabel.font.lineHeight)
@@ -815,7 +814,7 @@ extension SuperPartiesGameViewController {
         buttonToBuy.frame = CGRect(x: width/2 - buttonToBuyWidth/2 - buttonNoWidth/2 - separator/2, y: label.frame.maxY + verticalSeparator, width: buttonToBuyWidth, height: buttonsHeight)
         buttonToBuy.tappedFuncIfEnoughMoney = {
             coinView.playParticleAnimation()
-            money.addMoney(amount: -allBonus[4].prixAchat)
+            dataManager.money -= allBonus[4].prixAchat
             
             var viewToRemove: BombView?
             var viewOfGame: UIView?
@@ -844,7 +843,7 @@ extension SuperPartiesGameViewController {
             UIView.animate(withDuration: 0.1, animations: {
                 coinLabel.alpha = 0
             }, completion: { (_) in
-                coinLabel.text = String(money.getCurrentValue())
+                coinLabel.text = String(dataManager.money)
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     

@@ -1,51 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Bonus" representedClassName="Bonus" syncable="YES" codeGenerationType="class">
-        <attribute name="bombe" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="drapeau" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="temps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="verification" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="vie" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="CurrentTheme" representedClassName="CurrentTheme" syncable="YES" codeGenerationType="class">
-        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="GameData" representedClassName="GameData" syncable="YES" codeGenerationType="class">
-        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="LevelBonus" representedClassName="LevelBonus" syncable="YES" codeGenerationType="class">
-        <attribute name="bombe" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="drapeau" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="temps" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="verification" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="vie" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="LocalScores" representedClassName="LocalScores" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocalScore" representedClassName=".LocalScore" syncable="YES" codeGenerationType="category">
         <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="numberOfBombs" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
-    <entity name="Money" representedClassName="Money" syncable="YES" codeGenerationType="class">
-        <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="Reglage" representedClassName="Reglage" syncable="YES" codeGenerationType="class">
-        <attribute name="areEffectsOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="indexOfArticleInPauseVC" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="isMusicOn" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="languageIterator" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="timeToMantainIterator" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="vibration" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
-    <entity name="UnlockTheme" representedClassName="UnlockTheme" syncable="YES" codeGenerationType="class">
-        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-    </entity>
     <elements>
-        <element name="Bonus" positionX="250" positionY="-90" width="128" height="118"/>
-        <element name="CurrentTheme" positionX="72" positionY="-63" width="128" height="60"/>
-        <element name="GameData" positionX="63" positionY="-72" width="128" height="60"/>
-        <element name="LevelBonus" positionX="72" positionY="-72" width="128" height="120"/>
-        <element name="LocalScores" positionX="63" positionY="-72" width="128" height="75"/>
-        <element name="Money" positionX="-126" positionY="-144" width="128" height="58"/>
-        <element name="Reglage" positionX="70" positionY="-153" width="128" height="135"/>
-        <element name="UnlockTheme" positionX="63" positionY="-72" width="128" height="60"/>
+        <element name="LocalScore" positionX="63" positionY="-72" width="128" height="73"/>
     </elements>
 </model>

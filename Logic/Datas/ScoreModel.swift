@@ -21,9 +21,18 @@
  Il y a une variable globale du type ScoresModel dans le fichier DataModel.swift
 */
 
+
+
 import Foundation
 import CloudKit
 import SystemConfiguration
+
+
+
+// MARK: - Variable globale pour cloudKit
+let scoresModel = ScoresModel()
+
+
 
 
 // MARK: - Structure à sauvegarder

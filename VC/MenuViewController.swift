@@ -53,12 +53,12 @@ class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // Localisation
-        histoireButton.setTitle("key1".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
-        infiniteButton.setTitle("key2".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
-        superPartiesButton.setTitle("key3".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
-        boutiqueButton.setTitle("key4".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
-        reglagesButton.setTitle("key5".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
-        tutorialButton.setTitle("key6".localized(lang: reglages.giveCurrentLanguage()), for: .normal)
+        histoireButton.setTitle("key1".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
+        infiniteButton.setTitle("key2".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
+        superPartiesButton.setTitle("key3".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
+        boutiqueButton.setTitle("key4".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
+        reglagesButton.setTitle("key5".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
+        tutorialButton.setTitle("key6".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
 
         
     }

@@ -25,28 +25,25 @@ class ReglageViewController: UIViewController {
     var allLanguages: [String]?
     
     
-    
+
     // MARK: - Actions
     
     @IBAction func menuButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
-    
     @IBAction func vibrationCheckerTapped(_ sender: Any) {
         self.vibrationChecker.isChecked = !self.vibrationChecker.isChecked
-        reglages.areVibrationsOn = !reglages.areVibrationsOn
+        dataManager.isVibrationOn = !dataManager.isVibrationOn
     }
     
     
     @IBAction func musicCheckerTapped(_ sender: Any) {
         self.musicChecker.isChecked = !self.musicChecker.isChecked
-        reglages.isMusicOn = !reglages.isMusicOn
-        
-        if reglages.isMusicOn == false {
+        dataManager.isMusicOn = !dataManager.isMusicOn
+        if dataManager.isMusicOn == false {
             musicPlayer!.stop()
-        } else if reglages.isMusicOn == true {
+        } else if dataManager.isMusicOn == true {
             playMusic()
         }
     }
@@ -54,20 +51,20 @@ class ReglageViewController: UIViewController {
     
     @IBAction func effectCheckerTapped(_ sender: Any) {
         self.effectChecker.isChecked = !self.effectChecker.isChecked
-        reglages.areEffectsOn = !reglages.areEffectsOn
+        dataManager.areEffectsOn = !dataManager.areEffectsOn
     }
     
     
     @IBAction func timeButtonTapped(_ sender: Any) {
         Vibrate().vibrate(style: .light)
-        reglages.timeToMantainIterator += (reglages.timeToMantainIterator != allTimes!.count-1) ? 1 : -(allTimes!.count-1)
+        dataManager.timeToMantainIterator += (dataManager.timeToMantainIterator != allTimes!.count-1) ? 1 : -(allTimes!.count-1)
         updateView()
     }
     
     
     @IBAction func languageButtonTapped(_ sender: Any) {
         Vibrate().vibrate(style: .light)
-        reglages.languageIterator += (reglages.languageIterator != allLanguages!.count-1) ? 1 : -(allLanguages!.count-1)
+        dataManager.languageIterator += (dataManager.languageIterator != allLanguages!.count-1) ? 1 : -(allLanguages!.count-1)
         updateView()
     }
     
@@ -75,21 +72,18 @@ class ReglageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Actualiser le modèle de donnée
-        allTimes = ReglagesManager.allTimesToMantain
-        allLanguages = ReglagesManager.allLanguages
-        
+        allTimes = UserDefaultsManager.allTimesToMantain
+        allLanguages = UserDefaultsManager.allLanguages
         updateView()
     }
 
-    
     func updateView() {
-        self.effectChecker.isChecked = reglages.areEffectsOn
-        self.musicChecker.isChecked = reglages.isMusicOn
-        self.vibrationChecker.isChecked = reglages.areVibrationsOn
-        timeButton.text = allTimes![reglages.timeToMantainIterator]
-        languageButton.text = allLanguages![reglages.languageIterator].uppercased()
+        self.effectChecker.isChecked = dataManager.areEffectsOn
+        self.musicChecker.isChecked = dataManager.isMusicOn
+        self.vibrationChecker.isChecked = dataManager.isVibrationOn
+        timeButton.text = allTimes![dataManager.timeToMantainIterator]
+        languageButton.text = allLanguages![dataManager.languageIterator].uppercased()
     }
 
 }

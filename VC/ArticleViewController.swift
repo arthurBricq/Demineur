@@ -35,20 +35,26 @@ class ArticleViewController: UIViewController {
         
         let prix = allBonus[articleIndex].prixAchat
         
-        if money.currentAmountOfMoney > prix {
-            money.takeAwayMoney(amount: prix)
+        if dataManager.money > prix {
+            dataManager.money -= prix
             
             switch articleIndex {
             case 0:
-                bonus.addTemps(amount: 1)
+                dataManager.tempsQuantity += 1
             case 1:
-                bonus.addDrapeau(amount: 1)
+                dataManager.drapeauQuantity += 1
             case 2:
-                bonus.addBomb(amount: 1)
+                dataManager.bombeQuantity += 1
             case 3:
-                bonus.addVerification(amount: 1)
+                dataManager.verificationQuantity += 1
             case 4:
-                bonus.addVie(amount: 1)
+                var amount = 1
+                if dataManager.levelOfBonus(atIndex:  4) == 1 {
+                    amount = 2
+                } else if dataManager.levelOfBonus(atIndex:  4) == 2 {
+                    amount = 3
+                }
+                dataManager.vieQuantity += amount
             default:
                 break
             }
@@ -81,7 +87,7 @@ class ArticleViewController: UIViewController {
     
     
     func updateNumberOfElementDisplay() {
-        let tmp = bonus.giveTheNumberOfBonus(forIndex: articleIndex)
+        let tmp = dataManager.levelOfBonus(atIndex: articleIndex)
         if tmp == 0 || tmp == 1 {
             indicateurNombreLabel.text = "\(tmp) restant"
         } else {
@@ -93,7 +99,7 @@ class ArticleViewController: UIViewController {
         
         // label et prix de la case
         let currentBonus = allBonus[articleIndex]
-        descriptionLabel.text = currentBonus.descriptions[levelOfBonus.giveTheLevelOfBonus(forIndex: articleIndex)]
+        descriptionLabel.text = currentBonus.descriptions[dataManager.levelOfBonus(atIndex:  articleIndex)]
         achatButton.prix = String(currentBonus.prixAchat)
         containerView.backgroundColor = UIColor.clear
         
@@ -107,7 +113,7 @@ class ArticleViewController: UIViewController {
         bonusView.index = articleIndex
         bonusView.frame = CGRect(origin: CGPoint.zero, size: size)
         if articleIndex == 0 {
-            switch levelOfBonus.giveTheLevelOfBonus(forIndex: articleIndex) {
+            switch dataManager.levelOfBonus(atIndex:  articleIndex) {
             case 0:
                 bonusView.tempsAngleParameter = 0
             case 1:

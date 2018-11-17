@@ -91,7 +91,7 @@ class BoutiqueViewController: UIViewController {
 
     
     func updateDisplay() {
-        moneyLabel.text = String(money.currentAmountOfMoney)
+        moneyLabel.text = String(dataManager.money)
     }
     
     
@@ -129,8 +129,8 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.delegate = self
             let currentBonus = allBonus[indexPath.row]
-            let level = levelOfBonus.giveTheLevelOfBonus(forIndex: indexPath.row)
-            let number = bonus.giveTheNumberOfBonus(forIndex: indexPath.row)
+            let level = dataManager.levelOfBonus(atIndex:  indexPath.row)
+            let number = dataManager.levelOfBonus(atIndex: indexPath.row)
             
             cell.label1.text = currentBonus.descriptions[level]
             cell.bonusView.index = indexPath.row
@@ -150,7 +150,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.label2.text = currentBonus.descriptionsAmeliorations[level]
                 cell.AmeliorerButton.prix = String(currentBonus.prixAmelioration[level])
                 
-                if money.currentAmountOfMoney < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
+                if dataManager.money < currentBonus.prixAmelioration[level] { // Pas assez d'argent pour améliorer.
                     UIView.animate(withDuration: 0.2, animations: { cell.AmeliorerButton.alpha = 0.5 })
                     cell.AmeliorerButton.isUserInteractionEnabled = false
                 } else {
@@ -160,7 +160,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             }
             cell.AmeliorerButton.setNeedsDisplay()
             
-            if money.currentAmountOfMoney < currentBonus.prixAchat { // Pas assez d'argent pour acheter.
+            if dataManager.money < currentBonus.prixAchat { // Pas assez d'argent pour acheter.
                 UIView.animate(withDuration: 0.2, animations: { cell.achatButton.alpha = 0.5 })
                 cell.achatButton.isUserInteractionEnabled = false
                 UIView.animate(withDuration: 0.2, animations: { cell.AmeliorerButton.alpha = 0.5 })
@@ -203,10 +203,10 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.titleView.text = currentTheme.name
             
             cell.buyButton.prix = currentTheme.price.description
-            cell.buyButton.isHidden = themesManager.indexesOfUnlockedThemes.contains(indexPath.row)
+            cell.buyButton.isHidden = dataManager.unlockedThemes.contains(indexPath.row)
             
             cell.buyButton.textsize = 55
-            if money.currentAmountOfMoney < currentTheme.price {
+            if dataManager.money < currentTheme.price {
                 cell.buyButton.isUserInteractionEnabled = false
                 cell.buyButton.alpha = 0.5
             } else {
@@ -215,13 +215,13 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             }
             cell.buyButton.setNeedsDisplay()
             
-            cell.hidingView.isHidden = themesManager.indexesOfUnlockedThemes.contains(indexPath.row)
+            cell.hidingView.isHidden = dataManager.unlockedThemes.contains(indexPath.row)
             cell.hidingView.layer.cornerRadius = 10
             cell.hidingView.layer.borderWidth = 2
             
-            cell.lockView.progress = themesManager.indexesOfUnlockedThemes.contains(indexPath.row) ? 0 : 1
+            cell.lockView.progress = dataManager.unlockedThemes.contains(indexPath.row) ? 0 : 1
             
-            cell.checkerButton.isChecked = (themesManager.indexOfSelectedTheme == indexPath.row)
+            cell.checkerButton.isChecked = (dataManager.currentTheme == indexPath.row)
             
             cell.checkerButton.setNeedsDisplay()
             

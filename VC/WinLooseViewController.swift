@@ -148,8 +148,8 @@ class WinLooseViewController: UIViewController {
         let gameViewController = precedentViewController as! HistoryGameViewController
         
         gameViewController.game = historyLevels[precedentGameIndex+1]
-        if precedentGameIndex == gameData.currentLevel {
-            gameData.currentLevel += 1 // On débloque le niveau suivant
+        if precedentGameIndex == dataManager.currentHistoryLevel {
+            dataManager.currentHistoryLevel += 1 // On débloque le niveau suivant
         }
         gameViewController.gameIndex = precedentGameIndex + 1
         

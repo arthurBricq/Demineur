@@ -35,7 +35,7 @@ class AchatBoutiqueBouton: UIButton {
             self.alpha = 1.0
         }, completion: { (_) in
             
-            if money.getCurrentValue() >= Int(self.prix)! {
+            if dataManager.money >= Int(self.prix)! {
                 self.tappedFuncIfEnoughMoney?()
             }
             

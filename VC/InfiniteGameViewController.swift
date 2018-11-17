@@ -321,14 +321,25 @@ class InfiniteGameViewController: UIViewController {
         if Reachability.isConnectedToNetwork() == true {
             scoresModel.addOneScore(level: self.level, numberOfBombs: self.numberOfBombs)
         }
-        localScores.addOneScoreToLocal(level: self.level, numberOfBombs: self.numberOfBombs)
+        
+        // Adding the new local score
+        
+        let newScore = LocalScore(context: AppDelegate.viewContext)
+        newScore.level = Int32(level)
+        newScore.numberOfBombs = Int32(numberOfBombs)
+        do {
+            try AppDelegate.viewContext.save()
+        } catch {
+            print("ERROR: saving core data ")
+        }
+        
+        
         
         
         // 2.
         // Rajouter l'argent gagné par le joueur
         // Argent gagné = niveau + nombre de bombes
-        money.addMoney(amount: self.level + self.numberOfBombs)
-        
+        dataManager.money += self.level + self.numberOfBombs
         
         
         
@@ -936,28 +947,28 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
     
     func tempsTapped() { // il faut ajouter du temps
         
-        if bonus.temps > 0 {
-            bonus.addTemps(amount: -1)
+        if dataManager.tempsQuantity > 0 {
+            dataManager.tempsQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
         
-        let timeLevel: Int = levelOfBonus.giveTheLevelOfBonus(forIndex: 0)
+        let timeLevel: Int = dataManager.levelOfBonus(atIndex:  0)
         let values: [CGFloat] = [15,30,45,60] // temps à rajouter
         gameTimer.counter -= values[timeLevel]
     }
     
     func drapeauTapped() { // il faut ajouter des drapeaux
         
-        if bonus.drapeau > 0 {
-            bonus.addDrapeau(amount: -1)
+        if dataManager.drapeauQuantity > 0 {
+            dataManager.drapeauQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
         } else {
             return
         }
         
-        let drapeauLevel = levelOfBonus.giveTheLevelOfBonus(forIndex: 1)
+        let drapeauLevel = dataManager.levelOfBonus(atIndex:  1)
         let values: [Int] = [1,2,3] // drapeaux à ajouter
         // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
         if currentSection.gameType == .hexagonal {
@@ -977,24 +988,9 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
     
     func bombeTapped() { // il faut marquer des bombes
         
-        
-        if bonus.bombe > 0 {
-            bonus.addBomb(amount: -1)
+        if dataManager.bombeQuantity > 0 {
+            dataManager.bombeQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-        
-        
-        switch levelOfBonus.bombe {
-        case 0:
-            // 50 % de chance
-            let tmp = random(100)
-            if tmp < 50 {
-                // return
-            }
-            // marquer une bombe non marquée
-            
             if currentSection.gameType == .hexagonal {
                 let viewOfGameHex = containerView.subviews.last as! ViewOfGame_Hex
                 viewOfGameHex.markARandomBomb()
@@ -1006,31 +1002,23 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
                 viewOfGameTriangular.markARandomBomb()
             }
             
-        default:
-            break
         }
-        
-        
         
     }
     
     func vieTapped() { // il faut rajouter une vie
-        if bonus.vie > 0 {
-            bonus.addVie(amount: -1)
+        if dataManager.vieQuantity > 0 {
+            dataManager.vieQuantity  -= 1
             bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
         }
     }
     
     
-    
     func verificationTapped() { // il faut verifier les drapeaux posée
-        if bonus.verification > 0 {
-            
-            bonus.addVerification(amount: -1)
+        if dataManager.verificationQuantity > 0 {
+            dataManager.verificationQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-            
+
             let viewOfGame = containerView.subviews.last!
             
             switch returnCurrentGame().gameType {
@@ -1079,12 +1067,11 @@ extension InfiniteGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
     func addTheMessage(didTapABomb: Bool) {
-        if bonus.vie > 0 {
+        if dataManager.vieQuantity > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
             messageOne(didTapABomb: didTapABomb)
         } else {
-            
-            if money.getCurrentValue() > 0 {
+            if dataManager.money > 0 {
                 messageTwo(didTapABomb: didTapABomb)
             } else {
                 endOfInfiniteGame(didTapABomb: didTapABomb)
@@ -1129,7 +1116,7 @@ extension InfiniteGameViewController {
         let heartLabel = UILabel()
         heartLabel.numberOfLines = 1
         heartLabel.textAlignment = .right
-        heartLabel.text = String(bonus.vie)
+        heartLabel.text = String(dataManager.vieQuantity)
         heartLabel.font = UIFont(name: "PingFangSC-Regular", size: 30)
         let diffHeight: CGFloat = heartLabel.font.lineHeight - heartCote
         heartLabel.frame = CGRect(x: 0, y: secondHeart.frame.minY - diffHeight/2, width: width - heartCote - 10, height: heartLabel.font.lineHeight)
@@ -1160,7 +1147,7 @@ extension InfiniteGameViewController {
         yes.isYes = true
         yes.tappedFunc = {
             
-            bonus.addVie(amount: -1)
+            dataManager.vieQuantity -= 1
             
             var viewToRemove: BombView?
             let viewOfGame: UIView? = self.containerView.subviews.last
@@ -1183,7 +1170,7 @@ extension InfiniteGameViewController {
             UIView.animate(withDuration: 0.1, animations: {
                 heartLabel.alpha = 0
             }, completion: { (_) in
-                heartLabel.text = String(bonus.vie)
+                heartLabel.text = String(dataManager.vieQuantity)
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     
@@ -1302,7 +1289,7 @@ extension InfiniteGameViewController {
         let coinLabel = UILabel()
         coinLabel.numberOfLines = 1
         coinLabel.textAlignment = .right
-        coinLabel.text = String(money.currentAmountOfMoney)
+        coinLabel.text = String(dataManager.money)
         coinLabel.font = UIFont(name: "PingFangSC-Regular", size: 26)
         let diffHeight: CGFloat = coinLabel.font.lineHeight - coinCote
         coinLabel.frame = CGRect(x: 0, y: coinView.frame.minY - diffHeight/2, width: width - coinCote, height: coinLabel.font.lineHeight)
@@ -1329,7 +1316,8 @@ extension InfiniteGameViewController {
         buttonToBuy.prix = String(allBonus[4].prixAchat)
         buttonToBuy.frame = CGRect(x: width/2 - buttonToBuyWidth/2 - buttonNoWidth/2 - separator/2, y: label.frame.maxY + verticalSeparator, width: buttonToBuyWidth, height: buttonsHeight)
         buttonToBuy.tappedFuncIfEnoughMoney = {
-            money.addMoney(amount: -allBonus[4].prixAchat)
+            
+            dataManager.money -= allBonus[4].prixAchat
             coinView.playParticleAnimation()
             
             var viewToRemove: BombView?
@@ -1354,7 +1342,7 @@ extension InfiniteGameViewController {
                 coinLabel.alpha = 0
             }, completion: { (_) in
                 
-                coinLabel.text = String(money.getCurrentValue())
+                coinLabel.text = String(dataManager.money)
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     

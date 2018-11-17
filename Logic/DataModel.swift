@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 // MARK: - Remarque générale
+
 /*
  Il y a deux type de classe de sauvegarde, les méthodes de sauvegarde sont différentes pour les deux types.
  1. Quand il faut juste se souvenir de la dernière valeure: alors la sauvegarde peut se faire directement en accedant à la propriété qui nous intéresse et en la modifiant.
@@ -21,7 +22,7 @@ import CoreData
  
  */
 
-
+/*
 // MARK: - Variables globales pour les sauvegardes
 let money = MoneyManager()
 let reglages = ReglagesManager()
@@ -42,15 +43,15 @@ let scoresModel = ScoresModel()
 /// Cette fonction est appelée si on souhaite ré-initialiser toutes les propriétés d'une partie correctement
 func initiateANewDevice(argent: Int, lives: Int, level: Int) {
     // 1. Niveau du joueur
-    gameData.currentLevel = level
+    dataManager.currentHistoryLevel = level
     // 2. Niveaux des bonus
     levelOfBonus.initializeLevels(atLevel: 0) // indice zéro pour les premiers bonus
     // 3. Argent du joueur
-    money.currentAmountOfMoney = argent
+    dataManager.money = argent
     // 4. Ajouter quelques bonus au joueur
-    bonus.temps = 10
-    bonus.drapeau = 10
-    bonus.bombe = 10
+    dataManager.tempsQuantity = 10
+    dataManager.drapeauQuantity = 10
+    dataManager.bombeQuantity = 10
     bonus.verification = 10
     bonus.vie = lives
 }
@@ -928,4 +929,5 @@ class ThemesManager {
     }
     
 }
+*/
 

@@ -11,52 +11,20 @@ import UIKit
 import CoreData
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        
-        money.getCurrentValue() // on récupère l'argent au début du jeu
-        reglages.getCurrentValue() // on récupère les options de l'application
-        bonus.getCurrentValue() // on récupère les bonus achetés.
-        levelOfBonus.getCurrentValue() // on récupère les niveaux du joueur.
-        gameData.getCurrentValue() // on récupère le mode histoire. 
-        localScores.getCurrentValue() // on récupère tous les scores du joueur.
-        themesManager.getCurrentValue() // on récupère les thèmes de couleurs ...
-        
-        reglages.displayOptions()
-        localScores.displayTheLocalScores()
-        themesManager.displayCurrentThemes()
         
         
+        if dataManager.isMusicOn { playMusic() }
         
-        print("\nUser Default Manager")
-        let manager = UserDefaultsManager()
-        // print(manager.currentTheme)
-        // print(manager.unlockedThemes)
-        // manager.unlockedThemes.append(2)
-        
-
-        
-        
-        
-        
-        
-        // Lancer la musique
-        if reglages.isMusicOn {
-            playMusic()
-        }
-        
-        
-        /// A faire lors du premier appel de l'application 
-        
+        // A faire lors du premier appel de l'application
         //themesManager.initiateUnlockedThemes()
-        initiateANewDevice(argent: 10000, lives: 0, level: 20)
-        
+        dataManager.initiateANewDevice(argent: 10000, lives: 2, level: 20)
         
         
         return true
@@ -115,6 +83,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+    
+    // MARK: - Core Data Static Var
+    
+    static var presistentContainer: NSPersistentContainer {
+        return (UIApplication.shared.delegate as? AppDelegate)!.persistentContainer
+    }
+    
+    static var viewContext: NSManagedObjectContext {
+        return presistentContainer.viewContext
+    }
     
     // MARK: - Core Data Saving support
     

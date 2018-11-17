@@ -210,7 +210,7 @@ class SquareCase: UIButton {
         
         markingTimer.delegate = self
                 
-        markingTimer.start(limit: TimeInterval(reglages.giveTimeToMantain()), id: "Marking")
+        markingTimer.start(limit: TimeInterval(dataManager.giveTimeToMantain()), id: "Marking")
         
     }
     

@@ -61,16 +61,12 @@ class HistoryPresentationViewController: UIViewController  {
     var totalNumberOfRowsInSection: Int {
         return Int(floor(Double(historyLevels.count/3))+1)
     }
-    
-    // retourne l'indice
-    var currentGameIndex: Int { return gameData.currentLevel }
-    
+   
     // retourne le nombre de niveau du chapitre en question.
     var numberOfLevelInSection: Int { return historyLevels.count }
-    var color1 = colorForRGB(r: 66, g: 66, b: 66) //UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
+    var color1 = colorForRGB(r: 66, g: 66, b: 66)
     var color2 = UIColor.orange
     var selectedGameIndex: Int = 1
-    
     
     /// FUNCTIONS
     override func viewDidLoad() {
@@ -78,11 +74,6 @@ class HistoryPresentationViewController: UIViewController  {
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     
     /**
      Cette fonction doit retourner les niveaux des jeux en mode histoire
@@ -119,7 +110,7 @@ class HistoryPresentationViewController: UIViewController  {
             let dest = segue.destination as! HistoryGameViewController
             
             // On connait l'indice choisit de la partie et on connait la partie courrant du jeu,
-            if selectedGameIndex <= gameData.currentLevel {
+            if selectedGameIndex <= dataManager.currentHistoryLevel {
                 dest.game = historyLevels[selectedGameIndex]
                 dest.gameIndex = selectedGameIndex
             } else {
@@ -149,19 +140,17 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "StartCell", for: indexPath) as! StartTableViewCell
-            cell.currentGame = currentGameIndex+1
+            cell.currentGame = dataManager.currentHistoryLevel+1
             cell.VC = self
             cell.strokeColor = color1
             cell.tag = 1
             cell.setNeedsDisplay()
             return cell
-            
         } else if indexPath.row % 2 == 1  {
-            print("type 1 démarre avec : \(3*indexPath.row + 1) et currentGame: \(currentGameIndex+1)" )
             let cell = tableView.dequeueReusableCell(withIdentifier: "Type1Cell", for: indexPath) as! Type1TableViewCell
             cell.firstGameOfRow = 3*indexPath.row + 1
-            cell.tag = currentGameIndex+1
-            cell.currentGame = currentGameIndex+1
+            cell.tag = dataManager.currentHistoryLevel+1
+            cell.currentGame = dataManager.currentHistoryLevel+1
             cell.VC = self
             let firstGameOfRow = 3*indexPath.row + 1
             cell.button1.setTitle(String(firstGameOfRow), for: .normal)
@@ -171,13 +160,11 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
             cell.secondStrokeColor = color1
             cell.setNeedsDisplay()
             return cell
-            
         } else {
-            print("type 2 démarre avec : \(3*indexPath.row + 1) et currentGame: \(currentGameIndex+1)")
             let cell = tableView.dequeueReusableCell(withIdentifier: "Type2Cell", for: indexPath) as! Type2TableViewCell
             cell.firstGameOfRow = 3*indexPath.row + 1
-            cell.tag = currentGameIndex+1
-            cell.currentGame = currentGameIndex+1
+            cell.tag = dataManager.currentHistoryLevel+1
+            cell.currentGame = dataManager.currentHistoryLevel+1
             cell.VC = self
             let firstGameOfRow = 3*indexPath.row + 1
             cell.button1.setTitle(String(firstGameOfRow), for: .normal)

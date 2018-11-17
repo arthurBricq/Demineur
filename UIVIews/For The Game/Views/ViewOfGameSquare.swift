@@ -430,7 +430,7 @@ extension ViewOfGameSquare {
                         UIView.animate(withDuration: 0.2, animations: {
                             flag.frame = CGRect(x: -5, y: -5, width: flag.frame.width + 10, height: flag.frame.height + 10)
                         }) { (_) in
-                            if levelOfBonus.verification == 0 && random(2) == 1 {
+                            if dataManager.verificationLevel == 0 && random(2) == 1 {
                                 UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
                                     flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
                                 }, completion: nil)

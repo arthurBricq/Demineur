@@ -16,7 +16,7 @@ class BonusView: UIView {
         get {
             if index == 0 {
                 
-                switch levelOfBonus.giveTheLevelOfBonus(forIndex: 0) {
+                switch dataManager.levelOfBonus(atIndex:  0) {
                 case 0:
                     return 15
                 case 1:
@@ -31,7 +31,7 @@ class BonusView: UIView {
                 
             } else if index == 1 {
                 
-                switch levelOfBonus.giveTheLevelOfBonus(forIndex: 1) {
+                switch dataManager.levelOfBonus(atIndex:  1) {
                 case 0:
                     return 1
                 case 1:
@@ -44,7 +44,7 @@ class BonusView: UIView {
                 
             } else if index == 4 {
                 
-                switch levelOfBonus.giveTheLevelOfBonus(forIndex: 4) {
+                switch dataManager.levelOfBonus(atIndex:  4) {
                 case 0:
                     return 1
                 case 1:

@@ -12,7 +12,7 @@ import AudioToolbox.AudioServices
 class Vibrate: NSObject {
     
     func vibrate() {
-        if reglages.areVibrationsOn == false {
+        if dataManager.isVibrationOn == false {
             return
         }
         
@@ -26,7 +26,7 @@ class Vibrate: NSObject {
     
     func vibrate(style: UIImpactFeedbackStyle)
     {
-        if reglages.areVibrationsOn == false {
+        if dataManager.isVibrationOn == false {
             return
         }
         

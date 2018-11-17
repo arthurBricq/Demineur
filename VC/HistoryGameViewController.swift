@@ -489,65 +489,40 @@ extension HistoryGameViewController: CountingTimerProtocol {
 
 
 /// BONUS
-// MARK: - Actions des boutons bonus via une délégation.
+// MARK: - Actions des boutons bonus via une délégation
+
 extension HistoryGameViewController: BonusButtonsCanCallVC {
     func tempsTapped() { // il faut ajouter du temps
-        
-        if bonus.temps > 0 {
-            bonus.addTemps(amount: -1)
+        if dataManager.tempsQuantity > 0 {
+            dataManager.tempsQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
+            let timeLevel: Int = dataManager.tempsLevel
+            let values: [CGFloat] = [15,30,45,60] // temps à rajouter
+            gameTimer.counter -= values[timeLevel]
         }
-        
-        let timeLevel: Int = levelOfBonus.giveTheLevelOfBonus(forIndex: 0)
-        let values: [CGFloat] = [15,30,45,60] // temps à rajouter
-        gameTimer.counter -= values[timeLevel]
     }
     
     func drapeauTapped() { // il faut ajouter des drapeaux
-        
-        if bonus.drapeau > 0 {
-            bonus.addDrapeau(amount: -1)
+        if dataManager.drapeauQuantity > 0 {
+            dataManager.drapeauQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
+            let drapeauLevel = dataManager.drapeauLevel
+            let values: [Int] = [1,2,3] // drapeaux à ajouter
+            // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
+            if game.gameType == .hexagonal {
+                viewOfGameHex?.numberOfFlags += values[drapeauLevel]
+            } else if game.gameType == .square {
+                viewOfGameSquare?.numberOfFlags += values[drapeauLevel]
+            } else if game.gameType == .triangular {
+                viewOfGameTriangular?.numberOfFlags += values[drapeauLevel]
+            }
         }
-        
-        let drapeauLevel = levelOfBonus.giveTheLevelOfBonus(forIndex: 1)
-        let values: [Int] = [1,2,3] // drapeaux à ajouter
-        // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
-        if game.gameType == .hexagonal {
-            viewOfGameHex?.numberOfFlags += values[drapeauLevel]
-        } else if game.gameType == .square {
-            viewOfGameSquare?.numberOfFlags += values[drapeauLevel]
-        } else if game.gameType == .triangular {
-            viewOfGameTriangular?.numberOfFlags += values[drapeauLevel]
-        }
-        
     }
     
-    
-    
-    //// A FAIRE ////
     func bombeTapped() { // il faut marquer des bombes
-        
-        if bonus.bombe > 0 {
-            bonus.addBomb(amount: -1)
+        if dataManager.bombeQuantity > 0 {
+            dataManager.bombeQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-                
-        switch levelOfBonus.bombe {
-        case 0:
-            // 50 % de chance
-            let tmp = random(100)
-            if tmp < 50 {
-                // return
-            }
-            // marquer une bombe non marquée
-            
             if game.gameType == .hexagonal {
                 viewOfGameHex?.markARandomBomb()
             } else if game.gameType == .square {
@@ -555,51 +530,27 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
             } else if game.gameType == .triangular {
                 viewOfGameTriangular?.markARandomBomb()
             }
-            
-        default:
-            break
         }
-        
-        
-        
     }
     
     func vieTapped() { // il faut rajouter une vie
-        if bonus.vie > 0 {
-            bonus.addVie(amount: -1)
+        if dataManager.vieQuantity > 0 {
+            dataManager.vieQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
         }
     }
-    
-    
     
     func verificationTapped() { // il faut verifier les drapeaux posée
-        if bonus.verification > 0 {
-            bonus.addVerification(amount: -1)
+        if dataManager.verificationQuantity > 0 {
+            dataManager.verificationQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-            
             switch game.gameType {
-            case .square:
-                viewOfGameSquare?.verificationBonusFunc()
-                
-            case .hexagonal:
-                viewOfGameHex?.verificationBonusFunc()
-                
-            case .triangular:
-                viewOfGameTriangular?.verificationBonusFunc()
-                
+            case .square: viewOfGameSquare?.verificationBonusFunc()
+            case .hexagonal: viewOfGameHex?.verificationBonusFunc()
+            case .triangular: viewOfGameTriangular?.verificationBonusFunc()
             }
-            
-        } else {
-            return
         }
-        
-        
-        
     }
-    
     
 }
 
@@ -658,17 +609,16 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
     }
 }
 
-// MARK: - PARTIE POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
+// MARK: - POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
 extension HistoryGameViewController {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
     func addTheMessage(didTapABomb: Bool) {
-        if bonus.vie > 0 {
+        if dataManager.vieQuantity > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
             messageOne(didTapABomb: didTapABomb)
         } else {
-            
-            if money.getCurrentValue() > 0 {
+            if dataManager.money > 0 {
                 messageTwo(didTapABomb: didTapABomb)
             } else {
                 self.gameTimer.stop()
@@ -688,7 +638,7 @@ extension HistoryGameViewController {
     }
     
     /// Faire apparaitre le message qui demande une nouvelle chance
-    func messageOne(didTapABomb: Bool) {
+    private func messageOne(didTapABomb: Bool) {
         
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
@@ -720,11 +670,11 @@ extension HistoryGameViewController {
         secondHeart.backgroundColor = UIColor.clear
         secondHeart.frame = CGRect(x: width - heartCote, y:  -heartCote - 5, width: heartCote, height: heartCote)
         message.addSubview(secondHeart)
-        
+    
         let heartLabel = UILabel()
         heartLabel.numberOfLines = 1
         heartLabel.textAlignment = .right
-        heartLabel.text = String(bonus.vie)
+        heartLabel.text = String(dataManager.vieQuantity)
         heartLabel.font = UIFont(name: "PingFangSC-Regular", size: 30)
         let diffHeight: CGFloat = heartLabel.font.lineHeight - heartCote
         heartLabel.frame = CGRect(x: 0, y: secondHeart.frame.minY - diffHeight/2, width: width - heartCote - 10, height: heartLabel.font.lineHeight)
@@ -755,7 +705,7 @@ extension HistoryGameViewController {
         yes.isYes = true
         yes.tappedFunc = {
             
-            bonus.addVie(amount: -1)
+            dataManager.vieQuantity -= 1
             
             var viewToRemove: BombView?
             var viewOfGame: UIView?
@@ -787,7 +737,7 @@ extension HistoryGameViewController {
             UIView.animate(withDuration: 0.1, animations: {
                 heartLabel.alpha = 0
             }, completion: { (_) in
-                heartLabel.text = String(bonus.vie)
+                heartLabel.text = String(dataManager.vieQuantity)
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     
@@ -912,7 +862,7 @@ extension HistoryGameViewController {
         let coinLabel = UILabel()
         coinLabel.numberOfLines = 1
         coinLabel.textAlignment = .right
-        coinLabel.text = String(money.currentAmountOfMoney)
+        coinLabel.text = String(dataManager.money)
         coinLabel.font = UIFont(name: "PingFangSC-Regular", size: 26)
         let diffHeight: CGFloat = coinLabel.font.lineHeight - coinCote
         coinLabel.frame = CGRect(x: 0, y: coinView.frame.minY - diffHeight/2, width: width - coinCote, height: coinLabel.font.lineHeight)
@@ -940,7 +890,7 @@ extension HistoryGameViewController {
         buttonToBuy.frame = CGRect(x: width/2 - buttonToBuyWidth/2 - buttonNoWidth/2 - separator/2, y: label.frame.maxY + verticalSeparator, width: buttonToBuyWidth, height: buttonsHeight)
         buttonToBuy.tappedFuncIfEnoughMoney = {
             coinView.playParticleAnimation()
-            money.addMoney(amount: -allBonus[4].prixAchat)
+            dataManager.money -= allBonus[4].prixAchat
             
             var viewToRemove: BombView?
             var viewOfGame: UIView?
@@ -972,7 +922,7 @@ extension HistoryGameViewController {
             UIView.animate(withDuration: 0.1, animations: {
                 coinLabel.alpha = 0
             }, completion: { (_) in
-                coinLabel.text = String(money.getCurrentValue())
+                coinLabel.text = String(dataManager.money)
                 
                 UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
                     

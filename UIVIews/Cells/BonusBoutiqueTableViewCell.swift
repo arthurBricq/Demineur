@@ -33,25 +33,25 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
     // REMARQUE : on est certain que lorsque l'utilisateur tappe sur ces bouttons il a assez d'argent, car les boutons ne seraient pas disponibles sinon.
     @IBAction func achatButtonTapped(_ sender: Any) {
         
-        money.takeAwayMoney(amount: allBonus[index].prixAchat)
+        dataManager.money -= allBonus[index].prixAchat
         
         switch index {
         case 0:
-            bonus.addTemps(amount: 1)
+            dataManager.tempsQuantity += 1
         case 1:
-            bonus.addDrapeau(amount: 1)
+            dataManager.drapeauQuantity += 1
         case 2:
-            bonus.addBomb(amount: 1)
+            dataManager.bombeQuantity += 1
         case 3:
-            bonus.addVerification(amount: 1)
+            dataManager.verificationQuantity += 1
         case 4:
             var amount = 1
-            if levelOfBonus.giveTheLevelOfBonus(forIndex: 4) == 1 {
+            if dataManager.levelOfBonus(atIndex:  4) == 1 {
                 amount = 2
-            } else if levelOfBonus.giveTheLevelOfBonus(forIndex: 4) == 2 {
+            } else if dataManager.levelOfBonus(atIndex:  4) == 2 {
                 amount = 3
             }
-            bonus.addVie(amount: amount)
+            dataManager.vieQuantity += amount
         default:
             break
         }
@@ -63,7 +63,7 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
     
     @IBAction func ameliorerButtonTapped(_ sender: Any) {
         
-        money.takeAwayMoney(amount: allBonus[self.index].prixAmelioration[levelOfBonus.giveTheLevelOfBonus(forIndex: self.index)])
+        dataManager.money -= allBonus[self.index].prixAmelioration[dataManager.levelOfBonus(atIndex:  self.index)]
         self.delegate?.reloadMoney()
         
         let arrow = SkillUpArrowView()
@@ -77,20 +77,20 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
         
         switch index {
         case 0:
-            levelOfBonus.addTemps(amount: 1)
+            dataManager.tempsLevel += 1
         case 1:
-            levelOfBonus.addDrapeau(amount: 1)
+            dataManager.drapeauLevel += 1
         case 2:
-            levelOfBonus.addBomb(amount: 1)
+            dataManager.bombeLevel += 1
         case 3:
-            levelOfBonus.addVerification(amount: 1)
+            dataManager.verificationLevel += 1
         case 4:
-            levelOfBonus.addVie(amount: 1)
+            dataManager.vieLevel += 1
         default:
             break
         }
         
-        levelLabel.text = String(levelOfBonus.giveTheLevelOfBonus(forIndex: index))
+        levelLabel.text = String(dataManager.levelOfBonus(atIndex:  index))
 
         UIView.animate(withDuration: 0.4, delay: 0, options: [], animations: {
             arrow.frame = CGRect(x: arrowOrigin.x, y: arrowOrigin.y  - arrowHeight, width: arrowWidth, height: arrowHeight)
