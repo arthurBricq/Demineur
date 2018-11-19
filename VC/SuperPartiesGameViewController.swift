@@ -10,7 +10,6 @@ import UIKit
 
 
 
-
 /*
  
  Disposition of boxes:
@@ -19,8 +18,11 @@ import UIKit
  - It also means that the value of m is predefined (see in the SuperPartiesPresentationViewController)
  
  
- 
- 
+ When exiting this view controller, saves the current game (characterized by n,m,z and gametype) to coreData so that we can get it back.
+ For now, assume that the only one way to quit the game are:
+- when using the pause menu --> just save
+ - when winning --> must save the progress and delete the current game
+ - when loosing --> must delete the current game
  
  
  */
@@ -37,7 +39,12 @@ class SuperPartiesGameViewController: UIViewController {
     // MARK: - Variables
     override var prefersStatusBarHidden: Bool { return true }
     var game: OneGame?
-    var gameState = [[Int]].init()
+    var superPartieGame: SuperPartieGame?
+    var gameState = [[Int]].init() {
+        didSet {
+            print(gameState)
+        }
+    }
     var viewOfGameSquare: ViewOfGameSquare?
     var viewOfGameHex: ViewOfGame_Hex?
     var viewOfGameTriangular: ViewOfGameTriangular?
@@ -46,7 +53,6 @@ class SuperPartiesGameViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
-        
         
         if game!.gameType == .square {
             viewOfGameSquare?.option3Timer.pause()
@@ -92,6 +98,30 @@ class SuperPartiesGameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         updateScrollViewDisplay()
+    }
+    
+    public func saveGameToCoreData() {
+        // Get the flags position
+        // get the game state
+        do {
+            try AppDelegate.viewContext.save()
+        } catch {
+            print("ERROR: saving to core data ")
+        }
+    }
+    
+    public func deleteTheGameFromCoreData() {
+        AppDelegate.viewContext.delete(superPartieGame!)
+    }
+    
+    public func recordGameIsWonToCoreData() {
+        deleteTheGameFromCoreData()
+        // now save the new progress
+        switch game!.gameType {
+        case .square: dataManager.currentSuperPartiesLevels.square += 1
+        case .hexagonal: dataManager.currentSuperPartiesLevels.hex += 1
+        case .triangular: dataManager.currentSuperPartiesLevels.triangle += 1
+        }
     }
     
     func startANewGame(animatedFromTheRight: Bool) {
@@ -290,8 +320,6 @@ class SuperPartiesGameViewController: UIViewController {
     }
     
     func updateScrollViewDisplay() {
-        
-        
         // Terminer d'actualiser la scrollView
         switch game!.gameType {
         case .square:

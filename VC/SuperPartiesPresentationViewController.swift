@@ -85,6 +85,11 @@ class SuperPartiesPresentationViewController: UIViewController {
              
              Then, using a ratio which depends on the difficulty, we determine the value of n required to fit the game
             */
+            
+            // Two things can happen
+            // 1. The game has already have been saved, hence we must load it were it was
+            // 2. The game hasn't been start, hence we must create a new one 
+            
             dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame!.gameType, n: 100, m: 30, z: 300, totalTime: 1000)
         }
     }

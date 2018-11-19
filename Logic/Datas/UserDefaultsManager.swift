@@ -38,6 +38,19 @@ class UserDefaultsManager {
         set { defaults.set(newValue, forKey: "currentHistoryLevel") }
     }
     
+    var currentSuperPartiesLevels: (square: Int, hex: Int, triangle: Int) {
+        get {
+            return (defaults.integer(forKey: "superPartiesSquareLevel"),
+                    defaults.integer(forKey:"superPartiesHexLevel"),
+                    defaults.integer(forKey: "superPartiesTriangleLevel")
+            )
+        } set {
+            defaults.set(newValue.square, forKey: "superPartiesSquareLevel")
+            defaults.set(newValue.hex, forKey: "superPartiesHexLevel")
+            defaults.set(newValue.triangle, forKey: "superPartiesTriangleLevel")
+        }
+    }
+    
     // MARK: - Quantity of bonus
     
     var vieQuantity: Int {

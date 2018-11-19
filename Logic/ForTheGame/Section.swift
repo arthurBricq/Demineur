@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class Section {
     var n: Int = 8
     var m: Int = 8
@@ -57,8 +56,7 @@ class Section {
         game5!.numberOfFlag = game5!.z+additionalsFlags[4]
         
     }
-    
-    
+
     
     
     init(n: Int, m: Int, z0: Int, gameType: GameType, game1: OneGame, game2: OneGame, game3: OneGame, game4: OneGame, game5: OneGame) {

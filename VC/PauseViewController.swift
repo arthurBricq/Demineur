@@ -202,7 +202,7 @@ class PauseViewController: UIViewController {
         } else if pausedGameViewController is HistoryGameViewController {
             self.performSegue(withIdentifier: "BackToHistoryPresentation", sender: nil)
         } else if pausedGameViewController is SuperPartiesGameViewController {
-            // TODO: save the game just here 
+            (pausedGameViewController as! SuperPartiesGameViewController).saveGameToCoreData()
             self.performSegue(withIdentifier: "BackToSuperPartiesPresentation", sender: nil)
         }
     

@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
-        
-        
         // Settings of the app
         
         if dataManager.isMusicOn { playMusic() }
