@@ -42,6 +42,7 @@
 		4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */; };
 		4E98AD8221AB6EFC0041DD2E /* ViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */; };
 		4E98AD8421AB6F110041DD2E /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98AD8321AB6F110041DD2E /* Case.swift */; };
+		4E98AD8621AB866A0041DD2E /* SquareViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */; };
 		4E98BBC92132E2D30054C7E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E98BBCB2132E2D30054C7E7 /* Localizable.strings */; };
 		4E98BBCE21335AB30054C7E7 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98BBCD21335AB30054C7E7 /* TutorialViewController.swift */; };
 		4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98BBCF21340E920054C7E7 /* TransitionToTutoriel.swift */; };
@@ -144,6 +145,7 @@
 		4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demineur.xcdatamodel; sourceTree = "<group>"; };
 		4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGame.swift; sourceTree = "<group>"; };
 		4E98AD8321AB6F110041DD2E /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
+		4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareViewOfGame.swift; sourceTree = "<group>"; };
 		4E98BBC42132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		4E98BBC52132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Demineur/fr.lproj/Tutorial.strings; sourceTree = "<group>"; };
 		4E98BBC62132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 				4EA7FD8B20F8964A00740480 /* Views */,
 				4EA7FD8220F895FC00740480 /* Buttons */,
 				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
+				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
 				4E98AD8321AB6F110041DD2E /* Case.swift */,
 			);
 			path = "For The Game";
@@ -646,6 +649,7 @@
 				4EA2FAD7210624090039846E /* WinLooseViewController.swift in Sources */,
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
+				4E98AD8621AB866A0041DD2E /* SquareViewOfGame.swift in Sources */,
 				9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4E2989A2213DBDCE003D98D1 /* HexPresentationButton.swift in Sources */,

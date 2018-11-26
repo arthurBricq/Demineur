@@ -99,89 +99,38 @@ class ViewOfGame: UIView {
         return toReturn
     }
     
-    private func isTheCaseMarked(i: Int, j: Int) -> Bool {
+    func isTheCaseMarked(i: Int, j: Int) -> Bool {
         return cases[i][j].caseState == .marked
     }
     
-    private func isTheCaseOpen(i: Int, j: Int) -> Bool {
+    func isTheCaseOpen(i: Int, j: Int) -> Bool {
         return cases[i][j].caseState == .open
     }
     
-    private func isCaseNone(i: Int, j: Int) -> Bool {
+    func isCaseNone(i: Int, j: Int) -> Bool {
         return cases[i][j].caseState == .none
     }
     
-    private func isCaseBlocked(i: Int, j: Int) -> Bool {
+    func isCaseBlocked(i: Int, j: Int) -> Bool {
         return cases[i][j].caseState == .blocked
     }
     
-    private func isCaseABomb(i: Int, j: Int) -> Bool {
+    func isCaseABomb(i: Int, j: Int) -> Bool {
         return gameState[i][j] == -1
     }
     
     /// This method needs to be overriden by subclasses.
     /// It's supposed to dispose the cases in the right position (not on the draw function anymore)
-    private func instantiateCases() {
+    func instantiateCases() {
         fatalError("This method needs to be overriden by children")
     }
     
-    private func ouvertureRecursive(line i: Int, column j: Int) {
+    func ouvertureRecursive(line i: Int, column j: Int) {
         fatalError("This method needs to be overriden by children")
-
-        /*
-        
-        // **** Constant to use **** //
-        let minI = 0
-        let minJ = 0
-        let maxI = gameState.count-1
-        let maxJ = gameState[0].count-1
-        
-        // **** Variable to use **** //
-        var hasToContinue: Bool = false
-        var hasToOpen: Bool = false
-        
-        // followings condition are true if we should open the case
-        let cond1_1 = (i >= minI && i <= maxI) ; let cond1_2 = (j >= minJ && j <= maxJ);
-        let cond1 = cond1_1 && cond1_2
-        if !cond1 { return } else {
-            let cond2 = !isTheCaseOpen(i: i, j: j)
-            let cond3 = !isTheCaseMarked(i: i, j: j)
-            let cond4 = !isCaseNone(i: i, j: j)
-            hasToOpen = cond1 && cond2 && cond3 && cond4
-            
-            // followings condition are true if we should not continue the recursion
-            if gameState[i][j] == 0 {
-                hasToContinue = true
-            }
-            
-        }
-        
-        if isCaseBlocked(i: i, j: j) { return }
-        
-        // Implementation starts here
-        if hasToOpen {
-            returnACaseAt(i: i, j: j)
-        } else {
-            return
-        }
-        
-        if hasToContinue {
-            ouvertureRecursive(line: i+1, column: j+1)
-            ouvertureRecursive(line: i+1, column: j)
-            ouvertureRecursive(line: i+1, column: j-1)
-            ouvertureRecursive(line: i, column: j-1)
-            ouvertureRecursive(line: i-1, column: j-1)
-            ouvertureRecursive(line: i-1, column: j)
-            ouvertureRecursive(line: i-1, column: j+1)
-            ouvertureRecursive(line: i, column: j+1)
-        } else {
-            return
-        }
-        */
     }
     
     /// This method return the case (opens the case)
-    private func returnACaseAt(i: Int, j: Int) {
+    func returnACaseAt(i: Int, j: Int) {
         cases[i][j].caseState = .open
     }
     
