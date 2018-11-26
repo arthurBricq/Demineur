@@ -9,6 +9,7 @@
 import UIKit
 
 // @IBDesignable
+
 class ViewOfGameSquare: UIView {
     
     // MARK: - Variables
@@ -51,24 +52,13 @@ class ViewOfGameSquare: UIView {
             for j in 0..<m {
                 
                 let newCase = SquareCase()
-                newCase.cornersToDraw = [1,2,3,4,5,6,7,8]
-                newCase.ratio = ratio
                 newCase.lineWidth = lineWidth
                 newCase.i = i
                 newCase.j = j
-                newCase.number = gameState[i][j]
-                newCase.gameState = gameState
-                newCase.superViewDelegate = self
-                newCase.option1 = option1
-                newCase.option1Time = option1Time
+//                newCase.gameState = gameState
                 newCase.option1Timer.delegate = newCase
-                newCase.option2 = option2
-                newCase.option2frequency = option2frequency
-                newCase.emptyColor = emptyColor
-                newCase.openColor = openColor
-                newCase.strokeColor = strokeColor
-                newCase.textColor = textColor
-                newCase.strokeColor = strokeColor
+                
+                
                 newCase.layer.masksToBounds = false
                 
                 if gameState[i][j] == -2 {
@@ -342,7 +332,7 @@ extension ViewOfGameSquare {
         for button in self.subviews {
             if button is SquareCase {
                 let button = button as! SquareCase
-                button.gameState = gameState
+                // button.gameState = gameState
             }
         }
     }
@@ -413,8 +403,7 @@ extension ViewOfGameSquare {
             }
         }
         
-        
-        
+
     }
     
     func verificationBonusFunc() {
@@ -503,3 +492,4 @@ extension ViewOfGameSquare: CountingTimerProtocol {
         }
     }
 }
+

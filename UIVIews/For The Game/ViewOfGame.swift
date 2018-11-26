@@ -20,9 +20,9 @@ class ViewOfGame: UIView {
     var delegate: GameViewCanCallVC?
     /// Holds the position of bombs and the numbers displayed when cases are opened.
     /// Keeps in mind that this array is only modified when one game is created.
-    var gameState: [[Int]] = [[]]
+    var gameState: [[Int]] = [[Int]].init()
     /// Holds all the cases present on screen.
-    var cases: [[Case]] = [[]]
+    var cases: [[Case]] = [[Case]].init()
     /// Holds the number of remaining flags.
     var numberOfFlags: Int = 5 {
         didSet {delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)}
@@ -31,6 +31,8 @@ class ViewOfGame: UIView {
     var onPosingFlag: ((Bool) -> Void)?
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
     var onUnposingFlag: ((Bool) -> Void)?
+    var option3Timer = CountingTimer()
+    
     
     // MARK: - Inits functions
     
@@ -38,10 +40,15 @@ class ViewOfGame: UIView {
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
  
-    convenience init(frame: CGRect, game: OneGame) {
+    convenience init(frame: CGRect, game: OneGame, gameState: inout [[Int]]) {
         self.init(frame: frame)
         self.game = game
+        self.gameState = gameState
         instantiateCases()
+        if game.option3 {
+            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
+            option3Timer.delegate = self
+        }
     }
     
     // MARK: - Functions
@@ -51,7 +58,6 @@ class ViewOfGame: UIView {
         
         if isCaseNone(i: i, j: j) || isTheCaseOpen(i: i, j: j) || isCaseBlocked(i: i, j: j) {
             return
-            
         }
         
         if marking { // hold tapping --> have to mark or unmark the card
@@ -153,19 +159,8 @@ class ViewOfGame: UIView {
     private func unblockACaseAt(i: Int, j: Int) {
         cases[i][j].caseState = .empty
     }
-    
-    /* I feel like this method is totally useless
-    func updateAllNumbers() {
-        for button in self.subviews {
-            if button is SquareCase {
-                let button = button as! SquareCase
-                button.gameState = gameState
-            }
-        }
-    }
-    */
-    
-    private func returnAllTheCases(win: Bool = false) {
+   
+    func returnAllTheCases(win: Bool = false) {
         for i in 0..<gameState.count {
             for j in 0..<gameState[i].count {
                 if isCaseABomb(i: i, j: j) {
@@ -224,4 +219,87 @@ class ViewOfGame: UIView {
    
     }
     
+    func verificationBonusFunc() {
+        for line in cases {
+            for c in line {
+                // c is the case
+                if c.caseState == .marked || c.caseState == .markedByComputer {
+                    for subview in c.subviews {
+                        guard let flag = subview as? FlagView else { continue }
+                        if flag.tag != 1 {
+                            UIView.animate(withDuration: 0.2, animations: {
+                                flag.frame = CGRect(x: -5, y: -5, width: flag.frame.width + 10, height: flag.frame.height + 10)
+                            }) { (_) in
+                                if dataManager.verificationLevel == 0 && random(2) == 1 {
+                                    UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                        flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                    }, completion: nil)
+                                } else if self.isCaseABomb(i: c.i, j: c.j) {
+                                    UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                        flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                    }, completion: { (_) in
+                                        flag.removeFromSuperview()
+                                        flag.color = colorForRGB(r: 60, g: 160, b: 100)
+                                        flag.tag = 1
+                                        c.addSubview(flag)
+                                        flag.setNeedsDisplay()
+                                    })
+                                } else {
+                                    UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                        flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                    }, completion: nil)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
+
+// MARK: - Timer extension
+extension ViewOfGame: CountingTimerProtocol {
+    func timerFires(id: String) {
+        if id == "Option3" {
+            for line in cases {
+                for c in line {
+                    // Do option 3
+                    if c.caseState == .blocked && random(100) < Int(100-game!.option3Frequency*100)  {
+                        c.caseState = .empty
+                        c.isUserInteractionEnabled = true
+                    }
+                }
+            }
+
+            if random(100) < Int(game!.option3Frequency*100) {
+                let randN = random(game!.n)
+                let randM = random(game!.m)
+                blockACaseAt(i: randN, j: randM)
+            }
+            
+        }
+    }
+    
+    func pauseAllOption1Timers() {
+        if game!.option1 {
+            cases.forEach { (line) in
+                line.forEach({ (c) in
+                    c.option1Timer.pause()
+                })
+            }
+        }
+    }
+    
+    func unPauseAllOption1Timers() {
+        if game!.option1 {
+            cases.forEach { (line) in
+                line.forEach({ (c) in
+                    c.option1Timer.play()
+                })
+            }
+        }
+    }
+}
+

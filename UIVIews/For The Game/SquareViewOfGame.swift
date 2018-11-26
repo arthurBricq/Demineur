@@ -16,26 +16,36 @@ class SquareViewOfGame: ViewOfGame {
         let a = self.frame.width/CGFloat(game!.m)
         let caseSize = CGSize(width: a, height: a)
         for i in 0..<game!.n {
+            var line: [Case] = []
             for j in 0..<game!.m {
-                // Create a new square case 
+                // Create a new square case
+                let newCase = SquareCase(frame: CGRect(origin: positionnerPoint, size: caseSize), game: game!, i: i, j: j, gameState: gameState, viewOfGame: self)
+                newCase.caseState = gameState[i][j] == -2 ? .none : .empty
+                line.append(newCase)
+                self.addSubview(newCase)
+                positionnerPoint = CGPoint(x: positionnerPoint.x + a, y: positionnerPoint.y)
             }
+            cases.append(line)
+            positionnerPoint = CGPoint(x: 0, y: positionnerPoint.y + a)
         }
     }
     
     override func ouvertureRecursive(line i: Int, column j: Int) {
+
         let minI = 0
         let minJ = 0
         let maxI = gameState.count-1
         let maxJ = gameState[0].count-1
         var hasToContinue: Bool = false
         var hasToOpen: Bool = false
-        
-        if isCaseBlocked(i: i, j: j) { return }
-        
+
         // followings condition are true if we should open the case
-        let cond1_1 = (i >= minI && i <= maxI) ; let cond1_2 = (j >= minJ && j <= maxJ);
+        let cond1_1 = (i >= minI && i <= maxI)
+        let cond1_2 = (j >= minJ && j <= maxJ)
         let cond1 = cond1_1 && cond1_2
-        if !cond1 { return } else {
+        if !cond1 {
+            return
+        } else {
             let cond2 = !isTheCaseOpen(i: i, j: j)
             let cond3 = !isTheCaseMarked(i: i, j: j)
             let cond4 = !isCaseNone(i: i, j: j)
@@ -45,6 +55,8 @@ class SquareViewOfGame: ViewOfGame {
             hasToContinue = gameState[i][j] == 0
         }
     
+        if isCaseBlocked(i: i, j: j) { return }
+        
         if hasToOpen {
             returnACaseAt(i: i, j: j)
         } else {

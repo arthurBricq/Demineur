@@ -132,21 +132,9 @@ class PauseViewController: UIViewController {
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()
-            
-            if gameViewController.game.gameType == .square {
-                gameViewController.viewOfGameSquare?.option3Timer.play()
-                gameViewController.viewOfGameSquare?.unPauseAllOption1Timers()
-            } else if gameViewController.game.gameType == .hexagonal {
-                gameViewController.viewOfGameHex?.option3Timer.play()
-                gameViewController.viewOfGameHex?.unPauseAllOption1Timers()
-            } else if gameViewController.game.gameType == .triangular {
-                gameViewController.viewOfGameTriangular?.option3Timer.play()
-                gameViewController.viewOfGameTriangular?.unPauseAllOption1Timers()
-            }
-            
-            
+            gameViewController.viewOfGame?.option3Timer.play()
+            gameViewController.viewOfGame?.unPauseAllOption1Timers()
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
-        
         } else if pausedGameViewController is SuperPartiesGameViewController {
             let gameViewController = pausedGameViewController as! SuperPartiesGameViewController
             

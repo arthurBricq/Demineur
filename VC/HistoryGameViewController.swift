@@ -19,6 +19,7 @@ class HistoryGameViewController: UIViewController {
    
     // MARK: - VARIABLES
     override var prefersStatusBarHidden: Bool { return true }
+    
     var bonusChoiceView: BonusChoiceView?
     var game: OneGame = OneGame(gameTypeWithNoneCases: .square, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
     var gameIndex: Int = 1 // Avoir connaissance de l'indice du niveau
@@ -26,9 +27,10 @@ class HistoryGameViewController: UIViewController {
     var numberOfBombs: Int = 0
     var gameState = [[Int]].init()
     var gameTimer = CountingTimer()
-    var viewOfGameSquare: ViewOfGameSquare?
     var viewOfGameHex: ViewOfGame_Hex?
     var viewOfGameTriangular: ViewOfGameTriangular?
+    
+    var viewOfGame: ViewOfGame?
     
     // MARK: - FUNCTIONS
     override func viewDidLoad() {
@@ -38,12 +40,11 @@ class HistoryGameViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         transitioningDelegate = nil
-        isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu.
+        isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu pour créer la partie
         startANewGame(animatedFromTheRight: false)
     }
     
     func addTheBonusChoiceView() {
-        
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
         let dec_h: CGFloat = 20 // decalage horizontal
@@ -53,7 +54,6 @@ class HistoryGameViewController: UIViewController {
         let size = CGSize(width: w, height: h)
         let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
         if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
-        
         bonusChoiceView = BonusChoiceView()
         bonusChoiceView!.backgroundColor = UIColor.clear
         bonusChoiceView!.progress = 0
@@ -61,7 +61,6 @@ class HistoryGameViewController: UIViewController {
         bonusChoiceView!.instantiateScrollView()
         bonusChoiceView!.vcDelegate = self
         self.view.addSubview(bonusChoiceView!)
-        
     }
     
     func startANewGame(animatedFromTheRight: Bool) {
@@ -105,66 +104,29 @@ class HistoryGameViewController: UIViewController {
         let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
         
         removePrecendentViewOfGame()
-        
+    
         let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
+        
         game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
         
         // Ajouter les vues du jeu
         if game.gameType == .square {
             createANewSquareGameStepOne()
-            
-            let gameView = ViewOfGameSquare()
-            //gameView.layer.borderWidth = 2.0
-            //gameView.layer.borderColor = game.colors.strokeColor.cgColor
             let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
             let viewSize = CGSize(width: width, height: height)
             let origin = animatedFromTheRight ? CGPoint(x: self.view.center.x - width/2 + self.view.frame.width, y: self.view.center.y - height/2) : CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
-            gameView.frame = CGRect(origin: origin, size: viewSize)
+            let gameView = SquareViewOfGame(frame: CGRect(origin: origin, size: viewSize), game: game, gameState: &gameState)
             gameView.backgroundColor = UIColor.clear
-            gameView.n = game.n
-            gameView.m = game.m
-            gameView.ratio = 2
-            gameView.gameState = gameState
             gameView.delegate = self
-            gameView.option1 = game.option1
-            gameView.option1Time = game.option1Time
-            gameView.option2 = game.option2
-            gameView.option2frequency = game.option2Frequency
-            gameView.isUserInteractionEnabled = true
-            gameView.strokeColor = game.colors.strokeColor
-            gameView.openColor = game.colors.openColor
-            gameView.emptyColor = game.colors.emptyColor
-            gameView.textColor = game.colors.textColor
             gameView.layer.masksToBounds = false
             gameView.layer.borderColor = game.colors.strokeColor.cgColor
             gameView.layer.borderWidth = 1.0
             gameView.numberOfFlags = game.numberOfFlag
-            
             gameView.onPosingFlag = { (test: Bool) -> Void in
-                
-                if test {
-                    // Incrémenter le nombre de bombes
-                    self.numberOfBombs += 1
-                }
-                
+                self.numberOfBombs += test ? 1 : 0
             }
-            
-            
-            if game.option3 {
-                gameView.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-                gameView.option3Frequency = game.option3Frequency
-                gameView.option3Timer.delegate = gameView
-            }
-            
-            viewOfGameSquare = gameView
-            self.view.addSubview(viewOfGameSquare!)
-            
-            if animatedFromTheRight {
-                UIView.animate(withDuration: 0.7) {
-                    self.viewOfGameSquare?.center.x -= self.view.frame.width
-                }
-            }
-            
+            viewOfGame = gameView
+            self.view.addSubview(gameView)
         } else if game.gameType == .hexagonal {
             
             createANewHexGameStepOne() // première étape de la création
@@ -216,12 +178,6 @@ class HistoryGameViewController: UIViewController {
             
             self.view.addSubview(viewOfGameHex!)
             
-            if animatedFromTheRight {
-                UIView.animate(withDuration: 0.7) {
-                    self.viewOfGameHex?.center.x -= self.view.frame.width
-                }
-            }
-            
         } else if game.gameType == .triangular {
             createNewTriangularGameStepOne()
             
@@ -272,10 +228,13 @@ class HistoryGameViewController: UIViewController {
             
             self.view.addSubview(viewOfGameTriangular!)
             
-            if animatedFromTheRight {
-                UIView.animate(withDuration: 0.7) {
-                    self.viewOfGameTriangular?.center.x -= self.view.frame.width
-                }
+            
+        }
+        
+        
+        if animatedFromTheRight {
+            UIView.animate(withDuration: 0.7) {
+                self.viewOfGame?.center.x -= self.view.frame.width
             }
         }
     }
@@ -283,10 +242,9 @@ class HistoryGameViewController: UIViewController {
     /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
     func removePrecendentViewOfGame()
     {
+        // TODO: simpliy this method
         
-        if viewOfGameSquare != nil {
-            viewOfGameSquare?.removeFromSuperview()
-        }
+        viewOfGame?.removeFromSuperview()
         
         if viewOfGameHex != nil {
             viewOfGameHex?.removeFromSuperview()
@@ -299,11 +257,9 @@ class HistoryGameViewController: UIViewController {
     }
     
     func openTheBombs() {
-        if game.gameType == .square {
-            if viewOfGameSquare != nil {
-                viewOfGameSquare!.returnAllTheCases()
-            }
-        } else if game.gameType == .hexagonal {
+        // TODO: simplify this method
+        viewOfGame?.returnAllTheCases()
+        if game.gameType == .hexagonal {
             if viewOfGameHex != nil {
                 viewOfGameHex!.returnAllTheCases()
             }
@@ -317,12 +273,12 @@ class HistoryGameViewController: UIViewController {
     
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
+        // TODO: simplify this method
         gameTimer.pause()
+        viewOfGame?.option3Timer.pause()
+        viewOfGame?.pauseAllOption1Timers()
         
-        if game.gameType == .square {
-            viewOfGameSquare?.option3Timer.pause()
-            viewOfGameSquare?.pauseAllOption1Timers()
-        } else if game.gameType == .hexagonal {
+        if game.gameType == .hexagonal {
             viewOfGameHex?.option3Timer.pause()
             viewOfGameHex?.pauseAllOption1Timers()
         } else if game.gameType == .triangular {
@@ -337,9 +293,7 @@ class HistoryGameViewController: UIViewController {
         pauseVC.pausedGameViewController = self
         self.present(pauseVC, animated: true, completion: nil)
     }
-    
-    
-    
+
     func updateFlags(numberOfFlags: Int) {
         flagsLabel.text = numberOfFlags.description
         bombsLabel.text = game.z.description
@@ -354,14 +308,12 @@ extension HistoryGameViewController {
     func createANewSquareGameStepOne() {
         gameState = createEmptySquareGameState(n: game.n, m: game.m)
         positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
-        
     }
     
     func updateSquareGame(withFirstTouched touch: (x: Int, y: Int)) {
         positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
         createNumbersToDisplaySquare(in: &gameState)
-        viewOfGameSquare!.gameState = gameState
-        viewOfGameSquare!.updateAllNumbers()
+        viewOfGame!.gameState = gameState
     }
     
     ///// HEX
@@ -419,14 +371,14 @@ extension HistoryGameViewController: GameViewCanCallVC {
         
         gameTimer.pause()
         
+        viewOfGame!.isUserInteractionEnabled = false
+        viewOfGame!.option3Timer.stop()
+        viewOfGame!.pauseAllOption1Timers()
+        
         if game.gameType == .hexagonal {
             viewOfGameHex!.isUserInteractionEnabled = false
             viewOfGameHex!.option3Timer.stop()
             viewOfGameHex?.pauseAllOption1Timers()
-        } else if game.gameType == .square {
-            viewOfGameSquare!.isUserInteractionEnabled = false
-            viewOfGameSquare!.option3Timer.stop()
-            viewOfGameSquare?.pauseAllOption1Timers()
         } else if game.gameType == .triangular {
             viewOfGameTriangular!.isUserInteractionEnabled = false
             viewOfGameTriangular!.option3Timer.stop()
@@ -509,13 +461,7 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
             let drapeauLevel = dataManager.drapeauLevel
             let values: [Int] = [1,2,3] // drapeaux à ajouter
             // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
-            if game.gameType == .hexagonal {
-                viewOfGameHex?.numberOfFlags += values[drapeauLevel]
-            } else if game.gameType == .square {
-                viewOfGameSquare?.numberOfFlags += values[drapeauLevel]
-            } else if game.gameType == .triangular {
-                viewOfGameTriangular?.numberOfFlags += values[drapeauLevel]
-            }
+            viewOfGame!.numberOfFlags += values[drapeauLevel]
         }
     }
     
@@ -523,13 +469,7 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
         if dataManager.bombeQuantity > 0 {
             dataManager.bombeQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-            if game.gameType == .hexagonal {
-                viewOfGameHex?.markARandomBomb()
-            } else if game.gameType == .square {
-                viewOfGameSquare?.markARandomBomb()
-            } else if game.gameType == .triangular {
-                viewOfGameTriangular?.markARandomBomb()
-            }
+            viewOfGame!.markARandomBomb()
         }
     }
     
@@ -544,11 +484,7 @@ extension HistoryGameViewController: BonusButtonsCanCallVC {
         if dataManager.verificationQuantity > 0 {
             dataManager.verificationQuantity -= 1
             bonusChoiceView!.updateTheNumberLabels()
-            switch game.gameType {
-            case .square: viewOfGameSquare?.verificationBonusFunc()
-            case .hexagonal: viewOfGameHex?.verificationBonusFunc()
-            case .triangular: viewOfGameTriangular?.verificationBonusFunc()
-            }
+            viewOfGame!.verificationBonusFunc()
         }
     }
     
@@ -582,14 +518,7 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
             })
             
             UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.7, animations: {
-                switch self.game.gameType {
-                case .square:
-                    self.viewOfGameSquare?.center.x -= self.view.frame.width
-                case .hexagonal:
-                    self.viewOfGameHex?.center.x -= self.view.frame.width
-                case .triangular:
-                    self.viewOfGameTriangular?.center.x -= self.view.frame.width
-                }
+                self.viewOfGame!.center.x -= self.view.frame.width
             })
             
         }) { (_) in
@@ -708,19 +637,9 @@ extension HistoryGameViewController {
             dataManager.vieQuantity -= 1
             
             var viewToRemove: BombView?
-            var viewOfGame: UIView?
-            
-            switch self.game.gameType {
-            case .square:
-                viewOfGame = self.viewOfGameSquare
-            case .hexagonal:
-                viewOfGame = self.viewOfGameHex
-            case .triangular:
-                viewOfGame = self.viewOfGameTriangular
-            }
             
             if didTapABomb {
-                for subview in viewOfGame!.subviews {
+                for subview in self.viewOfGame!.subviews {
                     if subview is SquareCase || subview is HexCase || subview is TriangularCase {
                         for subview2 in subview.subviews {
                             if subview2 is BombView {
@@ -758,27 +677,11 @@ extension HistoryGameViewController {
                     blurView.removeFromSuperview()
                     viewToRemove?.removeFromSuperview()
                     self.gameTimer.play()
-                    
-                    if self.game.gameType == .hexagonal {
-                        self.viewOfGameHex!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
-                        }
-                        self.viewOfGameHex?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .square {
-                        self.viewOfGameSquare!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
-                        }
-                        self.viewOfGameSquare?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .triangular {
-                        self.viewOfGameTriangular!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
-                        }
-                        self.viewOfGameTriangular?.unPauseAllOption1Timers()
+                    self.viewOfGame?.isUserInteractionEnabled = true
+                    if self.game.option3 {
+                        self.viewOfGame!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                     }
-                    
+                    self.viewOfGame?.unPauseAllOption1Timers()
                 })
                 
             })
@@ -893,19 +796,9 @@ extension HistoryGameViewController {
             dataManager.money -= allBonus[4].prixAchat
             
             var viewToRemove: BombView?
-            var viewOfGame: UIView?
-            
-            switch self.game.gameType {
-            case .square:
-                viewOfGame = self.viewOfGameSquare
-            case .hexagonal:
-                viewOfGame = self.viewOfGameHex
-            case .triangular:
-                viewOfGame = self.viewOfGameTriangular
-            }
-            
+        
             if didTapABomb {
-                for subview in viewOfGame!.subviews {
+                for subview in self.viewOfGame!.subviews {
                     if subview is SquareCase || subview is HexCase || subview is TriangularCase {
                         for subview2 in subview.subviews {
                             if subview2 is BombView {
@@ -943,31 +836,14 @@ extension HistoryGameViewController {
                     blurView.removeFromSuperview()
                     viewToRemove?.removeFromSuperview()
                     self.gameTimer.play()
-                    
-                    if self.game.gameType == .hexagonal {
-                        self.viewOfGameHex!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
-                        }
-                        self.viewOfGameHex?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .square {
-                        self.viewOfGameSquare!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
-                        }
-                        self.viewOfGameSquare?.unPauseAllOption1Timers()
-                    } else if self.game.gameType == .triangular {
-                        self.viewOfGameTriangular!.isUserInteractionEnabled = true
-                        if self.game.option3 {
-                            self.viewOfGameHex!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
-                        }
-                        self.viewOfGameTriangular?.unPauseAllOption1Timers()
+                    self.viewOfGame!.isUserInteractionEnabled = true
+                    if self.game.option3 {
+                        self.viewOfGame!.option3Timer.start(timeInterval: TimeInterval(self.game.option3Time), id: "Option3")
                     }
+                    self.viewOfGame!.unPauseAllOption1Timers()
                     
                 })
-                
             })
-            
         }
         message.addSubview(buttonToBuy)
         
@@ -1012,19 +888,7 @@ extension HistoryGameViewController {
     
     /// Retourne la largeur que doit avoir le popover pour etre exactement à la taille des parties
     func widthForThePopover() -> CGFloat {
-        
-        var toReturn: CGFloat = 100
-        
-        if game.gameType == .square {
-            toReturn = viewOfGameSquare!.frame.width
-        } else if game.gameType == .hexagonal {
-            toReturn = viewOfGameHex!.frame.width
-        } else if game.gameType == .triangular {
-            toReturn = viewOfGameTriangular!.frame.width
-        }
-        
-        return toReturn
-        
+        return viewOfGame!.frame.width
     }
     
 }

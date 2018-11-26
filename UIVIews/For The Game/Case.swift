@@ -18,12 +18,15 @@ class Case: UIButton {
     var i: Int = 0
     var j: Int = 0
     var game: OneGame?
-    var gameState = [[Int]].init()
+    var gameState : [[Int]] {
+        return viewOfGame!.gameState
+    }
     var viewOfGame: ViewOfGame?
     var markingTimer = LimitedTimer()
     var option1Timer = LimitedTimer()
     var caseState: CaseState = .empty  {
         didSet {
+            setNeedsDisplay()
             if game!.option1 && caseState == .open {
                 option1Timer.start(limit: TimeInterval(game!.option1Time), id: "ReturnCase")
             }
@@ -38,7 +41,7 @@ class Case: UIButton {
             }
         }
     }
-
+    
     // MARK: - Inits
     
     override init(frame: CGRect) {
@@ -47,13 +50,14 @@ class Case: UIButton {
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
     
-    convenience init(frame: CGRect, game: OneGame, i: Int, j: Int, gameState: [[Int]], viewOfGame: ViewOfGame) {
+    convenience init(frame: CGRect, game: OneGame, i: Int, j: Int, gameState:  [[Int]], viewOfGame: ViewOfGame) {
         self.init(frame: frame)
         self.game = game
         self.i = i
         self.j = j
-        self.gameState = gameState
+        // self.gameState = gameState
         self.viewOfGame = viewOfGame
+        option1Timer.delegate = self 
         markingTimer.delegate = self
     }
     

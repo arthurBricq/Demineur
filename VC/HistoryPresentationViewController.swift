@@ -108,7 +108,6 @@ class HistoryPresentationViewController: UIViewController  {
             
         case is HistoryGameViewController:
             let dest = segue.destination as! HistoryGameViewController
-            
             // On connait l'indice choisit de la partie et on connait la partie courrant du jeu,
             if selectedGameIndex <= dataManager.currentHistoryLevel {
                 dest.game = historyLevels[selectedGameIndex]
