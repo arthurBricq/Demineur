@@ -40,6 +40,8 @@
 		4E88CAC220FF38B100DAD9DB /* BonusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC120FF38B100DAD9DB /* BonusView.swift */; };
 		4E88CAC42101338F00DAD9DB /* TransitionToGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */; };
 		4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */; };
+		4E98AD8221AB6EFC0041DD2E /* ViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */; };
+		4E98AD8421AB6F110041DD2E /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98AD8321AB6F110041DD2E /* Case.swift */; };
 		4E98BBC92132E2D30054C7E7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E98BBCB2132E2D30054C7E7 /* Localizable.strings */; };
 		4E98BBCE21335AB30054C7E7 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98BBCD21335AB30054C7E7 /* TutorialViewController.swift */; };
 		4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E98BBCF21340E920054C7E7 /* TransitionToTutoriel.swift */; };
@@ -140,6 +142,8 @@
 		4E88CAC120FF38B100DAD9DB /* BonusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusView.swift; sourceTree = "<group>"; };
 		4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToGameView.swift; sourceTree = "<group>"; };
 		4E8FC31B20F91985000A9BCB /* Demineur.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Demineur.xcdatamodel; sourceTree = "<group>"; };
+		4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGame.swift; sourceTree = "<group>"; };
+		4E98AD8321AB6F110041DD2E /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
 		4E98BBC42132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		4E98BBC52132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Demineur/fr.lproj/Tutorial.strings; sourceTree = "<group>"; };
 		4E98BBC62132E2A00054C7E7 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -404,6 +408,8 @@
 			children = (
 				4EA7FD8B20F8964A00740480 /* Views */,
 				4EA7FD8220F895FC00740480 /* Buttons */,
+				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
+				4E98AD8321AB6F110041DD2E /* Case.swift */,
 			);
 			path = "For The Game";
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */,
 				4E29899E213DB1AB003D98D1 /* SuperPartiesTableViewCell.swift in Sources */,
 				4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */,
+				4E98AD8221AB6EFC0041DD2E /* ViewOfGame.swift in Sources */,
 				4E301FB421A0DA0B00DAB959 /* BonusDescription.swift in Sources */,
 				9C6E629A20FC96A6003B98C9 /* TransitionToHistoryMenuViewController.swift in Sources */,
 				4E51200A210B2B2F00736375 /* YesNoButton.swift in Sources */,
@@ -630,6 +637,7 @@
 				4EE06BBF219E7663004ED7D6 /* UserDefaultsManager.swift in Sources */,
 				4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */,
 				4EA7FD6C20F894E200740480 /* MenuViewController.swift in Sources */,
+				4E98AD8421AB6F110041DD2E /* Case.swift in Sources */,
 				4EA7FD5720F893E700740480 /* AppDelegate.swift in Sources */,
 				9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */,
 				4E301FB221A0D9CE00DAB959 /* OneGame.swift in Sources */,
