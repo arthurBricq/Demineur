@@ -56,18 +56,18 @@ class ViewOfGameTriangular: UIView {
                 let button = TriangularCase()
                 button.i = i
                 button.j = j
-                button.gameState = gameState
-                button.emptyColor = emptyColor
-                button.strokeColor = strokeColor
-                button.textColor = textColor
-                button.lineWidth = lineWidth
-                button.openColor = openColor
-                button.option1 = option1
-                button.option1Time = option1Time
-                button.option1Timer.delegate = button
-                button.option2 = option2
-                button.option2frequency = option2frequency
-                button.superViewDelegate = self
+//                button.gameState = gameState
+//                button.emptyColor = emptyColor
+//                button.strokeColor = strokeColor
+//                button.textColor = textColor
+//                button.lineWidth = lineWidth
+//                button.openColor = openColor
+//                button.option1 = option1
+//                button.option1Time = option1Time
+//                button.option1Timer.delegate = button
+//                button.option2 = option2
+//                button.option2frequency = option2frequency
+//                button.superViewDelegate = self
                 iteratorPoint.x = CGFloat(j) * a/2
                 iteratorPoint.y = CGFloat(i) * h
                 button.frame = CGRect(origin: iteratorPoint, size: size)
@@ -324,7 +324,7 @@ extension ViewOfGameTriangular {
         for button in self.subviews {
             if button is TriangularCase {
                 let button = button as! TriangularCase
-                button.gameState = gameState
+//                button.gameState = gameState
             }
         }
     }

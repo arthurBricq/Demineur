@@ -35,6 +35,8 @@
 		4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3A4F2120FE07A300EB5978 /* PieceView.swift */; };
 		4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E18CD2104F5C100B0AB30 /* HeartView.swift */; };
 		4E51200A210B2B2F00736375 /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E512009210B2B2F00736375 /* YesNoButton.swift */; };
+		4E5F79EA21ABBD3800955D36 /* HexViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */; };
+		4E6AFDD121ACBA4200A94A16 /* TriangleViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */; };
 		4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7725C420FD088C00B24FBE /* HautParleur.swift */; };
 		4E79480221386A0100FF462C /* SuperPartiesGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E79480121386A0100FF462C /* SuperPartiesGameViewController.swift */; };
 		4E88CAC220FF38B100DAD9DB /* BonusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E88CAC120FF38B100DAD9DB /* BonusView.swift */; };
@@ -138,6 +140,8 @@
 		4E3A4F2120FE07A300EB5978 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
 		4E4E18CD2104F5C100B0AB30 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		4E512009210B2B2F00736375 /* YesNoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
+		4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexViewOfGame.swift; sourceTree = "<group>"; };
+		4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleViewOfGame.swift; sourceTree = "<group>"; };
 		4E7725C420FD088C00B24FBE /* HautParleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HautParleur.swift; sourceTree = "<group>"; };
 		4E79480121386A0100FF462C /* SuperPartiesGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartiesGameViewController.swift; sourceTree = "<group>"; };
 		4E88CAC120FF38B100DAD9DB /* BonusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusView.swift; sourceTree = "<group>"; };
@@ -412,7 +416,10 @@
 				4EA7FD8220F895FC00740480 /* Buttons */,
 				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
 				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
+				4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */,
+				4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */,
 				4E98AD8321AB6F110041DD2E /* Case.swift */,
+				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
 			);
 			path = "For The Game";
 			sourceTree = "<group>";
@@ -451,7 +458,6 @@
 				4E7725C420FD088C00B24FBE /* HautParleur.swift */,
 				4E3A4F2120FE07A300EB5978 /* PieceView.swift */,
 				4E88CAC120FF38B100DAD9DB /* BonusView.swift */,
-				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
 				4EA7FD8520F8961C00740480 /* RayureDrawing.swift */,
 				4E4E18CD2104F5C100B0AB30 /* HeartView.swift */,
 				9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */,
@@ -632,6 +638,7 @@
 				4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */,
 				4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */,
 				4E301FB821A0DA7C00DAB959 /* IsTheGameStarted.swift in Sources */,
+				4E6AFDD121ACBA4200A94A16 /* TriangleViewOfGame.swift in Sources */,
 				4EAAE0FA21243810003F9BFE /* NextLevelButton.swift in Sources */,
 				4EA76A9920FB6E9C00E940C8 /* ArticleViewController.swift in Sources */,
 				4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */,
@@ -658,6 +665,7 @@
 				9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */,
 				4EAAE0FE212444DE003F9BFE /* ScoreViewController.swift in Sources */,
 				4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */,
+				4E5F79EA21ABBD3800955D36 /* HexViewOfGame.swift in Sources */,
 				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E2989A4213DC774003D98D1 /* TriangularPresentationButton.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,

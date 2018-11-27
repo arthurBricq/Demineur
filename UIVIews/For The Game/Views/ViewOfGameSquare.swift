@@ -52,7 +52,6 @@ class ViewOfGameSquare: UIView {
             for j in 0..<m {
                 
                 let newCase = SquareCase()
-                newCase.lineWidth = lineWidth
                 newCase.i = i
                 newCase.j = j
 //                newCase.gameState = gameState

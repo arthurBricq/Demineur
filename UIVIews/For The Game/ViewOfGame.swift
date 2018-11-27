@@ -91,7 +91,7 @@ class ViewOfGame: UIView {
     private func isTheGameFinished() -> Bool {
         var toReturn = true
         for i in 0..<gameState.count {
-            for j in 0..<gameState[0].count {
+            for j in 0..<gameState[i].count {
                 // We check if all bombs are marked
                 if isCaseABomb(i: i, j: j) {
                     if !isTheCaseMarked(i: i, j: j) {
@@ -185,14 +185,13 @@ class ViewOfGame: UIView {
         let cas = random(2) + 1
         let n = gameState.count
         for i in 0..<n {
-            let m = gameState[i].count
-            for j in 0..<m {
-                switch cas {
-                case 1:
+            switch cas {
+            case 1:
+                let m = gameState[i].count
+                for j in 0..<m {
                     if isCaseABomb(i: i, j: j) {
                         if !isTheCaseMarked(i: i, j: j) {
                             markACaseAt(i: i, j: j, byComputer: true)
-                            // si on gagne la partie à l'aide du bonus ...
                             if isTheGameFinished() { // end of game
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
@@ -200,7 +199,10 @@ class ViewOfGame: UIView {
                             return
                         }
                     }
-                case 2:
+                }
+            case 2:
+                let m = gameState[n-i-1].count
+                for j in 0..<m {
                     if isCaseABomb(i: n-i-1, j: m-j-1) {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
@@ -208,12 +210,12 @@ class ViewOfGame: UIView {
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
-                            return
+                            return 
                         }
                     }
-                default:
-                    break
                 }
+            default:
+                break
             }
         }
    

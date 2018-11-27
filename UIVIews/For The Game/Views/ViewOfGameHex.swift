@@ -62,21 +62,6 @@ class ViewOfGame_Hex: UIView {
                 let hexButton = HexCase()
                 hexButton.i = i // coordonné de la ligne
                 hexButton.j = j // coordonée de la colonne
-                hexButton.name = "line: \(i), column: \(j)"
-                hexButton.lineWidth = lineWidth
-                hexButton.emptyColor = emptyColor
-                hexButton.strokeColor = strokeColor
-                hexButton.openColor = openColor
-                hexButton.textColor = textColor
-                hexButton.gameState = gameState
-                hexButton.numberOfColumns = m
-                hexButton.number = gameState[i][j] // transmission du tableau des données.
-                hexButton.superViewDelegate = self // permet au boutton d'appeler cette vue.
-                hexButton.option1 = option1 // permet l'activation des timers.
-                hexButton.option1Time = option1Time
-                hexButton.option1Timer.delegate = hexButton
-                hexButton.option2 = option2
-                hexButton.option2frequency = option2frequency
                 
                 if gameState[i][j] == -2 {
                     hexButton.caseState = .none
@@ -358,7 +343,7 @@ extension ViewOfGame_Hex {
         for button in self.subviews {
             if button is HexCase {
                 let button = button as! HexCase
-                button.gameState = gameState
+                // button.gameState = gameState
             }
         }
     }

@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if dataManager.isMusicOn { playMusic() }
         
-        
         // To be done when first lunching the app
         
         dataManager.initiateANewDevice(argent: 10000, lives: 2, level: 20)

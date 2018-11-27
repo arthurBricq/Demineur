@@ -35,7 +35,6 @@ class BonusChoiceView: UIView {
         tmp.showsVerticalScrollIndicator = false
         tmp.showsHorizontalScrollIndicator = true
         tmp.indicatorStyle = .default
-        
         scrollView = tmp
     }
     
@@ -68,7 +67,7 @@ class BonusChoiceView: UIView {
             r.font = UIFont(name: "PingFangSC-Semibold", size: 20)
             r.layer.zPosition = 10
             r.frame = CGRect(x: c+4, y: c-d/2-10, width: d+10, height: d)
-            r.text = String(dataManager.levelOfBonus(atIndex: i))
+            r.text = String(dataManager.quantityOfBonus(atIndex: i))
             r.tag = i
             
             
@@ -103,7 +102,7 @@ class BonusChoiceView: UIView {
                 let view = tmp as! BonusView
                 guard let label = view.subviews[0] as? UILabel else { return } // il n'y a qu'un seul subview, il s'agit du label
                 
-                let number = dataManager.levelOfBonus(atIndex: label.tag)
+                let number = dataManager.quantityOfBonus(atIndex: label.tag)
                 view.alpha = 0.5
                 view.isUserInteractionEnabled = false
                 label.text = String(number)
@@ -120,7 +119,7 @@ class BonusChoiceView: UIView {
                 let view = tmp as! BonusView
                 guard let label = view.subviews[0] as? UILabel else { return } // il n'y a qu'un seul subview, il s'agit du label
                 
-                let number = dataManager.levelOfBonus(atIndex: label.tag)
+                let number = dataManager.quantityOfBonus(atIndex: label.tag)
                 
                 if number == 0 || (!isTimerOn && view.index == 0) { // permet d'annuler le bouttons temps ou d'annuler les cases qui n'ont plus de bonus.
                     view.alpha = 0.5

@@ -68,30 +68,19 @@ class ArticleViewController: UIViewController {
         
     }
     
-    
-    
-    
-    
     // MARK: - FONCTIONS
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateView()
     }
     
-    
     func updateNumberOfElementDisplay() {
-        let tmp = dataManager.levelOfBonus(atIndex: articleIndex)
-        if tmp == 0 || tmp == 1 {
-            indicateurNombreLabel.text = "\(tmp) restant"
+        let number = dataManager.quantityOfBonus(atIndex: articleIndex)
+        if number == 0 || number == 1 {
+            indicateurNombreLabel.text = "\(number) restant"
         } else {
-            indicateurNombreLabel.text = "\(tmp) restants"
+            indicateurNombreLabel.text = "\(number) restants"
         }
     }
     
@@ -102,7 +91,6 @@ class ArticleViewController: UIViewController {
         descriptionLabel.text = currentBonus.descriptions[dataManager.levelOfBonus(atIndex:  articleIndex)]
         achatButton.prix = String(currentBonus.prixAchat)
         containerView.backgroundColor = UIColor.clear
-        
         updateNumberOfElementDisplay()
         
         // ajout de la vue avec le dessin

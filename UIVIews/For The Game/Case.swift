@@ -50,7 +50,7 @@ class Case: UIButton {
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
     
-    convenience init(frame: CGRect, game: OneGame, i: Int, j: Int, gameState:  [[Int]], viewOfGame: ViewOfGame) {
+    convenience init(frame: CGRect, game: OneGame, i: Int, j: Int, viewOfGame: ViewOfGame) {
         self.init(frame: frame)
         self.game = game
         self.i = i
@@ -104,7 +104,7 @@ class Case: UIButton {
     
     // MARK: - Functions
 
-    private func addFlagToCase(flagColor: UIColor) {
+    func addFlagToCase(flagColor: UIColor) {
         let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: flagColor)
         addSubview(flag)
         Vibrate().vibrate(style: .medium)

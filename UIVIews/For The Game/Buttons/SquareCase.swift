@@ -8,14 +8,10 @@
 
 import UIKit
 
-// @IBDesignable
 class SquareCase: Case {
-    // This button is the one displaying the cases of the game.
-    // Those buttons have many different states
     
     // MARK: -  VARIABLES
-    @IBInspectable var lineWidth: CGFloat = 1.0
-    
+    let lineWidth: CGFloat = 1.0
     
     // MARK: - FUNCTIONS
     override func draw(_ rect: CGRect) {
@@ -96,12 +92,7 @@ class SquareCase: Case {
             break
         }
         
-        
-        
-        
-        
-        
-        
+      
     }
 
 }
