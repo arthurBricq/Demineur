@@ -38,6 +38,8 @@ class HistoryGameViewController: UIViewController {
         startANewGame(animatedFromTheRight: false)
     }
     
+    /// This function will either create the bonusBarView or replace it with a new one when a new game is started
+    /// - When calling the function, be sure that the viewOfGame already exists.
     func addTheBonusChoiceView() {
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
@@ -48,12 +50,8 @@ class HistoryGameViewController: UIViewController {
         let size = CGSize(width: w, height: h)
         let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
         if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
-        bonusChoiceView = BonusChoiceView()
-        bonusChoiceView!.backgroundColor = UIColor.clear
-        bonusChoiceView!.progress = 0
-        bonusChoiceView!.frame = CGRect(origin: origin, size: size)
-        bonusChoiceView!.instantiateScrollView()
-        bonusChoiceView!.vcDelegate = self
+        bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: viewOfGame!, gameTimer: gameTimer)
+        bonusChoiceView!.progress = 0.0
         self.view.addSubview(bonusChoiceView!)
     }
     
@@ -69,7 +67,6 @@ class HistoryGameViewController: UIViewController {
             gameTimer.delegate = self
             gameTimer.timeInterval = 1.0
         }
-        
         // instauration des drapeaux et des bombes sur l'écran
         if !game.areNumbersShowed {
             flagsLabel.isHidden = true
@@ -82,28 +79,19 @@ class HistoryGameViewController: UIViewController {
             bombsLabel.isHidden = false
             bombView.isHidden = false
         }
-        
-        // instauration de la bar des bonus
-        addTheBonusChoiceView()
-        
-        // Quelques détails
         isTheGameStarted.value = false
         updateFlags(numberOfFlags: game.numberOfFlag)
         self.numberOfBombs = 0 
+        
+        let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
+        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
+        
         
         // Tailles maximales occupées par la vue :
         let maxHeight = self.view.bounds.height * 0.65
         let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.92
         let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
-        
         removePrecendentViewOfGame()
-    
-        let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
-        
-        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
-        
-        // Compute the frame for the view
-        
         if game.gameType == .square {
             createANewSquareGameStepOne()
             let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
@@ -124,8 +112,6 @@ class HistoryGameViewController: UIViewController {
             let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
             viewOfGame = TriangleViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
         }
-    
-        
         // Set the properties of the view of game
         viewOfGame!.backgroundColor = UIColor.clear
         viewOfGame!.delegate = self
@@ -135,6 +121,8 @@ class HistoryGameViewController: UIViewController {
         viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
             self.numberOfBombs += test ? 1 : 0
         }
+        
+        addTheBonusChoiceView()
         self.view.addSubview(viewOfGame!)
         
         if animatedFromTheRight {
@@ -290,57 +278,6 @@ extension HistoryGameViewController: CountingTimerProtocol {
             }
         }
     }
-}
-
-
-/// BONUS
-// MARK: - Actions des boutons bonus via une délégation
-
-extension HistoryGameViewController: BonusButtonsCanCallVC {
-    func tempsTapped() { // il faut ajouter du temps
-        if dataManager.tempsQuantity > 0 {
-            dataManager.tempsQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-            let timeLevel: Int = dataManager.tempsLevel
-            let values: [CGFloat] = [15,30,45,60] // temps à rajouter
-            gameTimer.counter -= values[timeLevel]
-        }
-    }
-    
-    func drapeauTapped() { // il faut ajouter des drapeaux
-        if dataManager.drapeauQuantity > 0 {
-            dataManager.drapeauQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-            let drapeauLevel = dataManager.drapeauLevel
-            let values: [Int] = [1,2,3] // drapeaux à ajouter
-            // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
-            viewOfGame!.numberOfFlags += values[drapeauLevel]
-        }
-    }
-    
-    func bombeTapped() { // il faut marquer des bombes
-        if dataManager.bombeQuantity > 0 {
-            dataManager.bombeQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-            viewOfGame!.markARandomBomb()
-        }
-    }
-    
-    func vieTapped() { // il faut rajouter une vie
-        if dataManager.vieQuantity > 0 {
-            dataManager.vieQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-        }
-    }
-    
-    func verificationTapped() { // il faut verifier les drapeaux posée
-        if dataManager.verificationQuantity > 0 {
-            dataManager.verificationQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-            viewOfGame!.verificationBonusFunc()
-        }
-    }
-    
 }
 
 // MARK: - Gere les transitions

@@ -31,8 +31,8 @@ class InfiniteGameViewController: UIViewController {
     
     var sectionIndex: Int = 0
     var gameIndex: Int = 1
-    var numberOfBombs: Int = 0 // a la fin des parties, il faut updater le nombre de bombes correctement marquées
-    {
+    // À la fin des parties, il faut updater le nombre de bombes correctement marquées
+    var numberOfBombs: Int = 0 {
         didSet {
             print("nombre de drapeaux corrects: \(numberOfBombs)")
         }
@@ -939,8 +939,8 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
         bonusChoiceView!.backgroundColor = UIColor.clear
         bonusChoiceView!.progress = 0
         bonusChoiceView!.frame = CGRect(origin: origin, size: size)
-        bonusChoiceView!.instantiateScrollView()
-        bonusChoiceView!.vcDelegate = self
+//        bonusChoiceView!.instantiateScrollView()
+//        bonusChoiceView!.vcDelegate = self
         bonusChoiceView!.isTimerOn = returnCurrentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
     }

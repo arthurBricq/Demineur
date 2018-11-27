@@ -16,15 +16,37 @@ class BonusChoiceColor {
 
 var bonusChoiceColor = BonusChoiceColor() // il s'agit des couleurs de la vue
 
+/// REQUIRED: Largeur = 6 Hauteur
 class BonusChoiceView: UIView {
-    // Largeur = 6 Hauteur //
     
-    var vcDelegate: BonusButtonsCanCallVC?
-    var scrollView: UIScrollView?
+    // MARK: - Variables
+    
+    var viewOfGame: ViewOfGame?
+    var gameTimer: CountingTimer?
+    private var scrollView: UIScrollView?
     private var isActivated: Bool = false
     var isTimerOn: Bool = true
+
     
-    func instantiateScrollView() {
+    // MARK: - Inits
+    
+    override init(frame: CGRect) { super.init(frame: frame) }
+    
+    required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
+    
+    convenience init(frame: CGRect, viewOfGame: ViewOfGame, gameTimer: CountingTimer) {
+        self.init(frame: frame)
+        self.viewOfGame = viewOfGame
+        self.gameTimer = gameTimer
+        self.backgroundColor = UIColor.clear
+        self.progress = 0
+        self.instantiateScrollView()
+    }
+    
+    
+    // MARK: - Functions 
+    
+    private func instantiateScrollView() {
         let tmp = UIScrollView()
         let fx = self.bounds.width / 600 // ratios de dilatation de l'espace
         let fy = self.bounds.height / 100
@@ -38,7 +60,7 @@ class BonusChoiceView: UIView {
         scrollView = tmp
     }
     
-    func populateScrollView() {
+    private func populateScrollView() {
         
         let fy = self.bounds.height / 100
         let y0: CGFloat = 2
@@ -51,15 +73,12 @@ class BonusChoiceView: UIView {
             i.removeFromSuperview()
         }
         
-        
         for i in 0..<4 {
-            
             let v = BonusView() // v comme view
             v.frame = CGRect(x: 10 + CGFloat(i)*(c+esp), y: y0, width: c, height: c)
             v.index = i
-            v.delegate = vcDelegate
+            v.bonusBarView = self 
             v.backgroundColor = UIColor.clear
-            
             let r = UILabel() // r comme rond
             let d = c/2 // diametre du rond avec le nombre de bonus
             r.backgroundColor = UIColor.clear
@@ -69,12 +88,8 @@ class BonusChoiceView: UIView {
             r.frame = CGRect(x: c+4, y: c-d/2-10, width: d+10, height: d)
             r.text = String(dataManager.quantityOfBonus(atIndex: i))
             r.tag = i
-            
-            
-            
             v.addSubview(r)
             scrollView!.addSubview(v)
-            
         }
         
         
@@ -90,13 +105,13 @@ class BonusChoiceView: UIView {
     }
     
     /// Cette fonction permet de réactiver tous les bonus après le début de la partie.
-    func activateBonusButtons() {
+    public func activateBonusButtons() {
         updateTheNumberLabels()
         isActivated = true
     }
     
     /// Cette fonction doit-être appelée au début d'une partie pour pas que les bonus soit accessibles au début. Elle permet aussi de mettre les bons numéros à l'écran.
-    func desactivateBonusButtons() {
+    public func desactivateBonusButtons() {
         for tmp in scrollView!.subviews {
             if tmp is BonusView {
                 let view = tmp as! BonusView
@@ -128,9 +143,6 @@ class BonusChoiceView: UIView {
                     view.alpha = 1.0
                     view.isUserInteractionEnabled = true
                 }
-
-                
-                
                 label.text = String(number)
             }
         }
@@ -227,7 +239,71 @@ class BonusChoiceView: UIView {
         return false
     }
     
+    // MARK: - Actions when bonus button are tapped
+    
+    func tempsTapped() { // il faut ajouter du temps
+        if dataManager.tempsQuantity > 0 {
+            dataManager.tempsQuantity -= 1
+            self.updateTheNumberLabels()
+            let timeLevel: Int = dataManager.tempsLevel
+            let values: [CGFloat] = [15,30,45,60] // temps à rajouter
+            gameTimer!.counter -= values[timeLevel]
+        }
+    }
+    
+    func drapeauTapped() { // il faut ajouter des drapeaux
+        if dataManager.drapeauQuantity > 0 {
+            dataManager.drapeauQuantity -= 1
+            self.updateTheNumberLabels()
+            let drapeauLevel = dataManager.drapeauLevel
+            let values: [Int] = [1,2,3] // drapeaux à ajouter
+            viewOfGame!.numberOfFlags += values[drapeauLevel]
+        }
+    }
+    
+    func bombeTapped() { // il faut marquer des bombes
+        if dataManager.bombeQuantity > 0
+        {
+            dataManager.bombeQuantity -= 1
+            self.updateTheNumberLabels()
+            viewOfGame!.markARandomBomb()
+        }
+    }
+    
+    func vieTapped() { // il faut rajouter une vie
+        if dataManager.vieQuantity > 0 {
+            dataManager.vieQuantity -= 1
+            self.updateTheNumberLabels()
+        }
+    }
+    
+    func verificationTapped() { // il faut verifier les drapeaux posée
+        if dataManager.verificationQuantity > 0 {
+            dataManager.verificationQuantity -= 1
+            self.updateTheNumberLabels()
+            viewOfGame!.verificationBonusFunc()
+        }
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class BonusChoiceLayer: CALayer {
     

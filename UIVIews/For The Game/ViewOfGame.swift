@@ -106,7 +106,7 @@ class ViewOfGame: UIView {
     }
     
     func isTheCaseMarked(i: Int, j: Int) -> Bool {
-        return cases[i][j].caseState == .marked
+        return cases[i][j].caseState == .marked || cases[i][j].caseState == .markedByComputer
     }
     
     func isTheCaseOpen(i: Int, j: Int) -> Bool {
@@ -189,8 +189,8 @@ class ViewOfGame: UIView {
             case 1:
                 let m = gameState[i].count
                 for j in 0..<m {
-                    if isCaseABomb(i: i, j: j) {
-                        if !isTheCaseMarked(i: i, j: j) {
+                    if !isTheCaseMarked(i: i, j: j) {
+                        if isCaseABomb(i: i, j: j) {
                             markACaseAt(i: i, j: j, byComputer: true)
                             if isTheGameFinished() { // end of game
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)

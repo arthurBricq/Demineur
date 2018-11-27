@@ -9,7 +9,6 @@
 import UIKit
 
 class BonusView: UIView {
-
     var index: Int = 1
     var tempsAngleParameter: CGFloat = 45
     var writenNumber: Int {
@@ -60,7 +59,8 @@ class BonusView: UIView {
             }
         }
     }
-    var delegate: BonusButtonsCanCallVC?
+    
+    var bonusBarView: BonusChoiceView?
     
     override func draw(_ rect: CGRect) {
         if index == 0 {
@@ -89,15 +89,15 @@ class BonusView: UIView {
         }
         
         if index == 0 {
-            delegate!.tempsTapped()
+            bonusBarView!.tempsTapped()
         } else if index == 1 {
-            delegate!.drapeauTapped()
+            bonusBarView!.drapeauTapped()
         } else if index == 2 {
-            delegate!.bombeTapped()
+            bonusBarView!.bombeTapped()
         } else if index == 3 {
-            delegate!.verificationTapped()
+            bonusBarView!.verificationTapped()
         } else {
-            delegate!.vieTapped()
+            bonusBarView!.vieTapped()
         }
         
         
