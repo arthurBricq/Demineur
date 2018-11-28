@@ -70,9 +70,6 @@
 		4EA7FD8620F8961C00740480 /* RayureDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8520F8961C00740480 /* RayureDrawing.swift */; };
 		4EA7FD8820F8962B00740480 /* SquareCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8720F8962B00740480 /* SquareCase.swift */; };
 		4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8920F8963E00740480 /* TriangularCase.swift */; };
-		4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8C20F8966000740480 /* ViewOfGameHex.swift */; };
-		4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8E20F8967200740480 /* ViewOfGameSquare.swift */; };
-		4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9020F8968600740480 /* ViewOfGameTriangular.swift */; };
 		4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9320F896B500740480 /* BombViewDisplay.swift */; };
 		4EA7FD9620F896C200740480 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9520F896C200740480 /* ClockView.swift */; };
 		4EA7FD9820F896D200740480 /* FlagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD9720F896D200740480 /* FlagView.swift */; };
@@ -182,9 +179,6 @@
 		4EA7FD8520F8961C00740480 /* RayureDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayureDrawing.swift; sourceTree = "<group>"; };
 		4EA7FD8720F8962B00740480 /* SquareCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareCase.swift; sourceTree = "<group>"; };
 		4EA7FD8920F8963E00740480 /* TriangularCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangularCase.swift; sourceTree = "<group>"; };
-		4EA7FD8C20F8966000740480 /* ViewOfGameHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGameHex.swift; sourceTree = "<group>"; };
-		4EA7FD8E20F8967200740480 /* ViewOfGameSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGameSquare.swift; sourceTree = "<group>"; };
-		4EA7FD9020F8968600740480 /* ViewOfGameTriangular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewOfGameTriangular.swift; sourceTree = "<group>"; };
 		4EA7FD9320F896B500740480 /* BombViewDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombViewDisplay.swift; sourceTree = "<group>"; };
 		4EA7FD9520F896C200740480 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		4EA7FD9720F896D200740480 /* FlagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagView.swift; sourceTree = "<group>"; };
@@ -289,11 +283,30 @@
 			path = ForTheGame;
 			sourceTree = "<group>";
 		};
+		4E44EACD21AE1DDE00DABB51 /* AbstractClasses */ = {
+			isa = PBXGroup;
+			children = (
+				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
+				4E98AD8321AB6F110041DD2E /* Case.swift */,
+			);
+			path = AbstractClasses;
+			sourceTree = "<group>";
+		};
+		4E44EACE21AE1DF200DABB51 /* LogicalClasses */ = {
+			isa = PBXGroup;
+			children = (
+				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
+				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
+			);
+			path = LogicalClasses;
+			sourceTree = "<group>";
+		};
 		4EA7FD4A20F893E700740480 = {
 			isa = PBXGroup;
 			children = (
 				9C6E629B20FC96AA003B98C9 /* CustomTransitions */,
 				4EA7FD6820F894A700740480 /* Logic */,
+				4EA7FD8120F895EC00740480 /* For The Game */,
 				4EA7FD6920F894B300740480 /* UIVIews */,
 				4EA7FD6A20F894BE00740480 /* VC */,
 				4E02A1372109E1480040BA88 /* VC_Tutorial */,
@@ -348,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				4EA7FD9220F8969D00740480 /* Graphism */,
-				4EA7FD8120F895EC00740480 /* For The Game */,
 				4EA7FD7820F8958700740480 /* Cells */,
 				4EA7FD7520F8956200740480 /* Buttons */,
 			);
@@ -414,15 +426,10 @@
 		4EA7FD8120F895EC00740480 /* For The Game */ = {
 			isa = PBXGroup;
 			children = (
+				4E44EACE21AE1DF200DABB51 /* LogicalClasses */,
+				4E44EACD21AE1DDE00DABB51 /* AbstractClasses */,
 				4EA7FD8B20F8964A00740480 /* Views */,
 				4EA7FD8220F895FC00740480 /* Buttons */,
-				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
-				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
-				4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */,
-				4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */,
-				4E98AD8321AB6F110041DD2E /* Case.swift */,
-				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
-				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
 			);
 			path = "For The Game";
 			sourceTree = "<group>";
@@ -440,9 +447,9 @@
 		4EA7FD8B20F8964A00740480 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4EA7FD8E20F8967200740480 /* ViewOfGameSquare.swift */,
-				4EA7FD8C20F8966000740480 /* ViewOfGameHex.swift */,
-				4EA7FD9020F8968600740480 /* ViewOfGameTriangular.swift */,
+				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
+				4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */,
+				4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -585,7 +592,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E88CAC42101338F00DAD9DB /* TransitionToGameView.swift in Sources */,
-				4EA7FD8F20F8967200740480 /* ViewOfGameSquare.swift in Sources */,
 				4E29899E213DB1AB003D98D1 /* SuperPartiesTableViewCell.swift in Sources */,
 				4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */,
 				4E98AD8221AB6EFC0041DD2E /* ViewOfGame.swift in Sources */,
@@ -595,7 +601,6 @@
 				4E36C10F211DD78900F810B7 /* InfinitePresentationViewController.swift in Sources */,
 				9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */,
 				4EA7FDA020F8971F00740480 /* PauseButton.swift in Sources */,
-				4EA7FD9120F8968600740480 /* ViewOfGameTriangular.swift in Sources */,
 				4E3705EC213168E100972B51 /* TransitionToReglage.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
 				4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */,
@@ -669,7 +674,6 @@
 				4EAAE0FE212444DE003F9BFE /* ScoreViewController.swift in Sources */,
 				4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */,
 				4E5F79EA21ABBD3800955D36 /* HexViewOfGame.swift in Sources */,
-				4EA7FD8D20F8966000740480 /* ViewOfGameHex.swift in Sources */,
 				4E2989A4213DC774003D98D1 /* TriangularPresentationButton.swift in Sources */,
 				4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */,
 				4E3705E12130304B00972B51 /* ReglageViewController.swift in Sources */,
