@@ -88,8 +88,6 @@ class InfiniteGameViewController: UIViewController {
         containerView.layer.borderColor = UIColor.red.cgColor
         containerView.layer.borderWidth = 0.0
         self.view.addSubview(containerView)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -271,8 +269,6 @@ class InfiniteGameViewController: UIViewController {
     func endOfInfiniteGame(didTapABomb: Bool) {
         self.gameTimer.stop()
         self.openTheBombs()
-        
-        //1.
         // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
         // La variable 'level' est déjà upadter à chaque changement de niveau
         // Pour la variable 'numberOfBombs', on utilise des closures dénomées 'onPosingFlag(isFlagCorrect: Bool)' qui vont être donnée aux gameView et qui update la variable 'numberOfBombs'.
@@ -281,24 +277,15 @@ class InfiniteGameViewController: UIViewController {
         if Reachability.isConnectedToNetwork() == true {
             scoresModel.addOneScore(level: self.level, numberOfBombs: self.numberOfBombs)
         }
-        
         // Adding the new local score
         let newScore = LocalScore(context: AppDelegate.viewContext)
         newScore.level = Int32(level)
         newScore.numberOfBombs = Int32(numberOfBombs)
-        do {
-            try AppDelegate.viewContext.save()
-        } catch {
-            print("ERROR: saving core data ")
-        }
-    
-        
-        // 2.
-        // Rajouter l'argent gagné par le joueur
-        // Argent gagné = niveau + nombre de bombes
+        do { try AppDelegate.viewContext.save() }
+        catch { print("ERROR: saving core data ") }
+        // Money
         dataManager.money += self.level + self.numberOfBombs
-        
-        //3.
+        // Closing the page
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
         vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -312,7 +299,6 @@ class InfiniteGameViewController: UIViewController {
     }
     
     // MARK: - Fonctions qui ajoutent les parties
-    
     
     // Returns the CGRect to use to create a new ViewOfGame, used by the function 'addANewGame'
     private func frameForGame(game: OneGame) -> CGRect {
@@ -387,13 +373,10 @@ class InfiniteGameViewController: UIViewController {
     }
     
     func updateDisplaysOnNewGame() {
-        
         let numberOfFlags = currentGame().numberOfFlag
-        
         // met à jour les labels
         self.bombCounterLabel.text = self.currentGame().z.description
         self.flagCounterLabel.text = numberOfFlags.description
-        
         // si besoin reaffiche les labels
         if self.currentGame().areNumbersShowed {
             UIView.animate(withDuration: 0.25, animations: {
@@ -403,8 +386,7 @@ class InfiniteGameViewController: UIViewController {
                 self.flagView.alpha = 1
             })
         }
-        
-        // si nécessaire affiche la clock
+        // si besoin affiche la clock
         if currentGame().isTimerAllowed {
             gameTimer.start(timeInterval: 1.0, id: "Clock")
             gameTimer.delegate = self
@@ -440,7 +422,6 @@ class InfiniteGameViewController: UIViewController {
         }
     }
 
-    
     func updateSquareGame(withFirstTouched touch: (x: Int, y: Int)) {
         // on récupère la vue courrante
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
@@ -543,13 +524,9 @@ extension InfiniteGameViewController: variableCanCallGameVC {
         } else if currentSection.gameType == .triangular {
             updateTriangularGameState(withFirstTouched: touch)
         }
-        
         bonusChoiceView!.activateBonusButtons()
-        
     }
 }
-
-
 // MARK: - Protocole pour les gameView 
 extension InfiniteGameViewController: GameViewCanCallVC {
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
@@ -585,8 +562,6 @@ extension InfiniteGameViewController: GameViewCanCallVC {
                 self.endOfInfiniteGame(didTapABomb: false)
             }
         }
-        
-        
     }
     
     func updateFlagsDisplay(numberOfFlags: Int) {
@@ -618,11 +593,7 @@ extension InfiniteGameViewController: CountingTimerProtocol
             }
         }
     }
-    
-    
 }
-
-
 
 extension InfiniteGameViewController: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
