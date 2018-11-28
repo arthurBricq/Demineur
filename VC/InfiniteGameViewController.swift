@@ -21,37 +21,28 @@ class InfiniteGameViewController: UIViewController {
     @IBOutlet weak var flagCounterLabel: UILabel!
     @IBOutlet weak var flagView: FlagViewDisplay!
     @IBOutlet weak var pauseButton: PauseButton!
-    // Cette variable s'occupe de contenir les parties du jeu.
-    //@IBOutlet weak var containerView: UIView!
-    var containerView = UIView()
-    var blockingView: UIView? = UIView()
-    
     
     // MARK: - VARIABLES
     
+    var blockingView: UIView? = UIView()
+    // Cette variable s'occupe de contenir les parties du jeu comme ses subview
+    var containerView = UIView()
     var sectionIndex: Int = 0
     var gameIndex: Int = 1
-    // À la fin des parties, il faut updater le nombre de bombes correctement marquées
-    var numberOfBombs: Int = 0 {
-        didSet {
-            print("nombre de drapeaux corrects: \(numberOfBombs)")
-        }
-    }
-    var level: Int = 1 {
-        didSet {
-            print("niveau courrant: \(level)")
-        }
-    }
-    
+    // Is the number of correct flags put
+    var numberOfBombs: Int = 0
+    // Is the current level
+    var level: Int = 1
     var emptyGameState = [[Int]].init()
-    var gameState = [[Int]].init() // Pour la partie en cours ...
-    var currentSection = Section(simpleHexGameWith: (11,9)) // création de la section courante
-    
+    var gameState = [[Int]].init()
+    var currentSection = Section(simpleHexGameWith: (11,9))
     var gameTimer = CountingTimer()
     var animationTimer = CountingTimer()
+    // This variable is used in order to call only once the function 'currentGameIsFinished'. Indeed, it is called many times for a very strange reason.
+    var hasToFinishTheGame: Bool = true
     
-    var hasToFinishTheGame: Bool = true // This variable is used in order to call only once the function 'currentGameIsFinished'. Indeed, it is called many times for a very strange reason.
     var bonusChoiceView: BonusChoiceView?
+    var messageManager: MessageManagor?
     var gameManager = InfiniteGameManager() // permet de s'occuper de la logique du mode infinie.
     
     
@@ -67,31 +58,18 @@ class InfiniteGameViewController: UIViewController {
     }
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
-        
         gameTimer.pause()
-        
-        let currentGameView = containerView.subviews[containerView.subviews.count-1]
-        if currentGameView is ViewOfGameSquare {
-            let squareView = currentGameView as! ViewOfGameSquare
-            squareView.option3Timer.pause()
-            squareView.pauseAllOption1Timers()
-        } else if currentGameView is ViewOfGame_Hex {
-            let hexView = currentGameView as! ViewOfGame_Hex
-            hexView.option3Timer.pause()
-            hexView.pauseAllOption1Timers()
-        } else if currentGameView is ViewOfGameTriangular {
-            let triangularView = currentGameView as! ViewOfGameTriangular
-            triangularView.option3Timer.pause()
-            triangularView.pauseAllOption1Timers()
-        }
-        
+        // Pause the game
+        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        currentGameView.option3Timer.pause()
+        currentGameView.pauseAllOption1Timers()
+        // Open the pause menu
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
         pauseVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         pauseVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         pauseVC.pausedGameViewController = self
         self.present(pauseVC, animated: true, completion: nil)
-        
     }
     
     
@@ -100,32 +78,30 @@ class InfiniteGameViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        // Set the container view
         let containerWidth = self.view.frame.width*0.95
         let containerHeight = self.view.frame.height * (isItABigScreen() ? 0.7 : 0.8 )
         let ox = view.frame.width/2 - containerWidth/2
         let oy = (isItABigScreen() ? 0.16 : 0.10) * view.frame.height
         containerView.frame = CGRect(x: ox, y: oy, width: containerWidth, height: containerHeight)
-        self.view.addSubview(containerView)
-        
-        /// Pour la position de la containerView
         containerView.backgroundColor = UIColor.clear
         containerView.layer.borderColor = UIColor.red.cgColor
         containerView.layer.borderWidth = 0.0
+        self.view.addSubview(containerView)
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         clockView.alpha = 0
-        isTheGameStarted.delegate = self // permet le positionnement des bombes pos-début.
-        
+        isTheGameStarted.delegate = self
         startNewSection()
-        
-        // instauration de la bar des bonus
         addTheBonusChoiceView()
-        
+        // Set the message managor (to be updated)
+        messageManager = MessageManagor(viewOfGame: containerView.subviews.last as! ViewOfGame, superView: self.view) {
+            self.endOfInfiniteGame(didTapABomb: false)
+        }
     }
     
     
@@ -145,8 +121,7 @@ class InfiniteGameViewController: UIViewController {
     }
     
     /**
-     Cette fonction doit-être appelée quand on commence une nouvelle section (i.e.) dans le ViewWillAppear très probablement.
-     Appelé au TOUT DEBUT
+     Cette fonction doit-être appelée quand on commence une nouvelle section
      */
     func startNewSection() {
         
@@ -179,21 +154,14 @@ class InfiniteGameViewController: UIViewController {
         // si c'est la première section, on ne fait pas d'animations et on lance la partie immédiatemment
         if sectionIndex == 0 {
             
-            if currentSection.gameType == .hexagonal {
-                addANewHexGame(game: currentSection.game1!) // element 1 (sur le dessus)
-                addANewHexGame(game: currentSection.game2!) // element 0 (en dessous du premier)
-            } else if currentSection.gameType == .square {
-                addANewSquareGame(game: currentSection.game1!) // element 1 (sur le dessus)
-                addANewSquareGame(game: currentSection.game2!) // element 0 (en dessous du premier)
-            } else if currentSection.gameType == .triangular {
-                addANewTriangularGame(game: currentSection.game1!)
-                addANewTriangularGame(game: currentSection.game2!)
-            }
+            addANewGame(game: currentSection.game1!) // First element on the top
+            addANewGame(game: currentSection.game2!) // Second game is put below
+            updateDisplaysOnNewGame()
             
+            // TODO: put the next block inside method
             blockingView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height))
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlockingView(_:)))
             blockingView?.addGestureRecognizer(tapGesture)
-            
             let message = MessageEndOfSection()
             message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
             message.textColor = colorForRGB(r: 255, g: 255, b: 255)
@@ -205,18 +173,14 @@ class InfiniteGameViewController: UIViewController {
             let origin: CGPoint = CGPoint(x: (self.view.bounds.width-size.width)/2, y: (self.view.bounds.height-size.height)/2)
             message.frame = CGRect(origin: origin, size: size)
             self.view.addSubview(message)
-            
             blockingView?.addSubview(message)
-            
             view.addSubview(blockingView!)
             
-        } else {
+        } else { // (It is not the first section)
             // on supprime la partie courrante
             containerView.isUserInteractionEnabled = true
             containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
-            
             animateNewSection()
-            
             launchOption3TimerIfNeeded()
             containerView.isUserInteractionEnabled = true
         }
@@ -255,27 +219,31 @@ class InfiniteGameViewController: UIViewController {
         }
     }
     
+    /// This function has to be called each time the viewOfGame reference is modified, to let know the different object dealing with it.
+    func updateViewOfGamesReferences() {
+        bonusChoiceView!.viewOfGame = (containerView.subviews.last as! ViewOfGame)
+        messageManager!.viewOfGame = (containerView.subviews.last as! ViewOfGame)
+    }
+    
     /**
      Cette fonction est appelée quand la partie actuelle est terminée.
      Son rôle est de faire disparaitre l'ancienne vue et de faire apparaitre la nouvelle afin de passer à la partie suivante.
      */
     func currentGameIsFinished() {
-        /// DISPARITION OF CURRENT VIEW
         gameTimer.stop()
 
         if gameIndex != 5 {
             animateNewLevel()
         }
         
-        //// ANIMATION TO MAKE DISAPEAR THE VIEW GOES HERE.
         UIView.animate(withDuration: 2.0, animations: {
             self.containerView.subviews.last?.alpha = 0.0
         }) { (tmp) in
-            
             if self.gameIndex == 5 {
                 self.sectionIndex += 1
                 self.startNewSection()
             } else {
+                self.containerView.subviews.last?.removeFromSuperview()
                 self.reloadTheGames()
             }
         }
@@ -286,22 +254,15 @@ class InfiniteGameViewController: UIViewController {
      Cette fonction est appelée après la disparition de la vue courrante.
      */
     func reloadTheGames() {
-        
+        // Reset the game setting
         isTheGameStarted.value = false
-        containerView.subviews.last?.removeFromSuperview()
-        
-        if currentSection.gameType == .hexagonal {
-            addANewHexGame(game: nextGameToAdd())
-        } else if currentSection.gameType == .square {
-            addANewSquareGame(game: nextGameToAdd())
-        } else if currentSection.gameType == .triangular {
-            addANewTriangularGame(game: nextGameToAdd())
-        }
-        
+        addANewGame(game: nextGameToAdd())
+        // Update the viewOfgame of the bonus bar view (for bonus action)
+        updateViewOfGamesReferences()
         gameIndex += 1
         updateDisplaysOnNewGame()
         launchOption3TimerIfNeeded()
-        bonusChoiceView!.isTimerOn = returnCurrentGame().isTimerAllowed
+        bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         updateUserInteractionProperty()
         hasToFinishTheGame = true
     }
@@ -311,19 +272,17 @@ class InfiniteGameViewController: UIViewController {
         self.gameTimer.stop()
         self.openTheBombs()
         
-        
-        
         //1.
         // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
         // La variable 'level' est déjà upadter à chaque changement de niveau
         // Pour la variable 'numberOfBombs', on utilise des closures dénomées 'onPosingFlag(isFlagCorrect: Bool)' qui vont être donnée aux gameView et qui update la variable 'numberOfBombs'.
         
+        // Adding the score online
         if Reachability.isConnectedToNetwork() == true {
             scoresModel.addOneScore(level: self.level, numberOfBombs: self.numberOfBombs)
         }
         
         // Adding the new local score
-        
         let newScore = LocalScore(context: AppDelegate.viewContext)
         newScore.level = Int32(level)
         newScore.numberOfBombs = Int32(numberOfBombs)
@@ -332,16 +291,12 @@ class InfiniteGameViewController: UIViewController {
         } catch {
             print("ERROR: saving core data ")
         }
-        
-        
-        
+    
         
         // 2.
         // Rajouter l'argent gagné par le joueur
         // Argent gagné = niveau + nombre de bombes
         dataManager.money += self.level + self.numberOfBombs
-        
-        
         
         //3.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -358,206 +313,64 @@ class InfiniteGameViewController: UIViewController {
     
     // MARK: - Fonctions qui ajoutent les parties
     
-    /**
-     Cette fonction rajoute une partie carré en dessous des vues actuelles.
-     La partie est ajouté au prelier élement du tableau des subviews du container view.
-     */
-    func addANewSquareGame(game: OneGame, isFirst: Bool = false) {
-        /// Dimensionnement
-        let maxWidth = self.containerView.frame.width
-        let maxHeight = self.containerView.frame.height
-        
-        let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
-        /// Positionnnement
-        
-        let origin = CGPoint(x: self.containerView.frame.width/2 - width/2, y: self.containerView.frame.height/2 - height/2)
-        // let origin = CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: containerView.frame.height/2 - height/2)
-        let viewSize = CGSize(width: width, height: height)
-        let gameToAdd = ViewOfGameSquare()
-        gameToAdd.frame = CGRect(origin: origin, size: viewSize)
-        gameToAdd.layer.zPosition = 0 ; // en dessous
-        
-        /// Actualisation /// Creation de la partie vide du jeu
-        gameToAdd.n = game.n
-        gameToAdd.m = game.m
-        gameToAdd.z = game.z
-        gameToAdd.ratio = 3.0
-        gameToAdd.lineWidth = 0.5
-        gameToAdd.gameState = createEmptySquareGameState(n: game.n, m: game.m)
-        positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameToAdd.gameState)
-        gameToAdd.backgroundColor = UIColor.clear
-        gameToAdd.delegate = self
-        gameToAdd.option1 = game.option1
-        gameToAdd.option1Time = game.option1Time
-        gameToAdd.option2 = game.option2
-        gameToAdd.option2frequency = game.option2Frequency
-        gameToAdd.option3Frequency = game.option3Frequency
-        gameToAdd.openColor = game.colors.openColor
-        gameToAdd.emptyColor = game.colors.emptyColor
-        gameToAdd.textColor = game.colors.textColor
-        gameToAdd.strokeColor = game.colors.strokeColor
-        gameToAdd.numberOfFlags = game.numberOfFlag
-        
-        gameToAdd.layer.borderWidth = 1.0
-        gameToAdd.layer.borderColor = UIColor.black.cgColor
-        
-        // Comptage des drapeaux
-        gameToAdd.onPosingFlag = { (test: Bool) -> Void in
-            if test {
-                self.numberOfBombs += 1 
-            }
+    
+    // Returns the CGRect to use to create a new ViewOfGame, used by the function 'addANewGame'
+    private func frameForGame(game: OneGame) -> CGRect {
+        switch game.gameType {
+        case .square:
+            let maxWidth = self.containerView.frame.width
+            let maxHeight = self.containerView.frame.height
+            let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
+            let origin = CGPoint(x: self.containerView.frame.width/2 - width/2, y: self.containerView.frame.height/2 - height/2)
+            let viewSize = CGSize(width: width, height: height)
+            return CGRect(origin: origin, size: viewSize)
+        case .hexagonal:
+            let maxWidth = self.containerView.frame.width
+            let maxHeight = self.containerView.frame.height
+            let (width, height) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
+            let viewSize = CGSize(width: width, height: height)
+            let origin = CGPoint(x: self.containerView.frame.width/2 - width/2, y: self.containerView.frame.height/2 - height/2)
+            return CGRect(origin: origin, size: viewSize)
+        case .triangular:
+            let maxWidth = self.containerView.bounds.width
+            let maxHeight = self.containerView.bounds.height
+            let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
+            let origin = CGPoint(x: self.containerView.frame.width/2 - w/2, y: self.containerView.frame.height/2 - h/2)
+            return CGRect(origin: origin, size: CGSize.init(width: w, height: h))
         }
-        
-        gameToAdd.onUnposingFlag = { (test: Bool) -> Void in
-            if test {
-                self.numberOfBombs -= 1
-            }
-        }
-        
-        /// Ajout de la vue
-        self.containerView.insertSubview(gameToAdd, at: 0)
     }
     
-    /**
-     Cette fonction rajoute une partie hexagonale en dessous des vues actuelles.
-     La partie est ajouté au premier élement du tableau des subviews du container view.
-     */
-    func addANewHexGame(game: OneGame, isFirst: Bool = false) {
-        // Dimensionnement
-        let maxWidth = self.containerView.frame.width
-        let maxHeight = self.containerView.frame.height
-        let (width, height) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-        // Positionnement
-        let viewSize = CGSize(width: width, height: height)
-        let origin = CGPoint(x: self.containerView.frame.width/2 - width/2, y: self.containerView.frame.height/2 - height/2)
-        // let origin = (height > containerView.frame.height) ? CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: (containerView.frame.height/2 - height/2)*0.5) : CGPoint(x: containerView.frame.width/2 + (isFirst ? width/2 : -width/2), y: containerView.frame.height/2 - height/2)
-        let gameToAdd = ViewOfGame_Hex()
-        gameToAdd.frame = CGRect(origin: origin, size: viewSize)
-        gameToAdd.layer.zPosition = 0
-        
-        /// Actualisation /// Creation de la partie vide du jeu
-        gameToAdd.n = game.n
-        gameToAdd.m = game.m
-        gameToAdd.a = width / (sqrt(3) * CGFloat(game.m))
-        gameToAdd.z = game.z
-        gameToAdd.lineWidth = 0.5
-        gameToAdd.gameState = createEmptyHexGameState(n: game.n, m: game.m)
-        positionNoneCaseHex(noneCases: game.noneCasesPosition, gameState: &gameToAdd.gameState)
-        gameToAdd.backgroundColor = UIColor.clear
-        gameToAdd.delegate = self
-        gameToAdd.option1 = game.option1
-        gameToAdd.option1Time = game.option1Time
-        gameToAdd.option2 = game.option2
-        gameToAdd.option2frequency = game.option2Frequency
-        gameToAdd.option3Frequency = game.option3Frequency
-        gameToAdd.openColor = game.colors.openColor
-        gameToAdd.emptyColor = game.colors.emptyColor
-        gameToAdd.textColor = game.colors.textColor
-        gameToAdd.strokeColor = game.colors.strokeColor
-        gameToAdd.numberOfFlags = game.z
-        
-        // Comptage des drapeaux
-        gameToAdd.onPosingFlag = { (test: Bool) -> Void in
-            if test {
-                self.numberOfBombs += 1
-            }
+    // This function add a ViewOfGame as the first element of the containerView, with the specified game inside it.
+    func addANewGame(game: OneGame, isFirst: Bool = false) {
+        let frame = frameForGame(game: game)
+        let viewOfGame: ViewOfGame
+        switch game.gameType {
+        case .square:
+            var gameState = createEmptySquareGameState(n: game.n, m: game.m)
+            positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
+            viewOfGame = SquareViewOfGame(frame: frame, game: game, gameState: &gameState)
+            viewOfGame.layer.borderWidth = 1.0
+            viewOfGame.layer.borderColor = UIColor.black.cgColor
+        case .hexagonal:
+            var gameState = createEmptyHexGameState(n: game.n, m: game.m)
+            positionNoneCaseHex(noneCases: game.noneCasesPosition, gameState: &gameState)
+            viewOfGame = HexViewOfGame(frame: frame, game: game, gameState: &gameState)
+        case .triangular:
+            var gameState = createEmptySquareGameState(n: game.n, m: game.m)
+            positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
+            viewOfGame = TriangleViewOfGame(frame: frame, game: game, gameState: &gameState)
         }
-        
-        gameToAdd.onUnposingFlag = { (test: Bool) -> Void in
-            if test {
-                self.numberOfBombs -= 1
-            }
+        viewOfGame.delegate = self
+        viewOfGame.backgroundColor = UIColor.clear
+        viewOfGame.layer.zPosition = 0 ;
+        viewOfGame.onPosingFlag = { (test: Bool) -> Void in
+            self.numberOfBombs += test ? 1 : 0
         }
-        
-        
-        /// Ajout de la vue
-        self.containerView.insertSubview(gameToAdd, at: 0)
+        viewOfGame.onUnposingFlag = { (test: Bool) -> Void in
+            self.numberOfBombs -= test ? 1 : 0
+        }
+        self.containerView.insertSubview(viewOfGame, at: 0)
     }
-    
-    
-    /**
-     Cette fonction rajoute une partie triangulaire en dessous des vues actuelles.
-     La partie est ajouté au premier élement du tableau des subviews du container view.
-     */
-    func addANewTriangularGame(game: OneGame, isFirst: Bool = false) {
-        
-        let maxWidth = self.containerView.bounds.width
-        let maxHeight = self.containerView.bounds.height
-        let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-        let origin = CGPoint(x: self.containerView.frame.width/2 - w/2, y: self.containerView.frame.height/2 - h/2)
-
-//        let origin = CGPoint(x: containerView.bounds.width/2 + (isFirst ? w/2 : -w/2), y: (containerView.bounds.height - h)/2)
-        
-        let gameToAdd = ViewOfGameTriangular()
-
-        gameToAdd.frame = CGRect(origin: origin, size: CGSize.init(width: w, height: h))
-        gameToAdd.m = game.m
-        gameToAdd.n = game.n
-        gameToAdd.z = game.z
-        gameToAdd.gameState = createEmptySquareGameState(n: game.n, m: game.m)
-        gameToAdd.backgroundColor = UIColor.clear
-        gameToAdd.emptyColor = game.colors.emptyColor
-        gameToAdd.openColor = UIColor.lightGray.withAlphaComponent(0.5)
-        gameToAdd.strokeColor = UIColor.black
-        gameToAdd.lineWidth = 1.0
-        gameToAdd.delegateVC = self
-        gameToAdd.option1 = game.option1
-        gameToAdd.option1Time = game.option1Time
-        gameToAdd.option2 = game.option2
-        gameToAdd.option2frequency = game.option2Frequency
-        gameToAdd.option3Frequency = game.option3Frequency
-        gameToAdd.isUserInteractionEnabled = true
-        gameToAdd.strokeColor = game.colors.strokeColor
-        gameToAdd.openColor = game.colors.openColor
-        gameToAdd.emptyColor = game.colors.emptyColor
-        gameToAdd.numberOfFlags = game.z
-        
-        // Comptage des drapeaux
-        gameToAdd.onPosingFlag = { (test: Bool) -> Void in
-            if test {
-                self.numberOfBombs += 1
-            }
-        }
-        
-        gameToAdd.onUnposingFlag = { (test: Bool) -> Void in
-            if test {
-                self.numberOfBombs -= 1
-            }
-        }
-        
-        
-        /// Ajout de la vue
-        self.containerView.insertSubview(gameToAdd, at: 0)
-    }
-    
-    func displayTheGamesPresentInContainer() {
-        print("\n***** Vues présente actuellement *****")
-        print("Number of views: \(containerView.subviews.count)")
-        //let first = containerView.subviews.first ; let last = containerView.subviews.last ;
-        if let first = containerView.subviews.first as? ViewOfGameSquare {
-            print("Première partie : carrée.")
-            print("N = \(first.n) ; M = \(first.m) ; Z = \(first.z)" )
-        } else if let first = containerView.subviews.first as? ViewOfGameTriangular {
-            print("Première partie : triangulaire.")
-            print("N = \(first.n) ; M = \(first.m) ; Z = \(first.z)" )
-        } else if let first = containerView.subviews.first as? ViewOfGame_Hex {
-            print("Première partie : hexagonal.")
-            print("N = \(first.n) ; M = \(first.m) ; Z = \(first.z)" )
-        }
-        print("PARTIE COURANTE ----> ")
-        if let last = containerView.subviews.last as? ViewOfGameSquare {
-            print("Seconde partie : carrée.")
-            print("N = \(last.n) ; M = \(last.m) ; Z = \(last.z)" )
-        } else if let last = containerView.subviews.first as? ViewOfGameTriangular {
-            print("Seconde partie : triangulaire.")
-            print("N = \(last.n) ; M = \(last.m) ; Z = \(last.z)" )
-        } else if let last = containerView.subviews.first as? ViewOfGame_Hex {
-            print("Seconde partie : hexagonal.")
-            print("N = \(last.n) ; M = \(last.m) ; Z = \(last.z)" )
-        }
-        
-    }
-    
     
     /**
      Cette fonction permet simplement d'activer la première vue et de desactiver la deuxième vue.
@@ -569,29 +382,20 @@ class InfiniteGameViewController: UIViewController {
     }
     
     func openTheBombs() {
-        switch returnCurrentGame().gameType {
-        case .square:
-            let currentViewOfGame = containerView.subviews.last as! ViewOfGameSquare
-            currentViewOfGame.returnAllTheCases()
-        case .triangular:
-            let currentViewOfGame = containerView.subviews.last as! ViewOfGameTriangular
-            currentViewOfGame.returnAllTheCases()
-        case .hexagonal:
-            let currentViewOfGame = containerView.subviews.last as! ViewOfGame_Hex
-            currentViewOfGame.returnAllTheCases()
-        }
+        let currentViewOfGame = containerView.subviews.last as! ViewOfGame
+        currentViewOfGame.returnAllTheCases()
     }
     
     func updateDisplaysOnNewGame() {
         
-        let numberOfFlags = returnCurrentGame().numberOfFlag
+        let numberOfFlags = currentGame().numberOfFlag
         
         // met à jour les labels
-        self.bombCounterLabel.text = self.returnCurrentGame().z.description
+        self.bombCounterLabel.text = self.currentGame().z.description
         self.flagCounterLabel.text = numberOfFlags.description
         
         // si besoin reaffiche les labels
-        if self.returnCurrentGame().areNumbersShowed {
+        if self.currentGame().areNumbersShowed {
             UIView.animate(withDuration: 0.25, animations: {
                 self.bombCounterLabel.alpha = 1
                 self.bombView.alpha = 1
@@ -601,11 +405,9 @@ class InfiniteGameViewController: UIViewController {
         }
         
         // si nécessaire affiche la clock
-        if returnCurrentGame().isTimerAllowed {
-            
+        if currentGame().isTimerAllowed {
             gameTimer.start(timeInterval: 1.0, id: "Clock")
             gameTimer.delegate = self
-            
             UIView.animate(withDuration: 0.25) {
                 self.clockView.alpha = 1
             }
@@ -614,28 +416,14 @@ class InfiniteGameViewController: UIViewController {
     }
     
     func launchOption3TimerIfNeeded() {
-        
-        if returnCurrentGame().option3 {
-            
-            let currentGameView = containerView.subviews[containerView.subviews.count-1]
-            
-            if currentGameView is ViewOfGameSquare {
-                let squareView = currentGameView as! ViewOfGameSquare
-                squareView.option3Timer.start(timeInterval: Double(returnCurrentGame().option3Time), id: "Option3")
-                squareView.option3Timer.delegate = squareView
-            } else if currentGameView is ViewOfGame_Hex {
-                let hexView = currentGameView as! ViewOfGame_Hex
-                hexView.option3Timer.start(timeInterval: Double(returnCurrentGame().option3Time), id: "Option3")
-                hexView.option3Timer.delegate = hexView
-            } else if currentGameView is ViewOfGameTriangular {
-                let triangularView = currentGameView as! ViewOfGameTriangular
-                triangularView.option3Timer.start(timeInterval: Double(returnCurrentGame().option3Time), id: "Option3")
-                triangularView.option3Timer.delegate = triangularView
-            }
+        if currentGame().option3 {
+            let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+            currentGameView.option3Timer.start(timeInterval: Double(currentGame().option3Time), id: "Option3")
+            currentGameView.option3Timer.delegate = currentGameView
         }
     }
     
-    func returnCurrentGame() -> OneGame {
+    func currentGame() -> OneGame {
         switch gameIndex {
         case 1:
             return currentSection.game1!
@@ -651,43 +439,31 @@ class InfiniteGameViewController: UIViewController {
             return currentSection.game1!
         }
     }
-    
-}
 
-// MARK: - Création d'une nouvelle partie
-extension InfiniteGameViewController {
     
     ///// SQUARE
     func updateSquareGame(withFirstTouched touch: (x: Int, y: Int)) {
         // on récupère la vue courrante
-        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameSquare
-        let z = currentViewOfGame.z ;
+        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
         // on actualise les données de la vue courrante
-        positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: z, withFirstTouched: touch)
+        positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: currentGame().z, withFirstTouched: touch)
         createNumbersToDisplaySquare(in: &currentViewOfGame.gameState)
-        currentViewOfGame.updateAllNumbers()
-        
     }
     
     
     ///// HEX
     func updateHexGameState(withFirstTouched touch: (x: Int, y: Int)) {
-        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame_Hex
-        let z = currentViewOfGame.z
-        positionBombsHex(gameState: &currentViewOfGame.gameState, z: z, withFirstTouched: touch)
+        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        positionBombsHex(gameState: &currentViewOfGame.gameState, z: currentGame().z, withFirstTouched: touch)
         createNumbersToDisplayHex(gameState: &currentViewOfGame.gameState)
-        currentViewOfGame.updateAllNumbers()
     }
     
     
     ///// TRIANGLE
     func updateTriangularGameState(withFirstTouched touch: (x:Int, y: Int)) {
-        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGameTriangular
-        let z = currentViewOfGame.z
-        positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: z, withFirstTouched: touch, isTriangular: true)
+        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        positionBombsSquare(in: &currentViewOfGame.gameState, numberOfBombs: currentGame().z, withFirstTouched: touch, isTriangular: true)
         createNumbersToDisplayTriangle(in: &currentViewOfGame.gameState)
-        currentViewOfGame.updateAllNumbers()
-        
     }
     
 }
@@ -739,27 +515,11 @@ extension InfiniteGameViewController: GameViewCanCallVC {
             
             isTheGameStarted.value = false
             currentGameIsFinished()
-            
-            
         } else {
-            
             if didTapABomb || didTimeEnd {
-                
-                let currentGameView = containerView.subviews[containerView.subviews.count-1]
-                if currentGameView is ViewOfGameSquare {
-                    let squareView = currentGameView as! ViewOfGameSquare
-                    squareView.option3Timer.pause()
-                    squareView.pauseAllOption1Timers()
-                } else if currentGameView is ViewOfGame_Hex {
-                    let hexView = currentGameView as! ViewOfGame_Hex
-                    hexView.option3Timer.pause()
-                    hexView.pauseAllOption1Timers()
-                } else if currentGameView is ViewOfGameTriangular {
-                    let triangularView = currentGameView as! ViewOfGameTriangular
-                    triangularView.option3Timer.pause()
-                    triangularView.pauseAllOption1Timers()
-                }
-                
+                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+                currentGameView.option3Timer.pause()
+                currentGameView.pauseAllOption1Timers()
                 gameTimer.pause()
                 addTheMessage(didTapABomb: didTapABomb)
             } else {
@@ -773,8 +533,8 @@ extension InfiniteGameViewController: GameViewCanCallVC {
     
     func updateFlagsDisplay(numberOfFlags: Int) {
         
-        if returnCurrentGame().areNumbersShowed {
-            bombCounterLabel.text = returnCurrentGame().z.description
+        if currentGame().areNumbersShowed {
+            bombCounterLabel.text = currentGame().z.description
             flagCounterLabel.text = numberOfFlags.description
         }
     }
@@ -787,8 +547,8 @@ extension InfiniteGameViewController: CountingTimerProtocol
     // Cette fonction est appelée par le timer toutes les secondes pour actualiser le temps de l'horloge. Si la chronomètre est terminée, la fonction arrete de le jeu.
     func timerFires(id: String) {
         
-        if returnCurrentGame().isTimerAllowed {
-            let pourcentage: CGFloat = gameTimer.counter / CGFloat(returnCurrentGame().totalTime) // ratio of time used.
+        if currentGame().isTimerAllowed {
+            let pourcentage: CGFloat = gameTimer.counter / CGFloat(currentGame().totalTime) // ratio of time used.
             
             clockView.pourcentage = pourcentage // et actualisation via un didSet
             
@@ -808,39 +568,26 @@ extension InfiniteGameViewController: CountingTimerProtocol
 // MARK: - Gere les animations
 extension InfiniteGameViewController {
     
+    // This function animate and instantiate a new section (that is not the first section)
     func animateNewSection() {
-        
         let view = containerView.subviews.last!
-        
         UIView.animate(withDuration: 0.72, animations: {
             view.alpha = 0
         }) { (_) in
-            
             view.removeFromSuperview()
-            
             self.gameIndex = 0
             self.animateNewLevel()
-            
-            if self.currentSection.gameType == .hexagonal {
-                self.addANewHexGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
-                self.addANewHexGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
-            } else if self.currentSection.gameType == .square {
-                self.addANewSquareGame(game: self.currentSection.game1!) // element 1 (sur le dessus)
-                self.addANewSquareGame(game: self.currentSection.game2!) // element 0 (en dessous du premier)
-            } else if self.currentSection.gameType == .triangular {
-                self.addANewTriangularGame(game: self.currentSection.game1!)
-                self.addANewTriangularGame(game: self.currentSection.game2!)
-            }
-            
+            self.addANewGame(game: self.currentSection.game1!)
+            self.addANewGame(game: self.currentSection.game2!)
+            self.updateViewOfGamesReferences()
             self.updateDisplaysOnNewGame()
         }
         
     }
     
+    // Adds a circle on the screen with the new level displayed on it.
     func animateNewLevel() {
-        
         let message = MessageEndOfSection()
-        
         message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
         message.textColor = colorForRGB(r: 255, g: 255, b: 255)
         message.fontSizeNumber = 60
@@ -852,15 +599,12 @@ extension InfiniteGameViewController {
         let origin: CGPoint = CGPoint(x: (self.view.bounds.width-size.width)/2, y: (self.view.bounds.height-size.height)/2)
         message.frame = CGRect(origin: origin, size: size)
         self.view.addSubview(message)
-        
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
         scaleAnimation.fromValue = 0.3
         scaleAnimation.toValue = 1
-        
         let fadeAnimation = CABasicAnimation(keyPath: "opacity")
         fadeAnimation.fromValue = 0
         fadeAnimation.toValue = 1
-        
         let groupAnimation = CAAnimationGroup()
         groupAnimation.animations = [scaleAnimation, fadeAnimation]
         groupAnimation.fillMode = kCAFillModeBackwards
@@ -921,10 +665,11 @@ extension InfiniteGameViewController: CAAnimationDelegate {
 }
 
 // MARK: - Les actions des bonus
-extension InfiniteGameViewController: BonusButtonsCanCallVC {
+extension InfiniteGameViewController{
     
+    /// Adds the bonus choice view to the screen and set its viewOfGame as the first viewOfGame of this infinite party.
+    /// - You must keep updating the viewOfGame of the bonusChoiceView each time a new game is presented to screen.
     func addTheBonusChoiceView() {
-        
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
         let dec_h: CGFloat = 20 // decalage horizontal
@@ -934,112 +679,11 @@ extension InfiniteGameViewController: BonusButtonsCanCallVC {
         let size = CGSize(width: w, height: h)
         let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
         if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
-        
-        bonusChoiceView = BonusChoiceView()
-        bonusChoiceView!.backgroundColor = UIColor.clear
+        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: currentViewOfGame, gameTimer: gameTimer)
         bonusChoiceView!.progress = 0
-        bonusChoiceView!.frame = CGRect(origin: origin, size: size)
-//        bonusChoiceView!.instantiateScrollView()
-//        bonusChoiceView!.vcDelegate = self
-        bonusChoiceView!.isTimerOn = returnCurrentGame().isTimerAllowed
+        bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
-    }
-    
-    func tempsTapped() { // il faut ajouter du temps
-        
-        if dataManager.tempsQuantity > 0 {
-            dataManager.tempsQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-        
-        let timeLevel: Int = dataManager.levelOfBonus(atIndex:  0)
-        let values: [CGFloat] = [15,30,45,60] // temps à rajouter
-        gameTimer.counter -= values[timeLevel]
-    }
-    
-    func drapeauTapped() { // il faut ajouter des drapeaux
-        
-        if dataManager.drapeauQuantity > 0 {
-            dataManager.drapeauQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-        } else {
-            return
-        }
-        
-        let drapeauLevel = dataManager.levelOfBonus(atIndex:  1)
-        let values: [Int] = [1,2,3] // drapeaux à ajouter
-        // il faut le changer le nombre de drapeaux de la ViewOfGame (c'est elle qui s'en occupe)
-        if currentSection.gameType == .hexagonal {
-            let viewOfGameHex = containerView.subviews.last as! ViewOfGame_Hex
-            viewOfGameHex.numberOfFlags += values[drapeauLevel]
-        } else if currentSection.gameType == .square {
-            let viewOfGameSquare = containerView.subviews.last as! ViewOfGameSquare
-            viewOfGameSquare.numberOfFlags += values[drapeauLevel]
-        } else if currentSection.gameType == .triangular {
-            let viewOfGameTriangular = containerView.subviews.last as! ViewOfGameTriangular
-            viewOfGameTriangular.numberOfFlags += values[drapeauLevel]
-        }
-        
-    }
-    
-    
-    
-    func bombeTapped() { // il faut marquer des bombes
-        
-        if dataManager.bombeQuantity > 0 {
-            dataManager.bombeQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-            if currentSection.gameType == .hexagonal {
-                let viewOfGameHex = containerView.subviews.last as! ViewOfGame_Hex
-                viewOfGameHex.markARandomBomb()
-            } else if currentSection.gameType == .square {
-                let viewOfGameSquare = containerView.subviews.last as! ViewOfGameSquare
-                viewOfGameSquare.markARandomBomb()
-            } else if currentSection.gameType == .triangular {
-                let viewOfGameTriangular = containerView.subviews.last as! ViewOfGameTriangular
-                viewOfGameTriangular.markARandomBomb()
-            }
-            
-        }
-        
-    }
-    
-    func vieTapped() { // il faut rajouter une vie
-        if dataManager.vieQuantity > 0 {
-            dataManager.vieQuantity  -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-        }
-    }
-    
-    
-    func verificationTapped() { // il faut verifier les drapeaux posée
-        if dataManager.verificationQuantity > 0 {
-            dataManager.verificationQuantity -= 1
-            bonusChoiceView!.updateTheNumberLabels()
-
-            let viewOfGame = containerView.subviews.last!
-            
-            switch returnCurrentGame().gameType {
-            case .square:
-                let viewOfGameSquare = viewOfGame as! ViewOfGameSquare
-                viewOfGameSquare.verificationBonusFunc()
-                
-            case .hexagonal:
-                let viewOfGameHex = viewOfGame as! ViewOfGame_Hex
-                viewOfGameHex.verificationBonusFunc()
-                
-            case .triangular:
-                let viewOfGameTriangular = viewOfGame as! ViewOfGameTriangular
-                viewOfGameTriangular.verificationBonusFunc()
-                
-            }
-            
-        } else {
-            return
-        }
-        
     }
     
     
@@ -1163,7 +807,7 @@ extension InfiniteGameViewController {
                     }
                 }
             } else {
-                self.gameTimer.counter = 3*self.returnCurrentGame().totalTime/4
+                self.gameTimer.counter = 3*self.currentGame().totalTime/4
                 self.clockView.pourcentage = 0.75
             }
             
@@ -1194,28 +838,11 @@ extension InfiniteGameViewController {
                     viewToRemove?.removeFromSuperview()
                     self.gameTimer.play()
                     
-                    if self.returnCurrentGame().gameType == .hexagonal {
-                        let currentViewOfGame = self.containerView.subviews.last as! ViewOfGame_Hex
-                        currentViewOfGame.isUserInteractionEnabled = true
-                        if self.returnCurrentGame().option3 {
-                            currentViewOfGame.option3Timer.play()
-                        }
-                        currentViewOfGame.unPauseAllOption1Timers()
-                    } else if self.returnCurrentGame().gameType == .square {
-                        let currentViewOfGame = self.containerView.subviews.last as! ViewOfGameSquare
-                        currentViewOfGame.isUserInteractionEnabled = true
-                        if self.returnCurrentGame().option3 {
-                            currentViewOfGame.option3Timer.play()
-                        }
-                        currentViewOfGame.unPauseAllOption1Timers()
-                    } else if self.returnCurrentGame().gameType == .triangular {
-                        let currentViewOfGame = self.containerView.subviews.last as! ViewOfGameTriangular
-                        currentViewOfGame.isUserInteractionEnabled = true
-                        if self.returnCurrentGame().option3 {
-                            currentViewOfGame.option3Timer.play()
-                        }
-                        currentViewOfGame.unPauseAllOption1Timers()
-                    }
+                    let currentViewOfGame = self.containerView.subviews.last as! ViewOfGame
+                    currentViewOfGame.isUserInteractionEnabled = true
+                    if self.currentGame().option3 { currentViewOfGame.option3Timer.play() }
+                    currentViewOfGame.unPauseAllOption1Timers()
+                    
                     
                 })
                 
@@ -1334,7 +961,7 @@ extension InfiniteGameViewController {
                     }
                 }
             } else {
-                self.gameTimer.counter = 3*self.returnCurrentGame().totalTime/4
+                self.gameTimer.counter = 3*self.currentGame().totalTime/4
                 self.clockView.pourcentage = 0.75
             }
             
@@ -1364,28 +991,10 @@ extension InfiniteGameViewController {
                     viewToRemove?.removeFromSuperview()
                     self.gameTimer.play()
                     
-                    if self.returnCurrentGame().gameType == .hexagonal {
-                        let viewOfGame = self.containerView.subviews.last as! ViewOfGame_Hex
-                        viewOfGame.isUserInteractionEnabled = true
-                        if self.returnCurrentGame().option3 {
-                            viewOfGame.option3Timer.play()
-                        }
-                        viewOfGame.unPauseAllOption1Timers()
-                    } else if self.returnCurrentGame().gameType == .square {
-                        let viewOfGame = self.containerView.subviews.last as! ViewOfGameSquare
-                        viewOfGame.isUserInteractionEnabled = true
-                        if self.returnCurrentGame().option3 {
-                            viewOfGame.option3Timer.play()
-                        }
-                        viewOfGame.unPauseAllOption1Timers()
-                    } else if self.returnCurrentGame().gameType == .triangular {
-                        let viewOfGame = self.containerView.subviews.last as! ViewOfGameTriangular
-                        viewOfGame.isUserInteractionEnabled = true
-                        if self.returnCurrentGame().option3 {
-                            viewOfGame.option3Timer.play()
-                        }
-                        viewOfGame.unPauseAllOption1Timers()
-                    }
+                    let viewOfGame = self.containerView.subviews.last as! ViewOfGame
+                    viewOfGame.isUserInteractionEnabled = true
+                    if self.currentGame().option3 { viewOfGame.option3Timer.play() }
+                    viewOfGame.unPauseAllOption1Timers()
                     
                 })
                 
@@ -1429,5 +1038,3 @@ extension InfiniteGameViewController {
     }
     
 }
-
-

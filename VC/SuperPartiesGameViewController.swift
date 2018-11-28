@@ -45,9 +45,10 @@ class SuperPartiesGameViewController: UIViewController {
             print(gameState)
         }
     }
-    var viewOfGameSquare: ViewOfGameSquare?
-    var viewOfGameHex: ViewOfGame_Hex?
-    var viewOfGameTriangular: ViewOfGameTriangular?
+    
+    var viewOfGameSquare: ViewOfGame?
+    var viewOfGameHex: ViewOfGame?
+    var viewOfGameTriangular: ViewOfGame?
     var numberOfBombs: Int = 0
 
     // MARK: - Actions
@@ -156,6 +157,7 @@ class SuperPartiesGameViewController: UIViewController {
             
             /// Prenons 50 comme 1 côté d'un carré
             let cote: Int = 50
+            /*
             let gameView = ViewOfGameSquare()
             gameView.n = game!.n
             gameView.m = game!.m
@@ -199,9 +201,9 @@ class SuperPartiesGameViewController: UIViewController {
                     self.viewOfGameSquare?.center.x -= self.view.frame.width
                 }
             }
-            
+            */
         case .hexagonal:
-            
+            /*
             createANewHexGameStepOne() // première étape de la création
             
             let gameView = ViewOfGame_Hex()
@@ -254,8 +256,11 @@ class SuperPartiesGameViewController: UIViewController {
                 UIView.animate(withDuration: 0.7) {
                     self.viewOfGameHex?.center.x -= self.view.frame.width
                 }
-            }
+            }*/
+            break
         case .triangular:
+            break
+/*
             createNewTriangularGameStepOne()
             
             let gameView = ViewOfGameTriangular()
@@ -302,6 +307,7 @@ class SuperPartiesGameViewController: UIViewController {
                     self.viewOfGameTriangular?.center.x -= self.view.frame.width
                 }
             }
+ */
         
         }
         
@@ -397,7 +403,6 @@ extension SuperPartiesGameViewController {
         positionBombsSquare(in: &gameState, numberOfBombs: game!.z, withFirstTouched: (touch.x,touch.y))
         createNumbersToDisplaySquare(in: &gameState)
         viewOfGameSquare!.gameState = gameState
-        viewOfGameSquare!.updateAllNumbers()
     }
     
     ///// HEX
@@ -410,7 +415,6 @@ extension SuperPartiesGameViewController {
         positionBombsHex(gameState: &gameState, z: game!.z, withFirstTouched: (touch.x, touch.y))
         createNumbersToDisplayHex(gameState: &gameState)
         viewOfGameHex!.gameState = gameState // on actualise la nouvelle carte du jeu
-        viewOfGameHex!.updateAllNumbers()
     }
     
     ///// TRIANGLE
@@ -423,7 +427,6 @@ extension SuperPartiesGameViewController {
         positionBombsSquare(in: &gameState, numberOfBombs: game!.z, withFirstTouched: (touch.x,touch.y), isTriangular: true)
         createNumbersToDisplayTriangle(in: &gameState)
         viewOfGameTriangular!.gameState = gameState
-        viewOfGameTriangular!.updateAllNumbers()
     }
     
     
@@ -974,4 +977,3 @@ extension SuperPartiesGameViewController {
     
 }
 
-// TODO: add extensions for the bonus bar

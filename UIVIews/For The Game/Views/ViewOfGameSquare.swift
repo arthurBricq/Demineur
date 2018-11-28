@@ -9,7 +9,7 @@
 import UIKit
 
 // @IBDesignable
-
+/*
 class ViewOfGameSquare: UIView {
     
     // MARK: - Variables
@@ -491,4 +491,4 @@ extension ViewOfGameSquare: CountingTimerProtocol {
         }
     }
 }
-
+*/

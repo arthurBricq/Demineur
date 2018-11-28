@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+/*
 class ViewOfGame_Hex: UIView {
     
     // MARK: - Variables sur le jeu en cours
@@ -491,3 +491,4 @@ extension ViewOfGame_Hex: CountingTimerProtocol {
         }
     }
 }
+ */

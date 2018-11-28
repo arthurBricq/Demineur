@@ -9,6 +9,7 @@
 import UIKit
 
 // @IBDesignable
+/*
 class ViewOfGameTriangular: UIView {
     
     // MARK: - Variables sur le jeu en cours
@@ -483,3 +484,4 @@ extension ViewOfGameTriangular: CountingTimerProtocol {
         }
     }
 }
+*/

@@ -111,24 +111,11 @@ class PauseViewController: UIViewController {
         if pausedGameViewController is InfiniteGameViewController {
             let gameViewController = pausedGameViewController as! InfiniteGameViewController
             gameViewController.gameTimer.play()
-            
-            let currentGameView = gameViewController.containerView.subviews[gameViewController.containerView.subviews.count-1]
-            if currentGameView is ViewOfGameSquare {
-                let squareView = currentGameView as! ViewOfGameSquare
-                squareView.option3Timer.play()
-                squareView.unPauseAllOption1Timers()
-            } else if currentGameView is ViewOfGame_Hex {
-                let hexView = currentGameView as! ViewOfGame_Hex
-                hexView.option3Timer.play()
-                hexView.unPauseAllOption1Timers()
-            } else if currentGameView is ViewOfGameTriangular {
-                let triangularView = currentGameView as! ViewOfGameTriangular
-                triangularView.option3Timer.play()
-                triangularView.unPauseAllOption1Timers()
-            }
-            
+            let currentGameView = gameViewController.containerView.subviews.last as! ViewOfGame
+            currentGameView.option3Timer.play()
+            currentGameView.unPauseAllOption1Timers()
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
-            
+         
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
             gameViewController.gameTimer.play()
@@ -138,7 +125,7 @@ class PauseViewController: UIViewController {
         } else if pausedGameViewController is SuperPartiesGameViewController {
             let gameViewController = pausedGameViewController as! SuperPartiesGameViewController
             
-            
+            /*
             if gameViewController.game!.gameType == .square {
                 gameViewController.viewOfGameSquare?.option3Timer.play()
                 gameViewController.viewOfGameSquare?.unPauseAllOption1Timers()
@@ -149,9 +136,8 @@ class PauseViewController: UIViewController {
                 gameViewController.viewOfGameTriangular?.option3Timer.play()
                 gameViewController.viewOfGameTriangular?.unPauseAllOption1Timers()
             }
+             */
             
-            
-            // TODO: update the number of the bonus bar 
         }
         
         

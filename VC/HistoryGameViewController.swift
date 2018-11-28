@@ -169,8 +169,9 @@ class HistoryGameViewController: UIViewController {
     
     func updateSquareGame(withFirstTouched touch: (x: Int, y: Int)) {
         positionBombsSquare(in: &gameState, numberOfBombs: game.z, withFirstTouched: (touch.x,touch.y))
-        createNumbersToDisplaySquare(in: &gameState)
-        viewOfGame!.gameState = gameState
+        createNumbersToDisplaySquare(in: &viewOfGame!.gameState)
+        // Verify if this work (passing directly the gameState of the viewOfGame as parameter of the function
+        // viewOfGame!.gameState = gameState
     }
     
     func createANewHexGameStepOne() {
