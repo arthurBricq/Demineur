@@ -50,5 +50,5 @@
 "key19" = "Voici les différentes cases présentes dans le jeu, ainsi que leur influence s'il y a une bombe." ;
 // Les bonus
 "key20" = "En jouant, vous gagnez des pièces. Avec cette argent, vous pouvez acheter des bonus dans la boutique ou dans le menu pause et les utiliser durant une partie. " ;
-"key21" = "Les bonus s'utilisent dans la bar des bonus." ;
+"key21" = "Les bonus s'utilisent dans la bar des bonus qui est sous l'écran." ;
 

@@ -18,6 +18,7 @@ class HistoryGameViewController: UIViewController {
     @IBOutlet weak var bombView: BombViewDisplay!
    
     // MARK: - VARIABLES
+    
     override var prefersStatusBarHidden: Bool { return true }
     
     var game: OneGame = OneGame(gameTypeWithNoneCases: .triangular, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
@@ -30,7 +31,6 @@ class HistoryGameViewController: UIViewController {
     var viewOfGame: ViewOfGame?
     var bonusChoiceView: BonusChoiceView?
     var messageManagor: MessageManagor?
-    
     
     // MARK: - FUNCTIONS
     
@@ -284,6 +284,8 @@ extension HistoryGameViewController: CountingTimerProtocol {
             }
         }
     }
+    
+    
 }
 
 // MARK: - Gere les transitions
