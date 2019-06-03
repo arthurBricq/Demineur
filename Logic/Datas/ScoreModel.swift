@@ -123,7 +123,7 @@ class ScoresModel {
     var records = [CKRecord]()
     // les listes d'attentes
     var insertedObjects = [Score]()
-    var deletedObjectIds = Set<CKRecordID>()
+    var deletedObjectIds = Set<CKRecord.ID>()
     
     init() { }
     
@@ -141,7 +141,7 @@ class ScoresModel {
         newScore.numberOfBombs = numberOfBombs
         
         // Pour ajouter l'identifiant des apples
-        iCloudUserIDAsync { (recordID: CKRecordID?, error: NSError?) in
+        iCloudUserIDAsync { (recordID: CKRecord.ID?, error: NSError?) in
             if let userID = recordID?.recordName {
                 newScore.userIdentifier = userID
             } else {
@@ -419,7 +419,7 @@ public class Reachability {
 // MARK: - Reconnaissance de l'identifiant iCloud afin de reconnaitre les joueurs
 
 /// async gets iCloud record ID object of logged-in iCloud user
-func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecordID?, _ error: NSError?) -> ()) {
+func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecord.ID?, _ error: NSError?) -> ()) {
     let container = CKContainer.default()
     container.fetchUserRecordID() {
         recordID, error in

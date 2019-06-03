@@ -433,7 +433,7 @@ extension SuperPartiesGameViewController {
 }
 
 // MARK: - Délégation pour le gameView (fin de la partie)
-extension SuperPartiesGameViewController: GameViewCanCallVC {
+extension SuperPartiesGameViewController: GameController {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
@@ -604,9 +604,9 @@ extension SuperPartiesGameViewController {
         
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
         }
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.view.frame //your view that have any objects
@@ -785,9 +785,9 @@ extension SuperPartiesGameViewController {
     func messageTwo(didTapABomb: Bool) {
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
         }
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.view.frame //your view that have any objects

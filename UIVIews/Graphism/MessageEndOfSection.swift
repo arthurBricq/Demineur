@@ -57,7 +57,7 @@ public class EndOfSectionMessage : NSObject {
             .font: UIFont.systemFont(ofSize: fontSizeLevel),
             .foregroundColor: textColor,
             .paragraphStyle: text2Style,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let text2TextHeight: CGFloat = text2TextContent.boundingRect(with: CGSize(width: text2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text2FontAttributes, context: nil).height
         context.saveGState()
@@ -74,7 +74,7 @@ public class EndOfSectionMessage : NSObject {
             .font: UIFont(name: "PingFangSC-Regular", size: fontSizeNumber)!,
             .foregroundColor: textColor,
             .paragraphStyle: text3Style,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let text3TextHeight: CGFloat = sectionIndex.boundingRect(with: CGSize(width: text3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: text3FontAttributes, context: nil).height
         context.saveGState()

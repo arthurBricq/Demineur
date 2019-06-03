@@ -15,7 +15,7 @@ import UIKit
 protocol ButtonCanCallSuperView {
     func buttonHaveBeenTapped(i: Int, j: Int, marking: Bool)
 }
-protocol GameViewCanCallVC {
+protocol GameController {
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) 
     func updateFlagsDisplay(numberOfFlags: Int)
     
@@ -32,9 +32,10 @@ protocol LimitedTimerProtocol {
 protocol variableCanCallGameVC {
     func createTheGame(withFirstTouched: (x: Int, y: Int))
 }
+/*
 protocol RoundButtonsCanCallVC {
     func buttonTapped(withIndex: Int)
-}
+} */
 protocol BonusButtonsCanCallVC {
     func tempsTapped()
     func drapeauTapped()
@@ -42,6 +43,7 @@ protocol BonusButtonsCanCallVC {
     func vieTapped()
     func verificationTapped()
 }
+
 protocol CellCanCallTableViewController {
     func reloadDatas()
     func reloadMoney()

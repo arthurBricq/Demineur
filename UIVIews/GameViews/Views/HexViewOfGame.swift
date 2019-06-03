@@ -10,13 +10,22 @@ import UIKit
 
 class HexViewOfGame: ViewOfGame {
     
-    var a: CGFloat {
+    public func getA() -> CGFloat {
         return self.frame.width/(sqrt(3) * CGFloat(game!.m))
+    }
+    
+    override var dimension: CGSize {
+        // We must return the dimension taken by game.
+        let n = game!.n ; let m = game!.m
+        let a = 30.0
+        let width = a * sqrt(3) * Double(m)
+        let height = 3/2 * a * Double(n) + a/2 
+        return CGSize(width: width, height: height)
     }
     
     override func instantiateCases() {
         var iteratorPoint: CGPoint = .zero
-        // pour toutes les cases :
+        let a = getA()
         let h = 2*a // la hauteur
         let w = k*h // la largeur
         let size = CGSize(width: w, height: h)
@@ -29,7 +38,7 @@ class HexViewOfGame: ViewOfGame {
                     iteratorPoint.y = CGFloat(i) * (3*a/2)
                 } else {
                     iteratorPoint.x = w/2 + CGFloat(j) * sqrt(3) * a
-                    iteratorPoint.y = CGFloat(i) * (3*a/2) 
+                    iteratorPoint.y = CGFloat(i) * (3*a/2)
                 }
                 let hexButton = HexCase(frame: CGRect(origin: iteratorPoint, size: size), game: game!, i: i, j: j, viewOfGame: self)
                 hexButton.caseState = gameState[i][j] == -2 ? .none : .empty
@@ -41,10 +50,10 @@ class HexViewOfGame: ViewOfGame {
         
     }
     
-    override func ouvertureRecursive(line i: Int, column j: Int)
-    {
-        let minIJ = 0 ;
-        let maxI = gameState.count ;
+    override func ouvertureRecursive(line i: Int, column j: Int) {
+        let minIJ = 0
+        let maxI = gameState.count
+        let a = getA()
         if i >= minIJ && j >= minIJ && i < maxI {
             // Pas une case en dehors du domaine.
             let maxJ = gameState[i].count ;

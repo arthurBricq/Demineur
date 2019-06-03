@@ -10,10 +10,16 @@ import UIKit
 
 
 class SquareViewOfGame: ViewOfGame {
+
+    override var dimension: CGSize {
+        let a = 50
+        return CGSize(width: CGFloat(game!.m*a), height: CGFloat(game!.n*a))
+    }
     
     override func instantiateCases() {
         var positionnerPoint: CGPoint = CGPoint.zero // iterator point
         let a = self.frame.width/CGFloat(game!.m)
+        print("frame of the view:",self.frame)
         let caseSize = CGSize(width: a, height: a)
         for i in 0..<game!.n {
             var line: [Case] = []

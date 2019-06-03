@@ -64,7 +64,7 @@ public class OuiNonButton : NSObject {
             .font: UIFont(name: "PingFangSC-Medium", size: 59)!,
             .foregroundColor: color,
             .paragraphStyle: textStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let textTextHeight: CGFloat = expression.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()

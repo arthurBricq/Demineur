@@ -46,9 +46,9 @@ class MessageManagor {
         
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
         }
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = superView.frame //your view that have any objects
@@ -196,9 +196,9 @@ class MessageManagor {
     private func messageTwo(didTapABomb: Bool) {
         var blurEffect: UIBlurEffect
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
-            blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+            blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
         }
         let blurView = UIVisualEffectView(effect: blurEffect)
         blurView.frame = self.superView.frame //your view that have any objects
@@ -340,7 +340,7 @@ class MessageManagor {
     
     /// Retourne la largeur que doit avoir le popover pour etre exactement à la taille des parties
     private func widthForThePopover() -> CGFloat {
-        return viewOfGame.frame.width
+        return superView.frame.width*0.8
     }
     
     

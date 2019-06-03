@@ -20,7 +20,7 @@ class Type1TableViewCell: UITableViewCell {
     }
     
     // Pour la logique des bouttons
-    var VC: RoundButtonsCanCallVC?
+    var buttonTappedClosure: ((Int)->Void)?
     
     var firstGameOfRow: Int = 4
     
@@ -36,17 +36,17 @@ class Type1TableViewCell: UITableViewCell {
         
         button1.isEnabled = true
         button1.number = firstGameOfRow
-        button1.delegate = VC
+        button1.buttonTappedClosure = buttonTappedClosure
         button1.alpha = 1
         
         button2.isEnabled = true
         button2.number = firstGameOfRow+1
-        button2.delegate = VC
+        button2.buttonTappedClosure = buttonTappedClosure
         button2.alpha = 1
         
         button3.isEnabled = true
         button3.number = firstGameOfRow+2
-        button3.delegate = VC
+        button3.buttonTappedClosure = buttonTappedClosure
         button3.alpha = 1
         
         print("firstGame : \(firstGameOfRow)      x = \(currentGame-firstGameOfRow)")

@@ -35,14 +35,7 @@ class PauseViewController: UIViewController {
     
     // MARK: - FUNCTIONS
     
-    func viewController(forIndex index: Int) -> UIViewController {
-        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
-        vc.articleIndex = index
-        vc.pauseVC = self
-        return vc
-        
-        
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +54,9 @@ class PauseViewController: UIViewController {
         
         var darkBlur = UIBlurEffect()
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+            darkBlur = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+            darkBlur = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
         }
         let blurView = UIVisualEffectView(effect: darkBlur)
         blurView.frame = self.view.frame //your view that have any objects
@@ -191,6 +184,13 @@ class PauseViewController: UIViewController {
 
 // MARK: - Gère le PageViewController
 extension PauseViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    
+    private func viewController(forIndex index: Int) -> UIViewController {
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "articleViewController") as! ArticleViewController
+        vc.articleIndex = index
+        vc.pauseVC = self
+        return vc
+    }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         

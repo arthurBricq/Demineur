@@ -10,6 +10,15 @@ import UIKit
 
 
 class TriangleViewOfGame: ViewOfGame {
+    override var dimension: CGSize {
+        // We must return the dimension taken by game
+        let n = game!.n ; let m = game!.m
+        let side = 70.0
+        let width = side * Double((m % 2 == 1) ? (m+1)/2 : m/2)
+        let height = sqrt(3)/2*side * Double(n)
+        return CGSize(width: width, height: height)
+    }
+    
     override func instantiateCases() {
         // Les dimensions de la vue doivent être les bonnes, grâce à la fonction de dimensionnement.
         var a: CGFloat = 0

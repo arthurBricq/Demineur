@@ -17,7 +17,7 @@ class ViewOfGame: UIView {
     // MARK: - Variables
     
     var game: OneGame?
-    var delegate: GameViewCanCallVC?
+    var delegate: GameController?
     /// Holds the position of bombs and the numbers displayed when cases are opened.
     /// Keeps in mind that this array is only modified when one game is created.
     var gameState: [[Int]] = [[Int]].init()
@@ -33,6 +33,115 @@ class ViewOfGame: UIView {
     var onUnposingFlag: ((Bool) -> Void)?
     var option3Timer = CountingTimer()
     
+    // MARK: - computed properties for the automatic sizing process
+    
+    /// Is the dimension of the viewOfGame, when n and m are set, calculated using the unit dimension of the case. It is function of n,m and of a.
+    /// - In the infinite mode, this propert is irrelevant since we calculate the dimension to fit the screen size.
+    /// - But in the history mode and in the superParties mode, the game can be as big as you want.
+    var dimension: CGSize {
+        fatalError("Needs to be overiden by each subclass")
+    }
+    
+    /*
+    private func isWidthBiggerThanScreen(screenWidth: CGFloat) -> Bool {
+        return dimension.width >= screenWidth
+    }
+    
+    private func isHeightBiggerThanScreen(screenHeight: CGFloat) -> Bool {
+        return dimension.height >= screenHeight
+    }
+    */
+    
+    
+    /// Is the origin for the scrollView.
+    public func getOriginForScrollView(scrollViewDimension: CGSize) -> CGPoint {
+        // There are different cases to be considered.
+        // First we need to determine which is the bigger dimension of seld (w or h)
+        // Second, this constraint dimension must be compared with the availables dimensions of the scroll view. If the view is bigger than the scroll view, then it must be placed accordingly to use all the size (minus 10 points on each sides)
+        let w = dimension.width
+        let h = dimension.height
+        
+        /*
+        if w >= h {
+            if dimension.width > scrollViewDimension.width {
+                // It means that the view is squizzed in the vertical direction
+                let initialZoom = scrollViewDimension.width / w
+                let newH = dimension.height * initialZoom
+                return CGPoint(x: 10, y: scrollViewDimension.height/2 - newH/2)
+            } /* else {
+                // It means that the view is not squizzed, so it must be centered
+                print("Unsquizzed --> \(scrollViewDimension) VS \(dimension)")
+                return CGPoint(x: scrollViewDimension.width/2 - w/2 , y: scrollViewDimension.height/2 - h/2)
+            }   */
+        } else {
+            if dimension.height > scrollViewDimension.height {
+                // It means that the view is squizzed in the vertical direction
+                let initialZoom = scrollViewDimension.height / h
+                let newW = w * initialZoom
+                return CGPoint(x: scrollViewDimension.width/2 - newW/2 , y: 0 )
+            } /*else {
+                // It means that the view is not squizzed, so it must be centered
+                return CGPoint(x: scrollViewDimension.width/2 - w/2 , y: scrollViewDimension.height/2 - h/2)
+            }*/
+        }
+         // If execution reached this point, it means that the bigger dimension of the view isn't bigger than the screen's scroll view.
+         */
+        
+        print("\nFinding origin for view of game")
+        print("Scroll view dimension: \(scrollViewDimension)")
+        print("game view dimension: \(dimension)")
+        
+        var xMultiplier: CGFloat = 1
+        var yMultiplier: CGFloat = 1
+        
+        if dimension.width > scrollViewDimension.width {
+            yMultiplier = scrollViewDimension.width / dimension.width
+        }
+        
+        if dimension.height > scrollViewDimension.height {
+            xMultiplier = scrollViewDimension.height / dimension.height
+        }
+        
+        var x: CGFloat = scrollViewDimension.width/2 - dimension.width*xMultiplier/2
+        var y: CGFloat = scrollViewDimension.height/2 - dimension.height*yMultiplier/2
+        /*
+        if dimension.width > scrollViewDimension.width {
+            x = 10
+        }
+        
+        if dimension.height > scrollViewDimension.height {
+            y = 0
+        }
+ */
+        
+        if dimension.width > scrollViewDimension.width || dimension.height > scrollViewDimension.height  {
+            // it means that the game is bigger than the screen
+            if dimension.width > dimension.height {
+                x = 10
+            } else if dimension.height > dimension.width {
+                y = 0
+            } else {
+                // it means it's a square, so we must place it in the middle
+                // TODO: place the square
+            }
+        }
+        
+        if x < 10 {
+            x = 10
+        }
+        
+        if y < 0 {
+            y = 0 
+        }
+        
+        return CGPoint(x: x, y: y)
+    }
+    
+    /// Is the zoom to set to the viewOfGame inside the scroll view (historyMode or superParties mode) so that the view is nicely centered
+    /// - There are two cases: if the dimension width is smaller than screen width (in which case must center the viewOfGame) and if it is bigger (in which case, but dezoom and center again)
+//    var initialZoomValue: CGFloat {
+//        return isWidthBiggerThanScreen ? UIScreen.main.bounds.width/dimension.width : 1
+//    }
     
     // MARK: - Inits functions
     
@@ -40,6 +149,7 @@ class ViewOfGame: UIView {
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
  
+    /// This init asks for frame, which implies a constraint dimension of the viewOfGame (infinite game). In this case, the VC is in charge of positionnning the view.
     convenience init(frame: CGRect, game: OneGame, gameState: inout [[Int]]) {
         self.init(frame: frame)
         self.game = game
@@ -49,6 +159,20 @@ class ViewOfGame: UIView {
             option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
             option3Timer.delegate = self
         }
+    }
+    
+    /// This init don't ask for a frame, which means that the frame is calculated based on unit dimension of the case. After calling this init, the viewOfGame is already positienned at the right position for the scroll view where it belongs.
+    convenience init(game: OneGame, gameState: inout [[Int]], scrollViewDimension: CGSize) {
+        self.init()
+        self.game = game
+        self.gameState = gameState
+        self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
+        instantiateCases()
+        if game.option3 {
+            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
+            option3Timer.delegate = self
+        }
+       
     }
     
     // MARK: - Functions

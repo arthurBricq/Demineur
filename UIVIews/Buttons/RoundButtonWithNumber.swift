@@ -13,7 +13,7 @@ class RoundButtonWithNumber: UIButton {
     
     var strokeColor: UIColor = .brown
     var lineWidth: CGFloat = 1.0
-    var delegate: RoundButtonsCanCallVC?
+    var buttonTappedClosure: ((Int)->Void)?
     var number: Int = 1
     
     override func draw(_ rect: CGRect) {
@@ -47,7 +47,7 @@ class RoundButtonWithNumber: UIButton {
             self.alpha = 1.0
         }
         
-        delegate!.buttonTapped(withIndex: number)
+        buttonTappedClosure?(number)
         
     }
     

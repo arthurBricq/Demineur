@@ -16,18 +16,18 @@ class HistoryGameViewController: UIViewController {
     @IBOutlet weak var flagView: FlagViewDisplay!
     @IBOutlet weak var bombsLabel: UILabel!
     @IBOutlet weak var bombView: BombViewDisplay!
-   
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     // MARK: - VARIABLES
     
     override var prefersStatusBarHidden: Bool { return true }
     
-    var game: OneGame = OneGame(gameTypeWithNoneCases: .triangular, n: 10, m: 10, z: 5, numberOfFlag: 5, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true) // cette variable s'occupe de toute la partie à jouer.
-    var gameIndex: Int = 1 // Avoir connaissance de l'indice du niveau
+    var gameIndex: Int = 1
     /// Nombre de bombes qui ont été trouvées par l'utilisateur
     var numberOfBombs: Int = 0
     var gameState = [[Int]].init()
     var gameTimer = CountingTimer()
-    
+    var game: OneGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 20, m: 13, z: 10, totalTime: 90)
     var viewOfGame: ViewOfGame?
     var bonusChoiceView: BonusChoiceView?
     var messageManagor: MessageManagor?
@@ -43,10 +43,83 @@ class HistoryGameViewController: UIViewController {
             self.endOfHistoryGame(didTapABomb)
         })
     }
+
+    /// This function will start a new game, with the 'viewOfGame' as gameManager for the game 'game' variable.
+    func startANewGame(animatedFromTheRight: Bool) {
+        // 0. Set te colors
+        let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
+        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
+        
+        // 1. Kill the last variables of the game
+        gameTimer.stop()
+        isTheGameStarted.value = false
+        self.numberOfBombs = 0
+       
+       
+        // 2. Instantiate the view of games using the correct INIT call.
+//        let maxHeight = self.view.bounds.height * 0.65
+//        let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.92
+//        let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
+        
+        
+        
+        if game.gameType == .square { // read comments to understand. 
+            createANewSquareGameStepOne()
+            viewOfGame = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            viewOfGame!.layer.borderWidth = 1.0
+            if animatedFromTheRight {
+                let size = viewOfGame!.dimension
+                viewOfGame!.frame.origin = CGPoint(x: self.view.center.x - size.width/2 + self.view.frame.width, y: self.view.center.y - size.height/2)
+            }
+        } else if game.gameType == .hexagonal {
+            createANewHexGameStepOne()
+            viewOfGame = HexViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            /*
+            let center = self.view.center
+            let (w,h) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
+            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
+            viewOfGame = HexViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
+             */
+        } else if game.gameType == .triangular {
+            createNewTriangularGameStepOne()
+            viewOfGame = TriangleViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            /*
+            let center = self.view.center
+            let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
+            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
+            viewOfGame = TriangleViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
+            */
+        }
+        
+        // Set the properties of the view of game
+        viewOfGame!.backgroundColor = UIColor.clear
+        viewOfGame!.makeDarkBorderDisplay()
+        viewOfGame!.delegate = self
+        viewOfGame!.layer.masksToBounds = false
+//        viewOfGame!.layer.borderColor = game.colors.strokeColor.cgColor
+        viewOfGame!.numberOfFlags = game.numberOfFlag
+        viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
+            self.numberOfBombs += test ? 1 : 0
+        }
+        
+        setUpLabelsForNewGame()
+        updateFlags(numberOfFlags: game.numberOfFlag)
+        removePrecendentViewOfGame()
+        addTheBonusChoiceView()
+        
+        // Set the properties of the scroll view
+        setUpScrollView()
+        
+        if animatedFromTheRight {
+            UIView.animate(withDuration: 0.7) {
+                self.viewOfGame?.center.x -= self.view.frame.width
+            }
+        }
+    }
     
     /// This function will either create the bonusBarView or replace it with a new one when a new game is started
     /// - When calling the function, be sure that the viewOfGame already exists.
-    func addTheBonusChoiceView() {
+    private func addTheBonusChoiceView() {
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
         let dec_h: CGFloat = 20 // decalage horizontal
@@ -61,9 +134,52 @@ class HistoryGameViewController: UIViewController {
         self.view.addSubview(bonusChoiceView!)
     }
     
-    func startANewGame(animatedFromTheRight: Bool) {
-        // instauration du timer sur l'écran
-        gameTimer.stop()
+    /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
+    public func removePrecendentViewOfGame() {
+        viewOfGame?.removeFromSuperview()
+    }
+    
+    private func openTheBombs() {
+        viewOfGame?.returnAllTheCases()
+    }
+    
+    private func updateFlags(numberOfFlags: Int) {
+        flagsLabel.text = numberOfFlags.description
+        bombsLabel.text = game.z.description
+    }
+    
+    /// This function set up all the settings of the scroll view. The viewOfGame must be already set, and it will be added to the scroll view.
+    private func setUpScrollView() {
+        // Scroll View settings
+        // 1. General settings
+        scrollView.delegate = self
+        scrollView.layer.zPosition = -1 // permet de placer la vue du jeu derrières l'interface
+        scrollView.bounces = true // permet de faire rebondir sur les dépassements
+        scrollView.clipsToBounds = false // Permet de faire dépasser le jeu sur tout l'écran de l'iphone
+        scrollView.isScrollEnabled = true
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
+        
+        // 2. Settings specific to one view of game
+        let widthRatio = (self.scrollView!.frame.width) / (viewOfGame!.frame.size.width+30)
+        let heightRatio = (self.scrollView!.frame.height) / (viewOfGame!.frame.size.height)
+        self.scrollView.minimumZoomScale = widthRatio < heightRatio ? widthRatio : heightRatio
+        scrollView.makeRedBorderDisplay()
+        self.scrollView.maximumZoomScale = 2
+        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
+        self.scrollView.contentSize = CGSize(width: viewOfGame!.frame.size.width+20, height: viewOfGame!.frame.size.height)
+        self.scrollView.addSubview(viewOfGame!)
+        /*
+        print("\nState of the variables:")
+        print("Initial zoom \(widthRatio)")
+        print("Scroll view frame: \(scrollView.frame)")
+        print("Scroll view content frame: \(scrollView.contentSize)")
+        print("View of game frame: \(viewOfGame!.frame)")
+        */
+    }
+    
+    /// This function will show/hide the correct view amoung the 'clockView', the 'flagLabel', the 'flagView', the 'bombLabel', the 'bombView' and it will do some setUp for the 'gameTimeVariable'.
+    private func setUpLabelsForNewGame() {
         if !game.isTimerAllowed {
             clockView.isHidden = true
             gameTimer.delegate = nil
@@ -73,6 +189,7 @@ class HistoryGameViewController: UIViewController {
             gameTimer.delegate = self
             gameTimer.timeInterval = 1.0
         }
+        
         // instauration des drapeaux et des bombes sur l'écran
         if !game.areNumbersShowed {
             flagsLabel.isHidden = true
@@ -85,67 +202,8 @@ class HistoryGameViewController: UIViewController {
             bombsLabel.isHidden = false
             bombView.isHidden = false
         }
-        isTheGameStarted.value = false
-        updateFlags(numberOfFlags: game.numberOfFlag)
-        self.numberOfBombs = 0 
-        
-        let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
-        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
-        
-        
-        // Tailles maximales occupées par la vue :
-        let maxHeight = self.view.bounds.height * 0.65
-        let multiplier: CGFloat = isItABigScreen() ? 0.98 : 0.92
-        let maxWidth = game.gameType == .square ? self.view.bounds.width * multiplier : self.view.bounds.width * 0.95
-        removePrecendentViewOfGame()
-        if game.gameType == .square {
-            createANewSquareGameStepOne()
-            let (width, height) = dimensionSquareTable(n: game.n, m: game.m, withMaximumWidth: maxWidth, withMaximumHeight: maxHeight)
-            let viewSize = CGSize(width: width, height: height)
-            let origin = animatedFromTheRight ? CGPoint(x: self.view.center.x - width/2 + self.view.frame.width, y: self.view.center.y - height/2) : CGPoint(x: self.view.center.x - width/2, y: self.view.center.y - height/2)
-            viewOfGame = SquareViewOfGame(frame: CGRect(origin: origin, size: viewSize), game: game, gameState: &gameState)
-            viewOfGame!.layer.borderWidth = 1.0
-        } else if game.gameType == .hexagonal {
-            createANewHexGameStepOne() // première étape de la création
-            let center = self.view.center
-            let (w,h) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
-            viewOfGame = HexViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
-        } else if game.gameType == .triangular {
-            createNewTriangularGameStepOne()
-            let center = self.view.center
-            let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
-            viewOfGame = TriangleViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
-        }
-        // Set the properties of the view of game
-        viewOfGame!.backgroundColor = UIColor.clear
-        viewOfGame!.delegate = self
-        viewOfGame!.layer.masksToBounds = false
-        viewOfGame!.layer.borderColor = game.colors.strokeColor.cgColor
-        viewOfGame!.numberOfFlags = game.numberOfFlag
-        viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
-            self.numberOfBombs += test ? 1 : 0
-        }
-        
-        addTheBonusChoiceView()
-        self.view.addSubview(viewOfGame!)
-        
-        if animatedFromTheRight {
-            UIView.animate(withDuration: 0.7) {
-                self.viewOfGame?.center.x -= self.view.frame.width
-            }
-        }
     }
     
-    /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
-    func removePrecendentViewOfGame() {
-        viewOfGame?.removeFromSuperview()
-    }
-    
-    func openTheBombs() {
-        viewOfGame?.returnAllTheCases()
-    }
     
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
@@ -161,10 +219,7 @@ class HistoryGameViewController: UIViewController {
         self.present(pauseVC, animated: true, completion: nil)
     }
 
-    func updateFlags(numberOfFlags: Int) {
-        flagsLabel.text = numberOfFlags.description
-        bombsLabel.text = game.z.description
-    }
+    
     
     // MARK: - Functions to create a new game
 
@@ -220,10 +275,11 @@ extension HistoryGameViewController: variableCanCallGameVC {
         gameTimer.start(timeInterval: 1.0, id: "Clock")
         
     }
+    
 }
 
 // MARK: - Protocol pour les gameViews (permet de terminer la partie, entre autre)
-extension HistoryGameViewController: GameViewCanCallVC {
+extension HistoryGameViewController: GameController {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
@@ -337,6 +393,7 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
 }
 
 // MARK: - POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
+
 extension HistoryGameViewController {
     
     fileprivate func endOfHistoryGame(_ didTapABomb: Bool) {
@@ -352,5 +409,14 @@ extension HistoryGameViewController {
         vc.didTapABomb = didTapABomb
         vc.precedentGameIndex = self.gameIndex
         self.present(vc, animated: true, completion: nil)
+    }
+    
+}
+
+// MARK: - Scroll view extension
+
+extension HistoryGameViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.viewOfGame
     }
 }

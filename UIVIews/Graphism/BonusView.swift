@@ -314,7 +314,7 @@ public class BonusDraw : NSObject {
             .font: UIFont(name: "PingFangSC-Semibold", size: 28)!,
             .foregroundColor: UIColor.white,
             .paragraphStyle: textStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -390,7 +390,7 @@ public class BonusDraw : NSObject {
             .font: UIFont(name: "PingFangSC-Semibold", size: 28)!,
             .foregroundColor: UIColor.white,
             .paragraphStyle: textStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()
@@ -498,7 +498,7 @@ public class BonusDraw : NSObject {
             .font: UIFont(name: "PingFangSC-Semibold", size: 30)!,
             .foregroundColor: UIColor.white,
             .paragraphStyle: textStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()

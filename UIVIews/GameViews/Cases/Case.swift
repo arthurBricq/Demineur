@@ -134,7 +134,7 @@ class Case: UIButton {
                         scaleAnimation.keyTimes = [0, 0.2, 0.6, 1]
                         scaleAnimation.duration = 0.5
                         scaleAnimation.isRemovedOnCompletion = false
-                        scaleAnimation.fillMode = kCAFillModeForwards
+                        scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
                         subview.layer.add(scaleAnimation, forKey: nil)
                     } else {
                         // La case était marquée et n'était pas une bombe
@@ -143,7 +143,7 @@ class Case: UIButton {
                         scaleAnimation.keyTimes = [0, 0.2, 1]
                         scaleAnimation.duration = 0.5
                         scaleAnimation.isRemovedOnCompletion = false
-                        scaleAnimation.fillMode = kCAFillModeForwards
+                        scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
                         subview.layer.add(scaleAnimation, forKey: nil)
                     }
                 }
@@ -160,7 +160,7 @@ class Case: UIButton {
                 scaleAnimation.toValue = 1
                 scaleAnimation.duration = 0.5
                 scaleAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, -0.1, 0.4, 0.5)
-                scaleAnimation.fillMode = kCAFillModeBackwards
+                scaleAnimation.fillMode = CAMediaTimingFillMode.backwards
                 cross.layer.add(scaleAnimation, forKey: nil)
             } else {
                 // si la case était marquée
@@ -172,7 +172,7 @@ class Case: UIButton {
                             scaleAnimation.keyTimes = [0, 0.2, 1]
                             scaleAnimation.duration = 0.5
                             scaleAnimation.isRemovedOnCompletion = false
-                            scaleAnimation.fillMode = kCAFillModeForwards
+                            scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
                             subview.layer.add(scaleAnimation, forKey: nil)
                         }
                     }

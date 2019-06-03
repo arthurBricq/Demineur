@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E02A1362109DF580040BA88 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E02A1342109DF580040BA88 /* Tutorial.storyboard */; };
 		4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */; };
+		4E21E4A5229D67B50092A620 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E21E4A4229D67B50092A620 /* UIView.swift */; };
 		4E29899C213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29899B213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift */; };
 		4E29899E213DB1AB003D98D1 /* SuperPartiesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29899D213DB1AB003D98D1 /* SuperPartiesTableViewCell.swift */; };
 		4E2989A0213DBBF2003D98D1 /* SquarePresentationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E29899F213DBBF2003D98D1 /* SquarePresentationButton.swift */; };
@@ -112,6 +113,7 @@
 /* Begin PBXFileReference section */
 		4E02A1352109DF580040BA88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Demineur/Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
 		4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTutorialViewController.swift; sourceTree = "<group>"; };
+		4E21E4A4229D67B50092A620 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = ../UIView.swift; sourceTree = "<group>"; };
 		4E29899B213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartiesPresentationViewController.swift; sourceTree = "<group>"; };
 		4E29899D213DB1AB003D98D1 /* SuperPartiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartiesTableViewCell.swift; sourceTree = "<group>"; };
 		4E29899F213DBBF2003D98D1 /* SquarePresentationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquarePresentationButton.swift; sourceTree = "<group>"; };
@@ -239,6 +241,16 @@
 			path = VC_Tutorial;
 			sourceTree = "<group>";
 		};
+		4E21E4A6229D67C90092A620 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				4E301FAD21A0D98100DAB959 /* Enums.swift */,
+				4EA7FDA320F8976B00740480 /* Protocols.swift */,
+				4E21E4A4229D67B50092A620 /* UIView.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
 		4E301FA121A0BF7100DAB959 /* Datas */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,10 +281,9 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		4E301FAC21A0D96500DAB959 /* ForTheGame */ = {
+		4E301FAC21A0D96500DAB959 /* GameDescription */ = {
 			isa = PBXGroup;
 			children = (
-				4E301FAD21A0D98100DAB959 /* Enums.swift */,
 				4E301FAF21A0D9AF00DAB959 /* Section.swift */,
 				4E301FB121A0D9CE00DAB959 /* OneGame.swift */,
 				4E301FB321A0DA0B00DAB959 /* BonusDescription.swift */,
@@ -280,25 +291,7 @@
 				4E301FB721A0DA7C00DAB959 /* IsTheGameStarted.swift */,
 				4EA7FDA720F8978C00740480 /* Variables.swift */,
 			);
-			path = ForTheGame;
-			sourceTree = "<group>";
-		};
-		4E44EACD21AE1DDE00DABB51 /* AbstractClasses */ = {
-			isa = PBXGroup;
-			children = (
-				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
-				4E98AD8321AB6F110041DD2E /* Case.swift */,
-			);
-			path = AbstractClasses;
-			sourceTree = "<group>";
-		};
-		4E44EACE21AE1DF200DABB51 /* LogicalClasses */ = {
-			isa = PBXGroup;
-			children = (
-				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
-				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
-			);
-			path = LogicalClasses;
+			path = GameDescription;
 			sourceTree = "<group>";
 		};
 		4EA7FD4A20F893E700740480 = {
@@ -306,7 +299,6 @@
 			children = (
 				9C6E629B20FC96AA003B98C9 /* CustomTransitions */,
 				4EA7FD6820F894A700740480 /* Logic */,
-				4EA7FD8120F895EC00740480 /* For The Game */,
 				4EA7FD6920F894B300740480 /* UIVIews */,
 				4EA7FD6A20F894BE00740480 /* VC */,
 				4E02A1372109E1480040BA88 /* VC_Tutorial */,
@@ -345,12 +337,13 @@
 		4EA7FD6820F894A700740480 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				4E301FAC21A0D96500DAB959 /* ForTheGame */,
+				4E21E4A6229D67C90092A620 /* Swift */,
+				4E301FAC21A0D96500DAB959 /* GameDescription */,
 				4E301FA921A0C51700DAB959 /* Utilities */,
 				4E301FA421A0C4AB00DAB959 /* Timers */,
 				4E301FA121A0BF7100DAB959 /* Datas */,
 				4EA7FDA120F8974E00740480 /* Functions.swift */,
-				4EA7FDA320F8976B00740480 /* Protocols.swift */,
+				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
 				4EA7FDA520F8977E00740480 /* StarterFunctions.swift */,
 				4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */,
 			);
@@ -360,6 +353,8 @@
 		4EA7FD6920F894B300740480 /* UIVIews */ = {
 			isa = PBXGroup;
 			children = (
+				9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */,
+				4EEE8E8722A5566A00F89875 /* GameViews */,
 				4EA7FD9220F8969D00740480 /* Graphism */,
 				4EA7FD7820F8958700740480 /* Cells */,
 				4EA7FD7520F8956200740480 /* Buttons */,
@@ -423,37 +418,6 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		4EA7FD8120F895EC00740480 /* For The Game */ = {
-			isa = PBXGroup;
-			children = (
-				4E44EACE21AE1DF200DABB51 /* LogicalClasses */,
-				4E44EACD21AE1DDE00DABB51 /* AbstractClasses */,
-				4EA7FD8B20F8964A00740480 /* Views */,
-				4EA7FD8220F895FC00740480 /* Buttons */,
-			);
-			path = "For The Game";
-			sourceTree = "<group>";
-		};
-		4EA7FD8220F895FC00740480 /* Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				4EA7FD8720F8962B00740480 /* SquareCase.swift */,
-				4EA7FD8320F8960700740480 /* HexCase.swift */,
-				4EA7FD8920F8963E00740480 /* TriangularCase.swift */,
-			);
-			path = Buttons;
-			sourceTree = "<group>";
-		};
-		4EA7FD8B20F8964A00740480 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
-				4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */,
-				4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		4EA7FD9220F8969D00740480 /* Graphism */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +448,37 @@
 				4EAAE0F521242B11003F9BFE /* CloudKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4EEE8E8722A5566A00F89875 /* GameViews */ = {
+			isa = PBXGroup;
+			children = (
+				4EEE8E8922A5568300F89875 /* Cases */,
+				4EEE8E8822A5567D00F89875 /* Views */,
+			);
+			path = GameViews;
+			sourceTree = "<group>";
+		};
+		4EEE8E8822A5567D00F89875 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
+				4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */,
+				4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */,
+				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4EEE8E8922A5568300F89875 /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				4E98AD8321AB6F110041DD2E /* Case.swift */,
+				4EA7FD8320F8960700740480 /* HexCase.swift */,
+				4EA7FD8920F8963E00740480 /* TriangularCase.swift */,
+				4EA7FD8720F8962B00740480 /* SquareCase.swift */,
+			);
+			path = Cases;
 			sourceTree = "<group>";
 		};
 		4EF20A3621343F4600E08BBF /* Recovered References */ = {
@@ -540,6 +535,7 @@
 				TargetAttributes = {
 					4EA7FD5220F893E700740480 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -665,6 +661,7 @@
 				4EA7FDA420F8976B00740480 /* Protocols.swift in Sources */,
 				9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */,
 				4E98AD8621AB866A0041DD2E /* SquareViewOfGame.swift in Sources */,
+				4E21E4A5229D67B50092A620 /* UIView.swift in Sources */,
 				9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */,
 				4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */,
 				4E2989A2213DBDCE003D98D1 /* HexPresentationButton.swift in Sources */,
@@ -859,7 +856,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BricqBros.Demineur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -878,7 +875,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BricqBros.Demineur;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -14,7 +14,7 @@ class WinLooseViewController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     
     
-    /// OUTLETS
+    // MARK: -  OUTLETS
     // @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lineView: LineView!
     @IBOutlet weak var letterE: Letter!
@@ -29,7 +29,7 @@ class WinLooseViewController: UIViewController {
     @IBOutlet weak var nextLevelIcon: NextLevelButton!
     
     
-    /// VARIABLES
+    // MARK: - VARIABLES
 
     var win: Bool = false
     var didTapABomb: Bool = false
@@ -37,8 +37,7 @@ class WinLooseViewController: UIViewController {
     var precedentGameIndex: Int = 1 // uniquement important pour le mode histoire
     
     
-    
-    /// FUNCTIONS
+    // MARK: -  FUNCTIONS
     override func viewDidLoad() {
         super.viewDidLoad()
         menuIconButton.isUserInteractionEnabled = true
@@ -53,15 +52,14 @@ class WinLooseViewController: UIViewController {
         
         var darkBlur = UIBlurEffect()
         if #available(iOS 10.0, *) { //iOS 10.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.regular)//prominent,regular,extraLight, light, dark
+            darkBlur = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
         } else { //iOS 8.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffectStyle.light) //extraLight, light, dark
+            darkBlur = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
         }
         let blurView = UIVisualEffectView(effect: darkBlur)
         blurView.frame = self.view.frame //your view that have any objects
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurView, at: 0)
-        
         
         transitioningDelegate = nil
         

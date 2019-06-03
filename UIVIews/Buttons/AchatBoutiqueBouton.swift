@@ -243,7 +243,7 @@ public class BoutonAchat : NSObject {
             .font: UIFont(name: "PingFangSC-Medium", size: textsize)!,
             .foregroundColor: textColor,
             .paragraphStyle: textStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let textTextHeight: CGFloat = prix.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
         context.saveGState()

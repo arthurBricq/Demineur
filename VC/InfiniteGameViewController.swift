@@ -194,7 +194,7 @@ class InfiniteGameViewController: UIViewController {
         exitAnimation.duration = 0.5
         exitAnimation.toValue = -(message?.bounds.width)!
         exitAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.73, 0.71, 0.92, 0.76)
-        exitAnimation.fillMode = kCAFillModeForwards
+        exitAnimation.fillMode = CAMediaTimingFillMode.forwards
         exitAnimation.isRemovedOnCompletion = false
         exitAnimation.beginTime = CACurrentMediaTime()+0.2
         exitAnimation.delegate = self
@@ -503,7 +503,7 @@ class InfiniteGameViewController: UIViewController {
         fadeAnimation.toValue = 1
         let groupAnimation = CAAnimationGroup()
         groupAnimation.animations = [scaleAnimation, fadeAnimation]
-        groupAnimation.fillMode = kCAFillModeBackwards
+        groupAnimation.fillMode = CAMediaTimingFillMode.backwards
         groupAnimation.duration = 0.3
         groupAnimation.delegate = self
         groupAnimation.setValue("AppearMessageAnimation", forKey: "name")
@@ -528,7 +528,7 @@ extension InfiniteGameViewController: variableCanCallGameVC {
     }
 }
 // MARK: - Protocole pour les gameView 
-extension InfiniteGameViewController: GameViewCanCallVC {
+extension InfiniteGameViewController: GameController {
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         Vibrate().vibrate(style: .heavy)
         if win {
@@ -617,7 +617,7 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             exitAnimation.duration = 0.5
             exitAnimation.toValue = -(message?.bounds.width)!
             exitAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.73, 0.71, 0.92, 0.76)
-            exitAnimation.fillMode = kCAFillModeForwards
+            exitAnimation.fillMode = CAMediaTimingFillMode.forwards
             exitAnimation.isRemovedOnCompletion = false
             exitAnimation.beginTime = CACurrentMediaTime()+0.2
             exitAnimation.delegate = self

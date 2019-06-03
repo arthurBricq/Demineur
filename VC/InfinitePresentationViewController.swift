@@ -11,11 +11,10 @@ import UIKit
 class InfinitePresentationViewController: UIViewController {
 
     // MARK: - Outlets et variables
+    
     override var prefersStatusBarHidden: Bool { return true }
     @IBOutlet weak var headerView: HeaderInfinite!
     @IBOutlet weak var bestScoreLabel: UILabel!
-    
-  
     
     // MARK: - Actions
     @IBAction func playButton(_ sender: Any) {

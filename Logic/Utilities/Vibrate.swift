@@ -24,7 +24,7 @@ class Vibrate: NSObject {
         }
     }
     
-    func vibrate(style: UIImpactFeedbackStyle)
+    func vibrate(style: UIImpactFeedbackGenerator.FeedbackStyle)
     {
         if dataManager.isVibrationOn == false {
             return

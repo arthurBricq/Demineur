@@ -65,7 +65,7 @@ public class InAppPurchaseButtonDraw : NSObject {
             .font: UIFont(name: "PingFangSC-Regular", size: 45)!,
             .foregroundColor: textColor,
             .paragraphStyle: textLabelStyle,
-            ] as [NSAttributedStringKey: Any]
+            ] as [NSAttributedString.Key: Any]
         
         let textLabelTextHeight: CGFloat = text.boundingRect(with: CGSize(width: textLabelRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textLabelFontAttributes, context: nil).height
         context.saveGState()

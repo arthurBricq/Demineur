@@ -14,11 +14,8 @@ class StartTableViewCell: UITableViewCell {
     var strokeColor: UIColor = UIColor(red: 0, green: 144/255, blue: 81/255, alpha: 1.0)
     var lineWidth: CGFloat = 1
     
-    
-    
-    
     // Pour la logique des bouttons
-    var VC: RoundButtonsCanCallVC?
+    var buttonTappedClosure: ((Int)->Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,17 +34,17 @@ class StartTableViewCell: UITableViewCell {
         
         button1.isEnabled = true
         button1.number = 1
-        button1.delegate = VC
+        button1.buttonTappedClosure = buttonTappedClosure
         button1.alpha = 1
         
         button2.isEnabled = true
         button2.number = 2
-        button2.delegate = VC
+        button2.buttonTappedClosure = buttonTappedClosure
         button2.alpha = 1
         
         button3.isEnabled = true
         button3.number = 3
-        button3.delegate = VC
+        button3.buttonTappedClosure = buttonTappedClosure
         button3.alpha = 1
         
         // presentation

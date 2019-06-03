@@ -21,7 +21,7 @@ class PieceView: UIView {
         
         let emitter = CAEmitterLayer()
         emitter.frame = CGRect(x: 0.35*bounds.width, y: bounds.height/2, width: 0.3*bounds.width, height: bounds.height/2)
-        emitter.emitterShape = kCAEmitterLayerLine
+        emitter.emitterShape = CAEmitterLayerEmitterShape.line
         emitter.emitterPosition = CGPoint(x: emitter.frame.width/2, y: emitter.frame.height/2)
         emitter.emitterSize = bounds.size
         

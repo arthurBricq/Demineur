@@ -17,12 +17,12 @@ import UIKit
 
 let dataManager = UserDefaultsManager()
 
-
 class UserDefaultsManager {
     
     fileprivate let defaults = UserDefaults.standard
     
     // MARK: - Static properties for data model
+    
     static let allTimesToMantain: [String] = ["Petit","Moyen","Long"]
     static let allLanguages: [String] = ["fr","en"]
 
@@ -148,8 +148,6 @@ class UserDefaultsManager {
         get { return (defaults.object(forKey: "unlockedThemes") as? [Int]) ?? [] }
         set {defaults.set(newValue, forKey: "unlockedThemes")}
     }
-    
-    
     
     // MARK: - Functions
     
