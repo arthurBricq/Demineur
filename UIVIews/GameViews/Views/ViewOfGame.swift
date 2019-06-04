@@ -42,50 +42,8 @@ class ViewOfGame: UIView {
         fatalError("Needs to be overiden by each subclass")
     }
     
-    /*
-    private func isWidthBiggerThanScreen(screenWidth: CGFloat) -> Bool {
-        return dimension.width >= screenWidth
-    }
-    
-    private func isHeightBiggerThanScreen(screenHeight: CGFloat) -> Bool {
-        return dimension.height >= screenHeight
-    }
-    */
-    
-    
     /// Is the origin for the scrollView.
     public func getOriginForScrollView(scrollViewDimension: CGSize) -> CGPoint {
-        // There are different cases to be considered.
-        // First we need to determine which is the bigger dimension of seld (w or h)
-        // Second, this constraint dimension must be compared with the availables dimensions of the scroll view. If the view is bigger than the scroll view, then it must be placed accordingly to use all the size (minus 10 points on each sides)
-        let w = dimension.width
-        let h = dimension.height
-        
-        /*
-        if w >= h {
-            if dimension.width > scrollViewDimension.width {
-                // It means that the view is squizzed in the vertical direction
-                let initialZoom = scrollViewDimension.width / w
-                let newH = dimension.height * initialZoom
-                return CGPoint(x: 10, y: scrollViewDimension.height/2 - newH/2)
-            } /* else {
-                // It means that the view is not squizzed, so it must be centered
-                print("Unsquizzed --> \(scrollViewDimension) VS \(dimension)")
-                return CGPoint(x: scrollViewDimension.width/2 - w/2 , y: scrollViewDimension.height/2 - h/2)
-            }   */
-        } else {
-            if dimension.height > scrollViewDimension.height {
-                // It means that the view is squizzed in the vertical direction
-                let initialZoom = scrollViewDimension.height / h
-                let newW = w * initialZoom
-                return CGPoint(x: scrollViewDimension.width/2 - newW/2 , y: 0 )
-            } /*else {
-                // It means that the view is not squizzed, so it must be centered
-                return CGPoint(x: scrollViewDimension.width/2 - w/2 , y: scrollViewDimension.height/2 - h/2)
-            }*/
-        }
-         // If execution reached this point, it means that the bigger dimension of the view isn't bigger than the screen's scroll view.
-         */
         
         print("\nFinding origin for view of game")
         print("Scroll view dimension: \(scrollViewDimension)")
@@ -104,15 +62,7 @@ class ViewOfGame: UIView {
         
         var x: CGFloat = scrollViewDimension.width/2 - dimension.width*xMultiplier/2
         var y: CGFloat = scrollViewDimension.height/2 - dimension.height*yMultiplier/2
-        /*
-        if dimension.width > scrollViewDimension.width {
-            x = 10
-        }
         
-        if dimension.height > scrollViewDimension.height {
-            y = 0
-        }
- */
         
         if dimension.width > scrollViewDimension.width || dimension.height > scrollViewDimension.height  {
             // it means that the game is bigger than the screen
@@ -136,12 +86,6 @@ class ViewOfGame: UIView {
         
         return CGPoint(x: x, y: y)
     }
-    
-    /// Is the zoom to set to the viewOfGame inside the scroll view (historyMode or superParties mode) so that the view is nicely centered
-    /// - There are two cases: if the dimension width is smaller than screen width (in which case must center the viewOfGame) and if it is bigger (in which case, but dezoom and center again)
-//    var initialZoomValue: CGFloat {
-//        return isWidthBiggerThanScreen ? UIScreen.main.bounds.width/dimension.width : 1
-//    }
     
     // MARK: - Inits functions
     
@@ -172,7 +116,6 @@ class ViewOfGame: UIView {
             option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
             option3Timer.delegate = self
         }
-       
     }
     
     // MARK: - Functions

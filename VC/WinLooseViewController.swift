@@ -128,7 +128,7 @@ class WinLooseViewController: UIViewController {
             gameViewController.restartTheGame()
         } else if precedentViewController is HistoryGameViewController {
             let gameViewController = precedentViewController as! HistoryGameViewController
-            gameViewController.gameTimer.play()
+            gameViewController.gameTimer?.play()
             gameViewController.removePrecendentViewOfGame()
             gameViewController.startANewGame(animatedFromTheRight: false)
         } else if precedentViewController is SuperPartiesGameViewController {

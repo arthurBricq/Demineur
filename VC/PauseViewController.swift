@@ -111,7 +111,7 @@ class PauseViewController: UIViewController {
          
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
-            gameViewController.gameTimer.play()
+            gameViewController.gameTimer?.play()
             gameViewController.viewOfGame?.option3Timer.play()
             gameViewController.viewOfGame?.unPauseAllOption1Timers()
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
@@ -149,7 +149,7 @@ class PauseViewController: UIViewController {
             gameViewController.restartTheGame()
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
-            gameViewController.gameTimer.play()
+            gameViewController.gameTimer?.play()
             gameViewController.removePrecendentViewOfGame()
             gameViewController.startANewGame(animatedFromTheRight: false)
         } else if pausedGameViewController is SuperPartiesGameViewController {

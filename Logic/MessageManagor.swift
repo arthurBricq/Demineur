@@ -14,12 +14,12 @@ typealias FunctionToFinishGameType = (_ didTapABomb: Bool) -> Void
 class MessageManagor {
     
     var viewOfGame: ViewOfGame
-    var clockView: ClockView
-    var gameTimer: CountingTimer
+    var clockView: ClockView?
+    var gameTimer: CountingTimer?
     var superView: UIView
     var functionToFinishGame: (Bool)->Void
     
-    init(viewOfGame: ViewOfGame, gameTimer: CountingTimer, superView: UIView, clockView: ClockView, functionToFinishGame: @escaping FunctionToFinishGameType) {
+    init(viewOfGame: ViewOfGame, gameTimer: CountingTimer?, superView: UIView, clockView: ClockView?, functionToFinishGame: @escaping FunctionToFinishGameType) {
         self.viewOfGame = viewOfGame
         self.superView = superView
         self.functionToFinishGame = functionToFinishGame
@@ -124,8 +124,8 @@ class MessageManagor {
                     }
                 }
             } else {
-                self.gameTimer.counter = 3*self.viewOfGame.game!.totalTime/4
-                self.clockView.pourcentage = 0.75
+                self.gameTimer?.counter = 3*self.viewOfGame.game!.totalTime/4
+                self.clockView?.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -151,7 +151,7 @@ class MessageManagor {
                     
                     blurView.removeFromSuperview()
                     viewToRemove?.removeFromSuperview()
-                    self.gameTimer.play()
+                    self.gameTimer?.play()
                     self.viewOfGame.isUserInteractionEnabled = true
                     if self.viewOfGame.game!.option3 {
                         self.viewOfGame.option3Timer.start(timeInterval: TimeInterval(self.viewOfGame.game!.option3Time), id: "Option3")
@@ -271,8 +271,8 @@ class MessageManagor {
                     }
                 }
             } else {
-                self.gameTimer.counter = 3*self.viewOfGame.game!.totalTime/4
-                self.clockView.pourcentage = 0.75
+                self.gameTimer?.counter = 3*self.viewOfGame.game!.totalTime/4
+                self.clockView?.pourcentage = 0.75
             }
             
             UIView.animate(withDuration: 0.1, animations: {
@@ -298,7 +298,7 @@ class MessageManagor {
                     
                     blurView.removeFromSuperview()
                     viewToRemove?.removeFromSuperview()
-                    self.gameTimer.play()
+                    self.gameTimer?.play()
                     self.viewOfGame.isUserInteractionEnabled = true
                     if self.viewOfGame.game!.option3 {
                         self.viewOfGame.option3Timer.start(timeInterval: TimeInterval(self.viewOfGame.game!.option3Time), id: "Option3")

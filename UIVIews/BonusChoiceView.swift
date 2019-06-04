@@ -34,7 +34,7 @@ class BonusChoiceView: UIView {
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
     
-    convenience init(frame: CGRect, viewOfGame: ViewOfGame, gameTimer: CountingTimer) {
+    convenience init(frame: CGRect, viewOfGame: ViewOfGame, gameTimer: CountingTimer?) {
         self.init(frame: frame)
         self.viewOfGame = viewOfGame
         self.gameTimer = gameTimer

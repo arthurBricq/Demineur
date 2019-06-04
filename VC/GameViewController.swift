@@ -1,65 +1,21 @@
+
 //
-//  HistoryGameViewController.swift
-//  DemineIt
+//  GameViewController.swift
+//  Demineur
 //
-//  Created by Arthur BRICQ on 12/07/2018.
-//  Copyright © 2018 Arthur BRICQ. All rights reserved.
+//  Created by Arthur BRICQ on 03/06/2019.
+//  Copyright © 2019 Arthur BRICQ. All rights reserved.
 //
 
 import UIKit
 
-class HistoryGameViewController: GameViewController {
-    
-    /// Override this method to create the timer (its existence is not necessary for this class to work)
-    override func viewDidLoad() {
-        super.viewDidLoad()
-         self.gameTimer = CountingTimer()
-    }
-    
-    override func setUpLabelsForNewGame() {
-        if !game.isTimerAllowed {
-            clockView.isHidden = true
-            gameTimer?.delegate = nil
-        } else {
-            clockView.isHidden = false
-            clockView.pourcentage = 0.0
-            gameTimer?.delegate = self
-            gameTimer?.timeInterval = 1.0
-        }
-        
-        // instauration des drapeaux et des bombes sur l'écran
-        if !game.areNumbersShowed {
-            flagsLabel.isHidden = true
-            flagView.isHidden = true
-            bombsLabel.isHidden = true
-            bombView.isHidden = true
-        } else {
-            flagsLabel.isHidden = false
-            flagView.isHidden = false
-            bombsLabel.isHidden = false
-            bombView.isHidden = false
-        }
-    }
-    
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-class HistoryGameViewController: UIViewController {
+/// This class is in charge of presenting one game only, which can be of any size and of any type, and let the user play.
+/// The class canno't be instantiated to control a view controller. It's the parent class of 2 other VC: historyGameViewController and superPartieGameViewController
+class GameViewController: UIViewController {
     
     // MARK: - OUTLETS
+    
     @IBOutlet weak var clockView: ClockView!
     @IBOutlet weak var flagsLabel: UILabel!
     @IBOutlet weak var flagView: FlagViewDisplay!
@@ -72,27 +28,38 @@ class HistoryGameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     
     var gameIndex: Int = 1
+    
     /// Nombre de bombes qui ont été trouvées par l'utilisateur
     var numberOfBombs: Int = 0
+    
     var gameState = [[Int]].init()
-    var gameTimer = CountingTimer()
     var game: OneGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 20, m: 13, z: 10, totalTime: 90)
+    
     var viewOfGame: ViewOfGame?
     var bonusChoiceView: BonusChoiceView?
     var messageManagor: MessageManagor?
+    var gameTimer: CountingTimer?
     
-    // MARK: - FUNCTIONS
+    
+    // MARK: - Required function to override for event handling
+    
+    /// This function will show/hide the correct view amoung the 'clockView', the 'flagLabel', the 'flagView', the 'bombLabel', the 'bombView' and it will do some setUp for the 'gameTimeVariable'.
+    func setUpLabelsForNewGame() {
+        fatalError("This function needs to be overiden by children")
+    }
+    
+    // MARK: - Functions for the game gestion
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         transitioningDelegate = nil
         isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu pour créer la partie
         startANewGame(animatedFromTheRight: false)
-        messageManagor = MessageManagor(viewOfGame: viewOfGame!, gameTimer: gameTimer, superView: self.view, clockView: clockView, functionToFinishGame: { (didTapABomb) in
+        messageManagor = MessageManagor(viewOfGame: viewOfGame!, gameTimer: gameTimer, superView: self.view, clockView: self is HistoryGameViewController ? clockView : nil, functionToFinishGame: { (didTapABomb) in
             self.endOfHistoryGame(didTapABomb)
         })
     }
-
+    
     /// This function will start a new game, with the 'viewOfGame' as gameManager for the game 'game' variable.
     func startANewGame(animatedFromTheRight: Bool) {
         // 0. Set te colors
@@ -100,12 +67,11 @@ class HistoryGameViewController: UIViewController {
         game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
         
         // 1. Kill the last variables of the game
-        gameTimer.stop()
+        gameTimer?.stop()
         isTheGameStarted.value = false
         self.numberOfBombs = 0
-       
-       
-        if game.gameType == .square { // read comments to understand. 
+        
+        if game.gameType == .square { // read comments to understand.
             createANewSquareGameStepOne()
             viewOfGame = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
             viewOfGame!.layer.borderWidth = 1.0
@@ -116,21 +82,9 @@ class HistoryGameViewController: UIViewController {
         } else if game.gameType == .hexagonal {
             createANewHexGameStepOne()
             viewOfGame = HexViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
-            /*
-            let center = self.view.center
-            let (w,h) = dimensionHexTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
-            viewOfGame = HexViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
-             */
         } else if game.gameType == .triangular {
             createNewTriangularGameStepOne()
             viewOfGame = TriangleViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
-            /*
-            let center = self.view.center
-            let (w,h) = dimensionTriangularTable(n: game.n, m: game.m, maxW: maxWidth, maxH: maxHeight)
-            let origin = animatedFromTheRight ? CGPoint(x: center.x - w/2 + self.view.frame.width, y: center.y - h/2) : CGPoint(x: center.x - w/2, y: center.y - h/2)
-            viewOfGame = TriangleViewOfGame(frame: CGRect(origin: origin, size: CGSize.init(width: w, height: h)), game: game, gameState: &gameState)
-            */
         }
         
         // Set the properties of the view of game
@@ -138,7 +92,6 @@ class HistoryGameViewController: UIViewController {
         viewOfGame!.makeDarkBorderDisplay()
         viewOfGame!.delegate = self
         viewOfGame!.layer.masksToBounds = false
-//        viewOfGame!.layer.borderColor = game.colors.strokeColor.cgColor
         viewOfGame!.numberOfFlags = game.numberOfFlag
         viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
             self.numberOfBombs += test ? 1 : 0
@@ -212,45 +165,16 @@ class HistoryGameViewController: UIViewController {
         self.scrollView.contentSize = CGSize(width: viewOfGame!.frame.size.width+20, height: viewOfGame!.frame.size.height)
         self.scrollView.addSubview(viewOfGame!)
         /*
-        print("\nState of the variables:")
-        print("Initial zoom \(widthRatio)")
-        print("Scroll view frame: \(scrollView.frame)")
-        print("Scroll view content frame: \(scrollView.contentSize)")
-        print("View of game frame: \(viewOfGame!.frame)")
-        */
+         print("\nState of the variables:")
+         print("Initial zoom \(widthRatio)")
+         print("Scroll view frame: \(scrollView.frame)")
+         print("Scroll view content frame: \(scrollView.contentSize)")
+         print("View of game frame: \(viewOfGame!.frame)")
+         */
     }
-    
-    /// This function will show/hide the correct view amoung the 'clockView', the 'flagLabel', the 'flagView', the 'bombLabel', the 'bombView' and it will do some setUp for the 'gameTimeVariable'.
-    private func setUpLabelsForNewGame() {
-        if !game.isTimerAllowed {
-            clockView.isHidden = true
-            gameTimer.delegate = nil
-        } else {
-            clockView.isHidden = false
-            clockView.pourcentage = 0.0
-            gameTimer.delegate = self
-            gameTimer.timeInterval = 1.0
-        }
-        
-        // instauration des drapeaux et des bombes sur l'écran
-        if !game.areNumbersShowed {
-            flagsLabel.isHidden = true
-            flagView.isHidden = true
-            bombsLabel.isHidden = true
-            bombView.isHidden = true
-        } else {
-            flagsLabel.isHidden = false
-            flagView.isHidden = false
-            bombsLabel.isHidden = false
-            bombView.isHidden = false
-        }
-    }
-    
-    
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
-        // TODO: simplify this method
-        gameTimer.pause()
+        gameTimer?.pause()
         viewOfGame?.option3Timer.pause()
         viewOfGame?.pauseAllOption1Timers()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -260,11 +184,9 @@ class HistoryGameViewController: UIViewController {
         pauseVC.pausedGameViewController = self
         self.present(pauseVC, animated: true, completion: nil)
     }
-
-    
     
     // MARK: - Functions to create a new game
-
+    
     func createANewSquareGameStepOne() {
         gameState = createEmptySquareGameState(n: game.n, m: game.m)
         positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
@@ -286,7 +208,7 @@ class HistoryGameViewController: UIViewController {
         createNumbersToDisplayHex(gameState: &gameState)
         viewOfGame!.gameState = gameState
     }
-   
+    
     func createNewTriangularGameStepOne() {
         gameState = createEmptySquareGameState(n: game.n, m: game.m)
         positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
@@ -301,7 +223,7 @@ class HistoryGameViewController: UIViewController {
 }
 
 
-extension HistoryGameViewController: variableCanCallGameVC {
+extension GameViewController: variableCanCallGameVC {
     
     /// cette fonction est appelée lorsque l'utilisateur tape sur la première case : cela apelle cette fonction immédiatement avec le touches began, puis la partie commence comme il le faut grâce au touchesEnded.
     func createTheGame(withFirstTouched touch: (x: Int, y: Int)) {
@@ -314,29 +236,30 @@ extension HistoryGameViewController: variableCanCallGameVC {
         }
         
         bonusChoiceView!.activateBonusButtons()
-        gameTimer.start(timeInterval: 1.0, id: "Clock")
+        gameTimer?.start(timeInterval: 1.0, id: "Clock")
         
     }
     
 }
 
 // MARK: - Protocol pour les gameViews (permet de terminer la partie, entre autre)
-extension HistoryGameViewController: GameController {
+extension GameViewController: GameController {
     
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
         
         Vibrate().vibrate(style: .heavy)
         
-        gameTimer.pause()
+        gameTimer?.pause()
         
         viewOfGame!.isUserInteractionEnabled = false
         viewOfGame!.option3Timer.stop()
         viewOfGame!.pauseAllOption1Timers()
-    
+        
         if didTapABomb || didTimeEnd {
             messageManagor?.addTheMessage(didTapABomb: didTapABomb)
         } else {
-            gameTimer.stop()
+            
+            gameTimer?.stop()
             
             if !win {
                 openTheBombs()
@@ -362,32 +285,35 @@ extension HistoryGameViewController: GameController {
 }
 
 // MARK: - Pour le chronomètre
-extension HistoryGameViewController: CountingTimerProtocol {
+extension GameViewController: CountingTimerProtocol {
     
     func timerFires(id: String) {
         // In this case, the id does not matter at all.
         // This method is called each second.
-        
-        if id == "Clock" {
-            
-            if game.isTimerAllowed {
-                let pourcentage: CGFloat = gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
+        if let gameTimer = gameTimer {
+            if id == "Clock" {
                 
-                clockView.pourcentage = pourcentage // et actualisation via un didSet
-                
-                if pourcentage == 1 {
-                    gameTimer.pause()
-                    gameOver(win: false, didTapABomb: false, didTimeEnd: true)
+                if game.isTimerAllowed {
+                    
+                    let pourcentage: CGFloat = gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
+                    
+                    clockView.pourcentage = pourcentage // et actualisation via un didSet
+                    
+                    if pourcentage == 1 {
+                        gameTimer.pause()
+                        gameOver(win: false, didTapABomb: false, didTimeEnd: true)
+                    }
                 }
             }
         }
+        
     }
     
     
 }
 
 // MARK: - Gere les transitions
-extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
+extension GameViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -436,10 +362,10 @@ extension HistoryGameViewController: UIViewControllerTransitioningDelegate {
 
 // MARK: - POP-OVER : permet de faire apparaitre le bon message à la fin de partie si le joueur tape sur une bombe.
 
-extension HistoryGameViewController {
+extension GameViewController {
     
     fileprivate func endOfHistoryGame(_ didTapABomb: Bool) {
-        self.gameTimer.stop()
+        self.gameTimer?.stop()
         self.openTheBombs()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
@@ -457,9 +383,9 @@ extension HistoryGameViewController {
 
 // MARK: - Scroll view extension
 
-extension HistoryGameViewController: UIScrollViewDelegate {
+extension GameViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.viewOfGame
     }
 }
-*/
+

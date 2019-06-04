@@ -27,8 +27,63 @@ import UIKit
  
  */
 
-class SuperPartiesGameViewController: UIViewController {
+
+class SuperPartiesGameViewController: GameViewController {
+    public func restartTheGame() {
+        // TODO
+    }
     
+    public func saveGameToCoreData() {
+        // TODO 
+    }
+    
+    override func setUpLabelsForNewGame() {
+        
+        // instauration des drapeaux et des bombes sur l'écran
+        if !game.areNumbersShowed {
+            flagsLabel.isHidden = true
+            flagView.isHidden = true
+            bombsLabel.isHidden = true
+            bombView.isHidden = true
+        } else {
+            flagsLabel.isHidden = false
+            flagView.isHidden = false
+            bombsLabel.isHidden = false
+            bombView.isHidden = false
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+class SuperPartiesGameViewController: UIViewController {
+
+
     // MARK: - Outlets
     @IBOutlet weak var flagsLabel: UILabel!
     @IBOutlet weak var flagView: FlagViewDisplay!
@@ -46,9 +101,7 @@ class SuperPartiesGameViewController: UIViewController {
         }
     }
     
-    var viewOfGameSquare: ViewOfGame?
-    var viewOfGameHex: ViewOfGame?
-    var viewOfGameTriangular: ViewOfGame?
+    var viewOfGame: ViewOfGame?
     var numberOfBombs: Int = 0
 
     // MARK: - Actions
@@ -152,56 +205,13 @@ class SuperPartiesGameViewController: UIViewController {
         
         switch game!.gameType {
         case .square:
-            
             createANewSquareGameStepOne()
-            
-            /// Prenons 50 comme 1 côté d'un carré
-            let cote: Int = 50
-            /*
-            let gameView = ViewOfGameSquare()
-            gameView.n = game!.n
-            gameView.m = game!.m
-            gameView.z = game!.z
-            gameView.ratio = 2
-            gameView.frame = CGRect(x: 0, y: 0, width: cote*gameView.m, height: cote*gameView.n)
-            gameView.gameState = gameState
-            gameView.strokeColor = game!.colors.strokeColor
-            gameView.openColor = game!.colors.openColor
-            gameView.emptyColor = game!.colors.emptyColor
-            gameView.textColor = game!.colors.textColor
-            gameView.option1 = game!.option1
-            gameView.option1Time = game!.option1Time
-            gameView.option2 = game!.option2
-            gameView.option2frequency = game!.option2Frequency
-            gameView.layer.masksToBounds = false
-            gameView.numberOfFlags = game!.numberOfFlag
-            // Delegation
-            gameView.delegate = self
-            gameView.onPosingFlag = { (test: Bool) -> Void in
-                if test {
-                    // Incrémenter le nombre de bombes
-                    self.numberOfBombs += 1
-                }
-            }
-            
-            viewOfGameSquare = gameView
-            
-            
-            
-            self.scrollView.addSubview(gameView)
-            
-            if game!.option3 {
-                gameView.option3Timer.start(timeInterval: TimeInterval(game!.option3Time), id: "Option3")
-                gameView.option3Frequency = game!.option3Frequency
-                gameView.option3Timer.delegate = gameView
-            }
-            
+            viewOfGame = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            viewOfGame!.layer.borderWidth = 1.0
             if animatedFromTheRight {
-                UIView.animate(withDuration: 0.7) {
-                    self.viewOfGameSquare?.center.x -= self.view.frame.width
-                }
+                let size = viewOfGame!.dimension
+                viewOfGame!.frame.origin = CGPoint(x: self.view.center.x - size.width/2 + self.view.frame.width, y: self.view.center.y - size.height/2)
             }
-            */
         case .hexagonal:
             /*
             createANewHexGameStepOne() // première étape de la création
@@ -350,8 +360,7 @@ class SuperPartiesGameViewController: UIViewController {
     }
     
     /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
-    func removePrecendentViewOfGame()
-    {
+    func removePrecendentViewOfGame() {
         if viewOfGameSquare != nil {
             viewOfGameSquare?.removeFromSuperview()
         }
@@ -976,4 +985,4 @@ extension SuperPartiesGameViewController {
     }
     
 }
-
+*/

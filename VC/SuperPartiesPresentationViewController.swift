@@ -20,7 +20,7 @@ class SuperPartiesPresentationViewController: UIViewController {
     // MARK: - Variables
     override var prefersStatusBarHidden: Bool { return true }
     var currentLevelReached: (square: Int, hex: Int, triangle: Int) = (1,0,0)
-    var selectedGame: (level: Int,gameType: GameType)?
+//    var selectedGame: (level: Int, gameType: GameType)?
     
     // MARK: - Actions
     @IBAction func menuButtonTapped(_ sender: Any) {
@@ -54,8 +54,8 @@ class SuperPartiesPresentationViewController: UIViewController {
         }
     }
     
-    
     // MARK: - Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,7 +76,9 @@ class SuperPartiesPresentationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is SuperPartiesGameViewController {
             let dest = segue.destination as! SuperPartiesGameViewController
+            
             // TODO : Give the correct game to the destination
+            
             /*
              There is a maximum m fixed by default
                 square --> m = 30
@@ -89,9 +91,24 @@ class SuperPartiesPresentationViewController: UIViewController {
             // Two things can happen
             // 1. The game has already have been saved, hence we must load it were it was
             // 2. The game hasn't been start, hence we must create a new one 
+            if let selectedGame = sender as! (level: Int, gameType: GameType)? {
+                if isGameAlreadyStarted(level: selectedGame.level) {
+                    // TODO: restaure the game as it was before (we need to use the valide gameState array)
+                    
+                } else {
+                    // TODO: find the correct game to be passed
+                    dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame.gameType, n: 50, m: 30, z: 300, totalTime: 1000)
+                }
+                
+            }
             
-            dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame!.gameType, n: 100, m: 30, z: 300, totalTime: 1000)
         }
+    }
+    
+    // Returns true if there is an existing game saved locally for this level
+    private func isGameAlreadyStarted(level: Int) -> Bool {
+        // TODO
+        return true
     }
 }
 
@@ -126,8 +143,7 @@ extension SuperPartiesPresentationViewController: UITableViewDelegate, UITableVi
         cell.setNeedsDisplay()
         
         cell.closureToStartGame = { (levelTapped: Int,gameTypeTapped: GameType) -> Void in
-            self.selectedGame = (level: levelTapped, gameType: gameTypeTapped)
-            self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: nil)
+            self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: (levelTapped, gameTypeTapped))
         }
         
         return cell
