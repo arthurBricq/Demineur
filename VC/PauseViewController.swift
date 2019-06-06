@@ -35,8 +35,6 @@ class PauseViewController: UIViewController {
     
     // MARK: - FUNCTIONS
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let radius: CGFloat = 10.0
@@ -46,7 +44,6 @@ class PauseViewController: UIViewController {
         boutiqueView.layer.cornerRadius = radius-2
         boutiqueView.layer.borderWidth = 0.75
         boutiqueView.layer.borderColor = UIColor.gray.cgColor
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +68,6 @@ class PauseViewController: UIViewController {
         
         
         }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -117,33 +113,16 @@ class PauseViewController: UIViewController {
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
         } else if pausedGameViewController is SuperPartiesGameViewController {
             let gameViewController = pausedGameViewController as! SuperPartiesGameViewController
-            
-            /*
-            if gameViewController.game!.gameType == .square {
-                gameViewController.viewOfGameSquare?.option3Timer.play()
-                gameViewController.viewOfGameSquare?.unPauseAllOption1Timers()
-            } else if gameViewController.game!.gameType == .hexagonal {
-                gameViewController.viewOfGameHex?.option3Timer.play()
-                gameViewController.viewOfGameHex?.unPauseAllOption1Timers()
-            } else if gameViewController.game!.gameType == .triangular {
-                gameViewController.viewOfGameTriangular?.option3Timer.play()
-                gameViewController.viewOfGameTriangular?.unPauseAllOption1Timers()
-            }
-             */
-            
+            gameViewController.gameTimer?.play()
+            gameViewController.viewOfGame?.option3Timer.play()
+            gameViewController.viewOfGame?.unPauseAllOption1Timers()
+            gameViewController.bonusChoiceView?.updateTheNumberLabels()
         }
-        
-        
-        
-        
-        
-        
         dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func restartButtonTapped(_ sender: Any) {
-        
         if pausedGameViewController is InfiniteGameViewController {
             let gameViewController = pausedGameViewController as! InfiniteGameViewController
             gameViewController.restartTheGame()
@@ -159,11 +138,7 @@ class PauseViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     @IBAction func menuButtonTapped(_ sender: Any) {
-        
-        // retour au menu
-        
         if pausedGameViewController is InfiniteGameViewController {
             self.performSegue(withIdentifier: "BackToInfinitePresentation", sender: nil)
         } else if pausedGameViewController is HistoryGameViewController {
@@ -172,7 +147,6 @@ class PauseViewController: UIViewController {
             (pausedGameViewController as! SuperPartiesGameViewController).saveGameToCoreData()
             self.performSegue(withIdentifier: "BackToSuperPartiesPresentation", sender: nil)
         }
-    
     }
     
     @IBAction func vibrationButtonTapped(_ sender: Any) {

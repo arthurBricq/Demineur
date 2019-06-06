@@ -71,21 +71,7 @@ class GameViewController: UIViewController {
         isTheGameStarted.value = false
         self.numberOfBombs = 0
         
-        if game.gameType == .square { // read comments to understand.
-            createANewSquareGameStepOne()
-            viewOfGame = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
-            viewOfGame!.layer.borderWidth = 1.0
-            if animatedFromTheRight {
-                let size = viewOfGame!.dimension
-                viewOfGame!.frame.origin = CGPoint(x: self.view.center.x - size.width/2 + self.view.frame.width, y: self.view.center.y - size.height/2)
-            }
-        } else if game.gameType == .hexagonal {
-            createANewHexGameStepOne()
-            viewOfGame = HexViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
-        } else if game.gameType == .triangular {
-            createNewTriangularGameStepOne()
-            viewOfGame = TriangleViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
-        }
+        viewOfGame = getNewViewOfGame()
         
         // Set the properties of the view of game
         viewOfGame!.backgroundColor = UIColor.clear
@@ -187,7 +173,34 @@ class GameViewController: UIViewController {
     
     // MARK: - Functions to create a new game
     
-    func createANewSquareGameStepOne() {
+    /// This function returns a new view of game, set with the correct type and with the none cases positionned. It still needs to be tapped to position the bombs and finish the gamestate array.
+    func getNewViewOfGame() -> ViewOfGame? {
+        var vog: ViewOfGame?
+        if game.gameType == .square { // read comments to understand.
+            createANewSquareGameStepOne()
+            vog = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            vog!.layer.borderWidth = 1.0
+        } else if game.gameType == .hexagonal {
+            createANewHexGameStepOne()
+            vog = HexViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+        } else if game.gameType == .triangular {
+            createNewTriangularGameStepOne()
+            vog = TriangleViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+        }
+        return vog
+    }
+    
+    private func createANewSquareGameStepOne() {
+        gameState = createEmptySquareGameState(n: game.n, m: game.m)
+        positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
+    }
+    
+    private func createANewHexGameStepOne() {
+        gameState = createEmptyHexGameState(n: game.n, m: game.m)
+        positionNoneCaseHex(noneCases: game.noneCasesPosition, gameState: &gameState)
+    }
+    
+    private func createNewTriangularGameStepOne() {
         gameState = createEmptySquareGameState(n: game.n, m: game.m)
         positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
     }
@@ -198,20 +211,10 @@ class GameViewController: UIViewController {
         viewOfGame!.gameState = gameState
     }
     
-    func createANewHexGameStepOne() {
-        gameState = createEmptyHexGameState(n: game.n, m: game.m)
-        positionNoneCaseHex(noneCases: game.noneCasesPosition, gameState: &gameState)
-    }
-    
     func updateHexGameState(withFirstTouched touch: (x: Int, y: Int)) {
         positionBombsHex(gameState: &gameState, z: game.z, withFirstTouched: (touch.x, touch.y))
         createNumbersToDisplayHex(gameState: &gameState)
         viewOfGame!.gameState = gameState
-    }
-    
-    func createNewTriangularGameStepOne() {
-        gameState = createEmptySquareGameState(n: game.n, m: game.m)
-        positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
     }
     
     func updateTriangularGameStepTwo(withFirstTouched touch: (x: Int, y: Int)) {

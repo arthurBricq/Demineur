@@ -88,18 +88,19 @@ class SuperPartiesPresentationViewController: UIViewController {
              Then, using a ratio which depends on the difficulty, we determine the value of n required to fit the game
             */
             
-            // Two things can happen
-            // 1. The game has already have been saved, hence we must load it were it was
-            // 2. The game hasn't been start, hence we must create a new one 
+            
             if let selectedGame = sender as! (level: Int, gameType: GameType)? {
+                // 1. Pass the level index
+                dest.gameIndex = selectedGame.level
+                // 2. Check if there is an existing game at this index, and if so pass it
                 if isGameAlreadyStarted(level: selectedGame.level) {
-                    // TODO: restaure the game as it was before (we need to use the valide gameState array)
-                    
-                } else {
-                    // TODO: find the correct game to be passed
-                    dest.game = OneGame(gameTypeWithNoOptionsWithoutNoneCases: selectedGame.gameType, n: 50, m: 30, z: 300, totalTime: 1000)
+                    if let game = getSavedGame(level: selectedGame.level, gameType: selectedGame.gameType) {
+                        dest.game = game
+                        return
+                    }
                 }
-                
+                // 2. Else, pass a new game for this level. 
+                dest.game = getNewGame(level: selectedGame.level, gameType: selectedGame.gameType)
             }
             
         }
@@ -109,6 +110,16 @@ class SuperPartiesPresentationViewController: UIViewController {
     private func isGameAlreadyStarted(level: Int) -> Bool {
         // TODO
         return true
+    }
+    
+    private func getSavedGame(level: Int, gameType: GameType) -> OneGame?  {
+        // TODO
+        return nil
+    }
+    
+    private func getNewGame(level: Int, gameType: GameType) -> OneGame {
+        // TODO: find the valid game
+        return OneGame(gameTypeWithNoOptionsWithoutNoneCases: gameType, n: 50, m: 30, z: 300, totalTime: 1000)
     }
 }
 

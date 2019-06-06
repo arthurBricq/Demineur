@@ -7,10 +7,11 @@
 //
 
 import UIKit
-
+import CoreData
 
 /// This class represents one abstract case  (it is never to be instantiated)
 /// Methods that needs to be overriden: draw method (plus properties)
+
 class Case: UIButton {
     
     // MARK: - Variables

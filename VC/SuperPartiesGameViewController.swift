@@ -29,12 +29,37 @@ import UIKit
 
 
 class SuperPartiesGameViewController: GameViewController {
+    
+    /// This variable is the CD object keeping this game. If there is no saved game from before, it will be nil.
+    var savedGame: SuperPartieGame?
+    
     public func restartTheGame() {
-        // TODO
+        self.removePrecendentViewOfGame()
+        self.deleteTheGameFromCoreData()
+        self.startANewGame(animatedFromTheRight: false)
     }
     
+    /// This function save the current game to CD
     public func saveGameToCoreData() {
-        // TODO 
+        // TODO: save the current state of the game to CD
+        print("Is saving (creating...) the game to CD")
+        
+        // 1. Delete the precedent game
+        if savedGame != nil {
+            deleteTheGameFromCoreData()
+        }
+        
+        // 2. Create the new one and set it up using the view of game. 
+        let game = SuperPartieGame(context: AppDelegate.viewContext)
+        game.setUpGame(viewOfGame: self.viewOfGame!, level: self.gameIndex)
+    }
+    
+    public func deleteTheGameFromCoreData() {
+        print("Is deleting the game from CD")
+        if let sg = self.savedGame {
+            AppDelegate.viewContext.delete(sg)
+        }
+            
     }
     
     override func setUpLabelsForNewGame() {
@@ -52,6 +77,8 @@ class SuperPartiesGameViewController: GameViewController {
             bombView.isHidden = false
         }
     }
+    
+    
 }
 
 
