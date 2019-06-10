@@ -25,17 +25,25 @@ class InfinitePresentationViewController: UIViewController {
         self.performSegue(withIdentifier: "InfinitePresentationToScores", sender: nil)
     }
     
+    // MARK: - Functions
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if scoresModel.allScores.count == 0 && Reachability.isConnectedToNetwork() {
+            scoresModel.refresh()
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if segue.destination is InfiniteGameViewController || segue.destination is ScoreViewController {
             segue.destination.transitioningDelegate = self
         }
-        
     }
     
 }
 
 // MARK: - Gère les transitions
+
 extension InfinitePresentationViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
@@ -88,17 +96,6 @@ extension InfinitePresentationViewController: UIViewControllerTransitioningDeleg
                 })
             }
         }
+        
     }
-    
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("nombre d'enregistrements en ligne: \(scoresModel.allScores.count)")
-        if scoresModel.allScores.count == 0 && Reachability.isConnectedToNetwork() {
-            scoresModel.refresh()
-        }
-    }
-    
-    
-    
 }

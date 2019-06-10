@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class Type1TableViewCell: UITableViewCell {
     
     var currentGame: Int = 4
@@ -191,3 +192,5 @@ class Type1TableViewCell: UITableViewCell {
     
     
 }
+
+ */

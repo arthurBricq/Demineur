@@ -23,3 +23,11 @@ enum CaseState: Int32 {
     case none = 4 // quand il n'y a pas de cases
     case blocked = 5 // quand la case est temporairemetn bloque
 }
+
+/// Describe the 3 states that a cell of the type 'HistoryPresentationCell' (used to display the levels of history game) can have. Their drawing will depend on this state only
+enum PresentationCellState {
+    case notReachedYet
+    case completed
+    case reached
+    case firstRow
+}

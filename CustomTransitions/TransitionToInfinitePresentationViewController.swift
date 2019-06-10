@@ -53,6 +53,7 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
             secondLine.backgroundColor = UIColor.clear
             
             // MARK: - Calculs des différents points pour les lignes
+            
             let correctiveConstant: CGFloat = isItABigScreen() ? -24 : 20
             var firstX: CGFloat = 0
             var averageYs: [CGFloat] = [0, 0]

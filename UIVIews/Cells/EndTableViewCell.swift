@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class EndTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
@@ -22,3 +23,4 @@ class EndTableViewCell: UITableViewCell {
     }
     
 }
+*/

@@ -26,8 +26,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var reglagesButton: UIButton!
     
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 6*40 + 5*15
@@ -67,8 +66,7 @@ class MenuViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController
-        {
+        if /*segue.destination is HistoryPresentationViewController || */segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController {
             segue.destination.transitioningDelegate = self
         }
         

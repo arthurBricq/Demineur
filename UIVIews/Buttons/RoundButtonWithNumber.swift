@@ -13,11 +13,9 @@ class RoundButtonWithNumber: UIButton {
     
     var strokeColor: UIColor = .brown
     var lineWidth: CGFloat = 1.0
-    var buttonTappedClosure: ((Int)->Void)?
     var number: Int = 1
     
     override func draw(_ rect: CGRect) {
-        
         if rect.width != rect.height {
             print("le boutton rond n'est pas un carre")
         }
@@ -34,22 +32,23 @@ class RoundButtonWithNumber: UIButton {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        
         self.alpha = 0.4
-        
-        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
         UIView.animate(withDuration: 0.5) {
             self.alpha = 1.0
         }
-        
-        buttonTappedClosure?(number)
-        
     }
     
+    public func setDisable() {
+        self.isEnabled = false
+        self.alpha = 0.5
+    }
     
+    public func setEnable() {
+        self.isEnabled = true
+        self.alpha = 1.0 
+    }
 }
