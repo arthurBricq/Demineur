@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class SuperPartiesPresentationViewController: UIViewController {
 
@@ -76,47 +77,76 @@ class SuperPartiesPresentationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is SuperPartiesGameViewController {
             let dest = segue.destination as! SuperPartiesGameViewController
-            
-            // TODO : Give the correct game to the destination
-            
-            /*
-             There is a maximum m fixed by default
-                square --> m = 30
-                hex --> m = ?
-                triangle --> m = ?
-             
-             Then, using a ratio which depends on the difficulty, we determine the value of n required to fit the game
-            */
-            
-            
             if let selectedGame = sender as! (level: Int, gameType: GameType)? {
                 // 1. Pass the level index
                 dest.gameIndex = selectedGame.level
+                
                 // 2. Check if there is an existing game at this index, and if so pass it
-                if isGameAlreadyStarted(level: selectedGame.level) {
-                    if let game = getSavedGame(level: selectedGame.level, gameType: selectedGame.gameType) {
-                        dest.game = game
+                if isGameAlreadyStarted(level: selectedGame.level, gameType: selectedGame.gameType) {
+                    print("There is a game saved for this level")
+                    if let savedGame = getSavedGame(level: selectedGame.level, gameType: selectedGame.gameType) {
+                        // TODO: pass the information needed to recover the game
+                        print("b")
+                        dest.savedGame = savedGame
                         return
                     }
+                } else {
+                    print("Creating a new game for this level")
+                    dest.game = getNewGame(level: selectedGame.level, gameType: selectedGame.gameType)
                 }
-                // 2. Else, pass a new game for this level. 
-                dest.game = getNewGame(level: selectedGame.level, gameType: selectedGame.gameType)
+                
             }
             
         }
     }
     
     // Returns true if there is an existing game saved locally for this level
-    private func isGameAlreadyStarted(level: Int) -> Bool {
-        // TODO
-        return true
+    private func isGameAlreadyStarted(level: Int, gameType: GameType) -> Bool {
+        print("Is game started ? level: \(level) - gameType: \(gameType)")
+        let request: NSFetchRequest<SuperPartieGame> = SuperPartieGame.fetchRequest()
+        request.predicate = NSPredicate(format: "level == \(level) && gameType == \(gameType.rawValue)")
+        do {
+            let games = try AppDelegate.viewContext.fetch(request)
+            print("Number of games matching predicates: \(games.count)")
+            if games.count > 1 {
+                print("ERROR: there are to many games saved for one specific level. ")
+            }
+            return games.count > 0
+        } catch {
+            print("Error fecthing games from CD: \(error)")
+            return false
+        }
     }
     
-    private func getSavedGame(level: Int, gameType: GameType) -> OneGame?  {
-        // TODO
-        return nil
+    /// If there is a game saved at this level and for this gameType, then it will return it. Else, it will return nil.
+    private func getSavedGame(level: Int, gameType: GameType) -> SuperPartieGame?  {
+        let request: NSFetchRequest<SuperPartieGame> = SuperPartieGame.fetchRequest()
+        request.predicate = NSPredicate(format: "level == \(level) && gameType == \(gameType.rawValue)")
+        do {
+            let games = try AppDelegate.viewContext.fetch(request)
+            if games.count > 1 {
+                print("ERROR: there are to many games saved for one specific level. ")
+            }
+            if let firstGame = games.first {
+                return firstGame
+            } else {
+                print("ERROR: there are no games...")
+                return nil
+            }
+        } catch {
+            print("Error fecthing games from CD: \(error)")
+            return nil
+        }
     }
     
+    /**
+     There is a maximum m fixed by default
+     square --> m = 30
+     hex --> m = ?
+     triangle --> m = ?
+     
+     Then, using a ratio which depends on the difficulty, we determine the value of n required to fit the game
+     */
     private func getNewGame(level: Int, gameType: GameType) -> OneGame {
         // TODO: find the valid game
         return OneGame(gameTypeWithNoOptionsWithoutNoneCases: gameType, n: 50, m: 30, z: 300, totalTime: 1000)

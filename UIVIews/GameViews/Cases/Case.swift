@@ -61,7 +61,7 @@ class Case: UIButton {
         option1Timer.delegate = self 
         markingTimer.delegate = self
     }
-    
+        
     // MARK: - Function when tapped
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

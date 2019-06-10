@@ -63,8 +63,7 @@ class GameViewController: UIViewController {
     /// This function will start a new game, with the 'viewOfGame' as gameManager for the game 'game' variable.
     func startANewGame(animatedFromTheRight: Bool) {
         // 0. Set te colors
-        let color1: UIColor = colorForRGB(r: 52, g: 61, b: 70)
-        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: color1, textColor: color1)
+        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: colorForRGB(r: 52, g: 61, b: 70), textColor: colorForRGB(r: 52, g: 61, b: 70))
         
         // 1. Kill the last variables of the game
         gameTimer?.stop()
@@ -78,7 +77,7 @@ class GameViewController: UIViewController {
         viewOfGame!.makeDarkBorderDisplay()
         viewOfGame!.delegate = self
         viewOfGame!.layer.masksToBounds = false
-        viewOfGame!.numberOfFlags = game.numberOfFlag
+        viewOfGame!.numberOfRemainingFlags = game.numberOfFlag
         viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
             self.numberOfBombs += test ? 1 : 0
         }

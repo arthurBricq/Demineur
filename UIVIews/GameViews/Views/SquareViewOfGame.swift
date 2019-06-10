@@ -16,7 +16,7 @@ class SquareViewOfGame: ViewOfGame {
         return CGSize(width: CGFloat(game!.m*a), height: CGFloat(game!.n*a))
     }
     
-    override func instantiateCases() {
+    override func instantiateCases(isRestauringGame: Bool = false) {
         var positionnerPoint: CGPoint = CGPoint.zero // iterator point
         let a = self.frame.width/CGFloat(game!.m)
         print("frame of the view:",self.frame)
@@ -24,12 +24,22 @@ class SquareViewOfGame: ViewOfGame {
         for i in 0..<game!.n {
             var line: [Case] = []
             for j in 0..<game!.m {
-                // Create a new square case
-                let newCase = SquareCase(frame: CGRect(origin: positionnerPoint, size: caseSize), game: game!, i: i, j: j, viewOfGame: self)
-                newCase.caseState = gameState[i][j] == -2 ? .none : .empty
+                var c: Case?
+                c = SquareCase(frame: CGRect(origin: positionnerPoint, size: caseSize), game: game!, i: i, j: j, viewOfGame: self)
+                
+                if isRestauringGame {
+                    // We need to set the correct case state
+                    if let state = self.allCaseStates?[i][j] {
+                        c!.caseState = state
+                    }
+                } else {
+                    // Create a new square case
+                    c!.caseState = gameState[i][j] == -2 ? .none : .empty
+                }
+                
                 positionnerPoint = CGPoint(x: positionnerPoint.x + a, y: positionnerPoint.y)
-                line.append(newCase)
-                self.addSubview(newCase)
+                line.append(c!)
+                self.addSubview(c!)
             }
             cases.append(line)
             positionnerPoint = CGPoint(x: 0, y: positionnerPoint.y + a)

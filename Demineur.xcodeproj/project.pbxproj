@@ -380,8 +380,8 @@
 			children = (
 				4EA7FD6B20F894E200740480 /* MenuViewController.swift */,
 				4E36C10E211DD78900F810B7 /* InfinitePresentationViewController.swift */,
-				4E29899B213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift */,
 				4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */,
+				4E29899B213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift */,
 				4EEE8E8A22A5914200F89875 /* GameViewController.swift */,
 				4EA7FD6F20F8951300740480 /* InfiniteGameViewController.swift */,
 				4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */,
@@ -477,9 +477,9 @@
 			isa = PBXGroup;
 			children = (
 				4E98AD8121AB6EFC0041DD2E /* ViewOfGame.swift */,
+				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
 				4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */,
 				4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */,
-				4E98AD8521AB866A0041DD2E /* SquareViewOfGame.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

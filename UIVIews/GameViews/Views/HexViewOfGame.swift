@@ -23,7 +23,9 @@ class HexViewOfGame: ViewOfGame {
         return CGSize(width: width, height: height)
     }
     
-    override func instantiateCases() {
+    override func instantiateCases(isRestauringGame: Bool = false) {
+        // TODO: update this method to handle recovery
+        
         var iteratorPoint: CGPoint = .zero
         let a = getA()
         let h = 2*a // la hauteur

@@ -19,7 +19,10 @@ class TriangleViewOfGame: ViewOfGame {
         return CGSize(width: width, height: height)
     }
     
-    override func instantiateCases() {
+    override func instantiateCases(isRestauringGame: Bool = false) {
+        // TODO: update this method to handle recovery
+
+        
         // Les dimensions de la vue doivent être les bonnes, grâce à la fonction de dimensionnement.
         var a: CGFloat = 0
         // Trouver la constante a = a(m,n) et la hauteur

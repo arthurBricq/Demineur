@@ -16,12 +16,13 @@
         <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="m" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="n" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="numberOfRemainingFlags" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="z" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="cases" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SavedCase" inverseName="game" inverseEntity="SavedCase" syncable="YES"/>
     </entity>
     <elements>
         <element name="LocalScore" positionX="-183.55078125" positionY="-264.9375" width="128" height="73"/>
-        <element name="SuperPartieGame" positionX="-160.4375" positionY="-118.171875" width="128" height="133"/>
+        <element name="SuperPartieGame" positionX="-160.4375" positionY="-118.171875" width="128" height="148"/>
         <element name="SavedCase" positionX="-332.8046875" positionY="-111.38671875" width="128" height="118"/>
     </elements>
 </model>

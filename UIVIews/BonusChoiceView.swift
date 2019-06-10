@@ -257,7 +257,7 @@ class BonusChoiceView: UIView {
             self.updateTheNumberLabels()
             let drapeauLevel = dataManager.drapeauLevel
             let values: [Int] = [1,2,3] // drapeaux à ajouter
-            viewOfGame!.numberOfFlags += values[drapeauLevel]
+            viewOfGame!.numberOfRemainingFlags += values[drapeauLevel]
         }
     }
     

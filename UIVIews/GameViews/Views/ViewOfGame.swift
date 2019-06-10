@@ -24,14 +24,65 @@ class ViewOfGame: UIView {
     /// Holds all the cases present on screen.
     var cases: [[Case]] = [[Case]].init()
     /// Holds the number of remaining flags.
-    var numberOfFlags: Int = 5 {
-        didSet {delegate?.updateFlagsDisplay(numberOfFlags: numberOfFlags)}
+    var numberOfRemainingFlags: Int = 5 {
+        didSet {delegate?.updateFlagsDisplay(numberOfFlags: numberOfRemainingFlags)}
     }
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va rajouter +1 à la variable 'numberOfBombs' du VC si on marque un drapeau au bon endroit.
     var onPosingFlag: ((Bool) -> Void)?
     /// Permet de compter le nombre total de drapeaux correct que le joueur a posé. Cette closure va enlever -1 à la variable 'numberOfBombs' du VC si on enlève un drapeau correct.
     var onUnposingFlag: ((Bool) -> Void)?
+    /// This variable is only used to restaure the game at the correct state, if we start from a game that was already existing. 
+    var allCaseStates: [[CaseState]]?
+    
     var option3Timer = CountingTimer()
+    
+    
+    // MARK: - Inits functions
+    
+    override init(frame: CGRect) { super.init(frame: frame) }
+    
+    required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
+    
+    /// This init asks for frame, which implies a constraint dimension of the viewOfGame (infinite game). In this case, the VC is in charge of positionnning the view.
+    convenience init(frame: CGRect, game: OneGame, gameState: inout [[Int]]) {
+        self.init(frame: frame)
+        self.game = game
+        self.gameState = gameState
+        instantiateCases()
+        if game.option3 {
+            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
+            option3Timer.delegate = self
+        }
+    }
+    
+    /// This init don't ask for a frame, which means that the frame is calculated based on unit dimension of the case. After calling this init, the viewOfGame is already positienned at the right position for the scroll view where it belongs.
+    convenience init(game: OneGame, gameState: inout [[Int]], scrollViewDimension: CGSize) {
+        self.init()
+        self.game = game
+        self.gameState = gameState
+        self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
+        instantiateCases()
+        if game.option3 {
+            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
+            option3Timer.delegate = self
+        }
+    }
+    
+    /// This init must be call when we want to restaure a game. It needs more information about the states of cases.
+    convenience init(restauredGame game: OneGame, gameState: inout [[Int]], allCaseStates: [[CaseState]], scrollViewDimension: CGSize) {
+        self.init()
+        self.game = game
+        self.gameState = gameState
+        self.allCaseStates = allCaseStates
+        self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
+        instantiateCases(isRestauringGame: true)
+        if game.option3 {
+            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
+            option3Timer.delegate = self
+        }
+        
+    }
+    
     
     // MARK: - computed properties for the automatic sizing process
     
@@ -87,36 +138,6 @@ class ViewOfGame: UIView {
         return CGPoint(x: x, y: y)
     }
     
-    // MARK: - Inits functions
-    
-    override init(frame: CGRect) { super.init(frame: frame) }
-    
-    required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
- 
-    /// This init asks for frame, which implies a constraint dimension of the viewOfGame (infinite game). In this case, the VC is in charge of positionnning the view.
-    convenience init(frame: CGRect, game: OneGame, gameState: inout [[Int]]) {
-        self.init(frame: frame)
-        self.game = game
-        self.gameState = gameState
-        instantiateCases()
-        if game.option3 {
-            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-            option3Timer.delegate = self
-        }
-    }
-    
-    /// This init don't ask for a frame, which means that the frame is calculated based on unit dimension of the case. After calling this init, the viewOfGame is already positienned at the right position for the scroll view where it belongs.
-    convenience init(game: OneGame, gameState: inout [[Int]], scrollViewDimension: CGSize) {
-        self.init()
-        self.game = game
-        self.gameState = gameState
-        self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
-        instantiateCases()
-        if game.option3 {
-            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-            option3Timer.delegate = self
-        }
-    }
     
     // MARK: - Functions
     
@@ -194,7 +215,8 @@ class ViewOfGame: UIView {
     
     /// This method needs to be overriden by subclasses.
     /// It's supposed to dispose the cases in the right position (not on the draw function anymore)
-    func instantiateCases() {
+    /// If the parameter 'isRestauringGame' is passed as true, then the function will look for the correct information to be passed in the cases
+    func instantiateCases(isRestauringGame: Bool = false) {
         fatalError("This method needs to be overriden by children")
     }
     
@@ -208,8 +230,8 @@ class ViewOfGame: UIView {
     }
     
     private func markACaseAt(i: Int, j: Int, byComputer: Bool = false) {
-        if numberOfFlags <= 0 { return }
-        numberOfFlags = numberOfFlags - 1
+        if numberOfRemainingFlags <= 0 { return }
+        numberOfRemainingFlags = numberOfRemainingFlags - 1
         cases[i][j].caseState = byComputer ? .markedByComputer : .marked
     }
     
