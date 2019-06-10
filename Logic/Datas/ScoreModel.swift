@@ -235,15 +235,10 @@ class ScoresModel {
         
         print("current id:\(curentId)")
         // On progresse parmis tous les scores
-        for element in array
-        {
-            print("id:\(element.userIdentifier)")
-            
+        for element in array {            
             if element.userIdentifier == curentId { // même joueur qu'avant -> remplir le tableau TMP
-                print("a")
                 tmpArray.append(element)
             } else { // il s'agit d'un nouveau joueur -> On change le current iD
-                print("b")
                 arraysByPlayers.append(tmpArray)
                 tmpArray.removeAll()
                 curentId = element.userIdentifier

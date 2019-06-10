@@ -20,6 +20,7 @@ class SuperPartiesGameViewController: GameViewController {
     // MARK: - new functions
     
     public func restartTheGame() {
+        isTheGameStarted.delegate = self 
         self.removePrecendentViewOfGame()
         self.deleteTheGameFromCoreData()
         self.startANewGame(animatedFromTheRight: false)
@@ -73,7 +74,6 @@ class SuperPartiesGameViewController: GameViewController {
     }
     
     override func getNewViewOfGame() -> ViewOfGame? {
-        print("a")
         if savedGame == nil {
             print("New game to be created")
             return super.getNewViewOfGame()
