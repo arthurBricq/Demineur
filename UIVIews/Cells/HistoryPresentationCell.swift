@@ -68,8 +68,8 @@ class HistoryPresentationCell: UITableViewCell {
             switch state {
             case .firstRow:
                 // This line must be animated
-                let p1 = CGPoint(x: 0, y: h/2)
-                let p2 = CGPoint(x: w/2, y: h/2)
+                let p1 = CGPoint(x: 0, y: h/2+40)
+                let p2 = CGPoint(x: w/2, y: h/2+40)
                 let p3 = CGPoint(x: w/2, y: h)
                 let path = UIBezierPath()
                 path.move(to: p1)

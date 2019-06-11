@@ -25,6 +25,7 @@ class HistoryPresentationViewController: UIViewController  {
     @IBOutlet weak var levelsTableView: UITableView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var menuButton: UIButton!
     
     
     // MARK: - VARIABLES
@@ -71,14 +72,14 @@ class HistoryPresentationViewController: UIViewController  {
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
         dataManager.currentHistoryLevel = 5
+        self.view.bringSubviewToFront(menuButton)
         addHistoryLabel()
     }
 
     /// This function adds the label with 'HISTORY' writen on it to the tableview, so that is scrolls with the cells.
     private func addHistoryLabel() {
         let w = self.view.frame.width
-        let h = self.view.frame.height
-        let lbl = UILabel(frame: CGRect(x: w/2 + 50, y: 40, width: 20, height: 300))
+        let lbl = UILabel(frame: CGRect(x: w/2 + 50, y: 55, width: 20, height: 300))
         lbl.text = "HISTORY"
         lbl.font = UIFont(name: "PingFangSC-Light", size: 25)
         lbl.textColor = UIColor.gray
