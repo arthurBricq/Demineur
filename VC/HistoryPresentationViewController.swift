@@ -71,6 +71,20 @@ class HistoryPresentationViewController: UIViewController  {
         levelsTableView.delegate = self
         levelsTableView.dataSource = self
         dataManager.currentHistoryLevel = 5
+        addHistoryLabel()
+    }
+
+    /// This function adds the label with 'HISTORY' writen on it to the tableview, so that is scrolls with the cells.
+    private func addHistoryLabel() {
+        let w = self.view.frame.width
+        let h = self.view.frame.height
+        let lbl = UILabel(frame: CGRect(x: w/2 + 50, y: 40, width: 20, height: 300))
+        lbl.text = "HISTORY"
+        lbl.font = UIFont(name: "PingFangSC-Light", size: 25)
+        lbl.textColor = UIColor.gray
+        lbl.numberOfLines = 0
+        lbl.textAlignment = .center
+        self.levelsTableView.addSubview(lbl)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -134,6 +148,7 @@ extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDe
                 self.performSegue(withIdentifier: "StartingGame", sender: gameIndex)
             }
         }
+        cell.clipsToBounds = false 
         cell.setNeedsDisplay()
         cell.levelButton.setNeedsDisplay()
         return cell

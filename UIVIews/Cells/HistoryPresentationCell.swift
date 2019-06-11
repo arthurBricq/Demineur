@@ -16,7 +16,6 @@ class HistoryPresentationCell: UITableViewCell {
     // MARK: - Outlet
     
     @IBOutlet weak var levelButton: RoundButtonWithNumber!
-    @IBOutlet weak var historyLabel: UILabel!
     
     // MARK: - Variables
     
@@ -34,16 +33,11 @@ class HistoryPresentationCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        self.clipsToBounds = false
-        self.contentView.clipsToBounds = false
-        self.contentView.superview?.clipsToBounds = false 
     }
     
     /// Call this function to set a cell that is not the first row
     public func setCell(displayedLevel level: Int, cellState state: PresentationCellState) {
         self.levelButton.isHidden = false
-        self.historyLabel.isHidden = true
         self.levelButton.setTitle(String(level), for: .normal)
         self.cellState = state
         if state == .notReachedYet {
@@ -56,7 +50,6 @@ class HistoryPresentationCell: UITableViewCell {
     /// Call this function to set a cell that is the first row only s
     public func disableAndHideButton() {
         self.levelButton.isHidden = true
-        self.historyLabel.isHidden = false
         self.cellState = .firstRow
     }
     

@@ -64,10 +64,6 @@
 		4EA7FD7220F8953500740480 /* HistoryPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */; };
 		4EA7FD7420F8954B00740480 /* HistoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */; };
 		4EA7FD7720F8957A00740480 /* RoundButtonWithNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7620F8957A00740480 /* RoundButtonWithNumber.swift */; };
-		4EA7FD7A20F8959C00740480 /* EndTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7920F8959C00740480 /* EndTableViewCell.swift */; };
-		4EA7FD7C20F895B000740480 /* StartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */; };
-		4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */; };
-		4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */; };
 		4EA7FD8420F8960700740480 /* HexCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8320F8960700740480 /* HexCase.swift */; };
 		4EA7FD8620F8961C00740480 /* RayureDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8520F8961C00740480 /* RayureDrawing.swift */; };
 		4EA7FD8820F8962B00740480 /* SquareCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FD8720F8962B00740480 /* SquareCase.swift */; };
@@ -177,10 +173,6 @@
 		4EA7FD7120F8953500740480 /* HistoryPresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPresentationViewController.swift; sourceTree = "<group>"; };
 		4EA7FD7320F8954B00740480 /* HistoryGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGameViewController.swift; sourceTree = "<group>"; };
 		4EA7FD7620F8957A00740480 /* RoundButtonWithNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButtonWithNumber.swift; sourceTree = "<group>"; };
-		4EA7FD7920F8959C00740480 /* EndTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndTableViewCell.swift; sourceTree = "<group>"; };
-		4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartTableViewCell.swift; sourceTree = "<group>"; };
-		4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type1TableViewCell.swift; sourceTree = "<group>"; };
-		4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type2TableViewCell.swift; sourceTree = "<group>"; };
 		4EA7FD8320F8960700740480 /* HexCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexCase.swift; sourceTree = "<group>"; };
 		4EA7FD8520F8961C00740480 /* RayureDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayureDrawing.swift; sourceTree = "<group>"; };
 		4EA7FD8720F8962B00740480 /* SquareCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquareCase.swift; sourceTree = "<group>"; };
@@ -422,10 +414,6 @@
 		4EA7FD7820F8958700740480 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4EA7FD7920F8959C00740480 /* EndTableViewCell.swift */,
-				4EA7FD7B20F895B000740480 /* StartTableViewCell.swift */,
-				4EA7FD7D20F895C900740480 /* Type1TableViewCell.swift */,
-				4EA7FD7F20F895DB00740480 /* Type2TableViewCell.swift */,
 				4EF49E8422AE586A00075AC8 /* HistoryPresentationCell.swift */,
 				4EB7D4FB211B3EEB00BE3E42 /* BonusBoutiqueTableViewCell.swift */,
 				9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */,
@@ -617,13 +605,11 @@
 				4E3705EC213168E100972B51 /* TransitionToReglage.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
 				4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */,
-				4EA7FD7E20F895C900740480 /* Type1TableViewCell.swift in Sources */,
 				4E3705EA2131652D00972B51 /* NiceButton.swift in Sources */,
 				9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */,
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4E29899C213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift in Sources */,
 				4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */,
-				4EA7FD8020F895DB00740480 /* Type2TableViewCell.swift in Sources */,
 				4EA7FD9820F896D200740480 /* FlagView.swift in Sources */,
 				9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */,
 				4E301FAE21A0D98100DAB959 /* Enums.swift in Sources */,
@@ -664,7 +650,6 @@
 				4E4A9F7B22A7C1AE00FC6E66 /* SavedCase.swift in Sources */,
 				4EA76A9920FB6E9C00E940C8 /* ArticleViewController.swift in Sources */,
 				4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */,
-				4EA7FD7C20F895B000740480 /* StartTableViewCell.swift in Sources */,
 				4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */,
 				4EE06BBF219E7663004ED7D6 /* UserDefaultsManager.swift in Sources */,
 				4EA7FD9420F896B500740480 /* BombViewDisplay.swift in Sources */,
@@ -700,7 +685,6 @@
 				4E2989A0213DBBF2003D98D1 /* SquarePresentationButton.swift in Sources */,
 				4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */,
 				4E301FB021A0D9AF00DAB959 /* Section.swift in Sources */,
-				4EA7FD7A20F8959C00740480 /* EndTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
