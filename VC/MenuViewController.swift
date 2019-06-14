@@ -16,8 +16,6 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var lineHeight: NSLayoutConstraint!
     @IBOutlet weak var mainLine: LineView!
     @IBOutlet weak var mainLineLeadingConstraint: NSLayoutConstraint!
-    
-    
     @IBOutlet weak var histoireButton: UIButton!
     @IBOutlet weak var infiniteButton: UIButton!
     @IBOutlet weak var superPartiesButton: UIButton!
@@ -26,7 +24,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var reglagesButton: UIButton!
     
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 6*40 + 5*15

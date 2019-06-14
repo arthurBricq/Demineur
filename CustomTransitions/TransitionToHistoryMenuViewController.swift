@@ -18,7 +18,7 @@ class TransitionToHistoryPresentationViewController: NSObject, UIViewControllerA
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        
+        /*
         if presenting {
             
             // MARK: - ANIMATION ALLER
@@ -295,6 +295,7 @@ class TransitionToHistoryPresentationViewController: NSObject, UIViewControllerA
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             }
         }
+        */
     }
     
 }

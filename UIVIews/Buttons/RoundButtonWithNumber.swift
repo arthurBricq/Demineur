@@ -14,6 +14,7 @@ class RoundButtonWithNumber: UIButton {
     var strokeColor: UIColor = .brown
     var lineWidth: CGFloat = 1.0
     var number: Int = 1
+    var buttonTappedClosure: (()->Void)?
     
     override func draw(_ rect: CGRect) {
         if rect.width != rect.height {
@@ -40,6 +41,7 @@ class RoundButtonWithNumber: UIButton {
         UIView.animate(withDuration: 0.5) {
             self.alpha = 1.0
         }
+        buttonTappedClosure?() 
     }
     
     public func setDisable() {

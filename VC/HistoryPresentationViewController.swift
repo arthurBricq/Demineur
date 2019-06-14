@@ -22,16 +22,18 @@ class HistoryPresentationViewController: UIViewController  {
     
     // MARK: - OUTLETS
     
-    @IBOutlet weak var levelsTableView: UITableView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuButton: UIButton!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     // MARK: - VARIABLES
     
     var color1 = colorForRGB(r: 66, g: 66, b: 66)
     var color2 = UIColor.orange
+    var rows: [HistoryPresentationCell] = []
+    
+    // MARK: - Constants
+    let heigthOfRow: CGFloat = 100
     
     // MARK: - ACTIONS
     
@@ -42,40 +44,74 @@ class HistoryPresentationViewController: UIViewController  {
     @IBAction func unwindToHistoryPresentation(segue: UIStoryboardSegue) {
         // retour aux niveaux
     }
+   
     
-    /// fonction appelée lorsque le unwind est fait
-    /*
-    override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
-       tableView.reloadData()
-        
-        return UIStoryboardSegue(identifier: identifier, source: fromViewController, destination: toViewController) {
-            let fromView = fromViewController.view!
-            let toView = toViewController.view!
-            if let containerView = fromView.superview {
-                toView.frame = fromView.frame
-                toView.alpha = 0
-                containerView.addSubview(toView)
-                
-                UIView.animate(withDuration: 1, animations: {
-                    toView.alpha = 1
-                }, completion: { (_) in
-                    toView.removeFromSuperview()
-                    self.dismiss(animated: false, completion: nil)
-                })
-            }
-        }
-    }
-    */
+    // MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        levelsTableView.delegate = self
-        levelsTableView.dataSource = self
         dataManager.currentHistoryLevel = 5
+        fillScrollView()
+        setUpScrollView()
         self.view.bringSubviewToFront(menuButton)
         addHistoryLabel()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        animateCells(index: 0)
+    }
+    
+    /// This method will add all the cells to the scroll view, and add them one by one.
+    private func fillScrollView() {
+        let numberOfRows = historyLevels.count + 1
+        let w = self.view.frame.width
+        
+        var yPosition: CGFloat = 0.0
+        for i in 0..<numberOfRows {
+            let h: CGFloat = i == 0 ? 150.0 : heigthOfRow
+            let cell = HistoryPresentationCell(frame: CGRect(x: 0, y: yPosition, width: w, height: h))
+            yPosition += i == 0 ? 150.0 : heigthOfRow
+            if i == 0 {
+                cell.setFirstRowCell(delegate: self)
+            } else {
+                let gameIndex = i-1
+                cell.buttonTappedClosure = {
+                    self.performSegue(withIdentifier: "StartingGame", sender: gameIndex)
+                }
+                if gameIndex == dataManager.currentHistoryLevel {
+                    cell.setCell(displayedLevel: gameIndex+1, cellState: .reached, delegate: self)
+                } else {
+                    cell.setCell(displayedLevel: gameIndex+1, cellState: gameIndex < dataManager.currentHistoryLevel ? .completed : .notReachedYet, delegate: self)
+                }
+                
+            }
+            scrollView.addSubview(cell)
+            rows.append(cell)
+        }
+    }
+    
+    private func setUpScrollView() {
+        let numberOfLevels = historyLevels.count
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: CGFloat(numberOfLevels)*heigthOfRow + 150)
+    }
+    
+    /// Call this method when you want to have the animation. 
+    private func animateCells(index: Int ) {
+        if index == 0 {
+            self.menuButton.alpha = 0.5
+            self.menuButton.isEnabled = false
+        }
+        if index == rows.count - 1 {
+            self.menuButton.alpha = 1.0
+            self.menuButton.isEnabled = true
+        }
+        if index < rows.count {
+            rows[index].animateLine()
+        }
+        
+    }
+    
     /// This function adds the label with 'HISTORY' writen on it to the tableview, so that is scrolls with the cells.
     private func addHistoryLabel() {
         let w = self.view.frame.width
@@ -85,8 +121,9 @@ class HistoryPresentationViewController: UIViewController  {
         lbl.textColor = UIColor.gray
         lbl.numberOfLines = 0
         lbl.textAlignment = .center
-        self.levelsTableView.addSubview(lbl)
+        // TODO: add the label
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.destination {
@@ -110,57 +147,32 @@ class HistoryPresentationViewController: UIViewController  {
             break
         }
     }
-        
-}
-
-extension HistoryPresentationViewController:UITableViewDataSource, UITableViewDelegate
-{
+    
+    
+    /// fonction appelée lorsque le unwind est fait
     /*
-     NOTE ABOUT THIS TABLE VIEW
-     The rows of this table view present the level.
-     Just note that the first row is left blank in order to draw the initial line there.
-     The other rows present levels one by one, with a line that will go around the finished levels.
-    */
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // All the levels, plus the first row where the line will be drawn
-        return historyLevels.count+1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     override func segueForUnwinding(to toViewController: UIViewController, from fromViewController: UIViewController, identifier: String?) -> UIStoryboardSegue? {
+     tableView.reloadData()
+     
+     return UIStoryboardSegue(identifier: identifier, source: fromViewController, destination: toViewController) {
+     let fromView = fromViewController.view!
+     let toView = toViewController.view!
+     if let containerView = fromView.superview {
+     toView.frame = fromView.frame
+     toView.alpha = 0
+     containerView.addSubview(toView)
+     
+     UIView.animate(withDuration: 1, animations: {
+     toView.alpha = 1
+     }, completion: { (_) in
+     toView.removeFromSuperview()
+     self.dismiss(animated: false, completion: nil)
+     })
+     }
+     }
+     }
+     */
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as! HistoryPresentationCell
-        if indexPath.row == 0 {
-            cell.disableAndHideButton()
-        } else {
-            // Set the cell as required here
-            let gameIndex = indexPath.row-1
-            if gameIndex == dataManager.currentHistoryLevel {
-                cell.setCell(displayedLevel: gameIndex+1, cellState: .reached)
-            } else {
-                cell.setCell(displayedLevel: gameIndex+1, cellState: gameIndex < dataManager.currentHistoryLevel ? .completed : .notReachedYet)
-            }
-            cell.buttonTappedClosure = {
-                self.performSegue(withIdentifier: "StartingGame", sender: gameIndex)
-            }
-        }
-        cell.clipsToBounds = false 
-        cell.setNeedsDisplay()
-        cell.levelButton.setNeedsDisplay()
-        return cell
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 100 : 80
-    }
-    
-    
 }
 
 // Animations of transition
@@ -185,5 +197,17 @@ extension HistoryPresentationViewController: UIViewControllerTransitioningDelega
         }
         
         return nil
+    }
+}
+
+// MARK: - Functions for animation gestion of cells
+extension HistoryPresentationViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if let animationID = anim.value(forKey: "animationID") as? String {
+            if let cellNumber = Int(animationID) {
+                let nextNumber = cellNumber + 1
+                self.animateCells(index: nextNumber)
+            }
+        }
     }
 }
