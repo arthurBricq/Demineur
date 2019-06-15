@@ -55,10 +55,7 @@ class HistoryPresentationViewController: UIViewController  {
         setUpScrollView()
         self.view.bringSubviewToFront(menuButton)
         addHistoryLabel()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        // To be called when the view is presented
         animateCells(index: 0)
     }
     
@@ -101,10 +98,6 @@ class HistoryPresentationViewController: UIViewController  {
         if index == 0 {
             self.menuButton.alpha = 0.5
             self.menuButton.isEnabled = false
-        }
-        if index == rows.count - 1 {
-            self.menuButton.alpha = 1.0
-            self.menuButton.isEnabled = true
         }
         if index < rows.count {
             rows[index].animateLine()
@@ -203,10 +196,15 @@ extension HistoryPresentationViewController: UIViewControllerTransitioningDelega
 // MARK: - Functions for animation gestion of cells
 extension HistoryPresentationViewController: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if let animationID = anim.value(forKey: "animationID") as? String {
-            if let cellNumber = Int(animationID) {
-                let nextNumber = cellNumber + 1
-                self.animateCells(index: nextNumber)
+        // 1. Obtain the data sent by the cells
+        if let cellNumber = anim.value(forKey: "cellNumber") as? Int  {
+            if let isFinished = anim.value(forKey: "isFinished") as? Bool {
+                if !isFinished {
+                    self.animateCells(index: cellNumber + 1 )
+                } else {
+                    self.menuButton.alpha = 1.0
+                    self.menuButton.isEnabled = true
+                }
             }
         }
     }

@@ -48,7 +48,7 @@ class HistoryPresentationCell: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    /// Call this function to set a cell that is not the first row. Make sure that the closure was defined before. 
+    /// Call this function to set a cell that is not the first row. Make sure that the closure was defined before.
     public func setCell(displayedLevel level: Int, cellState state: PresentationCellState, delegate: CAAnimationDelegate) {
         levelButton!.buttonTappedClosure = buttonTappedClosure
         self.cellIndex = level
@@ -147,7 +147,8 @@ class HistoryPresentationCell: UIView {
             
             let animation = CABasicAnimation(keyPath: "strokeEnd")
             animation.delegate = animationDelegate
-            animation.setValue("\(cellIndex)", forKey: "animationID")
+            animation.setValue(cellIndex, forKey: "cellNumber")
+            animation.setValue(false, forKey: "isFinished")
             animation.fromValue = 0.0
             animation.toValue = 1.0
             animation.duration = 0.5
@@ -175,7 +176,8 @@ class HistoryPresentationCell: UIView {
             /// Create the animation and sent it to work 
             let animation = CABasicAnimation(keyPath: "path")
             animation.delegate = animationDelegate
-            animation.setValue("\(cellIndex)", forKey: "animationID")
+            animation.setValue(cellIndex, forKey: "cellNumber")
+            animation.setValue(cellState! == .reached, forKey: "isFinished")
             animation.fromValue = path1.cgPath
             animation.toValue = path2.cgPath
             animation.duration = 0.5
