@@ -72,6 +72,7 @@ class GameViewController: UIViewController {
         
         viewOfGame = getNewViewOfGame()
         
+        
         // Set the properties of the view of game
         viewOfGame!.backgroundColor = UIColor.clear
         viewOfGame!.makeDarkBorderDisplay()
@@ -330,32 +331,28 @@ extension GameViewController: UIViewControllerTransitioningDelegate {
     @IBAction func unwindToHistoryGameViewController(segue: UIStoryboardSegue) {}
     
     func animateNextLevel() {
-        
+                
         UIView.animateKeyframes(withDuration: 1, delay: 0.3, options: [], animations: {
             
+            // Hide the clock view
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
-                for subview in self.view.subviews {
-                    if subview is ClockView || subview.tag == -10 {
-                        subview.alpha = 0
-                    }
-                }
+                self.clockView.alpha = 0.0
             })
             
             UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.7, animations: {
                 self.viewOfGame!.center.x -= self.view.frame.width
+                self.viewOfGame?.alpha = 0
             })
             
         }) { (_) in
             
-            UIView.animate(withDuration: 0.3, animations: {
-                for subview in self.view.subviews {
-                    if subview is ClockView || subview.tag == -10 {
-                        subview.alpha = 1
-                    }
-                }
-            })
             self.removePrecendentViewOfGame()
-            self.startANewGame(animatedFromTheRight: true)
+            self.startANewGame(animatedFromTheRight: false)
+            self.viewOfGame?.alpha = 0.0
+            UIView.animate(withDuration: 0.6, animations: {
+                self.viewOfGame?.alpha = 1.0
+                self.clockView.alpha = 1
+            })
             
         }
         

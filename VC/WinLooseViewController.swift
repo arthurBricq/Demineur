@@ -140,21 +140,16 @@ class WinLooseViewController: UIViewController {
     }
     
     
-    /// Passer au niveau suivant, uniquement en mode histoire
+    /// Passer au niveau suivant, uniquement en mode histoire.
     @objc func nextLevel() {
-        
         let gameViewController = precedentViewController as! HistoryGameViewController
-        
-        gameViewController.game = historyLevels[precedentGameIndex+1]
         if precedentGameIndex == dataManager.currentHistoryLevel {
             dataManager.currentHistoryLevel += 1 // On débloque le niveau suivant
         }
+        gameViewController.game = historyLevels[precedentGameIndex+1]
         gameViewController.gameIndex = precedentGameIndex + 1
-        
         gameViewController.animateNextLevel()
-        
         dismiss(animated: true, completion: nil)
-        
     }
   
 }

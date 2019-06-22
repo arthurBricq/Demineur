@@ -87,8 +87,8 @@ class HistoryPresentationCell: UIView {
             switch state {
             case .firstRow:
                 // This line must be animated
-                let p1 = CGPoint(x: 0, y: h/2+40)
-                let p2 = CGPoint(x: w/2, y: h/2+40)
+                let p1 = CGPoint(x: 0, y: h/2)
+                let p2 = CGPoint(x: w/2, y: h/2)
                 let p3 = CGPoint(x: w/2, y: h)
                 path.move(to: p1)
                 path.addLine(to: p2)
@@ -137,7 +137,6 @@ class HistoryPresentationCell: UIView {
     
     public func animateLine() {
         isAlreadyDrawn = true
-        
         if self.cellState! == .firstRow {
             
             frontLayer.path = getLinePath(size: self.frame.size).cgPath
@@ -151,10 +150,11 @@ class HistoryPresentationCell: UIView {
             animation.setValue(false, forKey: "isFinished")
             animation.fromValue = 0.0
             animation.toValue = 1.0
-            animation.duration = 0.5
+            animation.duration = 1.2
             frontLayer.add(animation, forKey: "drawLineAnimation")
             self.layer.addSublayer(frontLayer)
             
+        
         } else {
             
             /// Create a layer that contains the path
@@ -180,10 +180,11 @@ class HistoryPresentationCell: UIView {
             animation.setValue(cellState! == .reached, forKey: "isFinished")
             animation.fromValue = path1.cgPath
             animation.toValue = path2.cgPath
-            animation.duration = 0.5
+            animation.duration = 0.3
             animation.fillMode = CAMediaTimingFillMode.forwards
             animation.isRemovedOnCompletion = false
             frontLayer.mask?.add(animation, forKey: "anim")
         }
     }
 }
+ 

@@ -23,6 +23,10 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var tutorialButton: UIButton!
     @IBOutlet weak var reglagesButton: UIButton!
     
+    // MARK: - Variables
+    var linesForAnimationToHistory: [UIView]? 
+    
+    // MARK: - Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +39,7 @@ class MenuViewController: UIViewController {
             print("Gestion des scores en ligne")
             print("Nombre de scores enregistrées en ligne: \(scoresModel.allScores.count)\n")
         }
+        
         // On ajoute la gestion des erreurs
         scoresModel.onError = { error in
             let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
@@ -57,14 +62,13 @@ class MenuViewController: UIViewController {
         reglagesButton.setTitle("key5".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
         tutorialButton.setTitle("key6".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
 
-        
     }
     
     override var prefersStatusBarHidden: Bool { return true }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if /*segue.destination is HistoryPresentationViewController || */segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController {
+        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController {
             segue.destination.transitioningDelegate = self
         }
         
@@ -74,6 +78,15 @@ class MenuViewController: UIViewController {
         // retour au menu
     }
     
+    /// Returns the y position where the line going to the history position must start.
+    public func getInitialYPositionForTransitionToHistory() -> CGFloat {
+        return (histoireButton.frame.origin.y + infiniteButton.frame.origin.y)/2 + 20
+    }
+    
+    public func getInitialXPositionForTransitionToHistory() -> CGFloat{
+        return view.convert(lineE.frame.origin, from: lineE.superview!).x + lineE.frame.width/2
+    }
+    
 }
 
 extension MenuViewController: UIViewControllerTransitioningDelegate {
@@ -81,9 +94,8 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if presented is HistoryPresentationViewController {
-            let transition = TransitionToHistoryPresentationViewController()
-            transition.animationDuration = 1.5
-            transition.presenting = true
+            let transition = TransitionFromMenuToHistory()
+            transition.animationDuration = 2.0
             return transition
         } else if presented is InfinitePresentationViewController {
             let transition = TransitionToInfinitePresentationViewController()
@@ -113,9 +125,7 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if dismissed is HistoryPresentationViewController {
-            let transition = TransitionToHistoryPresentationViewController()
-            transition.animationDuration = 1.5
-            transition.presenting = false
+            let transition = TransitionFromHistoryToMenu(animationDuration: 1.0)
             return transition
         } else if dismissed is InfinitePresentationViewController {
             let transition = TransitionToInfinitePresentationViewController()

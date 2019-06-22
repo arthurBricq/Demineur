@@ -54,8 +54,8 @@ class TransitionToHistoryPresentationViewController: NSObject, UIViewControllerA
             thirdLine.tag = -3
             thirdLine.backgroundColor = UIColor.clear
             
-            
             // MARK: - On cherche le x et le y de départ
+            
             var x: CGFloat = 0
             var allY: [CGFloat] = [0, 0]
             for subview in fromView.subviews {
@@ -202,8 +202,10 @@ class TransitionToHistoryPresentationViewController: NSObject, UIViewControllerA
                 line.removeFromSuperview()
             }
             fromView.addSubview(firstLine)
+            
             var secondLine = LineView()
             var thirdLine = LineView()
+            
             for subview in toView.subviews {
                 if subview is LineView {
                     if subview.tag == -2 {
@@ -215,6 +217,7 @@ class TransitionToHistoryPresentationViewController: NSObject, UIViewControllerA
             }
             
             // MARK: - Calcul des points (par rapport à l'animation aller)
+            
             // Intersection entre la première ligne et la ligne verticale
             let firstIntersection = fromView.convert(CGPoint(x:0.9*(toView.frame.width-toVC.mainLineLeadingConstraint.constant), y: firstLine.frame.minY), from: toView)
             let firstLineWidth = firstLine.frame.maxX - firstIntersection.x

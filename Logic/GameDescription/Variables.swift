@@ -11,8 +11,6 @@ import UIKit
 
 // MARK: - Definition des parties
 
-
-
 struct ColorSetForOneGame {
     var openColor = UIColor.white // color for open-case's background
     var emptyColor = UIColor.white // color for empty-case's background
@@ -24,12 +22,12 @@ struct ColorSetForOneGame {
 
 // MARK: - Mode Histoire
 
-let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 30, m: 10, z: 10, totalTime: 90),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 15, z: 15, totalTime: 90),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 10, z: 10, totalTime: 90),
+let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 30, m: 10, z: 2, totalTime: 90),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 15, z: 3, totalTime: 90),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 10, z: 4, totalTime: 90),
                                 
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 11, z: 4, totalTime: 60),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 4, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 11, z: 2, totalTime: 60),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 3, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 13, z: 4, totalTime: 60),
                                 
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .hexagonal, n: 10, m: 10, z: 4, totalTime: 60),

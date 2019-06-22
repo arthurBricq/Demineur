@@ -14,9 +14,31 @@ import UIKit
 // @IBDesignable
 class LineView: UIView {
     
+    // MARK: - Variables
+    
     @IBInspectable var lineWidth: CGFloat = 1
     @IBInspectable var strokeColor: UIColor = UIColor(red: 0.720, green: 0.469, blue: 0.000, alpha: 1.000)//184,120,0
     @IBInspectable var isVertical: Bool = true
+    
+    // MARK: - Functions
+    
+    /// Creates a line with the desired properties, with its tag set to -1 and with a clear background color. All the position/size properties are set to zero.
+    init(lineWidth: CGFloat, isVertical: Bool, strokeColor: UIColor) {
+        self.lineWidth = lineWidth
+        self.isVertical = isVertical
+        self.strokeColor = strokeColor
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        self.tag = -1
+        self.backgroundColor = UIColor.clear
+    }
+    
+    init() {
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
     
     override func draw(_ rect: CGRect) {
         
@@ -30,6 +52,7 @@ class LineView: UIView {
         line.stroke()
         
     }
+    
     
     
 }
