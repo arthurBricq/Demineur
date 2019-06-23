@@ -11,7 +11,11 @@ import UIKit
 /// This is the transition to go from the menu to the presentation of history levels. 
 class TransitionFromMenuToHistory: NSObject, UIViewControllerAnimatedTransitioning {
     
-    var animationDuration: TimeInterval = 1
+    var animationDuration: TimeInterval 
+    
+    init(animationDuration: TimeInterval) {
+        self.animationDuration = animationDuration
+    }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return animationDuration

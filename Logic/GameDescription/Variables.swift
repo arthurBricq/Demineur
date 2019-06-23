@@ -22,9 +22,9 @@ struct ColorSetForOneGame {
 
 // MARK: - Mode Histoire
 
-let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 30, m: 10, z: 2, totalTime: 90),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 15, z: 3, totalTime: 90),
-                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 10, z: 4, totalTime: 90),
+let historyLevels: [OneGame] = [OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 7, m: 7, z: 10, totalTime: 90),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 10, z: 12, totalTime: 90),
+                                OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 10, m: 10, z: 15, totalTime: 90),
                                 
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 8, m: 11, z: 2, totalTime: 60),
                                 OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 10, m: 11, z: 3, totalTime: 60),

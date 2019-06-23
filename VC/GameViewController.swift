@@ -72,10 +72,8 @@ class GameViewController: UIViewController {
         
         viewOfGame = getNewViewOfGame()
         
-        
         // Set the properties of the view of game
         viewOfGame!.backgroundColor = UIColor.clear
-        viewOfGame!.makeDarkBorderDisplay()
         viewOfGame!.delegate = self
         viewOfGame!.layer.masksToBounds = false
         viewOfGame!.numberOfRemainingFlags = game.numberOfFlag
@@ -145,7 +143,6 @@ class GameViewController: UIViewController {
         let widthRatio = (self.scrollView!.frame.width) / (viewOfGame!.frame.size.width+30)
         let heightRatio = (self.scrollView!.frame.height) / (viewOfGame!.frame.size.height)
         self.scrollView.minimumZoomScale = widthRatio < heightRatio ? widthRatio : heightRatio
-        scrollView.makeRedBorderDisplay()
         self.scrollView.maximumZoomScale = 2
         scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
         self.scrollView.contentSize = CGSize(width: viewOfGame!.frame.size.width+20, height: viewOfGame!.frame.size.height)
@@ -179,7 +176,7 @@ class GameViewController: UIViewController {
         if game.gameType == .square { // read comments to understand.
             createANewSquareGameStepOne()
             vog = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
-            vog!.layer.borderWidth = 1.0
+            vog!.makeDarkBorderDisplay()
         } else if game.gameType == .hexagonal {
             createANewHexGameStepOne()
             vog = HexViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)

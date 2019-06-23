@@ -92,11 +92,13 @@ class MenuViewController: UIViewController {
 extension MenuViewController: UIViewControllerTransitioningDelegate {
     
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    
+        // TODO: rewrite the transitions that don't have an init with the duration, and then use a more generic method (make it shorter)
+        
+        var transition: UIViewControllerAnimatedTransitioning? = nil
         
         if presented is HistoryPresentationViewController {
-            let transition = TransitionFromMenuToHistory()
-            transition.animationDuration = 2.0
-            return transition
+            transition = TransitionFromMenuToHistory(animationDuration: 2.0)
         } else if presented is InfinitePresentationViewController {
             let transition = TransitionToInfinitePresentationViewController()
             transition.animationDuration = 2.0
@@ -119,7 +121,7 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
             return transition
         }
         
-        return nil
+        return transition
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
