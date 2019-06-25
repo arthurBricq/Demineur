@@ -364,7 +364,7 @@ class InfiniteGameManager {
         default:
             fatalError("Problème dans la génération aléatoire ")
         }
-        
+ 
         print("type de la partie: "+stringToDisplay)
         
         return game

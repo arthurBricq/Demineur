@@ -388,13 +388,22 @@ class InfiniteGameViewController: UIViewController {
                 self.flagView.alpha = 1
             })
         }
-        // si besoin affiche la clock
+        
+        // si besoin affiche la clock et la met à 0
         if currentGame().isTimerAllowed {
-            gameTimer.start(timeInterval: 1.0, id: "Clock")
-            gameTimer.delegate = self
+            
+            clockView.pourcentage = 0
+            
             UIView.animate(withDuration: 0.25) {
                 self.clockView.alpha = 1
             }
+            
+            // if isn't the first game, start the timer, otherwise it has to startwhen the player first click
+            if !(sectionIndex == 0 && gameIndex == 1) {
+                gameTimer.start(timeInterval: 1.0, id: "Clock")
+                gameTimer.delegate = self
+            }
+            
         }
         
     }
@@ -636,6 +645,9 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             
         } else if id == "FirstMessageAnimation" {
             
+            // launch the different timers at the beginning and start the game
+            gameTimer.start(timeInterval: 1.0, id: "Clock")
+            gameTimer.delegate = self
             blockingView?.removeFromSuperview()
             launchOption3TimerIfNeeded()
             containerView.isUserInteractionEnabled = true
