@@ -87,6 +87,16 @@ class MenuViewController: UIViewController {
         return view.convert(lineE.frame.origin, from: lineE.superview!).x + lineE.frame.width/2
     }
     
+    public func getInitialYPositionForTransitionToInfinite() -> CGFloat {
+        return (superPartiesButton.frame.origin.y + infiniteButton.frame.origin.y)/2 + 20
+    }
+    
+    public func getInitialXPositionForTransitionToInfinite() -> CGFloat{
+        return getInitialXPositionForTransitionToHistory()
+    }
+    
+    
+    
 }
 
 extension MenuViewController: UIViewControllerTransitioningDelegate {

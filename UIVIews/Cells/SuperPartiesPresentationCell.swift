@@ -21,6 +21,10 @@ class SuperPartiesPresentationCell: UIView {
     var closureToStartGame: ((Int,GameType)->Void)? // Parameters : level, gameType
     var level: Int = 0
     
+    // MARK: - Variables set by the setters and used to draw
+    
+    private var xSquareLinePosition: CGFloat = 0
+    
     // MARK: - Constants
     
     let buttonSize: CGFloat = 40
@@ -49,6 +53,8 @@ class SuperPartiesPresentationCell: UIView {
         triangleButton!.openColor = .white
         triangleButton!.strokeColor = .black
         triangleButton!.setTitleColor(UIColor.lightGray, for: .normal)
+        // And set all the 'xposition holders' that we need to know to draw the lines
+        xSquareLinePosition = w/4-buttonSize/2 - 30 + buttonSize/2
         // And add them all 
         self.addSubview(squareButton!)
         self.addSubview(triangleButton!)
@@ -89,6 +95,47 @@ class SuperPartiesPresentationCell: UIView {
     private func disableButton(b: UIButton) {
         b.isEnabled = false
         b.alpha = 0.4
+    }
+    
+    // MARK: - Functions for the drawings
+    
+    private func getSquarePath() -> UIBezierPath {
+        let h = self.frame.height
+        let dec: CGFloat = 3.0
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: xSquareLinePosition, y: 0))
+        path.addLine(to: CGPoint(x: xSquareLinePosition, y: h/2 - buttonSize/2 - dec))
+        return path
+    }
+    
+    private func getHexPath() -> UIBezierPath {
+        // TODO: complete
+
+        return UIBezierPath()
+    }
+    
+    private func getTrianglePath() -> UIBezierPath {
+        // TODO: complete
+
+        return  UIBezierPath()
+    }
+    
+    /// Returns the path that contains all the lines to be drawn inside this cell. This is the path to be animated from top to botom.
+    private func getLinePath() -> UIBezierPath {
+        let p1 = getSquarePath()
+        let p2 = getHexPath()
+        let p3 = getTrianglePath()
+        p1.append(p2)
+        p1.append(p3)
+        return p1
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        let path = getLinePath()
+        UIColor.gray.setStroke()
+        path.lineWidth = 2.0
+        path.stroke()
     }
     
     

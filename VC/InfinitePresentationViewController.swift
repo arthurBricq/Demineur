@@ -40,6 +40,22 @@ class InfinitePresentationViewController: UIViewController {
         }
     }
     
+    // MARK: - Functions for presentation
+    
+    /// Returns the x position in this VC's frame where the line for the transition needs to arrive
+    public func getFinalXPosForTransition() -> CGFloat {
+        return headerView.frame.origin.x
+    }
+    
+    /// Returns the y position in this VC's frame where the line for the transition needs to arrive
+    public func getFinalYPosForTransition() -> CGFloat {
+        let window = UIApplication.shared.keyWindow
+        let topPadding = window?.safeAreaInsets.top
+        let y = headerView.frame.origin.y
+        return y + (topPadding ?? 0)
+    }
+    
+    
 }
 
 // MARK: - Gère les transitions

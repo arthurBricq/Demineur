@@ -36,7 +36,8 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
                 subview.alpha = 0
             }
             
-            // MARK: - Initialisation des lignes
+            // Initialisation des lignes
+            // TODO: use new init call
             let lineFrameWidth: CGFloat = 4
             let lineWidth: CGFloat = 2
             
@@ -52,85 +53,61 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
             secondLine.lineWidth = lineWidth
             secondLine.backgroundColor = UIColor.clear
             
-            // MARK: - Calculs des différents points pour les lignes
+            // Calculs des différents points pour les lignes
             
-            let correctiveConstant: CGFloat = isItABigScreen() ? -24 : 20
-            var firstX: CGFloat = 0
-            var averageYs: [CGFloat] = [0, 0]
-            for subview in fromView.subviews {
-                
-                if subview is Letter && subview.tag == 1 {
-                    guard let line = subview.subviews.first as? LineView else { return }
-                    firstX = (fromView.convert(line.frame.origin, from: subview)).x + line.frame.width/2
-                }
-                
-                if subview is UIButton && subview.tag == 2 {
-                    averageYs[0] = subview.frame.maxY
-                }
-                if subview is UIButton && subview.tag == 3 {
-                    averageYs[1] = subview.frame.minY
-                }
-                
-            }
-            let firstY = (averageYs[0] + averageYs[1])/2
+            let x1: CGFloat = fromVC.getInitialXPositionForTransitionToInfinite()
+            let y1: CGFloat = fromVC.getInitialYPositionForTransitionToInfinite()
+            let x2 = toVC.getFinalXPosForTransition()
+            let y2 = toVC.getFinalYPosForTransition()
+            let finalPoint = CGPoint(x: x2 + fromView.frame.width, y: y2)
             
-            var headerView: UIView?
-            for subview in toView.subviews {
-                if subview is HeaderInfinite {
-                    headerView = subview
-                }
-            }
-            
-            let finalPoint = fromView.convert(CGPoint(x: 9*(headerView?.frame.width)!/163, y: 12*(headerView?.frame.height)!/57 - correctiveConstant ), from: headerView)
-            
-            
-            firstLine.frame = CGRect(x: firstX, y: firstY, width: 0, height: lineFrameWidth)
-            secondLine.frame = CGRect(x: finalPoint.x, y: firstY, width: lineFrameWidth, height: 0)
+            // Initialise the different views before animation
+            firstLine.frame = CGRect(x: x1, y: y1, width: 0, height: lineFrameWidth)
+            secondLine.frame = CGRect(x: finalPoint.x, y: y1, width: lineFrameWidth, height: 0)
             fromView.addSubview(firstLine)
             fromView.addSubview(secondLine)
+            toVC.headerView.alpha = 0.0
             
             
-            // MARK: - Temps pour l'animation
-            let x1: Double = 0.1
-            let x2: Double = 0.15
-            let x3: Double = 0.25
-            let x4: Double = 0.3
-            let x5: Double = 0.05
-            let x6: Double = 0.05
-
-            
+            // Temps pour l'animation
+            let t1: Double = 0.1
+            let t2: Double = 0.15
+            let t3: Double = 0.25
+            let t4: Double = 0.3
+            let t5: Double = 0.05
+            let t6: Double = 0.05
             UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: [], animations: {
                 
                 // MARK: - 1: La ligne part sur la droite
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: x1, animations: {
-                    firstLine.frame = CGRect(x: firstX, y: firstY - lineFrameWidth/2, width: 0.9*fromView.frame.width - firstX, height: lineFrameWidth)
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: t1, animations: {
+                    firstLine.frame = CGRect(x: x1, y: y1 - lineFrameWidth/2, width: 0.9*fromView.frame.width - x1, height: lineFrameWidth)
                 })
                 
                 // MARK: - 2: La ligne continue et la vue d'origine part à gauche
-                UIView.addKeyframe(withRelativeStartTime: x1, relativeDuration: x2, animations: {
+                UIView.addKeyframe(withRelativeStartTime: t1, relativeDuration: t2, animations: {
                     toView.frame = CGRect(x: 0, y: 0, width: fromView.frame.width, height: fromView.frame.height)
                     fromView.frame = CGRect(x: -fromView.frame.width, y: 0, width: fromView.frame.width, height: fromView.frame.height)
-                    firstLine.frame = CGRect(x: firstX, y: firstY - lineFrameWidth/2, width: 1.9*fromView.frame.width - firstX, height: lineFrameWidth)
+                    firstLine.frame = CGRect(x: x1, y: y1 - lineFrameWidth/2, width: 1.9*fromView.frame.width - x1, height: lineFrameWidth)
                 })
                 
                 // MARK: - 3: La ligne finit d'avancer
-                UIView.addKeyframe(withRelativeStartTime: x1+x2, relativeDuration: x3, animations: {
-                    firstLine.frame = CGRect(x: firstX, y: firstY - lineFrameWidth/2, width: finalPoint.x-firstX, height: lineFrameWidth)
+                UIView.addKeyframe(withRelativeStartTime: t1+t2, relativeDuration: t3, animations: {
+                    firstLine.frame = CGRect(x: x1, y: y1 - lineFrameWidth/2, width: finalPoint.x-x1, height: lineFrameWidth)
                 })
                 
                 // MARK: - 4: La première ligne remonte et la deuxième descend
-                UIView.addKeyframe(withRelativeStartTime: x1+x2+x3, relativeDuration: x4, animations: {
-                    firstLine.frame = CGRect(x: firstX, y: finalPoint.y - lineFrameWidth/2, width: finalPoint.x-firstX+1, height: lineFrameWidth)
+                UIView.addKeyframe(withRelativeStartTime: t1+t2+t3, relativeDuration: t4, animations: {
+                    firstLine.frame = CGRect(x: x1, y: finalPoint.y - lineFrameWidth/2, width: finalPoint.x-x1+1, height: lineFrameWidth)
                     secondLine.frame = CGRect(x: finalPoint.x - lineFrameWidth/2, y: finalPoint.y + firstLine.lineWidth/2, width: lineFrameWidth, height: 285-30)
                 })
                 
                 // MARK: - 5: Le titre apparait
-                UIView.addKeyframe(withRelativeStartTime: x1+x2+x3+x4, relativeDuration: x5, animations: {
-                    headerView?.alpha = 1
+                UIView.addKeyframe(withRelativeStartTime: t1+t2+t3+t4, relativeDuration: t5, animations: {
+                    toVC.headerView.alpha = 1.0
                 })
                 
                 // MARK: - 6: Le reste apparait
-                UIView.addKeyframe(withRelativeStartTime: x1+x2+x3+x4+x5, relativeDuration: x6, animations: {
+                UIView.addKeyframe(withRelativeStartTime: t1+t2+t3+t4+t5, relativeDuration: t6, animations: {
                     for subview in toView.subviews {
                         if !(subview is HeaderInfinite) {
                             subview.alpha = 1
