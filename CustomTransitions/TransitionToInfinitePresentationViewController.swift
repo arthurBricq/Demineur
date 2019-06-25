@@ -38,7 +38,7 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
             
             // Initialisation des lignes
             // TODO: use new init call
-            let lineFrameWidth: CGFloat = 4
+            let lineFrameWidth: CGFloat = 2
             let lineWidth: CGFloat = 2
             
             let firstLine = LineView()

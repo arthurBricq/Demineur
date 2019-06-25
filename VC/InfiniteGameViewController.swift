@@ -346,6 +346,7 @@ class InfiniteGameViewController: UIViewController {
             positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
             viewOfGame = TriangleViewOfGame(frame: frame, game: game, gameState: &gameState)
         }
+        viewOfGame.numberOfRemainingFlags = game.numberOfFlag
         viewOfGame.delegate = self
         viewOfGame.backgroundColor = UIColor.clear
         viewOfGame.layer.zPosition = 0 ;
@@ -355,6 +356,7 @@ class InfiniteGameViewController: UIViewController {
         viewOfGame.onUnposingFlag = { (test: Bool) -> Void in
             self.numberOfBombs -= test ? 1 : 0
         }
+        
         self.containerView.insertSubview(viewOfGame, at: 0)
     }
     
