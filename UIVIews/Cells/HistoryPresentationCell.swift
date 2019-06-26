@@ -186,5 +186,7 @@ class HistoryPresentationCell: UIView {
             frontLayer.mask?.add(animation, forKey: "anim")
         }
     }
+
+
 }
  

@@ -24,6 +24,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var reglagesButton: UIButton!
     
     // MARK: - Variables
+    
     var linesForAnimationToHistory: [UIView]? 
     
     // MARK: - Functions
@@ -68,7 +69,7 @@ class MenuViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController {
+        if segue.destination is HistoryPresentationViewController || segue.destination is BoutiqueViewController || segue.destination is InfinitePresentationViewController || segue.destination is ReglageViewController || segue.destination is TutorialViewController || segue.destination is SuperPartiesPresentationViewController {
             segue.destination.transitioningDelegate = self
         }
         
@@ -77,6 +78,8 @@ class MenuViewController: UIViewController {
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
         // retour au menu
     }
+    
+    // MARK: - Functions to get positions for the transitions
     
     /// Returns the y position where the line going to the history position must start.
     public func getInitialYPositionForTransitionToHistory() -> CGFloat {
@@ -95,6 +98,14 @@ class MenuViewController: UIViewController {
         return getInitialXPositionForTransitionToHistory()
     }
     
+    public func getInitialYPositionForTransitionToSuperParties() -> CGFloat {
+        return (superPartiesButton.frame.origin.y + boutiqueButton.frame.origin.y)/2 + 20
+    }
+    
+    public func getInitialXPositionForTransitionToSuperParties() -> CGFloat{
+        return getInitialXPositionForTransitionToHistory()
+    }
+    
     
     
 }
@@ -109,6 +120,8 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         
         if presented is HistoryPresentationViewController {
             transition = TransitionFromMenuToHistory(animationDuration: 2.0)
+        } else if presented is SuperPartiesPresentationViewController {
+            transition = TransitionFromMenuToSuperParties(animationDuration: 2.0)
         } else if presented is InfinitePresentationViewController {
             let transition = TransitionToInfinitePresentationViewController()
             transition.animationDuration = 2.0

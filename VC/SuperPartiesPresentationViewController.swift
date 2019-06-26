@@ -24,7 +24,7 @@ class SuperPartiesPresentationViewController: UIViewController {
     // MARK: - Variables
     
     override var prefersStatusBarHidden: Bool { return true }
-    var currentLevelReached: (square: Int, hex: Int, triangle: Int) = (1,0,0)
+    var currentLevelReached: (square: Int, hex: Int, triangle: Int) = (2,1,1)
     var rows: [SuperPartiesPresentationCell] = []
     
     // MARK: - Actions
@@ -153,19 +153,19 @@ class SuperPartiesPresentationViewController: UIViewController {
         addAllOtherRowsToScrollView()
     }
     
-    
     private func addFirstRowToScrollView() {
         let w = self.view.frame.width
-        let row = UIView(frame: CGRect(x: 0, y: 0, width: w, height: heightOfFirstRow))
+        let row = SuperPartiesPresentationCell(frame: CGRect(x: 0, y: 0, width: w, height: heightOfFirstRow), level: 0, animationDelegate: self)
         let text = "SUPER PARTIES"
         let font = UIFont(name: "PingFangSC-Regular", size: 28)!
         let lblWidth: CGFloat = 400
         let h = text.height(withConstrainedWidth: lblWidth, font: font)
-        let lbl = UILabel(frame: CGRect(x: 100, y: heightOfFirstRow/2 - h/2, width: lblWidth, height: h))
+        let lbl = UILabel(frame: CGRect(x: 100, y: heightOfFirstRow/2 - h/2 - 50, width: lblWidth, height: h))
         lbl.text = text
         lbl.font = font
         lbl.textColor = UIColor.gray
         row.addSubview(lbl)
+        self.rows.append(row)
         scrollView.addSubview(row)
     }
     
@@ -175,12 +175,56 @@ class SuperPartiesPresentationViewController: UIViewController {
         let w = self.view.frame.width
         var yPos: CGFloat = heightOfFirstRow
         for i in 0..<numberOfRows {
-            let newRow = SuperPartiesPresentationCell(frame: CGRect(x: 0, y: yPos, width: w, height: heightOfRow))
+            let newRow = SuperPartiesPresentationCell(frame: CGRect(x: 0, y: yPos, width: w, height: heightOfRow), level: i+1, animationDelegate: self)
             yPos += heightOfRow
             newRow.setCell(reachedLevels: currentLevelReached, cellLevel: i, closure: { (levelTapped: Int , gameTypeTapped: GameType) -> Void in
                 self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: (levelTapped, gameTypeTapped))
             })
+            self.rows.append(newRow)
             scrollView.addSubview(newRow)
         }
     }
+    
+    // MARK: - Functions for the transitions
+    
+    /// Returns the x position of the last point of the line
+    public func getLastXPositionForTransition() -> CGFloat {
+        return view.frame.width * 0.75
+    }
+    
+    public func getYPositionForTransition() -> CGFloat {
+        let window = UIApplication.shared.keyWindow
+        let topPadding = window?.safeAreaInsets.top
+        return (heightOfFirstRow/2 + 50 + (topPadding ?? 0))
+    }
+    
+    /// This function must draw the first line, then draw all the lines cells by cell. 
+    public func animateLines() {
+        self.rows[0].drawFirstRow(heightOfFirstLine: self.heightOfFirstRow/2 + 50)
+    }
+    
+    private func animateCells(index: Int) {
+        if index < rows.count {
+            self.rows[index].drawRow()
+        }
+        
+    }
 }
+
+
+// MARK: - Functions for animation gestion of cells
+
+extension SuperPartiesPresentationViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        // 1. Obtain the data sent by the cells
+        if let cellNumber = anim.value(forKey: "cellNumber") as? Int  {
+            if let isFinished = anim.value(forKey: "isFinished") as? Bool {
+                if !isFinished {
+                    animateCells(index: cellNumber+1)
+                }
+            }
+        }
+        
+    }
+}
+

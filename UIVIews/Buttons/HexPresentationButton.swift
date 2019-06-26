@@ -51,6 +51,7 @@ class HexPresentationButton: UIButton {
         strokeColor.setStroke()
         contourPath.lineWidth = lineWidth
         
+        
         //// 2.
         // ******* Personnalisation des cases en fonction de leur état ******* //
         strokeColor.setStroke()

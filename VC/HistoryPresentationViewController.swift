@@ -188,7 +188,6 @@ extension HistoryPresentationViewController: UIViewControllerTransitioningDelega
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if dismissed is WinLooseViewController {
-            print("aaaaa")
             return nil
         }
         
