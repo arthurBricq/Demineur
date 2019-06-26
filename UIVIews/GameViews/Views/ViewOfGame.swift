@@ -49,10 +49,10 @@ class ViewOfGame: UIView {
         self.game = game
         self.gameState = gameState
         instantiateCases()
-        if game.option3 {
+        /*if game.option3 {
             option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
             option3Timer.delegate = self
-        }
+        }*/
     }
     
     /// This init don't ask for a frame, which means that the frame is calculated based on unit dimension of the case. After calling this init, the viewOfGame is already positienned at the right position for the scroll view where it belongs.
@@ -62,10 +62,10 @@ class ViewOfGame: UIView {
         self.gameState = gameState
         self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
         instantiateCases()
-        if game.option3 {
+        /*if game.option3 {
             option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
             option3Timer.delegate = self
-        }
+        }*/
     }
     
     /// This init must be call when we want to restaure a game. It needs more information about the states of cases.
@@ -76,10 +76,10 @@ class ViewOfGame: UIView {
         self.allCaseStates = allCaseStates
         self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
         instantiateCases(isRestauringGame: true)
-        if game.option3 {
+        /*if game.option3 {
             option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
             option3Timer.delegate = self
-        }
+        }*/
         
     }
     
@@ -366,7 +366,13 @@ extension ViewOfGame: CountingTimerProtocol {
 
             if random(100) < Int(game!.option3Frequency*100) {
                 let randN = random(game!.n)
-                let randM = random(game!.m)
+                var numberOfColumn: Int = game!.m
+                if game?.gameType == .hexagonal {
+                    if game!.n%2 == 1 {
+                        numberOfColumn = game!.m - 1
+                    }
+                }
+                let randM = random(numberOfColumn)
                 blockACaseAt(i: randN, j: randM)
             }
             

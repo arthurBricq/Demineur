@@ -229,6 +229,8 @@ class InfiniteGameViewController: UIViewController {
      */
     func currentGameIsFinished() {
         gameTimer.stop()
+        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        currentGameView.option3Timer.stop()
 
         if gameIndex != 5 {
             animateNewLevel()
@@ -268,6 +270,8 @@ class InfiniteGameViewController: UIViewController {
     /// Cette fonction termine totalement la partie et lance le prochain VC qui est un message de fin de partie.
     func endOfInfiniteGame(didTapABomb: Bool) {
         self.gameTimer.stop()
+        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        currentGameView.option3Timer.stop()
         self.openTheBombs()
         // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
         // La variable 'level' est déjà upadter à chaque changement de niveau
@@ -409,6 +413,7 @@ class InfiniteGameViewController: UIViewController {
     }
     
     func launchOption3TimerIfNeeded() {
+        print("âaaaa")
         if currentGame().option3 {
             let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
             currentGameView.option3Timer.start(timeInterval: Double(currentGame().option3Time), id: "Option3")
