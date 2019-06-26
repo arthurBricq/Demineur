@@ -103,6 +103,7 @@
 		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
 		9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */; };
 		9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */; };
+		9C1B71F222C3958C001A9006 /* EndGameCoinAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
@@ -215,6 +216,7 @@
 		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
 		9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInfinite.swift; sourceTree = "<group>"; };
 		9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfinitePresentationViewController.swift; sourceTree = "<group>"; };
+		9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameCoinAnimationManager.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				9C745D2E20FB7B5800741ED2 /* Animator.swift */,
 				4EA7FDAB20F897A700740480 /* Vibrate.swift */,
 				4E3705E621315A4700972B51 /* Sound.swift */,
+				9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4E29899C213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift in Sources */,
 				4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */,
+				9C1B71F222C3958C001A9006 /* EndGameCoinAnimationManager.swift in Sources */,
 				4EA7FD9820F896D200740480 /* FlagView.swift in Sources */,
 				4E70B15222B4EB1100CA8CF3 /* TransitionFromMenuToHistory.swift in Sources */,
 				9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */,
