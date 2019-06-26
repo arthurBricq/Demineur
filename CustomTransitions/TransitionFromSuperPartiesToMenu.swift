@@ -30,7 +30,7 @@ class TransitionFromSuperPartiesToMenu: NSObject, UIViewControllerAnimatedTransi
         let toView = toVC.view!
         toView.frame = CGRect(x: -fromView.bounds.width, y: 0, width: fromView.bounds.width, height: fromView.bounds.height)
         transitionContext.containerView.addSubview(toView)
-        
+         
         UIView.animateKeyframes(withDuration: animationDuration, delay: 0.0, options: [], animations: {
             let h = toView.bounds.height
             let w = toView.bounds.width
