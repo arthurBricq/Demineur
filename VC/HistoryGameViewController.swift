@@ -39,6 +39,11 @@ class HistoryGameViewController: GameViewController {
             bombsLabel.isHidden = false
             bombView.isHidden = false
         }
+        
+        if game.option3 {
+            viewOfGame?.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
+            viewOfGame?.option3Timer.delegate = viewOfGame
+        }
     }
     
 }

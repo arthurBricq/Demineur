@@ -12,7 +12,7 @@ class TransitionToScore: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         if presenting {
-            
+                        
             // recupere les vc et place le toVC
             let fromVC = transitionContext.viewController(forKey: .from) as! InfinitePresentationViewController
             let toVC = transitionContext.viewController(forKey: .to) as! ScoreViewController

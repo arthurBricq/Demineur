@@ -229,6 +229,8 @@ class InfiniteGameViewController: UIViewController {
      */
     func currentGameIsFinished() {
         gameTimer.stop()
+        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        currentGameView.option3Timer.stop()
 
         if gameIndex != 5 {
             animateNewLevel()
@@ -268,6 +270,8 @@ class InfiniteGameViewController: UIViewController {
     /// Cette fonction termine totalement la partie et lance le prochain VC qui est un message de fin de partie.
     func endOfInfiniteGame(didTapABomb: Bool) {
         self.gameTimer.stop()
+        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        currentGameView.option3Timer.stop()
         self.openTheBombs()
         // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
         // La variable 'level' est déjà upadter à chaque changement de niveau
@@ -346,6 +350,7 @@ class InfiniteGameViewController: UIViewController {
             positionNoneCaseSquare(noneCases: game.noneCasesPosition, in: &gameState)
             viewOfGame = TriangleViewOfGame(frame: frame, game: game, gameState: &gameState)
         }
+        viewOfGame.numberOfRemainingFlags = game.numberOfFlag
         viewOfGame.delegate = self
         viewOfGame.backgroundColor = UIColor.clear
         viewOfGame.layer.zPosition = 0 ;
@@ -355,6 +360,7 @@ class InfiniteGameViewController: UIViewController {
         viewOfGame.onUnposingFlag = { (test: Bool) -> Void in
             self.numberOfBombs -= test ? 1 : 0
         }
+        
         self.containerView.insertSubview(viewOfGame, at: 0)
     }
     
@@ -386,18 +392,28 @@ class InfiniteGameViewController: UIViewController {
                 self.flagView.alpha = 1
             })
         }
-        // si besoin affiche la clock
+        
+        // si besoin affiche la clock et la met à 0
         if currentGame().isTimerAllowed {
-            gameTimer.start(timeInterval: 1.0, id: "Clock")
-            gameTimer.delegate = self
+            
+            clockView.pourcentage = 0
+            
             UIView.animate(withDuration: 0.25) {
                 self.clockView.alpha = 1
             }
+            
+            // if isn't the first game, start the timer, otherwise it has to startwhen the player first click
+            if !(sectionIndex == 0 && gameIndex == 1) {
+                gameTimer.start(timeInterval: 1.0, id: "Clock")
+                gameTimer.delegate = self
+            }
+            
         }
         
     }
     
     func launchOption3TimerIfNeeded() {
+        print("âaaaa")
         if currentGame().option3 {
             let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
             currentGameView.option3Timer.start(timeInterval: Double(currentGame().option3Time), id: "Option3")
@@ -634,6 +650,9 @@ extension InfiniteGameViewController: CAAnimationDelegate {
             
         } else if id == "FirstMessageAnimation" {
             
+            // launch the different timers at the beginning and start the game
+            gameTimer.start(timeInterval: 1.0, id: "Clock")
+            gameTimer.delegate = self
             blockingView?.removeFromSuperview()
             launchOption3TimerIfNeeded()
             containerView.isUserInteractionEnabled = true

@@ -35,7 +35,8 @@ class ArticleViewController: UIViewController {
         
         let prix = allBonus[articleIndex].prixAchat
         
-        if dataManager.money > prix {
+        if dataManager.money >= prix {
+            pauseVC?.pieceView.playParticleAnimation()
             dataManager.money -= prix
             
             switch articleIndex {
@@ -63,7 +64,6 @@ class ArticleViewController: UIViewController {
         
         pauseVC?.updateLivesDisplay()
         pauseVC?.updateMoneyDisplay()
-        pauseVC?.pieceView.playParticleAnimation()
         updateNumberOfElementDisplay()
         
     }
