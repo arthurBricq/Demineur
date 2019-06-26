@@ -33,6 +33,7 @@ class HistoryPresentationViewController: UIViewController  {
     var rows: [HistoryPresentationCell] = []
     
     // MARK: - Constants
+    
     let heightOfFirstRow: CGFloat = 150
     let heigthOfRow: CGFloat = 100
     

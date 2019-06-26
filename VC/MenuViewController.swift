@@ -152,6 +152,9 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         if dismissed is HistoryPresentationViewController {
             let transition = TransitionFromHistoryToMenu(animationDuration: 1.0)
             return transition
+        } else if dismissed is SuperPartiesPresentationViewController {
+            let transition = TransitionFromSuperPartiesToMenu(animationDuration: 1.0)
+            return transition
         } else if dismissed is InfinitePresentationViewController {
             let transition = TransitionToInfinitePresentationViewController()
             transition.animationDuration = 1.5

@@ -224,7 +224,6 @@ extension SuperPartiesPresentationViewController: CAAnimationDelegate {
                 }
             }
         }
-        
     }
 }
 
