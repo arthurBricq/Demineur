@@ -130,6 +130,7 @@ class HistoryPresentationViewController: UIViewController  {
             
             let dest = segue.destination as! HistoryGameViewController
             // On connait l'indice choisit de la partie et on connait la partie courrant du jeu,
+            
             let selectedGameIndex = sender as! Int
             
             if selectedGameIndex <= dataManager.currentHistoryLevel {
@@ -140,7 +141,7 @@ class HistoryPresentationViewController: UIViewController  {
             }
             
             dest.transitioningDelegate = self
-            
+        
         default:
             break
         }
@@ -172,14 +173,15 @@ class HistoryPresentationViewController: UIViewController  {
         
 }
 
-// Animations of transition
+// MARK: - Animations for transition
+
 extension HistoryPresentationViewController: UIViewControllerTransitioningDelegate {
    
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if presented is HistoryGameViewController {
             let transition = TransitionToGameView()
-            transition.animationDuration = 1.5
+            transition.animationDuration = 0.75
             return transition
         }
         
@@ -187,17 +189,6 @@ extension HistoryPresentationViewController: UIViewControllerTransitioningDelega
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if dismissed is WinLooseViewController {
-            return nil
-        }
-        
-        if dismissed is HistoryGameViewController {
-            let transition = TransitionToGameView()
-            transition.animationDuration = 1.5
-            return transition
-        }
-        
         return nil
     }
 }

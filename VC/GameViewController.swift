@@ -23,78 +23,79 @@ class GameViewController: UIViewController {
     @IBOutlet weak var bombView: BombViewDisplay!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    override var prefersStatusBarHidden: Bool { return true }
+
     // MARK: - VARIABLES
     
-    override var prefersStatusBarHidden: Bool { return true }
-    
     var gameIndex: Int = 1
-    
     /// Nombre de bombes qui ont été trouvées par l'utilisateur
     var numberOfBombs: Int = 0
-    
     var gameState = [[Int]].init()
     var game: OneGame = OneGame(gameTypeWithNoOptionsWithoutNoneCases: .triangular, n: 20, m: 13, z: 10, totalTime: 90)
-    
     var viewOfGame: ViewOfGame?
     var bonusChoiceView: BonusChoiceView?
     var messageManagor: MessageManagor?
     var gameTimer: CountingTimer?
     
+    // MARK: - Constants
     
-    // MARK: - Required function to override for event handling
+    let maximumZoom: CGFloat = 2.0
+    
+    // MARK: - Actions
+    
+    @IBAction func pauseButtonTapped(_ sender: Any) {
+        gameTimer?.pause()
+        viewOfGame?.option3Timer.pause()
+        viewOfGame?.pauseAllOption1Timers()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
+        pauseVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        pauseVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        pauseVC.pausedGameViewController = self
+        self.present(pauseVC, animated: true, completion: nil)
+    }
+    
+    // MARK: - Functions
+    
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        transitioningDelegate = nil
+        isTheGameStarted.delegate = self
+    }
     
     /// This function will show/hide the correct view amoung the 'clockView', the 'flagLabel', the 'flagView', the 'bombLabel', the 'bombView' and it will do some setUp for the 'gameTimeVariable'.
     func setUpLabelsForNewGame() {
         fatalError("This function needs to be overiden by children")
     }
     
-    // MARK: - Functions for the game gestion
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        transitioningDelegate = nil
-        isTheGameStarted.delegate = self // Cela permet, via cette variable, d'appeller le VC qui s'occupe du jeu pour créer la partie
-        startANewGame(animatedFromTheRight: false)
-        messageManagor = MessageManagor(viewOfGame: viewOfGame!, gameTimer: gameTimer, superView: self.view, clockView: self is HistoryGameViewController ? clockView : nil, functionToFinishGame: { (didTapABomb) in
-            self.endOfHistoryGame(didTapABomb)
-        })
+    /// Will put the alpha of the views on the top of screen to be zero. Those lights must be turned on again when creating a new game.
+    public func clearScreen() {
+        flagView.alpha = 0.0
+        flagsLabel.alpha = 0.0
+        bombView.alpha = 0.0
+        bombsLabel.alpha = 0.0
+        viewOfGame?.alpha = 0.0
     }
     
-    /// This function will start a new game, with the 'viewOfGame' as gameManager for the game 'game' variable.
-    func startANewGame(animatedFromTheRight: Bool) {
-        // 0. Set te colors
-        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: colorForRGB(r: 52, g: 61, b: 70), textColor: colorForRGB(r: 52, g: 61, b: 70))
-        
-        // 1. Kill the last variables of the game
-        gameTimer?.stop()
-        isTheGameStarted.value = false
-        self.numberOfBombs = 0
-        
-        viewOfGame = getNewViewOfGame()
-        
-        // Set the properties of the view of game
-        viewOfGame!.backgroundColor = UIColor.clear
-        viewOfGame!.delegate = self
-        viewOfGame!.layer.masksToBounds = false
-        viewOfGame!.numberOfRemainingFlags = game.numberOfFlag
-        viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
-            self.numberOfBombs += test ? 1 : 0
-        }
-        
-        setUpLabelsForNewGame()
-        updateFlags(numberOfFlags: game.numberOfFlag)
+    /// Will make appear the view of game and the labels associated with the game.
+    public func presentGame() {
+        // 1. Put the view of game
         removePrecendentViewOfGame()
-        addTheBonusChoiceView()
-        
-        // Set the properties of the scroll view
-        setUpScrollView()
-        
-        if animatedFromTheRight {
-            UIView.animate(withDuration: 0.7) {
-                self.viewOfGame?.center.x -= self.view.frame.width
-            }
+        startANewGame(animatedFromTheRight: false)
+        viewOfGame?.alpha = 0.0
+        // 2. And make it appear
+        UIView.animate(withDuration: 0.5) {
+            self.flagView.alpha = 1.0
+            self.flagsLabel.alpha = 1.0
+            self.bombView.alpha = 1.0
+            self.bombsLabel.alpha = 1.0
+            self.viewOfGame?.alpha = 1.0
         }
     }
+    
+    // MARK: - Functions for the game gestion
     
     /// This function will either create the bonusBarView or replace it with a new one when a new game is started
     /// - When calling the function, be sure that the viewOfGame already exists.
@@ -143,46 +144,78 @@ class GameViewController: UIViewController {
         let widthRatio = (self.scrollView!.frame.width) / (viewOfGame!.frame.size.width+30)
         let heightRatio = (self.scrollView!.frame.height) / (viewOfGame!.frame.size.height)
         self.scrollView.minimumZoomScale = widthRatio < heightRatio ? widthRatio : heightRatio
-        self.scrollView.maximumZoomScale = 2
-        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
+        self.scrollView.maximumZoomScale = maximumZoom
         self.scrollView.contentSize = CGSize(width: viewOfGame!.frame.size.width+20, height: viewOfGame!.frame.size.height)
+        scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
+        let p = CGPoint(x: scrollView!.frame.width/2 - viewOfGame!.frame.size.width/2, y: 50)
+        viewOfGame!.frame.origin = p
         self.scrollView.addSubview(viewOfGame!)
-        /*
+        
          print("\nState of the variables:")
          print("Initial zoom \(widthRatio)")
          print("Scroll view frame: \(scrollView.frame)")
          print("Scroll view content frame: \(scrollView.contentSize)")
          print("View of game frame: \(viewOfGame!.frame)")
-         */
-    }
-    
-    @IBAction func pauseButtonTapped(_ sender: Any) {
-        gameTimer?.pause()
-        viewOfGame?.option3Timer.pause()
-        viewOfGame?.pauseAllOption1Timers()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
-        pauseVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        pauseVC.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        pauseVC.pausedGameViewController = self
-        self.present(pauseVC, animated: true, completion: nil)
+ 
     }
     
     // MARK: - Functions to create a new game
+    
+    
+    /// This function will start a new game, with the 'viewOfGame' as gameManager for the game 'game' variable.
+    func startANewGame(animatedFromTheRight: Bool) {
+        // 0. Set te colors
+        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: colorForRGB(r: 52, g: 61, b: 70), textColor: colorForRGB(r: 52, g: 61, b: 70))
+        
+        // 1. Kill the last variables of the game
+        gameTimer?.stop()
+        isTheGameStarted.value = false
+        self.numberOfBombs = 0
+        
+        viewOfGame = getNewViewOfGame()
+        
+        // Set the properties of the view of game
+        viewOfGame!.backgroundColor = UIColor.clear
+        viewOfGame!.delegate = self
+        viewOfGame!.layer.masksToBounds = false
+        viewOfGame!.numberOfRemainingFlags = game.numberOfFlag
+        viewOfGame!.onPosingFlag = { (test: Bool) -> Void in
+            self.numberOfBombs += test ? 1 : 0
+        }
+        
+        setUpLabelsForNewGame()
+        updateFlags(numberOfFlags: game.numberOfFlag)
+        removePrecendentViewOfGame()
+        addTheBonusChoiceView()
+        
+        // Set the properties of the scroll view
+        setUpScrollView()
+        
+        // Set the message managor, to be linked to the correct view of game
+        messageManagor = MessageManagor(viewOfGame: viewOfGame!, gameTimer: gameTimer, superView: self.view, clockView: self is HistoryGameViewController ? clockView : nil, functionToFinishGame: { (didTapABomb) in
+            self.endOfHistoryGame(didTapABomb)
+        })
+        
+        if animatedFromTheRight {
+            UIView.animate(withDuration: 0.7) {
+                self.viewOfGame?.center.x -= self.view.frame.width
+            }
+        }
+    }
     
     /// This function returns a new view of game, set with the correct type and with the none cases positionned. It still needs to be tapped to position the bombs and finish the gamestate array.
     func getNewViewOfGame() -> ViewOfGame? {
         var vog: ViewOfGame?
         if game.gameType == .square { // read comments to understand.
             createANewSquareGameStepOne()
-            vog = SquareViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            vog = SquareViewOfGame(game: game, gameState: &gameState)
             vog!.makeDarkBorderDisplay()
         } else if game.gameType == .hexagonal {
             createANewHexGameStepOne()
-            vog = HexViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            vog = HexViewOfGame(game: game, gameState: &gameState)
         } else if game.gameType == .triangular {
             createNewTriangularGameStepOne()
-            vog = TriangleViewOfGame(game: game, gameState: &gameState, scrollViewDimension: scrollView.frame.size)
+            vog = TriangleViewOfGame(game: game, gameState: &gameState)
         }
         return vog
     }

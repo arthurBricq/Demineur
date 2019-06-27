@@ -49,23 +49,15 @@ class ViewOfGame: UIView {
         self.game = game
         self.gameState = gameState
         instantiateCases()
-        /*if game.option3 {
-            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-            option3Timer.delegate = self
-        }*/
     }
     
     /// This init don't ask for a frame, which means that the frame is calculated based on unit dimension of the case. After calling this init, the viewOfGame is already positienned at the right position for the scroll view where it belongs.
-    convenience init(game: OneGame, gameState: inout [[Int]], scrollViewDimension: CGSize) {
+    convenience init(game: OneGame, gameState: inout [[Int]]) {
         self.init()
         self.game = game
         self.gameState = gameState
-        self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
+        self.frame = CGRect(origin: CGPoint.zero, size: dimension)
         instantiateCases()
-        /*if game.option3 {
-            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-            option3Timer.delegate = self
-        }*/
     }
     
     /// This init must be call when we want to restaure a game. It needs more information about the states of cases.
@@ -74,13 +66,8 @@ class ViewOfGame: UIView {
         self.game = game
         self.gameState = gameState
         self.allCaseStates = allCaseStates
-        self.frame = CGRect(origin: getOriginForScrollView(scrollViewDimension: scrollViewDimension), size: dimension)
+        self.frame = CGRect(origin: CGPoint.zero, size: dimension)
         instantiateCases(isRestauringGame: true)
-        /*if game.option3 {
-            option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
-            option3Timer.delegate = self
-        }*/
-        
     }
     
     
@@ -92,53 +79,6 @@ class ViewOfGame: UIView {
     var dimension: CGSize {
         fatalError("Needs to be overiden by each subclass")
     }
-    
-    /// Is the origin for the scrollView.
-    public func getOriginForScrollView(scrollViewDimension: CGSize) -> CGPoint {
-        
-        print("\nFinding origin for view of game")
-        print("Scroll view dimension: \(scrollViewDimension)")
-        print("game view dimension: \(dimension)")
-        
-        var xMultiplier: CGFloat = 1
-        var yMultiplier: CGFloat = 1
-        
-        if dimension.width > scrollViewDimension.width {
-            yMultiplier = scrollViewDimension.width / dimension.width
-        }
-        
-        if dimension.height > scrollViewDimension.height {
-            xMultiplier = scrollViewDimension.height / dimension.height
-        }
-        
-        var x: CGFloat = scrollViewDimension.width/2 - dimension.width*xMultiplier/2
-        var y: CGFloat = scrollViewDimension.height/2 - dimension.height*yMultiplier/2
-        
-        
-        if dimension.width > scrollViewDimension.width || dimension.height > scrollViewDimension.height  {
-            // it means that the game is bigger than the screen
-            if dimension.width > dimension.height {
-                x = 10
-            } else if dimension.height > dimension.width {
-                y = 0
-            } else {
-                // it means it's a square, so we must place it in the middle
-                // TODO: place the square
-            }
-        }
-        
-        if x < 10 {
-            x = 10
-        }
-        
-        if y < 0 {
-            y = 0 
-        }
-        
-        return CGPoint(x: x, y: y)
-    }
-    
-    
     // MARK: - Functions
     
     /// This is method is called by cases when user taps on them

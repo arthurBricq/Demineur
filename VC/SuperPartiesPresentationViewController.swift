@@ -71,16 +71,16 @@ class SuperPartiesPresentationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is SuperPartiesGameViewController {
             let dest = segue.destination as! SuperPartiesGameViewController
+            dest.transitioningDelegate = self
             if let selectedGame = sender as! (level: Int, gameType: GameType)? {
                 // 1. Pass the level index
                 dest.gameIndex = selectedGame.level
                 
+                
                 // 2. Check if there is an existing game at this index, and if so pass it
                 if isGameAlreadyStarted(level: selectedGame.level, gameType: selectedGame.gameType) {
-                    print("There is a game saved for this level")
                     if let savedGame = getSavedGame(level: selectedGame.level, gameType: selectedGame.gameType) {
                         // TODO: pass the information needed to recover the game
-                        print("b")
                         dest.savedGame = savedGame
                         return
                     }
@@ -96,12 +96,10 @@ class SuperPartiesPresentationViewController: UIViewController {
     
     // Returns true if there is an existing game saved locally for this level
     private func isGameAlreadyStarted(level: Int, gameType: GameType) -> Bool {
-        print("Is game started ? level: \(level) - gameType: \(gameType)")
         let request: NSFetchRequest<SuperPartieGame> = SuperPartieGame.fetchRequest()
         request.predicate = NSPredicate(format: "level == \(level) && gameType == \(gameType.rawValue)")
         do {
             let games = try AppDelegate.viewContext.fetch(request)
-            print("Number of games matching predicates: \(games.count)")
             if games.count > 1 {
                 print("ERROR: there are to many games saved for one specific level. ")
             }
@@ -226,4 +224,25 @@ extension SuperPartiesPresentationViewController: CAAnimationDelegate {
         }
     }
 }
+
+// MARK: - Animations for transition
+
+extension SuperPartiesPresentationViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if presented is SuperPartiesGameViewController {
+            let transition = TransitionToGameView()
+            transition.animationDuration = 0.75
+            return transition
+        }
+        
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return nil
+    }
+}
+
 

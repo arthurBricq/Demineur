@@ -19,7 +19,7 @@ class TransitionToGameView: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let fromVC = (transitionContext.viewController(forKey: .from))!
-        let toVC = (transitionContext.viewController(forKey: .to))!
+        let toVC = (transitionContext.viewController(forKey: .to)) as! GameViewController
         
         let fromView = fromVC.view!
         let toView = toVC.view!
@@ -27,12 +27,22 @@ class TransitionToGameView: NSObject, UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
         toView.frame = CGRect(x: 0, y: 0, width: fromView.frame.width, height: fromView.frame.height)
         
+        toVC.clearScreen()
+        
         UIView.animate(withDuration: animationDuration, animations: {
             fromView.alpha = 0
+            
+            
         }) { (_) in
             fromView.alpha = 1
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            
+            // Creation of the next game
+            toVC.presentGame()
+        
         }
+        
+        
     }
 
 }

@@ -285,6 +285,7 @@
 				4EA7FDAB20F897A700740480 /* Vibrate.swift */,
 				4E3705E621315A4700972B51 /* Sound.swift */,
 				9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */,
+				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -361,7 +362,6 @@
 				4E301FA421A0C4AB00DAB959 /* Timers */,
 				4E301FA121A0BF7100DAB959 /* Datas */,
 				4EA7FDA120F8974E00740480 /* Functions.swift */,
-				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
 				4EA7FDA520F8977E00740480 /* StarterFunctions.swift */,
 				4EB822B7210E3101009290C3 /* InfiniteFunctions.swift */,
 			);
