@@ -255,27 +255,32 @@ extension GameViewController: GameController {
         viewOfGame!.option3Timer.stop()
         viewOfGame!.pauseAllOption1Timers()
         
-        if didTapABomb || didTimeEnd {
-            messageManagor?.addTheMessage(didTapABomb: didTapABomb)
-        } else {
-            
-            gameTimer?.stop()
-            
-            if !win {
-                openTheBombs()
+        let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame!)
+        animationOfCoinManager.animateTheEarnings {
+            if didTapABomb || didTimeEnd {
+                self.messageManagor?.addTheMessage(didTapABomb: didTapABomb)
+            } else {
+                
+                self.gameTimer?.stop()
+                
+                if !win {
+                    self.openTheBombs()
+                }
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+                vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+                vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                vc.precedentViewController = self
+                vc.win = win
+                vc.transitioningDelegate = self
+                vc.didTapABomb = didTapABomb
+                vc.precedentGameIndex = self.gameIndex
+                self.present(vc, animated: true, completion: nil)
             }
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-            vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-            vc.precedentViewController = self
-            vc.win = win
-            vc.transitioningDelegate = self
-            vc.didTapABomb = didTapABomb
-            vc.precedentGameIndex = gameIndex
-            self.present(vc, animated: true, completion: nil)
         }
+        
+        
     }
     
     func updateFlagsDisplay(numberOfFlags: Int) {

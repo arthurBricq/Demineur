@@ -67,10 +67,6 @@ class Case: UIButton {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
-        print("touched")
-        let test = EndGameCoinAnimationManager(gameViewToAnimate: self.viewOfGame!)
-        test.animateOneCase(toAnimate: self)
-        
         if caseState == .none || caseState == .open { return }
         alpha = 0.4
         if isTheGameStarted.value == false {

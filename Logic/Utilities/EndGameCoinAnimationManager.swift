@@ -40,38 +40,42 @@ class EndGameCoinAnimationManager: NSObject {
     }
     
     /// This function will animate the case that it has as a parameter. It creates a message with the coins earned and makes it move
-    public func animateOneCase(toAnimate: Case) {
+    private func animateOneCase(toAnimate: Case, delayTime: Double) {
         
-        let randomXTranslation = (CGFloat(random(Int(toAnimate.frame.width))) - toAnimate.frame.width/2)
-        let msgToAnimate = returnMessageWithCoinsEarned(rect: CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 10, width: 80, height: 30))
-        msgToAnimate.backgroundColor = UIColor.clear
-        msgToAnimate.alpha = 0
-        gameView.addSubview(msgToAnimate)
-        
-        UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
+        delay(seconds: delayTime) {
+            let randomXTranslation = (CGFloat(random(Int(toAnimate.frame.width))) - toAnimate.frame.width/2)
+            let msgToAnimate = self.returnMessageWithCoinsEarned(rect: CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 10, width: 80, height: 30))
+            msgToAnimate.backgroundColor = UIColor.clear
+            msgToAnimate.alpha = 0
+            self.gameView.addSubview(msgToAnimate)
             
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
-                msgToAnimate.alpha = 1
-                msgToAnimate.frame = CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 15, width: 80, height: 30)
-            })
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.6, animations: {
-                msgToAnimate.frame = CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 30, width: 80, height: 30)
-            })
-            
-            UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2, animations: {
-                msgToAnimate.alpha = 0
-                msgToAnimate.frame = CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 35, width: 80, height: 30)
-            })
-            
-        }) { (_) in
-            msgToAnimate.removeFromSuperview()
+            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
+                
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
+                    msgToAnimate.alpha = 1
+                    msgToAnimate.frame = CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 15, width: 80, height: 30)
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.6, animations: {
+                    msgToAnimate.frame = CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 30, width: 80, height: 30)
+                })
+                
+                UIView.addKeyframe(withRelativeStartTime: 0.8, relativeDuration: 0.2, animations: {
+                    msgToAnimate.alpha = 0
+                    msgToAnimate.frame = CGRect(x: toAnimate.frame.midX + randomXTranslation - 80/2, y: toAnimate.frame.minY - 35, width: 80, height: 30)
+                })
+                
+            }) { (_) in
+                msgToAnimate.removeFromSuperview()
+                dataManager.money += self.coinsEarnedPerBomb
+            }
         }
+        
         
     }
     
+    /// This function creates the message showing the coins earned
     private func returnMessageWithCoinsEarned(rect: CGRect) -> UIView {
-        
         
         let message: UIView = UIView(frame: rect)
         
@@ -90,6 +94,27 @@ class EndGameCoinAnimationManager: NSObject {
         message.addSubview(coinView)
         
         return message
+        
+    }
+    
+    /// This function get all the cases that have bombs and make the animation to earn money
+    public func animateTheEarnings(completion: @escaping ()->Void) {
+        
+        var casesToAnimate = returnAllCorrectlyMarkedBombs()
+        var casesToAnimateOrderedRandomly: [Case] = []
+        
+        while casesToAnimate.count != 0 {
+            let randomIndex = random(casesToAnimate.count)
+            casesToAnimateOrderedRandomly.append(casesToAnimate.remove(at: randomIndex))
+        }
+        
+        for (i,caseToAnimate) in casesToAnimateOrderedRandomly.enumerated() {
+            self.animateOneCase(toAnimate: caseToAnimate, delayTime: 0.5*Double(i))
+        }
+        
+        delay(seconds: Double(casesToAnimateOrderedRandomly.count) * 0.5 + 0.5) {
+            completion()
+        }
         
     }
     
