@@ -47,11 +47,12 @@ class TransitionFromMenuToSuperParties: NSObject, UIViewControllerAnimatedTransi
         let x1 = fromVC.getInitialXPositionForTransitionToSuperParties()
         let y1 = fromVC.getInitialYPositionForTransitionToSuperParties()
         let y2 = toVC.getYPositionForTransition()
-        let x3 = toVC.getLastXPositionForTransition()
+//        let x3 = toVC.getLastXPositionForTransition()
         let w = fromView.frame.width
+        let multiplier: CGFloat = 0.94
         line1.frame = CGRect(x: x1, y: y1, width: 0, height: 2)
-        line2.frame = CGRect(x: 0.9*w, y: y1, width: 2, height: 0)
-        line3.frame = CGRect(x: 0.9*w, y: y2, width: 0.0, height: 2.0)
+        line2.frame = CGRect(x: multiplier*w, y: y1, width: 2, height: 0)
+        line3.frame = CGRect(x: multiplier*w, y: y2, width: 0.0, height: 2.0)
         fromView.addSubview(line1)
         fromView.addSubview(line2)
         fromView.addSubview(line3)
@@ -68,7 +69,7 @@ class TransitionFromMenuToSuperParties: NSObject, UIViewControllerAnimatedTransi
             
             // 1. The line start going to the right.
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: t1, animations: {
-                line1.frame = CGRect(x: x1, y: y1, width: 0.9*w - x1, height: 1)
+                line1.frame = CGRect(x: x1, y: y1, width: multiplier*w - x1, height: 2)
             })
             
             // 2. The line keep going by herself.
@@ -81,17 +82,17 @@ class TransitionFromMenuToSuperParties: NSObject, UIViewControllerAnimatedTransi
                 }
                 
                 // b. Make the line longer as well
-                line1.frame = CGRect(x: x1 - w, y: y1, width: 0.9*w - x1 + w, height: 1)
+                line1.frame = CGRect(x: x1 - w, y: y1, width: multiplier*w - x1 + w + 2, height: 2)
                 
             })
             
             // 3. Make the line going to the vertical direction
             UIView.addKeyframe(withRelativeStartTime: t1+t2, relativeDuration: t3, animations: {
-                line2.frame = CGRect(x: 0.9*w, y: y2, width: 2, height: y1-y2)
+                line2.frame = CGRect(x: multiplier*w, y: y2, width: 2, height: y1-y2)
             })
             
             UIView.addKeyframe(withRelativeStartTime: t1+t2+t3, relativeDuration: t4, animations: {
-                line3.frame = CGRect(x: 0.9*w, y: y2, width: 0.1*w, height: 2)
+                line3.frame = CGRect(x: multiplier*w, y: y2, width: 0.1*w, height: 2)
             })
             
             // 4. Make the 'toView' arrive from the right
@@ -104,7 +105,7 @@ class TransitionFromMenuToSuperParties: NSObject, UIViewControllerAnimatedTransi
         }) { (_) in
             
             // Reset the first line to have the correct position for when going back
-            line1.frame = CGRect(x: x1, y: y1, width: 0.9*w - x1, height: 2)
+            line1.frame = CGRect(x: x1, y: y1, width: multiplier*w - x1, height: 2)
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
             
         }

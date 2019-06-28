@@ -228,7 +228,7 @@ class SuperPartiesPresentationViewController: UIViewController {
     public func getYPositionForTransition() -> CGFloat {
         let window = UIApplication.shared.keyWindow
         let topPadding = window?.safeAreaInsets.top
-        return (heightOfFirstRow/2 + 50 + (topPadding ?? 0))
+        return (heightOfFirstRow/2 + 50 + (topPadding ?? 0))-1
     }
     
     /// This function must draw the first line, then draw all the lines cells by cell. 
