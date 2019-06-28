@@ -66,6 +66,7 @@ class Case: UIButton {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
+        
         if caseState == .none || caseState == .open { return }
         alpha = 0.4
         if isTheGameStarted.value == false {

@@ -272,34 +272,42 @@ class InfiniteGameViewController: UIViewController {
         self.gameTimer.stop()
         let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
         currentGameView.option3Timer.stop()
-        self.openTheBombs()
-        // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
-        // La variable 'level' est déjà upadter à chaque changement de niveau
-        // Pour la variable 'numberOfBombs', on utilise des closures dénomées 'onPosingFlag(isFlagCorrect: Bool)' qui vont être donnée aux gameView et qui update la variable 'numberOfBombs'.
         
-        // Adding the score online
-        if Reachability.isConnectedToNetwork() == true {
-            scoresModel.addOneScore(level: self.level, numberOfBombs: self.numberOfBombs)
+        let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: currentGameView)
+        animationOfCoinManager.animateTheEarnings {
+            
+            print("fin animation")
+                
+            self.openTheBombs()
+            // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
+            // La variable 'level' est déjà upadter à chaque changement de niveau
+            // Pour la variable 'numberOfBombs', on utilise des closures dénomées 'onPosingFlag(isFlagCorrect: Bool)' qui vont être donnée aux gameView et qui update la variable 'numberOfBombs'.
+            
+            // Adding the score online
+            if Reachability.isConnectedToNetwork() == true {
+                scoresModel.addOneScore(level: self.level, numberOfBombs: self.numberOfBombs)
+            }
+            // Adding the new local score
+            let newScore = LocalScore(context: AppDelegate.viewContext)
+            newScore.level = Int32(self.level)
+            newScore.numberOfBombs = Int32(self.numberOfBombs)
+            do { try AppDelegate.viewContext.save() }
+            catch { print("ERROR: saving core data ") }
+            // Money
+            dataManager.money += self.level + self.numberOfBombs
+            // Closing the page
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            vc.precedentViewController = self
+            vc.win = false
+            vc.transitioningDelegate = self
+            vc.didTapABomb = didTapABomb
+            vc.amountOfBombsFound = animationOfCoinManager.returnAllCorrectlyMarkedBombs().count
+            vc.precedentGameIndex = self.gameIndex
+            self.present(vc, animated: true, completion: nil)
         }
-        // Adding the new local score
-        let newScore = LocalScore(context: AppDelegate.viewContext)
-        newScore.level = Int32(level)
-        newScore.numberOfBombs = Int32(numberOfBombs)
-        do { try AppDelegate.viewContext.save() }
-        catch { print("ERROR: saving core data ") }
-        // Money
-        dataManager.money += self.level + self.numberOfBombs
-        // Closing the page
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        vc.precedentViewController = self
-        vc.win = false
-        vc.transitioningDelegate = self
-        vc.didTapABomb = didTapABomb
-        vc.precedentGameIndex = self.gameIndex
-        self.present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Fonctions qui ajoutent les parties
@@ -413,7 +421,6 @@ class InfiniteGameViewController: UIViewController {
     }
     
     func launchOption3TimerIfNeeded() {
-        print("âaaaa")
         if currentGame().option3 {
             let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
             currentGameView.option3Timer.start(timeInterval: Double(currentGame().option3Time), id: "Option3")
@@ -549,23 +556,28 @@ extension InfiniteGameViewController: GameController {
         Vibrate().vibrate(style: .heavy)
         if win {
             gameTimer.stop()
-            bonusChoiceView?.desactivateBonusButtons()
-            UIView.animate(withDuration: 0.25, animations: {
-                self.clockView.alpha = 0
-                self.bombCounterLabel.alpha = 0
-                self.bombView.alpha = 0
-                self.flagCounterLabel.alpha = 0
-                self.flagView.alpha = 0
-            })
             
-            if hasToFinishTheGame {
-                hasToFinishTheGame = false
-            } else {
-                return
+            let viewOfGame = containerView.subviews.last as! ViewOfGame
+            let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame, timeOfAnimation: 0.9)
+            animationOfCoinManager.animateTheEarnings {
+                self.bonusChoiceView?.desactivateBonusButtons()
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.clockView.alpha = 0
+                    self.bombCounterLabel.alpha = 0
+                    self.bombView.alpha = 0
+                    self.flagCounterLabel.alpha = 0
+                    self.flagView.alpha = 0
+                })
+                
+                if self.hasToFinishTheGame {
+                    self.hasToFinishTheGame = false
+                } else {
+                    return
+                }
+                
+                isTheGameStarted.value = false
+                self.currentGameIsFinished()
             }
-            
-            isTheGameStarted.value = false
-            currentGameIsFinished()
         } else {
             if didTapABomb || didTimeEnd {
                 let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
