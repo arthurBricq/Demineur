@@ -255,11 +255,13 @@ extension GameViewController: GameController {
         viewOfGame!.option3Timer.stop()
         viewOfGame!.pauseAllOption1Timers()
         
-        let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame!)
-        animationOfCoinManager.animateTheEarnings {
-            if didTapABomb || didTimeEnd {
-                self.messageManagor?.addTheMessage(didTapABomb: didTapABomb)
-            } else {
+        
+        if didTapABomb || didTimeEnd {
+            self.messageManagor?.addTheMessage(didTapABomb: didTapABomb)
+        } else {
+            
+            let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame!)
+            animationOfCoinManager.animateTheEarnings {
                 
                 self.gameTimer?.stop()
                 
@@ -366,18 +368,21 @@ extension GameViewController: UIViewControllerTransitioningDelegate {
 extension GameViewController {
     
     fileprivate func endOfHistoryGame(_ didTapABomb: Bool) {
-        self.gameTimer?.stop()
-        self.openTheBombs()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
-        vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        vc.precedentViewController = self
-        vc.win = false
-        vc.transitioningDelegate = self
-        vc.didTapABomb = didTapABomb
-        vc.precedentGameIndex = self.gameIndex
-        self.present(vc, animated: true, completion: nil)
+        let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame!)
+        animationOfCoinManager.animateTheEarnings {
+            self.gameTimer?.stop()
+            self.openTheBombs()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
+            vc.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            vc.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            vc.precedentViewController = self
+            vc.win = false
+            vc.transitioningDelegate = self
+            vc.didTapABomb = didTapABomb
+            vc.precedentGameIndex = self.gameIndex
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
 }
