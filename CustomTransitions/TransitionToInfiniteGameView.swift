@@ -24,7 +24,7 @@ class TransitionToInfiniteGameView: NSObject, UIViewControllerAnimatedTransition
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let fromVC = (transitionContext.viewController(forKey: .from))!
-        let toVC = (transitionContext.viewController(forKey: .to))!
+        let toVC = (transitionContext.viewController(forKey: .to) as! InfiniteGameViewController)
         
         let fromView = fromVC.view!
         let toView = toVC.view!
@@ -35,7 +35,7 @@ class TransitionToInfiniteGameView: NSObject, UIViewControllerAnimatedTransition
         
         UIView.animate(withDuration: animationDuration, animations: {
             fromView.alpha = 0
-            
+            toVC.revealTheBonusChoiceView()
             
         }) { (_) in
             fromView.alpha = 1

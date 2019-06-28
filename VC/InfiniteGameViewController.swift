@@ -48,14 +48,14 @@ class InfiniteGameViewController: UIViewController {
     
     // MARK: - ACTIONS
     
-    @IBAction func buttonReturn(_ sender: Any) {
+    /*@IBAction func buttonReturn(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func newsectionbutton(_ sender: Any) {
         sectionIndex += 1
         startNewSection()
-    }
+    }*/
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
         gameTimer.pause()
@@ -489,7 +489,7 @@ class InfiniteGameViewController: UIViewController {
         let w = screenW
         let h = w/3
         let size = CGSize(width: w, height: h)
-        let origin = CGPoint(x: 0, y: screenH - h)
+        let origin = CGPoint(x: 0, y: screenH)
         let frame = CGRect(origin: origin, size: size)
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
         bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
@@ -498,6 +498,11 @@ class InfiniteGameViewController: UIViewController {
         
     }
     
+    public func revealTheBonusChoiceView() {
+        UIView.animate(withDuration: 0.5) {
+            self.bonusChoiceView?.frame.origin.y = self.view.frame.height - self.bonusChoiceView!.frame.height
+        }
+    }
     
     // MARK: - Animations for end of levels
     

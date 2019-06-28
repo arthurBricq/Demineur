@@ -638,16 +638,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jaC-C1-B8N">
-                                <rect key="frame" x="335" y="623" width="30" height="36"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="17"/>
-                                <state key="normal" title="&gt;">
-                                    <color key="titleColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="newsectionbutton:" destination="ylO-j7-Tgn" eventType="touchUpInside" id="x7f-vP-thx"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -658,9 +648,7 @@
                             <constraint firstItem="QR3-pF-xd2" firstAttribute="width" secondItem="QR3-pF-xd2" secondAttribute="height" multiplier="1:1" id="Mla-fc-P6R"/>
                             <constraint firstItem="DbP-03-m8a" firstAttribute="width" secondItem="DbP-03-m8a" secondAttribute="height" multiplier="1:1" id="VEj-MC-MyV"/>
                             <constraint firstItem="DbP-03-m8a" firstAttribute="leading" secondItem="pcB-3R-DrW" secondAttribute="leading" constant="20" id="cEg-Nd-Try"/>
-                            <constraint firstItem="pcB-3R-DrW" firstAttribute="trailing" secondItem="jaC-C1-B8N" secondAttribute="trailing" constant="10" id="qSb-SV-YKA"/>
                             <constraint firstItem="Dbs-gg-rV1" firstAttribute="width" secondItem="GQh-gW-Zxv" secondAttribute="width" multiplier="0.5" id="sN8-jS-8wv"/>
-                            <constraint firstItem="pcB-3R-DrW" firstAttribute="bottom" secondItem="jaC-C1-B8N" secondAttribute="bottom" constant="8" id="xEb-nd-dB3"/>
                             <constraint firstItem="Dbs-gg-rV1" firstAttribute="centerX" secondItem="pcB-3R-DrW" secondAttribute="centerX" id="ySK-Yu-BgJ"/>
                             <constraint firstItem="Dbs-gg-rV1" firstAttribute="top" secondItem="pcB-3R-DrW" secondAttribute="top" constant="15" id="zjX-XZ-KJV"/>
                             <constraint firstItem="QR3-pF-xd2" firstAttribute="width" secondItem="QR3-pF-xd2" secondAttribute="height" multiplier="1:1" id="zuN-YV-BQQ"/>
