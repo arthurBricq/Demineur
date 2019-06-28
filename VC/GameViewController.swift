@@ -77,6 +77,8 @@ class GameViewController: UIViewController {
         bombView.alpha = 0.0
         bombsLabel.alpha = 0.0
         viewOfGame?.alpha = 0.0
+        clockView?.alpha = 0.0
+        bonusChoiceView?.frame.origin = CGPoint(x: 0, y: view.frame.height)
     }
     
     /// Will make appear the view of game and the labels associated with the game.
@@ -85,13 +87,16 @@ class GameViewController: UIViewController {
         removePrecendentViewOfGame()
         startANewGame(animatedFromTheRight: false)
         viewOfGame?.alpha = 0.0
+        bonusChoiceView?.frame.origin = CGPoint(x: 0, y: view.frame.height)
         // 2. And make it appear
         UIView.animate(withDuration: 0.5) {
             self.flagView.alpha = 1.0
             self.flagsLabel.alpha = 1.0
             self.bombView.alpha = 1.0
             self.bombsLabel.alpha = 1.0
+            self.clockView?.alpha = 1.0
             self.viewOfGame?.alpha = 1.0
+            self.bonusChoiceView?.frame.origin = CGPoint(x: 0, y: self.view.frame.height-self.bonusChoiceView!.frame.height)
         }
     }
     
@@ -102,15 +107,18 @@ class GameViewController: UIViewController {
     private func addTheBonusChoiceView() {
         let screenW = self.view.frame.width
         let screenH = self.view.frame.height
-        let dec_h: CGFloat = 20 // decalage horizontal
-        let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
-        let w = screenW - dec_h
-        let h = w/6
-        let size = CGSize(width: w, height: h)
-        let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
         if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
-        bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: viewOfGame!, gameTimer: gameTimer)
-        bonusChoiceView!.progress = 0.0
+        /*let dec_h: CGFloat = 20 // decalage horizontal
+        let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
+        let w = screenW - dec_h*/
+        let w = screenW
+        let h = w/3
+        let size = CGSize(width: w, height: h)
+        let origin = CGPoint(x: 0, y: screenH - h)
+        let frame = CGRect(origin: origin, size: size)
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: viewOfGame!, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
+        //bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: viewOfGame!, gameTimer: gameTimer)
+        //bonusChoiceView!.progress = 0.0
         self.view.addSubview(bonusChoiceView!)
     }
     

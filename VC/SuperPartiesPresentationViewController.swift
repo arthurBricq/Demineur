@@ -91,6 +91,8 @@ class SuperPartiesPresentationViewController: UIViewController {
                 dest.gameIndex = data.level
             }
             
+        } else if segue.destination is MenuViewController {
+            segue.destination.transitioningDelegate = (segue.destination  as! MenuViewController)
         }
     }
     

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class BonusChoiceColor {
+/*class BonusChoiceColor {
     var backgroundColorRuban: UIColor = UIColor(red: 0.522, green: 0.522, blue: 0.522, alpha: 1.000)
     var starColor: UIColor = UIColor(red: 0.800, green: 0.574, blue: 0.354, alpha: 1.000)
     var backgroundContainer: UIColor = UIColor.white //= UIColor(red: 0.796, green: 0.796, blue: 0.796, alpha: 1.000)
 }
 
 var bonusChoiceColor = BonusChoiceColor() // il s'agit des couleurs de la vue
+*/
 
 /// REQUIRED: Largeur = 6 Hauteur
 class BonusChoiceView: UIView {
@@ -30,44 +31,54 @@ class BonusChoiceView: UIView {
     
     // MARK: - Inits
     
-    override init(frame: CGRect) { super.init(frame: frame) }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
     
-    convenience init(frame: CGRect, viewOfGame: ViewOfGame, gameTimer: CountingTimer?) {
+    convenience init(frame: CGRect, viewOfGame: ViewOfGame, gameTimer: CountingTimer?, backgroundColor: UIColor, lineColor: UIColor) {
         self.init(frame: frame)
         self.viewOfGame = viewOfGame
         self.gameTimer = gameTimer
-        self.backgroundColor = UIColor.clear
-        self.progress = 0
-        self.instantiateScrollView()
+        self.backgroundColor = backgroundColor
+        //self.progress = 0
+        instantiateTopLine(lineColor: lineColor)
+        instantiateScrollView()
     }
     
     
-    // MARK: - Functions 
+    // MARK: - Functions
+    
+    private func instantiateTopLine(lineColor: UIColor) {
+        let line = LineView(lineWidth: 3, isVertical: false, strokeColor: lineColor)
+        line.frame = CGRect(x: 0, y: 0, width: frame.width, height: line.lineWidth)
+        self.addSubview(line)
+    }
     
     private func instantiateScrollView() {
-        let tmp = UIScrollView()
-        let fx = self.bounds.width / 600 // ratios de dilatation de l'espace
-        let fy = self.bounds.height / 100
-        tmp.frame = CGRect(x: (42)*fx, y: 7.5*fy, width: (450)*fx, height: 85*fy)
-        tmp.backgroundColor = UIColor.clear
-        tmp.isScrollEnabled = true
-        tmp.alpha = 0
-        tmp.showsVerticalScrollIndicator = false
-        tmp.showsHorizontalScrollIndicator = true
-        tmp.indicatorStyle = .default
-        scrollView = tmp
+        let tmpScrollView = UIScrollView()
+        let width = 0.9 * self.bounds.width
+        let height = self.bounds.height - 50
+        tmpScrollView.frame = CGRect(x: 0.05 * self.bounds.width, y: (self.frame.height - height)/2, width: width, height: height)
+        tmpScrollView.backgroundColor = UIColor.clear
+        tmpScrollView.isScrollEnabled = true
+        //tmpScrollView.alpha = 0
+        tmpScrollView.showsVerticalScrollIndicator = false
+        tmpScrollView.showsHorizontalScrollIndicator = true
+        tmpScrollView.indicatorStyle = .default
+        scrollView = tmpScrollView
+        self.addSubview(scrollView!)
+        populateScrollView()
     }
     
     private func populateScrollView() {
         
-        let fy = self.bounds.height / 100
         let y0: CGFloat = 2
-        let c = 85*fy - 2*y0 // cotes du carre
+        let c = self.scrollView!.frame.height - 10
         let esp: CGFloat = 40 // espacement entre les boutons
         
-        scrollView!.contentSize = CGSize(width: 4*(c+esp) - esp/2 + 30 , height: 85*fy )
+        scrollView!.contentSize = CGSize(width: 4*(c+esp) - esp/2 + 30 , height: self.scrollView!.frame.height )
 
         for i in (scrollView?.subviews)! {
             i.removeFromSuperview()
@@ -82,7 +93,7 @@ class BonusChoiceView: UIView {
             let r = UILabel() // r comme rond
             let d = c/2 // diametre du rond avec le nombre de bonus
             r.backgroundColor = UIColor.clear
-            r.textColor = bonusChoiceColor.backgroundColorRuban
+            r.textColor = UIColor(red: 0.522, green: 0.522, blue: 0.522, alpha: 1.000) //bonusChoiceColor.backgroundColorRuban
             r.font = UIFont(name: "PingFangSC-Semibold", size: 20)
             r.layer.zPosition = 10
             r.frame = CGRect(x: c+4, y: c-d/2-10, width: d+10, height: d)
@@ -129,9 +140,9 @@ class BonusChoiceView: UIView {
      Cette fonction permet de changer le nombre de bonus à l'ecran, elle fonctionne grâce à la propriété 'tag' qui est ajouté aux label par la fonction 'populateScrollView()'
     */
     func updateTheNumberLabels() {
-        for tmp in scrollView!.subviews {
-            if tmp is BonusView {
-                let view = tmp as! BonusView
+        for subview in scrollView!.subviews {
+            if subview is BonusView {
+                let view = subview as! BonusView
                 guard let label = view.subviews[0] as? UILabel else { return } // il n'y a qu'un seul subview, il s'agit du label
                 
                 let number = dataManager.quantityOfBonus(atIndex: label.tag)
@@ -148,7 +159,7 @@ class BonusChoiceView: UIView {
         }
     }
     
-    @objc public dynamic var progress: CGFloat = 1 {
+    /*@objc public dynamic var progress: CGFloat = 1 {
         didSet {
             progressLayer.progress = progress
             if progress == 0 || progress == 1 {
@@ -185,7 +196,9 @@ class BonusChoiceView: UIView {
         }
         return super.action(for: layer, forKey: event)
     }
+    */
     
+    /*
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
@@ -238,6 +251,7 @@ class BonusChoiceView: UIView {
         
         return false
     }
+    */
     
     // MARK: - Actions when bonus button are tapped
     
@@ -304,7 +318,7 @@ class BonusChoiceView: UIView {
 
 
 
-
+/*
 class BonusChoiceLayer: CALayer {
     
     @NSManaged var progress: CGFloat
@@ -438,3 +452,4 @@ public class BonusChoiceProgress : NSObject {
         }
     }
 }
+*/

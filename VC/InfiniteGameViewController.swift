@@ -468,7 +468,7 @@ class InfiniteGameViewController: UIViewController {
     /// Adds the bonus choice view to the screen and set its viewOfGame as the first viewOfGame of this infinite party.
     /// - You must keep updating the viewOfGame of the bonusChoiceView each time a new game is presented to screen.
     func addTheBonusChoiceView() {
-        let screenW = self.view.frame.width
+        /*let screenW = self.view.frame.width
         let screenH = self.view.frame.height
         let dec_h: CGFloat = 20 // decalage horizontal
         let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
@@ -478,10 +478,24 @@ class InfiniteGameViewController: UIViewController {
         let origin = CGPoint(x: dec_h/2, y: screenH - h - dec_v)
         if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: currentViewOfGame, gameTimer: gameTimer)
-        bonusChoiceView!.progress = 0
+        //bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: currentViewOfGame, gameTimer: gameTimer)
+        //bonusChoiceView!.progress = 0
+        bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
+        self.view.addSubview(bonusChoiceView!)*/
+        
+        let screenW = self.view.frame.width
+        let screenH = self.view.frame.height
+        if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
+        let w = screenW
+        let h = w/3
+        let size = CGSize(width: w, height: h)
+        let origin = CGPoint(x: 0, y: screenH - h)
+        let frame = CGRect(origin: origin, size: size)
+        let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
         bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
+        
     }
     
     
