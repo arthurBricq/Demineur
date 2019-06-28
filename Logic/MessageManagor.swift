@@ -29,6 +29,7 @@ class MessageManagor {
     
     /// Cette fonction ajoute le message approprié quand l'utilisateur tape sur une bombe.
     func addTheMessage(didTapABomb: Bool) {
+        print("créatio d'un message")
         if dataManager.vieQuantity > 0 {
             // faire apparaitre le message qui demande une nouvelle chance
             messageOne(didTapABomb: didTapABomb)

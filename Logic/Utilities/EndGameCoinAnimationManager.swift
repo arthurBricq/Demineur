@@ -21,7 +21,7 @@ class EndGameCoinAnimationManager: NSObject {
     }
     
     /// This function will return an array of all the bombs correctly marked in order to animate them
-    private func returnAllCorrectlyMarkedBombs() -> [Case] {
+    public func returnAllCorrectlyMarkedBombs() -> [Case] {
         
         var correctlyMarkedBombs: [Case] = []
         

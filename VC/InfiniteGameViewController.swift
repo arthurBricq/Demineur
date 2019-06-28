@@ -274,8 +274,10 @@ class InfiniteGameViewController: UIViewController {
         currentGameView.option3Timer.stop()
         
         let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: currentGameView)
-            animationOfCoinManager.animateTheEarnings {
+        animationOfCoinManager.animateTheEarnings {
             
+            print("fin animation")
+                
             self.openTheBombs()
             // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
             // La variable 'level' est déjà upadter à chaque changement de niveau
@@ -302,6 +304,7 @@ class InfiniteGameViewController: UIViewController {
             vc.win = false
             vc.transitioningDelegate = self
             vc.didTapABomb = didTapABomb
+            vc.amountOfBombsFound = animationOfCoinManager.returnAllCorrectlyMarkedBombs().count
             vc.precedentGameIndex = self.gameIndex
             self.present(vc, animated: true, completion: nil)
         }

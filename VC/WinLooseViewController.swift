@@ -27,6 +27,12 @@ class WinLooseViewController: UIViewController {
     @IBOutlet weak var replayIconButton: MenuPauseIconsButtons!
     @IBOutlet weak var lastButton: UIButton!
     @IBOutlet weak var nextLevelIcon: NextLevelButton!
+    @IBOutlet weak var amountOfBomsDescriptionLabel: UILabel!
+    @IBOutlet weak var amountOfBombsFoundLabel: UILabel!
+    @IBOutlet weak var coinsEarnedDescriptionLabel: UILabel!
+    @IBOutlet weak var coinsEarnedLabel: UILabel!
+    @IBOutlet weak var coinView: PieceView!
+    @IBOutlet weak var constraintUnderNextLevelButton: NSLayoutConstraint!
     
     
     // MARK: - VARIABLES
@@ -35,6 +41,7 @@ class WinLooseViewController: UIViewController {
     var didTapABomb: Bool = false
     var precedentViewController: UIViewController?
     var precedentGameIndex: Int = 1 // uniquement important pour le mode histoire
+    var amountOfBombsFound: Int = 0
     
     
     // MARK: -  FUNCTIONS
@@ -69,6 +76,8 @@ class WinLooseViewController: UIViewController {
             updateLooseDisplay()
         }
         
+        amountOfBombsFoundLabel.text = amountOfBombsFound.description
+        coinsEarnedLabel.text = String(10*amountOfBombsFound)
         
     }
     
@@ -94,7 +103,8 @@ class WinLooseViewController: UIViewController {
         lastButton.isUserInteractionEnabled = false
         lastButton.isHidden = true
         nextLevelIcon.isHidden = true
-        nextLevelIcon.isUserInteractionEnabled = false 
+        nextLevelIcon.isUserInteractionEnabled = false
+        constraintUnderNextLevelButton.constant = -lastButton.frame.height
         
         if didTapABomb {
             label.text = "Dommage ! Vous avez touché une bombe. "
@@ -152,4 +162,26 @@ class WinLooseViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
   
+    
+    /// Returns the x coordinates of position the letter E
+    func getXPositionOfLetterE() -> CGFloat {
+        return letterE.frame.origin.x
+    }
+    
+    /// Returns the x coordinates of position the letter N
+    func getXPositionOfLetterN() -> CGFloat {
+        return letterN.frame.origin.x
+    }
+    
+    /// Returns the x coordinates of position the letter D
+    func getXPositionOfLetterD() -> CGFloat {
+        return letterD.frame.origin.x
+    }
+    
+    /// Returns the y coordinates of position the letters
+    func getYPostionOfLetters() -> CGFloat {
+        let y = letterE.frame.origin.y
+        return y 
+    }
+    
 }

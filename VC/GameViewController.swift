@@ -277,6 +277,7 @@ extension GameViewController: GameController {
                 vc.win = win
                 vc.transitioningDelegate = self
                 vc.didTapABomb = didTapABomb
+                vc.amountOfBombsFound = animationOfCoinManager.returnAllCorrectlyMarkedBombs().count
                 vc.precedentGameIndex = self.gameIndex
                 self.present(vc, animated: true, completion: nil)
             }
@@ -380,6 +381,7 @@ extension GameViewController {
             vc.win = false
             vc.transitioningDelegate = self
             vc.didTapABomb = didTapABomb
+            vc.amountOfBombsFound = animationOfCoinManager.returnAllCorrectlyMarkedBombs().count
             vc.precedentGameIndex = self.gameIndex
             self.present(vc, animated: true, completion: nil)
         }
