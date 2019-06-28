@@ -118,5 +118,18 @@ class SuperPartieGame: NSManagedObject {
         }
     }
     
+    static func deleteAllRecords() {
+        let request: NSFetchRequest<SuperPartieGame> = SuperPartieGame.fetchRequest()
+        do {
+            let games = try AppDelegate.viewContext.fetch(request)
+            print("Number of records: \(games.count)")
+            for g in games {
+                AppDelegate.viewContext.delete(g)
+            }
+        } catch {
+            print("Error fecthing games from CD: \(error)")
+        }
+    }
+    
     
 }

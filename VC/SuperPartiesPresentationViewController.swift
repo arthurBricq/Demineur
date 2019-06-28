@@ -72,23 +72,23 @@ class SuperPartiesPresentationViewController: UIViewController {
         if segue.destination is SuperPartiesGameViewController {
             let dest = segue.destination as! SuperPartiesGameViewController
             dest.transitioningDelegate = self
-            if let selectedGame = sender as! (level: Int, gameType: GameType)? {
-                // 1. Pass the level index
-                dest.gameIndex = selectedGame.level
-                
-                
-                // 2. Check if there is an existing game at this index, and if so pass it
-                if isGameAlreadyStarted(level: selectedGame.level, gameType: selectedGame.gameType) {
-                    if let savedGame = getSavedGame(level: selectedGame.level, gameType: selectedGame.gameType) {
-                        // TODO: pass the information needed to recover the game
-                        dest.savedGame = savedGame
-                        return
-                    }
-                } else {
-                    print("Creating a new game for this level")
-                    dest.game = getNewGame(level: selectedGame.level, gameType: selectedGame.gameType)
-                }
-                
+            
+            // Note: to understand the prepare, see the method 'addAllOtherRowsToScrollView()' which create the closure used by the buttons.
+            // The sender passed in this segue can either be of type 'SuperPartieGame' or of type 'OneGame', depending wether or not a party already exist or not
+            
+            if let data = sender as? (existingGame: SuperPartieGame, level: Int) {
+                // --> It means a party was already started.
+                print("Lunching a game that already exist")
+                dest.savedGame = data.existingGame
+                dest.gameIndex = data.level
+                return
+            }
+            
+            if let data = sender as? (newGame: OneGame, level: Int) {
+                // --> It means a new game needs to be created
+                print("Creating a new game ")
+                dest.game = data.newGame
+                dest.gameIndex = data.level
             }
             
         }
@@ -100,6 +100,7 @@ class SuperPartiesPresentationViewController: UIViewController {
         request.predicate = NSPredicate(format: "level == \(level) && gameType == \(gameType.rawValue)")
         do {
             let games = try AppDelegate.viewContext.fetch(request)
+            print("Number of records: \(games.count)")
             if games.count > 1 {
                 print("ERROR: there are to many games saved for one specific level. ")
             }
@@ -176,8 +177,42 @@ class SuperPartiesPresentationViewController: UIViewController {
             let newRow = SuperPartiesPresentationCell(frame: CGRect(x: 0, y: yPos, width: w, height: heightOfRow), level: i+1, animationDelegate: self)
             yPos += heightOfRow
             newRow.setCell(reachedLevels: currentLevelReached, cellLevel: i, closure: { (levelTapped: Int , gameTypeTapped: GameType) -> Void in
-                self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: (levelTapped, gameTypeTapped))
+                
+                // Logic here about game gestion... It's quite a mess...
+                print("Info : \(levelTapped) - \(gameTypeTapped)")
+                if self.isGameAlreadyStarted(level: levelTapped, gameType: gameTypeTapped) {
+                    self.displayRoundBox(title: "Game started", withMessage: "A game already exist. Do you want to continue ?", buttonNames: ["Yes", "No"], buttonActions: [
+                        {
+                            // So we pass as the sender the 'SuperPartieGame'
+                            let game = self.getSavedGame(level: levelTapped, gameType: gameTypeTapped)
+                            self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: (game!,levelTapped))
+                        }, {
+                            print("no")
+                            // Delete the previous game
+                            if let gameToDelete = self.getSavedGame(level: levelTapped, gameType: gameTypeTapped) {
+                                AppDelegate.viewContext.delete(gameToDelete)
+                            }
+                            
+                            // So we pass as the sender the 'OneGame' obtained...
+                            let game = self.getNewGame(level: levelTapped, gameType: gameTypeTapped)
+                            self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: (game,levelTapped))
+        
+                        }], backgroundColor: UIColor.red.withAlphaComponent(0.7))
+                } else {
+                    self.displayRoundBox(title: "New game", withMessage: "A new game is created for this level", buttonNames: ["Play"], buttonActions: [
+                        {
+                            // So we pass as the sender the 'OneGame' obtained...
+                            let game = self.getNewGame(level: levelTapped, gameType: gameTypeTapped)
+                            self.performSegue(withIdentifier: "StartSuperPartieSegue", sender: (game,levelTapped))
+                        }], backgroundColor: UIColor.red.withAlphaComponent(0.7))
+                    
+                }
+            
+
             })
+        
+                
+                
             self.rows.append(newRow)
             scrollView.addSubview(newRow)
         }

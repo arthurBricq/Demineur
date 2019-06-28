@@ -30,8 +30,6 @@ class SuperPartiesGameViewController: GameViewController {
     public func saveGameToCoreData() {
         // TODO: save the current state of the game to CD
         print("Is saving the game to CD !")
-
-        
         // 1. Delete the precedent game
         if savedGame != nil {
             deleteTheGameFromCoreData()
@@ -79,6 +77,7 @@ class SuperPartiesGameViewController: GameViewController {
             return super.getNewViewOfGame()
         } else {
             print("Is constructing the correct view of game for this existing level.")
+            isTheGameStarted.value = true 
             let vog = self.savedGame!.getViewOfGame(scrollViewDimension: scrollView.frame.size)
             self.game = vog!.game!
             return vog

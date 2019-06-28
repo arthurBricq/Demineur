@@ -64,8 +64,7 @@ extension InfinitePresentationViewController: UIViewControllerTransitioningDeleg
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         if presented is InfiniteGameViewController {
-            let transition = TransitionToGameView()
-            transition.animationDuration = 1.5
+            let transition = TransitionToInfiniteGameView(animationDuration: 1.5)
             return transition
         } else if presented is ScoreViewController {
             let transition = TransitionToScore()

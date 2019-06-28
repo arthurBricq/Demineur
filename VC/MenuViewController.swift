@@ -63,6 +63,8 @@ class MenuViewController: UIViewController {
         reglagesButton.setTitle("key5".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
         tutorialButton.setTitle("key6".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
 
+//        SuperPartieGame.deleteAllRecords()
+        
     }
     
     override var prefersStatusBarHidden: Bool { return true }

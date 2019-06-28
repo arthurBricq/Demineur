@@ -40,6 +40,9 @@
 		4E51200A210B2B2F00736375 /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E512009210B2B2F00736375 /* YesNoButton.swift */; };
 		4E5F79EA21ABBD3800955D36 /* HexViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */; };
 		4E6AFDD121ACBA4200A94A16 /* TriangleViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */; };
+		4E707E0B22C629B2008AE8B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E707E0A22C629B2008AE8B5 /* ViewController.swift */; };
+		4E707E0D22C6300C008AE8B5 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E707E0C22C6300C008AE8B5 /* UIButton.swift */; };
+		4E707E0F22C63F4B008AE8B5 /* TransitionToInfiniteGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E707E0E22C63F4B008AE8B5 /* TransitionToInfiniteGameView.swift */; };
 		4E70B15222B4EB1100CA8CF3 /* TransitionFromMenuToHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70B15122B4EB1100CA8CF3 /* TransitionFromMenuToHistory.swift */; };
 		4E7725C520FD088C00B24FBE /* HautParleur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7725C420FD088C00B24FBE /* HautParleur.swift */; };
 		4E79480221386A0100FF462C /* SuperPartiesGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E79480121386A0100FF462C /* SuperPartiesGameViewController.swift */; };
@@ -148,6 +151,9 @@
 		4E512009210B2B2F00736375 /* YesNoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
 		4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexViewOfGame.swift; sourceTree = "<group>"; };
 		4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleViewOfGame.swift; sourceTree = "<group>"; };
+		4E707E0A22C629B2008AE8B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4E707E0C22C6300C008AE8B5 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		4E707E0E22C63F4B008AE8B5 /* TransitionToInfiniteGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfiniteGameView.swift; sourceTree = "<group>"; };
 		4E70B15122B4EB1100CA8CF3 /* TransitionFromMenuToHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionFromMenuToHistory.swift; sourceTree = "<group>"; };
 		4E7725C420FD088C00B24FBE /* HautParleur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HautParleur.swift; sourceTree = "<group>"; };
 		4E79480121386A0100FF462C /* SuperPartiesGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartiesGameViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +319,15 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		4E707E0922C6299F008AE8B5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4E707E0A22C629B2008AE8B5 /* ViewController.swift */,
+				4E707E0C22C6300C008AE8B5 /* UIButton.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		4EA7FD4A20F893E700740480 = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +371,7 @@
 		4EA7FD6820F894A700740480 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				4E707E0922C6299F008AE8B5 /* Extension */,
 				4E21E4A6229D67C90092A620 /* Swift */,
 				4E301FAC21A0D96500DAB959 /* GameDescription */,
 				4E301FA921A0C51700DAB959 /* Utilities */,
@@ -514,6 +530,7 @@
 				4EDC954822C39DB10009EF98 /* TransitionFromSuperPartiesToMenu.swift */,
 				9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */,
 				4E88CAC32101338F00DAD9DB /* TransitionToGameView.swift */,
+				4E707E0E22C63F4B008AE8B5 /* TransitionToInfiniteGameView.swift */,
 				9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */,
 				9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */,
 				4E3705EB213168E100972B51 /* TransitionToReglage.swift */,
@@ -619,6 +636,7 @@
 				4EBE14A522B7DAE10026A590 /* SuperPartiesPresentationCell.swift in Sources */,
 				4E3705EC213168E100972B51 /* TransitionToReglage.swift in Sources */,
 				4EA7FDA620F8977E00740480 /* StarterFunctions.swift in Sources */,
+				4E707E0F22C63F4B008AE8B5 /* TransitionToInfiniteGameView.swift in Sources */,
 				4E98BBD021340E920054C7E7 /* TransitionToTutoriel.swift in Sources */,
 				4E3705EA2131652D00972B51 /* NiceButton.swift in Sources */,
 				4EF6F05B22BE48EA00C067A7 /* TransitionFromHistoryToMenu.swift in Sources */,
@@ -655,12 +673,14 @@
 				4EA7FD9E20F8971000740480 /* LineView.swift in Sources */,
 				4E3705E721315A4700972B51 /* Sound.swift in Sources */,
 				4EAAE0FC21244024003F9BFE /* MoneyPackage.swift in Sources */,
+				4E707E0B22C629B2008AE8B5 /* ViewController.swift in Sources */,
 				4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */,
 				4EA7FD6E20F894F600740480 /* PauseViewController.swift in Sources */,
 				4EF20A3821343FCA00E08BBF /* TransitionToScore.swift in Sources */,
 				4E98BBCE21335AB30054C7E7 /* TutorialViewController.swift in Sources */,
 				9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */,
 				4EA7FD9A20F896EB00740480 /* FlagViewDisplay.swift in Sources */,
+				4E707E0D22C6300C008AE8B5 /* UIButton.swift in Sources */,
 				4EA2893B20FD005C0069692F /* MenuPauseIconsButtons.swift in Sources */,
 				4E3A4F2220FE07A300EB5978 /* PieceView.swift in Sources */,
 				4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */,
