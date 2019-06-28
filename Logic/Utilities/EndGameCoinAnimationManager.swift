@@ -12,10 +12,12 @@ import UIKit
 class EndGameCoinAnimationManager: NSObject {
     
     var gameView: ViewOfGame
+    var timeOfAnimation: Double = 1.5
     let coinsEarnedPerBomb: Int = 10
     
-    init(gameViewToAnimate: ViewOfGame) {
+    init(gameViewToAnimate: ViewOfGame, timeOfAnimation: Double = 1.5) {
         self.gameView = gameViewToAnimate
+        self.timeOfAnimation = timeOfAnimation
     }
     
     /// This function will return an array of all the bombs correctly marked in order to animate them
@@ -49,7 +51,7 @@ class EndGameCoinAnimationManager: NSObject {
             msgToAnimate.alpha = 0
             self.gameView.addSubview(msgToAnimate)
             
-            UIView.animateKeyframes(withDuration: 1.5, delay: 0, options: [], animations: {
+            UIView.animateKeyframes(withDuration: self.timeOfAnimation, delay: 0, options: [], animations: {
                 
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
                     msgToAnimate.alpha = 1
@@ -109,10 +111,10 @@ class EndGameCoinAnimationManager: NSObject {
         }
         
         for (i,caseToAnimate) in casesToAnimateOrderedRandomly.enumerated() {
-            self.animateOneCase(toAnimate: caseToAnimate, delayTime: 0.5*Double(i))
+            self.animateOneCase(toAnimate: caseToAnimate, delayTime: (timeOfAnimation/3)*Double(i))
         }
         
-        delay(seconds: Double(casesToAnimateOrderedRandomly.count) * 0.5 + 0.5) {
+        delay(seconds: Double(casesToAnimateOrderedRandomly.count) * (timeOfAnimation/3) + 0.5) {
             completion()
         }
         
