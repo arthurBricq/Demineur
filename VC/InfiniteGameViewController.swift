@@ -36,7 +36,7 @@ class InfiniteGameViewController: UIViewController {
     var emptyGameState = [[Int]].init()
     var gameState = [[Int]].init()
     var currentSection = Section(simpleHexGameWith: (11,9))
-    var gameTimer = CountingTimer()
+//    var gameTimer = CountingTimer()
     var animationTimer = CountingTimer()
     // This variable is used in order to call only once the function 'currentGameIsFinished'. Indeed, it is called many times for a very strange reason.
     var hasToFinishTheGame: Bool = true
@@ -58,11 +58,8 @@ class InfiniteGameViewController: UIViewController {
     }*/
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
-        gameTimer.pause()
         // Pause the game
-        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        currentGameView.option3Timer.pause()
-        currentGameView.pauseAllOption1Timers()
+        getCurrentViewOfGame().pauseTimers()
         // Open the pause menu
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
@@ -97,22 +94,26 @@ class InfiniteGameViewController: UIViewController {
         startNewSection()
         addTheBonusChoiceView()
         // Set the message managor (to be updated)
-        messageManager = MessageManagor(viewOfGame: containerView.subviews.last as! ViewOfGame, gameTimer: gameTimer, superView: self.view, clockView: clockView, functionToFinishGame: { (didTapABomb) in
+        messageManager = MessageManagor(viewOfGame: containerView.subviews.last as! ViewOfGame, superView: self.view, clockView: clockView, functionToFinishGame: { (didTapABomb) in
                 self.endOfInfiniteGame(didTapABomb: didTapABomb)
         })
     }
     
+    public func getCurrentViewOfGame() -> ViewOfGame {
+        return containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
+    }
+    
     
     /**
-     Cette fonction permet de remettre à zero la partie infinie, en iniciant la section à la première section
+     Cette fonction permet de remettre à zero la partie infinie, en initiant la section à la première section
     */
     func restartTheGame() {
+        clockView.alpha = 0
         gameIndex = 1
         gameManager.iterators = InfiniteIterators() // remettre les iterateurs à 0
         sectionIndex = 0
         level = 1
         numberOfBombs = 0
-        gameTimer.stop()
         containerView.subviews.last?.removeFromSuperview()
         containerView.subviews.last?.removeFromSuperview()
         startNewSection()
@@ -124,7 +125,6 @@ class InfiniteGameViewController: UIViewController {
     func startNewSection() {
         
         // reinitialise toutes les données
-        gameTimer.stop()
         clockView.pourcentage = 0.0
         isTheGameStarted.value = false
         hasToFinishTheGame = true
@@ -179,7 +179,6 @@ class InfiniteGameViewController: UIViewController {
             containerView.isUserInteractionEnabled = true
             containerView.subviews[containerView.subviews.count-1].removeFromSuperview()
             animateNewSection()
-            launchOption3TimerIfNeeded()
             containerView.isUserInteractionEnabled = true
         }
         
@@ -228,9 +227,9 @@ class InfiniteGameViewController: UIViewController {
      Son rôle est de faire disparaitre l'ancienne vue et de faire apparaitre la nouvelle afin de passer à la partie suivante.
      */
     func currentGameIsFinished() {
-        gameTimer.stop()
-        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        currentGameView.option3Timer.stop()
+
+        
+        getCurrentViewOfGame().stopTimers()
 
         if gameIndex != 5 {
             animateNewLevel()
@@ -261,7 +260,6 @@ class InfiniteGameViewController: UIViewController {
         updateViewOfGamesReferences()
         gameIndex += 1
         updateDisplaysOnNewGame()
-        launchOption3TimerIfNeeded()
         bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         updateUserInteractionProperty()
         hasToFinishTheGame = true
@@ -269,11 +267,9 @@ class InfiniteGameViewController: UIViewController {
     
     /// Cette fonction termine totalement la partie et lance le prochain VC qui est un message de fin de partie.
     func endOfInfiniteGame(didTapABomb: Bool) {
-        self.gameTimer.stop()
-        let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        currentGameView.option3Timer.stop()
+        getCurrentViewOfGame().stopTimers()
         
-        let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: currentGameView)
+        let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: getCurrentViewOfGame())
         animationOfCoinManager.animateTheEarnings {
             
             print("fin animation")
@@ -410,23 +406,17 @@ class InfiniteGameViewController: UIViewController {
                 self.clockView.alpha = 1
             }
             
-            // if isn't the first game, start the timer, otherwise it has to startwhen the player first click
-            if !(sectionIndex == 0 && gameIndex == 1) {
-                gameTimer.start(timeInterval: 1.0, id: "Clock")
-                gameTimer.delegate = self
-            }
-            
         }
         
     }
     
-    func launchOption3TimerIfNeeded() {
+    /*func launchOption3TimerIfNeeded() {
         if currentGame().option3 {
             let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
             currentGameView.option3Timer.start(timeInterval: Double(currentGame().option3Time), id: "Option3")
             currentGameView.option3Timer.delegate = currentGameView
         }
-    }
+    }*/
     
     func currentGame() -> OneGame {
         switch gameIndex {
@@ -492,7 +482,7 @@ class InfiniteGameViewController: UIViewController {
         let origin = CGPoint(x: 0, y: screenH)
         let frame = CGRect(origin: origin, size: size)
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
         bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
         
@@ -566,18 +556,25 @@ extension InfiniteGameViewController: variableCanCallGameVC {
         } else if currentSection.gameType == .triangular {
             updateTriangularGameState(withFirstTouched: touch)
         }
+        
+        getCurrentViewOfGame().startTimers()
+        
         bonusChoiceView!.activateBonusButtons()
     }
 }
 // MARK: - Protocole pour les gameView 
 extension InfiniteGameViewController: GameController {
+    
     func gameOver(win: Bool, didTapABomb: Bool, didTimeEnd: Bool) {
+        
+        //print("gameOver")
+        
         Vibrate().vibrate(style: .heavy)
+        
         if win {
-            gameTimer.stop()
             
-            let viewOfGame = containerView.subviews.last as! ViewOfGame
-            let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame, timeOfAnimation: 0.9)
+            getCurrentViewOfGame().stopTimers()
+            let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: getCurrentViewOfGame(), timeOfAnimation: 0.9)
             animationOfCoinManager.animateTheEarnings {
                 self.bonusChoiceView?.desactivateBonusButtons()
                 UIView.animate(withDuration: 0.25, animations: {
@@ -599,13 +596,10 @@ extension InfiniteGameViewController: GameController {
             }
         } else {
             if didTapABomb || didTimeEnd {
-                let currentGameView = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-                currentGameView.option3Timer.pause()
-                currentGameView.pauseAllOption1Timers()
-                gameTimer.pause()
+                getCurrentViewOfGame().pauseTimers()
                 messageManager!.addTheMessage(didTapABomb: didTapABomb)
             } else {
-                gameTimer.stop()
+                getCurrentViewOfGame().stopTimers()
                 self.endOfInfiniteGame(didTapABomb: false)
             }
         }
@@ -628,23 +622,23 @@ extension InfiniteGameViewController: CountingTimerProtocol
     func timerFires(id: String) {
         
         if currentGame().isTimerAllowed {
-            let pourcentage: CGFloat = gameTimer.counter / CGFloat(currentGame().totalTime) // ratio of time used.
             
+            let pourcentage: CGFloat = getCurrentViewOfGame().gameTimer.counter / CGFloat(currentGame().totalTime) // ratio of time used.
             clockView.pourcentage = pourcentage // et actualisation via un didSet
-            
             if pourcentage >= 1 {
                 
                 // Fin de la partie à cause de temps
-                
+                print("timer end")
                 gameOver(win: false, didTapABomb: false, didTimeEnd: true)
+                
             }
         }
     }
 }
 
 extension InfiniteGameViewController: CAAnimationDelegate {
+    
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        
         
         guard let id = anim.value(forKey: "name") as? String else {
             return
@@ -682,12 +676,9 @@ extension InfiniteGameViewController: CAAnimationDelegate {
         } else if id == "FirstMessageAnimation" {
             
             // launch the different timers at the beginning and start the game
-            gameTimer.start(timeInterval: 1.0, id: "Clock")
-            gameTimer.delegate = self
             blockingView?.removeFromSuperview()
-            launchOption3TimerIfNeeded()
             containerView.isUserInteractionEnabled = true
-            
+    
         }
         
     }

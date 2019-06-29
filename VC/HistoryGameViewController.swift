@@ -10,21 +10,14 @@ import UIKit
 
 class HistoryGameViewController: GameViewController {
     
-    /// Override this method to create the timer (its existence is not necessary for this class to work)
-    override func viewDidLoad() {
-        super.viewDidLoad()
-         self.gameTimer = CountingTimer()
-    }
-    
     override func setUpLabelsForNewGame() {
         if !game.isTimerAllowed {
             clockView.isHidden = true
-            gameTimer?.delegate = nil
+            //viewOfGame!.gameTimer.delegate = nil
         } else {
             clockView.isHidden = false
             clockView.pourcentage = 0.0
-            gameTimer?.delegate = self
-            gameTimer?.timeInterval = 1.0
+            //viewOfGame!.gameTimer.delegate = self
         }
         
         // instauration des drapeaux et des bombes sur l'écran
@@ -39,11 +32,11 @@ class HistoryGameViewController: GameViewController {
             bombsLabel.isHidden = false
             bombView.isHidden = false
         }
-        
+        /*
         if game.option3 {
             viewOfGame?.option3Timer.start(timeInterval: TimeInterval(game.option3Time), id: "Option3")
             viewOfGame?.option3Timer.delegate = viewOfGame
-        }
+        }*/
     }
     
 }

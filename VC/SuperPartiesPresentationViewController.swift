@@ -144,7 +144,7 @@ class SuperPartiesPresentationViewController: UIViewController {
      */
     private func getNewGame(level: Int, gameType: GameType) -> OneGame {
         // TODO: find the valid game
-        return OneGame(gameTypeWithNoOptionsWithoutNoneCases: gameType, n: 50, m: 30, z: 300, totalTime: 1000)
+        return OneGame(gameTypeWithNoneCases: gameType, n: 30, m: 30, z: 300, numberOfFlag: 302, isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: [], areNumbersShowed: true)
     }
     
     // MARK: - Functions for the scroll view settings

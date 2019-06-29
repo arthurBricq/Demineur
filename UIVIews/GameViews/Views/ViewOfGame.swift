@@ -34,8 +34,40 @@ class ViewOfGame: UIView {
     /// This variable is only used to restaure the game at the correct state, if we start from a game that was already existing. 
     var allCaseStates: [[CaseState]]?
     
-    var option3Timer = CountingTimer()
+    // MARK: - Timers
     
+    var option3Timer = CountingTimer()
+    var gameTimer = CountingTimer()
+    
+    // MARK: - Functions for timers
+    
+    public func startTimers() {
+        if game!.isTimerAllowed {
+            gameTimer.start(timeInterval: 1.0, id: "Clock")
+            gameTimer.delegate = self.parentViewController! as? CountingTimerProtocol
+        }
+        if game!.option3 {
+            option3Timer.start(timeInterval: Double(game!.option3Time), id: "Option3")
+            option3Timer.delegate = self
+        }
+    }
+    
+    public func playTimers() {
+        gameTimer.play()
+        option3Timer.play()
+        unPauseAllOption1Timers()
+    }
+    
+    public func pauseTimers() {
+        option3Timer.pause()
+        gameTimer.pause()
+        pauseAllOption1Timers()
+    }
+    
+    public func stopTimers() {
+        option3Timer.stop()
+        gameTimer.stop()
+    }
     
     // MARK: - Inits functions
     
@@ -101,6 +133,7 @@ class ViewOfGame: UIView {
             if !isTheCaseMarked(i: i, j: j) { // si la case n'est pas marquée.
                 if isCaseABomb(i: i, j: j) {
                     // Le joueur a tapé sur une bombe
+                    print("touched a bomb")
                     delegate?.gameOver(win: false, didTapABomb: true, didTimeEnd: false)
                     callEndAnimation(onButtonAt: i, j: j, win: false, bombTapped: true)
                 } else {
@@ -110,6 +143,7 @@ class ViewOfGame: UIView {
         }
         
         if isTheGameFinished() { // end of game
+            print("found all the bombs")
             delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
             returnAllTheCases(win: true)
         }
@@ -222,6 +256,7 @@ class ViewOfGame: UIView {
                         if isCaseABomb(i: i, j: j) {
                             markACaseAt(i: i, j: j, byComputer: true)
                             if isTheGameFinished() { // end of game
+                                print("bonus bomb 1")
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
@@ -236,6 +271,7 @@ class ViewOfGame: UIView {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
                             if isTheGameFinished() { // end of game
+                                print("bonus bomb 2")
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
