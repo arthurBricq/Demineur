@@ -57,8 +57,6 @@ class GameViewController: UIViewController {
     
     // MARK: - Functions
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         transitioningDelegate = nil
@@ -96,32 +94,12 @@ class GameViewController: UIViewController {
             self.bombsLabel.alpha = 1.0
             self.clockView?.alpha = 1.0
             self.viewOfGame?.alpha = 1.0
-            self.bonusChoiceView?.frame.origin = CGPoint(x: 0, y: self.view.frame.height-self.bonusChoiceView!.frame.height)
+            self.bonusChoiceView?.frame.origin = CGPoint(x: 0, y: self.view.frame.height-(self.bonusChoiceView?.frame.height ?? 0))
         }
     }
     
     // MARK: - Functions for the game gestion
-    
-    /// This function will either create the bonusBarView or replace it with a new one when a new game is started
-    /// - When calling the function, be sure that the viewOfGame already exists.
-    private func addTheBonusChoiceView() {
-        let screenW = self.view.frame.width
-        let screenH = self.view.frame.height
-        if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
-        /*let dec_h: CGFloat = 20 // decalage horizontal
-        let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
-        let w = screenW - dec_h*/
-        let w = screenW
-        let h = w/3
-        let size = CGSize(width: w, height: h)
-        let origin = CGPoint(x: 0, y: screenH - h)
-        let frame = CGRect(origin: origin, size: size)
-        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: viewOfGame!, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
-        //bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: viewOfGame!, gameTimer: gameTimer)
-        //bonusChoiceView!.progress = 0.0
-        self.view.addSubview(bonusChoiceView!)
-    }
-    
+
     /// retire tous les view of game qui sont présent sur l'écran. Il faut penser à rajouter une nouvelle vue avec 'startANewGame()' après faire l'appel de cette fonction.
     public func removePrecendentViewOfGame() {
         viewOfGame?.removeFromSuperview()
@@ -147,17 +125,17 @@ class GameViewController: UIViewController {
         scrollView.isScrollEnabled = true
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
-        
+       
         // 2. Settings specific to one view of game
         let widthRatio = (self.scrollView!.frame.width) / (viewOfGame!.frame.size.width+30)
         let heightRatio = (self.scrollView!.frame.height) / (viewOfGame!.frame.size.height)
         self.scrollView.minimumZoomScale = widthRatio < heightRatio ? widthRatio : heightRatio
         self.scrollView.maximumZoomScale = maximumZoom
-        self.scrollView.contentSize = CGSize(width: viewOfGame!.frame.size.width+20, height: viewOfGame!.frame.size.height)
         scrollView.setZoomScale(scrollView.minimumZoomScale, animated: false)
         let p = CGPoint(x: scrollView!.frame.width/2 - viewOfGame!.frame.size.width/2, y: 50)
         viewOfGame!.frame.origin = p
         self.scrollView.addSubview(viewOfGame!)
+
         
          print("\nState of the variables:")
          print("Initial zoom \(widthRatio)")
@@ -194,7 +172,6 @@ class GameViewController: UIViewController {
         setUpLabelsForNewGame()
         updateFlags(numberOfFlags: game.numberOfFlag)
         removePrecendentViewOfGame()
-        addTheBonusChoiceView()
         
         // Set the properties of the scroll view
         setUpScrollView()
@@ -276,7 +253,7 @@ extension GameViewController: variableCanCallGameVC {
             updateTriangularGameStepTwo(withFirstTouched: (touch.x,touch.y))
         }
         
-        bonusChoiceView!.activateBonusButtons()
+        bonusChoiceView?.activateBonusButtons()
         gameTimer?.start(timeInterval: 1.0, id: "Clock")
         
     }
@@ -436,5 +413,11 @@ extension GameViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.viewOfGame
     }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let scale = scrollView.zoomScale
+        self.scrollView.contentSize = CGSize(width: viewOfGame!.frame.width * scale, height: viewOfGame!.frame.height * scale)
+    }
+    
 }
 

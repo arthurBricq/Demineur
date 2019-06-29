@@ -17,6 +17,10 @@ class HistoryGameViewController: GameViewController {
     }
     
     override func setUpLabelsForNewGame() {
+        
+        addTheBonusChoiceView()
+        
+        
         if !game.isTimerAllowed {
             clockView.isHidden = true
             gameTimer?.delegate = nil
@@ -45,6 +49,27 @@ class HistoryGameViewController: GameViewController {
             viewOfGame?.option3Timer.delegate = viewOfGame
         }
     }
+    
+    /// This function will either create the bonusBarView or replace it with a new one when a new game is started
+    /// - When calling the function, be sure that the viewOfGame already exists.
+    private func addTheBonusChoiceView() {
+        let screenW = self.view.frame.width
+        let screenH = self.view.frame.height
+        if bonusChoiceView != nil { bonusChoiceView?.removeFromSuperview() }
+        /*let dec_h: CGFloat = 20 // decalage horizontal
+         let dec_v: CGFloat = isItABigScreen() ? 30 : 15 // decalage vertical
+         let w = screenW - dec_h*/
+        let w = screenW
+        let h = w/3
+        let size = CGSize(width: w, height: h)
+        let origin = CGPoint(x: 0, y: screenH - h)
+        let frame = CGRect(origin: origin, size: size)
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: viewOfGame!, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
+        //bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: viewOfGame!, gameTimer: gameTimer)
+        //bonusChoiceView!.progress = 0.0
+        self.view.addSubview(bonusChoiceView!)
+    }
+    
     
 }
 
