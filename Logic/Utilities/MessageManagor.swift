@@ -19,11 +19,11 @@ class MessageManagor {
     var superView: UIView
     var functionToFinishGame: (Bool)->Void
     
-    init(viewOfGame: ViewOfGame, gameTimer: CountingTimer?, superView: UIView, clockView: ClockView?, functionToFinishGame: @escaping FunctionToFinishGameType) {
+    init(viewOfGame: ViewOfGame, superView: UIView, clockView: ClockView?, functionToFinishGame: @escaping FunctionToFinishGameType) {
         self.viewOfGame = viewOfGame
         self.superView = superView
         self.functionToFinishGame = functionToFinishGame
-        self.gameTimer = gameTimer
+        self.gameTimer = viewOfGame.gameTimer
         self.clockView = clockView
     }
     

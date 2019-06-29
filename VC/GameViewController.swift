@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
     var viewOfGame: ViewOfGame?
     var bonusChoiceView: BonusChoiceView?
     var messageManagor: MessageManagor?
-    var gameTimer: CountingTimer?
+    //var gameTimer: CountingTimer?
     
     // MARK: - Constants
     
@@ -44,9 +44,10 @@ class GameViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func pauseButtonTapped(_ sender: Any) {
-        gameTimer?.pause()
+        /*gameTimer?.pause()
         viewOfGame?.option3Timer.pause()
-        viewOfGame?.pauseAllOption1Timers()
+        viewOfGame?.pauseAllOption1Timers()*/
+        viewOfGame?.pauseTimers()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pauseVC = storyboard.instantiateViewController(withIdentifier: "Pause") as! PauseViewController
         pauseVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
@@ -154,7 +155,8 @@ class GameViewController: UIViewController {
         game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: colorForRGB(r: 52, g: 61, b: 70), textColor: colorForRGB(r: 52, g: 61, b: 70))
         
         // 1. Kill the last variables of the game
-        gameTimer?.stop()
+        //gameTimer?.stop()
+        viewOfGame?.stopTimers()
         isTheGameStarted.value = false
         self.numberOfBombs = 0
         
@@ -177,7 +179,7 @@ class GameViewController: UIViewController {
         setUpScrollView()
         
         // Set the message managor, to be linked to the correct view of game
-        messageManagor = MessageManagor(viewOfGame: viewOfGame!, gameTimer: gameTimer, superView: self.view, clockView: self is HistoryGameViewController ? clockView : nil, functionToFinishGame: { (didTapABomb) in
+        messageManagor = MessageManagor(viewOfGame: viewOfGame!, superView: self.view, clockView: self is HistoryGameViewController ? clockView : nil, functionToFinishGame: { (didTapABomb) in
             self.endOfHistoryGame(didTapABomb)
         })
         
@@ -267,11 +269,9 @@ extension GameViewController: GameController {
         
         Vibrate().vibrate(style: .heavy)
         
-        gameTimer?.pause()
+        viewOfGame?.pauseTimers()
         
         viewOfGame!.isUserInteractionEnabled = false
-        viewOfGame!.option3Timer.stop()
-        viewOfGame!.pauseAllOption1Timers()
         
         
         if didTapABomb || didTimeEnd {
@@ -281,7 +281,7 @@ extension GameViewController: GameController {
             let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame!)
             animationOfCoinManager.animateTheEarnings {
                 
-                self.gameTimer?.stop()
+                self.viewOfGame?.stopTimers()
                 
                 if !win {
                     self.openTheBombs()
@@ -314,24 +314,21 @@ extension GameViewController: GameController {
 extension GameViewController: CountingTimerProtocol {
     
     func timerFires(id: String) {
-        // In this case, the id does not matter at all.
         // This method is called each second.
-        if let gameTimer = gameTimer {
-            if id == "Clock" {
+        if id == "Clock" {
+            
+            if game.isTimerAllowed {
                 
-                if game.isTimerAllowed {
-                    
-                    let pourcentage: CGFloat = gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
-                    
-                    clockView.pourcentage = pourcentage // et actualisation via un didSet
-                    
-                    if pourcentage == 1 {
-                        gameTimer.pause()
-                        gameOver(win: false, didTapABomb: false, didTimeEnd: true)
-                    }
+                let pourcentage: CGFloat = viewOfGame!.gameTimer.counter / CGFloat(game.totalTime) // ratio of time used.
+                
+                clockView?.pourcentage = pourcentage // et actualisation via un didSet
+                
+                if pourcentage == 1 {
+                    gameOver(win: false, didTapABomb: false, didTimeEnd: true)
                 }
             }
         }
+        
         
     }
     
@@ -389,7 +386,7 @@ extension GameViewController {
     fileprivate func endOfHistoryGame(_ didTapABomb: Bool) {
         let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: viewOfGame!)
         animationOfCoinManager.animateTheEarnings {
-            self.gameTimer?.stop()
+            self.viewOfGame?.stopTimers()
             self.openTheBombs()
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController

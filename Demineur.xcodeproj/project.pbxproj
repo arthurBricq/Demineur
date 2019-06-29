@@ -114,6 +114,7 @@
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
 		9CA08A2F21243A50006BC68E /* PieceBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */; };
 		9CA08A3121243EB3006BC68E /* InAppPurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */; };
+		9CC5992222C7690A005192E9 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC5992122C7690A005192E9 /* View.swift */; };
 		9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */; };
 /* End PBXBuildFile section */
 
@@ -232,6 +233,7 @@
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseButton.swift; sourceTree = "<group>"; };
+		9CC5992122C7690A005192E9 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -324,6 +326,7 @@
 			children = (
 				4E707E0A22C629B2008AE8B5 /* ViewController.swift */,
 				4E707E0C22C6300C008AE8B5 /* UIButton.swift */,
+				9CC5992122C7690A005192E9 /* View.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -688,6 +691,7 @@
 				4E6AFDD121ACBA4200A94A16 /* TriangleViewOfGame.swift in Sources */,
 				4EAAE0FA21243810003F9BFE /* NextLevelButton.swift in Sources */,
 				4E4A9F7B22A7C1AE00FC6E66 /* SavedCase.swift in Sources */,
+				9CC5992222C7690A005192E9 /* View.swift in Sources */,
 				4EA76A9920FB6E9C00E940C8 /* ArticleViewController.swift in Sources */,
 				4EA7FD9C20F896FE00740480 /* Letter.swift in Sources */,
 				4E02A1392109E1700040BA88 /* MenuTutorialViewController.swift in Sources */,

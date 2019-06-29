@@ -98,24 +98,19 @@ class PauseViewController: UIViewController {
     @IBAction func returnButtonTapped(_ sender: Any) {
                 
         if pausedGameViewController is InfiniteGameViewController {
+            
             let gameViewController = pausedGameViewController as! InfiniteGameViewController
-            gameViewController.gameTimer.play()
-            let currentGameView = gameViewController.containerView.subviews.last as! ViewOfGame
-            currentGameView.option3Timer.play()
-            currentGameView.unPauseAllOption1Timers()
+            let currentGameView = gameViewController.getCurrentViewOfGame()
+            currentGameView.playTimers()
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
          
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
-            gameViewController.gameTimer?.play()
-            gameViewController.viewOfGame?.option3Timer.play()
-            gameViewController.viewOfGame?.unPauseAllOption1Timers()
+            gameViewController.viewOfGame?.playTimers()
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
         } else if pausedGameViewController is SuperPartiesGameViewController {
             let gameViewController = pausedGameViewController as! SuperPartiesGameViewController
-            gameViewController.gameTimer?.play()
-            gameViewController.viewOfGame?.option3Timer.play()
-            gameViewController.viewOfGame?.unPauseAllOption1Timers()
+            gameViewController.viewOfGame?.playTimers()
             gameViewController.bonusChoiceView?.updateTheNumberLabels()
         }
         dismiss(animated: true, completion: nil)
@@ -128,7 +123,7 @@ class PauseViewController: UIViewController {
             gameViewController.restartTheGame()
         } else if pausedGameViewController is HistoryGameViewController {
             let gameViewController = pausedGameViewController as! HistoryGameViewController
-            gameViewController.gameTimer?.play()
+            gameViewController.viewOfGame?.playTimers()
             gameViewController.removePrecendentViewOfGame()
             gameViewController.startANewGame(animatedFromTheRight: false)
         } else if pausedGameViewController is SuperPartiesGameViewController {

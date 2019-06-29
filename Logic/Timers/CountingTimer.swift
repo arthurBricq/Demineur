@@ -29,12 +29,14 @@ class CountingTimer: NSObject {
     var isRunning: Bool = false
     
     @objc func timerAction() {
+        //print("action of \(id)")
         counter += CGFloat(timeInterval)
         delegate?.timerFires(id: id)
     }
     
     /// Lance le timer avec un temps d'intervalle
     func start(timeInterval: TimeInterval, id: String) {
+        //print("start \(id)")
         isRunning = true
         counter = 0
         self.timeInterval = timeInterval
@@ -44,6 +46,7 @@ class CountingTimer: NSObject {
     
     /// Arrete le timer et retourne le temps final
     @discardableResult func stop() -> CGFloat {
+        //print("stop \(id)")
         isRunning = false
         isPaused = false
         let toRet = counter
@@ -55,7 +58,9 @@ class CountingTimer: NSObject {
     
     /// Met le timer en pause, s'il est en marche
     func pause() {
+        //print("trying to pause \(id)")
         if isRunning {
+            //print("pausing \(id)")
             timer.invalidate()
             isPaused = true
         }
@@ -63,6 +68,7 @@ class CountingTimer: NSObject {
     
     /// Relance le timer s'il est en pause
     func play() {
+        //print("play \(id)")
         if isPaused && isRunning {
             isPaused = false
             timer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(CountingTimer.timerAction), userInfo: nil, repeats: true)

@@ -23,7 +23,7 @@ class BonusChoiceView: UIView {
     // MARK: - Variables
     
     var viewOfGame: ViewOfGame?
-    var gameTimer: CountingTimer?
+    //var gameTimer: CountingTimer?
     private var scrollView: UIScrollView?
     private var isActivated: Bool = false
     var isTimerOn: Bool = true
@@ -37,10 +37,10 @@ class BonusChoiceView: UIView {
     
     required init(coder aDecoder: NSCoder) { fatalError("This class does not support NSCoding") }
     
-    convenience init(frame: CGRect, viewOfGame: ViewOfGame, gameTimer: CountingTimer?, backgroundColor: UIColor, lineColor: UIColor) {
+    convenience init(frame: CGRect, viewOfGame: ViewOfGame, backgroundColor: UIColor, lineColor: UIColor) {
         self.init(frame: frame)
         self.viewOfGame = viewOfGame
-        self.gameTimer = gameTimer
+        //self.gameTimer = viewOfGame.gameTimer
         self.backgroundColor = backgroundColor
         //self.progress = 0
         instantiateTopLine(lineColor: lineColor)
@@ -261,7 +261,7 @@ class BonusChoiceView: UIView {
             self.updateTheNumberLabels()
             let timeLevel: Int = dataManager.tempsLevel
             let values: [CGFloat] = [15,30,45,60] // temps à rajouter
-            gameTimer!.counter -= values[timeLevel]
+            viewOfGame!.gameTimer.counter -= values[timeLevel]
         }
     }
     
