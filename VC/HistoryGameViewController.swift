@@ -57,7 +57,7 @@ class HistoryGameViewController: GameViewController {
         let size = CGSize(width: w, height: h)
         let origin = CGPoint(x: 0, y: screenH - h)
         let frame = CGRect(origin: origin, size: size)
-        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: viewOfGame!, gameTimer: gameTimer, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: viewOfGame!, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
         //bonusChoiceView = BonusChoiceView(frame: CGRect(origin: origin, size: size), viewOfGame: viewOfGame!, gameTimer: gameTimer)
         //bonusChoiceView!.progress = 0.0
         self.view.addSubview(bonusChoiceView!)

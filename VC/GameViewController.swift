@@ -256,7 +256,7 @@ extension GameViewController: variableCanCallGameVC {
         }
         
         bonusChoiceView?.activateBonusButtons()
-        gameTimer?.start(timeInterval: 1.0, id: "Clock")
+        viewOfGame?.startTimers()
         
     }
     
