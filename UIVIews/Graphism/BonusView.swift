@@ -96,8 +96,6 @@ class BonusView: UIView {
             bonusBarView!.bombeTapped()
         } else if index == 3 {
             bonusBarView!.verificationTapped()
-        } else {
-            bonusBarView!.vieTapped()
         }
         
         

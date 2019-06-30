@@ -262,6 +262,9 @@ class BonusChoiceView: UIView {
             let timeLevel: Int = dataManager.tempsLevel
             let values: [CGFloat] = [15,30,45,60] // temps à rajouter
             viewOfGame!.gameTimer.counter -= values[timeLevel]
+            
+            let messageManager = LineMessageManager(viewToAddIn: self.parentViewController!.view, yOrigin: self.frame.origin.y - 50, timeOnScreen: 1.5, textColor: UIColor.gray)
+            messageManager.showMessage("Ajout de \(values[timeLevel]) secondes")
         }
     }
     
@@ -270,8 +273,25 @@ class BonusChoiceView: UIView {
             dataManager.drapeauQuantity -= 1
             self.updateTheNumberLabels()
             let drapeauLevel = dataManager.drapeauLevel
-            let values: [Int] = [1,2,3] // drapeaux à ajouter
-            viewOfGame!.numberOfRemainingFlags += values[drapeauLevel]
+            let messageManager = LineMessageManager(viewToAddIn: self.parentViewController!.view, yOrigin: self.frame.origin.y - 50, timeOnScreen: 1.5, textColor: UIColor.gray)
+            switch drapeauLevel {
+            case 0:
+                viewOfGame!.numberOfRemainingFlags += 1
+                messageManager.showMessage("Ajout de 1 drapeau")
+            case 1:
+                viewOfGame!.numberOfRemainingFlags += 1
+                if random(2) == 0 {
+                    viewOfGame!.numberOfRemainingFlags += 1
+                    messageManager.showMessage("Ajout de 2 drapeaux")
+                } else {
+                    messageManager.showMessage("Ajout de 1 drapeau")
+                }
+            case 3:
+                viewOfGame!.numberOfRemainingFlags += 2
+                messageManager.showMessage("Ajout de 2 drapeaux")
+            default:
+                fatalError("Level incorrect")
+            }
         }
     }
     
@@ -280,22 +300,37 @@ class BonusChoiceView: UIView {
         {
             dataManager.bombeQuantity -= 1
             self.updateTheNumberLabels()
-            viewOfGame!.markARandomBomb()
-        }
-    }
-    
-    func vieTapped() { // il faut rajouter une vie
-        if dataManager.vieQuantity > 0 {
-            dataManager.vieQuantity -= 1
-            self.updateTheNumberLabels()
+            let messageManager = LineMessageManager(viewToAddIn: self.parentViewController!.view, yOrigin: self.frame.origin.y - 50, timeOnScreen: 1.5, textColor: UIColor.gray)
+            switch dataManager.bombeLevel {
+            case 0:
+                viewOfGame!.markARandomBomb()
+                viewOfGame!.numberOfRemainingFlags -= 1
+                messageManager.showMessage("1 bombe marquée")
+            case 1:
+                viewOfGame!.markARandomBomb()
+                messageManager.showMessage("1 bombe marquée")
+            case 2:
+                viewOfGame!.markARandomBomb()
+                if random(2) == 0 {
+                    viewOfGame!.markARandomBomb()
+                    messageManager.showMessage("2 bombes marquées")
+                } else {
+                    messageManager.showMessage("1 bombe marquée")
+                }
+            default:
+                fatalError("Level incorrect")
+            }
+            
         }
     }
     
     func verificationTapped() { // il faut verifier les drapeaux posée
         if dataManager.verificationQuantity > 0 {
             dataManager.verificationQuantity -= 1
-            self.updateTheNumberLabels()
-            viewOfGame!.verificationBonusFunc()
+            viewOfGame!.verificationBonusFunc(yOriginForMessage: self.frame.origin.y - 50)
+            delay(seconds: 0.26) {
+                self.updateTheNumberLabels()
+            }
         }
     }
     

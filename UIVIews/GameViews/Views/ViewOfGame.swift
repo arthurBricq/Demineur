@@ -205,7 +205,7 @@ class ViewOfGame: UIView {
     
     private func markACaseAt(i: Int, j: Int, byComputer: Bool = false) {
         if numberOfRemainingFlags <= 0 { return }
-        numberOfRemainingFlags = numberOfRemainingFlags - 1
+        numberOfRemainingFlags -= byComputer ? 0 : 1
         cases[i][j].caseState = byComputer ? .markedByComputer : .marked
     }
     
@@ -256,7 +256,6 @@ class ViewOfGame: UIView {
                         if isCaseABomb(i: i, j: j) {
                             markACaseAt(i: i, j: j, byComputer: true)
                             if isTheGameFinished() { // end of game
-                                print("bonus bomb 1")
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
@@ -271,7 +270,6 @@ class ViewOfGame: UIView {
                         if !isTheCaseMarked(i: n-i-1, j: m-j-1) {
                             markACaseAt(i: n-i-1, j: m-j-1, byComputer: true)
                             if isTheGameFinished() { // end of game
-                                print("bonus bomb 2")
                                 delegate!.gameOver(win: true, didTapABomb: false, didTimeEnd: false)
                                 returnAllTheCases(win: true)
                             }
@@ -286,30 +284,37 @@ class ViewOfGame: UIView {
    
     }
     
-    func verificationBonusFunc() {
+    func verificationBonusFunc(yOriginForMessage: CGFloat) {
+        let messageManager = LineMessageManager(viewToAddIn: parentViewController!.view, yOrigin: yOriginForMessage, timeOnScreen: 1.5, textColor: UIColor.gray)
+        var amountOfFlagsChecked: Int = 0
+        var amountOfCorrectFlags: Int = 0
         for line in cases {
-            for c in line {
-                // c is the case
-                if c.caseState == .marked || c.caseState == .markedByComputer {
-                    for subview in c.subviews {
+            for caseChecked in line {
+                if caseChecked.caseState == .marked || caseChecked.caseState == .markedByComputer {
+                    amountOfFlagsChecked += 1
+                    for subview in caseChecked.subviews {
                         guard let flag = subview as? FlagView else { continue }
-                        if flag.tag != 1 {
-                            UIView.animate(withDuration: 0.2, animations: {
-                                flag.frame = CGRect(x: -5, y: -5, width: flag.frame.width + 10, height: flag.frame.height + 10)
-                            }) { (_) in
-                                if dataManager.verificationLevel == 0 && random(2) == 1 {
+                        UIView.animate(withDuration: 0.2, animations: {
+                            flag.frame = CGRect(x: -5, y: -5, width: flag.frame.width + 10, height: flag.frame.height + 10)
+                        }) { (_) in
+                            if self.isCaseABomb(i: caseChecked.i, j: caseChecked.j) {
+                                amountOfCorrectFlags += 1
+                                UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
+                                    flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                }, completion: { (_) in
+                                    flag.removeFromSuperview()
+                                    flag.color = colorForRGB(r: 60, g: 160, b: 100)
+                                    flag.tag = 1
+                                    caseChecked.addSubview(flag)
+                                    flag.setNeedsDisplay()
+                                })
+                            } else {
+                                if dataManager.verificationLevel == 1 {
+                                    self.numberOfRemainingFlags += 1
                                     UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
-                                        flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
-                                    }, completion: nil)
-                                } else if self.isCaseABomb(i: c.i, j: c.j) {
-                                    UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
-                                        flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
+                                        flag.frame = CGRect(x: flag.frame.midX, y: flag.frame.midY, width: 0, height: 0)
                                     }, completion: { (_) in
                                         flag.removeFromSuperview()
-                                        flag.color = colorForRGB(r: 60, g: 160, b: 100)
-                                        flag.tag = 1
-                                        c.addSubview(flag)
-                                        flag.setNeedsDisplay()
                                     })
                                 } else {
                                     UIView.animate(withDuration: 0.2, delay: 0.2, options: [], animations: {
@@ -322,6 +327,22 @@ class ViewOfGame: UIView {
                 }
             }
         }
+        
+        delay(seconds: 0.25) {
+            if amountOfFlagsChecked == 0 {
+                messageManager.showMessage("Aucun drapeau placé, bonus rendu")
+                dataManager.verificationQuantity += 1
+            } else if amountOfCorrectFlags == 0 {
+                messageManager.showMessage("Aucun drapeau correctement placé")
+            } else if amountOfFlagsChecked == 1 {
+                messageManager.showMessage("Drapeau correctement placé")
+            } else if amountOfCorrectFlags == 1 {
+                messageManager.showMessage("1 drapeau correctement placé")
+            } else {
+                messageManager.showMessage("\(amountOfCorrectFlags) drapeaux correctement placés")
+            }
+        }
+        
     }
 }
 
