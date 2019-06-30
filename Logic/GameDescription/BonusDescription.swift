@@ -30,11 +30,11 @@ let allBonus: [BonusDescription] = [
     
     BonusDescription(name: "Temps", niveau: 0, niveauMax: 3, descriptions: ["Récupérez 15 secondes", "Récupérez 30 secondes", "Récupérez 45 secondes", "Récupérez 1 minute"],descriptionsAmeliorations: ["+ 15 secondes", "+ 15 secondes", "+ 15 secondees"], prixAchat: 750, prixAmelioration: [8000, 16000, 30000, 40000] ),
     
-    BonusDescription(name: "Drapeau", niveau: 0, niveauMax: 2, descriptions: ["Gagnez un drapeau durant une partie", "Gagnez 2 drapeaux durant une partie", "Gagnez 3 drapeaux durant une partie"],descriptionsAmeliorations: ["+ 1 drapeau gagné", "+ 1 drapeau gagné"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
+    BonusDescription(name: "Drapeau", niveau: 0, niveauMax: 2, descriptions: ["Gagnez un drapeau durant une partie", "Gagnez 2 drapeau avec 50% de chance", "Gagnez 2 drapeaux durant une partie"],descriptionsAmeliorations: ["+ 1 drapeau gagné à 50% de chances", "+ 1 drapeau gagné"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
     
-    BonusDescription(name: "Bombe", niveau: 0, niveauMax: 2, descriptions: ["Trouver une bombe avec une chance de 50%.","Trouver une bombe !","Trouver 2 bombes avec une chance de 50%"],descriptionsAmeliorations: ["Trouvez-là avec 100% de chance !", "+ 1 bombe à 50% de chances"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
+    BonusDescription(name: "Bombe", niveau: 0, niveauMax: 2, descriptions: ["Trouver une bombe en utilisant un drapeau","Trouver une bombe sans drapeau !","Trouver 2 bombes avec une chance de 50%"],descriptionsAmeliorations: ["Trouvez-là sans drapeau !", "+ 1 bombe à 50% de chances"], prixAchat: 1000, prixAmelioration: [10000,20000] ),
     
-    BonusDescription(name: "Verification", niveau: 0, niveauMax: 1 , descriptions: ["Vérifiez certains de vos drapeaux","Vérifiez tous les drapeaux"],descriptionsAmeliorations: ["Vérifiez tous les drapeaux"], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
+    BonusDescription(name: "Verification", niveau: 0, niveauMax: 1 , descriptions: ["Vérifiez les drapeaux","Vérifiez les drapeaux et en rend"],descriptionsAmeliorations: ["Rend les drapeaux en plus"], prixAchat: 2000, prixAmelioration: [20000, 50000] ),
     
     BonusDescription(name: "Vie", niveau: 0, niveauMax: 2, descriptions: ["Obtenez une seconde chance", "Vous surviverez à 2 bombes", "3 échecs ne vous abatteront pas !"],descriptionsAmeliorations: ["Survivez à 2 bombes !", "Survivez à 3 bombes"], prixAchat: 2500, prixAmelioration: [20000, 50000] )
     
