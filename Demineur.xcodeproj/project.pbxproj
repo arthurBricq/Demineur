@@ -38,6 +38,7 @@
 		4E4A9F7D22A7C20500FC6E66 /* SuperPartieGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4A9F7C22A7C20500FC6E66 /* SuperPartieGame.swift */; };
 		4E4E18CE2104F5C100B0AB30 /* HeartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4E18CD2104F5C100B0AB30 /* HeartView.swift */; };
 		4E51200A210B2B2F00736375 /* YesNoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E512009210B2B2F00736375 /* YesNoButton.swift */; };
+		4E545E9922C906A10029CAD4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E545E9822C906A10029CAD4 /* GameKit.framework */; };
 		4E5F79EA21ABBD3800955D36 /* HexViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */; };
 		4E6AFDD121ACBA4200A94A16 /* TriangleViewOfGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */; };
 		4E707E0B22C629B2008AE8B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E707E0A22C629B2008AE8B5 /* ViewController.swift */; };
@@ -86,7 +87,6 @@
 		4EA7FDAC20F897A700740480 /* Vibrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAB20F897A700740480 /* Vibrate.swift */; };
 		4EA7FDAE20F8987700740480 /* BombView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA7FDAD20F8987700740480 /* BombView.swift */; };
 		4EAAE0F221242982003F9BFE /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F121242982003F9BFE /* ScoreModel.swift */; };
-		4EAAE0F621242B11003F9BFE /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EAAE0F521242B11003F9BFE /* CloudKit.framework */; };
 		4EAAE0F8212434E9003F9BFE /* ScoreStarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */; };
 		4EAAE0FA21243810003F9BFE /* NextLevelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0F921243810003F9BFE /* NextLevelButton.swift */; };
 		4EAAE0FC21244024003F9BFE /* MoneyPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */; };
@@ -150,6 +150,7 @@
 		4E4A9F7C22A7C20500FC6E66 /* SuperPartieGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartieGame.swift; sourceTree = "<group>"; };
 		4E4E18CD2104F5C100B0AB30 /* HeartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartView.swift; sourceTree = "<group>"; };
 		4E512009210B2B2F00736375 /* YesNoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YesNoButton.swift; sourceTree = "<group>"; };
+		4E545E9822C906A10029CAD4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		4E5F79E921ABBD3800955D36 /* HexViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexViewOfGame.swift; sourceTree = "<group>"; };
 		4E6AFDD021ACBA4200A94A16 /* TriangleViewOfGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleViewOfGame.swift; sourceTree = "<group>"; };
 		4E707E0A22C629B2008AE8B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -205,7 +206,6 @@
 		4EA7FDAD20F8987700740480 /* BombView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BombView.swift; sourceTree = "<group>"; };
 		4EAAE0F121242982003F9BFE /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
 		4EAAE0F321242B0C003F9BFE /* Demineur.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Demineur.entitlements; sourceTree = "<group>"; };
-		4EAAE0F521242B11003F9BFE /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4EAAE0F7212434E9003F9BFE /* ScoreStarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreStarView.swift; sourceTree = "<group>"; };
 		4EAAE0F921243810003F9BFE /* NextLevelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextLevelButton.swift; sourceTree = "<group>"; };
 		4EAAE0FB21244024003F9BFE /* MoneyPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyPackage.swift; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EAAE0F621242B11003F9BFE /* CloudKit.framework in Frameworks */,
+				4E545E9922C906A10029CAD4 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +272,6 @@
 			children = (
 				4EE06BBE219E7663004ED7D6 /* UserDefaultsManager.swift */,
 				4EAAE0F121242982003F9BFE /* ScoreModel.swift */,
-				4E301FA221A0BFA600DAB959 /* LocalScore.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -315,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				4E8FC31A20F91985000A9BCB /* Demineur.xcdatamodeld */,
+				4E301FA221A0BFA600DAB959 /* LocalScore.swift */,
 				4E4A9F7A22A7C1AE00FC6E66 /* SavedCase.swift */,
 				4E4A9F7C22A7C20500FC6E66 /* SuperPartieGame.swift */,
 			);
@@ -481,7 +481,7 @@
 		4EAAE0F421242B11003F9BFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4EAAE0F521242B11003F9BFE /* CloudKit.framework */,
+				4E545E9822C906A10029CAD4 /* GameKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -577,11 +577,14 @@
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1020;
 						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};

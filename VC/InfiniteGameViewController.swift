@@ -272,25 +272,23 @@ class InfiniteGameViewController: UIViewController {
         let animationOfCoinManager = EndGameCoinAnimationManager(gameViewToAnimate: getCurrentViewOfGame())
         animationOfCoinManager.animateTheEarnings {
             
-            print("fin animation")
-                
             self.openTheBombs()
             // Il faut compter le nombre de drapeaux et le niveau final atteint, pour sauvegarder les données dans la base de données.
             // La variable 'level' est déjà upadter à chaque changement de niveau
             // Pour la variable 'numberOfBombs', on utilise des closures dénomées 'onPosingFlag(isFlagCorrect: Bool)' qui vont être donnée aux gameView et qui update la variable 'numberOfBombs'.
             
-            // Adding the score online
-            if Reachability.isConnectedToNetwork() == true {
-                scoresModel.addOneScore(level: self.level, numberOfBombs: self.numberOfBombs)
-            }
+            
             // Adding the new local score
             let newScore = LocalScore(context: AppDelegate.viewContext)
             newScore.level = Int32(self.level)
             newScore.numberOfBombs = Int32(self.numberOfBombs)
             do { try AppDelegate.viewContext.save() }
             catch { print("ERROR: saving core data ") }
-            // Money
+            // And push it to the game center
+            newScore.publishScore()
+            // Win the money
             dataManager.money += self.level + self.numberOfBombs
+            
             // Closing the page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController

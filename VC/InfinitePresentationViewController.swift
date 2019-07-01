@@ -29,9 +29,6 @@ class InfinitePresentationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if scoresModel.allScores.count == 0 && Reachability.isConnectedToNetwork() {
-            scoresModel.refresh()
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

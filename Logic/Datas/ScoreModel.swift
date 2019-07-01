@@ -22,7 +22,6 @@
 */
 
 
-
 import Foundation
 import CloudKit
 import SystemConfiguration
@@ -30,9 +29,6 @@ import SystemConfiguration
 
 
 // MARK: - Variable globale pour cloudKit
-let scoresModel = ScoresModel()
-
-
 
 
 // MARK: - Structure à sauvegarder
@@ -82,9 +78,11 @@ struct Score {
 }
 
 // MARK: - Classe de sauvegarde qui gère la structure "Score"
+
+/*
 class ScoresModel {
-    private let database = CKContainer.default().publicCloudDatabase
     
+    private let database = CKContainer.default().publicCloudDatabase
     
     // MARK: - variables et propriétés remarquables
     var allScores = [Score]() {
@@ -366,6 +364,7 @@ class ScoresModel {
     
     
 }
+ */
 
 
 // MARK: - Extension des arrays qui rajoute une fonction de suppression par valeurs
@@ -410,35 +409,3 @@ public class Reachability {
         return (isReachable && !needsConnection)
     }
 }
-
-// MARK: - Reconnaissance de l'identifiant iCloud afin de reconnaitre les joueurs
-
-/// async gets iCloud record ID object of logged-in iCloud user
-func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecord.ID?, _ error: NSError?) -> ()) {
-    let container = CKContainer.default()
-    container.fetchUserRecordID() {
-        recordID, error in
-        if error != nil {
-            print(error!.localizedDescription)
-            complete(nil, error as NSError?)
-        } else {
-            print("fetched ID \(recordID?.recordName)")
-            complete(recordID, nil)
-        }
-    }
-}
-
-
-/*
-
-// call the function above in the following way:
-// (userID is the string you are interested in!)
-iCloudUserIDAsync { (recordID: CKRecordID?, error: NSError?) in
-    if let userID = recordID?.recordName {
-        print("received iCloudID \(userID)")
-    } else {
-        print("Fetched iCloudID was nil")
-    }
-}
-
- */

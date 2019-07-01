@@ -34,22 +34,6 @@ class MenuViewController: UIViewController {
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 6*40 + 5*15
 
-        // CloudKit
-        if Reachability.isConnectedToNetwork() == true { // Internet est activé
-            scoresModel.refresh()
-            print("Gestion des scores en ligne")
-            print("Nombre de scores enregistrées en ligne: \(scoresModel.allScores.count)\n")
-        }
-        
-        // On ajoute la gestion des erreurs
-        scoresModel.onError = { error in
-            let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default))
-            print("Voici l'erreur: \(error.localizedDescription)")
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
