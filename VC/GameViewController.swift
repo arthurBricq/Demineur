@@ -301,7 +301,6 @@ extension GameViewController: GameController {
             }
         }
         
-        
     }
     
     func updateFlagsDisplay(numberOfFlags: Int) {

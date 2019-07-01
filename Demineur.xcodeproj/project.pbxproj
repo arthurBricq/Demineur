@@ -111,6 +111,7 @@
 		9C1B71F222C3958C001A9006 /* EndGameCoinAnimationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */; };
 		9C312F4C21089C43002A86C8 /* TransitionToWinLose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */; };
 		9C47795C20FA55930094A358 /* MessageEndOfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47795B20FA55930094A358 /* MessageEndOfSection.swift */; };
+		9C5B565922C8E18700217FD0 /* LineMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5B565822C8E18700217FD0 /* LineMessageManager.swift */; };
 		9C745D2F20FB7B5800741ED2 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C745D2E20FB7B5800741ED2 /* Animator.swift */; };
 		9CA08A2F21243A50006BC68E /* PieceBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */; };
 		9CA08A3121243EB3006BC68E /* InAppPurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */; };
@@ -230,6 +231,7 @@
 		9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndGameCoinAnimationManager.swift; sourceTree = "<group>"; };
 		9C312F4B21089C43002A86C8 /* TransitionToWinLose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToWinLose.swift; sourceTree = "<group>"; };
 		9C47795B20FA55930094A358 /* MessageEndOfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageEndOfSection.swift; sourceTree = "<group>"; };
+		9C5B565822C8E18700217FD0 /* LineMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineMessageManager.swift; sourceTree = "<group>"; };
 		9C745D2E20FB7B5800741ED2 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseButton.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				4E3705E621315A4700972B51 /* Sound.swift */,
 				9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */,
 				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
+				9C5B565822C8E18700217FD0 /* LineMessageManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				4EB822B8210E3101009290C3 /* InfiniteFunctions.swift in Sources */,
 				4E4A9F7D22A7C20500FC6E66 /* SuperPartieGame.swift in Sources */,
 				4E2989A0213DBBF2003D98D1 /* SquarePresentationButton.swift in Sources */,
+				9C5B565922C8E18700217FD0 /* LineMessageManager.swift in Sources */,
 				4E3A4F2020FDFC5500EB5978 /* AchatBoutiqueBouton.swift in Sources */,
 				4E301FB021A0D9AF00DAB959 /* Section.swift in Sources */,
 			);

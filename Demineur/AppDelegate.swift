@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // To be done when first lunching the app
         
-        dataManager.initiateANewDevice(argent: 10000, lives: 2, level: 20)
+        dataManager.initiateANewDevice(argent: 2000000, lives: 2, level: 20)
         
         
         
