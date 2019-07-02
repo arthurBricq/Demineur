@@ -86,7 +86,8 @@ class BoutiqueViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .singleLine
         
-        updateDisplay() 
+        updateDisplay()
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
 
     

@@ -66,6 +66,7 @@ class SuperPartiesPresentationViewController: UIViewController {
         
         // Settings of the tableView
         setUpScrollView()
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

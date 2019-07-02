@@ -12,6 +12,10 @@ class MenuViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var letterM: Letter!
+    @IBOutlet weak var letterE: Letter!
+    @IBOutlet weak var letterN: Letter!
+    @IBOutlet weak var letterU: Letter!
     @IBOutlet weak var lineE: LineView!
     @IBOutlet weak var lineHeight: NSLayoutConstraint!
     @IBOutlet weak var mainLine: LineView!
@@ -50,7 +54,7 @@ class MenuViewController: UIViewController {
         
         let _ = TutorialManager(viewController: self)
         
-        self.view.backgroundColor = Color.getColor(index: 0)
+        setColors()
     }
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -167,6 +171,29 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         
         
         return nil
+    }
+    
+    func setColors() {
+        self.view.backgroundColor = Color.getColor(index: 0)
+        letterM.color = Color.getColor(index: 1)
+        letterM.setNeedsDisplay()
+        letterE.color = Color.getColor(index: 2)
+        letterE.setNeedsDisplay()
+        letterN.color = Color.getColor(index: 1)
+        letterN.setNeedsDisplay()
+        letterU.color = Color.getColor(index: 1)
+        letterU.setNeedsDisplay()
+        mainLine.strokeColor = Color.getColor(index: 1)
+        mainLine.setNeedsDisplay()
+        lineE.strokeColor = Color.getColor(index: 2)
+        lineE.setNeedsDisplay()
+        
+        histoireButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        infiniteButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        superPartiesButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        boutiqueButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        tutorialButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        reglagesButton.setTitleColor(Color.getColor(index: 3), for: .normal)
     }
     
 }

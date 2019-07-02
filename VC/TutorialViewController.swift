@@ -39,6 +39,7 @@ class TutorialViewController: UIViewController {
         addTitleAndTiters()
         let endOfFirstPart = addTheFirstPart()
         addTheSecondPart(startintAt: endOfFirstPart+30)
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

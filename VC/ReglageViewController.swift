@@ -76,6 +76,7 @@ class ReglageViewController: UIViewController {
         allTimes = UserDefaultsManager.allTimesToMantain
         allLanguages = UserDefaultsManager.allLanguages
         updateView()
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
 
     func updateView() {

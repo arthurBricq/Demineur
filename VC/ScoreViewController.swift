@@ -52,7 +52,7 @@ class ScoreViewController: UIViewController, GKGameCenterControllerDelegate {
 
         // Verify that the itunes account is available
         authenticateLocalPlayer()
-        
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

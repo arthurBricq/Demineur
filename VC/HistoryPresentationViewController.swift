@@ -59,6 +59,7 @@ class HistoryPresentationViewController: UIViewController  {
         setUpScrollView()
         self.view.bringSubviewToFront(menuButton)
         addHistoryLabel()
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
     
     

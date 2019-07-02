@@ -28,6 +28,11 @@ class InfinitePresentationViewController: UIViewController {
     
     // MARK: - Functions
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = Color.getColor(index: 0)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }

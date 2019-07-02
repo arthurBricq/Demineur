@@ -85,6 +85,7 @@ class InfiniteGameViewController: UIViewController {
         containerView.layer.borderColor = UIColor.red.cgColor
         containerView.layer.borderWidth = 0.0
         self.view.addSubview(containerView)
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

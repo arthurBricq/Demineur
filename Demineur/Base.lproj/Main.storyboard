@@ -20,7 +20,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oEZ-Z8-DzJ" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="30" y="0.0" width="5" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="5" id="UT1-yQ-uEp"/>
                                 </constraints>
@@ -33,7 +33,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ppR-ja-diU" userLabel="LetterM" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="43" y="170" width="70" height="70"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="QHn-XK-VaP"/>
                                     <constraint firstAttribute="width" secondItem="ppR-ja-diU" secondAttribute="height" multiplier="1:1" id="lr1-W7-fdw"/>
@@ -52,7 +52,7 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JnJ-iP-sIj" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                         <rect key="frame" x="8" y="0.0" width="5" height="400"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="400" id="ogi-Q0-BHR"/>
                                         </constraints>
@@ -66,7 +66,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="HQ4-ae-cdm"/>
                                     <constraint firstItem="JnJ-iP-sIj" firstAttribute="top" secondItem="s3Y-5a-e01" secondAttribute="top" id="Kuy-d2-ecQ"/>
@@ -93,7 +93,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fnw-KT-xLA" userLabel="LetterN" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="196" y="170" width="70" height="70"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fnw-KT-xLA" secondAttribute="height" multiplier="1:1" id="0PE-J4-NbM"/>
                                     <constraint firstAttribute="height" constant="70" id="2rh-44-5z1"/>
@@ -116,7 +116,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLw-gQ-wd1" userLabel="LetterU" customClass="Letter" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="280" y="170" width="70" height="70"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="QTW-b5-18z"/>
                                     <constraint firstAttribute="height" constant="70" id="ccF-Ex-FNg"/>
@@ -247,6 +247,10 @@
                         <outlet property="boutiqueButton" destination="cBg-Hy-KC7" id="aqZ-Jp-cj3"/>
                         <outlet property="histoireButton" destination="sOV-d4-h4g" id="aGD-Qr-46r"/>
                         <outlet property="infiniteButton" destination="Rzn-g0-ZtH" id="Rzh-Ay-Ue0"/>
+                        <outlet property="letterE" destination="s3Y-5a-e01" id="scf-E5-TF6"/>
+                        <outlet property="letterM" destination="ppR-ja-diU" id="EW6-og-Gg6"/>
+                        <outlet property="letterN" destination="Fnw-KT-xLA" id="bFi-9q-x5J"/>
+                        <outlet property="letterU" destination="pLw-gQ-wd1" id="yH9-3Q-tyX"/>
                         <outlet property="lineE" destination="JnJ-iP-sIj" id="aok-x1-2RD"/>
                         <outlet property="lineHeight" destination="ogi-Q0-BHR" id="j0z-S5-N0a"/>
                         <outlet property="mainLine" destination="oEZ-Z8-DzJ" id="JOM-be-mV6"/>
@@ -1292,7 +1296,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r5V-m6-A0J" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="30" y="-23.5" width="5" height="734"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="5" id="gnw-4u-zNZ"/>
                                 </constraints>
@@ -1720,7 +1724,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xN-u6-O4e" customClass="HeaderInfinite" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="40" y="150" width="300" height="105"/>
-                                <color key="backgroundColor" cyan="0.0" magenta="0.0" yellow="0.0" black="0.0" alpha="1" colorSpace="custom" customColorSpace="genericCMYKColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9xN-u6-O4e" secondAttribute="height" multiplier="163:57" id="DTF-J5-Eih"/>
                                 </constraints>
@@ -1858,7 +1862,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hck-T4-ubi" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="30" y="-23.5" width="5" height="734"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="5" id="tHN-3b-X5s"/>
                                 </constraints>
@@ -2159,7 +2163,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebP-mY-wPG" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="30" y="-23.5" width="5" height="734"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="5" id="W4o-OJ-O4s"/>
                                 </constraints>
@@ -2207,7 +2211,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VOP-fp-OAw" customClass="LineView" customModule="Demineur" customModuleProvider="target">
                                 <rect key="frame" x="40" y="0.0" width="4" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="4" id="7Gy-62-Cnf"/>
                                 </constraints>
