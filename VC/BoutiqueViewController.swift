@@ -113,7 +113,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
         case 1:
             return allPacks.count
         case 2:
-            return allThemes.count
+            return Color.allThemes.count
         default:
             return 1
         }
@@ -186,7 +186,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeBoutiqueCell", for: indexPath) as! ThemeBoutiqueTableViewCell
             cell.delegate = self
             
-            let currentTheme = allThemes[indexPath.row]
+            let currentTheme = Color.allThemes[indexPath.row]
             
             cell.index = indexPath.row
             

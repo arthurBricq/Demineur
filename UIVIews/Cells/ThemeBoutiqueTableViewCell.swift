@@ -32,7 +32,7 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     
     @IBAction func buyAction(_ sender: Any) {
         
-        dataManager.money -= allThemes[index].price
+        dataManager.money -= Color.allThemes[index].price
         
         dataManager.unlockedThemes.append(index)
         

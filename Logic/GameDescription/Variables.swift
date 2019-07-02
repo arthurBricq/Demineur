@@ -9,16 +9,12 @@
 import Foundation
 import UIKit
 
-// MARK: - Definition des parties
-
 struct ColorSetForOneGame {
     var openColor = UIColor.white // color for open-case's background
     var emptyColor = UIColor.white // color for empty-case's background
     var strokeColor = UIColor.white
     var textColor = UIColor.black
 }
-
-
 
 // MARK: - Mode Histoire
 
@@ -105,28 +101,3 @@ var isTheGameStarted = IsTheGameStarted(value: false)
 let k: CGFloat = 0.86603 // variable such that w = k*h.
 let maximumDifficulty: Int = 5 // Indice de la difficulté la plus élevée.
 
-
-
-// MARK: - Modèle de données pour les tablesView de la boutique
-
-
-
-// Thèmes de couleurs pour le jeu
-/* Ordre des couleurs :
-        1) Fond d'écran
-        2) Lignes principales
-        3) Textes et lignes secondaires
- */
-struct ColorTheme {
-    let name: String
-    let price: Int
-    let colors: [UIColor]
-//     var isUnlocked: Bool
-}
-
-var allThemes: [ColorTheme] = [
-    ColorTheme(name: "Classic", price: 0, colors: [colorForRGB(r: 255, g: 255, b: 255), colorForRGB(r: 184, g: 120, b: 0), colorForRGB(r: 66, g: 66, b: 66)]/*, isUnlocked: true*/),
-    ColorTheme(name: "Cartoon", price: 2500, colors: [colorForRGB(r: 204, g: 255, b: 153), colorForRGB(r: 0, g: 102, b: 255), colorForRGB(r: 204, g: 51, b: 153)]/*, isUnlocked: true*/),
-    ColorTheme(name: "Dark", price: 3000, colors: [colorForRGB(r: 55, g: 22, b: 55), colorForRGB(r: 153, g: 102, b: 0), colorForRGB(r: 179, g: 179, b: 179)]/*, isUnlocked: true*/)
-]
-// var selectedTheme: Int = 0

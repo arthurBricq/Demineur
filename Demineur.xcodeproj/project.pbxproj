@@ -117,6 +117,7 @@
 		9CA08A2F21243A50006BC68E /* PieceBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */; };
 		9CA08A3121243EB3006BC68E /* InAppPurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */; };
 		9CC5992222C7690A005192E9 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC5992122C7690A005192E9 /* View.swift */; };
+		9CD56B3022CB979C0070D077 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD56B2F22CB979C0070D077 /* Color.swift */; };
 		9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */; };
 /* End PBXBuildFile section */
 
@@ -238,6 +239,7 @@
 		9CA08A2E21243A50006BC68E /* PieceBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		9CA08A3021243EB3006BC68E /* InAppPurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppPurchaseButton.swift; sourceTree = "<group>"; };
 		9CC5992122C7690A005192E9 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		9CD56B2F22CB979C0070D077 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		9CEBDF7420FF9CD1001C0E54 /* BonusChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusChoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -312,6 +314,7 @@
 				4E301FB521A0DA3900DAB959 /* PackageDescription.swift */,
 				4E301FB721A0DA7C00DAB959 /* IsTheGameStarted.swift */,
 				4EA7FDA720F8978C00740480 /* Variables.swift */,
+				9CD56B2F22CB979C0070D077 /* Color.swift */,
 			);
 			path = GameDescription;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				9C1B71F222C3958C001A9006 /* EndGameCoinAnimationManager.swift in Sources */,
 				4EA7FD9820F896D200740480 /* FlagView.swift in Sources */,
 				4E70B15222B4EB1100CA8CF3 /* TransitionFromMenuToHistory.swift in Sources */,
+				9CD56B3022CB979C0070D077 /* Color.swift in Sources */,
 				9CEBDF7520FF9CD1001C0E54 /* BonusChoiceView.swift in Sources */,
 				4E301FAE21A0D98100DAB959 /* Enums.swift in Sources */,
 				4E8FC31C20F91985000A9BCB /* Demineur.xcdatamodeld in Sources */,

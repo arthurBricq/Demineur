@@ -16,7 +16,7 @@ class OneGame  {
     var z: Int = 4
     var numberOfFlag: Int = 4
     var noneCasesPosition = [(i: Int,j: Int)].init()
-    var colors = ColorSetForOneGame(openColor: .white, emptyColor: .white, strokeColor: .black, textColor: .black)
+    var colors = ColorSetForOneGame(openColor: Color.getColor(index: 0), emptyColor: .white, strokeColor: .black, textColor: .black)
     
     var isTimerAllowed: Bool = true
     var totalTime: CGFloat = 60

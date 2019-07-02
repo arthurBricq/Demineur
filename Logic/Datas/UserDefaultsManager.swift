@@ -145,7 +145,7 @@ class UserDefaultsManager {
     }
     
     var unlockedThemes: [Int] {
-        get { return (defaults.object(forKey: "unlockedThemes") as? [Int]) ?? [] }
+        get { return (defaults.object(forKey: "unlockedThemes") as? [Int]) ?? [0] }
         set {defaults.set(newValue, forKey: "unlockedThemes")}
     }
     

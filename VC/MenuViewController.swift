@@ -33,7 +33,6 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         lineHeight.constant = 110 + 6*40 + 5*15
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +50,7 @@ class MenuViewController: UIViewController {
         
         let _ = TutorialManager(viewController: self)
         
+        self.view.backgroundColor = Color.getColor(index: 0)
     }
     
     override var prefersStatusBarHidden: Bool { return true }
