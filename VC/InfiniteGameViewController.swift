@@ -286,9 +286,6 @@ class InfiniteGameViewController: UIViewController {
             catch { print("ERROR: saving core data ") }
             // And push it to the game center
             newScore.publishScore()
-            // Win the money
-            dataManager.money += self.level + self.numberOfBombs
-            
             // Closing the page
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "WinLooseVC") as! WinLooseViewController
@@ -298,7 +295,7 @@ class InfiniteGameViewController: UIViewController {
             vc.win = false
             vc.transitioningDelegate = self
             vc.didTapABomb = didTapABomb
-            vc.amountOfBombsFound = animationOfCoinManager.returnAllCorrectlyMarkedBombs().count
+            vc.amountOfBombsFound = Int(newScore.numberOfBombs)
             vc.precedentGameIndex = self.gameIndex
             self.present(vc, animated: true, completion: nil)
         }

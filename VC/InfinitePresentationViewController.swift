@@ -17,6 +17,7 @@ class InfinitePresentationViewController: UIViewController {
     @IBOutlet weak var bestScoreLabel: UILabel!
     
     // MARK: - Actions
+    
     @IBAction func playButton(_ sender: Any) {
         self.performSegue(withIdentifier: "InfinitePresentationToInfiniteGame", sender: nil)
     }
@@ -29,6 +30,11 @@ class InfinitePresentationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let _ = TutorialManager(viewController: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

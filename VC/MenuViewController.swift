@@ -49,6 +49,8 @@ class MenuViewController: UIViewController {
 
 //        SuperPartieGame.deleteAllRecords()
         
+        let _ = TutorialManager(viewController: self)
+        
     }
     
     override var prefersStatusBarHidden: Bool { return true }

@@ -9,13 +9,16 @@
 import UIKit
 
 extension UIViewController {
+    
+    // MARK: - Functions for the round message
+    
     /// Display a round box, with a title, a message, and one or two buttons.
-    public func displayRoundBox(title: String, withMessage message: String, buttonNames: [String], buttonActions: [(()->Void)], backgroundColor: UIColor) {
+    public func displayRoundBox(title: String, withMessage message: String, buttonNames: [String], buttonActions: [(()->Void)], backgroundColor: UIColor = .white, delay: CGFloat = 0.0) {
         
         // 1. Compute the dimensions of the box one need to create
-        let width: CGFloat = 275
+        let width: CGFloat = self.view.frame.width * 0.9
         let textWidth = width - 40
-        let font = UIFont(name: "PingFangSC-Regular", size: 20)
+        let font = UIFont(name: "PingFangSC-Thin", size: 17)
         let titleFont = UIFont(name: "PingFangSC-SemiBold", size: 25)
         let heightOfText = message.height(withConstrainedWidth: textWidth, font: font!)
         let heightOfTitle: CGFloat = 30
@@ -27,13 +30,14 @@ extension UIViewController {
         
         // 2. Put the subviews in the right places
         let box = UIView(frame: CGRect(x: view.frame.width/2-side/2, y: 150, width: side, height: side))
-        let firstY: CGFloat = 75
+        let firstY: CGFloat = 40
         let titleLabel = UILabel(frame: CGRect(x: side/2 - widthOfTitle/2, y: firstY, width: widthOfTitle, height: heightOfTitle))
         titleLabel.font = titleFont
         titleLabel.text = title
         titleLabel.textColor = UIColor.darkText
         box.addSubview(titleLabel)
-        let textLabel = UILabel(frame: CGRect(x: side/2 - textWidth/2, y: firstY + heightOfTitle + 10, width: textWidth, height: heightOfText))
+        let yForText: CGFloat = side/2 - (heightOfText+10)/2
+        let textLabel = UILabel(frame: CGRect(x: side/2 - textWidth/2, y: yForText, width: textWidth, height: heightOfText))
         textLabel.font = font
         textLabel.text = message
         textLabel.textColor = UIColor.darkText
@@ -44,8 +48,9 @@ extension UIViewController {
         // 3. Treat the cases of one or two buttons
         if buttonNames.count == 1 {
             let widthOfButton = buttonNames[0].width(withConstrainedHeight: heightOfButtons, font: font!)
-            let button = UIButton(frame: CGRect(x: side/2 - widthOfButton/2, y: side-heightOfButtons-20, width: widthOfButton, height: heightOfButtons))
+            let button = UIButton(frame: CGRect(x: side/2 - widthOfButton/2, y: side-heightOfButtons-40, width: widthOfButton, height: heightOfButtons))
             button.setTitle(buttonNames[0], for: .normal)
+            button.setTitleColor(.black, for: .normal)
             button.titleLabel?.font = font!
             button.addAction(for: .touchUpInside, transformClosureForButton(b: button, box: box, closure: buttonActions[0]))
             box.addSubview(button)
@@ -53,7 +58,7 @@ extension UIViewController {
             let dec: CGFloat = 40
             let w1 = buttonNames[0].width(withConstrainedHeight: heightOfButtons, font: font!)
             let w2 = buttonNames[1].width(withConstrainedHeight: heightOfButtons, font: font!)
-            let b1 = UIButton(frame: CGRect(x: side/2 - w1/2 - dec, y: side-heightOfButtons-20, width: w1, height: heightOfButtons))
+            let b1 = UIButton(frame: CGRect(x: side/2 - w1/2 - dec, y: side-heightOfButtons-40, width: w1, height: heightOfButtons))
             b1.setTitle(buttonNames[0], for: .normal)
             b1.titleLabel?.font = font!
             b1.addAction(for: .touchUpInside, transformClosureForButton(b: b1, box: box, closure: buttonActions[0]))
@@ -74,9 +79,10 @@ extension UIViewController {
         box.alpha = 0.0
         self.view.addSubview(box)
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.9, delay: TimeInterval(delay), options: [], animations: {
             box.alpha = 1.0
-        }
+        }, completion: nil)
+      
     }
     
     /// Takes a closure as parameter, and transform it into a new closure that will animate the button when tapped over it.
@@ -84,12 +90,21 @@ extension UIViewController {
         let newClosure = {
             b.alpha = 0.5
             closure()
-            print("tranformed ... ")
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.0 , options: [], animations: {
                 b.alpha = 1.0
+                box.alpha = 0.0
+            }, completion: { (_) -> Void in
                 box.removeFromSuperview()
             })
         }
         return newClosure
     }
+    
+    // MARK: - Functions for the 'interactive tutorial'
+
+    
+    
+    
+    
+    
 }

@@ -61,6 +61,8 @@ class HistoryPresentationViewController: UIViewController  {
         addHistoryLabel()
     }
     
+    
+    
     /// This method will add all the cells to the scroll view, and add them one by one.
     private func fillScrollView() {
         let numberOfRows = historyLevels.count + 1
@@ -204,6 +206,8 @@ extension HistoryPresentationViewController: CAAnimationDelegate {
                 } else {
                     self.menuButton.alpha = 1.0
                     self.menuButton.isEnabled = true
+                    // And show the tutorial
+                    let _ = TutorialManager(viewController: self)
                 }
             }
         }

@@ -102,6 +102,7 @@
 		4EF49E8522AE586A00075AC8 /* HistoryPresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF49E8422AE586A00075AC8 /* HistoryPresentationCell.swift */; };
 		4EF6F05B22BE48EA00C067A7 /* TransitionFromHistoryToMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF6F05A22BE48EA00C067A7 /* TransitionFromHistoryToMenu.swift */; };
 		4EF6F05D22C270ED00C067A7 /* TransitionFromMenuToSuperParties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF6F05C22C270ED00C067A7 /* TransitionFromMenuToSuperParties.swift */; };
+		4EF78D7A22CA676B001112B6 /* TutorialManagor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF78D7922CA676B001112B6 /* TutorialManagor.swift */; };
 		9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */; };
 		9C0084BE2126E64A00490F97 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BD2126E64A00490F97 /* LockView.swift */; };
 		9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */; };
@@ -222,6 +223,7 @@
 		4EF49E8422AE586A00075AC8 /* HistoryPresentationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryPresentationCell.swift; sourceTree = "<group>"; };
 		4EF6F05A22BE48EA00C067A7 /* TransitionFromHistoryToMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionFromHistoryToMenu.swift; sourceTree = "<group>"; };
 		4EF6F05C22C270ED00C067A7 /* TransitionFromMenuToSuperParties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionFromMenuToSuperParties.swift; sourceTree = "<group>"; };
+		4EF78D7922CA676B001112B6 /* TutorialManagor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialManagor.swift; sourceTree = "<group>"; };
 		9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		9C0084BD2126E64A00490F97 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillUpArrowView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				9C1B71F122C3958C001A9006 /* EndGameCoinAnimationManager.swift */,
 				4E44EACB21ADF6AB00DABB51 /* MessageManagor.swift */,
 				9C5B565822C8E18700217FD0 /* LineMessageManager.swift */,
+				4EF78D7922CA676B001112B6 /* TutorialManagor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				4EA7FD8A20F8963E00740480 /* TriangularCase.swift in Sources */,
 				9CA08A3121243EB3006BC68E /* InAppPurchaseButton.swift in Sources */,
 				4EDC954922C39DB10009EF98 /* TransitionFromSuperPartiesToMenu.swift in Sources */,
+				4EF78D7A22CA676B001112B6 /* TutorialManagor.swift in Sources */,
 				4EB7D4FA211B38C000BE3E42 /* BoutiqueViewController.swift in Sources */,
 				4EF6F05D22C270ED00C067A7 /* TransitionFromMenuToSuperParties.swift in Sources */,
 				4EB7D4FC211B3EEC00BE3E42 /* BonusBoutiqueTableViewCell.swift in Sources */,

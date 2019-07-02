@@ -17,10 +17,8 @@ import UIKit
 
 let dataManager = UserDefaultsManager()
 
-
-
 class UserDefaultsManager {
-    
+
     fileprivate let defaults = UserDefaults.standard
     
     // MARK: - Static properties for data model

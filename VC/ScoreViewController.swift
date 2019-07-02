@@ -10,9 +10,7 @@ import UIKit
 import CoreData
 import GameKit
 
-
 class ScoreViewController: UIViewController, GKGameCenterControllerDelegate {
-    
 
     // MARK: - Outlets
     
