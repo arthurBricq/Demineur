@@ -10,11 +10,10 @@ import UIKit
 
 class HeaderInfinite: UIView {
 
-    var color1: UIColor = UIColor(red: 0.678, green: 0.359, blue: 0.020, alpha: 1.000)
-    var color2: UIColor = colorForRGB(r: 66, g: 66, b: 66)
+    var color1: UIColor = Color.getColor(index: 1)
     
     override func draw(_ rect: CGRect) {
-        InfiniHeader.drawCanvas1(frame: rect, resizing: .aspectFill, color: color1, color2: color2)
+        InfiniHeader.drawCanvas1(frame: rect, resizing: .aspectFill, color: color1)
     }
  
 
@@ -24,7 +23,7 @@ public class InfiniHeader : NSObject {
     
     //// Drawing Methods
     
-    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 163, height: 57), resizing: ResizingBehavior = .aspectFit, color: UIColor = UIColor(red: 0.678, green: 0.359, blue: 0.020, alpha: 1.000), color2: UIColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)) {
+    @objc dynamic public class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 163, height: 57), resizing: ResizingBehavior = .aspectFit, color: UIColor = UIColor(red: 0.678, green: 0.359, blue: 0.020, alpha: 1.000)) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         

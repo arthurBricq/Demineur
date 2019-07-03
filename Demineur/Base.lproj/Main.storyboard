@@ -1847,8 +1847,14 @@
                         <viewLayoutGuide key="safeArea" id="AWv-hb-zw1"/>
                     </view>
                     <connections>
+                        <outlet property="bestLevelLabel" destination="4Qt-lE-6Ru" id="2bu-fu-9ep"/>
                         <outlet property="bestScoreLabel" destination="G6v-6d-ilT" id="1U8-E7-xXm"/>
                         <outlet property="headerView" destination="9xN-u6-O4e" id="edN-H2-ClI"/>
+                        <outlet property="menuButton" destination="Ixc-4M-RNR" id="lCf-K8-Pgp"/>
+                        <outlet property="playButton" destination="K11-oL-8zG" id="bIw-Si-9Jb"/>
+                        <outlet property="playImageButton" destination="56b-tW-YXe" id="m0S-Ee-mtP"/>
+                        <outlet property="scoreButton" destination="d6G-M4-K4d" id="x7b-Iy-Zkw"/>
+                        <outlet property="scoreImageButton" destination="Ddu-UN-JZd" id="dhS-1d-1yf"/>
                         <segue destination="ylO-j7-Tgn" kind="show" identifier="InfinitePresentationToInfiniteGame" id="qUd-d2-3pd"/>
                         <segue destination="jEq-ye-l5f" kind="show" identifier="InfinitePresentationToScores" id="TUJ-Nk-3Vd"/>
                     </connections>

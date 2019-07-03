@@ -15,6 +15,12 @@ class InfinitePresentationViewController: UIViewController {
     override var prefersStatusBarHidden: Bool { return true }
     @IBOutlet weak var headerView: HeaderInfinite!
     @IBOutlet weak var bestScoreLabel: UILabel!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var playImageButton: MenuPauseIconsButtons!
+    @IBOutlet weak var scoreButton: UIButton!
+    @IBOutlet weak var scoreImageButton: ScoreStarView!
+    @IBOutlet weak var bestLevelLabel: UILabel!
     
     // MARK: - Actions
     
@@ -30,7 +36,25 @@ class InfinitePresentationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setColors()
+    }
+    
+    func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
+        menuButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        playButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        scoreButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        
+        bestLevelLabel.textColor = Color.getColor(index: 3)
+        bestLevelLabel.setNeedsDisplay()
+        bestScoreLabel.textColor = Color.getColor(index: 3)
+        bestScoreLabel.setNeedsDisplay()
+        
+        playImageButton.color = Color.getColor(index: 3)
+        playImageButton.setNeedsDisplay()
+        scoreImageButton.color = Color.getColor(index: 3)
+        scoreImageButton.setNeedsDisplay()
     }
     
     override func viewWillAppear(_ animated: Bool) {

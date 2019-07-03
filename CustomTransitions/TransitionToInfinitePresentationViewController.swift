@@ -41,16 +41,9 @@ class TransitionToInfinitePresentationViewController: NSObject, UIViewController
             let lineFrameWidth: CGFloat = 2
             let lineWidth: CGFloat = 2
             
-            let firstLine = LineView()
-            firstLine.isVertical = false
-            firstLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
-            firstLine.lineWidth = lineWidth
+            let firstLine = LineView(lineWidth: lineWidth, isVertical: false, strokeColor: Color.getColor(index: 2))
             firstLine.backgroundColor = UIColor.clear
-            
-            let secondLine = LineView()
-            secondLine.isVertical = true
-            secondLine.strokeColor = colorForRGB(r: 66, g: 66, b: 66)
-            secondLine.lineWidth = lineWidth
+            let secondLine = LineView(lineWidth: lineWidth, isVertical: true, strokeColor: Color.getColor(index: 2))
             secondLine.backgroundColor = UIColor.clear
             
             // Calculs des différents points pour les lignes
