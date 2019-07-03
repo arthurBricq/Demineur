@@ -48,8 +48,8 @@ public class InAppPurchaseButtonDraw : NSObject {
         
         
         //// Color Declarations
-        let backgroundColor = UIColor(red: 0.259, green: 0.259, blue: 0.259, alpha: 1.000)
-        let textColor = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let backgroundColor = Color.getColor(index: 2)//UIColor(red: 0.259, green: 0.259, blue: 0.259, alpha: 1.000)
+        let textColor = Color.getColor(index: 0)//UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
         
         //// Rectangle Drawing
         let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 10, y: 10, width: 180, height: 80), cornerRadius: 15)

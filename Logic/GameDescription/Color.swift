@@ -11,7 +11,7 @@ import UIKit
 struct ColorTheme {
     let name: String
     let price: Int
-    let colors: [UIColor] // Ordre des couleurs : [background, lignes principales, lignes secondaires, textes]
+    let colors: [UIColor] // Ordre des couleurs : [background, lignes principales, lignes secondaires ou titres, textes]
 }
 
 class Color {

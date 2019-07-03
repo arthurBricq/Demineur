@@ -1488,11 +1488,14 @@
                                             <outlet property="AmeliorerButton" destination="x0T-2b-ERV" id="mMx-Di-qst"/>
                                             <outlet property="achatButton" destination="gaZ-n5-nIM" id="fvs-oE-Kck"/>
                                             <outlet property="bonusView" destination="HbZ-qy-FhD" id="m2F-Sb-Io2"/>
+                                            <outlet property="buyLabel" destination="x4A-el-aNy" id="kKW-tD-09Y"/>
                                             <outlet property="itemLabel" destination="PAa-gD-GOS" id="giE-sn-RFw"/>
                                             <outlet property="label1" destination="mC5-cC-f7K" id="t2R-me-1oz"/>
                                             <outlet property="label2" destination="Dgk-9E-rgL" id="KXh-2o-52n"/>
                                             <outlet property="levelLabel" destination="Pf1-XW-owx" id="TKw-p7-GS2"/>
                                             <outlet property="numberLabel" destination="TAI-tb-XF3" id="f5U-pn-cld"/>
+                                            <outlet property="textLevelLabel" destination="JJd-DC-I3W" id="KGf-zh-Mtq"/>
+                                            <outlet property="upgradeLabel" destination="UZa-S7-CS4" id="835-FX-egX"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PieceBoutiqueCell" rowHeight="100" id="8Zn-Tu-OjK" customClass="PieceBoutiqueTableViewCell" customModule="Demineur" customModuleProvider="target">
@@ -1703,7 +1706,10 @@
                     </view>
                     <connections>
                         <outlet property="bonusButton" destination="Saj-9k-XXp" id="5lx-66-oCy"/>
+                        <outlet property="boutiqueLabel" destination="h4J-3l-2eT" id="ntv-9O-BlR"/>
                         <outlet property="colorsButtons" destination="LPd-ae-zvH" id="WMo-ce-Y8B"/>
+                        <outlet property="mainLine" destination="r5V-m6-A0J" id="mgV-Wx-NZZ"/>
+                        <outlet property="menuButton" destination="Xuv-Dc-WBd" id="qdq-iI-S5i"/>
                         <outlet property="moneyLabel" destination="Qqx-v4-iL5" id="IDA-Ey-gDm"/>
                         <outlet property="pieceView" destination="n2E-at-Xie" id="y8W-N2-StJ"/>
                         <outlet property="piecesButton" destination="U1X-TP-pI4" id="42C-WE-7dr"/>

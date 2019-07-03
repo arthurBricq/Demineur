@@ -25,6 +25,9 @@ class BoutiqueViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var moneyLabel: UILabel!
     @IBOutlet weak var pieceView: PieceView!
+    @IBOutlet weak var mainLine: LineView!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var boutiqueLabel: UILabel!
     
     
     
@@ -87,12 +90,32 @@ class BoutiqueViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         
         updateDisplay()
-        self.view.backgroundColor = Color.getColor(index: 0)
+        
+        setColors()
     }
 
     
     func updateDisplay() {
         moneyLabel.text = String(dataManager.money)
+    }
+    
+    func setColors() {
+        self.view.backgroundColor = Color.getColor(index: 0)
+        
+        mainLine.strokeColor = Color.getColor(index: 1)
+        mainLine.setNeedsDisplay()
+        boutiqueLabel.textColor = Color.getColor(index: 2)
+        boutiqueLabel.setNeedsDisplay()
+        moneyLabel.textColor = Color.getColor(index: 3)
+        moneyLabel.setNeedsDisplay()
+        
+        menuButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        bonusButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        piecesButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        colorsButtons.setTitleColor(Color.getColor(index: 3), for: .normal)
+        
+        tableView.backgroundColor = UIColor.clear
+        tableView.separatorColor = .clear
     }
     
     
@@ -134,14 +157,24 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             let number = dataManager.levelOfBonus(atIndex: indexPath.row)
             
             cell.label1.text = currentBonus.descriptions[level]
+            cell.label1.textColor = Color.getColor(index: 2)
+            cell.label2.textColor = Color.getColor(index: 2)
             cell.bonusView.index = indexPath.row
             cell.bonusView.tempsAngleParameter = -185
             cell.bonusView.setNeedsDisplay()
             cell.achatButton.prix = String(currentBonus.prixAchat)
             cell.levelLabel.text = String(level+1)
+            cell.levelLabel.textColor = Color.getColor(index: 3)
+            cell.textLevelLabel.textColor = Color.getColor(index: 3)
+            cell.buyLabel.textColor = Color.getColor(index: 2)
+            cell.upgradeLabel.textColor = Color.getColor(index: 2)
             cell.numberLabel.text = String(number)
+            cell.numberLabel.textColor = Color.getColor(index: 3)
             cell.itemLabel.text = number == 0 ? "item" : "items"
+            cell.itemLabel.textColor = Color.getColor(index: 3)
+
             cell.index = indexPath.row
+            cell.backgroundColor = .clear
             
             if level == currentBonus.niveauMax { // dernier niveau atteint
                 cell.label2.text = "NIVEAU MAXIMUM"
@@ -175,11 +208,13 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.delegate = self
             
             let currentPack = allPacks[indexPath.row]
-            
+            cell.backgroundColor = .clear
             cell.moneyPackView.size = currentPack.size
             cell.moneyPackView.setNeedsDisplay()
             cell.descriptionLabel.text = currentPack.description
+            cell.descriptionLabel.textColor = Color.getColor(index: 3)
             cell.prixButton.text = "\(currentPack.prix.description)€"
+            cell.prixButton.setNeedsDisplay()
             
             return cell
             
@@ -189,10 +224,12 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
             let currentTheme = Color.allThemes[indexPath.row]
             
+            cell.backgroundColor = .clear
+            
             cell.index = indexPath.row
             
             cell.mainView.layer.cornerRadius = 10
-            cell.mainView.layer.borderWidth = 2
+            cell.mainView.layer.borderWidth = 4
             cell.mainView.layer.borderColor = colorForRGB(r: 20, g: 20, b: 20).cgColor
             cell.mainView.backgroundColor = currentTheme.colors[0]
             

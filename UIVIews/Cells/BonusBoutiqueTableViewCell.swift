@@ -23,6 +23,9 @@ class BonusBoutiqueTableViewCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var itemLabel: UILabel!
     @IBOutlet weak var levelLabel: UILabel!
+    @IBOutlet weak var textLevelLabel: UILabel!
+    @IBOutlet weak var buyLabel: UILabel!
+    @IBOutlet weak var upgradeLabel: UILabel!
     @IBOutlet weak var bonusView: BonusView!
     @IBOutlet weak var achatButton: AchatBoutiqueBouton!
     @IBOutlet weak var AmeliorerButton: AchatBoutiqueBouton!
