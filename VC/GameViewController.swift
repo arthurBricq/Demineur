@@ -61,6 +61,10 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Color.getColor(index: 0)
+        flagsLabel.textColor = Color.getColor(index: 3)
+        flagsLabel.setNeedsDisplay()
+        bombsLabel.textColor = Color.getColor(index: 3)
+        bombsLabel.setNeedsDisplay()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,7 +161,7 @@ class GameViewController: UIViewController {
     /// This function will start a new game, with the 'viewOfGame' as gameManager for the game 'game' variable.
     func startANewGame(animatedFromTheRight: Bool) {
         // 0. Set te colors
-        game.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: colorForRGB(r: 52, g: 61, b: 70), textColor: colorForRGB(r: 52, g: 61, b: 70))
+        game.colors = ColorSetForOneGame(openColor: Color.getColor(index: 4), emptyColor: Color.getColor(index: 0), strokeColor: Color.getColor(index: 2), textColor: Color.getColor(index: 3))
         
         // 1. Kill the last variables of the game
         //gameTimer?.stop()

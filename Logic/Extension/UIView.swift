@@ -11,9 +11,9 @@ import UIKit
 extension UIView {
     
     public func makeDarkBorderDisplay() {
-        self.layer.borderColor = colorForRGB(r: 94, g: 94, b: 94).cgColor
+        self.layer.borderColor = Color.getColor(index: 2).cgColor
         self.layer.borderWidth = 2.0
-        self.layer.cornerRadius = 15.0
+        self.layer.cornerRadius = 0.0
     }
     
     public func makeGrayBorderDisplay() {

@@ -478,7 +478,7 @@ class InfiniteGameViewController: UIViewController {
         let origin = CGPoint(x: 0, y: screenH)
         let frame = CGRect(origin: origin, size: size)
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, backgroundColor: UIColor(red: 0.6, green: 0.6, blue: 0.55, alpha: 0.6), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, backgroundColor: colorForRGB(r: 194, g: 194, b: 186), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
         bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
         

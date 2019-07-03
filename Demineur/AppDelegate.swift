@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         dataManager.initiateANewDevice(argent: 2000000, lives: 2, level: 20)
         
-        TutorialManager.resetInteractiveTutorial()
+        //TutorialManager.resetInteractiveTutorial()
         
         
         return true

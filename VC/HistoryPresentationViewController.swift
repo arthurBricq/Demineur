@@ -28,8 +28,8 @@ class HistoryPresentationViewController: UIViewController  {
     
     // MARK: - VARIABLES
     
-    var color1 = colorForRGB(r: 66, g: 66, b: 66)
-    var color2 = UIColor.orange
+    //var color1 = colorForRGB(r: 66, g: 66, b: 66)
+    //var color2 = UIColor.orange
     var rows: [HistoryPresentationCell] = []
     
     // MARK: - Constants
@@ -59,7 +59,9 @@ class HistoryPresentationViewController: UIViewController  {
         setUpScrollView()
         self.view.bringSubviewToFront(menuButton)
         addHistoryLabel()
+        
         self.view.backgroundColor = Color.getColor(index: 0)
+        menuButton.setTitleColor(Color.getColor(index: 3), for: .normal)
     }
     
     
@@ -120,7 +122,7 @@ class HistoryPresentationViewController: UIViewController  {
         let lbl = UILabel(frame: CGRect(x: w/2 + 50, y: 55, width: 20, height: 300))
         lbl.text = "HISTORY"
         lbl.font = UIFont(name: "PingFangSC-Light", size: 25)
-        lbl.textColor = UIColor.gray
+        lbl.textColor = Color.getColor(index: 2)
         lbl.numberOfLines = 0
         lbl.textAlignment = .center
         scrollView.addSubview(lbl)

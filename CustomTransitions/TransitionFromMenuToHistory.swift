@@ -37,9 +37,9 @@ class TransitionFromMenuToHistory: NSObject, UIViewControllerAnimatedTransitioni
         toVC.view.frame = CGRect(x: fromView.bounds.width, y: 0, width: fromView.bounds.width, height: fromView.bounds.height)
         
         // 2. We need three objects representing the lines.
-        let line1 = LineView(lineWidth: 2.0, isVertical: false, strokeColor: UIColor.gray)
-        let line2 = LineView(lineWidth: 2.0, isVertical: true, strokeColor: UIColor.gray)
-        let line3 = LineView(lineWidth: 2.0, isVertical: false, strokeColor: UIColor.gray)
+        let line1 = LineView(lineWidth: 2.0, isVertical: false, strokeColor: Color.getColor(index: 2))
+        let line2 = LineView(lineWidth: 2.0, isVertical: true, strokeColor: Color.getColor(index: 2))
+        let line3 = LineView(lineWidth: 2.0, isVertical: false, strokeColor: Color.getColor(index: 2))
         fromVC.linesForAnimationToHistory = [line1,line2,line3]
 
         // 3. Find the origin position (using the design constraints), and position the views where they must start there trip

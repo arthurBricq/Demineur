@@ -124,7 +124,7 @@
 /* Begin PBXFileReference section */
 		4E02A1352109DF580040BA88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Demineur/Base.lproj/Tutorial.storyboard; sourceTree = "<group>"; };
 		4E02A1382109E1700040BA88 /* MenuTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTutorialViewController.swift; sourceTree = "<group>"; };
-		4E21E4A4229D67B50092A620 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIView.swift; path = ../UIView.swift; sourceTree = "<group>"; };
+		4E21E4A4229D67B50092A620 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4E29899B213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartiesPresentationViewController.swift; sourceTree = "<group>"; };
 		4E29899D213DB1AB003D98D1 /* SuperPartiesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPartiesTableViewCell.swift; sourceTree = "<group>"; };
 		4E29899F213DBBF2003D98D1 /* SquarePresentationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquarePresentationButton.swift; sourceTree = "<group>"; };
@@ -268,7 +268,6 @@
 			children = (
 				4E301FAD21A0D98100DAB959 /* Enums.swift */,
 				4EA7FDA320F8976B00740480 /* Protocols.swift */,
-				4E21E4A4229D67B50092A620 /* UIView.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -336,6 +335,7 @@
 				4E707E0A22C629B2008AE8B5 /* ViewController.swift */,
 				4E707E0C22C6300C008AE8B5 /* UIButton.swift */,
 				9CC5992122C7690A005192E9 /* View.swift */,
+				4E21E4A4229D67B50092A620 /* UIView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";

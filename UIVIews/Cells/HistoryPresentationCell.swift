@@ -38,7 +38,7 @@ class HistoryPresentationCell: UIView {
         let w = frame.width
         let h = frame.height
         levelButton = RoundButtonWithNumber(frame: CGRect(x: w/2-buttonSize/2, y: h/2-buttonSize/2, width: buttonSize, height: buttonSize))
-        levelButton!.setTitleColor(UIColor.brown, for: .normal)
+        levelButton!.setTitleColor(Color.getColor(index: 1), for: .normal)
         levelButton!.backgroundColor = UIColor.clear
         self.addSubview(levelButton!)
         self.backgroundColor = UIColor.clear
@@ -140,7 +140,7 @@ class HistoryPresentationCell: UIView {
         if self.cellState! == .firstRow {
             
             frontLayer.path = getLinePath(size: self.frame.size).cgPath
-            frontLayer.strokeColor = UIColor.gray.cgColor
+            frontLayer.strokeColor = Color.getColor(index: 2).cgColor
             frontLayer.fillColor = UIColor.clear.cgColor
             frontLayer.lineWidth = 2.0
             
@@ -159,7 +159,7 @@ class HistoryPresentationCell: UIView {
             
             /// Create a layer that contains the path
             frontLayer.path = getLinePath(size: self.frame.size).cgPath
-            frontLayer.strokeColor = UIColor.gray.cgColor
+            frontLayer.strokeColor = Color.getColor(index: 2).cgColor
             frontLayer.fillColor = UIColor.clear.cgColor
             frontLayer.lineWidth = 2.0
             self.layer.addSublayer(frontLayer)

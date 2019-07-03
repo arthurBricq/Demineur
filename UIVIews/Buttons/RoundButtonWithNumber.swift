@@ -11,7 +11,7 @@ import UIKit
 // @IBDesignable
 class RoundButtonWithNumber: UIButton {
     
-    var strokeColor: UIColor = .brown
+    var strokeColor: UIColor = Color.getColor(index: 1)
     var lineWidth: CGFloat = 1.0
     var number: Int = 1
     var buttonTappedClosure: (()->Void)?
