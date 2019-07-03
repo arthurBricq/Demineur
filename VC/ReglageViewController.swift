@@ -16,9 +16,14 @@ class ReglageViewController: UIViewController {
     @IBOutlet weak var vibrationChecker: CheckerButton!
     @IBOutlet weak var musicChecker: CheckerButton!
     @IBOutlet weak var effectChecker: CheckerButton!
-    
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var labelsCollection: [UILabel]!
     @IBOutlet weak var timeButton: NiceButton!
     @IBOutlet weak var languageButton: NiceButton!
+    @IBOutlet var secondaryLineCollection: [LineView]!
+    @IBOutlet weak var mainLine: LineView!
+    
     
     // MARK: - Modele de données
     var allTimes: [String]?
@@ -76,7 +81,39 @@ class ReglageViewController: UIViewController {
         allTimes = UserDefaultsManager.allTimesToMantain
         allLanguages = UserDefaultsManager.allLanguages
         updateView()
+        
+        setColors()
+    }
+    
+    func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
+        menuButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+        
+        titleLabel.textColor = Color.getColor(index: 2)
+        titleLabel.setNeedsDisplay()
+        mainLine.strokeColor = Color.getColor(index: 1)
+        mainLine.setNeedsDisplay()
+        vibrationChecker.strokeColor = Color.getColor(index: 2)
+        vibrationChecker.setNeedsDisplay()
+        musicChecker.strokeColor = Color.getColor(index: 2)
+        musicChecker.setNeedsDisplay()
+        effectChecker.strokeColor = Color.getColor(index: 2)
+        effectChecker.setNeedsDisplay()
+        
+        for label in labelsCollection {
+            label.textColor = Color.getColor(index: 3)
+            label.setNeedsDisplay()
+            print(label)
+        }
+        for line in secondaryLineCollection {
+            line.strokeColor = Color.getColor(index: 2)
+            line.setNeedsDisplay()
+        }
+        
+        timeButton.color = Color.getColor(index: 2)
+        timeButton.textColor = Color.getColor(index: 2)
+        languageButton.color = Color.getColor(index: 2)
+        languageButton.textColor = Color.getColor(index: 2)
     }
 
     func updateView() {

@@ -37,6 +37,7 @@ class NiceButton: UIButton {
         self.setTitleColor(textColor, for: .normal)
         self.titleLabel!.font = UIFont(name: "PingFangSC-Regular", size: 15)
         self.tintColor = color
+        self.setNeedsDisplay()
     }
 
 }

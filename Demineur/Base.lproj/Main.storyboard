@@ -1904,13 +1904,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vibrations" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4pH-bU-1aL">
-                                <rect key="frame" x="43" y="190" width="72" height="22.5"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="16"/>
+                                <rect key="frame" x="43" y="190" width="76.5" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="17"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXZ-1P-N3T" customClass="CheckerButton" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="325" y="186.5" width="30" height="30"/>
+                                <rect key="frame" x="325" y="187" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="aDS-PI-Imh"/>
                                     <constraint firstAttribute="width" constant="30" id="y8U-zT-3v8"/>
@@ -1932,13 +1932,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Musique" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZL-zw-KSV">
-                                <rect key="frame" x="43" y="252.5" width="60" height="22.5"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="16"/>
+                                <rect key="frame" x="43" y="254" width="64" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="17"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpP-eb-aNq" customClass="CheckerButton" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="325" y="249" width="30" height="30"/>
+                                <rect key="frame" x="325" y="251" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="G3B-Ih-LYS"/>
                                     <constraint firstAttribute="height" constant="30" id="ZX7-2W-aDV"/>
@@ -1960,13 +1960,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Effets sonores" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jz0-z6-sVr">
-                                <rect key="frame" x="43" y="315" width="105" height="22.5"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="16"/>
+                                <rect key="frame" x="43" y="318" width="111.5" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="17"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b30-Q9-DaC" customClass="CheckerButton" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="325" y="311.5" width="30" height="30"/>
+                                <rect key="frame" x="325" y="315" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="ktR-ua-U7U"/>
                                     <constraint firstAttribute="height" constant="30" id="yTc-7l-9D4"/>
@@ -1988,20 +1988,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Temps pour poser une bombe" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eou-5Y-IdM">
-                                <rect key="frame" x="43" y="377.5" width="217" height="22.5"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="16"/>
+                                <rect key="frame" x="43" y="382" width="231" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="17"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pxb-k2-WjD">
-                                <rect key="frame" x="43" y="440" width="71" height="22.5"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="16"/>
+                                <rect key="frame" x="43" y="446" width="75.5" height="24"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Thin" family="PingFang SC" pointSize="17"/>
                                 <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AUt-3Q-oYr" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="123" y="205.5" width="194" height="2"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="127.5" y="206" width="189.5" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="M6G-Ed-qBk"/>
                                 </constraints>
@@ -2016,8 +2016,8 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jp0-nf-69l" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="111" y="268" width="206" height="2"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="115" y="270" width="202" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="Npj-hV-XXB"/>
                                 </constraints>
@@ -2032,8 +2032,8 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ivF-hc-ICg" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="156" y="330.5" width="161" height="2"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="162.5" y="334" width="154.5" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="822-rl-Blc"/>
                                 </constraints>
@@ -2048,28 +2048,26 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mjs-wy-f3Z" customClass="NiceButton" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="312.5" y="374" width="55" height="30"/>
+                                <rect key="frame" x="312.5" y="379" width="55" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="QFy-dt-jKn"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="timeButtonTapped:" destination="ifs-g2-hdf" eventType="touchUpInside" id="Lv2-Qr-LDA"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O23-gg-s1x" customClass="NiceButton" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="312.5" y="436.5" width="55" height="30"/>
+                                <rect key="frame" x="312.5" y="443" width="55" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="55" id="yFh-hB-sgr"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="languageButtonTapped:" destination="ifs-g2-hdf" eventType="touchUpInside" id="Td4-fM-lf7"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nf5-IW-n6l" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="122" y="455.5" width="182.5" height="2"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="126.5" y="462" width="178" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="7Bl-eo-Hdu"/>
                                 </constraints>
@@ -2084,8 +2082,8 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRt-Kf-zTX" customClass="LineView" customModule="Demineur" customModuleProvider="target">
-                                <rect key="frame" x="268" y="393" width="36.5" height="2"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="282" y="398" width="22.5" height="2"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="CyK-sk-NZy"/>
                                 </constraints>
@@ -2150,9 +2148,22 @@
                     <connections>
                         <outlet property="effectChecker" destination="b30-Q9-DaC" id="c54-nG-txd"/>
                         <outlet property="languageButton" destination="O23-gg-s1x" id="mYN-4T-ASZ"/>
+                        <outlet property="mainLine" destination="hck-T4-ubi" id="h9V-rJ-eKh"/>
+                        <outlet property="menuButton" destination="W1M-dS-tEo" id="IT8-EF-4e2"/>
                         <outlet property="musicChecker" destination="gpP-eb-aNq" id="gPQ-q9-LEq"/>
                         <outlet property="timeButton" destination="Mjs-wy-f3Z" id="HAq-pn-aCh"/>
+                        <outlet property="titleLabel" destination="2uE-YH-lPj" id="lcK-mJ-jsN"/>
                         <outlet property="vibrationChecker" destination="KXZ-1P-N3T" id="YpE-Ka-JDm"/>
+                        <outletCollection property="labelsCollection" destination="4pH-bU-1aL" collectionClass="NSMutableArray" id="Bz8-Tj-c89"/>
+                        <outletCollection property="labelsCollection" destination="KZL-zw-KSV" collectionClass="NSMutableArray" id="luT-dM-z1j"/>
+                        <outletCollection property="labelsCollection" destination="Jz0-z6-sVr" collectionClass="NSMutableArray" id="2Ag-GD-eDV"/>
+                        <outletCollection property="labelsCollection" destination="eou-5Y-IdM" collectionClass="NSMutableArray" id="3cc-ke-Tjv"/>
+                        <outletCollection property="labelsCollection" destination="Pxb-k2-WjD" collectionClass="NSMutableArray" id="7w3-ou-O1j"/>
+                        <outletCollection property="secondaryLineCollection" destination="nf5-IW-n6l" collectionClass="NSMutableArray" id="Dq9-bS-wvB"/>
+                        <outletCollection property="secondaryLineCollection" destination="nRt-Kf-zTX" collectionClass="NSMutableArray" id="Cu9-yj-gY6"/>
+                        <outletCollection property="secondaryLineCollection" destination="ivF-hc-ICg" collectionClass="NSMutableArray" id="aob-Rn-kVa"/>
+                        <outletCollection property="secondaryLineCollection" destination="jp0-nf-69l" collectionClass="NSMutableArray" id="L5h-vn-CJ0"/>
+                        <outletCollection property="secondaryLineCollection" destination="AUt-3Q-oYr" collectionClass="NSMutableArray" id="drC-cr-ksJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JgG-Bh-V6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
