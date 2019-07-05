@@ -79,10 +79,6 @@ func nextGame(forCurrentRoundIndex round: Int) -> OneGame {
     return OneGame(gameTypeWithNoOptionsWithoutNoneCases: .square, n: 4, m: 4, z: 4, totalTime: 60)
 }
 
-func colorForRGB(r:CGFloat,g:CGFloat,b:CGFloat)->UIColor {
-    return UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0)
-}
-
 func colorForHexString (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
     

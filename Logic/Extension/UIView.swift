@@ -23,7 +23,7 @@ extension UIView {
     }
     
     public func makeGreenBorderDisplay() {
-        self.layer.borderColor = colorForRGB(r: 79, g: 143, b: 0).cgColor
+        self.layer.borderColor = Color.rgb(79, 143, 0).cgColor
         self.layer.borderWidth = 2.0
         self.layer.cornerRadius = 15.0
     }

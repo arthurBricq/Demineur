@@ -106,6 +106,7 @@
 		9C0084BC2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */; };
 		9C0084BE2126E64A00490F97 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BD2126E64A00490F97 /* LockView.swift */; };
 		9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */; };
+		9C0475EC22CF911800398FB1 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0475EB22CF911800398FB1 /* UIColor.swift */; };
 		9C0F2FDF212032FA00B79B4F /* TransitionToBoutique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */; };
 		9C0F2FE121206FB000B79B4F /* HeaderInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */; };
 		9C0F2FE32121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */; };
@@ -228,6 +229,7 @@
 		9C0084BB2126D94900490F97 /* ThemeBoutiqueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeBoutiqueTableViewCell.swift; sourceTree = "<group>"; };
 		9C0084BD2126E64A00490F97 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		9C0084BF2128548A00490F97 /* SkillUpArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillUpArrowView.swift; sourceTree = "<group>"; };
+		9C0475EB22CF911800398FB1 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		9C0F2FDE212032FA00B79B4F /* TransitionToBoutique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToBoutique.swift; sourceTree = "<group>"; };
 		9C0F2FE021206FB000B79B4F /* HeaderInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInfinite.swift; sourceTree = "<group>"; };
 		9C0F2FE22121EB9000B79B4F /* TransitionToInfinitePresentationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionToInfinitePresentationViewController.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				4E707E0C22C6300C008AE8B5 /* UIButton.swift */,
 				9CC5992122C7690A005192E9 /* View.swift */,
 				4E21E4A4229D67B50092A620 /* UIView.swift */,
+				9C0475EB22CF911800398FB1 /* UIColor.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				4E3705EA2131652D00972B51 /* NiceButton.swift in Sources */,
 				4EF6F05B22BE48EA00C067A7 /* TransitionFromHistoryToMenu.swift in Sources */,
 				9C0084C02128548A00490F97 /* SkillUpArrowView.swift in Sources */,
+				9C0475EC22CF911800398FB1 /* UIColor.swift in Sources */,
 				4EA7FD9620F896C200740480 /* ClockView.swift in Sources */,
 				4E29899C213DAAAE003D98D1 /* SuperPartiesPresentationViewController.swift in Sources */,
 				4E3A4F1E20FD277100EB5978 /* CheckerButton.swift in Sources */,

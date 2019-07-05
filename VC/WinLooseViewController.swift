@@ -57,12 +57,8 @@ class WinLooseViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        var darkBlur = UIBlurEffect()
-        if #available(iOS 10.0, *) { //iOS 10.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffect.Style.regular)//prominent,regular,extraLight, light, dark
-        } else { //iOS 8.0 and above
-            darkBlur = UIBlurEffect(style: UIBlurEffect.Style.light) //extraLight, light, dark
-        }
+        let style: UIBlurEffect.Style = (Color.getColor(index: 0).isDark()) ? UIBlurEffect.Style.dark : UIBlurEffect.Style.light
+        let darkBlur = UIBlurEffect(style: style)//prominent,regular,extraLight, light, dark
         let blurView = UIVisualEffectView(effect: darkBlur)
         blurView.frame = self.view.frame //your view that have any objects
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -84,8 +80,6 @@ class WinLooseViewController: UIViewController {
     
     /// pour actualiser la vue lorsque la partie est gagnée (uniquement en mode histoire)
     func updateWinDisplay() {
-        // titleLabel.text = "GAGNE"
-        // titleLabel.textColor = colorForRGB(r: 79, g: 143, b: 0)
         label.text = "Bien joué ! Vous avez trouvé toutes les bombes à temps."
         lastButton.isUserInteractionEnabled = true
         lastButton.isHidden = false
@@ -97,8 +91,6 @@ class WinLooseViewController: UIViewController {
 
     /// pour actualiser la vue lorsque la partie est perdue (peut etre en mode histoire ou en mode infinie)
     func updateLooseDisplay() {
-        // titleLabel.text = "PERDU"
-        // titleLabel.textColor = colorForRGB(r: 148, g: 17, b: 0)
         
         lastButton.isUserInteractionEnabled = false
         lastButton.isHidden = true

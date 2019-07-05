@@ -49,7 +49,7 @@ class TutorialViewController: UIViewController {
     func addMenuButton() {
         let button = UIButton()
         button.setTitle("Menu", for: .normal)
-        button.setTitleColor(colorForRGB(r: 94, g: 94, b: 94), for: .normal)
+        button.setTitleColor(Color.rgb(94, 94, 94), for: .normal)
         button.addTarget(self, action: #selector(exitToMenu), for: .touchUpInside)
         button.titleLabel?.font = UIFont(name: "PingFangSC-Regular", size: 22)
         button.frame = CGRect(x: 2, y: 10, width: 60, height: 40)
@@ -60,14 +60,14 @@ class TutorialViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = "key6".localized(lang: dataManager.giveCurrentLanguage())
         titleLabel.font = UIFont(name: "PingFangSC-Thin", size: 50)
-        titleLabel.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        titleLabel.textColor = Color.rgb(66, 66, 66)
         titleLabel.frame = CGRect(x: 2, y: 60, width: 300, height: 70)
         self.scrollView.addSubview(titleLabel)
         
         let sommaireLabel = UILabel()
         sommaireLabel.text = "key7".localized(lang: dataManager.giveCurrentLanguage())
         sommaireLabel.font = UIFont(name: "PingFangSC-Thin", size: 25)
-        sommaireLabel.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        sommaireLabel.textColor = Color.rgb(66, 66, 66)
         sommaireLabel.frame = CGRect(x: 2, y: 140, width: 400, height: 40)
         self.scrollView.addSubview(sommaireLabel)
         
@@ -88,7 +88,7 @@ class TutorialViewController: UIViewController {
         
         button1 = UIButton()
         button1!.titleLabel?.font = font
-        button1!.setTitleColor(colorForRGB(r: 66, g: 66, b: 66), for: .normal)
+        button1!.setTitleColor(Color.rgb(66, 66, 66), for: .normal)
         button1!.setTitle("key8".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
         button1!.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
         
@@ -98,7 +98,7 @@ class TutorialViewController: UIViewController {
         
         button2 = UIButton()
         button2!.titleLabel?.font = font
-        button2!.setTitleColor(colorForRGB(r: 66, g: 66, b: 66), for: .normal)
+        button2!.setTitleColor(Color.rgb(66, 66, 66), for: .normal)
         button2!.setTitle("key9".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
         button2!.addTarget(self, action: #selector(button2Tapped), for: .touchUpInside)
         let w2 = "key9".localized(lang: dataManager.giveCurrentLanguage()).width(withConstrainedHeight: 60, font: font!)
@@ -107,7 +107,7 @@ class TutorialViewController: UIViewController {
         
         button3 = UIButton()
         button3!.titleLabel?.font = font
-        button3!.setTitleColor(colorForRGB(r: 66, g: 66, b: 66), for: .normal)
+        button3!.setTitleColor(Color.rgb(66, 66, 66), for: .normal)
         button3!.setTitle("key10".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
         button3!.addTarget(self, action: #selector(button3Tapped), for: .touchUpInside)
         let w3 = "key10".localized(lang: dataManager.giveCurrentLanguage()).width(withConstrainedHeight: 60, font: font!)
@@ -116,7 +116,7 @@ class TutorialViewController: UIViewController {
         
         button4 = UIButton()
         button4!.titleLabel?.font = font
-        button4!.setTitleColor(colorForRGB(r: 66, g: 66, b: 66), for: .normal)
+        button4!.setTitleColor(Color.rgb(66, 66, 66), for: .normal)
         button4!.setTitle("key11".localized(lang: dataManager.giveCurrentLanguage()), for: .normal)
         button4!.addTarget(self, action: #selector(button4Tapped), for: .touchUpInside)
         let w4 = "key11".localized(lang: dataManager.giveCurrentLanguage()).width(withConstrainedHeight: 60, font: font!)
@@ -135,7 +135,7 @@ class TutorialViewController: UIViewController {
         let gameLabel = UILabel()
         gameLabel.text = "key8bis".localized(lang: dataManager.giveCurrentLanguage())
         gameLabel.font = UIFont(name: "PingFangSC-Thin", size: 25)
-        gameLabel.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        gameLabel.textColor = Color.rgb(66, 66, 66)
         gameLabel.frame = CGRect(x: 2, y: y0, width: 400, height: 40)
         self.scrollView.addSubview(gameLabel)
         
@@ -152,7 +152,7 @@ class TutorialViewController: UIViewController {
         // Premier paragraphe de texte
         let lbl1 = UILabel()
         lbl1.text = "key12".localized(lang: dataManager.giveCurrentLanguage())
-        lbl1.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        lbl1.textColor = Color.rgb(66, 66, 66)
         lbl1.font = textFont
         lbl1.numberOfLines = 0
         let h1 = "key12".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)
@@ -161,14 +161,14 @@ class TutorialViewController: UIViewController {
         
         // Première reponse
         let numberLbl1 = UILabel()
-        numberLbl1.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        numberLbl1.textColor = Color.rgb(66, 66, 66)
         numberLbl1.text = "1."
         numberLbl1.frame = CGRect(x: 8, y: y1+h1+10, width: 10, height: 30)
         self.scrollView.addSubview(numberLbl1)
         
         let answerLbl1 = UILabel()
         answerLbl1.text = "key13".localized(lang: dataManager.giveCurrentLanguage())
-        answerLbl1.textColor = colorForRGB(r: 66+30, g: 66+30, b: 66+30)
+        answerLbl1.textColor = Color.rgb(66+30, 66+30, 66+30)
         answerLbl1.font = textFont
         let w = "key13".localized(lang: dataManager.giveCurrentLanguage()).width(withConstrainedHeight: 30, font: textFont!)
         answerLbl1.frame = CGRect(x: 28, y: y1+h1+10, width: w, height: 30)
@@ -176,14 +176,14 @@ class TutorialViewController: UIViewController {
         
         // Deuxieme reponse
         let numberLbl2 = UILabel()
-        numberLbl2.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        numberLbl2.textColor = Color.rgb(66, 66, 66)
         numberLbl2.text = "2."
         numberLbl2.frame = CGRect(x: 8, y: y1+h1+10+40, width: 10, height: 30)
         self.scrollView.addSubview(numberLbl2)
         
         let answerLbl2 = UILabel()
         answerLbl2.text = "key14".localized(lang: dataManager.giveCurrentLanguage())
-        answerLbl2.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        answerLbl2.textColor = Color.rgb(66, 66, 66)
         answerLbl2.font = textFont
         answerLbl2.numberOfLines = 0
         var h2 = "key14".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)
@@ -197,14 +197,14 @@ class TutorialViewController: UIViewController {
         let header1Label = UILabel()
         header1Label.text = "key15".localized(lang: dataManager.giveCurrentLanguage())
         header1Label.font = UIFont(name: "PingFangSC-Thin", size: 25)
-        header1Label.textColor = colorForRGB(r: 66+30, g: 66+30, b: 66+30)
+        header1Label.textColor = Color.rgb(66+30, 66+30, 66+30)
         header1Label.frame = CGRect(x: 2, y: y2, width: 400, height: 40)
         self.scrollView.addSubview(header1Label)
         
         // Deuxieme paragraphe de cette partie
         let lbl2 = UILabel()
         lbl2.text = "key16".localized(lang: dataManager.giveCurrentLanguage())
-        lbl2.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        lbl2.textColor = Color.rgb(66, 66, 66)
         lbl2.font = textFont
         lbl2.numberOfLines = 0
         h2 = "key16".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)
@@ -216,7 +216,7 @@ class TutorialViewController: UIViewController {
         // Troisième paragraphe de cette partie
         let lbl3 = UILabel()
         lbl3.text = "key17".localized(lang: dataManager.giveCurrentLanguage())
-        lbl3.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        lbl3.textColor = Color.rgb(66, 66, 66)
         lbl3.font = textFont
         lbl3.numberOfLines = 0
         let h3 = "key17".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)
@@ -229,14 +229,14 @@ class TutorialViewController: UIViewController {
         let header2Label = UILabel()
         header2Label.text = "key18".localized(lang: dataManager.giveCurrentLanguage())
         header2Label.font = UIFont(name: "PingFangSC-Thin", size: 25)
-        header2Label.textColor = colorForRGB(r: 66+30, g: 66+30, b: 66+30)
+        header2Label.textColor = Color.rgb(66+30, 66+30, 66+30)
         header2Label.frame = CGRect(x: 2, y: y4, width: 400, height: 40)
         self.scrollView.addSubview(header2Label)
         
         // Quatrieme paragraphe de cette partie
         let lbl4 = UILabel()
         lbl4.text = "key19".localized(lang: dataManager.giveCurrentLanguage())
-        lbl4.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        lbl4.textColor = Color.rgb(66, 66, 66)
         lbl4.font = textFont
         lbl4.numberOfLines = 0
         let h4 = "key19".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)
@@ -267,7 +267,7 @@ class TutorialViewController: UIViewController {
         let gameLabel = UILabel()
         gameLabel.text = "key9bis".localized(lang: dataManager.giveCurrentLanguage())
         gameLabel.font = UIFont(name: "PingFangSC-Thin", size: 25)
-        gameLabel.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        gameLabel.textColor = Color.rgb(66, 66, 66)
         gameLabel.frame = CGRect(x: 2, y: y0, width: 400, height: 40)
         self.scrollView.addSubview(gameLabel)
         
@@ -285,7 +285,7 @@ class TutorialViewController: UIViewController {
         let y1 = y0 + 60
         let lbl1 = UILabel()
         lbl1.text = "key20".localized(lang: dataManager.giveCurrentLanguage())
-        lbl1.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        lbl1.textColor = Color.rgb(66, 66, 66)
         lbl1.font = textFont
         lbl1.numberOfLines = 0
         let h1 = "key20".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)
@@ -296,7 +296,7 @@ class TutorialViewController: UIViewController {
         let y2 = y1 + h1 + 10
         let lbl2 = UILabel()
         lbl2.text = "key21".localized(lang: dataManager.giveCurrentLanguage())
-        lbl2.textColor = colorForRGB(r: 66, g: 66, b: 66)
+        lbl2.textColor = Color.rgb(66, 66, 66)
         lbl2.font = textFont
         lbl2.numberOfLines = 0
         let h2 = "key21".localized(lang: dataManager.giveCurrentLanguage()).height(withConstrainedWidth: self.scrollView.frame.width, font: textFont!)

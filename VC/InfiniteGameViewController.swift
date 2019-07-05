@@ -85,7 +85,17 @@ class InfiniteGameViewController: UIViewController {
         containerView.layer.borderColor = UIColor.red.cgColor
         containerView.layer.borderWidth = 0.0
         self.view.addSubview(containerView)
+        
+        setColors()
+        
+    }
+    
+    func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
+        bombCounterLabel.textColor = Color.getColor(index: 3)
+        bombCounterLabel.setNeedsDisplay()
+        flagCounterLabel.textColor = Color.getColor(index: 3)
+        flagCounterLabel.setNeedsDisplay()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,16 +149,17 @@ class InfiniteGameViewController: UIViewController {
         }
         
         // Actualisation des couleurs des parties courantes
-        let color1 = UIColor.white
-        let color2 = UIColor(red: 102/255, green: 153/255, blue: 255/255, alpha: 1.0)
-        let color3 = UIColor(red: 153/255, green: 102/255, blue: 255/255, alpha: 1.0)
-        let color4 = UIColor(red: 255/255, green: 153/255, blue: 102/255, alpha: 1.0)
-        let color5 = UIColor(red: 153/255, green: 255/255, blue: 51/255, alpha: 1.0)
-        currentSection.game1?.colors = ColorSetForOneGame(openColor: color2, emptyColor: color1, strokeColor: .black, textColor: .black)
-        currentSection.game2?.colors = ColorSetForOneGame(openColor: color3, emptyColor: color2, strokeColor: .black, textColor: .black)
-        currentSection.game3?.colors = ColorSetForOneGame(openColor: color4, emptyColor: color3, strokeColor: .black, textColor: .black)
-        currentSection.game4?.colors = ColorSetForOneGame(openColor: color5, emptyColor: color4, strokeColor: .black, textColor: .black)
-        currentSection.game5?.colors = ColorSetForOneGame(openColor: color1, emptyColor: color5, strokeColor: .black, textColor: .black)
+        let color1 = Color.getColor(index: 0)
+        let color2 = Color.getColor(index: 4)
+        let color3 = Color.getColor(index: 5)
+        let color4 = Color.getColor(index: 6)
+        let color5 = Color.getColor(index: 7)
+        let color6 = Color.getColor(index: 8)
+        currentSection.game1?.colors = ColorSetForOneGame(openColor: color2, emptyColor: color1, strokeColor: Color.getColor(index: 2), textColor: Color.getColor(index: 3))
+        currentSection.game2?.colors = ColorSetForOneGame(openColor: color3, emptyColor: color2, strokeColor: Color.getColor(index: 2), textColor: Color.getColor(index: 3))
+        currentSection.game3?.colors = ColorSetForOneGame(openColor: color4, emptyColor: color3, strokeColor: Color.getColor(index: 2), textColor: Color.getColor(index: 3))
+        currentSection.game4?.colors = ColorSetForOneGame(openColor: color5, emptyColor: color4, strokeColor: Color.getColor(index: 2), textColor: Color.getColor(index: 3))
+        currentSection.game5?.colors = ColorSetForOneGame(openColor: color6, emptyColor: color5, strokeColor: Color.getColor(index: 2), textColor: Color.getColor(index: 3))
         
         // si c'est la première section, on ne fait pas d'animations et on lance la partie immédiatemment
         if sectionIndex == 0 {
@@ -162,8 +173,8 @@ class InfiniteGameViewController: UIViewController {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapBlockingView(_:)))
             blockingView?.addGestureRecognizer(tapGesture)
             let message = MessageEndOfSection()
-            message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
-            message.textColor = colorForRGB(r: 255, g: 255, b: 255)
+            message.circleColor = Color.rgb(242, 180, 37)
+            message.textColor = Color.rgb(255, 255, 255)
             message.fontSizeNumber = 60
             message.fontSizeLevel = 14
             message.backgroundColor = UIColor.clear
@@ -478,7 +489,7 @@ class InfiniteGameViewController: UIViewController {
         let origin = CGPoint(x: 0, y: screenH)
         let frame = CGRect(origin: origin, size: size)
         let currentViewOfGame = containerView.subviews[containerView.subviews.count-1] as! ViewOfGame
-        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, backgroundColor: colorForRGB(r: 194, g: 194, b: 186), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
+        bonusChoiceView = BonusChoiceView(frame: frame, viewOfGame: currentViewOfGame, backgroundColor: Color.rgb(194, 194, 186), lineColor: UIColor(red: 0.5, green: 0.5, blue: 0.45, alpha: 1))
         bonusChoiceView!.isTimerOn = currentGame().isTimerAllowed
         self.view.addSubview(bonusChoiceView!)
         
@@ -512,8 +523,8 @@ class InfiniteGameViewController: UIViewController {
     // Adds a circle on the screen with the new level displayed on it.
     func animateNewLevel() {
         let message = MessageEndOfSection()
-        message.circleColor = colorForRGB(r: 242, g: 180, b: 37)
-        message.textColor = colorForRGB(r: 255, g: 255, b: 255)
+        message.circleColor = Color.rgb(242, 180, 37)
+        message.textColor = Color.rgb(255, 255, 255)
         message.fontSizeNumber = 60
         message.fontSizeLevel = 14
         message.backgroundColor = UIColor.clear

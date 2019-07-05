@@ -86,7 +86,7 @@ class SuperPartieGame: NSManagedObject {
             
             // 3. Obtain the game
             let oneGame = OneGame(gameTypeWithNoneCases: GameType(rawValue: self.gameType)!, n: Int(n), m: Int(m), z: Int(z), numberOfFlag: Int(numberOfRemainingFlags), isTimerAllowed: false, totalTime: 0, option1: false, option2: false, option1Time: 0.0, option2Frequency: 0, option3: false, option3Frequency: 0, option3Time: 0, noneCases: nonCases, areNumbersShowed: true)
-            oneGame.colors = ColorSetForOneGame(openColor: colorForRGB(r: 192, g: 197, b: 206) , emptyColor: UIColor.white, strokeColor: colorForRGB(r: 52, g: 61, b: 70), textColor: colorForRGB(r: 52, g: 61, b: 70))
+            oneGame.colors = ColorSetForOneGame(openColor: Color.rgb(192, 197, 206) , emptyColor: UIColor.white, strokeColor: Color.rgb(52, 61, 70), textColor: Color.rgb(52, 61, 70))
             
             // LAST. Obtain the view of game object
             let type = GameType(rawValue: gameType)!

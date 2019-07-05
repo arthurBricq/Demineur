@@ -10,8 +10,8 @@ import UIKit
 
 class MessageEndOfSection: UIView {
 
-    var circleColor: UIColor = colorForRGB(r: 242, g: 180, b: 37)
-    var textColor: UIColor = colorForRGB(r: 255, g: 255, b: 255)
+    var circleColor: UIColor = Color.rgb(242, 180, 37)
+    var textColor: UIColor = Color.rgb(255, 255, 255)
     var fontSizeNumber: CGFloat = 60
     var fontSizeLevel: CGFloat = 14
     var sectionIndex: Int = 1

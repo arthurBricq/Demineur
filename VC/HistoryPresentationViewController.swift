@@ -28,8 +28,6 @@ class HistoryPresentationViewController: UIViewController  {
     
     // MARK: - VARIABLES
     
-    //var color1 = colorForRGB(r: 66, g: 66, b: 66)
-    //var color2 = UIColor.orange
     var rows: [HistoryPresentationCell] = []
     
     // MARK: - Constants

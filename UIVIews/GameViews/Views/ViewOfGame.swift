@@ -303,7 +303,7 @@ class ViewOfGame: UIView {
                                     flag.frame = CGRect(x: 0, y: 0, width: flag.frame.width - 10, height: flag.frame.height - 10)
                                 }, completion: { (_) in
                                     flag.removeFromSuperview()
-                                    flag.color = colorForRGB(r: 60, g: 160, b: 100)
+                                    flag.color = Color.rgb(60, 160, 100)
                                     flag.tag = 1
                                     caseChecked.addSubview(flag)
                                     flag.setNeedsDisplay()

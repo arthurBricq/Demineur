@@ -230,7 +230,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             
             cell.mainView.layer.cornerRadius = 10
             cell.mainView.layer.borderWidth = 4
-            cell.mainView.layer.borderColor = colorForRGB(r: 20, g: 20, b: 20).cgColor
+            cell.mainView.layer.borderColor = Color.rgb(20, 20, 20).cgColor
             cell.mainView.backgroundColor = currentTheme.colors[0]
             
             cell.lineView.strokeColor = currentTheme.colors[1]

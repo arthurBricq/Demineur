@@ -11,8 +11,8 @@ import UIKit
 @IBDesignable
 class NiceButton: UIButton {
     
-    @IBInspectable var color: UIColor = colorForRGB(r: 94, g: 94, b: 94) { didSet { updateText() } }
-    @IBInspectable var textColor: UIColor = colorForRGB(r: 66, g: 66, b: 66) { didSet { updateText() } }
+    @IBInspectable var color: UIColor = Color.rgb(94, 94, 94) { didSet { updateText() } }
+    @IBInspectable var textColor: UIColor = Color.rgb(66, 66, 66) { didSet { updateText() } }
 
     @IBInspectable var lineWidth: CGFloat = 1.0
     

@@ -32,7 +32,7 @@ public class SkillUpArrow : NSObject {
         
         
         //// Color Declarations
-        let arrowColor = colorForRGB(r: 76, g: 175, b: 81)
+        let arrowColor = Color.rgb(76, 175, 81)
         
         //// Arrow
         //// Rectangle Drawing

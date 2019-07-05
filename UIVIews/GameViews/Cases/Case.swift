@@ -35,7 +35,7 @@ class Case: UIButton {
                 addFlagToCase(flagColor: UIColor.orange)
             }
             if caseState == .markedByComputer {
-                addFlagToCase(flagColor: colorForRGB(r: 60, g: 160, b: 100))
+                addFlagToCase(flagColor: Color.rgb(60, 160, 100))
             }
             if caseState == .empty {
                 removeFlag()
@@ -183,7 +183,7 @@ class Case: UIButton {
                 if gameState[i][j] == -1 {
                     var color: UIColor?
                     if caseState == .marked || caseState == .markedByComputer {
-                        color = colorForRGB(r: 100, g: 200, b: 150)
+                        color = Color.rgb(100, 200, 150)
                     } else {
                         color = UIColor.red
                     }
