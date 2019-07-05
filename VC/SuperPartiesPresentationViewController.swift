@@ -66,7 +66,16 @@ class SuperPartiesPresentationViewController: UIViewController {
         
         // Settings of the tableView
         setUpScrollView()
+        
+        setColors()
+        
+    }
+    
+    func setColors() {
+        
         self.view.backgroundColor = Color.getColor(index: 0)
+        menuButton.setTitleColor(Color.getColor(index: 2), for: .normal)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -164,8 +173,8 @@ class SuperPartiesPresentationViewController: UIViewController {
         let h = text.height(withConstrainedWidth: lblWidth, font: font)
         let lbl = UILabel(frame: CGRect(x: 100, y: heightOfFirstRow/2 - h/2 - 50, width: lblWidth, height: h))
         lbl.text = text
+        lbl.textColor = Color.getColor(index: 3)
         lbl.font = font
-        lbl.textColor = UIColor.gray
         row.addSubview(lbl)
         self.rows.append(row)
         scrollView.addSubview(row)

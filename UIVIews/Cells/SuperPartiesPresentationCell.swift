@@ -56,20 +56,20 @@ class SuperPartiesPresentationCell: UIView {
             // Square button
             squareButton = SquarePresentationButton(frame: CGRect(x: xSquareLinePosition-buttonSize/2, y: h/2-buttonSize/2, width: buttonSize, height: buttonSize))
             squareButton!.cornersToDraw = [1,2,3,4,5,6,7,8]
-            squareButton!.openColor = .white
-            squareButton!.strokeColor = .black
+            squareButton!.openColor = Color.getColor(index: 0)
+            squareButton!.strokeColor = Color.getColor(index: 1)
             squareButton!.ratio = 2
-            squareButton!.setTitleColor(UIColor.lightGray, for: .normal)
+            squareButton!.setTitleColor(Color.getColor(index: 1), for: .normal)
             // Hex button
             hexButton = HexPresentationButton(frame: CGRect(x: xHexLinePosition-buttonSize/2, y: h/2-buttonSize/2, width: buttonSize, height: buttonSize))
-            hexButton!.openColor = .white
-            hexButton!.strokeColor = .black
-            hexButton!.setTitleColor(UIColor.lightGray, for: .normal)
+            hexButton!.openColor = Color.getColor(index: 0)
+            hexButton!.strokeColor = Color.getColor(index: 1)
+            hexButton!.setTitleColor(Color.getColor(index: 1), for: .normal)
             // Triangular button
             triangleButton = TriangularPresentationButton(frame: CGRect(x: xTriangleLinePosition-buttonSize/2, y: h/2-buttonSize/2, width: buttonSize, height: buttonSize))
-            triangleButton!.openColor = .white
-            triangleButton!.strokeColor = .black
-            triangleButton!.setTitleColor(UIColor.lightGray, for: .normal)
+            triangleButton!.openColor = Color.getColor(index: 0)
+            triangleButton!.strokeColor = Color.getColor(index: 1)
+            triangleButton!.setTitleColor(Color.getColor(index: 1), for: .normal)
             // And add them all
             self.addSubview(squareButton!)
             self.addSubview(triangleButton!)
@@ -284,11 +284,11 @@ class SuperPartiesPresentationCell: UIView {
         // 1. Create the path of the first row
         let path = getFirstRowPath(heightOfFirstLine: y)
         path.lineWidth = 2.0
-        UIColor.lightGray.setStroke()
+        Color.getColor(index: 2).setStroke()
         // 2. Make the animation of this cell
         let frontLayer = CAShapeLayer() 
         frontLayer.path = path.cgPath
-        frontLayer.strokeColor = UIColor.gray.cgColor
+        frontLayer.strokeColor = Color.getColor(index: 2).cgColor
         frontLayer.fillColor = UIColor.clear.cgColor
         frontLayer.lineWidth = 2.0
         
@@ -311,7 +311,7 @@ class SuperPartiesPresentationCell: UIView {
         // 2. Create a layer that contains the path
         let frontLayer = CAShapeLayer()
         frontLayer.path = path.cgPath
-        frontLayer.strokeColor = UIColor.gray.cgColor
+        frontLayer.strokeColor = Color.getColor(index: 2).cgColor
         frontLayer.fillColor = UIColor.clear.cgColor
         frontLayer.lineWidth = 2.0
         self.layer.addSublayer(frontLayer)
