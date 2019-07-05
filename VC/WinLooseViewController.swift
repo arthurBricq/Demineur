@@ -75,6 +75,43 @@ class WinLooseViewController: UIViewController {
         amountOfBombsFoundLabel.text = amountOfBombsFound.description
         coinsEarnedLabel.text = String(10*amountOfBombsFound)
         
+        setColors()
+        
+    }
+    
+    func setColors() {
+        
+        lineView.strokeColor = Color.getColor(index: 1)
+        lineView.setNeedsDisplay()
+        letterE.color = Color.getColor(index: 1)
+        letterE.setNeedsDisplay()
+        letterN.color = Color.getColor(index: 2)
+        letterN.setNeedsDisplay()
+        letterD.color = Color.getColor(index: 2)
+        letterD.setNeedsDisplay()
+        
+        menuButton.setTitleColor(Color.getColor(index: 2), for: .normal)
+        replayButton.setTitleColor(Color.getColor(index: 2), for: .normal)
+        lastButton.setTitleColor(Color.getColor(index: 2), for: .normal)
+        
+        menuIconButton.color = Color.getColor(index: 2)
+        menuIconButton.setNeedsDisplay()
+        replayIconButton.color = Color.getColor(index: 2)
+        replayIconButton.setNeedsDisplay()
+        nextLevelIcon.color = Color.getColor(index: 2)
+        nextLevelIcon.setNeedsDisplay()
+        
+        label.textColor = Color.getColor(index: 3)
+        label.setNeedsDisplay()
+        amountOfBombsFoundLabel.textColor = Color.getColor(index: 3)
+        amountOfBombsFoundLabel.setNeedsDisplay()
+        amountOfBomsDescriptionLabel.textColor = Color.getColor(index: 3)
+        amountOfBomsDescriptionLabel.setNeedsDisplay()
+        coinsEarnedLabel.textColor = Color.getColor(index: 3)
+        coinsEarnedLabel.setNeedsDisplay()
+        coinsEarnedDescriptionLabel.textColor = Color.getColor(index: 3)
+        coinsEarnedDescriptionLabel.setNeedsDisplay()
+        
     }
     
     
