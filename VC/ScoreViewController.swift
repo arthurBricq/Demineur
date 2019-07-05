@@ -14,11 +14,16 @@ class ScoreViewController: UIViewController, GKGameCenterControllerDelegate {
 
     // MARK: - Outlets
     
+    @IBOutlet weak var infiniButton: UIButton!
+    @IBOutlet weak var scoresTitle: UILabel!
+    @IBOutlet weak var bestTitle: UILabel!
     @IBOutlet weak var text1label: UILabel!
     @IBOutlet weak var number1label: UILabel!
     @IBOutlet weak var text2label: UILabel!
     @IBOutlet weak var numbe2label: UILabel!
     @IBOutlet weak var lineView: LineView!
+    @IBOutlet weak var gameCenterTitle: UILabel!
+    @IBOutlet weak var gameCenterButton: UIButton!
     override var prefersStatusBarHidden: Bool { return true }
     
     // MARK: - Variables
@@ -52,7 +57,36 @@ class ScoreViewController: UIViewController, GKGameCenterControllerDelegate {
 
         // Verify that the itunes account is available
         authenticateLocalPlayer()
+        
+        setColors()
+    }
+    
+    func setColors() {
+        
         self.view.backgroundColor = Color.getColor(index: 0)
+        
+        lineView.strokeColor = Color.getColor(index: 1)
+        lineView.setNeedsDisplay()
+        
+        scoresTitle.textColor = Color.getColor(index: 2)
+        scoresTitle.setNeedsDisplay()
+        bestTitle.textColor = Color.getColor(index: 2)
+        bestTitle.setNeedsDisplay()
+        gameCenterTitle.textColor = Color.getColor(index: 2)
+        gameCenterTitle.setNeedsDisplay()
+        
+        infiniButton.setTitleColor(Color.getColor(index: 2), for: .normal)
+        gameCenterButton.setTitleColor(Color.getColor(index: 2), for: .normal)
+        
+        text1label.textColor = Color.getColor(index: 3)
+        text1label.setNeedsDisplay()
+        number1label.textColor = Color.getColor(index: 3)
+        number1label.setNeedsDisplay()
+        text2label.textColor = Color.getColor(index: 3)
+        text2label.setNeedsDisplay()
+        numbe2label.textColor = Color.getColor(index: 3)
+        numbe2label.setNeedsDisplay()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

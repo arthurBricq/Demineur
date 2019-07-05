@@ -2358,9 +2358,14 @@
                         <viewLayoutGuide key="safeArea" id="Bs1-8c-xao"/>
                     </view>
                     <connections>
+                        <outlet property="bestTitle" destination="3nx-Rk-ffF" id="uwk-n4-2rI"/>
+                        <outlet property="gameCenterButton" destination="spD-8R-Nnn" id="saD-5m-Tei"/>
+                        <outlet property="gameCenterTitle" destination="092-ky-t6s" id="c0M-QC-eyM"/>
+                        <outlet property="infiniButton" destination="d7J-CX-GBt" id="vZ2-jN-wFg"/>
                         <outlet property="lineView" destination="VOP-fp-OAw" id="KUu-xd-Jsc"/>
                         <outlet property="numbe2label" destination="m02-j3-Ykg" id="ZYt-Xl-lcg"/>
                         <outlet property="number1label" destination="YeN-l7-yky" id="EFT-O5-Vtv"/>
+                        <outlet property="scoresTitle" destination="PZo-Mh-d1z" id="G5s-F8-FIR"/>
                         <outlet property="text1label" destination="cHr-QP-WAT" id="WKw-YF-bNN"/>
                         <outlet property="text2label" destination="cMG-7d-YJG" id="HCQ-Xx-gw0"/>
                     </connections>
