@@ -116,12 +116,8 @@ class MessageManagor {
             
             if didTapABomb {
                 for subview in self.viewOfGame.subviews {
-                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                        for subview2 in subview.subviews {
-                            if subview2 is BombView {
-                                viewToRemove = subview2 as? BombView
-                            }
-                        }
+                    if subview is BombView {
+                        viewToRemove = subview as? BombView
                     }
                 }
             } else {
@@ -263,12 +259,8 @@ class MessageManagor {
             
             if didTapABomb {
                 for subview in self.viewOfGame.subviews {
-                    if subview is SquareCase || subview is HexCase || subview is TriangularCase {
-                        for subview2 in subview.subviews {
-                            if subview2 is BombView {
-                                viewToRemove = subview2 as? BombView
-                            }
-                        }
+                    if subview is BombView {
+                        viewToRemove = subview as? BombView
                     }
                 }
             } else {

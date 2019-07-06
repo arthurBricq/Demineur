@@ -154,8 +154,13 @@ class Case: UIButton {
             // La partie est perdue
             // si la case est celle sur laquelle le joueur a tappé
             if bombTapped {
-                let cross = BombView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), percentOfCase: 0.4, lineWidth: 4, color: UIColor.red)
-                self.addSubview(cross)
+                var verticalDisplacement: CGFloat = 0
+                if self.game!.gameType == .triangular {
+                    let triangularCase = self as! TriangularCase
+                    verticalDisplacement = (triangularButtonIsOfType(i: triangularCase.i, j: triangularCase.j) == 1) ? -bounds.width/7.5 : bounds.width/7.5 // décaler les vues.
+                }
+                let cross = BombView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + verticalDisplacement, width: self.frame.width, height: self.frame.height), percentOfCase: 0.35, lineWidth: 4, color: UIColor.red)
+                self.viewOfGame!.addSubview(cross)
                 
                 let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
                 scaleAnimation.fromValue = 2.3
@@ -187,8 +192,13 @@ class Case: UIButton {
                     } else {
                         color = UIColor.red
                     }
-                    let cross = BombView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), percentOfCase: 0.4, lineWidth: 4, color: color!)
-                    self.addSubview(cross)
+                    var verticalDisplacement: CGFloat = 0
+                    if self.game!.gameType == .triangular {
+                        let triangularCase = self as! TriangularCase
+                        verticalDisplacement = (triangularButtonIsOfType(i: triangularCase.i, j: triangularCase.j) == 1) ? -bounds.width/7.5 : bounds.width/7.5 // décaler les vues.
+                    }
+                    let cross = BombView(frame: CGRect(x: self.frame.origin.x, y: self.frame.origin.y + verticalDisplacement, width: self.frame.width, height: self.frame.height), percentOfCase: 0.35, lineWidth: 4, color: color!)
+                    viewOfGame!.addSubview(cross)
                     let alphaAnimation = CABasicAnimation(keyPath: "opacity")
                     alphaAnimation.fromValue = 0
                     alphaAnimation.toValue = 1
