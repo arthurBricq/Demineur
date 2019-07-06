@@ -28,6 +28,10 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
     @IBAction func chosenButton(_ sender: Any) {
         dataManager.currentTheme = index
         delegate?.reloadDatas()
+        
+        let parent = self.parentViewController as! BoutiqueViewController
+        parent.animateColorChange()
+        
     }
     
     @IBAction func buyAction(_ sender: Any) {
@@ -44,6 +48,7 @@ class ThemeBoutiqueTableViewCell: UITableViewCell {
                 self.hidingView.alpha = 0
                 self.buyButton.alpha = 0
             }) { (_) in
+                
                 self.delegate?.reloadDatas()
                 self.delegate?.reloadMoney()
             }

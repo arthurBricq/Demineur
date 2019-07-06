@@ -79,7 +79,7 @@ class WinLooseViewController: UIViewController {
         
     }
     
-    func setColors() {
+    private func setColors() {
         
         lineView.strokeColor = Color.getColor(index: 1)
         lineView.setNeedsDisplay()

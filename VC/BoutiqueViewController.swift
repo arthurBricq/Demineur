@@ -99,7 +99,7 @@ class BoutiqueViewController: UIViewController {
         moneyLabel.text = String(dataManager.money)
     }
     
-    func setColors() {
+    private func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
         
         mainLine.strokeColor = Color.getColor(index: 1)
@@ -118,6 +118,48 @@ class BoutiqueViewController: UIViewController {
         tableView.separatorColor = .clear
     }
     
+    /// This function changes the color of the view with an animation, has to be used when the color theme is changed
+    func animateColorChange() {
+        
+        let timeOfAnimation: TimeInterval = 1.0
+        
+        // this will change the color of the animation when the animation has done 45% of its complete time, and the elements disappear when it's
+        // at 40%, and thus, the change isn't visible
+        delay(seconds: 0.45*timeOfAnimation) {
+            self.mainLine.strokeColor = Color.getColor(index: 1)
+            self.boutiqueLabel.textColor = Color.getColor(index: 2)
+            self.moneyLabel.textColor = Color.getColor(index: 3)
+            self.mainLine.setNeedsDisplay()
+            self.boutiqueLabel.setNeedsDisplay()
+            self.moneyLabel.setNeedsDisplay()
+            
+            self.menuButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+            self.bonusButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+            self.piecesButton.setTitleColor(Color.getColor(index: 3), for: .normal)
+            self.colorsButtons.setTitleColor(Color.getColor(index: 3), for: .normal)
+        }
+        
+        UIView.animateKeyframes(withDuration: timeOfAnimation, delay: 0, options: [], animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.4, animations: {
+                for subview in self.view.subviews {
+                    subview.alpha = 0
+                }
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.2, animations: {
+                self.view.backgroundColor = Color.getColor(index: 0)
+            })
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4, animations: {
+                for subview in self.view.subviews {
+                    subview.alpha = 1
+                }
+            })
+            
+        })
+        
+    }
     
 }
 

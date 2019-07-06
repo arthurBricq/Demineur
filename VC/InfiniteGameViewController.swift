@@ -90,7 +90,7 @@ class InfiniteGameViewController: UIViewController {
         
     }
     
-    func setColors() {
+    private func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
         bombCounterLabel.textColor = Color.getColor(index: 3)
         bombCounterLabel.setNeedsDisplay()

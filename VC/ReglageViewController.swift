@@ -85,7 +85,7 @@ class ReglageViewController: UIViewController {
         setColors()
     }
     
-    func setColors() {
+    private func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
         menuButton.setTitleColor(Color.getColor(index: 3), for: .normal)
         

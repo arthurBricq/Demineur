@@ -71,7 +71,7 @@ class SuperPartiesPresentationViewController: UIViewController {
         
     }
     
-    func setColors() {
+    private func setColors() {
         
         self.view.backgroundColor = Color.getColor(index: 0)
         menuButton.setTitleColor(Color.getColor(index: 2), for: .normal)

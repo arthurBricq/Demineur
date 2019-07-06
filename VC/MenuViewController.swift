@@ -173,7 +173,7 @@ extension MenuViewController: UIViewControllerTransitioningDelegate {
         return nil
     }
     
-    func setColors() {
+    private func setColors() {
         self.view.backgroundColor = Color.getColor(index: 0)
         letterM.color = Color.getColor(index: 1)
         letterM.setNeedsDisplay()
