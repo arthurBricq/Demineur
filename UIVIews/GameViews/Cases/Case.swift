@@ -107,17 +107,22 @@ class Case: UIButton {
     // MARK: - Functions
 
     func addFlagToCase(flagColor: UIColor) {
-        let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2), r: 0.2*bounds.width, color: flagColor)
-        addSubview(flag)
+        let circleCenter = CGPoint(x: bounds.width/2, y: bounds.height/2)
+        let radius = 0.2*bounds.width
+        let id = String(i) + String(j)
+        let flag = FlagView(frame: frame, circleCenter: circleCenter, r: radius, id: id, color: flagColor)
+        viewOfGame!.addSubview(flag)
         Vibrate().vibrate(style: .medium)
     }
 
     private func removeFlag() {
-        for subview in subviews {
+        for subview in viewOfGame!.subviews {
             if subview is FlagView {
                 let flag = subview as! FlagView
-                flag.removeFromSuperview()
-                Vibrate().vibrate(style: .light)
+                if flag.id == String(i) + String(j) {
+                    flag.removeFromSuperview()
+                    Vibrate().vibrate(style: .light)
+                }
             }
         }
     }
@@ -125,28 +130,31 @@ class Case: UIButton {
     /// Quand la partie se termine, gère les animations de la case.
     func animateGameOver(win: Bool, bombTapped: Bool = false) {
         if win {
-            for subview in subviews {
+            for subview in viewOfGame!.subviews {
                 // Pour le drapeau
                 if subview is FlagView {
-                    // si la case était une bombe
-                    if gameState[i][j] == -1 {
-                        // La case était marquée et était une bombe
-                        let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
-                        scaleAnimation.values = [1.0, 0.9, 1.7, 1.1]
-                        scaleAnimation.keyTimes = [0, 0.2, 0.6, 1]
-                        scaleAnimation.duration = 0.5
-                        scaleAnimation.isRemovedOnCompletion = false
-                        scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
-                        subview.layer.add(scaleAnimation, forKey: nil)
-                    } else {
-                        // La case était marquée et n'était pas une bombe
-                        let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
-                        scaleAnimation.values = [1.0, 1.3, 0]
-                        scaleAnimation.keyTimes = [0, 0.2, 1]
-                        scaleAnimation.duration = 0.5
-                        scaleAnimation.isRemovedOnCompletion = false
-                        scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
-                        subview.layer.add(scaleAnimation, forKey: nil)
+                    let flag = subview as! FlagView
+                    if flag.id == String(i) + String(j) {
+                        // si la case était une bombe
+                        if gameState[i][j] == -1 {
+                            // La case était marquée et était une bombe
+                            let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+                            scaleAnimation.values = [1.0, 0.9, 1.7, 1.1]
+                            scaleAnimation.keyTimes = [0, 0.2, 0.6, 1]
+                            scaleAnimation.duration = 0.5
+                            scaleAnimation.isRemovedOnCompletion = false
+                            scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
+                            subview.layer.add(scaleAnimation, forKey: nil)
+                        } else {
+                            // La case était marquée et n'était pas une bombe
+                            let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+                            scaleAnimation.values = [1.0, 1.3, 0]
+                            scaleAnimation.keyTimes = [0, 0.2, 1]
+                            scaleAnimation.duration = 0.5
+                            scaleAnimation.isRemovedOnCompletion = false
+                            scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
+                            subview.layer.add(scaleAnimation, forKey: nil)
+                        }
                     }
                 }
             }
@@ -172,15 +180,18 @@ class Case: UIButton {
             } else {
                 // si la case était marquée
                 if caseState == .marked || caseState == .markedByComputer {
-                    for subview in subviews {
+                    for subview in viewOfGame!.subviews {
                         if subview is FlagView {
-                            let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
-                            scaleAnimation.values = [1.0, 1.3, 0]
-                            scaleAnimation.keyTimes = [0, 0.2, 1]
-                            scaleAnimation.duration = 0.5
-                            scaleAnimation.isRemovedOnCompletion = false
-                            scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
-                            subview.layer.add(scaleAnimation, forKey: nil)
+                            let flag = subview as! FlagView
+                            if flag.id == String(i) + String(j) {
+                                let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+                                scaleAnimation.values = [1.0, 1.3, 0]
+                                scaleAnimation.keyTimes = [0, 0.2, 1]
+                                scaleAnimation.duration = 0.5
+                                scaleAnimation.isRemovedOnCompletion = false
+                                scaleAnimation.fillMode = CAMediaTimingFillMode.forwards
+                                subview.layer.add(scaleAnimation, forKey: nil)
+                            }
                         }
                     }
                 }

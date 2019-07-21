@@ -204,6 +204,7 @@ extension BoutiqueViewController: UITableViewDataSource, UITableViewDelegate {
             cell.bonusView.index = indexPath.row
             cell.bonusView.tempsAngleParameter = -185
             cell.bonusView.setNeedsDisplay()
+            cell.bonusView.backgroundColor = UIColor.clear
             cell.achatButton.prix = String(currentBonus.prixAchat)
             cell.levelLabel.text = String(level+1)
             cell.levelLabel.textColor = Color.getColor(index: 3)

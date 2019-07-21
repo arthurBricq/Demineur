@@ -169,9 +169,13 @@ class TriangularCase: Case {
     override func addFlagToCase(flagColor: UIColor) {
         let buttonType = triangularButtonIsOfType(i: i, j: j)
         let verticalDisplacement: CGFloat = (buttonType == 1) ? -bounds.width/7.5 : bounds.width/7.5 // décaler les vues.
-        let flag = FlagView(frame: bounds, circleCenter: CGPoint(x: bounds.width/2, y: bounds.height/2 + verticalDisplacement), r: 0.16*bounds.width, color: flagColor)
-        addSubview(flag)
+        let circleCenter = CGPoint(x: bounds.width/2, y: bounds.height/2 + verticalDisplacement)
+        let radius = 0.2*bounds.width
+        let id = String(i) + String(j)
+        let flag = FlagView(frame: frame, circleCenter: circleCenter, r: radius, id: id, color: flagColor)
+        viewOfGame!.addSubview(flag)
         Vibrate().vibrate(style: .medium)
+        
     }
     
     
